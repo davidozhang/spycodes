@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Main Menu View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainMenuViewController" customModule="Codenames" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Codenames" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwp-LV-dpu">
+                                <rect key="frame" x="180" y="188" width="238.5" height="55"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="48"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBi-9c-KRm" customClass="CodenamesButton" customModule="Codenames" customModuleProvider="target">
+                                <rect key="frame" x="215" y="363" width="169" height="49"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                <inset key="contentEdgeInsets" minX="30" minY="10" maxX="30" maxY="10"/>
+                                <state key="normal" title="Join Game">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTx-L1-vkT" customClass="CodenamesButton" customModule="Codenames" customModuleProvider="target">
+                                <rect key="frame" x="213" y="427" width="174" height="49"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                <inset key="contentEdgeInsets" minX="30" minY="10" maxX="30" maxY="10"/>
+                                <state key="normal" title="Instructions">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2i2-Pu-U1X" customClass="CodenamesButton" customModule="Codenames" customModuleProvider="target">
+                                <rect key="frame" x="240.5" y="491" width="120" height="49"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                <inset key="contentEdgeInsets" minX="30" minY="10" maxX="30" maxY="10"/>
+                                <state key="normal" title="About">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spy" translatesAutoresizingMaskIntoConstraints="NO" id="4mz-Ms-1Ld">
+                                <rect key="frame" x="236" y="60" width="128" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="olh-Nu-wzw"/>
+                                    <constraint firstAttribute="height" constant="128" id="rNC-HL-uV8"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdj-Hd-5OI" customClass="CodenamesButton" customModule="Codenames" customModuleProvider="target">
+                                <rect key="frame" x="203" y="299" width="195" height="49"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                <inset key="contentEdgeInsets" minX="30" minY="10" maxX="30" maxY="10"/>
+                                <state key="normal" title="Create Game">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4mz-Ms-1Ld" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0Mk-mz-Een"/>
+                            <constraint firstItem="2i2-Pu-U1X" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EOg-jd-Cif"/>
+                            <constraint firstItem="Mdj-Hd-5OI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PVi-Dl-kgK"/>
+                            <constraint firstItem="CBi-9c-KRm" firstAttribute="top" secondItem="Mdj-Hd-5OI" secondAttribute="bottom" constant="15" id="Tx6-Im-6mn"/>
+                            <constraint firstItem="2i2-Pu-U1X" firstAttribute="top" secondItem="qTx-L1-vkT" secondAttribute="bottom" constant="15" id="VLh-I5-ISI"/>
+                            <constraint firstItem="4mz-Ms-1Ld" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="Xxl-Tb-xMF"/>
+                            <constraint firstItem="CBi-9c-KRm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Z7D-ub-Yxn"/>
+                            <constraint firstItem="qTx-L1-vkT" firstAttribute="top" secondItem="CBi-9c-KRm" secondAttribute="bottom" constant="15" id="aPl-6t-hnK"/>
+                            <constraint firstItem="qTx-L1-vkT" firstAttribute="top" secondItem="CBi-9c-KRm" secondAttribute="bottom" constant="30" id="buL-0J-g0T"/>
+                            <constraint firstItem="kwp-LV-dpu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="120" id="eEh-NQ-YDZ"/>
+                            <constraint firstItem="kwp-LV-dpu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jnH-98-A0C"/>
+                            <constraint firstItem="kwp-LV-dpu" firstAttribute="top" secondItem="4mz-Ms-1Ld" secondAttribute="bottom" id="l5A-8z-RMt"/>
+                            <constraint firstItem="qTx-L1-vkT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mdh-xj-3C8"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2i2-Pu-U1X" secondAttribute="bottom" constant="60" id="sLn-KO-VZf"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="eEh-NQ-YDZ"/>
+                                <exclude reference="buL-0J-g0T"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Spy" width="290" height="280"/>
+    </resources>
+</document>
