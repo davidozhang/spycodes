@@ -8,24 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* AppDelegate.swift */; };
-		63A04D061D1A5713005A2914 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D051D1A5713005A2914 /* MainMenuViewController.swift */; };
 		63A04D091D1A5713005A2914 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D071D1A5713005A2914 /* Main.storyboard */; };
 		63A04D0C1D1A5713005A2914 /* Codenames.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D0A1D1A5713005A2914 /* Codenames.xcdatamodeld */; };
 		63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D0D1D1A5713005A2914 /* Assets.xcassets */; };
 		63A04D111D1A5713005A2914 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D0F1D1A5713005A2914 /* LaunchScreen.storyboard */; };
-		63A04D191D1A74FD005A2914 /* CodenamesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D181D1A74FD005A2914 /* CodenamesButton.swift */; };
+		63A04D1D1D1A7F37005A2914 /* CodenamesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1C1D1A7F37005A2914 /* CodenamesButton.swift */; };
+		63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		63A04D001D1A5713005A2914 /* Codenames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Codenames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63A04D031D1A5713005A2914 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		63A04D051D1A5713005A2914 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		63A04D081D1A5713005A2914 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63A04D0B1D1A5713005A2914 /* Codenames.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Codenames.xcdatamodel; sourceTree = "<group>"; };
 		63A04D0D1D1A5713005A2914 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63A04D101D1A5713005A2914 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63A04D121D1A5713005A2914 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		63A04D181D1A74FD005A2914 /* CodenamesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodenamesButton.swift; sourceTree = "<group>"; };
+		63A04D1C1D1A7F37005A2914 /* CodenamesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodenamesButton.swift; path = Extensions/CodenamesButton.swift; sourceTree = "<group>"; };
+		63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainMenuViewController.swift; path = ViewControllers/MainMenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,15 +59,31 @@
 			isa = PBXGroup;
 			children = (
 				63A04D031D1A5713005A2914 /* AppDelegate.swift */,
-				63A04D051D1A5713005A2914 /* MainMenuViewController.swift */,
-				63A04D181D1A74FD005A2914 /* CodenamesButton.swift */,
 				63A04D071D1A5713005A2914 /* Main.storyboard */,
 				63A04D0D1D1A5713005A2914 /* Assets.xcassets */,
 				63A04D0F1D1A5713005A2914 /* LaunchScreen.storyboard */,
 				63A04D121D1A5713005A2914 /* Info.plist */,
 				63A04D0A1D1A5713005A2914 /* Codenames.xcdatamodeld */,
+				63A04D1B1D1A7F2B005A2914 /* Extensions */,
+				63A04D1A1D1A7F25005A2914 /* ViewControllers */,
 			);
 			path = Codenames;
+			sourceTree = "<group>";
+		};
+		63A04D1A1D1A7F25005A2914 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		63A04D1B1D1A7F2B005A2914 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				63A04D1C1D1A7F37005A2914 /* CodenamesButton.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,10 +158,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */,
 				63A04D0C1D1A5713005A2914 /* Codenames.xcdatamodeld in Sources */,
-				63A04D061D1A5713005A2914 /* MainMenuViewController.swift in Sources */,
+				63A04D1D1D1A7F37005A2914 /* CodenamesButton.swift in Sources */,
 				63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */,
-				63A04D191D1A74FD005A2914 /* CodenamesButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +319,7 @@
 				63A04D171D1A5713005A2914 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
