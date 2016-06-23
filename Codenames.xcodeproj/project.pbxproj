@@ -63,12 +63,11 @@
 			isa = PBXGroup;
 			children = (
 				63A04D031D1A5713005A2914 /* AppDelegate.swift */,
-				63A04D071D1A5713005A2914 /* Main.storyboard */,
 				63A04D0D1D1A5713005A2914 /* Assets.xcassets */,
-				63A04D0F1D1A5713005A2914 /* LaunchScreen.storyboard */,
 				63A04D121D1A5713005A2914 /* Info.plist */,
 				63A04D0A1D1A5713005A2914 /* Codenames.xcdatamodeld */,
 				63A04D1B1D1A7F2B005A2914 /* Extensions */,
+				63FA54E31D1BCFA6004515DA /* Storyboards */,
 				63A04D1A1D1A7F25005A2914 /* ViewControllers */,
 			);
 			path = Codenames;
@@ -90,6 +89,15 @@
 				63FA54DF1D1BBB73004515DA /* CodenamesTextField.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		63FA54E31D1BCFA6004515DA /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				63A04D0F1D1A5713005A2914 /* LaunchScreen.storyboard */,
+				63A04D071D1A5713005A2914 /* Main.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
