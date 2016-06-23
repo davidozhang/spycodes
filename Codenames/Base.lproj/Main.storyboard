@@ -106,7 +106,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eTE-OI-uxt" customClass="CodenamesTextField" customModule="Codenames" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eTE-OI-uxt" customClass="CodenamesTextField" customModule="Codenames" customModuleProvider="target">
                                 <rect key="frame" x="181" y="278" width="238" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="BMl-jz-SKj"/>

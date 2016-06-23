@@ -17,7 +17,7 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
         guard let text = roomNameTextField.text else { return true }
         
         let length = text.characters.count + string.characters.count - range.length
-        return length <= 15
+        return length <= 12
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

@@ -9,6 +9,7 @@ class CodenamesTextField: UITextField {
         self.font = UIFont(name: "HelveticaNeue-UltraLight", size: 32)
         
         self.autocorrectionType = UITextAutocorrectionType.No
+        
     }
     
     // MARK: Disable cursor
@@ -16,5 +17,10 @@ class CodenamesTextField: UITextField {
         return CGRectZero
     }
     
-    
+    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+        if action == Selector("copy:") || action == Selector("selectAll:") || action == Selector("paste:") {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
 }
