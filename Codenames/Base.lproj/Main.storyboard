@@ -58,6 +58,9 @@
                                 <state key="normal" title="Create Game">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="onCreateGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0f2-EE-nST"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -84,9 +87,68 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <segue destination="os2-Wc-CLV" kind="presentation" identifier="create-game" modalTransitionStyle="flipHorizontal" id="7WM-P4-SMa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Create Game View Controller-->
+        <scene sceneID="OZB-hn-iNT">
+            <objects>
+                <viewController storyboardIdentifier="create-game-view-controller" id="os2-Wc-CLV" customClass="CreateGameViewController" customModule="Codenames" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uCt-xz-jhL"/>
+                        <viewControllerLayoutGuide type="bottom" id="t04-Sz-EKe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AZq-9W-7DJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eTE-OI-uxt" customClass="CodenamesTextField" customModule="Codenames" customModuleProvider="target">
+                                <rect key="frame" x="181" y="278" width="238" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="BMl-jz-SKj"/>
+                                    <constraint firstAttribute="width" constant="238" id="BQY-85-MjS"/>
+                                    <constraint firstAttribute="width" constant="50" id="dC1-xg-WgO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dC1-xg-WgO"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Room Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8WL-So-JgS">
+                                <rect key="frame" x="181" y="211" width="238" height="37"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eTE-OI-uxt" firstAttribute="centerY" secondItem="AZq-9W-7DJ" secondAttribute="centerY" id="BLa-rz-TwJ"/>
+                            <constraint firstItem="8WL-So-JgS" firstAttribute="top" secondItem="uCt-xz-jhL" secondAttribute="bottom" constant="80" id="Fpi-AQ-KDn"/>
+                            <constraint firstItem="8WL-So-JgS" firstAttribute="centerX" secondItem="AZq-9W-7DJ" secondAttribute="centerX" id="Y9R-3Z-kEu"/>
+                            <constraint firstItem="eTE-OI-uxt" firstAttribute="centerX" secondItem="AZq-9W-7DJ" secondAttribute="centerX" id="jcK-sW-gwH"/>
+                            <constraint firstItem="eTE-OI-uxt" firstAttribute="top" secondItem="8WL-So-JgS" secondAttribute="bottom" constant="30" id="ot6-wa-nyd"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Fpi-AQ-KDn"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="roomNameTextField" destination="eTE-OI-uxt" id="8Qg-9L-oCD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P66-gy-EDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1026" y="324"/>
         </scene>
     </scenes>
     <resources>

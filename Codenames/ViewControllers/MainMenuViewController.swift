@@ -10,6 +10,9 @@ class MainMenuViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
+    @IBAction func onCreateGame(sender: AnyObject) {
+        performSegueWithIdentifier("create-game", sender: self)
+    }
 
 }
 
