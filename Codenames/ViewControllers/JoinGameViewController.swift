@@ -2,6 +2,8 @@ import UIKit
 
 class JoinGameViewController: UIViewController, UITextFieldDelegate {
     
+    let player = Player.instance
+    
     @IBOutlet weak var userNameTextField: CodenamesTextField!
     
     override func viewDidLoad() {
@@ -22,7 +24,13 @@ class JoinGameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        return true
+        if let name = userNameTextField.text where name.characters.count >= 1 {
+            player.setName(name)
+            return true
+        }
+        else {
+            return false
+        }
     }
 }
 

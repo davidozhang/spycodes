@@ -17,6 +17,9 @@
 		63FA54E01D1BBB73004515DA /* CodenamesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA54DF1D1BBB73004515DA /* CodenamesTextField.swift */; };
 		63FA54E21D1BBD8E004515DA /* CreateGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */; };
 		63FDED321D2648D600142780 /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED311D2648D600142780 /* JoinGameViewController.swift */; };
+		63FDED351D264BE800142780 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED341D264BE800142780 /* Player.swift */; };
+		63FDED371D264CF300142780 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED361D264CF300142780 /* Team.swift */; };
+		63FDED391D26557200142780 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED381D26557200142780 /* Room.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		63FA54DF1D1BBB73004515DA /* CodenamesTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodenamesTextField.swift; path = Extensions/CodenamesTextField.swift; sourceTree = "<group>"; };
 		63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateGameViewController.swift; path = ViewControllers/CreateGameViewController.swift; sourceTree = "<group>"; };
 		63FDED311D2648D600142780 /* JoinGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JoinGameViewController.swift; path = ViewControllers/JoinGameViewController.swift; sourceTree = "<group>"; };
+		63FDED341D264BE800142780 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = Objects/Player.swift; sourceTree = "<group>"; };
+		63FDED361D264CF300142780 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Objects/Team.swift; sourceTree = "<group>"; };
+		63FDED381D26557200142780 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Room.swift; path = Objects/Room.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +75,7 @@
 				63A04D121D1A5713005A2914 /* Info.plist */,
 				63A04D0A1D1A5713005A2914 /* Codenames.xcdatamodeld */,
 				63A04D1B1D1A7F2B005A2914 /* Extensions */,
+				63FDED331D264BD800142780 /* Objects */,
 				63FA54E31D1BCFA6004515DA /* Storyboards */,
 				63A04D1A1D1A7F25005A2914 /* ViewControllers */,
 			);
@@ -101,6 +108,16 @@
 				63A04D071D1A5713005A2914 /* Main.storyboard */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		63FDED331D264BD800142780 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				63FDED341D264BE800142780 /* Player.swift */,
+				63FDED381D26557200142780 /* Room.swift */,
+				63FDED361D264CF300142780 /* Team.swift */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,10 +192,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63FDED371D264CF300142780 /* Team.swift in Sources */,
 				63FA54E21D1BBD8E004515DA /* CreateGameViewController.swift in Sources */,
 				63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */,
 				63A04D0C1D1A5713005A2914 /* Codenames.xcdatamodeld in Sources */,
+				63FDED391D26557200142780 /* Room.swift in Sources */,
 				63FA54E01D1BBB73004515DA /* CodenamesTextField.swift in Sources */,
+				63FDED351D264BE800142780 /* Player.swift in Sources */,
 				63A04D1D1D1A7F37005A2914 /* CodenamesButton.swift in Sources */,
 				63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */,
 				63FDED321D2648D600142780 /* JoinGameViewController.swift in Sources */,

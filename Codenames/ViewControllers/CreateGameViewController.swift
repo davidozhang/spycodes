@@ -2,6 +2,9 @@ import UIKit
 
 class CreateGameViewController: UIViewController, UITextFieldDelegate {
     
+    let player = Player.instance
+    let room = Room.instance
+    
     @IBOutlet weak var roomNameTextField: CodenamesTextField!
     
     override func viewDidLoad() {
@@ -22,8 +25,15 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        performSegueWithIdentifier("join-game", sender: self)
-        return true
+        if let name = roomNameTextField.text where name.characters.count >= 1 {
+            player.setHost()
+            room.setName(name)
+            performSegueWithIdentifier("join-game", sender: self)
+            return true
+        }
+        else {
+            return false
+        }
     }
 }
 
