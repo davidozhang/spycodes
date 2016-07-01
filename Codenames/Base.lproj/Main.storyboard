@@ -29,6 +29,9 @@
                                 <state key="normal" title="Join Game">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="onJoinGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F7w-v0-i5q"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTx-L1-vkT" customClass="CodenamesButton" customModule="Codenames" customModuleProvider="target">
                                 <rect key="frame" x="237.5" y="435" width="125" height="41"/>
@@ -89,6 +92,7 @@
                     </view>
                     <connections>
                         <segue destination="os2-Wc-CLV" kind="presentation" identifier="create-game" modalTransitionStyle="flipHorizontal" id="7WM-P4-SMa"/>
+                        <segue destination="oCE-jf-1fM" kind="presentation" identifier="join-game" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -144,14 +148,68 @@
                     </view>
                     <connections>
                         <outlet property="roomNameTextField" destination="eTE-OI-uxt" id="8Qg-9L-oCD"/>
+                        <segue destination="oCE-jf-1fM" kind="presentation" identifier="join-game" modalTransitionStyle="flipHorizontal" id="Vg7-zN-QuD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P66-gy-EDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1026" y="324"/>
+            <point key="canvasLocation" x="1026" y="339"/>
+        </scene>
+        <!--Join Game View Controller-->
+        <scene sceneID="1W7-Yu-MRm">
+            <objects>
+                <viewController id="oCE-jf-1fM" customClass="JoinGameViewController" customModule="Codenames" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="O2o-J1-ZW6"/>
+                        <viewControllerLayoutGuide type="bottom" id="s1v-bI-7WK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Muy-4C-ske">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Your Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MdV-j8-107">
+                                <rect key="frame" x="192" y="211" width="216" height="37"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4s9-er-VpV" customClass="CodenamesTextField" customModule="Codenames" customModuleProvider="target">
+                                <rect key="frame" x="181" y="278" width="238" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="f6G-L2-vEk"/>
+                                    <constraint firstAttribute="width" constant="238" id="hzU-qF-QjJ"/>
+                                    <constraint firstAttribute="height" constant="44" id="vIE-GH-vfb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="f6G-L2-vEk"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MdV-j8-107" firstAttribute="centerX" secondItem="Muy-4C-ske" secondAttribute="centerX" id="2Jb-fb-Ut9"/>
+                            <constraint firstItem="4s9-er-VpV" firstAttribute="centerY" secondItem="Muy-4C-ske" secondAttribute="centerY" id="UwC-kY-pWD"/>
+                            <constraint firstItem="4s9-er-VpV" firstAttribute="top" secondItem="MdV-j8-107" secondAttribute="bottom" constant="30" id="VGE-mn-yDM"/>
+                            <constraint firstItem="4s9-er-VpV" firstAttribute="centerX" secondItem="Muy-4C-ske" secondAttribute="centerX" id="Y8l-Ag-BaX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="userNameTextField" destination="4s9-er-VpV" id="KFG-Mj-S6u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sKn-Jb-gii" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1026" y="1156"/>
         </scene>
     </scenes>
     <resources>
         <image name="Spy" width="290" height="280"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Vg7-zN-QuD"/>
+    </inferredMetricsTieBreakers>
 </document>

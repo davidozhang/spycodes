@@ -1,13 +1,13 @@
 import UIKit
 
-class CreateGameViewController: UIViewController, UITextFieldDelegate {
+class JoinGameViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var roomNameTextField: CodenamesTextField!
+    @IBOutlet weak var userNameTextField: CodenamesTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        roomNameTextField.delegate = self
-        roomNameTextField.becomeFirstResponder()
+        userNameTextField.delegate = self
+        userNameTextField.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -15,14 +15,13 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        guard let text = roomNameTextField.text else { return true }
+        guard let text = userNameTextField.text else { return true }
         
         let length = text.characters.count + string.characters.count - range.length
         return length <= 12
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        performSegueWithIdentifier("join-game", sender: self)
         return true
     }
 }
