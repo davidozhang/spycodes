@@ -6,6 +6,11 @@ class Player: Equatable {
     var clueGiver: Bool?
     var host: Bool?
     
+    func getName() -> String {
+        guard let name = self.name else { return "Nameless" }
+        return name
+    }
+    
     func setName(name: String) {
         self.name = name
     }

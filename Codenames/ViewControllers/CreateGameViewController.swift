@@ -2,8 +2,8 @@ import UIKit
 
 class CreateGameViewController: UIViewController, UITextFieldDelegate {
     
-    let player = Player.instance
-    let room = Room.instance
+    private let player = Player.instance
+    private let room = Room.instance
     
     @IBOutlet weak var roomNameTextField: CodenamesTextField!
     
@@ -28,6 +28,7 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
         if let name = roomNameTextField.text where name.characters.count >= 1 {
             player.setHost()
             room.setName(name)
+            room.addPlayer(player)
             performSegueWithIdentifier("join-game", sender: self)
             return true
         }

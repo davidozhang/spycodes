@@ -20,6 +20,9 @@
 		63FDED351D264BE800142780 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED341D264BE800142780 /* Player.swift */; };
 		63FDED371D264CF300142780 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED361D264CF300142780 /* Team.swift */; };
 		63FDED391D26557200142780 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED381D26557200142780 /* Room.swift */; };
+		63FDED3B1D265BAF00142780 /* PregameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED3A1D265BAF00142780 /* PregameRoomViewController.swift */; };
+		63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */; };
+		63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED451D28B47200142780 /* PregameRoomViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		63FDED341D264BE800142780 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = Objects/Player.swift; sourceTree = "<group>"; };
 		63FDED361D264CF300142780 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Objects/Team.swift; sourceTree = "<group>"; };
 		63FDED381D26557200142780 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Room.swift; path = Objects/Room.swift; sourceTree = "<group>"; };
+		63FDED3A1D265BAF00142780 /* PregameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PregameRoomViewController.swift; path = ViewControllers/PregameRoomViewController.swift; sourceTree = "<group>"; };
+		63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyRoomViewController.swift; path = ViewControllers/LobbyRoomViewController.swift; sourceTree = "<group>"; };
+		63FDED451D28B47200142780 /* PregameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PregameRoomViewCell.swift; path = Views/PregameRoomViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,7 @@
 				63FDED331D264BD800142780 /* Objects */,
 				63FA54E31D1BCFA6004515DA /* Storyboards */,
 				63A04D1A1D1A7F25005A2914 /* ViewControllers */,
+				63FDED421D28B42300142780 /* Views */,
 			);
 			path = Codenames;
 			sourceTree = "<group>";
@@ -87,7 +94,9 @@
 			children = (
 				63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */,
 				63FDED311D2648D600142780 /* JoinGameViewController.swift */,
+				63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */,
 				63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */,
+				63FDED3A1D265BAF00142780 /* PregameRoomViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -118,6 +127,14 @@
 				63FDED361D264CF300142780 /* Team.swift */,
 			);
 			name = Objects;
+			sourceTree = "<group>";
+		};
+		63FDED421D28B42300142780 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				63FDED451D28B47200142780 /* PregameRoomViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,10 +211,13 @@
 			files = (
 				63FDED371D264CF300142780 /* Team.swift in Sources */,
 				63FA54E21D1BBD8E004515DA /* CreateGameViewController.swift in Sources */,
+				63FDED3B1D265BAF00142780 /* PregameRoomViewController.swift in Sources */,
 				63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */,
+				63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */,
 				63A04D0C1D1A5713005A2914 /* Codenames.xcdatamodeld in Sources */,
 				63FDED391D26557200142780 /* Room.swift in Sources */,
 				63FA54E01D1BBB73004515DA /* CodenamesTextField.swift in Sources */,
+				63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */,
 				63FDED351D264BE800142780 /* Player.swift in Sources */,
 				63A04D1D1D1A7F37005A2914 /* CodenamesButton.swift in Sources */,
 				63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */,

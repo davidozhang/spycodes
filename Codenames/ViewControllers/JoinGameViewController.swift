@@ -2,7 +2,7 @@ import UIKit
 
 class JoinGameViewController: UIViewController, UITextFieldDelegate {
     
-    let player = Player.instance
+    private let player = Player.instance
     
     @IBOutlet weak var userNameTextField: CodenamesTextField!
     
@@ -26,6 +26,11 @@ class JoinGameViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if let name = userNameTextField.text where name.characters.count >= 1 {
             player.setName(name)
+            if (player.isHost()) {
+                performSegueWithIdentifier("pregame-room", sender: self)
+            } else {
+                performSegueWithIdentifier("lobby-room", sender: self)
+            }
             return true
         }
         else {
