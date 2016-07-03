@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63067C6A1D2982DD0005AC66 /* LobbyRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */; };
+		63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C6B1D2996B60005AC66 /* Lobby.swift */; };
 		63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* AppDelegate.swift */; };
 		63A04D091D1A5713005A2914 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D071D1A5713005A2914 /* Main.storyboard */; };
 		63A04D0C1D1A5713005A2914 /* Codenames.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D0A1D1A5713005A2914 /* Codenames.xcdatamodeld */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyRoomViewCell.swift; path = Views/LobbyRoomViewCell.swift; sourceTree = "<group>"; };
+		63067C6B1D2996B60005AC66 /* Lobby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lobby.swift; path = Objects/Lobby.swift; sourceTree = "<group>"; };
 		63A04D001D1A5713005A2914 /* Codenames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Codenames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63A04D031D1A5713005A2914 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63A04D081D1A5713005A2914 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 		63FDED331D264BD800142780 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				63067C6B1D2996B60005AC66 /* Lobby.swift */,
 				63FDED341D264BE800142780 /* Player.swift */,
 				63FDED381D26557200142780 /* Room.swift */,
 				63FDED361D264CF300142780 /* Team.swift */,
@@ -135,6 +140,7 @@
 		63FDED421D28B42300142780 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */,
 				63FDED451D28B47200142780 /* PregameRoomViewCell.swift */,
 			);
 			name = Views;
@@ -221,10 +227,12 @@
 				63FDED481D28FA6100142780 /* CodenamesNotificationKeys.swift in Sources */,
 				63FDED391D26557200142780 /* Room.swift in Sources */,
 				63FA54E01D1BBB73004515DA /* CodenamesTextField.swift in Sources */,
+				63067C6A1D2982DD0005AC66 /* LobbyRoomViewCell.swift in Sources */,
 				63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */,
 				63FDED351D264BE800142780 /* Player.swift in Sources */,
 				63A04D1D1D1A7F37005A2914 /* CodenamesButton.swift in Sources */,
 				63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */,
+				63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */,
 				63FDED321D2648D600142780 /* JoinGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
