@@ -28,6 +28,16 @@ class Lobby {
         return nil
     }
     
+    func hasRoomWithName(name: String) -> Bool {
+        for i in 0 ..< rooms.count {
+            if rooms[i].getName() == name {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
     func removeRoomWithName(name: String) {
         for i in 0 ..< rooms.count {
             if rooms[i].getName() == name {

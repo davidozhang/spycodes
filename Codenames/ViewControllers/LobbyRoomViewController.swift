@@ -20,6 +20,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         self.browser?.startBrowsingForPeers()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LobbyRoomViewController.refreshView), name: CodenamesNotificationKeys.roomsUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LobbyRoomViewController.joinGame), name: CodenamesNotificationKeys.joinGameWithName, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -27,14 +28,21 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     // MARK: Private
-    func refreshView() {
+    @objc
+    private func refreshView() {
         self.tableView.reloadData()
+    }
+    
+    @objc
+    private func joinGame(notification: NSNotification) {
+        if let roomName = notification.userInfo?["name"] as? String {}
     }
     
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! LobbyRoomViewCell
         let roomAtIndex = lobby.getRooms()[indexPath.row]
+        cell.roomName = roomAtIndex.getName()
         cell.roomNameLabel.text = String(indexPath.row + 1) + ". " + roomAtIndex.getName()
         
         return cell
@@ -54,7 +62,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        if let info = info where info == ["isHost": "yes"] {
+        if let info = info where info == ["isHost": "yes"] && !lobby.hasRoomWithName(peerID.displayName) {
             lobby.addRoomWithName(peerID.displayName)
         }
     }
