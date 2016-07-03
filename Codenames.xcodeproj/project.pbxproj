@@ -23,6 +23,7 @@
 		63FDED3B1D265BAF00142780 /* PregameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED3A1D265BAF00142780 /* PregameRoomViewController.swift */; };
 		63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */; };
 		63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED451D28B47200142780 /* PregameRoomViewCell.swift */; };
+		63FDED481D28FA6100142780 /* CodenamesNotificationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED471D28FA6100142780 /* CodenamesNotificationKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		63FDED3A1D265BAF00142780 /* PregameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PregameRoomViewController.swift; path = ViewControllers/PregameRoomViewController.swift; sourceTree = "<group>"; };
 		63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyRoomViewController.swift; path = ViewControllers/LobbyRoomViewController.swift; sourceTree = "<group>"; };
 		63FDED451D28B47200142780 /* PregameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PregameRoomViewCell.swift; path = Views/PregameRoomViewCell.swift; sourceTree = "<group>"; };
+		63FDED471D28FA6100142780 /* CodenamesNotificationKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodenamesNotificationKeys.swift; path = Extensions/CodenamesNotificationKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				63A04D1C1D1A7F37005A2914 /* CodenamesButton.swift */,
+				63FDED471D28FA6100142780 /* CodenamesNotificationKeys.swift */,
 				63FA54DF1D1BBB73004515DA /* CodenamesTextField.swift */,
 			);
 			name = Extensions;
@@ -215,6 +218,7 @@
 				63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */,
 				63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */,
 				63A04D0C1D1A5713005A2914 /* Codenames.xcdatamodeld in Sources */,
+				63FDED481D28FA6100142780 /* CodenamesNotificationKeys.swift in Sources */,
 				63FDED391D26557200142780 /* Room.swift in Sources */,
 				63FA54E01D1BBB73004515DA /* CodenamesTextField.swift in Sources */,
 				63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */,

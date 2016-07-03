@@ -15,6 +15,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var startGame: CodenamesButton!
     
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,15 +34,23 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         
         roomNameLabel.text = room.getName()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PregameRoomViewController.refreshView), name: room.playersUpdatedNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PregameRoomViewController.refreshView), name: CodenamesNotificationKeys.playersUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PregameRoomViewController.editName), name: CodenamesNotificationKeys.editName, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func refreshView() {
+    // MARK: Private
+    @objc
+    private func refreshView() {
         self.tableView.reloadData()
+    }
+    
+    @objc
+    private func editName() {
+        performSegueWithIdentifier("edit-name", sender: self)
     }
     
     // MARK: UITableViewDelegate
@@ -52,8 +61,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         
         if (player == playerAtIndex) {
             cell.removeButton.hidden = true
+            cell.editButton.hidden = false
         } else {
             cell.removeButton.hidden = false
+            cell.editButton.hidden = true
         }
         
         cell.index = indexPath.row

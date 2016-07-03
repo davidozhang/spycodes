@@ -2,12 +2,11 @@ import Foundation
 
 class Room {
     static let instance = Room()
-    let playersUpdatedNotificationKey = "playersUpdated"
     
     var name: String?
     var players = [Player]() {
         didSet {
-            NSNotificationCenter.defaultCenter().postNotificationName(playersUpdatedNotificationKey, object: self)
+            NSNotificationCenter.defaultCenter().postNotificationName(CodenamesNotificationKeys.playersUpdated, object: self)
         }
     }
     

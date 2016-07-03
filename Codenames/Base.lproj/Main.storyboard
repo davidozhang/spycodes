@@ -97,6 +97,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="219" y="339"/>
         </scene>
         <!--Create Game View Controller-->
         <scene sceneID="OZB-hn-iNT">
@@ -275,15 +276,37 @@
                                                         <action selector="onRemove:" destination="PVh-e3-TPn" eventType="touchUpInside" id="HYe-6V-Cju"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDC-S1-aKD" userLabel="Edit Button">
+                                                    <rect key="frame" x="535" y="9.5" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="ESH-n1-TvZ"/>
+                                                        <constraint firstAttribute="height" constant="25" id="Yew-IE-JHV"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="Edit"/>
+                                                    <connections>
+                                                        <action selector="onEdit:" destination="PVh-e3-TPn" eventType="touchUpInside" id="Fjc-hL-Tr0"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="d84-Az-a9v" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="1oP-67-mY5"/>
                                                 <constraint firstItem="ajc-po-6pQ" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="9Qp-wh-c4h"/>
+                                                <constraint firstItem="ajc-po-6pQ" firstAttribute="leading" secondItem="VDC-S1-aKD" secondAttribute="trailing" id="DbS-Kn-HR7"/>
+                                                <constraint firstItem="VDC-S1-aKD" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="GdE-tE-tff"/>
+                                                <constraint firstAttribute="trailing" secondItem="ajc-po-6pQ" secondAttribute="trailing" constant="40" id="LTp-nn-DnX"/>
                                                 <constraint firstAttribute="trailing" secondItem="ajc-po-6pQ" secondAttribute="trailing" constant="40" id="dBw-J4-M4o"/>
+                                                <constraint firstAttribute="trailing" secondItem="VDC-S1-aKD" secondAttribute="trailing" constant="40" id="smY-Rb-iLV"/>
                                                 <constraint firstItem="d84-Az-a9v" firstAttribute="leading" secondItem="rq2-uF-F29" secondAttribute="leading" constant="40" id="unX-kK-LLJ"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="DbS-Kn-HR7"/>
+                                                    <exclude reference="dBw-J4-M4o"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="editButton" destination="VDC-S1-aKD" id="sAt-Nd-9s8"/>
                                             <outlet property="nameLabel" destination="d84-Az-a9v" id="6T9-Jb-ZH6"/>
                                             <outlet property="removeButton" destination="ajc-po-6pQ" id="B86-EV-OzP"/>
                                         </connections>
@@ -358,6 +381,7 @@
                         <outlet property="roomNameLabel" destination="Mc1-YN-1oP" id="UVj-Yy-Wno"/>
                         <outlet property="startGame" destination="084-kN-Fki" id="ryC-Vh-gDH"/>
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
+                        <segue destination="oCE-jf-1fM" kind="presentation" identifier="edit-name" modalTransitionStyle="flipHorizontal" id="coq-y7-xTt"/>
                     </connections>
                 </viewController>
             </objects>
@@ -366,11 +390,12 @@
     </scenes>
     <resources>
         <image name="Delete" width="100" height="100"/>
+        <image name="Edit" width="100" height="100"/>
         <image name="Horizontal-Line" width="100" height="100"/>
         <image name="Spy" width="290" height="280"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="M2x-yW-um3"/>
+        <segue reference="coq-y7-xTt"/>
         <segue reference="7yd-xs-fux"/>
     </inferredMetricsTieBreakers>
 </document>
