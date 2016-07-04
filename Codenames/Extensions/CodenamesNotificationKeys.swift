@@ -3,4 +3,5 @@ class CodenamesNotificationKeys {
     static let playersUpdated = "playersUpdated"
     static let roomsUpdated = "roomsUpdated"
     static let joinGameWithName = "joinGameWithName"
+    static let joinGameSuccess = "joinGameSuccess"
 }

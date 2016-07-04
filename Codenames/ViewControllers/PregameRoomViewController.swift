@@ -1,15 +1,17 @@
 import MultipeerConnectivity
 import UIKit
 
-class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MCSessionDelegate {
+class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
     private let identifier = "pregame-room-view-cell"
     
     private let player = Player.instance
-    private let room = Room.instance
+    private var room = Room.instance
     
     private let serviceType = "Codenames"
-    private var session : MCSession?
-    private var advertiser : MCAdvertiserAssistant?
+    private var session: MCSession?
+    private var advertiser: MCAdvertiserAssistant?
+    private var browser: MCNearbyServiceBrowser?
+    private var roomId: MCPeerID?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var roomNameLabel: UILabel!
@@ -20,11 +22,17 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         
         if (player.isHost()) {
-            let roomId = MCPeerID.init(displayName: room.getName())
-            self.session = MCSession(peer: roomId)
-            self.session!.delegate = self
+            self.roomId = MCPeerID.init(displayName: room.getName())
+            
+            self.session = MCSession(peer: self.roomId!)
+            self.session?.delegate = self
+            
             self.advertiser = MCAdvertiserAssistant(serviceType: serviceType, discoveryInfo: ["isHost": "yes"], session: self.session!)
+            self.browser = MCNearbyServiceBrowser(peer: self.roomId!, serviceType: self.serviceType)
+            self.browser?.delegate = self
+            
             self.advertiser?.start()
+            self.browser?.startBrowsingForPeers()
             
             self.startGame.hidden = false
         }
@@ -89,6 +97,22 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
     
-    func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {}
+    func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
+        if state == MCSessionState.Connected {}
+    }
+    
+    func session(session: MCSession, didReceiveCertificate certificate: [AnyObject]?, fromPeer peerID: MCPeerID, certificateHandler: (Bool) -> Void) {
+        certificateHandler(true)
+    }
+    
+    // MARK: MCNearbyServiceBrowserDelegate
+    func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        if let info = info where info["joinRoom"] == room.getName() {
+            // Invite peer that explicitly advertised discovery info containing joinRoom entry that has the name of the host room
+            browser.invitePeer(peerID, toSession: self.session!, withContext: nil, timeout: 30)
+        }
+    }
+    
+    func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {}
 }
 
