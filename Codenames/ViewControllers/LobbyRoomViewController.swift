@@ -1,30 +1,23 @@
 import MultipeerConnectivity
 import UIKit
 
-class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate {
+class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate {
     private let identifier = "lobby-room-view-cell"
     private let lobby = Lobby.instance
     private let player = Player.instance
-    private var playerId: MCPeerID?
-    
-    private let serviceType = "Codenames"
-    private var advertiser: MCNearbyServiceAdvertiser?
-    private var browser: MCNearbyServiceBrowser?
-    private var session: MCSession?
+    private var multipeerManager = MultipeerManager.instance
     
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        playerId = MCPeerID.init(displayName: player.getName())
+        self.multipeerManager.delegate = self
+        self.multipeerManager.initPeerID(player.getName())
+        self.multipeerManager.initBrowser()
+        self.multipeerManager.initSession()
         
-        if let playerId = playerId {
-            self.browser = MCNearbyServiceBrowser(peer: playerId, serviceType: self.serviceType)
-            self.browser?.delegate = self
-            self.browser?.startBrowsingForPeers()
-            self.session = MCSession(peer: playerId)
-        }
+        self.multipeerManager.startBrowser()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LobbyRoomViewController.refreshView), name: CodenamesNotificationKeys.roomsUpdated, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LobbyRoomViewController.joinGame), name: CodenamesNotificationKeys.joinGameWithName, object: nil)
@@ -42,11 +35,11 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @objc
     private func joinGame(notification: NSNotification) {
-        if let roomName = notification.userInfo?["name"] as? String, let playerId = playerId {
+        if let roomName = notification.userInfo?["name"] as? String {
             // Start advertising to allow host room to invite into session
-            self.advertiser = MCNearbyServiceAdvertiser(peer: playerId, discoveryInfo: ["joinRoom": roomName], serviceType: serviceType)
-            self.advertiser?.delegate = self
-            self.advertiser?.startAdvertisingPeer()
+            self.multipeerManager.initAdvertiser()
+            self.multipeerManager.initDiscoveryInfo(["joinRoom": roomName])
+            self.multipeerManager.startAdvertiser()
         }
     }
     
@@ -65,23 +58,22 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lobby.getRooms().count
+        return lobby.getNumberOfRooms()
     }
     
-    // MARK: NMCNearbyServiceAdvertiserDelegate
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession) -> Void) {
-        invitationHandler(true, self.session!)
-    }
-    
-    // MARK: MCNearbyServiceBrowserDelegate
-    func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        lobby.removeRoomWithName(peerID.displayName)
-    }
-    
-    func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+    // MARK: MultipeerManagerDelegate
+    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         if let info = info where info["isHost"] == "yes" && !lobby.hasRoomWithName(peerID.displayName) {
             lobby.addRoomWithName(peerID.displayName)
         }
+    }
+    
+    func lostPeer(peerID: MCPeerID) {
+        lobby.removeRoomWithName(peerID.displayName)
+    }
+    
+    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
+    
     }
 }
 

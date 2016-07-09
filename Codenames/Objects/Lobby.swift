@@ -45,4 +45,8 @@ class Lobby {
             }
         }
     }
+    
+    func getNumberOfRooms() -> Int {
+        return self.rooms.count
+    }
 }
