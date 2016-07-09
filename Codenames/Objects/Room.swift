@@ -30,4 +30,8 @@ class Room {
     func getPlayers() -> [Player] {
         return self.players
     }
+    
+    func getNumberOfPlayers() -> Int {
+        return self.players.count
+    }
 }

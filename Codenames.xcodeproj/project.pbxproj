@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		63067C6A1D2982DD0005AC66 /* LobbyRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */; };
 		63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C6B1D2996B60005AC66 /* Lobby.swift */; };
+		63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* MultipeerManager.swift */; };
 		63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* AppDelegate.swift */; };
 		63A04D091D1A5713005A2914 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D071D1A5713005A2914 /* Main.storyboard */; };
 		63A04D0C1D1A5713005A2914 /* Codenames.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D0A1D1A5713005A2914 /* Codenames.xcdatamodeld */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyRoomViewCell.swift; path = Views/LobbyRoomViewCell.swift; sourceTree = "<group>"; };
 		63067C6B1D2996B60005AC66 /* Lobby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lobby.swift; path = Objects/Lobby.swift; sourceTree = "<group>"; };
+		63920A361D3090D60073E7F7 /* MultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipeerManager.swift; path = Managers/MultipeerManager.swift; sourceTree = "<group>"; };
 		63A04D001D1A5713005A2914 /* Codenames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Codenames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63A04D031D1A5713005A2914 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63A04D081D1A5713005A2914 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,6 +65,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63920A351D3090BC0073E7F7 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				63920A361D3090D60073E7F7 /* MultipeerManager.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 		63A04CF71D1A5713005A2914 = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +97,7 @@
 				63A04D121D1A5713005A2914 /* Info.plist */,
 				63A04D0A1D1A5713005A2914 /* Codenames.xcdatamodeld */,
 				63A04D1B1D1A7F2B005A2914 /* Extensions */,
+				63920A351D3090BC0073E7F7 /* Managers */,
 				63FDED331D264BD800142780 /* Objects */,
 				63FA54E31D1BCFA6004515DA /* Storyboards */,
 				63A04D1A1D1A7F25005A2914 /* ViewControllers */,
@@ -222,6 +233,7 @@
 				63FA54E21D1BBD8E004515DA /* CreateGameViewController.swift in Sources */,
 				63FDED3B1D265BAF00142780 /* PregameRoomViewController.swift in Sources */,
 				63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */,
+				63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */,
 				63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */,
 				63A04D0C1D1A5713005A2914 /* Codenames.xcdatamodeld in Sources */,
 				63FDED481D28FA6100142780 /* CodenamesNotificationKeys.swift in Sources */,
