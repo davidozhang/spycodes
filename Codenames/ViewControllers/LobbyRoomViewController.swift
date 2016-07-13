@@ -4,6 +4,7 @@ import UIKit
 class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate {
     private let identifier = "lobby-room-view-cell"
     private let lobby = Lobby.instance
+    private var room = Room.instance
     private let player = Player.instance
     private var multipeerManager = MultipeerManager.instance
     
@@ -13,7 +14,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         self.multipeerManager.delegate = self
-        self.multipeerManager.initPeerID(player.getName())
+        self.multipeerManager.initPeerID(player.getPlayerName())
         self.multipeerManager.initBrowser()
         self.multipeerManager.initSession()
         
@@ -37,9 +38,20 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     private func joinGame(notification: NSNotification) {
         if let roomName = notification.userInfo?["name"] as? String {
             // Start advertising to allow host room to invite into session
-            self.multipeerManager.initAdvertiser()
             self.multipeerManager.initDiscoveryInfo(["joinRoom": roomName])
+            self.multipeerManager.initAdvertiser()
             self.multipeerManager.startAdvertiser()
+        }
+    }
+    
+    // MARK: Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "pregame-room") {
+            if let pregameRoomViewController = segue.destinationViewController as? PregameRoomViewController {
+                pregameRoomViewController.player = self.player
+                pregameRoomViewController.room = self.room
+                pregameRoomViewController.multipeerManager = self.multipeerManager
+            }
         }
     }
     
@@ -47,8 +59,8 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! LobbyRoomViewCell
         let roomAtIndex = lobby.getRooms()[indexPath.row]
-        cell.roomName = roomAtIndex.getName()
-        cell.roomNameLabel.text = String(indexPath.row + 1) + ". " + roomAtIndex.getName()
+        cell.roomName = roomAtIndex.getRoomName()
+        cell.roomNameLabel.text = String(indexPath.row + 1) + ". " + roomAtIndex.getRoomName()
         
         return cell
     }
@@ -73,7 +85,23 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
-    
+        if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
+            self.room = room     // TODO: Sync room locally without the need for prepareForSegue
+            
+            // Inform the room host of local player info
+            let data = NSKeyedArchiver.archivedDataWithRootObject(self.player)
+            self.multipeerManager.broadcastData(data)
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.performSegueWithIdentifier("pregame-room", sender: self)
+            })
+            
+            NSNotificationCenter.defaultCenter().removeObserver(self, name: CodenamesNotificationKeys.roomsUpdated, object: nil)
+            NSNotificationCenter.defaultCenter().removeObserver(self, name: CodenamesNotificationKeys.joinGameWithName, object: nil)
+        }
     }
+    
+    func newPeerAddedToSession(peerID: MCPeerID) {}
+    
+    func peerDisconnectedFromSession(peerID: MCPeerID) {}
 }
-

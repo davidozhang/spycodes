@@ -1,7 +1,6 @@
 import UIKit
 
 class CreateGameViewController: UIViewController, UITextFieldDelegate {
-    private let lobby = Lobby.instance
     private let player = Player.instance
     private let room = Room.instance
     
@@ -27,9 +26,8 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if let name = roomNameTextField.text where name.characters.count >= 1 {
             player.setHost()
-            room.setName(name)
+            room.setRoomName(name)
             room.addPlayer(player)
-            lobby.addRoomWithName(name)
             
             performSegueWithIdentifier("join-game", sender: self)
             return true
@@ -39,4 +37,3 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
-

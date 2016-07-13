@@ -10,7 +10,7 @@ class Lobby {
     
     func addRoomWithName(name: String) {
         let room = Room()
-        room.setName(name)
+        room.setRoomName(name)
         self.rooms.append(room)
     }
     
@@ -20,7 +20,7 @@ class Lobby {
     
     func getRoomWithName(name: String) -> Room? {
         for i in 0 ..< rooms.count {
-            if rooms[i].getName() == name {
+            if rooms[i].getRoomName() == name {
                 return rooms[i]
             }
         }
@@ -30,7 +30,7 @@ class Lobby {
     
     func hasRoomWithName(name: String) -> Bool {
         for i in 0 ..< rooms.count {
-            if rooms[i].getName() == name {
+            if rooms[i].getRoomName() == name {
                 return true
             }
         }
@@ -40,7 +40,7 @@ class Lobby {
     
     func removeRoomWithName(name: String) {
         for i in 0 ..< rooms.count {
-            if rooms[i].getName() == name {
+            if rooms[i].getRoomName() == name {
                 rooms.removeAtIndex(i)
             }
         }

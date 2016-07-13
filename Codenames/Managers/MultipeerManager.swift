@@ -4,6 +4,8 @@ protocol MultipeerManagerDelegate {
     func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String:String]?)
     func lostPeer(peerID: MCPeerID)
     func didReceiveData(data: NSData, fromPeer peerID: MCPeerID)
+    func newPeerAddedToSession(peerID: MCPeerID)
+    func peerDisconnectedFromSession(peerID: MCPeerID)
 }
 
 class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
@@ -62,6 +64,14 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
         self.browser?.invitePeer(peerID, toSession: self.session!, withContext: nil, timeout: 30)
     }
     
+    func broadcastData(data: NSData) {
+        do {
+            try self.session?.sendData(data, toPeers: (self.session?.connectedPeers)!, withMode: MCSessionSendDataMode.Reliable)
+        } catch {
+            NSLog("Failed to broadcast data to all peers")
+        }
+    }
+    
     // MARK: MCNearbyServiceAdvertiserDelegate
     func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession) -> Void) {
         invitationHandler(true, self.session!)
@@ -87,7 +97,13 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
     
-    func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {}
+    func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
+        if state == MCSessionState.Connected {
+            delegate?.newPeerAddedToSession(peerID)
+        } else if state == MCSessionState.NotConnected {
+            delegate?.peerDisconnectedFromSession(peerID)
+        }
+    }
     
     func session(session: MCSession, didReceiveCertificate certificate: [AnyObject]?, fromPeer peerID: MCPeerID, certificateHandler: (Bool) -> Void) {
         certificateHandler(true)
