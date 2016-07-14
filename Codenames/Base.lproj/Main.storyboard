@@ -462,7 +462,6 @@
                         <outlet property="roomNameLabel" destination="Mc1-YN-1oP" id="UVj-Yy-Wno"/>
                         <outlet property="startGame" destination="084-kN-Fki" id="ryC-Vh-gDH"/>
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
-                        <segue destination="oCE-jf-1fM" kind="presentation" identifier="edit-name" modalTransitionStyle="flipHorizontal" id="coq-y7-xTt"/>
                         <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="87V-6a-5kI"/>
                     </connections>
                 </viewController>
@@ -478,8 +477,8 @@
         <image name="Spy" width="290" height="280"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7yd-xs-fux"/>
-        <segue reference="coq-y7-xTt"/>
+        <segue reference="Vg7-zN-QuD"/>
         <segue reference="87V-6a-5kI"/>
+        <segue reference="yme-7x-s1N"/>
     </inferredMetricsTieBreakers>
 </document>

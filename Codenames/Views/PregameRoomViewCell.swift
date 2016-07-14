@@ -1,6 +1,7 @@
 import UIKit
 
 protocol PregameRoomViewCellDelegate {
+    func editPlayerAtIndex(index: Int)
     func removePlayerAtIndex(index: Int)
 }
 
@@ -19,7 +20,9 @@ class PregameRoomViewCell: UITableViewCell {
     }
     
     @IBAction func onEdit(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName(CodenamesNotificationKeys.editName, object: self)
+        if let index = index {
+            delegate?.editPlayerAtIndex(index)
+        }
     }
     
     override func awakeFromNib() {}

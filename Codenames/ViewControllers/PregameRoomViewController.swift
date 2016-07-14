@@ -48,9 +48,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(PregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
         
-        roomNameLabel.text = room.getRoomName()
-
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PregameRoomViewController.editName), name: CodenamesNotificationKeys.editName, object: nil)
+        roomNameLabel.text = self.room.getRoomName()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -69,11 +67,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
         })
-    }
-    
-    @objc
-    private func editName() {
-        performSegueWithIdentifier("edit-name", sender: self)
     }
     
     @objc
@@ -204,6 +197,23 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: PregameRoomViewCellDelegate
     func removePlayerAtIndex(index: Int) {
         self.room.removePlayerAtIndex(index)
+    }
+    
+    func editPlayerAtIndex(index: Int) {
+        let alertController = UIAlertController(title: "Edit Name", message: "Enter a different name", preferredStyle: .Alert)
+        alertController.addTextFieldWithConfigurationHandler { (textField: UITextField) in }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alertAction: UIAlertAction) in }
+        let confirmAction = UIAlertAction(title: "OK", style: .Default) { (alertAction: UIAlertAction) in
+            if let newName = alertController.textFields?[0].text {
+                self.room.setNameOfPlayerAtIndex(index, name: newName)
+                if (!self.player.isHost()) {
+                    self.broadcastData()
+                }
+            }
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
 

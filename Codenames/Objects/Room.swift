@@ -51,6 +51,12 @@ class Room: NSObject, NSCoding {
         return nil
     }
     
+    func setNameOfPlayerAtIndex(index: Int, name: String) {
+        if index < self.players.count {
+            self.players[index].setPlayerName(name)
+        }
+    }
+    
     func removePlayerAtIndex(index: Int) {
         if index < self.players.count {
             self.players.removeAtIndex(index)
