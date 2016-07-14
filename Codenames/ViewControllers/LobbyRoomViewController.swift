@@ -1,13 +1,15 @@
 import MultipeerConnectivity
 import UIKit
 
-class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate {
+class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, LobbyRoomViewCellDelegate {
     private let identifier = "lobby-room-view-cell"
     
     var lobby = Lobby.instance
     var room = Room.instance
     var player = Player.instance
     var multipeerManager = MultipeerManager.instance
+    
+    private var refreshTimer: NSTimer?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,8 +23,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.multipeerManager.startBrowser()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LobbyRoomViewController.refreshView), name: CodenamesNotificationKeys.roomsUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LobbyRoomViewController.joinGame), name: CodenamesNotificationKeys.joinGameWithName, object: nil)
+        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(LobbyRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh lobby every second
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,17 +33,9 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: Private
     @objc
     private func refreshView() {
-        self.tableView.reloadData()
-    }
-    
-    @objc
-    private func joinGame(notification: NSNotification) {
-        if let roomName = notification.userInfo?["name"] as? String {
-            // Start advertising to allow host room to invite into session
-            self.multipeerManager.initDiscoveryInfo(["joinRoom": roomName])
-            self.multipeerManager.initAdvertiser()
-            self.multipeerManager.startAdvertiser()
-        }
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+        })
     }
     
     // MARK: Segue
@@ -63,6 +56,8 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.roomName = roomAtIndex.getRoomName()
         cell.roomNameLabel.text = String(indexPath.row + 1) + ". " + roomAtIndex.getRoomName()
         
+        cell.delegate = self
+        
         return cell
     }
     
@@ -72,6 +67,14 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return lobby.getNumberOfRooms()
+    }
+    
+    // MARK: LobbyRoomViewCellDelegate
+    func joinGameWithName(name: String) {
+        // Start advertising to allow host room to invite into session
+        self.multipeerManager.initDiscoveryInfo(["joinRoom": name])
+        self.multipeerManager.initAdvertiser()
+        self.multipeerManager.startAdvertiser()
     }
     
     // MARK: MultipeerManagerDelegate
@@ -94,12 +97,11 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
             let data = NSKeyedArchiver.archivedDataWithRootObject(self.player)
             self.multipeerManager.broadcastData(data)
             
+            self.refreshTimer?.invalidate()
+            
             dispatch_async(dispatch_get_main_queue(), {
                 self.performSegueWithIdentifier("pregame-room", sender: self)
             })
-            
-            NSNotificationCenter.defaultCenter().removeObserver(self, name: CodenamesNotificationKeys.roomsUpdated, object: nil)
-            NSNotificationCenter.defaultCenter().removeObserver(self, name: CodenamesNotificationKeys.joinGameWithName, object: nil)
         }
     }
     

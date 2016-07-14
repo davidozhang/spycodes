@@ -2,11 +2,7 @@ import Foundation
 
 class Lobby {
     static let instance = Lobby()
-    var rooms = [Room]() {
-        didSet {
-            NSNotificationCenter.defaultCenter().postNotificationName(CodenamesNotificationKeys.roomsUpdated, object: self)
-        }
-    }
+    var rooms = [Room]()
     
     func addRoomWithName(name: String) {
         let room = Room()
