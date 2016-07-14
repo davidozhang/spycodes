@@ -4,6 +4,8 @@ protocol MultipeerManagerDelegate {
     func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String:String]?)
     func lostPeer(peerID: MCPeerID)
     func didReceiveData(data: NSData, fromPeer peerID: MCPeerID)
+    func newPeerAddedToSession(peerID: MCPeerID)
+    func peerDisconnectedFromSession(peerID: MCPeerID)
 }
 
 class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
@@ -21,6 +23,10 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     // MARK: Public
     func initPeerID(displayName: String) {
         self.peerID = MCPeerID.init(displayName: displayName)
+    }
+    
+    func getPeerID() -> MCPeerID? {
+        return self.peerID
     }
     
     func initDiscoveryInfo(info: [String: String]) {
@@ -45,6 +51,16 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
         self.session?.delegate = self
     }
     
+    func stopSession() {
+        self.session?.disconnect()
+    }
+    
+    func terminate() {
+        self.stopAdvertiser()
+        self.stopBrowser()
+        self.stopSession()
+    }
+    
     func initAdvertiser() {
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID!, discoveryInfo: self.discoveryInfo, serviceType: self.serviceType)
         self.advertiser?.delegate = self
@@ -60,6 +76,14 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     
     func invitePeerToSession(peerID: MCPeerID) {
         self.browser?.invitePeer(peerID, toSession: self.session!, withContext: nil, timeout: 30)
+    }
+    
+    func broadcastData(data: NSData) {
+        do {
+            try self.session?.sendData(data, toPeers: (self.session?.connectedPeers)!, withMode: MCSessionSendDataMode.Reliable)
+        } catch {
+            NSLog("Failed to broadcast data to all peers")
+        }
     }
     
     // MARK: MCNearbyServiceAdvertiserDelegate
@@ -87,7 +111,13 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
     
-    func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {}
+    func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
+        if state == MCSessionState.Connected {
+            delegate?.newPeerAddedToSession(peerID)
+        } else if state == MCSessionState.NotConnected {
+            delegate?.peerDisconnectedFromSession(peerID)
+        }
+    }
     
     func session(session: MCSession, didReceiveCertificate certificate: [AnyObject]?, fromPeer peerID: MCPeerID, certificateHandler: (Bool) -> Void) {
         certificateHandler(true)
