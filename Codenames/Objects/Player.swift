@@ -78,10 +78,10 @@ class Player: NSObject, NSCoding {
     }
 }
 
-func ==(left: Player, right: Player) -> Bool {      // TODO: Currently only use name. Will use UUID in future.
-    return left.name == right.name
+func ==(left: Player, right: Player) -> Bool {
+    return left.uuid == right.uuid
 }
 
 func !=(left: Player, right: Player) -> Bool {
-    return left.name != right.name
+    return left.uuid != right.uuid
 }
