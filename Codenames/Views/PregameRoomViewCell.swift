@@ -1,8 +1,12 @@
 import UIKit
 
+protocol PregameRoomViewCellDelegate {
+    func removePlayerAtIndex(index: Int)
+}
+
 class PregameRoomViewCell: UITableViewCell {
-    private let room = Room.instance
     var index: Int?
+    var delegate: PregameRoomViewCellDelegate?
     
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
@@ -10,7 +14,7 @@ class PregameRoomViewCell: UITableViewCell {
     
     @IBAction func onRemove(sender: AnyObject) {
         if let index = index {
-            room.removePlayerAtIndex(index)
+            delegate?.removePlayerAtIndex(index)
         }
     }
     

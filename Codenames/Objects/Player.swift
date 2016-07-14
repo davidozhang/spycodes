@@ -1,33 +1,37 @@
 import Foundation
+import UIKit
 
 class Player: NSObject, NSCoding {
     static let instance = Player()
     
     var name: String
+    var uuid: String
     var team: Team
     var clueGiver: Bool
     var host: Bool
     
     override init() {
         self.name = "Nameless"
+        self.uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
         self.team = Team.Red
         self.clueGiver = false
         self.host = false
     }
     
-    convenience init(name: String, team: Team, clueGiver: Bool, host: Bool) {
+    convenience init(name: String, uuid: String, team: Team, clueGiver: Bool, host: Bool) {
         self.init()
         self.name = name
+        self.uuid = uuid
         self.team = team
         self.clueGiver = clueGiver
         self.host = host
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        if let name = aDecoder.decodeObjectForKey("name") as? String, team = aDecoder.decodeObjectForKey("team") as? Int {
+        if let name = aDecoder.decodeObjectForKey("name") as? String, uuid = aDecoder.decodeObjectForKey("uuid") as? String, team = aDecoder.decodeObjectForKey("team") as? Int {
             let clueGiver = aDecoder.decodeBoolForKey("clueGiver")
             let host = aDecoder.decodeBoolForKey("host")
-            self.init(name: name, team: Team(rawValue: team)!, clueGiver: clueGiver, host: host)
+            self.init(name: name, uuid: uuid, team: Team(rawValue: team)!, clueGiver: clueGiver, host: host)
         } else {
             self.init()
         }
@@ -35,17 +39,22 @@ class Player: NSObject, NSCoding {
     
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.name, forKey: "name")
+        aCoder.encodeObject(self.uuid, forKey: "uuid")
         aCoder.encodeObject(self.team.rawValue, forKey: "team")
         aCoder.encodeBool(self.clueGiver, forKey: "clueGiver")
         aCoder.encodeBool(self.host, forKey: "host")
     }
     
     func getPlayerName() -> String {
-        return name
+        return self.name
     }
     
     func setPlayerName(name: String) {
         self.name = name
+    }
+    
+    func getPlayerUUID() -> String {
+        return self.uuid
     }
     
     func setTeam(team: Team) {

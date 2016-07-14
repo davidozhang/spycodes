@@ -3,10 +3,11 @@ import UIKit
 
 class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate {
     private let identifier = "lobby-room-view-cell"
-    private let lobby = Lobby.instance
-    private var room = Room.instance
-    private let player = Player.instance
-    private var multipeerManager = MultipeerManager.instance
+    
+    var lobby = Lobby.instance
+    var room = Room.instance
+    var player = Player.instance
+    var multipeerManager = MultipeerManager.instance
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -84,6 +85,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         lobby.removeRoomWithName(peerID.displayName)
     }
     
+    // Navigate to pregame room only when preliminary sync data from host is received
     func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
         if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
             self.room = room     // TODO: Sync room locally without the need for prepareForSegue

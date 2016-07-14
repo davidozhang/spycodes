@@ -3,16 +3,11 @@ import Foundation
 class Room: NSObject, NSCoding {
     static let instance = Room()
     
-    var name: String?
-    var players: [Player] {
-        didSet {
-            NSNotificationCenter.defaultCenter().postNotificationName(CodenamesNotificationKeys.playersUpdated, object: self)
-        }
-    }
+    var name: String
+    var players = [Player]()
     
     override init() {
         self.name = "Default"
-        self.players = [Player]()
     }
     
     convenience init(name: String, players: [Player]) {
@@ -39,7 +34,6 @@ class Room: NSObject, NSCoding {
     }
     
     func getRoomName() -> String {
-        guard let name = self.name else { return "Default" }
         return name
     }
     
@@ -47,8 +41,38 @@ class Room: NSObject, NSCoding {
         self.players.append(player)
     }
     
+    func getPlayerWithUUID(uuid: String) -> Player? {
+        for player in players {
+            if player.uuid == uuid {
+                return player
+            }
+        }
+        
+        return nil
+    }
+    
     func removePlayerAtIndex(index: Int) {
-        self.players.removeAtIndex(index)
+        if index < self.players.count {
+            self.players.removeAtIndex(index)
+        }
+    }
+    
+    func removePlayerWithUUID(uuid: String) {
+        self.players = self.players.filter({($0 as Player).getPlayerUUID() != uuid})
+    }
+    
+    func removeAllPlayers() {
+        self.players.removeAll()
+    }
+    
+    func playerWithUUIDInRoom(uuid: String) -> Bool {
+        for player in players {
+            if player.getPlayerUUID() == uuid {
+                return true
+            }
+        }
+        
+        return false
     }
     
     func getPlayers() -> [Player] {

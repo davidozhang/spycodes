@@ -25,6 +25,10 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
         self.peerID = MCPeerID.init(displayName: displayName)
     }
     
+    func getPeerID() -> MCPeerID? {
+        return self.peerID
+    }
+    
     func initDiscoveryInfo(info: [String: String]) {
         self.discoveryInfo = info
     }
@@ -45,6 +49,16 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     func initSession() {
         self.session = MCSession(peer: self.peerID!)
         self.session?.delegate = self
+    }
+    
+    func stopSession() {
+        self.session?.disconnect()
+    }
+    
+    func terminate() {
+        self.stopAdvertiser()
+        self.stopBrowser()
+        self.stopSession()
     }
     
     func initAdvertiser() {
