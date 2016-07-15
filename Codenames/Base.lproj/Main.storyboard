@@ -221,19 +221,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lobby" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQI-Tf-8gE">
-                                <rect key="frame" x="240.5" y="28" width="119.5" height="55"/>
+                                <rect key="frame" x="240" y="28" width="120" height="55"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="48"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Horizontal-Line" translatesAutoresizingMaskIntoConstraints="NO" id="Wuc-k1-3q4">
-                                <rect key="frame" x="20" y="98" width="560" height="23"/>
+                                <rect key="frame" x="20" y="126" width="560" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="Afb-7p-e1r"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FNd-tS-fuD">
-                                <rect key="frame" x="0.0" y="136" width="600" height="381"/>
+                                <rect key="frame" x="0.0" y="164" width="600" height="353"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lobby-room-view-cell" id="fGf-dk-B8F" customClass="LobbyRoomViewCell" customModule="Codenames" customModuleProvider="target">
@@ -244,7 +244,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zag-jE-Vdk">
-                                                    <rect key="frame" x="40" y="3" width="68.5" height="37"/>
+                                                    <rect key="frame" x="40" y="3" width="69" height="37"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -294,6 +294,12 @@
                                     <constraint firstAttribute="height" constant="23" id="TIA-s3-hEO"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looking for rooms..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shA-ox-4B3">
+                                <rect key="frame" x="204" y="83" width="193" height="28"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -301,17 +307,25 @@
                             <constraint firstAttribute="trailing" secondItem="Y0T-fd-w4w" secondAttribute="trailing" constant="20" id="9xr-xp-4y4"/>
                             <constraint firstItem="Wuc-k1-3q4" firstAttribute="leading" secondItem="D01-O5-iI2" secondAttribute="leading" constant="20" id="BvC-z1-off"/>
                             <constraint firstItem="FNd-tS-fuD" firstAttribute="leading" secondItem="D01-O5-iI2" secondAttribute="leading" id="LBR-Nx-8uO"/>
+                            <constraint firstItem="shA-ox-4B3" firstAttribute="top" secondItem="CQI-Tf-8gE" secondAttribute="bottom" id="Nnd-AL-gjK"/>
                             <constraint firstAttribute="trailing" secondItem="Wuc-k1-3q4" secondAttribute="trailing" constant="20" id="YYq-fF-S7U"/>
                             <constraint firstItem="NSb-Fu-D4E" firstAttribute="top" secondItem="Y0T-fd-w4w" secondAttribute="bottom" constant="45" id="bPh-hg-omQ"/>
                             <constraint firstAttribute="trailing" secondItem="FNd-tS-fuD" secondAttribute="trailing" id="bS2-ly-A2E"/>
                             <constraint firstItem="Y0T-fd-w4w" firstAttribute="top" secondItem="FNd-tS-fuD" secondAttribute="bottom" constant="15" id="bsf-hM-4jw"/>
                             <constraint firstItem="CQI-Tf-8gE" firstAttribute="centerX" secondItem="D01-O5-iI2" secondAttribute="centerX" id="e1V-iw-oCT"/>
+                            <constraint firstItem="Wuc-k1-3q4" firstAttribute="top" secondItem="shA-ox-4B3" secondAttribute="bottom" constant="15" id="p14-cd-8jk"/>
                             <constraint firstItem="Y0T-fd-w4w" firstAttribute="leading" secondItem="D01-O5-iI2" secondAttribute="leading" constant="20" id="pM8-s6-pRO"/>
                             <constraint firstItem="CQI-Tf-8gE" firstAttribute="top" secondItem="E2v-cR-e0P" secondAttribute="bottom" constant="8" id="pdh-Ka-uwL"/>
                             <constraint firstItem="Y0T-fd-w4w" firstAttribute="centerX" secondItem="D01-O5-iI2" secondAttribute="centerX" id="s1M-IH-Gju"/>
                             <constraint firstItem="Wuc-k1-3q4" firstAttribute="centerX" secondItem="D01-O5-iI2" secondAttribute="centerX" id="vaM-ra-sAh"/>
                             <constraint firstItem="Wuc-k1-3q4" firstAttribute="top" secondItem="CQI-Tf-8gE" secondAttribute="bottom" constant="15" id="wNP-SZ-2M0"/>
+                            <constraint firstItem="shA-ox-4B3" firstAttribute="centerX" secondItem="D01-O5-iI2" secondAttribute="centerX" id="zAO-9I-ebm"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="wNP-SZ-2M0"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="FNd-tS-fuD" id="dYw-vq-L2t"/>
