@@ -1,10 +1,11 @@
 import MultipeerConnectivity
 import UIKit
 
-class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
+class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
     private let identifier = "pregame-room-view-cell"
     private let hostDisconnectedString = "Host player has been disconnected."
     private let removedFromRoomString = "You have been removed from the room."
+    private let cannotStartGameString = "Either 2 or 3 players can start game. If more than 3, there must be at least 2 players on each team."
     
     var player = Player.instance
     var room = Room.instance
@@ -14,9 +15,22 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private var refreshTimer: NSTimer?
     private var connectedPeers = [MCPeerID: String]()  // Mapping between Peer ID to UUID String
     
+    private var editNameTextField: UITextField?
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var startGame: CodenamesButton!
+    
+    @IBAction func onStartGame(sender: AnyObject) {
+        if self.room.canStartGame() {
+            // Go to cluegiver decision and game room
+        } else {
+            let alertController = UIAlertController(title: "Cannot Start Game", message: self.cannotStartGameString, preferredStyle: .Alert)
+            let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in })
+            alertController.addAction(confirmAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
     
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -212,10 +226,13 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     func editPlayerAtIndex(index: Int) {
         let alertController = UIAlertController(title: "Edit Name", message: "Enter a different name", preferredStyle: .Alert)
-        alertController.addTextFieldWithConfigurationHandler { (textField: UITextField) in }
+        alertController.addTextFieldWithConfigurationHandler { (textField: UITextField) in
+            self.editNameTextField = textField
+            textField.delegate = self
+        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alertAction: UIAlertAction) in }
         let confirmAction = UIAlertAction(title: "OK", style: .Default) { (alertAction: UIAlertAction) in
-            if let newName = alertController.textFields?[0].text {
+            if let newName = self.editNameTextField?.text {
                 self.room.setNameOfPlayerAtIndex(index, name: newName)
                 if (!self.player.isHost()) {
                     self.broadcastData()
@@ -234,6 +251,14 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             self.room.getPlayerWithUUID(self.player.getPlayerUUID())?.setTeam(Team.Blue)
         }
         self.broadcastData()
+    }
+    
+    // MARK: UITextFieldDelegate
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        guard let text = self.editNameTextField?.text else { return true }
+        
+        let length = text.characters.count + string.characters.count - range.length
+        return length <= 8
     }
 }
 

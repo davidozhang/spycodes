@@ -467,6 +467,9 @@
                                 <state key="normal" title="Start Game">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="onStartGame:" destination="VkA-D4-zlT" eventType="touchUpInside" id="YTM-QW-2fA"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

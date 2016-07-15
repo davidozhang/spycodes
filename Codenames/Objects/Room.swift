@@ -88,4 +88,24 @@ class Room: NSObject, NSCoding {
     func getNumberOfPlayers() -> Int {
         return self.players.count
     }
+    
+    func canStartGame() -> Bool {
+        if self.getNumberOfPlayers() >= 4 {
+            let redValid = self.players.filter({($0 as Player).getTeam() == Team.Red}).count >= 2
+            let blueValid = self.players.filter({($0 as Player).getTeam() == Team.Blue}).count >= 2
+            
+            if redValid && blueValid {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        else if self.getNumberOfPlayers() == 2 || self.getNumberOfPlayers() == 3 {
+            return true
+        }
+        else {
+            return false
+        }
+    }
 }
