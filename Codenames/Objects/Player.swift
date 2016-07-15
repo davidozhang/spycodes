@@ -61,6 +61,10 @@ class Player: NSObject, NSCoding {
         self.team = team
     }
     
+    func getTeam() -> Team {
+        return self.team
+    }
+    
     func setClueGiver() {
         self.clueGiver = true
     }

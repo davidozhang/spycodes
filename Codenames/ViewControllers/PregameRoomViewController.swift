@@ -114,6 +114,13 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         let playerAtIndex = room.getPlayers()[indexPath.row]
         cell.nameLabel.text = String(indexPath.row + 1) + ". " + playerAtIndex.getPlayerName()
         
+        // Determine team switch color
+        if playerAtIndex.getTeam() == Team.Red {
+            cell.teamSwitch.on = true
+        } else {
+            cell.teamSwitch.on = false
+        }
+        
         // Only host player can remove players
         if player.isHost() {
             cell.removeButton.hidden = false
@@ -124,11 +131,15 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         if player == playerAtIndex {
             cell.removeButton.hidden = true
             cell.editButton.hidden = false
+            cell.teamSwitch.enabled = true
         } else {
             cell.editButton.hidden = true
+            cell.teamSwitch.enabled = false
         }
         
         cell.index = indexPath.row
+        
+        
         
         cell.delegate = self
         
@@ -214,6 +225,15 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         alertController.addAction(cancelAction)
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func teamDidChange(redTeam: Bool) {
+        if redTeam {
+            self.room.getPlayerWithUUID(self.player.getPlayerUUID())?.setTeam(Team.Red)
+        } else {
+            self.room.getPlayerWithUUID(self.player.getPlayerUUID())?.setTeam(Team.Blue)
+        }
+        self.broadcastData()
     }
 }
 
