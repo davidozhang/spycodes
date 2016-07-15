@@ -132,12 +132,25 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdm-IF-Rcj" userLabel="Back Button">
+                                <rect key="frame" x="20" y="28" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="K90-tb-TNO"/>
+                                    <constraint firstAttribute="width" constant="50" id="VKL-V3-CR4"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Back"/>
+                                <connections>
+                                    <action selector="onBackButtonPressed:" destination="VkA-D4-zlT" eventType="touchUpInside" id="65S-CX-n3U"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eTE-OI-uxt" firstAttribute="centerY" secondItem="AZq-9W-7DJ" secondAttribute="centerY" id="BLa-rz-TwJ"/>
                             <constraint firstItem="8WL-So-JgS" firstAttribute="top" secondItem="uCt-xz-jhL" secondAttribute="bottom" constant="80" id="Fpi-AQ-KDn"/>
+                            <constraint firstItem="Bdm-IF-Rcj" firstAttribute="leading" secondItem="AZq-9W-7DJ" secondAttribute="leading" constant="20" id="WIw-7u-xt5"/>
                             <constraint firstItem="8WL-So-JgS" firstAttribute="centerX" secondItem="AZq-9W-7DJ" secondAttribute="centerX" id="Y9R-3Z-kEu"/>
+                            <constraint firstItem="Bdm-IF-Rcj" firstAttribute="top" secondItem="uCt-xz-jhL" secondAttribute="bottom" constant="8" id="iQF-12-6NT"/>
                             <constraint firstItem="eTE-OI-uxt" firstAttribute="centerX" secondItem="AZq-9W-7DJ" secondAttribute="centerX" id="jcK-sW-gwH"/>
                             <constraint firstItem="eTE-OI-uxt" firstAttribute="top" secondItem="8WL-So-JgS" secondAttribute="bottom" constant="30" id="ot6-wa-nyd"/>
                         </constraints>
@@ -189,6 +202,17 @@
                                     </mask>
                                 </variation>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geu-Kk-IZ2" userLabel="Back Button">
+                                <rect key="frame" x="20" y="28" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="VwG-fZ-ds0"/>
+                                    <constraint firstAttribute="width" constant="50" id="eOn-am-Ze3"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Back"/>
+                                <connections>
+                                    <action selector="onBackButtonPressed:" destination="VkA-D4-zlT" eventType="touchUpInside" id="LqT-ED-Ip7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -196,6 +220,8 @@
                             <constraint firstItem="4s9-er-VpV" firstAttribute="centerY" secondItem="Muy-4C-ske" secondAttribute="centerY" id="UwC-kY-pWD"/>
                             <constraint firstItem="4s9-er-VpV" firstAttribute="top" secondItem="MdV-j8-107" secondAttribute="bottom" constant="30" id="VGE-mn-yDM"/>
                             <constraint firstItem="4s9-er-VpV" firstAttribute="centerX" secondItem="Muy-4C-ske" secondAttribute="centerX" id="Y8l-Ag-BaX"/>
+                            <constraint firstItem="geu-Kk-IZ2" firstAttribute="top" secondItem="O2o-J1-ZW6" secondAttribute="bottom" constant="8" id="fhp-I7-34d"/>
+                            <constraint firstItem="geu-Kk-IZ2" firstAttribute="leading" secondItem="Muy-4C-ske" secondAttribute="leading" constant="20" id="h3a-Sc-dtn"/>
                         </constraints>
                     </view>
                     <connections>
@@ -335,13 +361,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mc1-YN-1oP">
-                                <rect key="frame" x="177.5" y="28" width="245.5" height="55"/>
+                                <rect key="frame" x="177" y="28" width="246" height="55"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="48"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5W3-A0-VGs">
-                                <rect key="frame" x="0.0" y="163.5" width="600" height="312.5"/>
+                                <rect key="frame" x="0.0" y="164" width="600" height="312"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="pregame-room-view-cell" id="PVh-e3-TPn" customClass="PregameRoomViewCell" customModule="Codenames" customModuleProvider="target">
@@ -352,7 +378,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d84-Az-a9v">
-                                                    <rect key="frame" x="40" y="3" width="68.5" height="37"/>
+                                                    <rect key="frame" x="40" y="3" width="69" height="37"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -369,7 +395,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDC-S1-aKD" userLabel="Edit Button">
-                                                    <rect key="frame" x="535" y="9.5" width="25" height="25"/>
+                                                    <rect key="frame" x="535" y="10" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="ESH-n1-TvZ"/>
                                                         <constraint firstAttribute="height" constant="25" id="Yew-IE-JHV"/>
@@ -410,13 +436,13 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting for players..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yv0-lP-7Gu">
-                                <rect key="frame" x="204" y="83" width="193" height="27.5"/>
+                                <rect key="frame" x="204" y="83" width="193" height="28"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="24"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Horizontal-Line" translatesAutoresizingMaskIntoConstraints="NO" id="Ujv-Na-1yG">
-                                <rect key="frame" x="20" y="125.5" width="560" height="23"/>
+                                <rect key="frame" x="20" y="126" width="560" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="5Sd-sc-bSu"/>
                                 </constraints>
@@ -434,6 +460,17 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z48-Bz-9FT" userLabel="Back Button">
+                                <rect key="frame" x="20" y="31" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="SwC-7j-4vL"/>
+                                    <constraint firstAttribute="width" constant="50" id="nYJ-oI-zl0"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Back"/>
+                                <connections>
+                                    <action selector="onBackButtonPressed:" destination="VkA-D4-zlT" eventType="touchUpInside" id="udF-BL-dgZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -447,11 +484,14 @@
                             <constraint firstItem="Oz9-tw-cJr" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="15" id="JTg-xR-nlg"/>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" id="JyP-Fd-tkk"/>
                             <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="084-kN-Fki" secondAttribute="bottom" constant="30" id="MLH-VU-LgP"/>
+                            <constraint firstItem="Z48-Bz-9FT" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="8" id="NDk-rL-t1X"/>
                             <constraint firstItem="Ujv-Na-1yG" firstAttribute="top" secondItem="Yv0-lP-7Gu" secondAttribute="bottom" constant="15" id="P25-Bg-9AC"/>
                             <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="Oz9-tw-cJr" secondAttribute="bottom" constant="15" id="R9z-Qo-PZw"/>
                             <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="30" id="Vsi-Wx-L0j"/>
                             <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="50" id="XBE-ff-nvo"/>
+                            <constraint firstItem="Mc1-YN-1oP" firstAttribute="centerY" secondItem="Z48-Bz-9FT" secondAttribute="centerY" id="bIA-wh-Meo"/>
                             <constraint firstAttribute="trailing" secondItem="Ujv-Na-1yG" secondAttribute="trailing" constant="20" id="cvB-54-ElX"/>
+                            <constraint firstItem="Z48-Bz-9FT" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" constant="20" id="e7D-G5-Res"/>
                             <constraint firstItem="Yv0-lP-7Gu" firstAttribute="top" secondItem="Mc1-YN-1oP" secondAttribute="bottom" id="f9Q-G5-ZU5"/>
                             <constraint firstItem="084-kN-Fki" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="h2n-yW-c3a"/>
                             <constraint firstAttribute="trailing" secondItem="5W3-A0-VGs" secondAttribute="trailing" id="jKW-MX-l9L"/>
@@ -462,6 +502,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="NDk-rL-t1X"/>
                                 <exclude reference="6DZ-tE-h64"/>
                                 <exclude reference="vGC-uB-Uit"/>
                                 <exclude reference="Vsi-Wx-L0j"/>
@@ -482,14 +523,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Back" width="100" height="100"/>
         <image name="Delete" width="100" height="100"/>
         <image name="Edit" width="100" height="100"/>
         <image name="Horizontal-Line" width="100" height="100"/>
         <image name="Spy" width="290" height="280"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vg7-zN-QuD"/>
-        <segue reference="87V-6a-5kI"/>
-        <segue reference="yme-7x-s1N"/>
+        <segue reference="7yd-xs-fux"/>
+        <segue reference="M2x-yW-um3"/>
+        <segue reference="VCz-No-0ZF"/>
     </inferredMetricsTieBreakers>
 </document>

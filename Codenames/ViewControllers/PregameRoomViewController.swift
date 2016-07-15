@@ -18,6 +18,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var startGame: CodenamesButton!
     
+    @IBAction func onBackButtonPressed(sender: AnyObject) {
+        self.returnToLobby(reason: nil)
+    }
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,17 +82,22 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         self.multipeerManager.broadcastData(data)
     }
     
-    private func returnToLobby(reason reason: String) {
-        let alertController = UIAlertController(title: "Returning To Lobby", message: reason, preferredStyle: .Alert)
-        let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-            
+    private func returnToLobby(reason reason: String?) {
+        if let reason = reason {
+            let alertController = UIAlertController(title: "Returning To Lobby", message: reason, preferredStyle: .Alert)
+            let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.performSegueWithIdentifier("lobby-room", sender: self)
+                })
+            })
+            alertController.addAction(confirmAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        else {
             dispatch_async(dispatch_get_main_queue(), {
                 self.performSegueWithIdentifier("lobby-room", sender: self)
             })
-            
-        })
-        alertController.addAction(confirmAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        }
     }
     
     // MARK: Segue
