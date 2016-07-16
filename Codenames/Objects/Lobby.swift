@@ -15,31 +15,15 @@ class Lobby {
     }
     
     func getRoomWithName(name: String) -> Room? {
-        for i in 0 ..< rooms.count {
-            if rooms[i].getRoomName() == name {
-                return rooms[i]
-            }
-        }
-        
-        return nil
+        return self.rooms.filter({($0 as Room).getRoomName() == name})[0]
     }
     
     func hasRoomWithName(name: String) -> Bool {
-        for i in 0 ..< rooms.count {
-            if rooms[i].getRoomName() == name {
-                return true
-            }
-        }
-        
-        return false
+        return self.getRoomWithName(name) != nil
     }
     
     func removeRoomWithName(name: String) {
-        for i in 0 ..< rooms.count {
-            if rooms[i].getRoomName() == name {
-                rooms.removeAtIndex(i)
-            }
-        }
+        self.rooms = self.rooms.filter({($0 as Room).getRoomName() != name})
     }
     
     func getNumberOfRooms() -> Int {
