@@ -5,7 +5,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private let identifier = "pregame-room-view-cell"
     private let hostDisconnectedString = "Host player has been disconnected."
     private let removedFromRoomString = "You have been removed from the room."
-    private let cannotStartGameString = "Either 2 or 3 players can start game. If more than 3, there must be at least 2 players on each team."
+    private let cannotStartGameString = "Check the following:\n1. Tap on a player's name to select as clue giver. There must be 1 clue giver on each team.\n2. Mini game requires 2 or 3 players on the same team. For standard game, 4 or more players are required with at least 2 players on each team."
     
     var player = Player.instance
     var room = Room.instance
@@ -174,7 +174,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let playerAtIndex = self.room.getPlayers()[indexPath.row]
         let team = playerAtIndex.getTeam()
-        if let clueGiverUUID = self.room.getClueGiverUUID(team) {
+        if let clueGiverUUID = self.room.getClueGiverUUIDForTeam(team) {
             self.room.getPlayerWithUUID(clueGiverUUID)?.setIsClueGiver(false)
         }
         self.room.getPlayers()[indexPath.row].setIsClueGiver(!playerAtIndex.isClueGiver())
