@@ -65,8 +65,8 @@ class Player: NSObject, NSCoding {
         return self.team
     }
     
-    func setClueGiver() {
-        self.clueGiver = true
+    func setIsClueGiver(isClueGiver: Bool) {
+        self.clueGiver = isClueGiver
     }
     
     func setHost() {

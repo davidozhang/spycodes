@@ -151,13 +151,34 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             cell.teamSwitch.enabled = false
         }
         
+        if playerAtIndex.isClueGiver() {
+            if playerAtIndex.getTeam() == Team.Red {
+                cell.contentView.backgroundColor = UIColor.codenamesLightRedColor()
+            }
+            else {
+                cell.contentView.backgroundColor = UIColor.codenamesLightBlueColor()
+            }
+            cell.nameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 32)
+        } else {
+            cell.contentView.backgroundColor = UIColor.clearColor()
+            cell.nameLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 32)
+        }
+        
         cell.index = indexPath.row
-        
-        
         
         cell.delegate = self
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let playerAtIndex = self.room.getPlayers()[indexPath.row]
+        let team = playerAtIndex.getTeam()
+        if let clueGiverUUID = self.room.getClueGiverUUID(team) {
+            self.room.getPlayerWithUUID(clueGiverUUID)?.setIsClueGiver(false)
+        }
+        self.room.getPlayers()[indexPath.row].setIsClueGiver(!playerAtIndex.isClueGiver())
+        self.broadcastData()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -250,6 +271,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         } else {
             self.room.getPlayerWithUUID(self.player.getPlayerUUID())?.setTeam(Team.Blue)
         }
+        self.room.getPlayerWithUUID(self.player.getPlayerUUID())?.setIsClueGiver(false)
         self.broadcastData()
     }
     
@@ -261,4 +283,3 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         return length <= 8
     }
 }
-

@@ -108,4 +108,14 @@ class Room: NSObject, NSCoding {
             return false
         }
     }
+    
+    func getClueGiverUUID(team: Team) -> String? {
+        let filtered = self.players.filter({($0 as Player).isClueGiver() && ($0 as Player).getTeam() == team})
+        if filtered.count == 1 {
+            return filtered[0].getPlayerUUID()
+        }
+        else {
+            return nil
+        }
+    }
 }
