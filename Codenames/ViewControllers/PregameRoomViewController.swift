@@ -54,7 +54,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                 self.connectedPeers[peerID] = self.player.getPlayerUUID()
             }
             
-            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every second
+            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
         }
         else {
             self.startGame.hidden = true
