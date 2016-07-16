@@ -15,7 +15,13 @@ class Lobby {
     }
     
     func getRoomWithName(name: String) -> Room? {
-        return self.rooms.filter({($0 as Room).getRoomName() == name})[0]
+        let filtered = self.rooms.filter({($0 as Room).getRoomName() == name})
+        if filtered.count == 1 {
+            return filtered[0]
+        }
+        else {
+            return nil
+        }
     }
     
     func hasRoomWithName(name: String) -> Bool {

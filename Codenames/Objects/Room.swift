@@ -42,7 +42,13 @@ class Room: NSObject, NSCoding {
     }
     
     func getPlayerWithUUID(uuid: String) -> Player? {
-        return self.players.filter({($0 as Player).getPlayerUUID() == uuid})[0]
+        let filtered = self.players.filter({($0 as Player).getPlayerUUID() == uuid})
+        if filtered.count == 1 {
+            return filtered[0]
+        }
+        else {
+            return nil
+        }
     }
     
     func setNameOfPlayerAtIndex(index: Int, name: String) {
