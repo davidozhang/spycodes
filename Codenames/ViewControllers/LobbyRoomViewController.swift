@@ -4,10 +4,10 @@ import UIKit
 class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, LobbyRoomViewCellDelegate {
     private let identifier = "lobby-room-view-cell"
     
-    var lobby = Lobby.instance
-    var room = Room.instance
-    var player = Player.instance
-    var multipeerManager = MultipeerManager.instance
+    private var lobby: Lobby?
+    private var room: Room?
+    private var player: Player?
+    private var multipeerManager: MultipeerManager?
     
     private var refreshTimer: NSTimer?
     
@@ -16,12 +16,20 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.multipeerManager.delegate = self
-        self.multipeerManager.initPeerID(player.getPlayerName())
-        self.multipeerManager.initBrowser()
-        self.multipeerManager.initSession()
+        self.lobby = Lobby.instance
+        self.room = Room.instance
+        self.player = Player.instance
+        self.multipeerManager = MultipeerManager.instance
         
-        self.multipeerManager.startBrowser()
+        if let name = self.player?.getPlayerName() {
+            self.multipeerManager?.delegate = self
+            self.multipeerManager?.initPeerID(name)
+            self.multipeerManager?.initBrowser()
+            self.multipeerManager?.initSession()
+            
+            self.multipeerManager?.startBrowser()
+        }
+        
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(LobbyRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh lobby every second
     }
@@ -38,23 +46,13 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         })
     }
     
-    // MARK: Segue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "pregame-room") {
-            if let pregameRoomViewController = segue.destinationViewController as? PregameRoomViewController {
-                pregameRoomViewController.player = self.player
-                pregameRoomViewController.room = self.room
-                pregameRoomViewController.multipeerManager = self.multipeerManager
-            }
-        }
-    }
-    
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! LobbyRoomViewCell
-        let roomAtIndex = lobby.getRooms()[indexPath.row]
-        cell.roomName = roomAtIndex.getRoomName()
-        cell.roomNameLabel.text = String(indexPath.row + 1) + ". " + roomAtIndex.getRoomName()
+        if let roomAtIndex = self.lobby?.getRooms()[indexPath.row] {
+            cell.roomName = roomAtIndex.getRoomName()
+            cell.roomNameLabel.text = String(indexPath.row + 1) + ". " + roomAtIndex.getRoomName()
+        }
         
         cell.delegate = self
         
@@ -66,36 +64,42 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lobby.getNumberOfRooms()
+        if let numberOfRooms = self.lobby?.getNumberOfRooms() {
+            return numberOfRooms
+        } else {
+            return 0
+        }
     }
     
     // MARK: LobbyRoomViewCellDelegate
     func joinGameWithName(name: String) {
         // Start advertising to allow host room to invite into session
-        self.multipeerManager.initDiscoveryInfo(["joinRoom": name])
-        self.multipeerManager.initAdvertiser()
-        self.multipeerManager.startAdvertiser()
+        self.multipeerManager?.initDiscoveryInfo(["joinRoom": name])
+        self.multipeerManager?.initAdvertiser()
+        self.multipeerManager?.startAdvertiser()
     }
     
     // MARK: MultipeerManagerDelegate
     func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        if let info = info where info["isHost"] == "yes" && !lobby.hasRoomWithName(peerID.displayName) {
-            lobby.addRoomWithName(peerID.displayName)
+        if let info = info where info["isHost"] == "yes", let hasRoom = self.lobby?.hasRoomWithName(peerID.displayName) where !hasRoom {
+            self.lobby?.addRoomWithName(peerID.displayName)
         }
     }
     
     func lostPeer(peerID: MCPeerID) {
-        lobby.removeRoomWithName(peerID.displayName)
+        self.lobby?.removeRoomWithName(peerID.displayName)
     }
     
     // Navigate to pregame room only when preliminary sync data from host is received
     func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
         if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
-            self.room = room     // TODO: Sync room locally without the need for prepareForSegue
+            self.room = room
             
             // Inform the room host of local player info
-            let data = NSKeyedArchiver.archivedDataWithRootObject(self.player)
-            self.multipeerManager.broadcastData(data)
+            if let player = self.player {
+                let data = NSKeyedArchiver.archivedDataWithRootObject(player)
+                self.multipeerManager?.broadcastData(data)
+            }
             
             self.refreshTimer?.invalidate()
             
