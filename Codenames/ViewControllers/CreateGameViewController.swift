@@ -25,9 +25,9 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if let name = roomNameTextField.text where name.characters.count >= 1 {
-            player.setHost()
-            room.setRoomName(name)
-            room.addPlayer(player)
+            self.player.setHost()
+            self.room.setRoomName(name)
+            self.room.addPlayer(player)
             
             performSegueWithIdentifier("join-game", sender: self)
             return true

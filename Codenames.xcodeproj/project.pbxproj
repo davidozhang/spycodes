@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		63067C6A1D2982DD0005AC66 /* LobbyRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */; };
 		63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C6B1D2996B60005AC66 /* Lobby.swift */; };
+		637310C91D3B1B2E00EA5D7A /* CodenamesMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637310C81D3B1B2E00EA5D7A /* CodenamesMessage.swift */; };
 		63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* MultipeerManager.swift */; };
 		639BA3161D38AFEF002F2A18 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BA3151D38AFEF002F2A18 /* UIColor.swift */; };
 		63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* AppDelegate.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyRoomViewCell.swift; path = Views/LobbyRoomViewCell.swift; sourceTree = "<group>"; };
 		63067C6B1D2996B60005AC66 /* Lobby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lobby.swift; path = Objects/Lobby.swift; sourceTree = "<group>"; };
+		637310C81D3B1B2E00EA5D7A /* CodenamesMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodenamesMessage.swift; path = Extensions/CodenamesMessage.swift; sourceTree = "<group>"; };
 		63920A361D3090D60073E7F7 /* MultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipeerManager.swift; path = Managers/MultipeerManager.swift; sourceTree = "<group>"; };
 		639BA3151D38AFEF002F2A18 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = Extensions/UIColor.swift; sourceTree = "<group>"; };
 		63A04D001D1A5713005A2914 /* Codenames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Codenames.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				63A04D1C1D1A7F37005A2914 /* CodenamesButton.swift */,
+				637310C81D3B1B2E00EA5D7A /* CodenamesMessage.swift */,
 				63FA54DF1D1BBB73004515DA /* CodenamesTextField.swift */,
 				639BA3151D38AFEF002F2A18 /* UIColor.swift */,
 			);
@@ -230,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63FDED371D264CF300142780 /* Team.swift in Sources */,
+				637310C91D3B1B2E00EA5D7A /* CodenamesMessage.swift in Sources */,
 				63FA54E21D1BBD8E004515DA /* CreateGameViewController.swift in Sources */,
 				63FDED3B1D265BAF00142780 /* PregameRoomViewController.swift in Sources */,
 				63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */,
