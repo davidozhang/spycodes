@@ -9,12 +9,21 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     var multipeerManager = MultipeerManager.instance
     var cardCollection = CardCollection.instance
     
+    private var broadcastTimer: NSTimer?
+    private var refreshTimer: NSTimer?
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.multipeerManager.delegate = self
+        
+        if self.player.isHost() {
+            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(GameRoomViewController.broadcastData), userInfo: nil, repeats: true)  // Broadcast host's card collection every 2 seconds
+        }
+        
+        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameRoomViewController.refreshView), userInfo: nil, repeats: true)    // Refresh room every second
         
         self.collectionView.backgroundColor = UIColor.clearColor()
     }
@@ -24,10 +33,17 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     // MARK: Private
+    @objc
     private func refreshView() {
         dispatch_async(dispatch_get_main_queue(), {
             self.collectionView.reloadData()
         })
+    }
+    
+    @objc
+    private func broadcastData() {
+        let data = NSKeyedArchiver.archivedDataWithRootObject(self.cardCollection)
+        self.multipeerManager.broadcastData(data)
     }
     
     // MARK: MultipeerManagerDelegate

@@ -7,6 +7,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private let removedFromRoomString = "You have been removed from the room."
     private let cannotStartGameString = "Check the following:\n1. Tap on a player's name to select as clue giver. There must be 1 clue giver on each team.\n2. Mini game requires 2 or 3 players on the same team. For standard game, 4 or more players are required with at least 2 players on each team."
     
+    var cardCollection = CardCollection.instance
     var player = Player.instance
     var room = Room.instance
     var multipeerManager = MultipeerManager.instance
@@ -69,6 +70,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         if self.player.isHost() {
             self.broadcastTimer?.invalidate()
         }
+        self.refreshTimer?.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -126,6 +128,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         } else if segue.identifier == "game-room" {
             if let gameRoomViewController = segue.destinationViewController as? GameRoomViewController {
                 gameRoomViewController.player = self.player
+                gameRoomViewController.cardCollection = self.cardCollection
                 gameRoomViewController.multipeerManager = self.multipeerManager
             }
         }
@@ -228,6 +231,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
         else if let connectedPeers = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [MCPeerID: String] {
             self.connectedPeers = connectedPeers
+        }
+        else if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
+            self.cardCollection = cardCollection
+            self.goToGame()
         }
     }
     
