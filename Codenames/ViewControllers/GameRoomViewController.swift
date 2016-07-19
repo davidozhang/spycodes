@@ -51,7 +51,11 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     func lostPeer(peerID: MCPeerID) {}
     
-    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {}
+    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
+        if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
+            self.cardCollection = cardCollection
+        }
+    }
     
     func newPeerAddedToSession(peerID: MCPeerID) {}
     
@@ -70,9 +74,20 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as! GameRoomViewCell
         let cardAtIndex = cardCollection.getCards()[indexPath.row]
         
-        cell.wordLabel.text = cardCollection.getCards()[indexPath.row].getWord()
+        cell.wordLabel.text = cardAtIndex.getWord()
+        
+        cell.contentView.backgroundColor = UIColor.clearColor()
+        cell.checkmark.hidden = true
         
         if self.player.isClueGiver() {
+            cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
+            if cardAtIndex.isSelected() && cardAtIndex.getTeam() == self.player.getTeam() {
+                cell.checkmark.hidden = false
+            }
+            return cell
+        }
+        
+        if cardAtIndex.isSelected() {
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
         }
         
@@ -83,6 +98,9 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         if self.player.isClueGiver() {
             return
         }
+        
+        self.cardCollection.getCards()[indexPath.row].setSelected()
+        self.broadcastData()
     }
     
     // Cell Size

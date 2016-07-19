@@ -3,6 +3,7 @@ import UIKit
 class GameRoomViewCell: UICollectionViewCell {
     
     @IBOutlet weak var wordLabel: UILabel!
+    @IBOutlet weak var checkmark: UIImageView!
     
     override func awakeFromNib() {
         self.contentView.layer.borderWidth = 1.0
