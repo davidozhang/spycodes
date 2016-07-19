@@ -24,8 +24,6 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         }
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameRoomViewController.refreshView), userInfo: nil, repeats: true)    // Refresh room every second
-        
-        self.collectionView.backgroundColor = UIColor.clearColor()
     }
     
     override func didReceiveMemoryWarning() {

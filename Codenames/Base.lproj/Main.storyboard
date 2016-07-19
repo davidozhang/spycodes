@@ -628,6 +628,7 @@
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="udo-t2-F4l">
                                 <rect key="frame" x="20" y="138" width="560" height="353"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kdn-LK-Bc8">
                                     <size key="itemSize" width="150" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
