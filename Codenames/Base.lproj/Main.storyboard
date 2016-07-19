@@ -643,8 +643,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cT-To-sV4">
-                                                    <rect key="frame" x="53.5" y="13" width="44.5" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Word" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cT-To-sV4">
+                                                    <rect key="frame" x="54" y="13" width="44" height="24"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -726,7 +726,10 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="cardsRemainingLabel" destination="647-e2-brJ" id="at7-pZ-ksU"/>
+                        <outlet property="clueLabel" destination="ccH-t8-hxM" id="100-ut-j4B"/>
                         <outlet property="collectionView" destination="udo-t2-F4l" id="dkZ-d6-YKx"/>
+                        <outlet property="numberOfWordsLabel" destination="bVu-E6-1Xk" id="q3J-x7-kHl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfM-Nb-l9K" userLabel="First Responder" sceneMemberID="firstResponder"/>

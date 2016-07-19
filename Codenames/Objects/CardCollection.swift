@@ -35,4 +35,8 @@ class CardCollection: NSObject, NSCoding {
     func getCards() -> [Card] {
         return self.cards
     }
+    
+    func getCardsRemainingForTeam(team: Team) -> Int {
+        return self.cards.filter({($0 as Card).getTeam() == team && !($0 as Card).isSelected()}).count
+    }
 }

@@ -13,6 +13,9 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private var refreshTimer: NSTimer?
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var clueLabel: UILabel!
+    @IBOutlet weak var cardsRemainingLabel: UILabel!
+    @IBOutlet weak var numberOfWordsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     @objc
     private func refreshView() {
         dispatch_async(dispatch_get_main_queue(), {
+            self.updateDashboard()
             self.collectionView.reloadData()
         })
     }
@@ -42,6 +46,10 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private func broadcastData() {
         let data = NSKeyedArchiver.archivedDataWithRootObject(self.cardCollection)
         self.multipeerManager.broadcastData(data)
+    }
+    
+    private func updateDashboard() {
+        self.cardsRemainingLabel.text = String(self.cardCollection.getCardsRemainingForTeam(self.player.getTeam()))
     }
     
     // MARK: MultipeerManagerDelegate
