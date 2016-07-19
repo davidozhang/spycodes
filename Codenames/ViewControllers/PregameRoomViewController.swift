@@ -127,9 +127,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             }
         } else if segue.identifier == "game-room" {
             if let gameRoomViewController = segue.destinationViewController as? GameRoomViewController {
-                gameRoomViewController.player = self.player
-                gameRoomViewController.cardCollection = self.cardCollection
-                gameRoomViewController.multipeerManager = self.multipeerManager
+                if let player = self.room.getPlayerWithUUID(self.player.uuid) {
+                    gameRoomViewController.player = player
+                    gameRoomViewController.cardCollection = self.cardCollection
+                    gameRoomViewController.multipeerManager = self.multipeerManager
+                }
             }
         }
     }

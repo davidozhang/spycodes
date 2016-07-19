@@ -68,13 +68,22 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as! GameRoomViewCell
+        let cardAtIndex = cardCollection.getCards()[indexPath.row]
         
         cell.wordLabel.text = cardCollection.getCards()[indexPath.row].getWord()
+        
+        if self.player.isClueGiver() {
+            cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
+        }
         
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {}
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if self.player.isClueGiver() {
+            return
+        }
+    }
     
     // Cell Size
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {

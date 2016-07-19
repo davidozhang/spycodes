@@ -46,6 +46,10 @@ class Card: NSObject, NSCoding {
         return self.word
     }
     
+    func setSelected() {
+        self.selected = true
+    }
+    
     func isSelected() -> Bool {
         return self.selected
     }
