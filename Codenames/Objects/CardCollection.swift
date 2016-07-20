@@ -6,12 +6,14 @@ class CardCollection: NSObject, NSCoding {
     private let words = CodenamesWordList.getTwentyFiveShuffledWords()
     
     var cards = [Card]()
-    var key: [Team]?
+    var key = [Team]()
+    var startingTeam: Team
     
     override init() {
         self.key = self.keyObject.getKey()
+        self.startingTeam = self.keyObject.getStartingTeam()
         for i in 0..<25 {
-            self.cards.append(Card(word: words[i], selected: false, team: self.key![i]))
+            self.cards.append(Card(word: words[i], selected: false, team: self.key[i]))
         }
     }
     
@@ -38,5 +40,9 @@ class CardCollection: NSObject, NSCoding {
     
     func getCardsRemainingForTeam(team: Team) -> Int {
         return self.cards.filter({($0 as Card).getTeam() == team && !($0 as Card).isSelected()}).count
+    }
+    
+    func getStartingTeam() -> Team {
+        return self.startingTeam
     }
 }

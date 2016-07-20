@@ -1,10 +1,12 @@
 import Foundation
 
 class Key {
+    private var startingTeam: Team?
     private var key = [Team]()
     
     init() {
         if let startingTeam = Team(rawValue: self.randomBinarySingleDigit()) {
+            self.startingTeam = startingTeam
             self.key += [Team.Assassin]
             self.key += Array(count: 7, repeatedValue: Team.Neutral)
             self.key += Array(count: 8, repeatedValue: Team.Red)
@@ -21,5 +23,13 @@ class Key {
     
     func getKey() -> [Team] {
         return self.key
+    }
+    
+    func getStartingTeam() -> Team {
+        if let startingTeam = self.startingTeam {
+            return startingTeam
+        } else {
+            return Team.Red
+        }
     }
 }

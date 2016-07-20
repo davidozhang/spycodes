@@ -1,7 +1,7 @@
 import MultipeerConnectivity
 import UIKit
 
-class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MultipeerManagerDelegate {
+class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MultipeerManagerDelegate, UITextFieldDelegate {
     private let reuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
     
@@ -13,9 +13,10 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private var refreshTimer: NSTimer?
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var clueLabel: UILabel!
+    @IBOutlet weak var clueTextField: UITextField!
+    @IBOutlet weak var numberOfWordsTextField: UITextField!
     @IBOutlet weak var cardsRemainingLabel: UILabel!
-    @IBOutlet weak var numberOfWordsLabel: UILabel!
+    @IBOutlet weak var endRoundButton: CodenamesButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,12 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         if self.player.isHost() {
             self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(GameRoomViewController.broadcastData), userInfo: nil, repeats: true)  // Broadcast host's card collection every 2 seconds
+        }
+        
+        if self.player.isClueGiver() {
+            self.endRoundButton.hidden = false
+        } else {
+            self.endRoundButton.hidden = true
         }
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameRoomViewController.refreshView), userInfo: nil, repeats: true)    // Refresh room every second
@@ -116,5 +123,23 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(edgeInset, edgeInset, edgeInset, edgeInset)
+    }
+    
+    // MARK: UITextFieldDelegate
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        if self.player.isClueGiver() {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == self.clueTextField {
+            self.numberOfWordsTextField.becomeFirstResponder()
+        } else if textField == self.numberOfWordsTextField {
+            self.numberOfWordsTextField.resignFirstResponder()
+        }
+        return true
     }
 }
