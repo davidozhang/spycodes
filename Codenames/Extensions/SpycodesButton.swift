@@ -1,6 +1,6 @@
 import UIKit
 
-class CodenamesButton: UIButton {
+class SpycodesButton: UIButton {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
