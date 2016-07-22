@@ -25,6 +25,7 @@
 		63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F091D3CB88D00211D3A /* Card.swift */; };
 		63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */; };
 		63CB4F0E1D3DAA5A00211D3A /* CodenamesWordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0D1D3DAA5A00211D3A /* CodenamesWordList.swift */; };
+		63EAF9A31D41D2E700BC554E /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A21D41D2E700BC554E /* Round.swift */; };
 		63FA54E01D1BBB73004515DA /* CodenamesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA54DF1D1BBB73004515DA /* CodenamesTextField.swift */; };
 		63FA54E21D1BBD8E004515DA /* CreateGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */; };
 		63FDED321D2648D600142780 /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED311D2648D600142780 /* JoinGameViewController.swift */; };
@@ -57,6 +58,7 @@
 		63CB4F091D3CB88D00211D3A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Objects/Card.swift; sourceTree = "<group>"; };
 		63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardCollection.swift; path = Objects/CardCollection.swift; sourceTree = "<group>"; };
 		63CB4F0D1D3DAA5A00211D3A /* CodenamesWordList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodenamesWordList.swift; path = Extensions/CodenamesWordList.swift; sourceTree = "<group>"; };
+		63EAF9A21D41D2E700BC554E /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Round.swift; path = Objects/Round.swift; sourceTree = "<group>"; };
 		63FA54DF1D1BBB73004515DA /* CodenamesTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodenamesTextField.swift; path = Extensions/CodenamesTextField.swift; sourceTree = "<group>"; };
 		63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateGameViewController.swift; path = ViewControllers/CreateGameViewController.swift; sourceTree = "<group>"; };
 		63FDED311D2648D600142780 /* JoinGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JoinGameViewController.swift; path = ViewControllers/JoinGameViewController.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				63067C6B1D2996B60005AC66 /* Lobby.swift */,
 				63FDED341D264BE800142780 /* Player.swift */,
 				63FDED381D26557200142780 /* Room.swift */,
+				63EAF9A21D41D2E700BC554E /* Round.swift */,
 				63FDED361D264CF300142780 /* Team.swift */,
 			);
 			name = Objects;
@@ -253,6 +256,7 @@
 				63FDED371D264CF300142780 /* Team.swift in Sources */,
 				63FA54E21D1BBD8E004515DA /* CreateGameViewController.swift in Sources */,
 				63FDED3B1D265BAF00142780 /* PregameRoomViewController.swift in Sources */,
+				63EAF9A31D41D2E700BC554E /* Round.swift in Sources */,
 				63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */,
 				63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */,
 				63486DA91D3DE29C00795403 /* Key.swift in Sources */,

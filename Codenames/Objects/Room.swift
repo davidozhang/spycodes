@@ -94,7 +94,7 @@ class Room: NSObject, NSCoding {
             else {
                 return false
             }
-        }
+        } /** Disable 2/3 Player Mini Game
         else if self.getNumberOfPlayers() == 2 || self.getNumberOfPlayers() == 3 {
             if self.getClueGiverUUIDForTeam(Team.Red) != nil || self.getClueGiverUUIDForTeam(Team.Blue) != nil {
                 return true
@@ -102,7 +102,7 @@ class Room: NSObject, NSCoding {
             else {
                 return false
             }
-        }
+        }**/
         else {
             return false
         }

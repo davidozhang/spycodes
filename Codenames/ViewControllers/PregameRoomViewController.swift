@@ -5,9 +5,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private let identifier = "pregame-room-view-cell"
     private let hostDisconnectedString = "Host player has been disconnected."
     private let removedFromRoomString = "You have been removed from the room."
-    private let cannotStartGameString = "Check the following:\n1. Tap on a player's name to select as clue giver. There must be 1 clue giver on each team.\n2. Mini game requires 2 or 3 players on the same team. For standard game, 4 or more players are required with at least 2 players on each team."
+    private let cannotStartGameString = "Check the following:\n1. Tap on a player's name to select as clue giver. There must be 1 clue giver on each team.\n2. 4 or more players are required with at least 2 players on each team."
     
     var cardCollection = CardCollection.instance
+    var round = Round.instance
+    
     var player = Player.instance
     var room = Room.instance
     var multipeerManager = MultipeerManager.instance
@@ -129,6 +131,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             if let gameRoomViewController = segue.destinationViewController as? GameRoomViewController {
                 if let player = self.room.getPlayerWithUUID(self.player.uuid) {
                     gameRoomViewController.player = player
+                    gameRoomViewController.round = self.round
                     gameRoomViewController.cardCollection = self.cardCollection
                     gameRoomViewController.multipeerManager = self.multipeerManager
                 }
@@ -236,6 +239,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
         else if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
             self.cardCollection = cardCollection
+        }
+        else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
+            self.round = round
             self.goToGame()
         }
     }
