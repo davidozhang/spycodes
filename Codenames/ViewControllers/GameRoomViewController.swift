@@ -90,12 +90,13 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         cell.wordLabel.text = cardAtIndex.getWord()
         
         cell.contentView.backgroundColor = UIColor.clearColor()
-        cell.checkmark.hidden = true
         
         if self.player.isClueGiver() {
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
             if cardAtIndex.isSelected() && cardAtIndex.getTeam() == self.player.getTeam() {
-                cell.checkmark.hidden = false
+                let attributedString: NSMutableAttributedString =  NSMutableAttributedString(string: cardAtIndex.getWord())
+                attributedString.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributedString.length))
+                cell.wordLabel.attributedText = attributedString
             }
             return cell
         }

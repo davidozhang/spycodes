@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -645,24 +645,14 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="jKg-ke-TKG">
-                                                    <rect key="frame" x="60" y="10" width="30" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="Aiv-AE-dbj"/>
-                                                        <constraint firstAttribute="height" constant="30" id="phM-kg-5WR"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="jKg-ke-TKG" firstAttribute="centerX" secondItem="PYS-7b-Gca" secondAttribute="centerX" id="GAS-Ev-O5n"/>
                                             <constraint firstItem="6cT-To-sV4" firstAttribute="centerX" secondItem="PYS-7b-Gca" secondAttribute="centerX" id="Tl6-mW-RNM"/>
-                                            <constraint firstItem="jKg-ke-TKG" firstAttribute="centerY" secondItem="PYS-7b-Gca" secondAttribute="centerY" id="kxz-Op-Jy5"/>
                                             <constraint firstItem="6cT-To-sV4" firstAttribute="centerY" secondItem="PYS-7b-Gca" secondAttribute="centerY" id="pjU-kv-Rbf"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="checkmark" destination="jKg-ke-TKG" id="Lw0-sB-sgc"/>
                                             <outlet property="wordLabel" destination="6cT-To-sV4" id="gmf-kD-ahA"/>
                                         </connections>
                                     </collectionViewCell>
@@ -732,7 +722,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Checkmark" width="96" height="96"/>
         <image name="Delete" width="100" height="100"/>
         <image name="Edit" width="100" height="100"/>
         <image name="Horizontal-Line" width="100" height="100"/>
