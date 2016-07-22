@@ -1,6 +1,6 @@
-# Codenames
+# Spycodes
 
-A local peer-to-peer multiplayer rendition of the popular game Codenames inspired by the minimalist style of Spyfall.
+A local peer-to-peer multiplayer word association game inspired by the minimalist style of Spyfall.
 
 The game is anticipated to be launched on the App Store early Fall!
 
@@ -8,13 +8,13 @@ The game is anticipated to be launched on the App Store early Fall!
 
 1. Download XCode
 
-2. Open Codenames.xcodeproj
+2. Open Spycodes.xcodeproj
 
 3. Click Run, and if you get code signing issues, simply click 'Fix Issue' on the pop up dialogue
 
 ## Contributing
 
-If you enjoy playing Codenames, then you should help contribute to making it even more awesome on iOS!
+If you enjoy playing the game, then you should help contribute to making it even more awesome!
 
 Code Contribution:
 
