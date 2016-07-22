@@ -134,6 +134,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                     gameRoomViewController.round = self.round
                     gameRoomViewController.cardCollection = self.cardCollection
                     gameRoomViewController.multipeerManager = self.multipeerManager
+                    gameRoomViewController.room = self.room
+                    gameRoomViewController.connectedPeers = self.connectedPeers
                 }
             }
         }

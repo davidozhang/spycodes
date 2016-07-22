@@ -4,6 +4,7 @@ import UIKit
 class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MultipeerManagerDelegate, UITextFieldDelegate {
     private let reuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
+    private let playerDisconnectedString = "A player from your team has disconnected."
     
     var multipeerManager = MultipeerManager.instance
     var audioToolboxManager = AudioToolboxManager.instance
@@ -11,6 +12,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     var player = Player.instance
     var cardCollection = CardCollection.instance
     var round = Round.instance
+    var room = Room.instance
+    var connectedPeers: [MCPeerID: String]?
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -146,7 +149,14 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     func newPeerAddedToSession(peerID: MCPeerID) {}
     
-    func peerDisconnectedFromSession(peerID: MCPeerID) {}
+    func peerDisconnectedFromSession(peerID: MCPeerID) {
+        if let peer = self.connectedPeers?[peerID], player = self.room.getPlayerWithUUID(peer) where player.getTeam() == self.player.team {
+            let alertController = UIAlertController(title: "Oops", message: self.playerDisconnectedString, preferredStyle: .Alert)
+            let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in })
+            alertController.addAction(confirmAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
     
     // MARK: UICollectionViewDelegate
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
