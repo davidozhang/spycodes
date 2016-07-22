@@ -1,15 +1,15 @@
 import UIKit
 
-class CreateGameViewController: UIViewController, UITextFieldDelegate {
-    private let player = Player.instance
-    private let room = Room.instance
+class JoinGameViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var roomNameTextField: CodenamesTextField!
+    private let player = Player.instance
+    
+    @IBOutlet weak var userNameTextField: SpycodesTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        roomNameTextField.delegate = self
-        roomNameTextField.becomeFirstResponder()
+        userNameTextField.delegate = self
+        userNameTextField.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -17,19 +17,20 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        guard let text = roomNameTextField.text else { return true }
+        guard let text = userNameTextField.text else { return true }
         
         let length = text.characters.count + string.characters.count - range.length
         return length <= 8
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if let name = roomNameTextField.text where name.characters.count >= 1 {
-            player.setHost()
-            room.setRoomName(name)
-            room.addPlayer(player)
-            
-            performSegueWithIdentifier("join-game", sender: self)
+        if let name = userNameTextField.text where name.characters.count >= 1 {
+            player.setPlayerName(name)
+            if (player.isHost()) {
+                performSegueWithIdentifier("pregame-room", sender: self)
+            } else {
+                performSegueWithIdentifier("lobby-room", sender: self)
+            }
             return true
         }
         else {
@@ -37,3 +38,4 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
+

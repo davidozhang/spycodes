@@ -7,8 +7,8 @@ protocol PregameRoomViewCellDelegate {
 }
 
 class PregameRoomViewCell: UITableViewCell {
-    let onColor = UIColor.codenamesRedColor()
-    let offColor = UIColor.codenamesBlueColor()
+    let onColor = UIColor.spycodesRedColor()
+    let offColor = UIColor.spycodesBlueColor()
     
     var index: Int?
     var delegate: PregameRoomViewCellDelegate?

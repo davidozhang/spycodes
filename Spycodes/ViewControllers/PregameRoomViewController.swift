@@ -22,7 +22,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var roomNameLabel: UILabel!
-    @IBOutlet weak var startGame: CodenamesButton!
+    @IBOutlet weak var startGame: SpycodesButton!
     
     @IBAction func onStartGame(sender: AnyObject) {
         if self.room.canStartGame() {
@@ -172,10 +172,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         
         if playerAtIndex.isClueGiver() {
             if playerAtIndex.getTeam() == Team.Red {
-                cell.contentView.backgroundColor = UIColor.codenamesLightRedColor()
+                cell.contentView.backgroundColor = UIColor.spycodesLightRedColor()
             }
             else {
-                cell.contentView.backgroundColor = UIColor.codenamesLightBlueColor()
+                cell.contentView.backgroundColor = UIColor.spycodesLightBlueColor()
             }
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 32)
         } else {

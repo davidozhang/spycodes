@@ -1,6 +1,6 @@
 import UIKit
 
-class CodenamesTextField: UITextField {
+class SpycodesTextField: UITextField {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

@@ -25,7 +25,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     @IBOutlet weak var numberOfWordsTextField: UITextField!
     @IBOutlet weak var cardsRemainingLabel: UILabel!
     @IBOutlet weak var teamLabel: UILabel!
-    @IBOutlet weak var endRoundButton: CodenamesButton!
+    @IBOutlet weak var endRoundButton: SpycodesButton!
     
     @IBAction func onEndRoundPressed(sender: AnyObject) {
         self.round.endRound(self.player.getTeam())

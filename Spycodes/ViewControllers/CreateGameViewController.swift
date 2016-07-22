@@ -1,15 +1,15 @@
 import UIKit
 
-class JoinGameViewController: UIViewController, UITextFieldDelegate {
-    
+class CreateGameViewController: UIViewController, UITextFieldDelegate {
     private let player = Player.instance
+    private let room = Room.instance
     
-    @IBOutlet weak var userNameTextField: CodenamesTextField!
+    @IBOutlet weak var roomNameTextField: SpycodesTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userNameTextField.delegate = self
-        userNameTextField.becomeFirstResponder()
+        roomNameTextField.delegate = self
+        roomNameTextField.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -17,20 +17,19 @@ class JoinGameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        guard let text = userNameTextField.text else { return true }
+        guard let text = roomNameTextField.text else { return true }
         
         let length = text.characters.count + string.characters.count - range.length
         return length <= 8
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if let name = userNameTextField.text where name.characters.count >= 1 {
-            player.setPlayerName(name)
-            if (player.isHost()) {
-                performSegueWithIdentifier("pregame-room", sender: self)
-            } else {
-                performSegueWithIdentifier("lobby-room", sender: self)
-            }
+        if let name = roomNameTextField.text where name.characters.count >= 1 {
+            player.setHost()
+            room.setRoomName(name)
+            room.addPlayer(player)
+            
+            performSegueWithIdentifier("join-game", sender: self)
             return true
         }
         else {
@@ -38,4 +37,3 @@ class JoinGameViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
-
