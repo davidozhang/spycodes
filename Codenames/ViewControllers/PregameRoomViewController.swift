@@ -5,7 +5,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private let identifier = "pregame-room-view-cell"
     private let hostDisconnectedString = "Host player has been disconnected."
     private let removedFromRoomString = "You have been removed from the room."
-    private let cannotStartGameString = "Check the following:\n1. Tap on a player's name to select as clue giver. There must be 1 clue giver on each team.\n2. Mini game requires 2 or 3 players on the same team. For standard game, 4 or more players are required with at least 2 players on each team."
+    private let cannotStartGameString = "Check the following:\n1. Tap on a player's name to select as clue giver. There must be 1 clue giver on each team.\n2. 4 or more players are required with at least 2 players on each team."
+    
+    var cardCollection = CardCollection.instance
+    var round = Round.instance
     
     var player = Player.instance
     var room = Room.instance
@@ -23,7 +26,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func onStartGame(sender: AnyObject) {
         if self.room.canStartGame() {
-            // Go to cluegiver decision and game room
+            self.goToGame()
         } else {
             let alertController = UIAlertController(title: "Cannot Start Game", message: self.cannotStartGameString, preferredStyle: .Alert)
             let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in })
@@ -69,6 +72,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         if self.player.isHost() {
             self.broadcastTimer?.invalidate()
         }
+        self.refreshTimer?.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,14 +96,18 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         self.multipeerManager.broadcastData(data)
     }
     
+    private func goToGame() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.performSegueWithIdentifier("game-room", sender: self)
+        })
+    }
+    
     private func returnToLobby(reason reason: String) {
         let alertController = UIAlertController(title: "Returning To Lobby", message: reason, preferredStyle: .Alert)
         let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-            
             dispatch_async(dispatch_get_main_queue(), {
                 self.performSegueWithIdentifier("lobby-room", sender: self)
             })
-            
         })
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -118,6 +126,17 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                 lobbyRoomViewController.lobby = Lobby()
                 lobbyRoomViewController.room = Room()
                 lobbyRoomViewController.multipeerManager = self.multipeerManager
+            }
+        } else if segue.identifier == "game-room" {
+            if let gameRoomViewController = segue.destinationViewController as? GameRoomViewController {
+                if let player = self.room.getPlayerWithUUID(self.player.uuid) {
+                    gameRoomViewController.player = player
+                    gameRoomViewController.round = self.round
+                    gameRoomViewController.cardCollection = self.cardCollection
+                    gameRoomViewController.multipeerManager = self.multipeerManager
+                    gameRoomViewController.room = self.room
+                    gameRoomViewController.connectedPeers = self.connectedPeers
+                }
             }
         }
     }
@@ -219,6 +238,13 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
         else if let connectedPeers = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [MCPeerID: String] {
             self.connectedPeers = connectedPeers
+        }
+        else if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
+            self.cardCollection = cardCollection
+        }
+        else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
+            self.round = round
+            self.goToGame()
         }
     }
     
