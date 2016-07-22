@@ -16,11 +16,11 @@
 		639BA3161D38AFEF002F2A18 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BA3151D38AFEF002F2A18 /* UIColor.swift */; };
 		63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* AppDelegate.swift */; };
 		63A04D091D1A5713005A2914 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D071D1A5713005A2914 /* Main.storyboard */; };
-		63A04D0C1D1A5713005A2914 /* Codenames.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D0A1D1A5713005A2914 /* Codenames.xcdatamodeld */; };
 		63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D0D1D1A5713005A2914 /* Assets.xcassets */; };
 		63A04D111D1A5713005A2914 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D0F1D1A5713005A2914 /* LaunchScreen.storyboard */; };
 		63A04D1D1D1A7F37005A2914 /* SpycodesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1C1D1A7F37005A2914 /* SpycodesButton.swift */; };
 		63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */; };
+		63CA90CA1D4280CC0027CA80 /* Spycodes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63CA90C81D4280CC0027CA80 /* Spycodes.xcdatamodeld */; };
 		63CB4F081D3CB3C300211D3A /* GameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F071D3CB3C300211D3A /* GameRoomViewCell.swift */; };
 		63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F091D3CB88D00211D3A /* Card.swift */; };
 		63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */; };
@@ -49,12 +49,12 @@
 		63A04D001D1A5713005A2914 /* Spycodes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spycodes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63A04D031D1A5713005A2914 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63A04D081D1A5713005A2914 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		63A04D0B1D1A5713005A2914 /* Codenames.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Codenames.xcdatamodel; sourceTree = "<group>"; };
 		63A04D0D1D1A5713005A2914 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63A04D101D1A5713005A2914 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63A04D121D1A5713005A2914 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63A04D1C1D1A7F37005A2914 /* SpycodesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesButton.swift; path = Extensions/SpycodesButton.swift; sourceTree = "<group>"; };
 		63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainMenuViewController.swift; path = ViewControllers/MainMenuViewController.swift; sourceTree = "<group>"; };
+		63CA90C91D4280CC0027CA80 /* Codenames.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Codenames.xcdatamodel; sourceTree = "<group>"; };
 		63CB4F071D3CB3C300211D3A /* GameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameRoomViewCell.swift; path = Views/GameRoomViewCell.swift; sourceTree = "<group>"; };
 		63CB4F091D3CB88D00211D3A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Objects/Card.swift; sourceTree = "<group>"; };
 		63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardCollection.swift; path = Objects/CardCollection.swift; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		63A04CF71D1A5713005A2914 = {
 			isa = PBXGroup;
 			children = (
-				63A04D021D1A5713005A2914 /* Codenames */,
+				63A04D021D1A5713005A2914 /* Spycodes */,
 				63A04D011D1A5713005A2914 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,13 +108,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		63A04D021D1A5713005A2914 /* Codenames */ = {
+		63A04D021D1A5713005A2914 /* Spycodes */ = {
 			isa = PBXGroup;
 			children = (
 				63A04D031D1A5713005A2914 /* AppDelegate.swift */,
 				63A04D0D1D1A5713005A2914 /* Assets.xcassets */,
 				63A04D121D1A5713005A2914 /* Info.plist */,
-				63A04D0A1D1A5713005A2914 /* Codenames.xcdatamodeld */,
+				63CA90C81D4280CC0027CA80 /* Spycodes.xcdatamodeld */,
 				63A04D1B1D1A7F2B005A2914 /* Extensions */,
 				63920A351D3090BC0073E7F7 /* Managers */,
 				63FDED331D264BD800142780 /* Objects */,
@@ -122,7 +122,7 @@
 				63A04D1A1D1A7F25005A2914 /* ViewControllers */,
 				63FDED421D28B42300142780 /* Views */,
 			);
-			path = Codenames;
+			path = Spycodes;
 			sourceTree = "<group>";
 		};
 		63A04D1A1D1A7F25005A2914 /* ViewControllers */ = {
@@ -200,7 +200,7 @@
 			dependencies = (
 			);
 			name = Spycodes;
-			productName = Codenames;
+			productName = Spycodes;
 			productReference = 63A04D001D1A5713005A2914 /* Spycodes.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -267,12 +267,12 @@
 				63486DA51D3DDC9800795403 /* SpycodesArray.swift in Sources */,
 				637310CB1D3B292F00EA5D7A /* GameRoomViewController.swift in Sources */,
 				63CB4F081D3CB3C300211D3A /* GameRoomViewCell.swift in Sources */,
+				63CA90CA1D4280CC0027CA80 /* Spycodes.xcdatamodeld in Sources */,
 				63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */,
 				63EAF9A51D41F1C400BC554E /* AudioToolboxManager.swift in Sources */,
 				63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */,
 				63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */,
 				639BA3161D38AFEF002F2A18 /* UIColor.swift in Sources */,
-				63A04D0C1D1A5713005A2914 /* Codenames.xcdatamodeld in Sources */,
 				63FDED391D26557200142780 /* Room.swift in Sources */,
 				63FA54E01D1BBB73004515DA /* SpycodesTextField.swift in Sources */,
 				63067C6A1D2982DD0005AC66 /* LobbyRoomViewCell.swift in Sources */,
@@ -398,7 +398,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = Codenames/Info.plist;
+				INFOPLIST_FILE = Spycodes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.david-zhang.Spycodes";
@@ -413,7 +413,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = Codenames/Info.plist;
+				INFOPLIST_FILE = Spycodes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.david-zhang.Spycodes";
@@ -446,13 +446,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		63A04D0A1D1A5713005A2914 /* Codenames.xcdatamodeld */ = {
+		63CA90C81D4280CC0027CA80 /* Spycodes.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				63A04D0B1D1A5713005A2914 /* Codenames.xcdatamodel */,
+				63CA90C91D4280CC0027CA80 /* Codenames.xcdatamodel */,
 			);
-			currentVersion = 63A04D0B1D1A5713005A2914 /* Codenames.xcdatamodel */;
-			path = Codenames.xcdatamodeld;
+			currentVersion = 63CA90C91D4280CC0027CA80 /* Codenames.xcdatamodel */;
+			path = Spycodes.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
