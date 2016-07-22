@@ -26,6 +26,7 @@
 		63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */; };
 		63CB4F0E1D3DAA5A00211D3A /* CodenamesWordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0D1D3DAA5A00211D3A /* CodenamesWordList.swift */; };
 		63EAF9A31D41D2E700BC554E /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A21D41D2E700BC554E /* Round.swift */; };
+		63EAF9A51D41F1C400BC554E /* AudioToolboxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A41D41F1C400BC554E /* AudioToolboxManager.swift */; };
 		63FA54E01D1BBB73004515DA /* CodenamesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA54DF1D1BBB73004515DA /* CodenamesTextField.swift */; };
 		63FA54E21D1BBD8E004515DA /* CreateGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */; };
 		63FDED321D2648D600142780 /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED311D2648D600142780 /* JoinGameViewController.swift */; };
@@ -59,6 +60,7 @@
 		63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardCollection.swift; path = Objects/CardCollection.swift; sourceTree = "<group>"; };
 		63CB4F0D1D3DAA5A00211D3A /* CodenamesWordList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodenamesWordList.swift; path = Extensions/CodenamesWordList.swift; sourceTree = "<group>"; };
 		63EAF9A21D41D2E700BC554E /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Round.swift; path = Objects/Round.swift; sourceTree = "<group>"; };
+		63EAF9A41D41F1C400BC554E /* AudioToolboxManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioToolboxManager.swift; path = Managers/AudioToolboxManager.swift; sourceTree = "<group>"; };
 		63FA54DF1D1BBB73004515DA /* CodenamesTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodenamesTextField.swift; path = Extensions/CodenamesTextField.swift; sourceTree = "<group>"; };
 		63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateGameViewController.swift; path = ViewControllers/CreateGameViewController.swift; sourceTree = "<group>"; };
 		63FDED311D2648D600142780 /* JoinGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JoinGameViewController.swift; path = ViewControllers/JoinGameViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		63920A351D3090BC0073E7F7 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				63EAF9A41D41F1C400BC554E /* AudioToolboxManager.swift */,
 				63920A361D3090D60073E7F7 /* MultipeerManager.swift */,
 			);
 			name = Managers;
@@ -265,6 +268,7 @@
 				637310CB1D3B292F00EA5D7A /* GameRoomViewController.swift in Sources */,
 				63CB4F081D3CB3C300211D3A /* GameRoomViewCell.swift in Sources */,
 				63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */,
+				63EAF9A51D41F1C400BC554E /* AudioToolboxManager.swift in Sources */,
 				63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */,
 				63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */,
 				639BA3161D38AFEF002F2A18 /* UIColor.swift in Sources */,

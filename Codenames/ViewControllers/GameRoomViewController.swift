@@ -5,13 +5,17 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private let reuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
     
-    var player = Player.instance
     var multipeerManager = MultipeerManager.instance
+    var audioToolboxManager = AudioToolboxManager.instance
+    
+    var player = Player.instance
     var cardCollection = CardCollection.instance
     var round = Round.instance
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
+    
+    private var playerRoundStarted = false
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var clueTextField: UITextField!
@@ -126,6 +130,14 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         }
         else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
             self.round = round
+            if self.round.currentTeam == self.player.getTeam() {
+                if !playerRoundStarted {
+                    audioToolboxManager.vibrate()
+                    playerRoundStarted = true
+                }
+            } else {
+                playerRoundStarted = false
+            }
         }
     }
     
