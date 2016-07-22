@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Codenames.xcodeproj">
+      location = "self:/Users/David/github/spycode/Spycode.xcodeproj">
    </FileRef>
 </Workspace>

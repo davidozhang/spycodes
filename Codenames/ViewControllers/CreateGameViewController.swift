@@ -4,7 +4,7 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     private let player = Player.instance
     private let room = Room.instance
     
-    @IBOutlet weak var roomNameTextField: CodenamesTextField!
+    @IBOutlet weak var roomNameTextField: SpycodeTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -4,7 +4,7 @@ class JoinGameViewController: UIViewController, UITextFieldDelegate {
     
     private let player = Player.instance
     
-    @IBOutlet weak var userNameTextField: CodenamesTextField!
+    @IBOutlet weak var userNameTextField: SpycodeTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()

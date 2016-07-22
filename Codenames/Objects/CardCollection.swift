@@ -3,7 +3,7 @@ import Foundation
 class CardCollection: NSObject, NSCoding {
     static let instance = CardCollection()
     private let keyObject = Key()
-    private let words = CodenamesWordList.getTwentyFiveShuffledWords()
+    private let words = SpycodeWordList.getTwentyFiveShuffledWords()
     
     var cards = [Card]()
     var key = [Team]()

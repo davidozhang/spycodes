@@ -12,7 +12,7 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     static let instance = MultipeerManager()
     var delegate: MultipeerManagerDelegate?
     
-    private let serviceType = "Codenames"
+    private let serviceType = "Spycode"
     private var discoveryInfo: [String: String]?
     
     private var peerID: MCPeerID?
