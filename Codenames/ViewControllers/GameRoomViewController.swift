@@ -21,6 +21,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     @IBOutlet weak var clueTextField: UITextField!
     @IBOutlet weak var numberOfWordsTextField: UITextField!
     @IBOutlet weak var cardsRemainingLabel: UILabel!
+    @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet weak var endRoundButton: CodenamesButton!
     
     @IBAction func onEndRoundPressed(sender: AnyObject) {
@@ -47,6 +48,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         }
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameRoomViewController.refreshView), userInfo: nil, repeats: true)    // Refresh room every second
+        
+        self.teamLabel.text = self.player.getTeam() == Team.Red ? "Red" : "Blue"
     }
     
     override func didReceiveMemoryWarning() {
