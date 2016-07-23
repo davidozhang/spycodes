@@ -1,7 +1,8 @@
 import Foundation
 
 class CardCollection: NSObject, NSCoding {
-    static let instance = CardCollection()
+    static var instance = CardCollection()
+    
     private let keyObject = Key()
     private let words = SpycodesWordList.getTwentyFiveShuffledWords()
     
@@ -34,15 +35,7 @@ class CardCollection: NSObject, NSCoding {
         aCoder.encodeObject(self.cards, forKey: "cards")
     }
     
-    func getCards() -> [Card] {
-        return self.cards
-    }
-    
     func getCardsRemainingForTeam(team: Team) -> Int {
         return self.cards.filter({($0 as Card).getTeam() == team && !($0 as Card).isSelected()}).count
-    }
-    
-    func getStartingTeam() -> Team {
-        return self.startingTeam
     }
 }

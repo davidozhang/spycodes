@@ -1,15 +1,13 @@
 import UIKit
 
 class CreateGameViewController: UIViewController, UITextFieldDelegate {
-    private let player = Player.instance
-    private let room = Room.instance
-    
     @IBOutlet weak var roomNameTextField: SpycodesTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        roomNameTextField.delegate = self
-        roomNameTextField.becomeFirstResponder()
+        
+        self.roomNameTextField.delegate = self
+        self.roomNameTextField.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -17,17 +15,17 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        guard let text = roomNameTextField.text else { return true }
+        guard let text = self.roomNameTextField.text else { return true }
         
         let length = text.characters.count + string.characters.count - range.length
         return length <= 8
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if let name = roomNameTextField.text where name.characters.count >= 1 {
-            player.setHost()
-            room.setRoomName(name)
-            room.addPlayer(player)
+        if let name = self.roomNameTextField.text where name.characters.count >= 1 {
+            Player.instance.setHost()
+            Room.instance.name = name
+            Room.instance.addPlayer(Player.instance)
             
             performSegueWithIdentifier("join-game", sender: self)
             return true

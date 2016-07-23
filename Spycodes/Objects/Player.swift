@@ -2,13 +2,14 @@ import Foundation
 import UIKit
 
 class Player: NSObject, NSCoding {
-    static let instance = Player()
+    static var instance = Player()
     
     var name: String
-    var uuid: String
     var team: Team
     var clueGiver: Bool
     var host: Bool
+    
+    private var uuid: String
     
     override init() {
         self.name = "Nameless"
@@ -45,15 +46,7 @@ class Player: NSObject, NSCoding {
         aCoder.encodeBool(self.host, forKey: "host")
     }
     
-    func getPlayerName() -> String {
-        return self.name
-    }
-    
-    func setPlayerName(name: String) {
-        self.name = name
-    }
-    
-    func getPlayerUUID() -> String {
+    func getUUID() -> String {
         return self.uuid
     }
     
