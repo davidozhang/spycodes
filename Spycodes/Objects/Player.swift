@@ -46,7 +46,7 @@ class Player: NSObject, NSCoding {
         aCoder.encodeBool(self.host, forKey: "host")
     }
     
-    func getPlayerUUID() -> String {
+    func getUUID() -> String {
         return self.uuid
     }
     

@@ -38,7 +38,7 @@ class Room: NSObject, NSCoding {
     }
     
     func getPlayerWithUUID(uuid: String) -> Player? {
-        let filtered = self.players.filter({($0 as Player).getPlayerUUID() == uuid})
+        let filtered = self.players.filter({($0 as Player).getUUID() == uuid})
         if filtered.count == 1 {
             return filtered[0]
         }
@@ -60,7 +60,7 @@ class Room: NSObject, NSCoding {
     }
     
     func removePlayerWithUUID(uuid: String) {
-        self.players = self.players.filter({($0 as Player).getPlayerUUID() != uuid})
+        self.players = self.players.filter({($0 as Player).getUUID() != uuid})
     }
     
     func playerWithUUIDInRoom(uuid: String) -> Bool {
@@ -95,7 +95,7 @@ class Room: NSObject, NSCoding {
     func getClueGiverUUIDForTeam(team: Team) -> String? {
         let filtered = self.players.filter({($0 as Player).isClueGiver() && ($0 as Player).getTeam() == team})
         if filtered.count == 1 {
-            return filtered[0].getPlayerUUID()
+            return filtered[0].getUUID()
         }
         else {
             return nil
