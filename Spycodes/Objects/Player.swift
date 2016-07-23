@@ -5,10 +5,11 @@ class Player: NSObject, NSCoding {
     static var instance = Player()
     
     var name: String
-    var uuid: String
     var team: Team
     var clueGiver: Bool
     var host: Bool
+    
+    private var uuid: String
     
     override init() {
         self.name = "Nameless"
@@ -43,14 +44,6 @@ class Player: NSObject, NSCoding {
         aCoder.encodeObject(self.team.rawValue, forKey: "team")
         aCoder.encodeBool(self.clueGiver, forKey: "clueGiver")
         aCoder.encodeBool(self.host, forKey: "host")
-    }
-    
-    func getPlayerName() -> String {
-        return self.name
-    }
-    
-    func setPlayerName(name: String) {
-        self.name = name
     }
     
     func getPlayerUUID() -> String {

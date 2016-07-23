@@ -5,8 +5,6 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private let reuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
     private let playerDisconnectedString = "A player from your team has disconnected."
-
-    var connectedPeers: [MCPeerID: String]?
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -36,7 +34,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         MultipeerManager.instance.delegate = self
         
-        Round.instance.setStartingTeam(CardCollection.instance.getStartingTeam())
+        Round.instance.setStartingTeam(CardCollection.instance.startingTeam)
         
         if Player.instance.isHost() {
             self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(GameRoomViewController.broadcastData), userInfo: nil, repeats: true)  // Broadcast host's card collection every 2 seconds
@@ -186,7 +184,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     func newPeerAddedToSession(peerID: MCPeerID) {}
     
     func peerDisconnectedFromSession(peerID: MCPeerID) {
-        if let peer = self.connectedPeers?[peerID], player = Room.instance.getPlayerWithUUID(peer) where player.getTeam() == Player.instance.team {
+        if let peer = Room.instance.connectedPeers[peerID], player = Room.instance.getPlayerWithUUID(peer) where player.getTeam() == Player.instance.team {
             let alertController = UIAlertController(title: "Oops", message: self.playerDisconnectedString, preferredStyle: .Alert)
             let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in })
             alertController.addAction(confirmAction)
@@ -205,7 +203,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as! GameRoomViewCell
-        let cardAtIndex = CardCollection.instance.getCards()[indexPath.row]
+        let cardAtIndex = CardCollection.instance.cards[indexPath.row]
         
         cell.wordLabel.text = cardAtIndex.getWord()
         
@@ -236,8 +234,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             return
         }
         
-        let cardAtIndex = CardCollection.instance.getCards()[indexPath.row]
-        CardCollection.instance.getCards()[indexPath.row].setSelected()
+        let cardAtIndex = CardCollection.instance.cards[indexPath.row]
+        CardCollection.instance.cards[indexPath.row].setSelected()
         
         if cardAtIndex.getTeam() != Player.instance.getTeam() {
             if cardAtIndex.getTeam() == Team.Neutral || cardAtIndex.getTeam() == Team(rawValue: Player.instance.getTeam().rawValue ^ 1) {

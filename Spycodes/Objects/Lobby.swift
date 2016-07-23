@@ -7,16 +7,12 @@ class Lobby {
     
     func addRoomWithName(name: String) {
         let room = Room()
-        room.setRoomName(name)
+        room.name = name
         self.rooms.append(room)
     }
     
-    func getRooms() -> [Room] {
-        return self.rooms
-    }
-    
     func getRoomWithName(name: String) -> Room? {
-        let filtered = self.rooms.filter({($0 as Room).getRoomName() == name})
+        let filtered = self.rooms.filter({($0 as Room).name == name})
         if filtered.count == 1 {
             return filtered[0]
         }
@@ -30,10 +26,6 @@ class Lobby {
     }
     
     func removeRoomWithName(name: String) {
-        self.rooms = self.rooms.filter({($0 as Room).getRoomName() != name})
-    }
-    
-    func getNumberOfRooms() -> Int {
-        return self.rooms.count
+        self.rooms = self.rooms.filter({($0 as Room).name != name})
     }
 }

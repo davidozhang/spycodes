@@ -12,7 +12,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         MultipeerManager.instance.delegate = self
-        MultipeerManager.instance.initPeerID(Player.instance.getPlayerName())
+        MultipeerManager.instance.initPeerID(Player.instance.name)
         MultipeerManager.instance.initBrowser()
         MultipeerManager.instance.initSession()
         MultipeerManager.instance.startBrowser()
@@ -35,9 +35,9 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! LobbyRoomViewCell
-        let roomAtIndex = Lobby.instance.getRooms()[indexPath.row]
-        cell.roomName = roomAtIndex.getRoomName()
-        cell.roomNameLabel.text = String(indexPath.row + 1) + ". " + roomAtIndex.getRoomName()
+        let roomAtIndex = Lobby.instance.rooms[indexPath.row]
+        cell.roomName = roomAtIndex.name
+        cell.roomNameLabel.text = String(indexPath.row + 1) + ". " + roomAtIndex.name
         
         cell.delegate = self
         
@@ -49,7 +49,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Lobby.instance.getNumberOfRooms()
+        return Lobby.instance.rooms.count
     }
     
     // MARK: LobbyRoomViewCellDelegate

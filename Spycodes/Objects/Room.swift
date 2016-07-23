@@ -1,24 +1,27 @@
 import Foundation
+import MultipeerConnectivity
 
 class Room: NSObject, NSCoding {
     static var instance = Room()
     
     var name: String
     var players = [Player]()
+    var connectedPeers = [MCPeerID: String]()
     
     override init() {
         self.name = "Default"
     }
     
-    convenience init(name: String, players: [Player]) {
+    convenience init(name: String, players: [Player], connectedPeers: [MCPeerID: String]) {
         self.init()
         self.name = name
         self.players = players
+        self.connectedPeers = connectedPeers
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        if let name = aDecoder.decodeObjectForKey("name") as? String, players = aDecoder.decodeObjectForKey("players") as? [Player] {
-            self.init(name: name, players: players)
+        if let name = aDecoder.decodeObjectForKey("name") as? String, players = aDecoder.decodeObjectForKey("players") as? [Player], connectedPeers = aDecoder.decodeObjectForKey("connectedPeers") as? [MCPeerID: String] {
+            self.init(name: name, players: players, connectedPeers: connectedPeers)
         } else {
             self.init()
         }
@@ -27,14 +30,7 @@ class Room: NSObject, NSCoding {
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.name, forKey: "name")
         aCoder.encodeObject(self.players, forKey: "players")
-    }
-    
-    func setRoomName(name: String) {
-        self.name = name
-    }
-    
-    func getRoomName() -> String {
-        return name
+        aCoder.encodeObject(self.connectedPeers, forKey: "connectedPeers")
     }
     
     func addPlayer(player: Player) {
@@ -53,7 +49,7 @@ class Room: NSObject, NSCoding {
     
     func setNameOfPlayerAtIndex(index: Int, name: String) {
         if index < self.players.count {
-            self.players[index].setPlayerName(name)
+            self.players[index].name = name
         }
     }
     
@@ -67,24 +63,12 @@ class Room: NSObject, NSCoding {
         self.players = self.players.filter({($0 as Player).getPlayerUUID() != uuid})
     }
     
-    func removeAllPlayers() {
-        self.players.removeAll()
-    }
-    
     func playerWithUUIDInRoom(uuid: String) -> Bool {
         return self.getPlayerWithUUID(uuid) != nil
     }
     
-    func getPlayers() -> [Player] {
-        return self.players
-    }
-    
-    func getNumberOfPlayers() -> Int {
-        return self.players.count
-    }
-    
     func canStartGame() -> Bool {
-        if self.getNumberOfPlayers() >= 4 {
+        if self.players.count >= 4 {
             let redValid = self.players.filter({($0 as Player).getTeam() == Team.Red}).count >= 2
             let blueValid = self.players.filter({($0 as Player).getTeam() == Team.Blue}).count >= 2
             
@@ -95,7 +79,7 @@ class Room: NSObject, NSCoding {
                 return false
             }
         } /** Disable 2/3 Player Mini Game
-        else if self.getNumberOfPlayers() == 2 || self.getNumberOfPlayers() == 3 {
+        else if self.players.count == 2 || self.players.count == 3 {
             if self.getClueGiverUUIDForTeam(Team.Red) != nil || self.getClueGiverUUIDForTeam(Team.Blue) != nil {
                 return true
             }

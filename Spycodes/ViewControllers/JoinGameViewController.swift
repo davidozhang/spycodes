@@ -23,7 +23,7 @@ class JoinGameViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if let name = self.userNameTextField.text where name.characters.count >= 1 {
-            Player.instance.setPlayerName(name)
+            Player.instance.name = name
             if (Player.instance.isHost()) {
                 self.performSegueWithIdentifier("pregame-room", sender: self)
             } else {
