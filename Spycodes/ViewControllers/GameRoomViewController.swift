@@ -34,8 +34,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     @IBAction func onEndRoundPressed(sender: AnyObject) {
-        self.round.endRound(self.player.getTeam())
-        self.broadcastData()
+        self.didEndRound()
     }
     
     // MARK: Lifecycle
@@ -164,6 +163,11 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         self.broadcastData()
     }
     
+    private func didEndRound() {
+        self.round.endRound(self.player.getTeam())
+        self.broadcastData()
+    }
+    
     // MARK: MultipeerManagerDelegate
     func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {}
     
@@ -236,7 +240,15 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             return
         }
         
+        let cardAtIndex = self.cardCollection.getCards()[indexPath.row]
         self.cardCollection.getCards()[indexPath.row].setSelected()
+        
+        if cardAtIndex.getTeam() != self.player.getTeam() {
+            if cardAtIndex.getTeam() == Team.Neutral || cardAtIndex.getTeam() == Team(rawValue: self.player.getTeam().rawValue ^ 1) {
+                self.didEndRound()
+            }
+        }
+        
         self.broadcastData()
     }
     
