@@ -74,7 +74,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     // Navigate to pregame room only when preliminary sync data from host is received
     func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
         if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
-            Room.instance = room     // TODO: Sync room locally without the need for prepareForSegue
+            Room.instance = room
             
             // Inform the room host of local player info
             let data = NSKeyedArchiver.archivedDataWithRootObject(Player.instance)
