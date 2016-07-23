@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 class Player: NSObject, NSCoding {
-    static let instance = Player()
+    static var instance = Player()
     
     var name: String
     var uuid: String

@@ -1,7 +1,8 @@
 import Foundation
 
 class Lobby {
-    static let instance = Lobby()
+    static var instance = Lobby()
+    
     var rooms = [Room]()
     
     func addRoomWithName(name: String) {

@@ -7,13 +7,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private let removedFromRoomString = "You have been removed from the room."
     private let cannotStartGameString = "Check the following:\n1. Tap on a player's name to select as clue giver. There must be 1 clue giver on each team.\n2. 4 or more players are required with at least 2 players on each team."
     
-    var cardCollection = CardCollection.instance
-    var round = Round.instance
-    
-    var player = Player.instance
-    var room = Room.instance
-    var multipeerManager = MultipeerManager.instance
-    
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
     private var connectedPeers = [MCPeerID: String]()  // Mapping between Peer ID to UUID String
@@ -25,7 +18,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var startGame: SpycodesButton!
     
     @IBAction func onStartGame(sender: AnyObject) {
-        if self.room.canStartGame() {
+        if Room.instance.canStartGame() {
             self.goToGame()
         } else {
             let alertController = UIAlertController(title: "Cannot Start Game", message: self.cannotStartGameString, preferredStyle: .Alert)
@@ -38,23 +31,23 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.multipeerManager.delegate = self
+        MultipeerManager.instance.delegate = self
         
-        if player.isHost() {
-            self.multipeerManager.initPeerID(room.getRoomName())
-            self.multipeerManager.initDiscoveryInfo(["isHost": "yes"])
-            self.multipeerManager.initSession()
-            self.multipeerManager.initAdvertiser()
-            self.multipeerManager.initBrowser()
+        if Player.instance.isHost() {
+            MultipeerManager.instance.initPeerID(Room.instance.getRoomName())
+            MultipeerManager.instance.initDiscoveryInfo(["isHost": "yes"])
+            MultipeerManager.instance.initSession()
+            MultipeerManager.instance.initAdvertiser()
+            MultipeerManager.instance.initBrowser()
             
-            self.multipeerManager.startAdvertiser()
-            self.multipeerManager.startBrowser()
+            MultipeerManager.instance.startAdvertiser()
+            MultipeerManager.instance.startBrowser()
             
             self.startGame.hidden = false
             
-            if let peerID = self.multipeerManager.getPeerID() {
+            if let peerID = MultipeerManager.instance.getPeerID() {
                 // Host should add itself to the connected peers
-                self.connectedPeers[peerID] = self.player.getPlayerUUID()
+                self.connectedPeers[peerID] = Player.instance.getPlayerUUID()
             }
             
             self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
@@ -65,11 +58,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(PregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
         
-        roomNameLabel.text = self.room.getRoomName()
+        roomNameLabel.text = Room.instance.getRoomName()
     }
     
     override func viewWillDisappear(animated: Bool) {
-        if self.player.isHost() {
+        if Player.instance.isHost() {
             self.broadcastTimer?.invalidate()
         }
         self.refreshTimer?.invalidate()
@@ -89,11 +82,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     @objc
     private func broadcastData() {
-        var data = NSKeyedArchiver.archivedDataWithRootObject(self.room)
-        self.multipeerManager.broadcastData(data)
+        var data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+        MultipeerManager.instance.broadcastData(data)
         
         data = NSKeyedArchiver.archivedDataWithRootObject(self.connectedPeers)
-        self.multipeerManager.broadcastData(data)
+        MultipeerManager.instance.broadcastData(data)
     }
     
     private func goToGame() {
@@ -116,27 +109,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "lobby-room" {
-            if let lobbyRoomViewController = segue.destinationViewController as? LobbyRoomViewController {
-                if self.player.isHost() {
-                    self.broadcastTimer?.invalidate()
-                }
-                self.refreshTimer?.invalidate()
-                self.multipeerManager.terminate()
-                self.connectedPeers.removeAll()
-                lobbyRoomViewController.lobby = Lobby()
-                lobbyRoomViewController.room = Room()
-                lobbyRoomViewController.multipeerManager = self.multipeerManager
-            }
+            self.connectedPeers.removeAll()
+            MultipeerManager.instance.terminate()
         } else if segue.identifier == "game-room" {
             if let gameRoomViewController = segue.destinationViewController as? GameRoomViewController {
-                if let player = self.room.getPlayerWithUUID(self.player.uuid) {
-                    gameRoomViewController.player = player
-                    gameRoomViewController.round = self.round
-                    gameRoomViewController.cardCollection = self.cardCollection
-                    gameRoomViewController.multipeerManager = self.multipeerManager
-                    gameRoomViewController.room = self.room
-                    gameRoomViewController.connectedPeers = self.connectedPeers
-                }
+                gameRoomViewController.connectedPeers = self.connectedPeers
             }
         }
     }
@@ -144,7 +121,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! PregameRoomViewCell
-        let playerAtIndex = room.getPlayers()[indexPath.row]
+        let playerAtIndex = Room.instance.getPlayers()[indexPath.row]
         cell.nameLabel.text = String(indexPath.row + 1) + ". " + playerAtIndex.getPlayerName()
         
         // Determine team switch color
@@ -155,13 +132,13 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         // Only host player can remove players
-        if player.isHost() {
+        if Player.instance.isHost() {
             cell.removeButton.hidden = false
         } else {
             cell.removeButton.hidden = true
         }
         
-        if player == playerAtIndex {
+        if Player.instance == playerAtIndex {
             cell.removeButton.hidden = true
             cell.editButton.hidden = false
             cell.teamSwitch.enabled = true
@@ -191,12 +168,12 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let playerAtIndex = self.room.getPlayers()[indexPath.row]
+        let playerAtIndex = Room.instance.getPlayers()[indexPath.row]
         let team = playerAtIndex.getTeam()
-        if let clueGiverUUID = self.room.getClueGiverUUIDForTeam(team) {
-            self.room.getPlayerWithUUID(clueGiverUUID)?.setIsClueGiver(false)
+        if let clueGiverUUID = Room.instance.getClueGiverUUIDForTeam(team) {
+            Room.instance.getPlayerWithUUID(clueGiverUUID)?.setIsClueGiver(false)
         }
-        self.room.getPlayers()[indexPath.row].setIsClueGiver(!playerAtIndex.isClueGiver())
+        Room.instance.getPlayers()[indexPath.row].setIsClueGiver(!playerAtIndex.isClueGiver())
         self.broadcastData()
     }
     
@@ -205,14 +182,14 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.room.getNumberOfPlayers()
+        return Room.instance.getNumberOfPlayers()
     }
     
     // MARK: MultipeerManagerDelegate
     func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        if let info = info where info["joinRoom"] == room.getRoomName() {
+        if let info = info where info["joinRoom"] == Room.instance.getRoomName() {
             // Invite peer that explicitly advertised discovery info containing joinRoom entry that has the name of the host room
-            self.multipeerManager.invitePeerToSession(peerID)
+            MultipeerManager.instance.invitePeerToSession(peerID)
         }
     }
     
@@ -221,18 +198,18 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
         if let player = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Player {
             self.connectedPeers[peerID] = player.getPlayerUUID()
-            if self.player.isHost() {
-                self.room.addPlayer(player)
+            if Player.instance.isHost() {
+                Room.instance.addPlayer(player)
             }
         }
         else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
-            self.room = room
+            Room.instance = room
             
             // Room has been terminated or local player has been removed from room
-            if self.room.getNumberOfPlayers() == 0 {
+            if Room.instance.getNumberOfPlayers() == 0 {
                 self.returnToLobby(reason: self.hostDisconnectedString)
             }
-            else if !self.room.playerWithUUIDInRoom(self.player.getPlayerUUID()) {
+            else if !Room.instance.playerWithUUIDInRoom(Player.instance.getPlayerUUID()) {
                 self.returnToLobby(reason: self.removedFromRoomString)
             }
         }
@@ -240,10 +217,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             self.connectedPeers = connectedPeers
         }
         else if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
-            self.cardCollection = cardCollection
+            CardCollection.instance = cardCollection
         }
         else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
-            self.round = round
+            Round.instance = round
             self.goToGame()
         }
     }
@@ -252,23 +229,23 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     func peerDisconnectedFromSession(peerID: MCPeerID) {
         if let playerUUID = self.connectedPeers[peerID] {
-            if let player = self.room.getPlayerWithUUID(playerUUID) {
+            if let player = Room.instance.getPlayerWithUUID(playerUUID) {
                 // Room has been terminated if host player is disconnected
                 if player.isHost() {
-                    self.room.removeAllPlayers()
+                    Room.instance.removeAllPlayers()
                     self.returnToLobby(reason: self.hostDisconnectedString)
                     return
                 }
             }
             
-            self.room.removePlayerWithUUID(playerUUID)
+            Room.instance.removePlayerWithUUID(playerUUID)
             self.connectedPeers.removeValueForKey(peerID)
         }
     }
     
     // MARK: PregameRoomViewCellDelegate
     func removePlayerAtIndex(index: Int) {
-        self.room.removePlayerAtIndex(index)
+        Room.instance.removePlayerAtIndex(index)
     }
     
     func editPlayerAtIndex(index: Int) {
@@ -280,8 +257,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alertAction: UIAlertAction) in }
         let confirmAction = UIAlertAction(title: "OK", style: .Default) { (alertAction: UIAlertAction) in
             if let newName = self.editNameTextField?.text {
-                self.room.setNameOfPlayerAtIndex(index, name: newName)
-                if (!self.player.isHost()) {
+                Room.instance.setNameOfPlayerAtIndex(index, name: newName)
+                if (!Player.instance.isHost()) {
                     self.broadcastData()
                 }
             }
@@ -293,11 +270,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     func teamDidChange(redTeam: Bool) {
         if redTeam {
-            self.room.getPlayerWithUUID(self.player.getPlayerUUID())?.setTeam(Team.Red)
+            Room.instance.getPlayerWithUUID(Player.instance.getPlayerUUID())?.setTeam(Team.Red)
         } else {
-            self.room.getPlayerWithUUID(self.player.getPlayerUUID())?.setTeam(Team.Blue)
+            Room.instance.getPlayerWithUUID(Player.instance.getPlayerUUID())?.setTeam(Team.Blue)
         }
-        self.room.getPlayerWithUUID(self.player.getPlayerUUID())?.setIsClueGiver(false)
+        Room.instance.getPlayerWithUUID(Player.instance.getPlayerUUID())?.setIsClueGiver(false)
         self.broadcastData()
     }
     

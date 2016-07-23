@@ -1,7 +1,8 @@
 import Foundation
 
 class Round: NSObject, NSCoding {
-    static let instance = Round()
+    static var instance = Round()
+    
     static let defaultClueGiverClue = "Enter Clue"
     static let defaultNonTurnClue = "Not Your Turn"
     static let defaultIsTurnClue = "Waiting for Clue..."

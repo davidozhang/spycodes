@@ -1,7 +1,8 @@
 import Foundation
 
 class CardCollection: NSObject, NSCoding {
-    static let instance = CardCollection()
+    static var instance = CardCollection()
+    
     private let keyObject = Key()
     private let words = SpycodesWordList.getTwentyFiveShuffledWords()
     
