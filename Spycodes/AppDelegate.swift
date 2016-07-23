@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  Spycodes
-//
-//  Created by David Zhang on 2016-06-21.
-//  Copyright © 2016 David Zhang. All rights reserved.
-//
-
 import UIKit
 import CoreData
 
@@ -16,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        application.idleTimerDisabled = true
         return true
     }
 
