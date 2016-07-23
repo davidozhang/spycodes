@@ -220,11 +220,14 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         if self.player.isClueGiver() {
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
-            if cardAtIndex.isSelected() {
-                let attributedString: NSMutableAttributedString =  NSMutableAttributedString(string: cardAtIndex.getWord())
-                attributedString.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributedString.length))
-                cell.wordLabel.attributedText = attributedString
+            var attributedString: NSMutableAttributedString =  NSMutableAttributedString(string: cardAtIndex.getWord())
+            if cardAtIndex.getTeam() == self.player.getTeam() {
+                attributedString = NSMutableAttributedString(string: cardAtIndex.getWord(), attributes: [NSFontAttributeName : UIFont(name: "HelveticaNeue-Light", size: 20)!])
             }
+            if cardAtIndex.isSelected() {
+                attributedString.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributedString.length))
+            }
+            cell.wordLabel.attributedText = attributedString
             return cell
         }
         
