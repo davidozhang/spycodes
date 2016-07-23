@@ -12,11 +12,6 @@ class SpycodesTextField: UITextField {
         
     }
     
-    // MARK: Disable cursor
-    override func caretRectForPosition(position: UITextPosition) -> CGRect {
-        return CGRectZero
-    }
-    
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
         if action == Selector("copy:") || action == Selector("selectAll:") || action == Selector("paste:") {
             return false
