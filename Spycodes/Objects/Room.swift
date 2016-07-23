@@ -1,7 +1,7 @@
 import Foundation
 
 class Room: NSObject, NSCoding {
-    static let instance = Room()
+    static var instance = Room()
     
     var name: String
     var players = [Player]()
