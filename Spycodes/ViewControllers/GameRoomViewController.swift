@@ -25,7 +25,13 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     @IBOutlet weak var numberOfWordsTextField: UITextField!
     @IBOutlet weak var cardsRemainingLabel: UILabel!
     @IBOutlet weak var teamLabel: UILabel!
+    
     @IBOutlet weak var endRoundButton: SpycodesButton!
+    @IBOutlet weak var confirmButton: UIButton!
+    
+    @IBAction func onConfirmPressed(sender: AnyObject) {
+        self.didConfirm()
+    }
     
     @IBAction func onEndRoundPressed(sender: AnyObject) {
         self.round.endRound(self.player.getTeam())
@@ -53,6 +59,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameRoomViewController.refreshView), userInfo: nil, repeats: true)    // Refresh room every second
         
         self.teamLabel.text = self.player.getTeam() == Team.Red ? "Red" : "Blue"
+        self.confirmButton.hidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,6 +72,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         dispatch_async(dispatch_get_main_queue(), {
             self.updateDashboard()
             self.updateEndRoundButton()
+            self.updateConfirmButton()
             self.collectionView.reloadData()
         })
     }
@@ -92,6 +100,14 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             else {
                 if self.player.isClueGiver() {
                     self.clueTextField.text = Round.defaultClueGiverClue
+                    self.confirmButton.hidden = false
+                    if self.round.isClueSet() && self.round.isNumberOfWordsSet() {
+                        self.clueTextField.enabled = false
+                        self.numberOfWordsTextField.enabled = false
+                    } else {
+                        self.clueTextField.enabled = true
+                        self.numberOfWordsTextField.enabled = true
+                    }
                 }
                 else {
                    self.clueTextField.text = Round.defaultIsTurnClue
@@ -123,6 +139,29 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             self.endRoundButton.alpha = 0.3
             self.endRoundButton.enabled = false
         }
+    }
+    
+    private func updateConfirmButton() {
+        if !self.player.isClueGiver() || self.round.currentTeam != self.player.getTeam() {
+            return
+        }
+        
+        if self.clueTextField.text?.characters.count > 0 && self.clueTextField.text != Round.defaultClueGiverClue && self.numberOfWordsTextField.text?.characters.count > 0 && self.numberOfWordsTextField.text != Round.defaultNumberOfWords {
+            self.confirmButton.alpha = 1.0
+            self.confirmButton.enabled = true
+        } else {
+            self.confirmButton.alpha = 0.3
+            self.confirmButton.enabled = false
+        }
+    }
+    
+    private func didConfirm() {
+        self.round.clue = self.clueTextField.text
+        self.round.numberOfWords = self.numberOfWordsTextField.text
+        self.clueTextField.enabled = false
+        self.numberOfWordsTextField.enabled = false
+        self.confirmButton.hidden = true
+        self.broadcastData()
     }
     
     // MARK: MultipeerManagerDelegate
@@ -226,9 +265,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         } else if textField == self.numberOfWordsTextField {
             self.round.numberOfWords = textField.text
             self.numberOfWordsTextField.resignFirstResponder()
+            self.didConfirm()
         }
-        
-        self.broadcastData()
         
         return true
     }
