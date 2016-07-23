@@ -107,6 +107,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         if segue.identifier == "lobby-room" {
             Room.instance.connectedPeers.removeAll()
             MultipeerManager.instance.terminate()
+        } else if segue.identifier == "game-room" {
+            if let player = Room.instance.getPlayerWithUUID(Player.instance.getPlayerUUID()) {
+                Player.instance = player
+            }
         }
     }
     
