@@ -16,6 +16,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var startGame: SpycodesButton!
     
+    @IBAction func unwindToPregameRoom(segue: UIStoryboardSegue) {}
+    
     @IBAction func onStartGame(sender: AnyObject) {
         if Room.instance.canStartGame() {
             self.goToGame()
@@ -117,7 +119,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         cell.nameLabel.text = String(indexPath.row + 1) + ". " + playerAtIndex.name
         
         // Determine team switch color
-        if playerAtIndex.getTeam() == Team.Red {
+        if playerAtIndex.team == Team.Red {
             cell.teamSwitch.on = true
         } else {
             cell.teamSwitch.on = false
@@ -140,7 +142,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         if playerAtIndex.isClueGiver() {
-            if playerAtIndex.getTeam() == Team.Red {
+            if playerAtIndex.team == Team.Red {
                 cell.contentView.backgroundColor = UIColor.spycodesLightRedColor()
             }
             else {
@@ -161,7 +163,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let playerAtIndex = Room.instance.players[indexPath.row]
-        let team = playerAtIndex.getTeam()
+        let team = playerAtIndex.team
         if let clueGiverUUID = Room.instance.getClueGiverUUIDForTeam(team) {
             Room.instance.getPlayerWithUUID(clueGiverUUID)?.setIsClueGiver(false)
         }
@@ -266,9 +268,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     func teamDidChange(redTeam: Bool) {
         if redTeam {
-            Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.setTeam(Team.Red)
+            Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.team = Team.Red
         } else {
-            Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.setTeam(Team.Blue)
+            Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.team = Team.Blue
         }
         Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.setIsClueGiver(false)
         self.broadcastData()

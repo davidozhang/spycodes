@@ -5,23 +5,31 @@ class Round: NSObject, NSCoding {
     
     static let defaultClueGiverClue = "Enter Clue"
     static let defaultNonTurnClue = "Not Your Turn"
-    static let defaultIsTurnClue = "Waiting for Clue..."
+    static let defaultIsTurnClue = "Waiting for Clue"
     static let defaultNumberOfWords = "∞"
+    static let defaultLoseString = "Your team lost!"
+    static let defaultWinString = "Your team won!"
     
     var currentTeam: Team?
     var clue: String?
     var numberOfWords: String?
+    var winningTeam: Team?
+    
+    private var statistics = [Team.Red: 0, Team.Blue: 0]
     
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        if let team = aDecoder.decodeObjectForKey("team") as? Int {
-            self.currentTeam = Team(rawValue: team)
+        if let currentTeam = aDecoder.decodeObjectForKey("team") as? Int {
+            self.currentTeam = Team(rawValue: currentTeam)
         }
         if let clue = aDecoder.decodeObjectForKey("clue") as? String {
             self.clue = clue
         }
         if let numberOfWords = aDecoder.decodeObjectForKey("numberOfWords") as? String {
             self.numberOfWords = numberOfWords
+        }
+        if let winningTeam = aDecoder.decodeObjectForKey("winningTeam") as? Int {
+            self.winningTeam = Team(rawValue: winningTeam)
         }
     }
     
@@ -34,6 +42,9 @@ class Round: NSObject, NSCoding {
         }
         if let numberOfWords = self.numberOfWords {
             aCoder.encodeObject(numberOfWords, forKey: "numberOfWords")
+        }
+        if let winningTeam = self.winningTeam?.rawValue {
+            aCoder.encodeObject(winningTeam, forKey: "winningTeam")
         }
     }
     
@@ -53,5 +64,10 @@ class Round: NSObject, NSCoding {
         self.currentTeam = Team(rawValue: endingTeam.rawValue ^ 1)
         self.clue = nil
         self.numberOfWords = nil
+    }
+    
+    func recordWinForTeam(winningTeam: Team) {
+        self.winningTeam = winningTeam
+        self.statistics[winningTeam]! += 1
     }
 }

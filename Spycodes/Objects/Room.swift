@@ -69,8 +69,8 @@ class Room: NSObject, NSCoding {
     
     func canStartGame() -> Bool {
         if self.players.count >= 4 {
-            let redValid = self.players.filter({($0 as Player).getTeam() == Team.Red}).count >= 2
-            let blueValid = self.players.filter({($0 as Player).getTeam() == Team.Blue}).count >= 2
+            let redValid = self.players.filter({($0 as Player).team == Team.Red}).count >= 2
+            let blueValid = self.players.filter({($0 as Player).team == Team.Blue}).count >= 2
             
             if redValid && blueValid && self.getClueGiverUUIDForTeam(Team.Red) != nil && self.getClueGiverUUIDForTeam(Team.Blue) != nil {
                 return true
@@ -93,7 +93,7 @@ class Room: NSObject, NSCoding {
     }
     
     func getClueGiverUUIDForTeam(team: Team) -> String? {
-        let filtered = self.players.filter({($0 as Player).isClueGiver() && ($0 as Player).getTeam() == team})
+        let filtered = self.players.filter({($0 as Player).isClueGiver() && ($0 as Player).team == team})
         if filtered.count == 1 {
             return filtered[0].getUUID()
         }
