@@ -3,9 +3,6 @@ import UIKit
 
 class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
     private let identifier = "pregame-room-view-cell"
-    private let hostDisconnectedString = "Host player has been disconnected."
-    private let removedFromRoomString = "You have been removed from the room."
-    private let cannotStartGameString = "Check the following:\n1. Tap on a player's name to select as clue giver. There must be 1 clue giver on each team.\n2. 4 or more players are required with at least 2 players on each team."
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -26,7 +23,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             Round.instance = Round()
             self.goToGame()
         } else {
-            let alertController = UIAlertController(title: "Cannot Start Game", message: self.cannotStartGameString, preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Cannot Start Game", message: SpycodesMessage.cannotStartGameString, preferredStyle: .Alert)
             let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in })
             alertController.addAction(confirmAction)
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -226,10 +223,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             
             // Room has been terminated or local player has been removed from room
             if Room.instance.players.count == 0 {
-                self.returnToLobby(reason: self.hostDisconnectedString)
+                self.returnToLobby(reason: SpycodesMessage.hostDisconnectedString)
             }
             else if !Room.instance.playerWithUUIDInRoom(Player.instance.getUUID()) {
-                self.returnToLobby(reason: self.removedFromRoomString)
+                self.returnToLobby(reason: SpycodesMessage.removedFromRoomString)
             }
         }
         else if let connectedPeers = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [MCPeerID: String] {
@@ -252,7 +249,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                 // Room has been terminated if host player is disconnected
                 if player.isHost() {
                     Room.instance.players.removeAll()
-                    self.returnToLobby(reason: self.hostDisconnectedString)
+                    self.returnToLobby(reason: SpycodesMessage.hostDisconnectedString)
                     return
                 }
             }

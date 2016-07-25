@@ -4,7 +4,6 @@ import UIKit
 class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MultipeerManagerDelegate, UITextFieldDelegate {
     private let reuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
-    private let playerDisconnectedString = "A player from your team has disconnected."
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -225,7 +224,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     func peerDisconnectedFromSession(peerID: MCPeerID) {
         if let peer = Room.instance.connectedPeers[peerID], player = Room.instance.getPlayerWithUUID(peer) where player.team == Player.instance.team {
-            let alertController = UIAlertController(title: "Oops", message: self.playerDisconnectedString, preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Oops", message: SpycodesMessage.playerDisconnectedString, preferredStyle: .Alert)
             let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in })
             alertController.addAction(confirmAction)
             self.presentViewController(alertController, animated: true, completion: nil)

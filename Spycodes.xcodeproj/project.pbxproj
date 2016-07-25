@@ -37,6 +37,7 @@
 		63FDED3B1D265BAF00142780 /* PregameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED3A1D265BAF00142780 /* PregameRoomViewController.swift */; };
 		63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */; };
 		63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED451D28B47200142780 /* PregameRoomViewCell.swift */; };
+		CF5A8DCC1D46D95F0032F581 /* SpycodesMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		63FDED3A1D265BAF00142780 /* PregameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PregameRoomViewController.swift; path = ViewControllers/PregameRoomViewController.swift; sourceTree = "<group>"; };
 		63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyRoomViewController.swift; path = ViewControllers/LobbyRoomViewController.swift; sourceTree = "<group>"; };
 		63FDED451D28B47200142780 /* PregameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PregameRoomViewCell.swift; path = Views/PregameRoomViewCell.swift; sourceTree = "<group>"; };
+		CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesMessage.swift; path = Extensions/SpycodesMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			children = (
 				63486DA41D3DDC9800795403 /* SpycodesArray.swift */,
 				63A04D1C1D1A7F37005A2914 /* SpycodesButton.swift */,
+				CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */,
 				63FA54DF1D1BBB73004515DA /* SpycodesTextField.swift */,
 				63CB4F0D1D3DAA5A00211D3A /* SpycodesWordList.swift */,
 				639BA3151D38AFEF002F2A18 /* UIColor.swift */,
@@ -266,6 +269,7 @@
 				63EAF9A31D41D2E700BC554E /* Round.swift in Sources */,
 				63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */,
 				63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */,
+				CF5A8DCC1D46D95F0032F581 /* SpycodesMessage.swift in Sources */,
 				63486DA91D3DE29C00795403 /* Key.swift in Sources */,
 				63CB4F0E1D3DAA5A00211D3A /* SpycodesWordList.swift in Sources */,
 				63486DA51D3DDC9800795403 /* SpycodesArray.swift in Sources */,
