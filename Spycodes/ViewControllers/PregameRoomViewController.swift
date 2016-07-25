@@ -44,15 +44,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             MultipeerManager.instance.initAdvertiser()
             MultipeerManager.instance.initBrowser()
             
-            MultipeerManager.instance.startAdvertiser()
-            MultipeerManager.instance.startBrowser()
-            
             self.startGame.hidden = false
-            
-            if let peerID = MultipeerManager.instance.getPeerID() {
-                // Host should add itself to the connected peers
-                Room.instance.connectedPeers[peerID] = Player.instance.getUUID()
-            }
         }
         else {
             self.startGame.hidden = true
@@ -67,6 +59,14 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         MultipeerManager.instance.delegate = self
         
         if Player.instance.isHost() {
+            MultipeerManager.instance.startAdvertiser()
+            MultipeerManager.instance.startBrowser()
+            
+            if let peerID = MultipeerManager.instance.getPeerID() {
+                // Host should add itself to the connected peers
+                Room.instance.connectedPeers[peerID] = Player.instance.getUUID()
+            }
+            
             self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
         }
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(PregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
@@ -76,6 +76,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillDisappear(animated: Bool) {
         if Player.instance.isHost() {
+            MultipeerManager.instance.stopAdvertiser()
+            MultipeerManager.instance.stopBrowser()
             self.broadcastTimer?.invalidate()
         }
         self.refreshTimer?.invalidate()

@@ -11,13 +11,24 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MultipeerManager.instance.delegate = self
         MultipeerManager.instance.initPeerID(Player.instance.name)
         MultipeerManager.instance.initBrowser()
         MultipeerManager.instance.initSession()
-        MultipeerManager.instance.startBrowser()
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(LobbyRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh lobby every second
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        MultipeerManager.instance.delegate = self
+        MultipeerManager.instance.startBrowser()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        MultipeerManager.instance.stopBrowser()
+        self.refreshTimer?.invalidate()
+        Lobby.instance = Lobby()
     }
     
     override func didReceiveMemoryWarning() {
