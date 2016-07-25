@@ -7,17 +7,30 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func unwindToLobbyRoom(sender: UIStoryboardSegue) {}
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MultipeerManager.instance.delegate = self
         MultipeerManager.instance.initPeerID(Player.instance.name)
         MultipeerManager.instance.initBrowser()
         MultipeerManager.instance.initSession()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        MultipeerManager.instance.delegate = self
         MultipeerManager.instance.startBrowser()
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(LobbyRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh lobby every second
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        MultipeerManager.instance.stopBrowser()
+        self.refreshTimer?.invalidate()
+        Lobby.instance = Lobby()
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,8 +92,6 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
             // Inform the room host of local player info
             let data = NSKeyedArchiver.archivedDataWithRootObject(Player.instance)
             MultipeerManager.instance.broadcastData(data)
-            
-            self.refreshTimer?.invalidate()
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.performSegueWithIdentifier("pregame-room", sender: self)
