@@ -15,9 +15,15 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var startGame: SpycodesButton!
+    @IBOutlet weak var redStatisticsLabel: UILabel!
+    @IBOutlet weak var blueStatisticsLabel: UILabel!
+    
+    @IBAction func unwindToPregameRoom(segue: UIStoryboardSegue) {}
     
     @IBAction func onStartGame(sender: AnyObject) {
         if Room.instance.canStartGame() {
+            CardCollection.instance = CardCollection()
+            Round.instance = Round()
             self.goToGame()
         } else {
             let alertController = UIAlertController(title: "Cannot Start Game", message: self.cannotStartGameString, preferredStyle: .Alert)
@@ -30,7 +36,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        MultipeerManager.instance.delegate = self
         
         if Player.instance.isHost() {
             MultipeerManager.instance.initPeerID(Room.instance.name)
@@ -48,16 +53,25 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                 // Host should add itself to the connected peers
                 Room.instance.connectedPeers[peerID] = Player.instance.getUUID()
             }
-            
-            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
         }
         else {
             self.startGame.hidden = true
         }
         
+        roomNameLabel.text = Room.instance.name
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        MultipeerManager.instance.delegate = self
+        
+        if Player.instance.isHost() {
+            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
+        }
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(PregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
         
-        roomNameLabel.text = Room.instance.name
+        self.updateDashboard()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -102,6 +116,13 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    private func updateDashboard() {
+        if let redNumberOfWins = Statistics.instance.getStatistics()[Team.Red], blueNumberOfWins = Statistics.instance.getStatistics()[Team.Blue] {
+            self.redStatisticsLabel.text = String(redNumberOfWins)
+            self.blueStatisticsLabel.text = String(blueNumberOfWins)
+        }
+    }
+    
     // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "lobby-room" {
@@ -117,7 +138,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         cell.nameLabel.text = String(indexPath.row + 1) + ". " + playerAtIndex.name
         
         // Determine team switch color
-        if playerAtIndex.getTeam() == Team.Red {
+        if playerAtIndex.team == Team.Red {
             cell.teamSwitch.on = true
         } else {
             cell.teamSwitch.on = false
@@ -140,7 +161,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         if playerAtIndex.isClueGiver() {
-            if playerAtIndex.getTeam() == Team.Red {
+            if playerAtIndex.team == Team.Red {
                 cell.contentView.backgroundColor = UIColor.spycodesLightRedColor()
             }
             else {
@@ -161,7 +182,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let playerAtIndex = Room.instance.players[indexPath.row]
-        let team = playerAtIndex.getTeam()
+        let team = playerAtIndex.team
         if let clueGiverUUID = Room.instance.getClueGiverUUIDForTeam(team) {
             Room.instance.getPlayerWithUUID(clueGiverUUID)?.setIsClueGiver(false)
         }
@@ -266,9 +287,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     func teamDidChange(redTeam: Bool) {
         if redTeam {
-            Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.setTeam(Team.Red)
+            Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.team = Team.Red
         } else {
-            Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.setTeam(Team.Blue)
+            Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.team = Team.Blue
         }
         Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.setIsClueGiver(false)
         self.broadcastData()

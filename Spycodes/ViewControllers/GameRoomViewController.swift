@@ -31,6 +31,10 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         MultipeerManager.instance.delegate = self
         
@@ -48,8 +52,15 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameRoomViewController.refreshView), userInfo: nil, repeats: true)    // Refresh room every second
         
-        self.teamLabel.text = Player.instance.getTeam() == Team.Red ? "Red" : "Blue"
+        self.teamLabel.text = Player.instance.team == Team.Red ? "Red" : "Blue"
         self.confirmButton.hidden = true
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        if Player.instance.isHost() {
+            self.broadcastTimer?.invalidate()
+        }
+        self.refreshTimer?.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,12 +85,15 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         data = NSKeyedArchiver.archivedDataWithRootObject(Round.instance)
         MultipeerManager.instance.broadcastData(data)
+        
+        data = NSKeyedArchiver.archivedDataWithRootObject(Statistics.instance)
+        MultipeerManager.instance.broadcastData(data)
     }
     
     private func updateDashboard() {
-        self.cardsRemainingLabel.text = String(CardCollection.instance.getCardsRemainingForTeam(Player.instance.getTeam()))
+        self.cardsRemainingLabel.text = String(CardCollection.instance.getCardsRemainingForTeam(Player.instance.team))
         
-        if Round.instance.currentTeam == Player.instance.getTeam() {
+        if Round.instance.currentTeam == Player.instance.team {
             if self.clueTextField.isFirstResponder() || self.numberOfWordsTextField.isFirstResponder() {
                 return  // Cluegiver is editing the clue/number of words
             }
@@ -121,7 +135,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             return
         }
         
-        if Round.instance.currentTeam == Player.instance.getTeam() {
+        if Round.instance.currentTeam == Player.instance.team {
             self.endRoundButton.alpha = 1.0
             self.endRoundButton.enabled = true
         }
@@ -132,7 +146,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     private func updateConfirmButton() {
-        if !Player.instance.isClueGiver() || Round.instance.currentTeam != Player.instance.getTeam() {
+        if !Player.instance.isClueGiver() || Round.instance.currentTeam != Player.instance.team {
             return
         }
         
@@ -155,8 +169,22 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     private func didEndRound() {
-        Round.instance.endRound(Player.instance.getTeam())
+        Round.instance.endRound(Player.instance.team)
         self.broadcastData()
+    }
+    
+    private func didEndGame(reason reason: String) {
+        if Player.instance.isHost() {
+            self.broadcastTimer?.invalidate()
+        }
+        self.refreshTimer?.invalidate()
+        
+        let alertController = UIAlertController(title: "Game Over", message: reason, preferredStyle: .Alert)
+        let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
+            self.performSegueWithIdentifier("pregame-room", sender: self)
+        })
+        alertController.addAction(confirmAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     // MARK: MultipeerManagerDelegate
@@ -170,7 +198,16 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         }
         else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
             Round.instance = round
-            if Round.instance.currentTeam == Player.instance.getTeam() {
+            if Round.instance.winningTeam == Player.instance.team {
+                self.didEndGame(reason: Round.defaultWinString)
+                return
+            }
+            else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) {
+                self.didEndGame(reason: Round.defaultLoseString)
+                return
+            }
+            
+            if Round.instance.currentTeam == Player.instance.team {
                 if !playerRoundStarted {
                     AudioToolboxManager.instance.vibrate()
                     playerRoundStarted = true
@@ -179,12 +216,15 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 playerRoundStarted = false
             }
         }
+        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
+            Statistics.instance = statistics
+        }
     }
     
     func newPeerAddedToSession(peerID: MCPeerID) {}
     
     func peerDisconnectedFromSession(peerID: MCPeerID) {
-        if let peer = Room.instance.connectedPeers[peerID], player = Room.instance.getPlayerWithUUID(peer) where player.getTeam() == Player.instance.team {
+        if let peer = Room.instance.connectedPeers[peerID], player = Room.instance.getPlayerWithUUID(peer) where player.team == Player.instance.team {
             let alertController = UIAlertController(title: "Oops", message: self.playerDisconnectedString, preferredStyle: .Alert)
             let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in })
             alertController.addAction(confirmAction)
@@ -212,7 +252,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         if Player.instance.isClueGiver() {
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
             var attributedString: NSMutableAttributedString =  NSMutableAttributedString(string: cardAtIndex.getWord())
-            if cardAtIndex.getTeam() == Player.instance.getTeam() {
+            if cardAtIndex.getTeam() == Player.instance.team {
                 attributedString = NSMutableAttributedString(string: cardAtIndex.getWord(), attributes: [NSFontAttributeName : UIFont(name: "HelveticaNeue-Light", size: 20)!])
             }
             if cardAtIndex.isSelected() {
@@ -230,20 +270,34 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if Player.instance.isClueGiver() || Round.instance.currentTeam != Player.instance.getTeam() {
+        if Player.instance.isClueGiver() || Round.instance.currentTeam != Player.instance.team {
             return
         }
         
-        let cardAtIndex = CardCollection.instance.cards[indexPath.row]
         CardCollection.instance.cards[indexPath.row].setSelected()
+        self.broadcastData()
         
-        if cardAtIndex.getTeam() != Player.instance.getTeam() {
-            if cardAtIndex.getTeam() == Team.Neutral || cardAtIndex.getTeam() == Team(rawValue: Player.instance.getTeam().rawValue ^ 1) {
-                self.didEndRound()
-            }
+        let cardAtIndex = CardCollection.instance.cards[indexPath.row]
+        let cardAtIndexTeam = cardAtIndex.getTeam()
+        let playerTeam = Player.instance.team
+        let opponentTeam = Team(rawValue: playerTeam.rawValue ^ 1)
+        
+        if cardAtIndexTeam == Team.Neutral || cardAtIndexTeam == opponentTeam {
+            self.didEndRound()
         }
         
-        self.broadcastData()
+        if cardAtIndexTeam == Team.Assassin || CardCollection.instance.getCardsRemainingForTeam(opponentTeam!) == 0 {
+            Round.instance.winningTeam = opponentTeam
+            Statistics.instance.recordWinForTeam(opponentTeam!)
+            self.broadcastData()
+            self.didEndGame(reason: Round.defaultLoseString)
+        }
+        else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
+            Round.instance.winningTeam = playerTeam
+            Statistics.instance.recordWinForTeam(playerTeam)
+            self.broadcastData()
+            self.didEndGame(reason: Round.defaultWinString)
+        }
     }
     
     // Cell Size
@@ -257,7 +311,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     // MARK: UITextFieldDelegate
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        if Player.instance.isClueGiver() && Round.instance.currentTeam == Player.instance.getTeam() {
+        if Player.instance.isClueGiver() && Round.instance.currentTeam == Player.instance.team {
             return true
         } else {
             return false

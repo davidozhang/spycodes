@@ -50,14 +50,6 @@ class Player: NSObject, NSCoding {
         return self.uuid
     }
     
-    func setTeam(team: Team) {
-        self.team = team
-    }
-    
-    func getTeam() -> Team {
-        return self.team
-    }
-    
     func setIsClueGiver(isClueGiver: Bool) {
         self.clueGiver = isClueGiver
     }

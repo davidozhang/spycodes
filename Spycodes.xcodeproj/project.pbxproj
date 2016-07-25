@@ -12,6 +12,7 @@
 		63486DA51D3DDC9800795403 /* SpycodesArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA41D3DDC9800795403 /* SpycodesArray.swift */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
 		637310CB1D3B292F00EA5D7A /* GameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */; };
+		637F195F1D46010E00FB4047 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F195E1D46010E00FB4047 /* Statistics.swift */; };
 		63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* MultipeerManager.swift */; };
 		639BA3161D38AFEF002F2A18 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BA3151D38AFEF002F2A18 /* UIColor.swift */; };
 		63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 		63486DA41D3DDC9800795403 /* SpycodesArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesArray.swift; path = Extensions/SpycodesArray.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
 		637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameRoomViewController.swift; path = ViewControllers/GameRoomViewController.swift; sourceTree = "<group>"; };
+		637F195E1D46010E00FB4047 /* Statistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Statistics.swift; path = Objects/Statistics.swift; sourceTree = "<group>"; };
 		63920A361D3090D60073E7F7 /* MultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipeerManager.swift; path = Managers/MultipeerManager.swift; sourceTree = "<group>"; };
 		639BA3151D38AFEF002F2A18 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = Extensions/UIColor.swift; sourceTree = "<group>"; };
 		63A04D001D1A5713005A2914 /* Spycodes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spycodes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,6 +171,7 @@
 				63FDED341D264BE800142780 /* Player.swift */,
 				63FDED381D26557200142780 /* Room.swift */,
 				63EAF9A21D41D2E700BC554E /* Round.swift */,
+				637F195E1D46010E00FB4047 /* Statistics.swift */,
 				63FDED361D264CF300142780 /* Team.swift */,
 			);
 			name = Objects;
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63FDED371D264CF300142780 /* Team.swift in Sources */,
+				637F195F1D46010E00FB4047 /* Statistics.swift in Sources */,
 				63FA54E21D1BBD8E004515DA /* CreateGameViewController.swift in Sources */,
 				63FDED3B1D265BAF00142780 /* PregameRoomViewController.swift in Sources */,
 				63EAF9A31D41D2E700BC554E /* Round.swift in Sources */,
