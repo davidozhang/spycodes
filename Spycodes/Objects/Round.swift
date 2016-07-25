@@ -15,8 +15,6 @@ class Round: NSObject, NSCoding {
     var numberOfWords: String?
     var winningTeam: Team?
     
-    private var statistics = [Team.Red: 0, Team.Blue: 0]
-    
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         if let currentTeam = aDecoder.decodeObjectForKey("team") as? Int {
@@ -64,10 +62,5 @@ class Round: NSObject, NSCoding {
         self.currentTeam = Team(rawValue: endingTeam.rawValue ^ 1)
         self.clue = nil
         self.numberOfWords = nil
-    }
-    
-    func recordWinForTeam(winningTeam: Team) {
-        self.winningTeam = winningTeam
-        self.statistics[winningTeam]! += 1
     }
 }

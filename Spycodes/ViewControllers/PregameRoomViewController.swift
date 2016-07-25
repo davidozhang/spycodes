@@ -15,6 +15,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var startGame: SpycodesButton!
+    @IBOutlet weak var redStatisticsLabel: UILabel!
+    @IBOutlet weak var blueStatisticsLabel: UILabel!
     
     @IBAction func unwindToPregameRoom(segue: UIStoryboardSegue) {}
     
@@ -68,6 +70,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
         }
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(PregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
+        
+        self.updateDashboard()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -110,6 +114,13 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         })
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    private func updateDashboard() {
+        if let redNumberOfWins = Statistics.instance.getStatistics()[Team.Red], blueNumberOfWins = Statistics.instance.getStatistics()[Team.Blue] {
+            self.redStatisticsLabel.text = String(redNumberOfWins)
+            self.blueStatisticsLabel.text = String(blueNumberOfWins)
+        }
     }
     
     // MARK: Segue

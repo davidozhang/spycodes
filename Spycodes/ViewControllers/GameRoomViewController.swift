@@ -85,6 +85,9 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         data = NSKeyedArchiver.archivedDataWithRootObject(Round.instance)
         MultipeerManager.instance.broadcastData(data)
+        
+        data = NSKeyedArchiver.archivedDataWithRootObject(Statistics.instance)
+        MultipeerManager.instance.broadcastData(data)
     }
     
     private func updateDashboard() {
@@ -213,6 +216,9 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 playerRoundStarted = false
             }
         }
+        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
+            Statistics.instance = statistics
+        }
     }
     
     func newPeerAddedToSession(peerID: MCPeerID) {}
@@ -281,12 +287,14 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         }
         
         if cardAtIndexTeam == Team.Assassin || CardCollection.instance.getCardsRemainingForTeam(opponentTeam!) == 0 {
-            Round.instance.recordWinForTeam(opponentTeam!)
+            Round.instance.winningTeam = opponentTeam
+            Statistics.instance.recordWinForTeam(opponentTeam!)
             self.broadcastData()
             self.didEndGame(reason: Round.defaultLoseString)
         }
         else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
-            Round.instance.recordWinForTeam(playerTeam)
+            Round.instance.winningTeam = playerTeam
+            Statistics.instance.recordWinForTeam(playerTeam)
             self.broadcastData()
             self.didEndGame(reason: Round.defaultWinString)
         }
