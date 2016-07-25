@@ -31,6 +31,10 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         MultipeerManager.instance.delegate = self
         
@@ -50,6 +54,13 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         self.teamLabel.text = Player.instance.team == Team.Red ? "Red" : "Blue"
         self.confirmButton.hidden = true
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        if Player.instance.isHost() {
+            self.broadcastTimer?.invalidate()
+        }
+        self.refreshTimer?.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -160,6 +171,11 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     private func didEndGame(reason reason: String) {
+        if Player.instance.isHost() {
+            self.broadcastTimer?.invalidate()
+        }
+        self.refreshTimer?.invalidate()
+        
         let alertController = UIAlertController(title: "Game Over", message: reason, preferredStyle: .Alert)
         let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
             self.performSegueWithIdentifier("pregame-room", sender: self)
@@ -252,12 +268,13 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             return
         }
         
+        CardCollection.instance.cards[indexPath.row].setSelected()
+        self.broadcastData()
+        
         let cardAtIndex = CardCollection.instance.cards[indexPath.row]
         let cardAtIndexTeam = cardAtIndex.getTeam()
         let playerTeam = Player.instance.team
         let opponentTeam = Team(rawValue: playerTeam.rawValue ^ 1)
-        
-        CardCollection.instance.cards[indexPath.row].setSelected()
         
         if cardAtIndexTeam == Team.Neutral || cardAtIndexTeam == opponentTeam {
             self.didEndRound()
@@ -265,14 +282,14 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         if cardAtIndexTeam == Team.Assassin || CardCollection.instance.getCardsRemainingForTeam(opponentTeam!) == 0 {
             Round.instance.recordWinForTeam(opponentTeam!)
+            self.broadcastData()
             self.didEndGame(reason: Round.defaultLoseString)
         }
         else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
             Round.instance.recordWinForTeam(playerTeam)
+            self.broadcastData()
             self.didEndGame(reason: Round.defaultWinString)
         }
-        
-        self.broadcastData()
     }
     
     // Cell Size

@@ -20,6 +20,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func onStartGame(sender: AnyObject) {
         if Room.instance.canStartGame() {
+            CardCollection.instance = CardCollection()
+            Round.instance = Round()
             self.goToGame()
         } else {
             let alertController = UIAlertController(title: "Cannot Start Game", message: self.cannotStartGameString, preferredStyle: .Alert)
@@ -32,7 +34,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        MultipeerManager.instance.delegate = self
         
         if Player.instance.isHost() {
             MultipeerManager.instance.initPeerID(Room.instance.name)
@@ -50,16 +51,23 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                 // Host should add itself to the connected peers
                 Room.instance.connectedPeers[peerID] = Player.instance.getUUID()
             }
-            
-            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
         }
         else {
             self.startGame.hidden = true
         }
         
-        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(PregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
-        
         roomNameLabel.text = Room.instance.name
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        MultipeerManager.instance.delegate = self
+        
+        if Player.instance.isHost() {
+            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
+        }
+        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(PregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
     }
     
     override func viewWillDisappear(animated: Bool) {
