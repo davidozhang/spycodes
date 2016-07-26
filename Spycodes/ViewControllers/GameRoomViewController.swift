@@ -172,13 +172,13 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         self.broadcastData()
     }
     
-    private func didEndGame(reason reason: String) {
+    private func didEndGame(title title: String, reason: String) {
         if Player.instance.isHost() {
             self.broadcastTimer?.invalidate()
         }
         self.refreshTimer?.invalidate()
         
-        let alertController = UIAlertController(title: "Game Over", message: reason, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: title, message: reason, preferredStyle: .Alert)
         let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
             self.performSegueWithIdentifier("pregame-room", sender: self)
         })
@@ -197,12 +197,16 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         }
         else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
             Round.instance = round
-            if Round.instance.winningTeam == Player.instance.team {
-                self.didEndGame(reason: Round.defaultWinString)
+            if Round.instance.abort {
+                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerDisconnectedString)
+                return
+            }
+            else if Round.instance.winningTeam == Player.instance.team {
+                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
                 return
             }
             else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) {
-                self.didEndGame(reason: Round.defaultLoseString)
+                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultLoseString)
                 return
             }
             
@@ -218,16 +222,31 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
             Statistics.instance = statistics
         }
+        else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
+            Room.instance = room
+        }
     }
     
     func newPeerAddedToSession(peerID: MCPeerID) {}
     
     func peerDisconnectedFromSession(peerID: MCPeerID) {
-        if let peer = Room.instance.connectedPeers[peerID], player = Room.instance.getPlayerWithUUID(peer) where player.team == Player.instance.team {
-            let alertController = UIAlertController(title: "Oops", message: SpycodesMessage.playerDisconnectedString, preferredStyle: .Alert)
-            let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in })
-            alertController.addAction(confirmAction)
-            self.presentViewController(alertController, animated: true, completion: nil)
+        if let uuid = Room.instance.connectedPeers[peerID], player = Room.instance.getPlayerWithUUID(uuid) {
+            
+            Room.instance.removePlayerWithUUID(uuid)
+            self.broadcastData()
+            
+            if player.isHost() {
+                let alertController = UIAlertController(title: SpycodesMessage.returningToLobbyString, message: SpycodesMessage.hostDisconnectedString, preferredStyle: .Alert)
+                let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
+                    self.performSegueWithIdentifier("lobby-room", sender: self)
+                })
+                alertController.addAction(confirmAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                Round.instance.abortGame()
+                self.broadcastData()
+                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerDisconnectedString)
+            }
         }
     }
     
@@ -289,13 +308,13 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             Round.instance.winningTeam = opponentTeam
             Statistics.instance.recordWinForTeam(opponentTeam!)
             self.broadcastData()
-            self.didEndGame(reason: Round.defaultLoseString)
+            self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultLoseString)
         }
         else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
             Round.instance.winningTeam = playerTeam
             Statistics.instance.recordWinForTeam(playerTeam)
             self.broadcastData()
-            self.didEndGame(reason: Round.defaultWinString)
+            self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
         }
     }
     
