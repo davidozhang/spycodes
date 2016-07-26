@@ -13,7 +13,7 @@ class SpycodesTextField: UITextField {
     }
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
-        if action == Selector("copy:") || action == Selector("selectAll:") || action == Selector("paste:") {
+        if action == #selector(NSObject.copy(_:)) || action == #selector(NSObject.select(_:)) || action == #selector(NSObject.selectAll(_:)) || action == #selector(NSObject.paste(_:)) {
             return false
         }
         return super.canPerformAction(action, withSender: sender)
