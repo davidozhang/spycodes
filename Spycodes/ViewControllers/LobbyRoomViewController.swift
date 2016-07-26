@@ -3,7 +3,9 @@ import UIKit
 
 class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, LobbyRoomViewCellDelegate {
     private let identifier = "lobby-room-view-cell"
+    
     private var refreshTimer: NSTimer?
+    private var joinGameAlertController: UIAlertController?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -16,6 +18,8 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         MultipeerManager.instance.initSession()
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(LobbyRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh lobby every second
+        
+        self.joinGameAlertController = UIAlertController(title: "Joining Room", message: SpycodesMessage.joiningRoomString, preferredStyle: .Alert)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -69,6 +73,8 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         MultipeerManager.instance.initDiscoveryInfo(["joinRoom": name])
         MultipeerManager.instance.initAdvertiser()
         MultipeerManager.instance.startAdvertiser()
+        
+        self.presentViewController(self.joinGameAlertController!, animated: true, completion: nil)
     }
     
     // MARK: MultipeerManagerDelegate
@@ -91,10 +97,10 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
             let data = NSKeyedArchiver.archivedDataWithRootObject(Player.instance)
             MultipeerManager.instance.broadcastData(data)
             
-            self.refreshTimer?.invalidate()
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.performSegueWithIdentifier("pregame-room", sender: self)
+            self.joinGameAlertController?.dismissViewControllerAnimated(true, completion: {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.performSegueWithIdentifier("pregame-room", sender: self)
+                })
             })
         }
     }

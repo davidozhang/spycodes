@@ -265,26 +265,15 @@
                                                         <action selector="onJoin:" destination="fGf-dk-B8F" eventType="touchUpInside" id="IVe-Fm-buf"/>
                                                     </connections>
                                                 </button>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="98D-iv-YqP">
-                                                    <rect key="frame" x="525" y="7" width="30" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="Svj-Oh-J4z"/>
-                                                        <constraint firstAttribute="width" constant="30" id="Xzq-n6-bU0"/>
-                                                    </constraints>
-                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="98D-iv-YqP" secondAttribute="trailing" constant="45" id="3f2-FN-vHQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="FIx-Jw-5YW" secondAttribute="trailing" constant="40" id="Fua-py-u53"/>
                                                 <constraint firstItem="FIx-Jw-5YW" firstAttribute="centerY" secondItem="vDa-dr-0HF" secondAttribute="centerY" id="SwQ-da-nHO"/>
                                                 <constraint firstItem="zag-jE-Vdk" firstAttribute="leading" secondItem="vDa-dr-0HF" secondAttribute="leading" constant="40" id="WYS-Dv-Wo2"/>
-                                                <constraint firstItem="98D-iv-YqP" firstAttribute="centerY" secondItem="vDa-dr-0HF" secondAttribute="centerY" id="f3Y-rg-gwM"/>
                                                 <constraint firstItem="zag-jE-Vdk" firstAttribute="centerY" secondItem="vDa-dr-0HF" secondAttribute="centerY" id="wGi-ZS-Jwb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="activityIndicatorView" destination="98D-iv-YqP" id="cMi-D2-YlK"/>
-                                            <outlet property="joinGameButton" destination="FIx-Jw-5YW" id="mps-IV-rgz"/>
                                             <outlet property="roomNameLabel" destination="zag-jE-Vdk" id="NpF-fK-MvL"/>
                                         </connections>
                                     </tableViewCell>

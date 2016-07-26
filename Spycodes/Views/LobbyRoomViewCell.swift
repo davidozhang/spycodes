@@ -7,23 +7,14 @@ protocol LobbyRoomViewCellDelegate {
 class LobbyRoomViewCell: UITableViewCell {
     var delegate: LobbyRoomViewCellDelegate?
     var roomName: String?
-    
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-    @IBOutlet weak var joinGameButton: UIButton!
+
     @IBOutlet weak var roomNameLabel: UILabel!
     
-    override func awakeFromNib() {
-        joinGameButton.hidden = false
-        activityIndicatorView.hidden = true
-    }
+    override func awakeFromNib() {}
     
     @IBAction func onJoin(sender: AnyObject) {
         if let roomName = roomName {
             delegate?.joinGameWithName(roomName)
         }
-
-        joinGameButton.hidden = true
-        activityIndicatorView.hidden = false
-        activityIndicatorView.startAnimating()
     }
 }
