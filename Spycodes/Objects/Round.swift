@@ -14,6 +14,7 @@ class Round: NSObject, NSCoding {
     var clue: String?
     var numberOfWords: String?
     var winningTeam: Team?
+    var abort = false
     
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
@@ -29,6 +30,8 @@ class Round: NSObject, NSCoding {
         if let winningTeam = aDecoder.decodeObjectForKey("winningTeam") as? Int {
             self.winningTeam = Team(rawValue: winningTeam)
         }
+        
+        self.abort = aDecoder.decodeBoolForKey("abort")
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
@@ -44,6 +47,8 @@ class Round: NSObject, NSCoding {
         if let winningTeam = self.winningTeam?.rawValue {
             aCoder.encodeObject(winningTeam, forKey: "winningTeam")
         }
+        
+        aCoder.encodeBool(self.abort, forKey: "abort")
     }
     
     func setStartingTeam(team: Team) {
@@ -62,5 +67,9 @@ class Round: NSObject, NSCoding {
         self.currentTeam = Team(rawValue: endingTeam.rawValue ^ 1)
         self.clue = nil
         self.numberOfWords = nil
+    }
+    
+    func abortGame() {
+        self.abort = true
     }
 }

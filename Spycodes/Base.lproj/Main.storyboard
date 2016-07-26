@@ -790,6 +790,7 @@
                         <outlet property="numberOfWordsTextField" destination="1J8-w3-IbM" id="OZo-0w-hSZ"/>
                         <outlet property="teamLabel" destination="p06-Ae-1HJ" id="NrV-HJ-nZH"/>
                         <segue destination="Isy-vz-eu5" kind="unwind" identifier="pregame-room" unwindAction="unwindToPregameRoom:" id="0dq-Te-mES"/>
+                        <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="IIH-9T-29V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfM-Nb-l9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -810,7 +811,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="M2x-yW-um3"/>
+        <segue reference="IIH-9T-29V"/>
         <segue reference="yme-7x-s1N"/>
-        <segue reference="87V-6a-5kI"/>
     </inferredMetricsTieBreakers>
 </document>
