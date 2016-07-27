@@ -20,6 +20,10 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     private var browser: MCNearbyServiceBrowser?
     private var session: MCSession?
     
+    // Status Variables
+    var advertiserOn = false
+    var browserOn = false
+    
     // MARK: Public
     func initPeerID(displayName: String) {
         self.peerID = MCPeerID.init(displayName: displayName)
@@ -40,10 +44,12 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     
     func startBrowser() {
         self.browser?.startBrowsingForPeers()
+        self.browserOn = true
     }
     
     func stopBrowser() {
         self.browser?.stopBrowsingForPeers()
+        self.browserOn = false
     }
     
     func initSession() {
@@ -68,10 +74,12 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     
     func startAdvertiser() {
         self.advertiser?.startAdvertisingPeer()
+        self.advertiserOn = true
     }
     
     func stopAdvertiser() {
         self.advertiser?.stopAdvertisingPeer()
+        self.advertiserOn = false
     }
     
     func invitePeerToSession(peerID: MCPeerID) {

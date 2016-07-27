@@ -89,6 +89,20 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private func refreshView() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
+            
+            if Player.instance.isHost() {
+                if Room.instance.players.count > 8 {
+                    MultipeerManager.instance.stopAdvertiser()
+                    MultipeerManager.instance.stopBrowser()
+                } else {
+                    if !MultipeerManager.instance.advertiserOn {
+                        MultipeerManager.instance.startAdvertiser()
+                    }
+                    if !MultipeerManager.instance.browserOn {
+                        MultipeerManager.instance.startBrowser()
+                    }
+                }
+            }
         })
     }
     
