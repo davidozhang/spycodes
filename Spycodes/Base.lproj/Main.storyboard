@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Main Menu View Controller-->
@@ -405,22 +406,38 @@
                                     </mask>
                                 </variation>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYY-fp-HQH">
+                                <rect key="frame" x="50" y="50" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="6OD-rQ-5oE"/>
+                                    <constraint firstAttribute="height" constant="50" id="Wdf-Df-5Gl"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Back"/>
+                                <connections>
+                                    <action selector="onBackPressed:" destination="oCE-jf-1fM" eventType="touchUpInside" id="t9d-Nh-ilQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="MdV-j8-107" firstAttribute="centerX" secondItem="Muy-4C-ske" secondAttribute="centerX" id="2Jb-fb-Ut9"/>
+                            <constraint firstItem="YYY-fp-HQH" firstAttribute="leading" secondItem="Muy-4C-ske" secondAttribute="leadingMargin" constant="30" id="AeL-Wa-K9c"/>
                             <constraint firstItem="4s9-er-VpV" firstAttribute="centerY" secondItem="Muy-4C-ske" secondAttribute="centerY" id="UwC-kY-pWD"/>
                             <constraint firstItem="4s9-er-VpV" firstAttribute="top" secondItem="MdV-j8-107" secondAttribute="bottom" constant="30" id="VGE-mn-yDM"/>
                             <constraint firstItem="4s9-er-VpV" firstAttribute="centerX" secondItem="Muy-4C-ske" secondAttribute="centerX" id="Y8l-Ag-BaX"/>
+                            <constraint firstItem="YYY-fp-HQH" firstAttribute="top" secondItem="O2o-J1-ZW6" secondAttribute="bottom" constant="30" id="n5F-Cc-qVu"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="userNameTextField" destination="4s9-er-VpV" id="KFG-Mj-S6u"/>
                         <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" id="7yd-xs-fux"/>
                         <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="VCz-No-0ZF"/>
+                        <segue destination="Z98-DM-ptk" kind="unwind" identifier="create-game" unwindAction="unwindToCreateRoom:" id="zGG-wX-NIX"/>
+                        <segue destination="Z98-DM-ptk" kind="unwind" identifier="main-menu" unwindAction="unwindToMainMenu:" id="XBQ-Hk-25x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sKn-Jb-gii" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Z98-DM-ptk" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1026" y="1156"/>
         </scene>

@@ -4,7 +4,11 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var roomNameTextField: SpycodesTextField!
     
     // MARK: Action
+    // MARK: Actions
+    @IBAction func unwindToCreateRoom(sender: UIStoryboardSegue) {}
+    
     @IBAction func onBackPressed(sender: AnyObject) {
+        Player.instance.setIsHost(false)
         self.performSegueWithIdentifier("main-menu", sender: self)
     }
     
@@ -30,7 +34,7 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if let name = self.roomNameTextField.text where name.characters.count >= 1 {
-            Player.instance.setHost()
+            Player.instance.setIsHost(true)
             Room.instance.name = name
             Room.instance.addPlayer(Player.instance)
             

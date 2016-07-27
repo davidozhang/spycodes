@@ -3,6 +3,16 @@ import UIKit
 class JoinGameViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userNameTextField: SpycodesTextField!
     
+    // MARK: Actions
+    @IBAction func onBackPressed(sender: AnyObject) {
+        if Player.instance.isHost() {
+            self.performSegueWithIdentifier("create-game", sender: self)
+        } else {
+            self.performSegueWithIdentifier("main-menu", sender: self)
+        }
+    }
+    
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -14,6 +24,7 @@ class JoinGameViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: UITextFieldDelegate
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         guard let text = self.userNameTextField.text else { return true }
         

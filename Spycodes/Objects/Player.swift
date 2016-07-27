@@ -54,8 +54,8 @@ class Player: NSObject, NSCoding {
         self.clueGiver = isClueGiver
     }
     
-    func setHost() {
-        self.host = true
+    func setIsHost(isHost: Bool) {
+        self.host = isHost
     }
     
     func isClueGiver() -> Bool {
