@@ -3,6 +3,12 @@ import UIKit
 class CreateGameViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var roomNameTextField: SpycodesTextField!
     
+    // MARK: Action
+    @IBAction func onBackPressed(sender: AnyObject) {
+        self.performSegueWithIdentifier("main-menu", sender: self)
+    }
+    
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -14,6 +20,7 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: UITextFieldDelegate
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         guard let text = self.roomNameTextField.text else { return true }
         
@@ -27,7 +34,7 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
             Room.instance.name = name
             Room.instance.addPlayer(Player.instance)
             
-            performSegueWithIdentifier("join-game", sender: self)
+            self.performSegueWithIdentifier("join-game", sender: self)
             return true
         }
         else {
