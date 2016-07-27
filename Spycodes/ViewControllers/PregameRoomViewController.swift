@@ -35,8 +35,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         
         if Player.instance.isHost() {
-            MultipeerManager.instance.initPeerID(Room.instance.name)
-            MultipeerManager.instance.initDiscoveryInfo(["isHost": "yes"])
+            MultipeerManager.instance.initPeerID(Room.instance.getUUID())
+            MultipeerManager.instance.initDiscoveryInfo(["room-uuid": Room.instance.getUUID(), "room-name": Room.instance.name])
             MultipeerManager.instance.initSession()
             MultipeerManager.instance.initAdvertiser()
             MultipeerManager.instance.initBrowser()

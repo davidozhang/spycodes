@@ -102,13 +102,13 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: MultipeerManagerDelegate
     func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        if let info = info where info["isHost"] == "yes" && !Lobby.instance.hasRoomWithName(peerID.displayName) {
-            Lobby.instance.addRoomWithName(peerID.displayName)
+        if let name = info?["room-name"], uuid = info?["room-uuid"] where !Lobby.instance.hasRoomWithUUID(uuid) {
+            Lobby.instance.addRoomWithNameAndUUID(name, uuid: uuid)
         }
     }
     
     func lostPeer(peerID: MCPeerID) {
-        Lobby.instance.removeRoomWithName(peerID.displayName)
+        Lobby.instance.removeRoomWithUUID(peerID.displayName)
     }
     
     // Navigate to pregame room only when preliminary sync data from host is received
