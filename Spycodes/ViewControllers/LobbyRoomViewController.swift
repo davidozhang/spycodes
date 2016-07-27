@@ -7,6 +7,8 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     private var refreshTimer: NSTimer?
     private var joinGameAlertController: UIAlertController?
     
+    private var emptyStateLabel: UILabel?
+    
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Lifecycle
@@ -20,6 +22,14 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(LobbyRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh lobby every second
         
         self.joinGameAlertController = UIAlertController(title: "Joining Room", message: SpycodesMessage.joiningRoomString, preferredStyle: .Alert)
+        
+        self.emptyStateLabel = UILabel(frame: self.tableView.frame)
+        self.emptyStateLabel?.text = "No rooms available to join."
+        self.emptyStateLabel?.font = UIFont(name: "HelveticaNeue-UltraLight", size: 24)
+        self.emptyStateLabel?.textAlignment = .Center
+        self.emptyStateLabel?.lineBreakMode = .ByWordWrapping
+        self.emptyStateLabel?.numberOfLines = 0
+        self.emptyStateLabel?.center = self.view.center
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -44,6 +54,12 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     private func refreshView() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
+            if self.tableView.numberOfRowsInSection(0) == 0 {
+                self.tableView.backgroundView = self.emptyStateLabel
+            }
+            else {
+                self.tableView.backgroundView = nil
+            }
         })
     }
     
