@@ -24,29 +24,59 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBi-9c-KRm" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="242" y="379" width="115" height="41"/>
+                                <rect key="frame" x="200" y="360" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1hV-px-VJN"/>
+                                    <constraint firstAttribute="width" constant="200" id="KKg-D2-Ocd"/>
+                                    <constraint firstAttribute="height" constant="50" id="kwe-yL-DaK"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Join Game">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1hV-px-VJN"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="onJoinGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F7w-v0-i5q"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTx-L1-vkT" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="238" y="435" width="125" height="41"/>
+                                <rect key="frame" x="200.5" y="425" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="aL6-xJ-woz"/>
+                                    <constraint firstAttribute="height" constant="50" id="iT4-Gb-x6N"/>
+                                    <constraint firstAttribute="width" constant="200" id="l13-3g-7B1"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Instructions">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aL6-xJ-woz"/>
+                                    </mask>
+                                </variation>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2i2-Pu-U1X" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="253" y="491" width="95" height="49"/>
+                                <rect key="frame" x="200.5" y="490" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="DVW-wZ-gSh"/>
+                                    <constraint firstAttribute="height" constant="50" id="Kdt-Kb-iN8"/>
+                                    <constraint firstAttribute="height" constant="40" id="UE3-cr-lOB"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="30" maxY="10"/>
                                 <state key="normal" title="About">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="UE3-cr-lOB"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="onAbout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Mt-HW-rLm"/>
                                 </connections>
@@ -59,11 +89,21 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdj-Hd-5OI" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="230" y="323" width="141" height="41"/>
+                                <rect key="frame" x="200" y="295" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Ofo-gX-pWl"/>
+                                    <constraint firstAttribute="width" constant="200" id="Oq6-qj-m0l"/>
+                                    <constraint firstAttribute="height" constant="50" id="cqF-Tx-JMG"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Create Game">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Ofo-gX-pWl"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="onCreateGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0f2-EE-nST"/>
                                 </connections>
