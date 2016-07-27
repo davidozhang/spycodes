@@ -8,20 +8,24 @@ class Room: NSObject, NSCoding {
     var players = [Player]()
     var connectedPeers = [MCPeerID: String]()
     
+    private var uuid: String
+    
     override init() {
         self.name = "Default"
+        self.uuid = NSUUID().UUIDString
     }
     
-    convenience init(name: String, players: [Player], connectedPeers: [MCPeerID: String]) {
+    convenience init(name: String, uuid: String, players: [Player], connectedPeers: [MCPeerID: String]) {
         self.init()
         self.name = name
+        self.uuid = uuid
         self.players = players
         self.connectedPeers = connectedPeers
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        if let name = aDecoder.decodeObjectForKey("name") as? String, players = aDecoder.decodeObjectForKey("players") as? [Player], connectedPeers = aDecoder.decodeObjectForKey("connectedPeers") as? [MCPeerID: String] {
-            self.init(name: name, players: players, connectedPeers: connectedPeers)
+        if let name = aDecoder.decodeObjectForKey("name") as? String, uuid = aDecoder.decodeObjectForKey("uuid") as? String, players = aDecoder.decodeObjectForKey("players") as? [Player], connectedPeers = aDecoder.decodeObjectForKey("connectedPeers") as? [MCPeerID: String] {
+            self.init(name: name, uuid: uuid, players: players, connectedPeers: connectedPeers)
         } else {
             self.init()
         }
@@ -29,8 +33,17 @@ class Room: NSObject, NSCoding {
     
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.name, forKey: "name")
+        aCoder.encodeObject(self.uuid, forKey: "uuid")
         aCoder.encodeObject(self.players, forKey: "players")
         aCoder.encodeObject(self.connectedPeers, forKey: "connectedPeers")
+    }
+    
+    func getUUID() -> String {
+        return self.uuid
+    }
+    
+    func setUUID(uuid: String) {
+        self.uuid = uuid
     }
     
     func addPlayer(player: Player) {
