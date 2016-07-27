@@ -287,7 +287,7 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a77-Tt-U0Q">
-                                <rect key="frame" x="18" y="20" width="50" height="50"/>
+                                <rect key="frame" x="30" y="30" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="H1F-Ia-D2A"/>
                                     <constraint firstAttribute="height" constant="50" id="aCy-wb-rJo"/>
@@ -300,8 +300,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="a77-Tt-U0Q" firstAttribute="top" secondItem="zqo-zb-qGl" secondAttribute="top" constant="20" id="AGu-Ta-rJ2"/>
-                            <constraint firstItem="a77-Tt-U0Q" firstAttribute="leading" secondItem="zqo-zb-qGl" secondAttribute="leading" constant="18" id="B9q-SQ-2nE"/>
+                            <constraint firstItem="a77-Tt-U0Q" firstAttribute="top" secondItem="zqo-zb-qGl" secondAttribute="top" constant="30" id="AGu-Ta-rJ2"/>
+                            <constraint firstItem="a77-Tt-U0Q" firstAttribute="leading" secondItem="zqo-zb-qGl" secondAttribute="leading" constant="30" id="B9q-SQ-2nE"/>
                             <constraint firstItem="k1e-zY-xvI" firstAttribute="centerX" secondItem="zqo-zb-qGl" secondAttribute="centerX" id="OnE-EU-H9E"/>
                             <constraint firstItem="k1e-zY-xvI" firstAttribute="centerY" secondItem="zqo-zb-qGl" secondAttribute="centerY" id="pdq-uV-9PA"/>
                         </constraints>
