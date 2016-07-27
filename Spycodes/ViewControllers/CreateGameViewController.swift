@@ -5,10 +5,11 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Action
     // MARK: Actions
-    @IBAction func unwindToCreateRoom(sender: UIStoryboardSegue) {}
+    @IBAction func unwindToCreateGame(sender: UIStoryboardSegue) {}
     
     @IBAction func onBackPressed(sender: AnyObject) {
         Player.instance.setIsHost(false)
+        Room.instance.players.removeAll()
         self.performSegueWithIdentifier("main-menu", sender: self)
     }
     
@@ -36,7 +37,10 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
         if let name = self.roomNameTextField.text where name.characters.count >= 1 {
             Player.instance.setIsHost(true)
             Room.instance.name = name
-            Room.instance.addPlayer(Player.instance)
+            
+            if Room.instance.getPlayerWithUUID(Player.instance.getUUID()) == nil {
+                Room.instance.addPlayer(Player.instance)
+            }
             
             self.performSegueWithIdentifier("join-game", sender: self)
             return true

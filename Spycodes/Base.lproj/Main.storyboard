@@ -432,8 +432,8 @@
                         <outlet property="userNameTextField" destination="4s9-er-VpV" id="KFG-Mj-S6u"/>
                         <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" id="7yd-xs-fux"/>
                         <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="VCz-No-0ZF"/>
-                        <segue destination="Z98-DM-ptk" kind="unwind" identifier="create-game" unwindAction="unwindToCreateRoom:" id="zGG-wX-NIX"/>
                         <segue destination="Z98-DM-ptk" kind="unwind" identifier="main-menu" unwindAction="unwindToMainMenu:" id="XBQ-Hk-25x"/>
+                        <segue destination="Z98-DM-ptk" kind="unwind" identifier="create-game" unwindAction="unwindToCreateGame:" id="r71-v7-SSI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sKn-Jb-gii" userLabel="First Responder" sceneMemberID="firstResponder"/>
