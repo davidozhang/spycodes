@@ -21,6 +21,7 @@
 		63A04D111D1A5713005A2914 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D0F1D1A5713005A2914 /* LaunchScreen.storyboard */; };
 		63A04D1D1D1A7F37005A2914 /* SpycodesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1C1D1A7F37005A2914 /* SpycodesButton.swift */; };
 		63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */; };
+		63AB64CD1D4880A600C4FF22 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB64CC1D4880A600C4FF22 /* AboutViewController.swift */; };
 		63CA90CA1D4280CC0027CA80 /* Spycodes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63CA90C81D4280CC0027CA80 /* Spycodes.xcdatamodeld */; };
 		63CB4F081D3CB3C300211D3A /* GameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F071D3CB3C300211D3A /* GameRoomViewCell.swift */; };
 		63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F091D3CB88D00211D3A /* Card.swift */; };
@@ -57,6 +58,7 @@
 		63A04D121D1A5713005A2914 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63A04D1C1D1A7F37005A2914 /* SpycodesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesButton.swift; path = Extensions/SpycodesButton.swift; sourceTree = "<group>"; };
 		63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainMenuViewController.swift; path = ViewControllers/MainMenuViewController.swift; sourceTree = "<group>"; };
+		63AB64CC1D4880A600C4FF22 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewController.swift; path = ViewControllers/AboutViewController.swift; sourceTree = "<group>"; };
 		63CA90C91D4280CC0027CA80 /* Codenames.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Codenames.xcdatamodel; sourceTree = "<group>"; };
 		63CB4F071D3CB3C300211D3A /* GameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameRoomViewCell.swift; path = Views/GameRoomViewCell.swift; sourceTree = "<group>"; };
 		63CB4F091D3CB88D00211D3A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Objects/Card.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		63A04D1A1D1A7F25005A2914 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				63AB64CC1D4880A600C4FF22 /* AboutViewController.swift */,
 				63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */,
 				637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */,
 				63FDED311D2648D600142780 /* JoinGameViewController.swift */,
@@ -288,6 +291,7 @@
 				63FDED351D264BE800142780 /* Player.swift in Sources */,
 				63A04D1D1D1A7F37005A2914 /* SpycodesButton.swift in Sources */,
 				63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */,
+				63AB64CD1D4880A600C4FF22 /* AboutViewController.swift in Sources */,
 				63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */,
 				63FDED321D2648D600142780 /* JoinGameViewController.swift in Sources */,
 			);

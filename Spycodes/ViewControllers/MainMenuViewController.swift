@@ -1,7 +1,7 @@
 import UIKit
 
 class MainMenuViewController: UIViewController {
-
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -10,12 +10,19 @@ class MainMenuViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
+    // MARK: Actions
+    @IBAction func unwindToMainMenu(sender: UIStoryboardSegue) {}
+    
     @IBAction func onCreateGame(sender: AnyObject) {
-        performSegueWithIdentifier("create-game", sender: self)
+        self.performSegueWithIdentifier("create-game", sender: self)
     }
 
     @IBAction func onJoinGame(sender: AnyObject) {
-        performSegueWithIdentifier("join-game", sender: self)
+        self.performSegueWithIdentifier("join-game", sender: self)
+    }
+    
+    @IBAction func onAbout(sender: AnyObject) {
+        self.performSegueWithIdentifier("about", sender: self)
     }
 }
 
