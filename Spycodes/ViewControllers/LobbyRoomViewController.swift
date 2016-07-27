@@ -11,6 +11,13 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func onBackPressed(sender: AnyObject) {
+        Player.instance.setIsHost(false)
+        Player.instance.setIsClueGiver(false)
+        self.performSegueWithIdentifier("main-menu", sender: self)
+    }
+    
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
