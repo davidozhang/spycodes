@@ -140,6 +140,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "lobby-room" {
             Room.instance.connectedPeers.removeAll()
+            Room.instance.players.removeAll()
             MultipeerManager.instance.terminate()
         }
     }
