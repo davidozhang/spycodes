@@ -6,7 +6,7 @@ class Round: NSObject, NSCoding {
     static let defaultClueGiverClue = "Enter Clue"
     static let defaultNonTurnClue = "Not Your Turn"
     static let defaultIsTurnClue = "Waiting for Clue"
-    static let defaultNumberOfWords = "∞"
+    static let defaultNumberOfWords = "#"
     static let defaultLoseString = "Your team lost!"
     static let defaultWinString = "Your team won!"
     
