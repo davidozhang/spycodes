@@ -97,31 +97,26 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 return  // Cluegiver is editing the clue/number of words
             }
             
-            if Round.instance.isClueSet() {
+            if Round.instance.isClueSet() && Round.instance.isNumberOfWordsSet() {
                 self.clueTextField.text = Round.instance.clue
+                self.numberOfWordsTextField.text = Round.instance.numberOfWords
+                
+                self.clueTextField.enabled = false
+                self.numberOfWordsTextField.enabled = false
             }
             else {
                 if Player.instance.isClueGiver() {
                     self.clueTextField.text = Round.defaultClueGiverClue
+                    self.numberOfWordsTextField.text = Round.defaultNumberOfWords
+                    
                     self.confirmButton.hidden = false
-                    if Round.instance.isClueSet() && Round.instance.isNumberOfWordsSet() {
-                        self.clueTextField.enabled = false
-                        self.numberOfWordsTextField.enabled = false
-                    } else {
-                        self.clueTextField.enabled = true
-                        self.numberOfWordsTextField.enabled = true
-                    }
+                    self.clueTextField.enabled = true
+                    self.numberOfWordsTextField.enabled = true
                 }
                 else {
-                   self.clueTextField.text = Round.defaultIsTurnClue
+                    self.clueTextField.text = Round.defaultIsTurnClue
+                    self.numberOfWordsTextField.text = Round.defaultNumberOfWords
                 }
-            }
-            
-            if Round.instance.isNumberOfWordsSet() {
-                self.numberOfWordsTextField.text = Round.instance.numberOfWords
-            }
-            else {
-                self.numberOfWordsTextField.text = Round.defaultNumberOfWords
             }
         } else {
             self.clueTextField.text = Round.defaultNonTurnClue
@@ -327,6 +322,19 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         return UIEdgeInsetsMake(edgeInset, edgeInset, edgeInset, edgeInset)
     }
     
+    // MARK: Touch
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesBegan(touches, withEvent: event)
+        
+        if let allTouches = event?.allTouches(), touch = allTouches.first {
+            if self.clueTextField.isFirstResponder() && touch.view != self.clueTextField {
+                self.clueTextField.resignFirstResponder()
+            } else if self.numberOfWordsTextField.isFirstResponder() && touch.view != self.numberOfWordsTextField {
+                self.numberOfWordsTextField.resignFirstResponder()
+            }
+        }
+    }
+    
     // MARK: UITextFieldDelegate
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if Player.instance.isClueGiver() && Round.instance.currentTeam == Player.instance.team {
@@ -336,12 +344,55 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         }
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if textField == self.clueTextField {
+            if textField.text == Round.defaultClueGiverClue {
+                textField.text = ""
+                textField.placeholder = Round.defaultClueGiverClue
+            }
+        } else if textField == self.numberOfWordsTextField {
+            if textField.text == Round.defaultNumberOfWords {
+                textField.text = ""
+                textField.placeholder = Round.defaultNumberOfWords
+            }
+        }
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        textField.placeholder = nil
+        return true
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField.text == "" {
+            if textField == self.clueTextField {
+                self.clueTextField.text = Round.defaultClueGiverClue
+            } else if textField == self.numberOfWordsTextField {
+                self.numberOfWordsTextField.text = Round.defaultNumberOfWords
+            }
+        }
+    }
+    
+    func textFieldShouldClear(textField: UITextField) -> Bool {
+        if textField == self.clueTextField {
+            textField.placeholder = Round.defaultClueGiverClue
+        } else if textField == self.numberOfWordsTextField {
+            textField.placeholder = Round.defaultNumberOfWords
+        }
+        return true
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == self.clueTextField && textField.text?.characters.count >= 1 {
+            Round.instance.clue = self.clueTextField.text
             self.numberOfWordsTextField.becomeFirstResponder()
-        } else if textField == self.numberOfWordsTextField {
+        } else if textField == self.numberOfWordsTextField && textField.text?.characters.count >= 1 {
+            Round.instance.numberOfWords = self.numberOfWordsTextField.text
             self.numberOfWordsTextField.resignFirstResponder()
-            self.didConfirm()
+            
+            if Round.instance.isClueSet() {
+                self.didConfirm()
+            }
         }
         
         return true
