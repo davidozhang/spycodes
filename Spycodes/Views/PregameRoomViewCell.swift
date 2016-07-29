@@ -1,9 +1,7 @@
 import UIKit
 
 protocol PregameRoomViewCellDelegate {
-    func editPlayerAtIndex(index: Int)
-    func removePlayerAtIndex(index: Int)
-    func teamDidChange(team: Bool)
+    func teamDidChangeAtIndex(index: Int, team: Bool)
 }
 
 class PregameRoomViewCell: UITableViewCell {
@@ -13,9 +11,8 @@ class PregameRoomViewCell: UITableViewCell {
     var index: Int?
     var delegate: PregameRoomViewCellDelegate?
     
-    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var clueGiverImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var removeButton: UIButton!
     @IBOutlet weak var teamSwitch: UISwitch!
     
     override func awakeFromNib() {
@@ -25,19 +22,10 @@ class PregameRoomViewCell: UITableViewCell {
         self.teamSwitch.backgroundColor = self.offColor
     }
     
-    @IBAction func onRemove(sender: AnyObject) {
-        if let index = index {
-            delegate?.removePlayerAtIndex(index)
-        }
-    }
-    
-    @IBAction func onEdit(sender: AnyObject) {
-        if let index = index {
-            delegate?.editPlayerAtIndex(index)
-        }
-    }
-    
     @IBAction func switchToggled(sender: AnyObject) {
-        delegate?.teamDidChange(teamSwitch.on)
+        if let index = self.index {
+            delegate?.teamDidChangeAtIndex(index, team: teamSwitch.on)
+        }
+        
     }
 }

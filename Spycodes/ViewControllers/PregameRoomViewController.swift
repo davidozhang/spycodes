@@ -1,14 +1,12 @@
 import MultipeerConnectivity
 import UIKit
 
-class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
+class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
     private let identifier = "pregame-room-view-cell"
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
-    
-    private var editNameTextField: UITextField?
-    
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var startGame: SpycodesButton!
@@ -47,7 +45,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             self.startGame.hidden = true
         }
         
-        roomNameLabel.text = Room.instance.name
+        self.roomNameLabel.text = Room.instance.name
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -158,32 +156,17 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             cell.teamSwitch.on = false
         }
         
-        // Only host player can remove players
-        if Player.instance.isHost() {
-            cell.removeButton.hidden = false
-        } else {
-            cell.removeButton.hidden = true
-        }
-        
-        if Player.instance == playerAtIndex {
-            cell.removeButton.hidden = true
-            cell.editButton.hidden = false
+        if Player.instance.isHost() || Player.instance == playerAtIndex {
             cell.teamSwitch.enabled = true
         } else {
-            cell.editButton.hidden = true
             cell.teamSwitch.enabled = false
         }
         
         if playerAtIndex.isClueGiver() {
-            if playerAtIndex.team == Team.Red {
-                cell.contentView.backgroundColor = UIColor.spycodesLightRedColor()
-            }
-            else {
-                cell.contentView.backgroundColor = UIColor.spycodesLightBlueColor()
-            }
+            cell.clueGiverImage.hidden = false
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 32)
         } else {
-            cell.contentView.backgroundColor = UIColor.clearColor()
+            cell.clueGiverImage.hidden = true
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 32)
         }
         
@@ -197,9 +180,15 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let playerAtIndex = Room.instance.players[indexPath.row]
         let team = playerAtIndex.team
+        
+        if !Player.instance.isHost() && Player.instance.getUUID() != playerAtIndex.getUUID() {
+            return
+        }
+        
         if let clueGiverUUID = Room.instance.getClueGiverUUIDForTeam(team) {
             Room.instance.getPlayerWithUUID(clueGiverUUID)?.setIsClueGiver(false)
         }
+        
         Room.instance.players[indexPath.row].setIsClueGiver(!playerAtIndex.isClueGiver())
         self.broadcastData()
     }
@@ -275,45 +264,16 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     // MARK: PregameRoomViewCellDelegate
-    func removePlayerAtIndex(index: Int) {
-        Room.instance.removePlayerAtIndex(index)
-    }
-    
-    func editPlayerAtIndex(index: Int) {
-        let alertController = UIAlertController(title: "Edit Name", message: "Enter a different name", preferredStyle: .Alert)
-        alertController.addTextFieldWithConfigurationHandler { (textField: UITextField) in
-            self.editNameTextField = textField
-            textField.delegate = self
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alertAction: UIAlertAction) in }
-        let confirmAction = UIAlertAction(title: "OK", style: .Default) { (alertAction: UIAlertAction) in
-            if let newName = self.editNameTextField?.text {
-                Room.instance.setNameOfPlayerAtIndex(index, name: newName)
-                if (!Player.instance.isHost()) {
-                    self.broadcastData()
-                }
-            }
-        }
-        alertController.addAction(cancelAction)
-        alertController.addAction(confirmAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-    func teamDidChange(redTeam: Bool) {
-        if redTeam {
-            Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.team = Team.Red
-        } else {
-            Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.team = Team.Blue
-        }
-        Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.setIsClueGiver(false)
-        self.broadcastData()
-    }
-    
-    // MARK: UITextFieldDelegate
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        guard let text = self.editNameTextField?.text else { return true }
+    func teamDidChangeAtIndex(index: Int, team redTeam: Bool) {
+        let playerAtIndex = Room.instance.players[index]
         
-        let length = text.characters.count + string.characters.count - range.length
-        return length <= 8
+        if redTeam {
+            Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.team = Team.Red
+        } else {
+            Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.team = Team.Blue
+        }
+        
+        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsClueGiver(false)
+        self.broadcastData()
     }
 }
