@@ -20,6 +20,9 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spycodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwp-LV-dpu">
                                 <rect key="frame" x="202" y="188" width="196" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="RIg-4C-8ag"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="48"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -135,6 +138,9 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="aboutButtonBottomConstraint" destination="sLn-KO-VZf" id="qP5-7F-CVR"/>
+                        <outlet property="spycodesIconTopConstraint" destination="Xxl-Tb-xMF" id="uCP-45-yC7"/>
+                        <outlet property="spycodesLabelHeightConstraint" destination="RIg-4C-8ag" id="Qzr-N1-zCD"/>
                         <segue destination="os2-Wc-CLV" kind="presentation" identifier="create-game" modalTransitionStyle="flipHorizontal" id="7WM-P4-SMa"/>
                         <segue destination="oCE-jf-1fM" kind="presentation" identifier="join-game" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
                         <segue destination="a1u-5S-T8S" kind="presentation" identifier="about" modalTransitionStyle="flipHorizontal" id="hYk-y3-ogQ"/>
