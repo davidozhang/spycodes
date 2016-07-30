@@ -31,10 +31,9 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         self.joinGameAlertController = UIAlertController(title: "Joining Room", message: SpycodesMessage.joiningRoomString, preferredStyle: .Alert)
         
         self.emptyStateLabel = UILabel(frame: self.tableView.frame)
-        self.emptyStateLabel?.text = "No rooms available to join."
+        self.emptyStateLabel?.text = "Rooms created will show here.\nMake sure Wifi is enabled."
         self.emptyStateLabel?.font = UIFont(name: "HelveticaNeue-UltraLight", size: 24)
         self.emptyStateLabel?.textAlignment = .Center
-        self.emptyStateLabel?.lineBreakMode = .ByWordWrapping
         self.emptyStateLabel?.numberOfLines = 0
         self.emptyStateLabel?.center = self.view.center
     }
