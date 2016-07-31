@@ -699,6 +699,9 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="084-kN-Fki" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
                                 <rect key="frame" x="240" y="529" width="121" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="nTZ-rc-cUK"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Start Game">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -727,11 +730,11 @@
                                 <constraints>
                                     <constraint firstItem="3wE-c8-LD8" firstAttribute="top" secondItem="GE8-dk-J4b" secondAttribute="top" constant="5" id="1Mi-5C-UTU"/>
                                     <constraint firstItem="3wE-c8-LD8" firstAttribute="leading" secondItem="vGW-o9-03c" secondAttribute="trailing" constant="8" id="3tN-M8-7j1"/>
+                                    <constraint firstAttribute="height" constant="41" id="8i0-yZ-nMg"/>
                                     <constraint firstItem="vGW-o9-03c" firstAttribute="leading" secondItem="GE8-dk-J4b" secondAttribute="leading" id="MDI-DL-Fpw"/>
                                     <constraint firstAttribute="trailing" secondItem="3wE-c8-LD8" secondAttribute="trailing" constant="5" id="NhC-NT-VYG"/>
                                     <constraint firstItem="3wE-c8-LD8" firstAttribute="centerY" secondItem="vGW-o9-03c" secondAttribute="centerY" id="PjB-Tt-foJ"/>
                                     <constraint firstAttribute="bottom" secondItem="3wE-c8-LD8" secondAttribute="bottom" constant="5" id="nq7-Ox-gDR"/>
-                                    <constraint firstAttribute="height" constant="41" id="qup-3G-lUZ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kCT-FC-Wj4" userLabel="Statistics Dashboard View">
@@ -774,6 +777,7 @@
                                     <constraint firstAttribute="bottom" secondItem="rTc-OY-I4E" secondAttribute="bottom" id="6lI-8I-fPM"/>
                                     <constraint firstItem="Crb-fR-RGp" firstAttribute="leading" secondItem="kCT-FC-Wj4" secondAttribute="leading" id="BBl-yo-NFy"/>
                                     <constraint firstItem="hqm-Yg-Dg8" firstAttribute="leading" secondItem="Sm4-Kb-8OD" secondAttribute="trailing" constant="10" id="DCK-Mu-Ejz"/>
+                                    <constraint firstAttribute="height" constant="32" id="MIa-n5-bvl"/>
                                     <constraint firstItem="rTc-OY-I4E" firstAttribute="leading" secondItem="kCT-FC-Wj4" secondAttribute="leading" id="U7P-VI-oQD"/>
                                     <constraint firstItem="Sm4-Kb-8OD" firstAttribute="leading" secondItem="rTc-OY-I4E" secondAttribute="trailing" constant="8" id="UKe-ll-yvt"/>
                                     <constraint firstItem="rTc-OY-I4E" firstAttribute="centerY" secondItem="Crb-fR-RGp" secondAttribute="centerY" id="WX4-es-rfo"/>
@@ -837,12 +841,14 @@
                     <connections>
                         <outlet property="blueStatisticsLabel" destination="6rK-DA-NwM" id="JLX-CR-11A"/>
                         <outlet property="minigameToggle" destination="3wE-c8-LD8" id="KBa-U5-Qqa"/>
-                        <outlet property="minigameToggleView" destination="GE8-dk-J4b" id="zH0-NP-e2s"/>
-                        <outlet property="minigameToggleViewHeightConstraint" destination="qup-3G-lUZ" id="kzO-yb-XjE"/>
+                        <outlet property="minigameToggleView" destination="GE8-dk-J4b" id="9H4-YN-13V"/>
+                        <outlet property="minigameToggleViewHeightConstraint" destination="8i0-yZ-nMg" id="mmC-rk-ofv"/>
                         <outlet property="redStatisticsLabel" destination="Sm4-Kb-8OD" id="gyb-7H-6rN"/>
                         <outlet property="roomNameLabel" destination="Mc1-YN-1oP" id="UVj-Yy-Wno"/>
                         <outlet property="startGame" destination="084-kN-Fki" id="ryC-Vh-gDH"/>
+                        <outlet property="startGameButtonHeightConstraint" destination="nTZ-rc-cUK" id="FzE-gm-f9g"/>
                         <outlet property="statisticsDashboardView" destination="kCT-FC-Wj4" id="odz-nY-QRi"/>
+                        <outlet property="statisticsDashboardViewHeightConstraint" destination="MIa-n5-bvl" id="3KY-o7-JDT"/>
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
                         <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="87V-6a-5kI"/>
                         <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-room" id="pzx-vK-usD"/>

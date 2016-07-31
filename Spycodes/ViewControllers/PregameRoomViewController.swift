@@ -3,8 +3,9 @@ import UIKit
 
 class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
     private let identifier = "pregame-room-view-cell"
-    private let minigameToggleViewDefaultHeight = 41
-    private let statisticsDashboardDefaultHeight = 30
+    private let startGameButtonDefaultHeight: CGFloat = 50
+    private let minigameToggleViewDefaultHeight: CGFloat = 41
+    private let statisticsDashboardDefaultHeight: CGFloat = 32
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -17,6 +18,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var minigameToggle: UISwitch!
     
     @IBOutlet weak var minigameToggleViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var startGameButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statisticsDashboardViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var minigameToggleView: UIView!
     @IBOutlet weak var statisticsDashboardView: UIView!
@@ -59,9 +62,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             GameMode.instance.mode = GameMode.Mode.RegularGame
             
             self.startGame.hidden = false
+            self.startGameButtonHeightConstraint.constant = self.startGameButtonDefaultHeight
         }
         else {
             self.startGame.hidden = true
+            self.startGameButtonHeightConstraint.constant = 0
         }
         
         self.roomNameLabel.text = Room.instance.name
@@ -86,6 +91,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             // Instantiate next game's card collection and round
             CardCollection.instance = CardCollection()
             Round.instance = Round()
+        } else {
+            // Prevent the flicker on first load
+            GameMode.instance.mode = GameMode.Mode.RegularGame
         }
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(PregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
         
@@ -112,6 +120,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
             self.checkRoomSize()
+            self.updateMinigameToggle()
+            self.updateStatisticsDashboard()
         })
     }
     
@@ -163,9 +173,17 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     private func updateMinigameToggle() {
         if !Player.instance.isHost() {
-            self.minigameToggleView.hidden = true
-            self.minigameToggleViewHeightConstraint.constant = 0
-            return
+            if GameMode.instance.mode == GameMode.Mode.RegularGame {    // Don't show the minigame indicator if it is regular game
+                self.minigameToggleView.hidden = true
+                self.minigameToggleViewHeightConstraint.constant = 0
+                return
+            } else {
+                self.minigameToggleView.hidden = false
+                self.minigameToggleViewHeightConstraint.constant = self.minigameToggleViewDefaultHeight
+            }
+            self.minigameToggle.enabled = false
+        } else {
+            self.minigameToggle.enabled = true
         }
         
         if GameMode.instance.mode == GameMode.Mode.MiniGame {
@@ -176,6 +194,14 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     private func updateStatisticsDashboard() {
+        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+            self.statisticsDashboardView.hidden = true
+            self.statisticsDashboardViewHeightConstraint.constant = 0
+            return
+        } else {
+            self.statisticsDashboardView.hidden = false
+            self.statisticsDashboardViewHeightConstraint.constant = self.statisticsDashboardDefaultHeight
+        }
         if let redNumberOfWins = Statistics.instance.getStatistics()[Team.Red], blueNumberOfWins = Statistics.instance.getStatistics()[Team.Blue] {
             self.redStatisticsLabel.text = String(redNumberOfWins)
             self.blueStatisticsLabel.text = String(blueNumberOfWins)
@@ -206,16 +232,14 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         
         if Player.instance.isHost() || Player.instance == playerAtIndex {
             cell.teamSwitch.enabled = true
+            
+            if GameMode.instance.mode == GameMode.Mode.MiniGame {
+                cell.teamSwitch.enabled = false
+            }
         } else {
             cell.teamSwitch.enabled = false
         }
-        
-        if GameMode.instance.mode == GameMode.Mode.RegularGame {
-            cell.teamSwitch.enabled = true
-        } else {
-            cell.teamSwitch.enabled = false
-        }
-        
+
         if playerAtIndex.isClueGiver() {
             cell.clueGiverImage.hidden = false
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 32)
@@ -235,7 +259,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         let playerAtIndex = Room.instance.players[indexPath.row]
         let team = playerAtIndex.team
         
-        if !Player.instance.isHost() && Player.instance.getUUID() != playerAtIndex.getUUID() {
+        if GameMode.instance.mode == GameMode.Mode.RegularGame && !Player.instance.isHost() && Player.instance.getUUID() != playerAtIndex.getUUID() {
             return
         }
         
