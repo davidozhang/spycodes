@@ -65,6 +65,11 @@ class Player: NSObject, NSCoding {
     func isHost() -> Bool {
         return self.host
     }
+    
+    func reset() {
+        self.team = Team.Red
+        self.clueGiver = false
+    }
 }
 
 func ==(left: Player, right: Player) -> Bool {

@@ -28,6 +28,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func minigameToggleChanged(sender: AnyObject) {
         if minigameToggle.on {
             GameMode.instance.mode = GameMode.Mode.MiniGame
+            Statistics.instance.resetStatistics()
         } else {
             GameMode.instance.mode = GameMode.Mode.RegularGame
         }
@@ -132,6 +133,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         
         data = NSKeyedArchiver.archivedDataWithRootObject(GameMode.instance)
         MultipeerManager.instance.broadcastData(data)
+        
+        data = NSKeyedArchiver.archivedDataWithRootObject(Statistics.instance)
+        MultipeerManager.instance.broadcastData(data)
     }
     
     private func goToGame() {
@@ -211,8 +215,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "lobby-room" {
-            Room.instance.connectedPeers.removeAll()
-            Room.instance.players.removeAll()
             MultipeerManager.instance.terminate()
         }
     }
@@ -320,6 +322,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
             Round.instance = round
             self.goToGame()
+        }
+        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
+            Statistics.instance = statistics
         }
     }
     

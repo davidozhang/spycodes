@@ -43,6 +43,10 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         
         MultipeerManager.instance.delegate = self
         MultipeerManager.instance.startBrowser()
+        
+        Player.instance.reset()
+        Room.instance.connectedPeers.removeAll()
+        Room.instance.players.removeAll()
     }
     
     override func viewWillDisappear(animated: Bool) {
