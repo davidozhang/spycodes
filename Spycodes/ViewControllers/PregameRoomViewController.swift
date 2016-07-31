@@ -3,6 +3,8 @@ import UIKit
 
 class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
     private let identifier = "pregame-room-view-cell"
+    private let minigameToggleViewDefaultHeight = 41
+    private let statisticsDashboardDefaultHeight = 30
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -12,13 +14,28 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var startGame: SpycodesButton!
     @IBOutlet weak var redStatisticsLabel: UILabel!
     @IBOutlet weak var blueStatisticsLabel: UILabel!
+    @IBOutlet weak var minigameToggle: UISwitch!
+    
+    @IBOutlet weak var minigameToggleViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var minigameToggleView: UIView!
+    @IBOutlet weak var statisticsDashboardView: UIView!
+    
+    // MARK: Actions
+    @IBAction func minigameToggleChanged(sender: AnyObject) {
+        if minigameToggle.on {
+            GameMode.instance.mode = GameMode.Mode.MiniGame
+        } else {
+            GameMode.instance.mode = GameMode.Mode.RegularGame
+        }
+        
+        self.broadcastData()
+    }
     
     @IBAction func unwindToPregameRoom(segue: UIStoryboardSegue) {}
     
     @IBAction func onStartGame(sender: AnyObject) {
         if Room.instance.canStartGame() {
-            CardCollection.instance = CardCollection()
-            Round.instance = Round()
             self.goToGame()
         } else {
             let alertController = UIAlertController(title: "Cannot Start Game", message: SpycodesMessage.cannotStartGameString, preferredStyle: .Alert)
@@ -38,6 +55,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             MultipeerManager.instance.initSession()
             MultipeerManager.instance.initAdvertiser()
             MultipeerManager.instance.initBrowser()
+            
+            GameMode.instance.mode = GameMode.Mode.RegularGame
             
             self.startGame.hidden = false
         }
@@ -63,10 +82,15 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             }
             
             self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
+            
+            // Instantiate next game's card collection and round
+            CardCollection.instance = CardCollection()
+            Round.instance = Round()
         }
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(PregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
         
-        self.updateDashboard()
+        self.updateMinigameToggle()
+        self.updateStatisticsDashboard()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -87,12 +111,16 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private func refreshView() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
+            self.checkRoomSize()
         })
     }
     
     @objc
     private func broadcastData() {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+        var data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+        MultipeerManager.instance.broadcastData(data)
+        
+        data = NSKeyedArchiver.archivedDataWithRootObject(GameMode.instance)
         MultipeerManager.instance.broadcastData(data)
     }
     
@@ -113,7 +141,41 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    private func updateDashboard() {
+    private func checkRoomSize() {
+        if !Player.instance.isHost() {
+            return
+        }
+        
+        let maxRoomSize = GameMode.instance.mode == GameMode.Mode.RegularGame ? 8 : 3
+        
+        if Room.instance.players.count >= maxRoomSize {
+            MultipeerManager.instance.stopAdvertiser()
+            MultipeerManager.instance.stopBrowser()
+        } else {
+            if !MultipeerManager.instance.advertiserOn {
+                MultipeerManager.instance.startAdvertiser()
+            }
+            if !MultipeerManager.instance.browserOn {
+                MultipeerManager.instance.startBrowser()
+            }
+        }
+    }
+    
+    private func updateMinigameToggle() {
+        if !Player.instance.isHost() {
+            self.minigameToggleView.hidden = true
+            self.minigameToggleViewHeightConstraint.constant = 0
+            return
+        }
+        
+        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+            self.minigameToggle.on = true
+        } else {
+            self.minigameToggle.on = false
+        }
+    }
+    
+    private func updateStatisticsDashboard() {
         if let redNumberOfWins = Statistics.instance.getStatistics()[Team.Red], blueNumberOfWins = Statistics.instance.getStatistics()[Team.Blue] {
             self.redStatisticsLabel.text = String(redNumberOfWins)
             self.blueStatisticsLabel.text = String(blueNumberOfWins)
@@ -143,6 +205,12 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         if Player.instance.isHost() || Player.instance == playerAtIndex {
+            cell.teamSwitch.enabled = true
+        } else {
+            cell.teamSwitch.enabled = false
+        }
+        
+        if GameMode.instance.mode == GameMode.Mode.RegularGame {
             cell.teamSwitch.enabled = true
         } else {
             cell.teamSwitch.enabled = false
@@ -219,8 +287,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                 self.returnToLobby(reason: SpycodesMessage.removedFromRoomString)
             }
         }
-        else if let connectedPeers = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [MCPeerID: String] {
-            Room.instance.connectedPeers = connectedPeers
+        else if let gameMode = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? GameMode {
+            GameMode.instance = gameMode
         }
         else if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
             CardCollection.instance = cardCollection
