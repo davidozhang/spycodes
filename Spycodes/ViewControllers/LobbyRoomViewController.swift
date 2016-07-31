@@ -3,9 +3,12 @@ import UIKit
 
 class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, LobbyRoomViewCellDelegate {
     private let identifier = "lobby-room-view-cell"
+    private let defaultTimeoutInterval: NSTimeInterval = 10     // Default timeout after 10 seconds
     
+    private var timeoutTimer: NSTimer?
     private var refreshTimer: NSTimer?
     private var joinGameAlertController: UIAlertController?
+    private var timeoutAlertController: UIAlertController?
     
     private var emptyStateLabel: UILabel?
     
@@ -16,7 +19,6 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         Player.instance.setIsClueGiver(false)
         self.performSegueWithIdentifier("main-menu", sender: self)
     }
-    
     
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -29,6 +31,13 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(LobbyRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh lobby every second
         
         self.joinGameAlertController = UIAlertController(title: "Joining Room", message: SpycodesMessage.joiningRoomString, preferredStyle: .Alert)
+        
+        self.timeoutAlertController = UIAlertController(title: "Oops", message: SpycodesMessage.failedToJoinRoomString, preferredStyle: .Alert)
+        let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
+            MultipeerManager.instance.stopAdvertiser()
+            MultipeerManager.instance.stopSession()
+        })
+        self.timeoutAlertController?.addAction(confirmAction)
         
         self.emptyStateLabel = UILabel(frame: self.tableView.frame)
         self.emptyStateLabel?.text = "Rooms created will show here.\nMake sure Wifi is enabled."
@@ -73,6 +82,13 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         })
     }
     
+    @objc
+    private func onTimeout() {
+        self.timeoutTimer?.invalidate()
+        self.joinGameAlertController?.dismissViewControllerAnimated(true, completion: nil)
+        self.presentViewController(self.timeoutAlertController!, animated: true, completion: nil)
+    }
+    
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! LobbyRoomViewCell
@@ -100,6 +116,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         MultipeerManager.instance.initAdvertiser()
         MultipeerManager.instance.startAdvertiser()
         
+        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.defaultTimeoutInterval, target: self, selector: #selector(LobbyRoomViewController.onTimeout), userInfo: nil, repeats: false)
         self.presentViewController(self.joinGameAlertController!, animated: true, completion: nil)
     }
     
