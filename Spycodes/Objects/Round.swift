@@ -64,9 +64,20 @@ class Round: NSObject, NSCoding {
     }
     
     func endRound(endingTeam: Team) {
-        self.currentTeam = Team(rawValue: endingTeam.rawValue ^ 1)
         self.clue = nil
         self.numberOfWords = nil
+        
+        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+            CardCollection.instance.autoEliminateOpponentTeamCard(Team.Blue)
+            NSNotificationCenter.defaultCenter().postNotificationName(SpycodesNotificationKey.autoEliminateNotificationKey, object: self, userInfo: nil)
+            
+            if CardCollection.instance.getCardsRemainingForTeam(Team.Blue) == 0 {
+                NSNotificationCenter.defaultCenter().postNotificationName(SpycodesNotificationKey.minigameGameOverNotificationKey, object: self, userInfo: ["title": "Minigame Game Over", "reason": "Your opponent team won!"])
+            }
+            
+            return
+        }
+        self.currentTeam = Team(rawValue: endingTeam.rawValue ^ 1)
     }
     
     func abortGame() {

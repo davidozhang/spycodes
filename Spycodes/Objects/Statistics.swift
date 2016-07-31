@@ -23,4 +23,8 @@ class Statistics: NSObject, NSCoding {
     func getStatistics() -> [Team: Int] {
         return self.statistics
     }
+    
+    func resetStatistics() {
+        self.statistics = [Team.Red: 0, Team.Blue: 0]
+    }
 }

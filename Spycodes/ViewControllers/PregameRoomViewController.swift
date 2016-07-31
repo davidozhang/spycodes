@@ -3,6 +3,9 @@ import UIKit
 
 class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
     private let identifier = "pregame-room-view-cell"
+    private let startGameButtonDefaultHeight: CGFloat = 50
+    private let minigameToggleViewDefaultHeight: CGFloat = 41
+    private let statisticsDashboardDefaultHeight: CGFloat = 32
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -12,11 +15,37 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var startGame: SpycodesButton!
     @IBOutlet weak var redStatisticsLabel: UILabel!
     @IBOutlet weak var blueStatisticsLabel: UILabel!
+    @IBOutlet weak var minigameToggle: UISwitch!
+    
+    @IBOutlet weak var minigameToggleViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var startGameButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statisticsDashboardViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var minigameToggleView: UIView!
+    @IBOutlet weak var statisticsDashboardView: UIView!
+    
+    // MARK: Actions
+    @IBAction func onBackButtonPressed(sender: AnyObject) {
+        self.returnToLobby(reason: nil)
+    }
+    
+    @IBAction func minigameToggleChanged(sender: AnyObject) {
+        if minigameToggle.on {
+            GameMode.instance.mode = GameMode.Mode.MiniGame
+            Room.instance.resetPlayerTeams()
+            Statistics.instance.resetStatistics()
+        } else {
+            GameMode.instance.mode = GameMode.Mode.RegularGame
+        }
+        
+        self.broadcastData()
+    }
     
     @IBAction func unwindToPregameRoom(segue: UIStoryboardSegue) {}
     
     @IBAction func onStartGame(sender: AnyObject) {
         if Room.instance.canStartGame() {
+            // Instantiate next game's card collection and round
             CardCollection.instance = CardCollection()
             Round.instance = Round()
             self.goToGame()
@@ -40,9 +69,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             MultipeerManager.instance.initBrowser()
             
             self.startGame.hidden = false
+            self.startGameButtonHeightConstraint.constant = self.startGameButtonDefaultHeight
         }
         else {
             self.startGame.hidden = true
+            self.startGameButtonHeightConstraint.constant = 0
         }
         
         self.roomNameLabel.text = Room.instance.name
@@ -63,10 +94,15 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             }
             
             self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
+        } else {
+            // Prevent the flicker on first load
+            self.minigameToggleView.hidden = true
+            self.minigameToggleViewHeightConstraint.constant = 0
         }
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(PregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
         
-        self.updateDashboard()
+        self.updateMinigameToggle()
+        self.updateStatisticsDashboard()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -87,12 +123,21 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private func refreshView() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
+            self.checkRoomSize()
+            self.updateMinigameToggle()
+            self.updateStatisticsDashboard()
         })
     }
     
     @objc
     private func broadcastData() {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+        var data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+        MultipeerManager.instance.broadcastData(data)
+        
+        data = NSKeyedArchiver.archivedDataWithRootObject(GameMode.instance)
+        MultipeerManager.instance.broadcastData(data)
+        
+        data = NSKeyedArchiver.archivedDataWithRootObject(Statistics.instance)
         MultipeerManager.instance.broadcastData(data)
     }
     
@@ -102,18 +147,81 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         })
     }
     
-    private func returnToLobby(reason reason: String) {
+    private func goToLobby() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.performSegueWithIdentifier("lobby-room", sender: self)
+        })
+    }
+    
+    private func returnToLobby(reason reason: String?) {
+        if reason == nil {
+            self.goToLobby()
+            return
+        }
+        
         let alertController = UIAlertController(title: "Returning To Lobby", message: reason, preferredStyle: .Alert)
         let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-            dispatch_async(dispatch_get_main_queue(), {
-                self.performSegueWithIdentifier("lobby-room", sender: self)
-            })
+            self.goToLobby()
         })
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    private func updateDashboard() {
+    private func checkRoomSize() {
+        if !Player.instance.isHost() {
+            return
+        }
+        
+        let maxRoomSize = GameMode.instance.mode == GameMode.Mode.RegularGame ? 8 : 3
+        
+        if Room.instance.players.count >= maxRoomSize {
+            MultipeerManager.instance.stopAdvertiser()
+            MultipeerManager.instance.stopBrowser()
+        } else {
+            if !MultipeerManager.instance.advertiserOn {
+                MultipeerManager.instance.startAdvertiser()
+            }
+            if !MultipeerManager.instance.browserOn {
+                MultipeerManager.instance.startBrowser()
+            }
+        }
+    }
+    
+    private func updateMinigameToggle() {
+        if !Player.instance.isHost() {
+            if GameMode.instance.mode == GameMode.Mode.RegularGame {    // Don't show the minigame indicator if it is regular game
+                self.minigameToggleView.hidden = true
+                self.minigameToggleViewHeightConstraint.constant = 0
+                return
+            } else {
+                self.minigameToggleView.hidden = false
+                self.minigameToggleViewHeightConstraint.constant = self.minigameToggleViewDefaultHeight
+            }
+            self.minigameToggle.enabled = false
+        } else {
+            if Room.instance.players.count > 3 {
+                self.minigameToggle.enabled = false
+            } else {
+                self.minigameToggle.enabled = true
+            }
+        }
+        
+        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+            self.minigameToggle.on = true
+        } else {
+            self.minigameToggle.on = false
+        }
+    }
+    
+    private func updateStatisticsDashboard() {
+        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+            self.statisticsDashboardView.hidden = true
+            self.statisticsDashboardViewHeightConstraint.constant = 0
+            return
+        } else {
+            self.statisticsDashboardView.hidden = false
+            self.statisticsDashboardViewHeightConstraint.constant = self.statisticsDashboardDefaultHeight
+        }
         if let redNumberOfWins = Statistics.instance.getStatistics()[Team.Red], blueNumberOfWins = Statistics.instance.getStatistics()[Team.Blue] {
             self.redStatisticsLabel.text = String(redNumberOfWins)
             self.blueStatisticsLabel.text = String(blueNumberOfWins)
@@ -123,8 +231,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "lobby-room" {
-            Room.instance.connectedPeers.removeAll()
-            Room.instance.players.removeAll()
             MultipeerManager.instance.terminate()
         }
     }
@@ -144,10 +250,14 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         
         if Player.instance.isHost() || Player.instance == playerAtIndex {
             cell.teamSwitch.enabled = true
+            
+            if GameMode.instance.mode == GameMode.Mode.MiniGame {
+                cell.teamSwitch.enabled = false
+            }
         } else {
             cell.teamSwitch.enabled = false
         }
-        
+
         if playerAtIndex.isClueGiver() {
             cell.clueGiverImage.hidden = false
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 32)
@@ -212,15 +322,12 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             }
             
             // Room has been terminated or local player has been removed from room
-            if Room.instance.players.count == 0 {
-                self.returnToLobby(reason: SpycodesMessage.hostDisconnectedString)
-            }
-            else if !Room.instance.playerWithUUIDInRoom(Player.instance.getUUID()) {
+            if !Room.instance.playerWithUUIDInRoom(Player.instance.getUUID()) {
                 self.returnToLobby(reason: SpycodesMessage.removedFromRoomString)
             }
         }
-        else if let connectedPeers = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [MCPeerID: String] {
-            Room.instance.connectedPeers = connectedPeers
+        else if let gameMode = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? GameMode {
+            GameMode.instance = gameMode
         }
         else if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
             CardCollection.instance = cardCollection
@@ -228,6 +335,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
             Round.instance = round
             self.goToGame()
+        }
+        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
+            Statistics.instance = statistics
         }
     }
     
