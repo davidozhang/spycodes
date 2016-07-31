@@ -1,20 +1,20 @@
 import UIKit
 
 protocol LobbyRoomViewCellDelegate {
-    func joinGameWithName(name: String)
+    func joinRoomWithUUID(uuid: String)
 }
 
 class LobbyRoomViewCell: UITableViewCell {
     var delegate: LobbyRoomViewCellDelegate?
-    var roomName: String?
+    var roomUUID: String?
 
     @IBOutlet weak var roomNameLabel: UILabel!
     
     override func awakeFromNib() {}
     
     @IBAction func onJoin(sender: AnyObject) {
-        if let roomName = roomName {
-            delegate?.joinGameWithName(roomName)
+        if let roomUUID = self.roomUUID {
+            delegate?.joinRoomWithUUID(roomUUID)
         }
     }
 }

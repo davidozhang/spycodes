@@ -73,7 +73,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! LobbyRoomViewCell
         let roomAtIndex = Lobby.instance.rooms[indexPath.row]
-        cell.roomName = roomAtIndex.name
+        cell.roomUUID = roomAtIndex.getUUID()
         cell.roomNameLabel.text = String(indexPath.row + 1) + ". " + roomAtIndex.name
         
         cell.delegate = self
@@ -90,9 +90,9 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     // MARK: LobbyRoomViewCellDelegate
-    func joinGameWithName(name: String) {
+    func joinRoomWithUUID(uuid: String) {
         // Start advertising to allow host room to invite into session
-        MultipeerManager.instance.initDiscoveryInfo(["joinRoom": name])
+        MultipeerManager.instance.initDiscoveryInfo(["joinRoomWithUUID": uuid])
         MultipeerManager.instance.initAdvertiser()
         MultipeerManager.instance.startAdvertiser()
         

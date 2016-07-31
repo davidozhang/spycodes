@@ -87,20 +87,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private func refreshView() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
-            
-            if Player.instance.isHost() {
-                if Room.instance.players.count > 8 {
-                    MultipeerManager.instance.stopAdvertiser()
-                    MultipeerManager.instance.stopBrowser()
-                } else {
-                    if !MultipeerManager.instance.advertiserOn {
-                        MultipeerManager.instance.startAdvertiser()
-                    }
-                    if !MultipeerManager.instance.browserOn {
-                        MultipeerManager.instance.startBrowser()
-                    }
-                }
-            }
         })
     }
     
@@ -203,7 +189,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     // MARK: MultipeerManagerDelegate
     func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        if let info = info where info["joinRoom"] == Room.instance.name {
+        if let info = info where info["joinRoomWithUUID"] == Room.instance.getUUID() {
             // Invite peer that explicitly advertised discovery info containing joinRoom entry that has the name of the host room
             MultipeerManager.instance.invitePeerToSession(peerID)
         }
