@@ -3,7 +3,7 @@ import Foundation
 class CardCollection: NSObject, NSCoding {
     static var instance = CardCollection()
     
-    private let keyObject = Key()
+    private var keyObject = Key()
     private let words = SpycodesWordList.getTwentyFiveShuffledWords()
     
     var cards = [Card]()
@@ -11,8 +11,14 @@ class CardCollection: NSObject, NSCoding {
     var startingTeam: Team
     
     override init() {
-        self.key = self.keyObject.getKey()
-        self.startingTeam = self.keyObject.getStartingTeam()
+        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+            self.startingTeam = Team.Red
+            self.keyObject = Key(startingTeam: self.startingTeam)
+            self.key = self.keyObject.getKey()
+        } else {
+            self.key = self.keyObject.getKey()
+            self.startingTeam = self.keyObject.getStartingTeam()
+        }
         for i in 0..<25 {
             self.cards.append(Card(word: words[i], selected: false, team: self.key[i]))
         }
@@ -37,5 +43,20 @@ class CardCollection: NSObject, NSCoding {
     
     func getCardsRemainingForTeam(team: Team) -> Int {
         return self.cards.filter({($0 as Card).getTeam() == team && !($0 as Card).isSelected()}).count
+    }
+    
+    // Minigame Specific
+    func autoEliminateOpponentTeamCard(opponentTeam: Team) {
+        var opponentRemainingCards = self.cards.filter({($0 as Card).getTeam() == opponentTeam && !($0 as Card).isSelected()})
+        opponentRemainingCards = opponentRemainingCards.shuffled
+        if opponentRemainingCards.count > 0 {
+            let eliminatedCard = opponentRemainingCards[0]
+            for i in 0..<25 {
+                if self.cards[i].getWord() == eliminatedCard.getWord() {
+                    self.cards[i].setSelected()
+                    return
+                }
+            }
+        }
     }
 }

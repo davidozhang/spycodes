@@ -25,7 +25,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var statisticsDashboardView: UIView!
     
     // MARK: Actions
-    
     @IBAction func onBackButtonPressed(sender: AnyObject) {
         self.returnToLobby(reason: nil)
     }
@@ -33,6 +32,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func minigameToggleChanged(sender: AnyObject) {
         if minigameToggle.on {
             GameMode.instance.mode = GameMode.Mode.MiniGame
+            Room.instance.resetPlayerTeams()
             Statistics.instance.resetStatistics()
         } else {
             GameMode.instance.mode = GameMode.Mode.RegularGame
@@ -45,6 +45,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func onStartGame(sender: AnyObject) {
         if Room.instance.canStartGame() {
+            // Instantiate next game's card collection and round
+            CardCollection.instance = CardCollection()
+            Round.instance = Round()
             self.goToGame()
         } else {
             let alertController = UIAlertController(title: "Cannot Start Game", message: SpycodesMessage.cannotStartGameString, preferredStyle: .Alert)
@@ -64,8 +67,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             MultipeerManager.instance.initSession()
             MultipeerManager.instance.initAdvertiser()
             MultipeerManager.instance.initBrowser()
-            
-            GameMode.instance.mode = GameMode.Mode.RegularGame
             
             self.startGame.hidden = false
             self.startGameButtonHeightConstraint.constant = self.startGameButtonDefaultHeight
@@ -93,13 +94,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             }
             
             self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
-            
-            // Instantiate next game's card collection and round
-            CardCollection.instance = CardCollection()
-            Round.instance = Round()
         } else {
             // Prevent the flicker on first load
-            GameMode.instance.mode = GameMode.Mode.RegularGame
+            self.minigameToggleView.hidden = true
+            self.minigameToggleViewHeightConstraint.constant = 0
         }
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(PregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
         
@@ -201,7 +199,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             }
             self.minigameToggle.enabled = false
         } else {
-            self.minigameToggle.enabled = true
+            if Room.instance.players.count > 3 {
+                self.minigameToggle.enabled = false
+            } else {
+                self.minigameToggle.enabled = true
+            }
         }
         
         if GameMode.instance.mode == GameMode.Mode.MiniGame {
@@ -275,7 +277,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         let playerAtIndex = Room.instance.players[indexPath.row]
         let team = playerAtIndex.team
         
-        if GameMode.instance.mode == GameMode.Mode.RegularGame && !Player.instance.isHost() && Player.instance.getUUID() != playerAtIndex.getUUID() {
+        if !Player.instance.isHost() && Player.instance.getUUID() != playerAtIndex.getUUID() {
             return
         }
         

@@ -81,7 +81,7 @@ class Room: NSObject, NSCoding {
     }
     
     func canStartGame() -> Bool {
-        if self.players.count >= 4 {
+        if GameMode.instance.mode == GameMode.Mode.RegularGame && self.players.count >= 4 {
             let redValid = self.players.filter({($0 as Player).team == Team.Red}).count >= 2
             let blueValid = self.players.filter({($0 as Player).team == Team.Blue}).count >= 2
             
@@ -92,7 +92,7 @@ class Room: NSObject, NSCoding {
                 return false
             }
         }
-        else if self.players.count == 2 || self.players.count == 3 {
+        else if GameMode.instance.mode == GameMode.Mode.MiniGame && (self.players.count == 2 || self.players.count == 3) {
             if self.getClueGiverUUIDForTeam(Team.Red) != nil || self.getClueGiverUUIDForTeam(Team.Blue) != nil {
                 return true
             }
@@ -112,6 +112,12 @@ class Room: NSObject, NSCoding {
         }
         else {
             return nil
+        }
+    }
+    
+    func resetPlayerTeams() {
+        for player in players {
+            player.team = Team.Red
         }
     }
 }

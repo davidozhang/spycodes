@@ -30,6 +30,9 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.broadcastData), name: SpycodesNotificationKey.autoEliminateNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.didEndGameWithNotification), name: SpycodesNotificationKey.minigameGameOverNotificationKey, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -60,6 +63,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             self.broadcastTimer?.invalidate()
         }
         self.refreshTimer?.invalidate()
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.autoEliminateNotificationKey, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,6 +91,9 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         MultipeerManager.instance.broadcastData(data)
         
         data = NSKeyedArchiver.archivedDataWithRootObject(Statistics.instance)
+        MultipeerManager.instance.broadcastData(data)
+        
+        data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
         MultipeerManager.instance.broadcastData(data)
     }
     
@@ -167,6 +175,15 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         self.broadcastData()
     }
     
+    @objc
+    private func didEndGameWithNotification(notification: NSNotification) {
+        Round.instance.winningTeam = Team.Blue
+        self.broadcastData()
+        if let userInfo = notification.userInfo {
+            self.didEndGame(title: userInfo["title"] as! String, reason: userInfo["reason"] as! String)
+        }
+    }
+    
     private func didEndGame(title title: String, reason: String) {
         if Player.instance.isHost() {
             self.broadcastTimer?.invalidate()
@@ -214,11 +231,11 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 playerRoundStarted = false
             }
         }
-        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
-            Statistics.instance = statistics
-        }
         else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
             Room.instance = room
+        }
+        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
+            Statistics.instance = statistics
         }
     }
     
@@ -388,11 +405,12 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             self.numberOfWordsTextField.becomeFirstResponder()
         } else if textField == self.numberOfWordsTextField && textField.text?.characters.count >= 1 {
             Round.instance.numberOfWords = self.numberOfWordsTextField.text
-            self.numberOfWordsTextField.resignFirstResponder()
             
             if Round.instance.isClueSet() {
                 self.didConfirm()
             }
+            
+            self.numberOfWordsTextField.resignFirstResponder()
         }
         
         return true
