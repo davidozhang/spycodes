@@ -25,6 +25,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var statisticsDashboardView: UIView!
     
     // MARK: Actions
+    
+    @IBAction func onBackButtonPressed(sender: AnyObject) {
+        self.returnToLobby(reason: nil)
+    }
+    
     @IBAction func minigameToggleChanged(sender: AnyObject) {
         if minigameToggle.on {
             GameMode.instance.mode = GameMode.Mode.MiniGame
@@ -144,12 +149,21 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         })
     }
     
-    private func returnToLobby(reason reason: String) {
+    private func goToLobby() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.performSegueWithIdentifier("lobby-room", sender: self)
+        })
+    }
+    
+    private func returnToLobby(reason reason: String?) {
+        if reason == nil {
+            self.goToLobby()
+            return
+        }
+        
         let alertController = UIAlertController(title: "Returning To Lobby", message: reason, preferredStyle: .Alert)
         let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-            dispatch_async(dispatch_get_main_queue(), {
-                self.performSegueWithIdentifier("lobby-room", sender: self)
-            })
+            self.goToLobby()
         })
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -306,10 +320,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             }
             
             // Room has been terminated or local player has been removed from room
-            if Room.instance.players.count == 0 {
-                self.returnToLobby(reason: SpycodesMessage.hostDisconnectedString)
-            }
-            else if !Room.instance.playerWithUUIDInRoom(Player.instance.getUUID()) {
+            if !Room.instance.playerWithUUIDInRoom(Player.instance.getUUID()) {
                 self.returnToLobby(reason: SpycodesMessage.removedFromRoomString)
             }
         }

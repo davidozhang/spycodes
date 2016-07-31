@@ -801,10 +801,22 @@
                                     <constraint firstAttribute="height" constant="23" id="5Sd-sc-bSu"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zpa-v1-yiA">
+                                <rect key="frame" x="30" y="30.5" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Wq3-KC-GD0"/>
+                                    <constraint firstAttribute="width" constant="50" id="qrm-NK-Xm7"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Back"/>
+                                <connections>
+                                    <action selector="onBackButtonPressed:" destination="VkA-D4-zlT" eventType="touchUpInside" id="0Td-yP-gLq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="top" secondItem="Ujv-Na-1yG" secondAttribute="bottom" constant="15" id="0ih-NU-hlY"/>
+                            <constraint firstItem="Mc1-YN-1oP" firstAttribute="centerY" secondItem="Zpa-v1-yiA" secondAttribute="centerY" id="3KF-lM-pMv"/>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="top" secondItem="Mc1-YN-1oP" secondAttribute="bottom" id="6DZ-tE-h64"/>
                             <constraint firstItem="Oz9-tw-cJr" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" constant="20" id="6wN-62-yPh"/>
                             <constraint firstAttribute="trailing" secondItem="Oz9-tw-cJr" secondAttribute="trailing" constant="20" id="8GB-VK-bb9"/>
@@ -818,11 +830,13 @@
                             <constraint firstItem="GE8-dk-J4b" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="SR9-mL-KVb"/>
                             <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="30" id="Vsi-Wx-L0j"/>
                             <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="50" id="XBE-ff-nvo"/>
+                            <constraint firstItem="Zpa-v1-yiA" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="20" id="Yg8-eX-EZE"/>
                             <constraint firstAttribute="trailing" secondItem="Ujv-Na-1yG" secondAttribute="trailing" constant="20" id="cvB-54-ElX"/>
                             <constraint firstItem="GE8-dk-J4b" firstAttribute="top" secondItem="Mc1-YN-1oP" secondAttribute="bottom" id="egn-pJ-7Wz"/>
                             <constraint firstItem="kCT-FC-Wj4" firstAttribute="top" secondItem="Mc1-YN-1oP" secondAttribute="bottom" id="gTl-TY-3Ra"/>
                             <constraint firstItem="084-kN-Fki" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="h2n-yW-c3a"/>
                             <constraint firstAttribute="trailing" secondItem="5W3-A0-VGs" secondAttribute="trailing" id="jKW-MX-l9L"/>
+                            <constraint firstItem="Zpa-v1-yiA" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" constant="30" id="ks2-G4-0fn"/>
                             <constraint firstItem="kCT-FC-Wj4" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="oLS-aX-3HI"/>
                             <constraint firstItem="Oz9-tw-cJr" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="sNh-PA-TJ0"/>
                             <constraint firstItem="kCT-FC-Wj4" firstAttribute="top" secondItem="GE8-dk-J4b" secondAttribute="bottom" id="u9n-xo-T0e"/>
@@ -831,6 +845,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="Yg8-eX-EZE"/>
                                 <exclude reference="6DZ-tE-h64"/>
                                 <exclude reference="gTl-TY-3Ra"/>
                                 <exclude reference="Vsi-Wx-L0j"/>
@@ -1110,8 +1125,8 @@
         <image name="Team" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yme-7x-s1N"/>
         <segue reference="87V-6a-5kI"/>
+        <segue reference="yme-7x-s1N"/>
         <segue reference="Vg7-zN-QuD"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -68,6 +68,7 @@ class Player: NSObject, NSCoding {
     
     func reset() {
         self.team = Team.Red
+        self.host = false
         self.clueGiver = false
     }
 }
