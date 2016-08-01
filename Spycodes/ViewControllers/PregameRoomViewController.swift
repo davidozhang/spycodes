@@ -32,7 +32,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func minigameToggleChanged(sender: AnyObject) {
         if minigameToggle.on {
             GameMode.instance.mode = GameMode.Mode.MiniGame
-            Room.instance.resetPlayerTeams()
+            Room.instance.resetPlayers()
             Statistics.instance.resetStatistics()
         } else {
             GameMode.instance.mode = GameMode.Mode.RegularGame
@@ -283,9 +283,18 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         
         if let clueGiverUUID = Room.instance.getClueGiverUUIDForTeam(team) {
             Room.instance.getPlayerWithUUID(clueGiverUUID)?.setIsClueGiver(false)
+            
+            if Player.instance.getUUID() == clueGiverUUID {
+                Player.instance.setIsClueGiver(false)
+            }
         }
         
         Room.instance.players[indexPath.row].setIsClueGiver(true)
+        
+        if Player.instance.getUUID() == playerAtIndex.getUUID() {
+            Player.instance.setIsClueGiver(true)
+        }
+        
         self.broadcastData()
     }
     

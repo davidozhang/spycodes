@@ -115,8 +115,9 @@ class Room: NSObject, NSCoding {
         }
     }
     
-    func resetPlayerTeams() {
+    func resetPlayers() {
         for player in players {
+            player.clueGiver = false
             player.team = Team.Red
         }
     }
