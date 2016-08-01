@@ -719,7 +719,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3wE-c8-LD8">
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3wE-c8-LD8">
                                         <rect key="frame" x="100" y="5" width="51" height="31"/>
                                         <connections>
                                             <action selector="minigameToggleChanged:" destination="VkA-D4-zlT" eventType="valueChanged" id="dBL-Nn-uXn"/>

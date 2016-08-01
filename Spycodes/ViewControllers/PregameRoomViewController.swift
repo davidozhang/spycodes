@@ -285,7 +285,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             Room.instance.getPlayerWithUUID(clueGiverUUID)?.setIsClueGiver(false)
         }
         
-        Room.instance.players[indexPath.row].setIsClueGiver(!playerAtIndex.isClueGiver())
+        Room.instance.players[indexPath.row].setIsClueGiver(true)
         self.broadcastData()
     }
     
@@ -300,7 +300,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: MultipeerManagerDelegate
     func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         if let info = info where info["joinRoomWithUUID"] == Room.instance.getUUID() {
-            // Invite peer that explicitly advertised discovery info containing joinRoom entry that has the name of the host room
+            // Invite peer that explicitly advertised discovery info containing joinRoomWithUUID entry that has the UUID of the host room
             MultipeerManager.instance.invitePeerToSession(peerID)
         }
     }

@@ -65,6 +65,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         self.refreshTimer?.invalidate()
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.autoEliminateNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.minigameGameOverNotificationKey, object: nil)
     }
     
     override func didReceiveMemoryWarning() {

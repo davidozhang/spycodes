@@ -10,7 +10,7 @@ class GameMode: NSObject, NSCoding {
     var mode: Mode?
 
     override init() {
-        self.mode = Mode.MiniGame
+        self.mode = Mode.RegularGame
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
