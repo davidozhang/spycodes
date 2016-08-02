@@ -269,7 +269,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 25
+        return 18
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -313,7 +313,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         let playerTeam = Player.instance.team
         let opponentTeam = Team(rawValue: playerTeam.rawValue ^ 1)
         
-        if cardAtIndexTeam == Team.Neutral || cardAtIndexTeam == opponentTeam {
+        if cardAtIndexTeam == opponentTeam {
             self.didEndRound()
         }
         

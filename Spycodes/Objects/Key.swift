@@ -8,7 +8,6 @@ class Key {
         if let startingTeam = Team(rawValue: self.randomBinarySingleDigit()) {
             self.startingTeam = startingTeam
             self.key += [Team.Assassin]
-            self.key += Array(count: 7, repeatedValue: Team.Neutral)
             self.key += Array(count: 8, repeatedValue: Team.Red)
             self.key += Array(count: 8, repeatedValue: Team.Blue)
             self.key += [startingTeam]
@@ -19,7 +18,6 @@ class Key {
     
     init(startingTeam: Team) {
         self.key += [Team.Assassin]
-        self.key += Array(count: 7, repeatedValue: Team.Neutral)
         self.key += Array(count: 8, repeatedValue: Team.Red)
         self.key += Array(count: 8, repeatedValue: Team.Blue)
         self.key += [startingTeam]
