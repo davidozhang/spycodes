@@ -40,6 +40,7 @@
 		63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */; };
 		63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED451D28B47200142780 /* PregameRoomViewCell.swift */; };
 		63FF7CE81D4E8471002D2B97 /* SpycodesNotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */; };
+		63FFA4B11D50635B006A181B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63FFA4B01D50635B006A181B /* GameKit.framework */; };
 		CF5A8DCC1D46D95F0032F581 /* SpycodesMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyRoomViewController.swift; path = ViewControllers/LobbyRoomViewController.swift; sourceTree = "<group>"; };
 		63FDED451D28B47200142780 /* PregameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PregameRoomViewCell.swift; path = Views/PregameRoomViewCell.swift; sourceTree = "<group>"; };
 		63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesNotificationKey.swift; path = Extensions/SpycodesNotificationKey.swift; sourceTree = "<group>"; };
+		63FFA4B01D50635B006A181B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesMessage.swift; path = Extensions/SpycodesMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63FFA4B11D50635B006A181B /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +108,7 @@
 		63A04CF71D1A5713005A2914 = {
 			isa = PBXGroup;
 			children = (
+				63FFA4B01D50635B006A181B /* GameKit.framework */,
 				63A04D021D1A5713005A2914 /* Spycodes */,
 				63A04D011D1A5713005A2914 /* Products */,
 			);
@@ -232,6 +236,11 @@
 					63A04CFF1D1A5713005A2914 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 3A8NZ732A3;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
