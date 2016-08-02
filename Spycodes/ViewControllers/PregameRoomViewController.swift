@@ -259,10 +259,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
 
         if playerAtIndex.isClueGiver() {
-            cell.clueGiverImage.hidden = false
+            cell.clueGiverImage.image = UIImage(named: "Cluegiver-Filled")
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 32)
         } else {
-            cell.clueGiverImage.hidden = true
+            cell.clueGiverImage.image = UIImage(named: "Cluegiver-Unfilled")
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 32)
         }
         
