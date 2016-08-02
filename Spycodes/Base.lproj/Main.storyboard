@@ -636,7 +636,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d84-Az-a9v">
-                                                    <rect key="frame" x="40" y="3" width="418" height="37"/>
+                                                    <rect key="frame" x="40" y="3" width="408" height="37"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="300" id="xaW-k5-dCT"/>
                                                     </constraints>
@@ -650,16 +650,16 @@
                                                     </variation>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4xn-Al-HcR" userLabel="Team Switch">
-                                                    <rect key="frame" x="463" y="7" width="51" height="31"/>
+                                                    <rect key="frame" x="453" y="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="switchToggled:" destination="PVh-e3-TPn" eventType="valueChanged" id="5x8-pM-NNx"/>
                                                     </connections>
                                                 </switch>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cluegiver" translatesAutoresizingMaskIntoConstraints="NO" id="4mv-rH-4Dm">
-                                                    <rect key="frame" x="520" y="2" width="40" height="40"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cluegiver-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="4mv-rH-4Dm">
+                                                    <rect key="frame" x="510" y="5.5" width="50" height="33"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="Qqy-dE-Ufe"/>
-                                                        <constraint firstAttribute="width" constant="40" id="pZq-43-xl3"/>
+                                                        <constraint firstAttribute="height" constant="33" id="Qqy-dE-Ufe"/>
+                                                        <constraint firstAttribute="width" constant="50" id="pZq-43-xl3"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -1116,7 +1116,7 @@
     <resources>
         <image name="Back" width="100" height="100"/>
         <image name="Chart" width="100" height="100"/>
-        <image name="Cluegiver" width="100" height="100"/>
+        <image name="Cluegiver-Filled" width="100" height="66"/>
         <image name="Confirm" width="100" height="100"/>
         <image name="Github-Icon" width="560" height="560"/>
         <image name="Horizontal-Line" width="100" height="100"/>

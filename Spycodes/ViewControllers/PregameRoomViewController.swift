@@ -248,6 +248,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             cell.teamSwitch.on = false
         }
         
+        if Player.instance == playerAtIndex {
+            cell.nameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 32)
+        }
+        
         if Player.instance.isHost() || Player.instance == playerAtIndex {
             cell.teamSwitch.enabled = true
             
@@ -259,11 +263,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
 
         if playerAtIndex.isClueGiver() {
-            cell.clueGiverImage.hidden = false
-            cell.nameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 32)
+            cell.clueGiverImage.image = UIImage(named: "Cluegiver-Filled")
         } else {
-            cell.clueGiverImage.hidden = true
-            cell.nameLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 32)
+            cell.clueGiverImage.image = UIImage(named: "Cluegiver-Unfilled")
         }
         
         cell.index = indexPath.row
