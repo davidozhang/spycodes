@@ -231,7 +231,7 @@
 				TargetAttributes = {
 					63A04CFF1D1A5713005A2914 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = R6552SUGAZ;
+						DevelopmentTeam = 3A8NZ732A3;
 					};
 				};
 			};
@@ -421,7 +421,7 @@
 				INFOPLIST_FILE = Spycodes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.david-zhang.Spycodes";
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidzhang.Spycodes;
 				PRODUCT_NAME = Spycodes;
 				PROVISIONING_PROFILE = "";
 			};
@@ -436,7 +436,7 @@
 				INFOPLIST_FILE = Spycodes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.david-zhang.Spycodes";
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidzhang.Spycodes;
 				PRODUCT_NAME = Spycodes;
 				PROVISIONING_PROFILE = "";
 			};
