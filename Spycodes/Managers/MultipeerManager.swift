@@ -88,9 +88,11 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     
     func broadcastData(data: NSData) {
         do {
-            try self.session?.sendData(data, toPeers: (self.session?.connectedPeers)!, withMode: MCSessionSendDataMode.Reliable)
+            if let connectedPeers = self.session?.connectedPeers {
+                try self.session?.sendData(data, toPeers: connectedPeers, withMode: MCSessionSendDataMode.Reliable)
+            }
         } catch {
-            NSLog("Failed to broadcast data to all peers")
+            NSLog("Failed to broadcast the following data to all peers: \(data)")
         }
     }
     
