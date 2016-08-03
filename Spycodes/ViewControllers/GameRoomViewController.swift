@@ -31,7 +31,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.broadcastData), name: SpycodesNotificationKey.autoEliminateNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.broadcastEssentialData), name: SpycodesNotificationKey.autoEliminateNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.didEndGameWithNotification), name: SpycodesNotificationKey.minigameGameOverNotificationKey, object: nil)
     }
     
@@ -43,7 +43,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         Round.instance.setStartingTeam(CardCollection.instance.startingTeam)
         
         if Player.instance.isHost() {
-            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(GameRoomViewController.broadcastData), userInfo: nil, repeats: true)  // Broadcast host's card collection every 2 seconds
+            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(GameRoomViewController.broadcastEssentialData), userInfo: nil, repeats: true)  // Broadcast host's card collection and round every 2 seconds
         }
         
         if Player.instance.isClueGiver() {
@@ -84,17 +84,16 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     @objc
-    private func broadcastData() {
+    private func broadcastEssentialData() {
         var data = NSKeyedArchiver.archivedDataWithRootObject(CardCollection.instance)
         MultipeerManager.instance.broadcastData(data)
         
         data = NSKeyedArchiver.archivedDataWithRootObject(Round.instance)
         MultipeerManager.instance.broadcastData(data)
-        
-        data = NSKeyedArchiver.archivedDataWithRootObject(Statistics.instance)
-        MultipeerManager.instance.broadcastData(data)
-        
-        data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+    }
+    
+    private func broadcastOptionalData(object: NSObject) {
+        let data = NSKeyedArchiver.archivedDataWithRootObject(object)
         MultipeerManager.instance.broadcastData(data)
     }
     
@@ -168,18 +167,18 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         self.clueTextField.enabled = false
         self.numberOfWordsTextField.enabled = false
         self.confirmButton.hidden = true
-        self.broadcastData()
+        self.broadcastEssentialData()
     }
     
     private func didEndRound() {
         Round.instance.endRound(Player.instance.team)
-        self.broadcastData()
+        self.broadcastEssentialData()
     }
     
     @objc
     private func didEndGameWithNotification(notification: NSNotification) {
         Round.instance.winningTeam = Team.Blue
-        self.broadcastData()
+        self.broadcastEssentialData()
         if let userInfo = notification.userInfo {
             self.didEndGame(title: userInfo["title"] as! String, reason: userInfo["reason"] as! String)
         }
@@ -246,7 +245,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         if let uuid = Room.instance.connectedPeers[peerID], player = Room.instance.getPlayerWithUUID(uuid) {
             
             Room.instance.removePlayerWithUUID(uuid)
-            self.broadcastData()
+            self.broadcastOptionalData(Room.instance)
             
             if player.isHost() {
                 let alertController = UIAlertController(title: SpycodesMessage.returningToLobbyString, message: SpycodesMessage.hostDisconnectedString, preferredStyle: .Alert)
@@ -257,7 +256,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 self.presentViewController(alertController, animated: true, completion: nil)
             } else {
                 Round.instance.abortGame()
-                self.broadcastData()
+                self.broadcastEssentialData()
                 self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerDisconnectedString)
             }
         }
@@ -306,7 +305,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         }
         
         CardCollection.instance.cards[indexPath.row].setSelected()
-        self.broadcastData()
+        self.broadcastEssentialData()
         
         let cardAtIndex = CardCollection.instance.cards[indexPath.row]
         let cardAtIndexTeam = cardAtIndex.getTeam()
@@ -319,14 +318,20 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         if cardAtIndexTeam == Team.Assassin || CardCollection.instance.getCardsRemainingForTeam(opponentTeam!) == 0 {
             Round.instance.winningTeam = opponentTeam
+            self.broadcastEssentialData()
+            
             Statistics.instance.recordWinForTeam(opponentTeam!)
-            self.broadcastData()
+            self.broadcastOptionalData(Statistics.instance)
+            
             self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultLoseString)
         }
         else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
             Round.instance.winningTeam = playerTeam
+            self.broadcastEssentialData()
+            
             Statistics.instance.recordWinForTeam(playerTeam)
-            self.broadcastData()
+            self.broadcastOptionalData(Statistics.instance)
+            
             self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
         }
     }

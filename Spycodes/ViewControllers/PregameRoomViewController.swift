@@ -38,7 +38,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             GameMode.instance.mode = GameMode.Mode.RegularGame
         }
         
-        self.broadcastData()
+        self.broadcastEssentialData()
+        
+        self.broadcastOptionalData(Statistics.instance)
+        self.broadcastOptionalData(GameMode.instance)
     }
     
     @IBAction func unwindToPregameRoom(segue: UIStoryboardSegue) {}
@@ -93,7 +96,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                 Room.instance.connectedPeers[peerID] = Player.instance.getUUID()
             }
             
-            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
+            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(PregameRoomViewController.broadcastEssentialData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
         } else {
             // Prevent the flicker on first load
             self.minigameToggleView.hidden = true
@@ -130,14 +133,13 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @objc
-    private func broadcastData() {
-        var data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+    private func broadcastEssentialData() {
+        let data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
         MultipeerManager.instance.broadcastData(data)
-        
-        data = NSKeyedArchiver.archivedDataWithRootObject(GameMode.instance)
-        MultipeerManager.instance.broadcastData(data)
-        
-        data = NSKeyedArchiver.archivedDataWithRootObject(Statistics.instance)
+    }
+    
+    private func broadcastOptionalData(object: NSObject) {
+        let data = NSKeyedArchiver.archivedDataWithRootObject(object)
         MultipeerManager.instance.broadcastData(data)
     }
     
@@ -297,7 +299,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             Player.instance.setIsClueGiver(true)
         }
         
-        self.broadcastData()
+        self.broadcastEssentialData()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -381,6 +383,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsClueGiver(false)
-        self.broadcastData()
+        self.broadcastEssentialData()
     }
 }
