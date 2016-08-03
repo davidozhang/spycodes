@@ -88,11 +88,11 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     
     func broadcastData(data: NSData) {
         do {
-            if let connectedPeers = self.session?.connectedPeers {
+            if let connectedPeers = self.session?.connectedPeers where connectedPeers.count > 0 {
                 try self.session?.sendData(data, toPeers: connectedPeers, withMode: MCSessionSendDataMode.Reliable)
             }
         } catch {
-            NSLog("Failed to broadcast the following data to all peers: \(data)")
+            NSLog("Failed to broadcast the following data to all peers: \(NSString(data: data, encoding: NSUTF8StringEncoding))")
         }
     }
     
