@@ -377,6 +377,10 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        // Only allow 1 word precisely
+        if string == " " {
+            return false
+        }
         textField.placeholder = nil
         return true
     }
@@ -402,15 +406,11 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == self.clueTextField && textField.text?.characters.count >= 1 {
-            Round.instance.clue = self.clueTextField.text
             self.numberOfWordsTextField.becomeFirstResponder()
         } else if textField == self.numberOfWordsTextField && textField.text?.characters.count >= 1 {
-            Round.instance.numberOfWords = self.numberOfWordsTextField.text
-            
             if Round.instance.isClueSet() {
                 self.didConfirm()
             }
-            
             self.numberOfWordsTextField.resignFirstResponder()
         }
         
