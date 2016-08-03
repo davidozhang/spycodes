@@ -411,6 +411,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == self.clueTextField && textField.text?.characters.count >= 1 {
+            Round.instance.clue = self.clueTextField.text
             self.numberOfWordsTextField.becomeFirstResponder()
         } else if textField == self.numberOfWordsTextField && textField.text?.characters.count >= 1 {
             if Round.instance.isClueSet() {
