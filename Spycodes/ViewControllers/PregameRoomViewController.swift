@@ -33,7 +33,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         if minigameToggle.on {
             GameMode.instance.mode = GameMode.Mode.MiniGame
             Room.instance.resetPlayers()
-            Statistics.instance.resetStatistics()
+            Statistics.instance.reset()
         } else {
             GameMode.instance.mode = GameMode.Mode.RegularGame
         }
