@@ -239,7 +239,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k1e-zY-xvI" userLabel="About View">
-                                <rect key="frame" x="180" y="186" width="241" height="229"/>
+                                <rect key="frame" x="180" y="183" width="241" height="235.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCs-7l-LI3">
                                         <rect key="frame" x="63" y="0.0" width="114" height="55"/>
@@ -320,22 +320,23 @@
                                             <constraint firstItem="65b-0K-Da1" firstAttribute="top" secondItem="AJl-uf-Iez" secondAttribute="top" id="zFW-aU-B2o"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.davzhang.me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAp-kx-GvW" userLabel="Website">
-                                        <rect key="frame" x="44" y="206" width="154" height="23"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="www.davzhang.me" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qHO-qx-ibe">
+                                        <rect key="frame" x="39" y="196" width="163.5" height="39.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="20"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="mAp-kx-GvW" firstAttribute="top" secondItem="AJl-uf-Iez" secondAttribute="bottom" constant="10" id="0yj-iv-lmC"/>
                                     <constraint firstItem="XCs-7l-LI3" firstAttribute="top" secondItem="k1e-zY-xvI" secondAttribute="top" id="3ge-AF-Eif"/>
+                                    <constraint firstItem="qHO-qx-ibe" firstAttribute="centerX" secondItem="k1e-zY-xvI" secondAttribute="centerX" id="3sg-iS-0hK"/>
+                                    <constraint firstAttribute="bottom" secondItem="qHO-qx-ibe" secondAttribute="bottom" id="5nS-E8-ohV"/>
                                     <constraint firstItem="WxK-eL-yZD" firstAttribute="centerX" secondItem="k1e-zY-xvI" secondAttribute="centerX" id="70H-3h-aLz"/>
-                                    <constraint firstItem="mAp-kx-GvW" firstAttribute="centerX" secondItem="k1e-zY-xvI" secondAttribute="centerX" id="L4i-H5-pAF"/>
+                                    <constraint firstItem="qHO-qx-ibe" firstAttribute="top" secondItem="AJl-uf-Iez" secondAttribute="bottom" id="A8H-Xs-vHz"/>
                                     <constraint firstItem="AJl-uf-Iez" firstAttribute="top" secondItem="hnd-5Z-15Q" secondAttribute="bottom" constant="10" id="P0I-J4-eAr"/>
                                     <constraint firstItem="hnd-5Z-15Q" firstAttribute="top" secondItem="WxK-eL-yZD" secondAttribute="bottom" constant="40" id="YaL-ro-AFk"/>
-                                    <constraint firstAttribute="bottom" secondItem="mAp-kx-GvW" secondAttribute="bottom" id="bKJ-58-2LK"/>
                                     <constraint firstItem="hnd-5Z-15Q" firstAttribute="centerX" secondItem="k1e-zY-xvI" secondAttribute="centerX" id="cNm-Me-Gox"/>
                                     <constraint firstAttribute="bottom" secondItem="hnd-5Z-15Q" secondAttribute="bottom" id="ddT-t8-dHf"/>
                                     <constraint firstItem="XCs-7l-LI3" firstAttribute="centerX" secondItem="k1e-zY-xvI" secondAttribute="centerX" id="fj8-tb-J3a"/>
