@@ -13,25 +13,14 @@ class InstructionsPageViewController: UIPageViewController, UIPageViewController
                                animated: true,
                                completion: nil)
         }
-        
-        self.stylePageControl()
     }
     
     // MARK: Private
     private(set) lazy var orderedViewControllers: [UIViewController] = {
         return [
-            self.instantiateViewControllerWithStoryboardIdentifier("introduction-view-controller")
+            self.instantiateViewControllerWithStoryboardIdentifier("welcome-view-controller")
         ]
     }()
-    
-    private func stylePageControl() {
-        if #available(iOS 9.0, *) {
-            let pageControl = UIPageControl.appearanceWhenContainedInInstancesOfClasses([self.dynamicType])
-            pageControl.currentPageIndicatorTintColor = UIColor.darkGrayColor()
-            pageControl.pageIndicatorTintColor = UIColor.whiteColor()
-            pageControl.backgroundColor = UIColor.whiteColor()
-        }
-    }
     
     private func instantiateViewControllerWithStoryboardIdentifier(identifier: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(identifier)
@@ -61,15 +50,5 @@ class InstructionsPageViewController: UIPageViewController, UIPageViewController
         guard orderedViewControllersCount > nextIndex else { return nil }
         
         return self.orderedViewControllers[nextIndex]
-    }
-    
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return self.orderedViewControllers.count
-    }
-    
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-        guard let firstViewController = self.viewControllers?.first, index = orderedViewControllers.indexOf(firstViewController) else { return 0 }
-        
-        return index
     }
 }
