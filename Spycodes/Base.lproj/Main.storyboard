@@ -9,7 +9,7 @@
         <!--Main Menu View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainMenuViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="main-menu-view-controller" id="BYZ-38-t0r" customClass="MainMenuViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -63,6 +63,9 @@
                                         <exclude reference="aL6-xJ-woz"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="onInstructions:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b0l-Gf-ccb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2i2-Pu-U1X" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
                                 <rect key="frame" x="200" y="490" width="200" height="50"/>
@@ -144,6 +147,7 @@
                         <segue destination="os2-Wc-CLV" kind="presentation" identifier="create-game" modalTransitionStyle="flipHorizontal" id="7WM-P4-SMa"/>
                         <segue destination="oCE-jf-1fM" kind="presentation" identifier="join-game" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
                         <segue destination="a1u-5S-T8S" kind="presentation" identifier="about" modalTransitionStyle="flipHorizontal" id="hYk-y3-ogQ"/>
+                        <segue destination="8Pj-EZ-fXD" kind="presentation" identifier="instructions" modalTransitionStyle="flipHorizontal" id="cMv-Ey-JuX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -226,10 +230,123 @@
             </objects>
             <point key="canvasLocation" x="1026" y="339"/>
         </scene>
+        <!--Instructions Page View Controller-->
+        <scene sceneID="8Yo-PD-wbA">
+            <objects>
+                <pageViewController storyboardIdentifier="instructions-page-view-controller" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="8Pj-EZ-fXD" customClass="InstructionsPageViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MOr-E9-YX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-601" y="1156"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ulO-Iy-BXy">
+            <objects>
+                <viewController storyboardIdentifier="introduction-view-controller" id="dmd-uQ-mhq" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GaO-QY-IfC"/>
+                        <viewControllerLayoutGuide type="bottom" id="7tW-dA-dS6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Br1-jY-fq1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEA-mq-c2V" userLabel="Back Button">
+                                <rect key="frame" x="30" y="21.5" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="TbG-bZ-2dc"/>
+                                    <constraint firstAttribute="width" constant="50" id="mvL-fu-e5E"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Back"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="main-menu" modalTransitionStyle="flipHorizontal" id="OKD-OH-6Td"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZn-Qe-eOO">
+                                <rect key="frame" x="240" y="28" width="121" height="37"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bRf-fP-n6u" userLabel="Introduction Text View">
+                                <rect key="frame" x="40" y="217.5" width="520" height="165.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spycodes is a super fun multiplayer word association game played locally with 2-8 players." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRF-KO-5kF">
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="57"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In order for the game to work, please enable Wifi. Internet access is not required." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05M-wu-Cc8">
+                                        <rect key="frame" x="0.0" y="77" width="520" height="28.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wifi" translatesAutoresizingMaskIntoConstraints="NO" id="49V-tu-dzJ">
+                                        <rect key="frame" x="235" y="115.5" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="F8Q-Ky-LR3"/>
+                                            <constraint firstAttribute="width" constant="50" id="veb-ZQ-YbG"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="05M-wu-Cc8" secondAttribute="trailing" id="1db-hz-9LC"/>
+                                    <constraint firstItem="49V-tu-dzJ" firstAttribute="top" secondItem="05M-wu-Cc8" secondAttribute="bottom" constant="10" id="FwJ-L2-hNP"/>
+                                    <constraint firstAttribute="trailing" secondItem="xRF-KO-5kF" secondAttribute="trailing" id="Lzc-yg-94K"/>
+                                    <constraint firstItem="05M-wu-Cc8" firstAttribute="top" secondItem="xRF-KO-5kF" secondAttribute="bottom" constant="20" id="NgC-fo-lxj"/>
+                                    <constraint firstItem="05M-wu-Cc8" firstAttribute="centerX" secondItem="bRf-fP-n6u" secondAttribute="centerX" id="SrU-v7-zGe"/>
+                                    <constraint firstItem="xRF-KO-5kF" firstAttribute="top" secondItem="bRf-fP-n6u" secondAttribute="top" id="XXS-LH-m7l"/>
+                                    <constraint firstItem="05M-wu-Cc8" firstAttribute="leading" secondItem="bRf-fP-n6u" secondAttribute="leading" id="bWO-hH-g5o"/>
+                                    <constraint firstItem="xRF-KO-5kF" firstAttribute="leading" secondItem="bRf-fP-n6u" secondAttribute="leading" id="dvC-4l-9Tv"/>
+                                    <constraint firstAttribute="bottom" secondItem="49V-tu-dzJ" secondAttribute="bottom" id="fze-8L-nwg"/>
+                                    <constraint firstItem="49V-tu-dzJ" firstAttribute="centerX" secondItem="bRf-fP-n6u" secondAttribute="centerX" id="lyZ-0I-5n1"/>
+                                    <constraint firstItem="xRF-KO-5kF" firstAttribute="centerX" secondItem="bRf-fP-n6u" secondAttribute="centerX" id="paB-x0-aFC"/>
+                                    <constraint firstAttribute="bottom" secondItem="05M-wu-Cc8" secondAttribute="bottom" id="w8J-4z-BMv"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="w8J-4z-BMv"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to continue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waG-ZY-f2p">
+                                <rect key="frame" x="213.5" y="562" width="173" height="28"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="24"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GZn-Qe-eOO" firstAttribute="centerX" secondItem="Br1-jY-fq1" secondAttribute="centerX" id="1DC-ve-0E0"/>
+                            <constraint firstItem="GZn-Qe-eOO" firstAttribute="centerY" secondItem="pEA-mq-c2V" secondAttribute="centerY" id="8eE-bz-rg3"/>
+                            <constraint firstItem="bRf-fP-n6u" firstAttribute="centerY" secondItem="Br1-jY-fq1" secondAttribute="centerY" id="F8l-cT-N7a"/>
+                            <constraint firstItem="7tW-dA-dS6" firstAttribute="top" secondItem="waG-ZY-f2p" secondAttribute="bottom" constant="10" id="GX2-6R-ptd"/>
+                            <constraint firstAttribute="trailing" secondItem="bRf-fP-n6u" secondAttribute="trailing" constant="40" id="OjL-PV-s3l"/>
+                            <constraint firstItem="bRf-fP-n6u" firstAttribute="centerX" secondItem="Br1-jY-fq1" secondAttribute="centerX" id="Qrd-tI-X7W"/>
+                            <constraint firstItem="GZn-Qe-eOO" firstAttribute="top" secondItem="GaO-QY-IfC" secondAttribute="bottom" constant="8" id="UlO-ov-A1h"/>
+                            <constraint firstItem="bRf-fP-n6u" firstAttribute="leading" secondItem="Br1-jY-fq1" secondAttribute="leading" constant="40" id="V7r-bc-jgI"/>
+                            <constraint firstItem="waG-ZY-f2p" firstAttribute="centerX" secondItem="Br1-jY-fq1" secondAttribute="centerX" id="YaM-ay-ltc"/>
+                            <constraint firstItem="pEA-mq-c2V" firstAttribute="top" secondItem="GaO-QY-IfC" secondAttribute="bottom" constant="25" id="i3T-5O-0dd"/>
+                            <constraint firstItem="pEA-mq-c2V" firstAttribute="leading" secondItem="Br1-jY-fq1" secondAttribute="leading" constant="30" id="piI-ig-Ah7"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="i3T-5O-0dd"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e2x-hP-iTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-601" y="1930"/>
+        </scene>
         <!--About View Controller-->
         <scene sceneID="WAq-IW-uDf">
             <objects>
-                <viewController id="a1u-5S-T8S" customClass="AboutViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="about-view-controller" id="a1u-5S-T8S" customClass="AboutViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1Dy-CL-HLv"/>
                         <viewControllerLayoutGuide type="bottom" id="GhN-un-K6h"/>
@@ -239,16 +356,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k1e-zY-xvI" userLabel="About View">
-                                <rect key="frame" x="180" y="182" width="241" height="236"/>
+                                <rect key="frame" x="168.5" y="180" width="264" height="240.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCs-7l-LI3">
-                                        <rect key="frame" x="63" y="0.0" width="114" height="55"/>
+                                        <rect key="frame" x="74.5" y="0.0" width="114" height="55"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="48"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WxK-eL-yZD" userLabel="Version View">
-                                        <rect key="frame" x="36" y="65" width="170" height="28"/>
+                                        <rect key="frame" x="47.5" y="65" width="170" height="28"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ExK-wx-YdV">
                                                 <rect key="frame" x="0.0" y="0.0" width="69" height="28"/>
@@ -288,17 +405,17 @@
                                         </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Made with ❤️ by David Zhang" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnd-5Z-15Q">
-                                        <rect key="frame" x="0.0" y="133" width="241" height="23"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="20"/>
+                                        <rect key="frame" x="0.0" y="133" width="264" height="25.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="22"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AJl-uf-Iez" userLabel="Github View">
-                                        <rect key="frame" x="48" y="166" width="146" height="30"/>
+                                        <rect key="frame" x="54.5" y="168.5" width="156" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/davidozhang" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5AV-UM-1q2">
-                                                <rect key="frame" x="38" y="3" width="108" height="23"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="20"/>
+                                                <rect key="frame" x="38" y="1.5" width="118" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="22"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -321,9 +438,9 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="www.davzhang.me" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qHO-qx-ibe">
-                                        <rect key="frame" x="39" y="196" width="164" height="40"/>
+                                        <rect key="frame" x="43" y="198.5" width="179" height="42"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="22"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                     </textView>
@@ -393,7 +510,7 @@
         <!--Join Game View Controller-->
         <scene sceneID="1W7-Yu-MRm">
             <objects>
-                <viewController id="oCE-jf-1fM" customClass="JoinGameViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="join-game-view-controller" id="oCE-jf-1fM" customClass="JoinGameViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O2o-J1-ZW6"/>
                         <viewControllerLayoutGuide type="bottom" id="s1v-bI-7WK"/>
@@ -471,7 +588,7 @@
         <!--Lobby Room View Controller-->
         <scene sceneID="9yO-IX-SF2">
             <objects>
-                <viewController id="qHt-PL-X7v" customClass="LobbyRoomViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="lobby-room-view-controller" id="qHt-PL-X7v" customClass="LobbyRoomViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="E2v-cR-e0P"/>
                         <viewControllerLayoutGuide type="bottom" id="NSb-Fu-D4E"/>
@@ -610,7 +727,7 @@
         <!--Pregame Room View Controller-->
         <scene sceneID="xkD-W1-Ufh">
             <objects>
-                <viewController id="VkA-D4-zlT" customClass="PregameRoomViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pregame-room-view-controller" id="VkA-D4-zlT" customClass="PregameRoomViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="peM-0h-h84"/>
                         <viewControllerLayoutGuide type="bottom" id="Doc-Hq-B89"/>
@@ -878,7 +995,7 @@
         <!--Game Room View Controller-->
         <scene sceneID="9GO-gD-g4A">
             <objects>
-                <viewController id="yX4-d1-WHr" customClass="GameRoomViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="game-room-view-controller" id="yX4-d1-WHr" customClass="GameRoomViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DMO-Jt-Cx9"/>
                         <viewControllerLayoutGuide type="bottom" id="Zrc-Nf-5YD"/>
@@ -1125,10 +1242,12 @@
         <image name="Spy" width="290" height="280"/>
         <image name="Stack" width="100" height="100"/>
         <image name="Team" width="100" height="100"/>
+        <image name="Wifi" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IIH-9T-29V"/>
+        <segue reference="OKD-OH-6Td"/>
+        <segue reference="M2x-yW-um3"/>
+        <segue reference="87V-6a-5kI"/>
         <segue reference="yme-7x-s1N"/>
-        <segue reference="Vg7-zN-QuD"/>
     </inferredMetricsTieBreakers>
 </document>
