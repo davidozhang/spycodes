@@ -26,6 +26,10 @@ class Key {
         self.key = self.key.shuffled
     }
     
+    deinit {
+        self.key.removeAll()
+    }
+    
     func randomBinarySingleDigit() -> Int {
         return arc4random_uniform(2) == 0 ? 1: 0
     }

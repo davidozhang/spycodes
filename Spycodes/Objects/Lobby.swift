@@ -5,6 +5,10 @@ class Lobby {
     
     var rooms = [Room]()
     
+    deinit {
+        self.rooms.removeAll()
+    }
+    
     func addRoomWithNameAndUUID(name: String, uuid: String) {
         let room = Room()
         room.name = name

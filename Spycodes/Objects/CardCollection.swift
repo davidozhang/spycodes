@@ -24,6 +24,11 @@ class CardCollection: NSObject, NSCoding {
         }
     }
     
+    deinit {
+        self.cards.removeAll()
+        self.key.removeAll()
+    }
+    
     convenience init(cards: [Card]) {
         self.init()
         self.cards = cards

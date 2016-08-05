@@ -11,6 +11,10 @@ class Statistics: NSObject, NSCoding {
         }
     }
     
+    deinit {
+        self.statistics.removeAll()
+    }
+    
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.statistics[Team.Red], forKey: "red")
         aCoder.encodeObject(self.statistics[Team.Blue], forKey: "blue")

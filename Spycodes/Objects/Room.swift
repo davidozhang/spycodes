@@ -31,6 +31,10 @@ class Room: NSObject, NSCoding {
         }
     }
     
+    deinit {
+        self.players.removeAll()
+    }
+    
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.name, forKey: "name")
         aCoder.encodeObject(self.uuid, forKey: "uuid")
