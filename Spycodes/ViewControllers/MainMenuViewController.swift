@@ -31,6 +31,10 @@ class MainMenuViewController: UIViewController {
         self.performSegueWithIdentifier("join-game", sender: self)
     }
     
+    @IBAction func onInstructions(sender: AnyObject) {
+        self.performSegueWithIdentifier("instructions", sender: self)
+    }
+    
     @IBAction func onAbout(sender: AnyObject) {
         self.performSegueWithIdentifier("about", sender: self)
     }

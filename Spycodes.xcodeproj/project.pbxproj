@@ -10,6 +10,7 @@
 		630674181D51BE9800339EC8 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630674171D51BE9800339EC8 /* Timer.swift */; };
 		63067C6A1D2982DD0005AC66 /* LobbyRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */; };
 		63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C6B1D2996B60005AC66 /* Lobby.swift */; };
+		6310C43F1D531B7E00187B7D /* InstructionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6310C43E1D531B7E00187B7D /* InstructionsPageViewController.swift */; };
 		63486DA51D3DDC9800795403 /* SpycodesArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA41D3DDC9800795403 /* SpycodesArray.swift */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
 		637310CB1D3B292F00EA5D7A /* GameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */; };
@@ -49,6 +50,7 @@
 		630674171D51BE9800339EC8 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Objects/Timer.swift; sourceTree = "<group>"; };
 		63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyRoomViewCell.swift; path = Views/LobbyRoomViewCell.swift; sourceTree = "<group>"; };
 		63067C6B1D2996B60005AC66 /* Lobby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lobby.swift; path = Objects/Lobby.swift; sourceTree = "<group>"; };
+		6310C43E1D531B7E00187B7D /* InstructionsPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstructionsPageViewController.swift; path = ViewControllers/InstructionsPageViewController.swift; sourceTree = "<group>"; };
 		63486DA41D3DDC9800795403 /* SpycodesArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesArray.swift; path = Extensions/SpycodesArray.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
 		637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameRoomViewController.swift; path = ViewControllers/GameRoomViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				63AB64CC1D4880A600C4FF22 /* AboutViewController.swift */,
 				63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */,
 				637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */,
+				6310C43E1D531B7E00187B7D /* InstructionsPageViewController.swift */,
 				63FDED311D2648D600142780 /* JoinGameViewController.swift */,
 				63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */,
 				63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */,
@@ -307,6 +310,7 @@
 				63FDED391D26557200142780 /* Room.swift in Sources */,
 				6378C6511D4C6F46009BD0CA /* GameMode.swift in Sources */,
 				63FA54E01D1BBB73004515DA /* SpycodesTextField.swift in Sources */,
+				6310C43F1D531B7E00187B7D /* InstructionsPageViewController.swift in Sources */,
 				63067C6A1D2982DD0005AC66 /* LobbyRoomViewCell.swift in Sources */,
 				63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */,
 				63FDED351D264BE800142780 /* Player.swift in Sources */,
