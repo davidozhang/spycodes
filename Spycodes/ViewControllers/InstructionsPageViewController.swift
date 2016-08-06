@@ -18,7 +18,8 @@ class InstructionsPageViewController: UIPageViewController, UIPageViewController
     // MARK: Private
     private(set) lazy var orderedViewControllers: [UIViewController] = {
         return [
-            self.instantiateViewControllerWithStoryboardIdentifier("welcome-view-controller")
+            self.instantiateViewControllerWithStoryboardIdentifier("welcome-view-controller"),
+            self.instantiateViewControllerWithStoryboardIdentifier("teams-instruction-view")
         ]
     }()
     
