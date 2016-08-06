@@ -398,7 +398,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOp-zT-XzW">
                                         <rect key="frame" x="0.0" y="0.0" width="520" height="28.5"/>
-                                        <string key="text">Players can be assigned to either Team Red or Blue. Each team must have at least 2 players. Minigame requires 2-3 players, and all players are by default assigned to Team Red.</string>
+                                        <string key="text">Players can be assigned to either Team Red or Blue. Each team must have at least 2 players. Minigame requires 2-3 players, where all players play for Team Red.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -436,7 +436,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0d-pc-vgU">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0d-pc-vgU">
                                         <rect key="frame" x="69.5" y="28" width="35" height="29"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -458,8 +458,8 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="oFR-EC-axd"/>
                                         <exclude reference="nml-Mz-Bdg"/>
+                                        <exclude reference="oFR-EC-axd"/>
                                         <exclude reference="vkp-89-dBs"/>
                                         <exclude reference="W1o-yr-bxA"/>
                                     </mask>
@@ -481,7 +481,109 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gYG-Sp-s8S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-601" y="2700"/>
+            <point key="canvasLocation" x="-601" y="3390"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="XbV-tj-TzI">
+            <objects>
+                <viewController storyboardIdentifier="setup-instruction-view" id="pVz-T1-rGc" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NNe-Vu-7em"/>
+                        <viewControllerLayoutGuide type="bottom" id="RqL-KC-j63"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cQO-ma-Blw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KqE-mV-jwI">
+                                <rect key="frame" x="262" y="28" width="76.5" height="37"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWf-9b-W2a">
+                                <rect key="frame" x="40" y="204" width="520" height="192"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1f-mf-C1s">
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="142"/>
+                                        <string key="text">The game is round-based and consists of 25 word cards: 9 for starting team, 8 for other team, 7 Bystanders and 1 Sniper. The goal is to have your team guess all of your team's cards before the other team does.</string>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Stack" translatesAutoresizingMaskIntoConstraints="NO" id="Hpv-y7-30w">
+                                        <rect key="frame" x="240" y="152" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="Fr5-RH-APg"/>
+                                            <constraint firstAttribute="height" constant="40" id="SsH-5g-PPL"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Hpv-y7-30w" secondAttribute="bottom" id="9Nf-7H-aua"/>
+                                    <constraint firstItem="Hpv-y7-30w" firstAttribute="top" secondItem="S1f-mf-C1s" secondAttribute="bottom" constant="10" id="LNB-2D-edz"/>
+                                    <constraint firstItem="Hpv-y7-30w" firstAttribute="centerX" secondItem="ZWf-9b-W2a" secondAttribute="centerX" id="VAm-ET-chL"/>
+                                    <constraint firstItem="S1f-mf-C1s" firstAttribute="top" secondItem="ZWf-9b-W2a" secondAttribute="top" id="arq-sX-Qpz"/>
+                                    <constraint firstItem="S1f-mf-C1s" firstAttribute="leading" secondItem="ZWf-9b-W2a" secondAttribute="leading" id="ell-dM-HRO"/>
+                                    <constraint firstAttribute="trailing" secondItem="S1f-mf-C1s" secondAttribute="trailing" id="vhJ-2s-X5j"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giG-7I-P9J" userLabel="Page Number View">
+                                <rect key="frame" x="213.5" y="533.5" width="173" height="56.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to continue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9y-Mx-VHM">
+                                        <rect key="frame" x="0.0" y="0.0" width="173" height="28"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yN5-AM-ruK">
+                                        <rect key="frame" x="69.5" y="28" width="35" height="29"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="yN5-AM-ruK" firstAttribute="centerX" secondItem="giG-7I-P9J" secondAttribute="centerX" id="8zx-SS-E2e"/>
+                                    <constraint firstItem="T9y-Mx-VHM" firstAttribute="centerX" secondItem="giG-7I-P9J" secondAttribute="centerX" id="Hph-2r-74h"/>
+                                    <constraint firstAttribute="trailing" secondItem="T9y-Mx-VHM" secondAttribute="trailing" id="J4H-BC-u8g"/>
+                                    <constraint firstItem="T9y-Mx-VHM" firstAttribute="top" secondItem="giG-7I-P9J" secondAttribute="top" id="NgT-LK-bcl"/>
+                                    <constraint firstAttribute="bottom" secondItem="yN5-AM-ruK" secondAttribute="bottom" id="U3G-ED-SAa"/>
+                                    <constraint firstItem="T9y-Mx-VHM" firstAttribute="leading" secondItem="giG-7I-P9J" secondAttribute="leading" id="UDm-Yk-Ez8"/>
+                                    <constraint firstAttribute="trailing" secondItem="T9y-Mx-VHM" secondAttribute="trailing" id="d9h-uY-m6Z"/>
+                                    <constraint firstItem="yN5-AM-ruK" firstAttribute="top" secondItem="T9y-Mx-VHM" secondAttribute="bottom" id="lK8-Ux-onN"/>
+                                    <constraint firstItem="T9y-Mx-VHM" firstAttribute="leading" secondItem="giG-7I-P9J" secondAttribute="leading" id="tsS-Bu-m0i"/>
+                                    <constraint firstItem="yN5-AM-ruK" firstAttribute="centerX" secondItem="giG-7I-P9J" secondAttribute="centerX" id="yyQ-cI-Yea"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="J4H-BC-u8g"/>
+                                        <exclude reference="UDm-Yk-Ez8"/>
+                                        <exclude reference="Hph-2r-74h"/>
+                                        <exclude reference="yyQ-cI-Yea"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZWf-9b-W2a" firstAttribute="centerX" secondItem="cQO-ma-Blw" secondAttribute="centerX" id="0ki-6M-Ieh"/>
+                            <constraint firstItem="ZWf-9b-W2a" firstAttribute="leading" secondItem="cQO-ma-Blw" secondAttribute="leading" constant="40" id="11E-Fx-3FR"/>
+                            <constraint firstItem="KqE-mV-jwI" firstAttribute="top" secondItem="NNe-Vu-7em" secondAttribute="bottom" constant="8" id="K5J-QU-Zsf"/>
+                            <constraint firstItem="ZWf-9b-W2a" firstAttribute="centerY" secondItem="cQO-ma-Blw" secondAttribute="centerY" id="Mgq-k0-l9x"/>
+                            <constraint firstItem="KqE-mV-jwI" firstAttribute="centerX" secondItem="cQO-ma-Blw" secondAttribute="centerX" id="eAn-Oh-NQ2"/>
+                            <constraint firstItem="RqL-KC-j63" firstAttribute="top" secondItem="giG-7I-P9J" secondAttribute="bottom" constant="10" id="nlZ-VY-aEa"/>
+                            <constraint firstItem="giG-7I-P9J" firstAttribute="centerX" secondItem="cQO-ma-Blw" secondAttribute="centerX" id="pc3-Lk-pKD"/>
+                            <constraint firstAttribute="trailing" secondItem="ZWf-9b-W2a" secondAttribute="trailing" constant="40" id="tO2-Yw-Qy5"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1pX-bf-b8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-601" y="2658"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="WAq-IW-uDf">
