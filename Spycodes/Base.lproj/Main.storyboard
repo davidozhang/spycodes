@@ -238,10 +238,10 @@
             </objects>
             <point key="canvasLocation" x="-601" y="1156"/>
         </scene>
-        <!--View Controller-->
+        <!--Introduction Instruction View Controller-->
         <scene sceneID="ulO-Iy-BXy">
             <objects>
-                <viewController storyboardIdentifier="welcome-view-controller" id="dmd-uQ-mhq" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="welcome-view-controller" title="Introduction Instruction View Controller" id="dmd-uQ-mhq" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GaO-QY-IfC"/>
                         <viewControllerLayoutGuide type="bottom" id="7tW-dA-dS6"/>
@@ -375,10 +375,10 @@
             </objects>
             <point key="canvasLocation" x="-601" y="1930"/>
         </scene>
-        <!--View Controller-->
+        <!--Teams Instruction View Controller-->
         <scene sceneID="7q8-Pu-qIm">
             <objects>
-                <viewController storyboardIdentifier="teams-instruction-view" id="VM1-3l-ign" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="teams-instruction-view" title="Teams Instruction View Controller" id="VM1-3l-ign" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GE7-mL-F9C"/>
                         <viewControllerLayoutGuide type="bottom" id="IWY-ER-I4U"/>
@@ -483,10 +483,112 @@
             </objects>
             <point key="canvasLocation" x="-601" y="3390"/>
         </scene>
-        <!--View Controller-->
+        <!--Cluegiver Instruction View Controller-->
+        <scene sceneID="dwU-nH-YAO">
+            <objects>
+                <viewController storyboardIdentifier="cluegiver-instruction-view" title="Cluegiver Instruction View Controller" id="uZV-bc-L0L" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="H5m-GY-TKF"/>
+                        <viewControllerLayoutGuide type="bottom" id="44M-yH-bRI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0eC-A2-AqN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cluegiver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBx-ez-FiQ">
+                                <rect key="frame" x="242" y="28" width="116.5" height="37"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sqj-6P-3b8">
+                                <rect key="frame" x="40" y="261" width="520" height="78.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tm2-Uk-Fk9">
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="28.5"/>
+                                        <string key="text">Each team assigns a player as cluegiver. During each team's round, the cluegiver gives a 1-word clue and the number of word cards associated with it. The cluegiver cannot talk, must keep a straight face, and cannot give non-verbal cues to teammates.</string>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cluegiver-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="0Ng-cF-dNf">
+                                        <rect key="frame" x="235.5" y="38.5" width="50" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="djq-Ka-Nan"/>
+                                            <constraint firstAttribute="width" constant="50" id="tXR-nz-pPW"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Tm2-Uk-Fk9" firstAttribute="top" secondItem="Sqj-6P-3b8" secondAttribute="top" id="25r-Yv-oQ2"/>
+                                    <constraint firstAttribute="trailing" secondItem="Tm2-Uk-Fk9" secondAttribute="trailing" id="4oZ-FW-jDp"/>
+                                    <constraint firstItem="0Ng-cF-dNf" firstAttribute="centerX" secondItem="Sqj-6P-3b8" secondAttribute="centerX" id="74s-f1-qt0"/>
+                                    <constraint firstItem="Tm2-Uk-Fk9" firstAttribute="leading" secondItem="Sqj-6P-3b8" secondAttribute="leading" id="Qsf-QR-gHo"/>
+                                    <constraint firstAttribute="bottom" secondItem="0Ng-cF-dNf" secondAttribute="bottom" id="e7r-qY-2K2"/>
+                                    <constraint firstItem="0Ng-cF-dNf" firstAttribute="top" secondItem="Tm2-Uk-Fk9" secondAttribute="bottom" constant="10" id="gFK-xa-hMT"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3RY-HO-QTJ" userLabel="Page Number View">
+                                <rect key="frame" x="213.5" y="533.5" width="173" height="56.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to continue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjn-o7-V2b">
+                                        <rect key="frame" x="0.0" y="0.0" width="173" height="28"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4/7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8N-ck-R1n">
+                                        <rect key="frame" x="69.5" y="28" width="35" height="29"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Z8N-ck-R1n" firstAttribute="top" secondItem="hjn-o7-V2b" secondAttribute="bottom" id="D24-Xi-YT2"/>
+                                    <constraint firstItem="hjn-o7-V2b" firstAttribute="leading" secondItem="3RY-HO-QTJ" secondAttribute="leading" id="DvQ-RW-6Dn"/>
+                                    <constraint firstItem="Z8N-ck-R1n" firstAttribute="centerX" secondItem="3RY-HO-QTJ" secondAttribute="centerX" id="Jju-nr-T7u"/>
+                                    <constraint firstItem="hjn-o7-V2b" firstAttribute="leading" secondItem="3RY-HO-QTJ" secondAttribute="leading" id="QBn-zd-y8P"/>
+                                    <constraint firstItem="Z8N-ck-R1n" firstAttribute="centerX" secondItem="3RY-HO-QTJ" secondAttribute="centerX" id="QYN-UO-c76"/>
+                                    <constraint firstAttribute="bottom" secondItem="Z8N-ck-R1n" secondAttribute="bottom" id="RPz-wj-XA8"/>
+                                    <constraint firstAttribute="trailing" secondItem="hjn-o7-V2b" secondAttribute="trailing" id="Run-4p-LmA"/>
+                                    <constraint firstItem="hjn-o7-V2b" firstAttribute="centerX" secondItem="3RY-HO-QTJ" secondAttribute="centerX" id="UaC-7H-OIX"/>
+                                    <constraint firstAttribute="trailing" secondItem="hjn-o7-V2b" secondAttribute="trailing" id="Uaj-xZ-Srh"/>
+                                    <constraint firstItem="hjn-o7-V2b" firstAttribute="top" secondItem="3RY-HO-QTJ" secondAttribute="top" id="jiy-Lt-3pS"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="QBn-zd-y8P"/>
+                                        <exclude reference="Uaj-xZ-Srh"/>
+                                        <exclude reference="UaC-7H-OIX"/>
+                                        <exclude reference="Jju-nr-T7u"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Sqj-6P-3b8" firstAttribute="centerX" secondItem="0eC-A2-AqN" secondAttribute="centerX" id="5xr-HU-v6D"/>
+                            <constraint firstItem="Sqj-6P-3b8" firstAttribute="centerY" secondItem="0eC-A2-AqN" secondAttribute="centerY" id="7Xp-Ue-TVq"/>
+                            <constraint firstAttribute="trailing" secondItem="Sqj-6P-3b8" secondAttribute="trailing" constant="40" id="QoN-RG-dw6"/>
+                            <constraint firstItem="wBx-ez-FiQ" firstAttribute="top" secondItem="H5m-GY-TKF" secondAttribute="bottom" constant="8" id="ZYE-wp-PYe"/>
+                            <constraint firstItem="Sqj-6P-3b8" firstAttribute="leading" secondItem="0eC-A2-AqN" secondAttribute="leading" constant="40" id="ein-mW-EAc"/>
+                            <constraint firstItem="44M-yH-bRI" firstAttribute="top" secondItem="3RY-HO-QTJ" secondAttribute="bottom" constant="10" id="hz3-JS-GBa"/>
+                            <constraint firstItem="wBx-ez-FiQ" firstAttribute="centerX" secondItem="0eC-A2-AqN" secondAttribute="centerX" id="l0a-Cz-mMU"/>
+                            <constraint firstItem="3RY-HO-QTJ" firstAttribute="centerX" secondItem="0eC-A2-AqN" secondAttribute="centerX" id="uDP-FE-haz"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Eb-Jw-CB0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-601" y="4122"/>
+        </scene>
+        <!--Setup Instruction View Controller-->
         <scene sceneID="XbV-tj-TzI">
             <objects>
-                <viewController storyboardIdentifier="setup-instruction-view" id="pVz-T1-rGc" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="setup-instruction-view" title="Setup Instruction View Controller" id="pVz-T1-rGc" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NNe-Vu-7em"/>
                         <viewControllerLayoutGuide type="bottom" id="RqL-KC-j63"/>
