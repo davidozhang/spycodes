@@ -268,22 +268,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bRf-fP-n6u" userLabel="Introduction Text View">
-                                <rect key="frame" x="40" y="217.5" width="520" height="165.5"/>
+                                <rect key="frame" x="40" y="213" width="520" height="175"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spycodes is a super fun multiplayer word association game played locally with 2-8 players." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRF-KO-5kF">
-                                        <rect key="frame" x="0.0" y="0.0" width="520" height="57"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="47.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In order for the game to work, please enable Wifi. Internet access is not required." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05M-wu-Cc8">
-                                        <rect key="frame" x="0.0" y="77" width="520" height="28.5"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <rect key="frame" x="0.0" y="67.5" width="520" height="47.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wifi" translatesAutoresizingMaskIntoConstraints="NO" id="49V-tu-dzJ">
-                                        <rect key="frame" x="235" y="115.5" width="50" height="50"/>
+                                        <rect key="frame" x="235" y="125" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="F8Q-Ky-LR3"/>
                                             <constraint firstAttribute="width" constant="50" id="veb-ZQ-YbG"/>
@@ -394,17 +394,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tRl-mX-lSC" userLabel="Team Instructions View">
-                                <rect key="frame" x="40" y="261" width="520" height="78.5"/>
+                                <rect key="frame" x="40" y="240" width="520" height="121"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOp-zT-XzW">
-                                        <rect key="frame" x="0.0" y="0.0" width="520" height="28.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="71"/>
                                         <string key="text">Players can be assigned to either Team Red or Blue. Each team must have at least 2 players. Minigame requires 2-3 players, where all players play for Team Red.</string>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Team" translatesAutoresizingMaskIntoConstraints="NO" id="nOZ-h4-nX6">
-                                        <rect key="frame" x="240" y="38.5" width="40" height="40"/>
+                                        <rect key="frame" x="240" y="81" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Ier-yo-6sF"/>
                                             <constraint firstAttribute="width" constant="40" id="bma-7R-MZc"/>
@@ -502,17 +502,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sqj-6P-3b8" userLabel="Cluegiver Instruction View">
-                                <rect key="frame" x="40" y="261" width="520" height="78.5"/>
+                                <rect key="frame" x="40" y="216.5" width="520" height="168"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tm2-Uk-Fk9">
-                                        <rect key="frame" x="0.0" y="0.0" width="520" height="28.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="118"/>
                                         <string key="text">Each team assigns a player as cluegiver. During each team's round, the cluegiver gives a 1-word clue and the number of word cards associated with it. The cluegiver cannot talk, must keep a straight face, and cannot give non-verbal cues to teammates.</string>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cluegiver-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="0Ng-cF-dNf">
-                                        <rect key="frame" x="235.5" y="38.5" width="50" height="40"/>
+                                        <rect key="frame" x="235.5" y="128" width="50" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="djq-Ka-Nan"/>
                                             <constraint firstAttribute="width" constant="50" id="tXR-nz-pPW"/>
@@ -604,17 +604,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-eO-I0y" userLabel="Clue Instruction View">
-                                <rect key="frame" x="40" y="261" width="520" height="78.5"/>
+                                <rect key="frame" x="40" y="228" width="520" height="144.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weB-KK-LgT">
-                                        <rect key="frame" x="0.0" y="0.0" width="520" height="28.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="94.5"/>
                                         <string key="text">Once clue and number of words are set, remaining team players should work together and guess the words. Tapping on a card means final decision for a guess. Once guessing is done, the cluegiver can end the round.</string>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cluegiver-Unfilled" translatesAutoresizingMaskIntoConstraints="NO" id="GfD-eG-lVl">
-                                        <rect key="frame" x="235" y="38.5" width="50" height="40"/>
+                                        <rect key="frame" x="235" y="104.5" width="50" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Glq-lq-BvA"/>
                                             <constraint firstAttribute="height" constant="40" id="QWm-JV-imp"/>
@@ -706,17 +706,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mpk-tC-u6K">
-                                <rect key="frame" x="40" y="204" width="520" height="192"/>
+                                <rect key="frame" x="40" y="228" width="520" height="144.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXN-1o-u41">
-                                        <rect key="frame" x="0.0" y="0.0" width="520" height="142"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="94.5"/>
                                         <string key="text">The given clue must be about meaning of the words. The cluegiver is allowed to spell out the clue. The cluegiver is NOT allowed to use proper names and compound, hyphenated or homonym words as clue.</string>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Confirm" translatesAutoresizingMaskIntoConstraints="NO" id="16b-KC-KSD">
-                                        <rect key="frame" x="240" y="152" width="40" height="40"/>
+                                        <rect key="frame" x="240" y="104.5" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="FFI-Cr-dMQ"/>
                                             <constraint firstAttribute="height" constant="40" id="lnE-WR-Pp0"/>
@@ -815,17 +815,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jts-Cm-5bq" userLabel="Minigame Instruction View">
-                                <rect key="frame" x="40" y="208.5" width="520" height="183"/>
+                                <rect key="frame" x="40" y="232.5" width="520" height="135.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MF4-4b-yNN">
-                                        <rect key="frame" x="0.0" y="0.0" width="520" height="142"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="94.5"/>
                                         <string key="text">Minigame can be played with 2-3 players. All of you play as Team Red. After each round, Team Blue will automatically eliminate a random word. You must beat Team Blue by guessing all your words before they do!</string>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oer-GL-33a">
-                                        <rect key="frame" x="235.5" y="152" width="51" height="31"/>
+                                        <rect key="frame" x="235.5" y="104.5" width="51" height="31"/>
                                     </switch>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -914,17 +914,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWf-9b-W2a">
-                                <rect key="frame" x="40" y="204" width="520" height="192"/>
+                                <rect key="frame" x="40" y="228" width="520" height="144.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1f-mf-C1s">
-                                        <rect key="frame" x="0.0" y="0.0" width="520" height="142"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="94.5"/>
                                         <string key="text">The game is round-based and consists of 25 word cards: 9 for starting team, 8 for other team, 7 Bystanders and 1 Sniper. The goal is to have your team guess all of your team's cards before the other team does.</string>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Stack" translatesAutoresizingMaskIntoConstraints="NO" id="Hpv-y7-30w">
-                                        <rect key="frame" x="240" y="152" width="40" height="40"/>
+                                        <rect key="frame" x="240" y="104.5" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="Fr5-RH-APg"/>
                                             <constraint firstAttribute="height" constant="40" id="SsH-5g-PPL"/>
