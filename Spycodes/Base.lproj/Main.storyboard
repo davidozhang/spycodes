@@ -608,7 +608,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weB-KK-LgT">
                                         <rect key="frame" x="0.0" y="0.0" width="520" height="28.5"/>
-                                        <string key="text">Once clue and number of words are set, remaining team players should work together and guess the words. Tapping on a card means final decision for a guess. At least one guess must be made each round. Once guessing is done, the cluegiver can end the round.</string>
+                                        <string key="text">Once clue and number of words are set, remaining team players should work together and guess the words. Tapping on a card means final decision for a guess. Once guessing is done, the cluegiver can end the round.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -795,6 +795,105 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wtj-qw-aJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-601" y="5606"/>
+        </scene>
+        <!--Minigame Instruction View Controller-->
+        <scene sceneID="A9n-BN-rqf">
+            <objects>
+                <viewController storyboardIdentifier="minigame-instruction-view" title="Minigame Instruction View Controller" id="ioO-SA-UjF" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="abQ-ZR-OGv"/>
+                        <viewControllerLayoutGuide type="bottom" id="kBi-Eo-8Rj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nKi-ml-TnN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minigame" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbX-Gn-esX">
+                                <rect key="frame" x="239" y="28" width="122.5" height="37"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jts-Cm-5bq" userLabel="Minigame Instruction View">
+                                <rect key="frame" x="40" y="208.5" width="520" height="183"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MF4-4b-yNN">
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="142"/>
+                                        <string key="text">Minigame can be played with 2-3 players. All of you play as Team Red. After each round, Team Blue will automatically eliminate a random word. You must beat Team Blue by guessing all your words before they do!</string>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oer-GL-33a">
+                                        <rect key="frame" x="235.5" y="152" width="51" height="31"/>
+                                    </switch>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="MF4-4b-yNN" secondAttribute="trailing" id="38L-fj-KKH"/>
+                                    <constraint firstItem="MF4-4b-yNN" firstAttribute="top" secondItem="jts-Cm-5bq" secondAttribute="top" id="GoI-Wa-E8j"/>
+                                    <constraint firstItem="Oer-GL-33a" firstAttribute="top" secondItem="MF4-4b-yNN" secondAttribute="bottom" constant="10" id="LdV-Ih-2eo"/>
+                                    <constraint firstAttribute="bottom" secondItem="Oer-GL-33a" secondAttribute="bottom" id="rV4-dx-rxs"/>
+                                    <constraint firstItem="MF4-4b-yNN" firstAttribute="leading" secondItem="jts-Cm-5bq" secondAttribute="leading" id="toh-Yy-67X"/>
+                                    <constraint firstItem="Oer-GL-33a" firstAttribute="centerX" secondItem="jts-Cm-5bq" secondAttribute="centerX" id="wc9-Fa-qCJ"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyN-SD-crL" userLabel="Page Number View">
+                                <rect key="frame" x="282.5" y="561.5" width="35" height="28.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7/7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvF-Wr-EZw">
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="29"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="ZvF-Wr-EZw" firstAttribute="centerX" secondItem="MyN-SD-crL" secondAttribute="centerX" id="Iiy-j7-mxk"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZvF-Wr-EZw" secondAttribute="trailing" id="THR-Rh-Qyo"/>
+                                    <constraint firstItem="ZvF-Wr-EZw" firstAttribute="leading" secondItem="MyN-SD-crL" secondAttribute="leading" id="d2l-1p-RTF"/>
+                                    <constraint firstItem="ZvF-Wr-EZw" firstAttribute="top" secondItem="MyN-SD-crL" secondAttribute="top" id="lKd-gW-jhD"/>
+                                    <constraint firstItem="ZvF-Wr-EZw" firstAttribute="centerX" secondItem="MyN-SD-crL" secondAttribute="centerX" id="meg-lM-y70"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZvF-Wr-EZw" secondAttribute="bottom" id="scU-NS-j5O"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Iiy-j7-mxk"/>
+                                        <exclude reference="meg-lM-y70"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SSd-KE-wqO">
+                                <rect key="frame" x="530" y="26.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Qgb-cH-YPz"/>
+                                    <constraint firstAttribute="height" constant="40" id="h1Z-1w-7Ec"/>
+                                </constraints>
+                                <state key="normal" title="Done" image="Confirm"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="main-menu" modalTransitionStyle="flipHorizontal" id="VB3-O5-rm1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="jts-Cm-5bq" secondAttribute="trailing" constant="40" id="6Qc-2e-Xvp"/>
+                            <constraint firstItem="jts-Cm-5bq" firstAttribute="leading" secondItem="nKi-ml-TnN" secondAttribute="leading" constant="40" id="Das-gy-8k9"/>
+                            <constraint firstItem="kBi-Eo-8Rj" firstAttribute="top" secondItem="MyN-SD-crL" secondAttribute="bottom" constant="10" id="Fgh-ij-vyi"/>
+                            <constraint firstItem="MyN-SD-crL" firstAttribute="centerX" secondItem="nKi-ml-TnN" secondAttribute="centerX" id="Flz-cp-Hok"/>
+                            <constraint firstItem="jts-Cm-5bq" firstAttribute="centerX" secondItem="nKi-ml-TnN" secondAttribute="centerX" id="WCI-cS-7Du"/>
+                            <constraint firstItem="SSd-KE-wqO" firstAttribute="centerY" secondItem="mbX-Gn-esX" secondAttribute="centerY" id="aC3-Yl-74L"/>
+                            <constraint firstItem="mbX-Gn-esX" firstAttribute="centerX" secondItem="nKi-ml-TnN" secondAttribute="centerX" id="irQ-0A-Uuy"/>
+                            <constraint firstItem="jts-Cm-5bq" firstAttribute="centerY" secondItem="nKi-ml-TnN" secondAttribute="centerY" id="sS3-Bw-r95"/>
+                            <constraint firstAttribute="trailing" secondItem="SSd-KE-wqO" secondAttribute="trailing" constant="30" id="tQy-nL-ZH0"/>
+                            <constraint firstItem="mbX-Gn-esX" firstAttribute="top" secondItem="abQ-ZR-OGv" secondAttribute="bottom" constant="8" id="w6a-nh-Cnz"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eMo-XO-EFi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-601" y="6341"/>
         </scene>
         <!--Setup Instruction View Controller-->
         <scene sceneID="XbV-tj-TzI">
@@ -1802,8 +1901,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="M2x-yW-um3"/>
-        <segue reference="OKD-OH-6Td"/>
-        <segue reference="87V-6a-5kI"/>
+        <segue reference="VB3-O5-rm1"/>
         <segue reference="yme-7x-s1N"/>
+        <segue reference="87V-6a-5kI"/>
     </inferredMetricsTieBreakers>
 </document>
