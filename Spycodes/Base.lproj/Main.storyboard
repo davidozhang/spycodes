@@ -561,8 +561,8 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="QBn-zd-y8P"/>
-                                        <exclude reference="Uaj-xZ-Srh"/>
                                         <exclude reference="UaC-7H-OIX"/>
+                                        <exclude reference="Uaj-xZ-Srh"/>
                                         <exclude reference="Jju-nr-T7u"/>
                                     </mask>
                                 </variation>
@@ -662,9 +662,9 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="eQN-lU-wrd"/>
                                         <exclude reference="ewL-wP-kyC"/>
                                         <exclude reference="nal-WC-Llu"/>
-                                        <exclude reference="eQN-lU-wrd"/>
                                         <exclude reference="L1c-Dn-Jei"/>
                                     </mask>
                                 </variation>
@@ -771,9 +771,9 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="pjp-Ft-fsD"/>
                                         <exclude reference="7X7-J5-LYe"/>
                                         <exclude reference="H0K-u9-oG9"/>
+                                        <exclude reference="pjp-Ft-fsD"/>
                                         <exclude reference="EHa-50-wKY"/>
                                     </mask>
                                 </variation>
@@ -972,9 +972,9 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="Hph-2r-74h"/>
                                         <exclude reference="J4H-BC-u8g"/>
                                         <exclude reference="UDm-Yk-Ez8"/>
-                                        <exclude reference="Hph-2r-74h"/>
                                         <exclude reference="yyQ-cI-Yea"/>
                                     </mask>
                                 </variation>
@@ -1469,21 +1469,8 @@
                                     <constraint firstAttribute="height" constant="23" id="ZfX-2d-IUg"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="084-kN-Fki" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="240" y="529" width="121" height="41"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="nTZ-rc-cUK"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Start Game">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="onStartGame:" destination="VkA-D4-zlT" eventType="touchUpInside" id="YTM-QW-2fA"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GE8-dk-J4b" userLabel="Minigame Toggle View">
-                                <rect key="frame" x="223" y="83" width="154" height="41"/>
+                                <rect key="frame" x="210.5" y="83" width="179" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minigame" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGW-o9-03c">
                                         <rect key="frame" x="0.0" y="7" width="92" height="28"/>
@@ -1497,17 +1484,36 @@
                                             <action selector="minigameToggleChanged:" destination="VkA-D4-zlT" eventType="valueChanged" id="dBL-Nn-uXn"/>
                                         </connections>
                                     </switch>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAi-cx-Vh8" userLabel="Info Button">
+                                        <rect key="frame" x="159" y="11" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="g0i-o0-raC"/>
+                                            <constraint firstAttribute="height" constant="20" id="m6o-PB-5Es"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="Info"/>
+                                        <connections>
+                                            <action selector="onMinigameInfoPressed:" destination="VkA-D4-zlT" eventType="touchUpInside" id="z8v-Pr-6ob"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="3wE-c8-LD8" firstAttribute="top" secondItem="GE8-dk-J4b" secondAttribute="top" constant="5" id="1Mi-5C-UTU"/>
                                     <constraint firstItem="3wE-c8-LD8" firstAttribute="leading" secondItem="vGW-o9-03c" secondAttribute="trailing" constant="8" id="3tN-M8-7j1"/>
                                     <constraint firstAttribute="height" constant="41" id="8i0-yZ-nMg"/>
+                                    <constraint firstItem="TAi-cx-Vh8" firstAttribute="centerY" secondItem="vGW-o9-03c" secondAttribute="centerY" id="8qj-n1-jTF"/>
                                     <constraint firstItem="vGW-o9-03c" firstAttribute="leading" secondItem="GE8-dk-J4b" secondAttribute="leading" id="MDI-DL-Fpw"/>
-                                    <constraint firstAttribute="trailing" secondItem="3wE-c8-LD8" secondAttribute="trailing" constant="5" id="NhC-NT-VYG"/>
+                                    <constraint firstAttribute="trailing" secondItem="3wE-c8-LD8" secondAttribute="trailing" constant="20" symbolic="YES" id="NhC-NT-VYG"/>
                                     <constraint firstItem="3wE-c8-LD8" firstAttribute="centerY" secondItem="vGW-o9-03c" secondAttribute="centerY" id="PjB-Tt-foJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="TAi-cx-Vh8" secondAttribute="trailing" id="ncz-Kj-rmD"/>
                                     <constraint firstAttribute="bottom" secondItem="3wE-c8-LD8" secondAttribute="bottom" constant="5" id="nq7-Ox-gDR"/>
+                                    <constraint firstItem="TAi-cx-Vh8" firstAttribute="leading" secondItem="3wE-c8-LD8" secondAttribute="trailing" constant="10" id="w4Q-Ft-GmI"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="NhC-NT-VYG"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kCT-FC-Wj4" userLabel="Statistics Dashboard View">
                                 <rect key="frame" x="217" y="124" width="166" height="32"/>
@@ -1585,6 +1591,30 @@
                                     <action selector="onBackButtonPressed:" destination="VkA-D4-zlT" eventType="touchUpInside" id="0Td-yP-gLq"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="084-kN-Fki" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="240" y="529" width="121" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="nTZ-rc-cUK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Start Game">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onStartGame:" destination="VkA-D4-zlT" eventType="touchUpInside" id="YTM-QW-2fA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtz-7Q-ljm">
+                                <rect key="frame" x="371" y="539.5" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="0eP-wH-o73"/>
+                                    <constraint firstAttribute="width" constant="20" id="WIO-yI-4pm"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Info"/>
+                                <connections>
+                                    <action selector="onStartGameInfoPressed:" destination="VkA-D4-zlT" eventType="touchUpInside" id="edm-nT-yWY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1594,6 +1624,7 @@
                             <constraint firstItem="Oz9-tw-cJr" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" constant="20" id="6wN-62-yPh"/>
                             <constraint firstAttribute="trailing" secondItem="Oz9-tw-cJr" secondAttribute="trailing" constant="20" id="8GB-VK-bb9"/>
                             <constraint firstItem="Mc1-YN-1oP" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="8St-PS-rgG"/>
+                            <constraint firstItem="rtz-7Q-ljm" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leadingMargin" constant="10" id="C75-cN-z70"/>
                             <constraint firstItem="Mc1-YN-1oP" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="8" id="DoL-Mf-2x1"/>
                             <constraint firstItem="Oz9-tw-cJr" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="15" id="JTg-xR-nlg"/>
                             <constraint firstItem="Ujv-Na-1yG" firstAttribute="top" secondItem="kCT-FC-Wj4" secondAttribute="bottom" constant="15" id="Jw7-7w-vsE"/>
@@ -1605,12 +1636,14 @@
                             <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="50" id="XBE-ff-nvo"/>
                             <constraint firstItem="Zpa-v1-yiA" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="20" id="Yg8-eX-EZE"/>
                             <constraint firstAttribute="trailing" secondItem="Ujv-Na-1yG" secondAttribute="trailing" constant="20" id="cvB-54-ElX"/>
+                            <constraint firstItem="rtz-7Q-ljm" firstAttribute="leading" secondItem="084-kN-Fki" secondAttribute="trailing" constant="10" id="e2C-hf-iKg"/>
                             <constraint firstItem="GE8-dk-J4b" firstAttribute="top" secondItem="Mc1-YN-1oP" secondAttribute="bottom" id="egn-pJ-7Wz"/>
                             <constraint firstItem="kCT-FC-Wj4" firstAttribute="top" secondItem="Mc1-YN-1oP" secondAttribute="bottom" id="gTl-TY-3Ra"/>
                             <constraint firstItem="084-kN-Fki" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="h2n-yW-c3a"/>
                             <constraint firstAttribute="trailing" secondItem="5W3-A0-VGs" secondAttribute="trailing" id="jKW-MX-l9L"/>
                             <constraint firstItem="Zpa-v1-yiA" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" constant="30" id="ks2-G4-0fn"/>
                             <constraint firstItem="kCT-FC-Wj4" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="oLS-aX-3HI"/>
+                            <constraint firstItem="rtz-7Q-ljm" firstAttribute="centerY" secondItem="084-kN-Fki" secondAttribute="centerY" id="rcs-aP-djG"/>
                             <constraint firstItem="Oz9-tw-cJr" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="sNh-PA-TJ0"/>
                             <constraint firstItem="kCT-FC-Wj4" firstAttribute="top" secondItem="GE8-dk-J4b" secondAttribute="bottom" id="u9n-xo-T0e"/>
                             <constraint firstItem="Ujv-Na-1yG" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="uCR-Ay-WxS"/>
@@ -1623,11 +1656,13 @@
                                 <exclude reference="gTl-TY-3Ra"/>
                                 <exclude reference="Vsi-Wx-L0j"/>
                                 <exclude reference="XBE-ff-nvo"/>
+                                <exclude reference="C75-cN-z70"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="blueStatisticsLabel" destination="6rK-DA-NwM" id="JLX-CR-11A"/>
+                        <outlet property="minigameInfoButton" destination="TAi-cx-Vh8" id="Ifw-OB-H6M"/>
                         <outlet property="minigameToggle" destination="3wE-c8-LD8" id="KBa-U5-Qqa"/>
                         <outlet property="minigameToggleView" destination="GE8-dk-J4b" id="9H4-YN-13V"/>
                         <outlet property="minigameToggleViewHeightConstraint" destination="8i0-yZ-nMg" id="mmC-rk-ofv"/>
@@ -1635,6 +1670,7 @@
                         <outlet property="roomNameLabel" destination="Mc1-YN-1oP" id="UVj-Yy-Wno"/>
                         <outlet property="startGame" destination="084-kN-Fki" id="ryC-Vh-gDH"/>
                         <outlet property="startGameButtonHeightConstraint" destination="nTZ-rc-cUK" id="FzE-gm-f9g"/>
+                        <outlet property="startGameInfoButton" destination="rtz-7Q-ljm" id="uDR-2c-NsP"/>
                         <outlet property="statisticsDashboardView" destination="kCT-FC-Wj4" id="odz-nY-QRi"/>
                         <outlet property="statisticsDashboardViewHeightConstraint" destination="MIa-n5-bvl" id="3KY-o7-JDT"/>
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
@@ -1894,6 +1930,7 @@
         <image name="Confirm" width="100" height="100"/>
         <image name="Github-Icon" width="560" height="560"/>
         <image name="Horizontal-Line" width="100" height="100"/>
+        <image name="Info" width="100" height="100"/>
         <image name="Spy" width="290" height="280"/>
         <image name="Stack" width="100" height="100"/>
         <image name="Team" width="100" height="100"/>

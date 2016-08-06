@@ -36,7 +36,6 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if let name = self.roomNameTextField.text where name.characters.count >= 1 {
             Player.instance.setIsHost(true)
-            Player.instance.setIsClueGiver(true)    // Introduce the cluegiver selection feature to other users
             Room.instance.name = name
             
             if Room.instance.getPlayerWithUUID(Player.instance.getUUID()) == nil {

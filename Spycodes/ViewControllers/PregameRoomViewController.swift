@@ -16,6 +16,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var redStatisticsLabel: UILabel!
     @IBOutlet weak var blueStatisticsLabel: UILabel!
     @IBOutlet weak var minigameToggle: UISwitch!
+    @IBOutlet weak var minigameInfoButton: UIButton!
+    @IBOutlet weak var startGameInfoButton: UIButton!
     
     @IBOutlet weak var minigameToggleViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var startGameButtonHeightConstraint: NSLayoutConstraint!
@@ -25,14 +27,29 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var statisticsDashboardView: UIView!
     
     // MARK: Actions
+    @IBAction func onMinigameInfoPressed(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Minigame", message: SpycodesMessage.minigameInfoString, preferredStyle: .Alert)
+        let confirmAction = UIAlertAction(title: "Dismiss", style: .Default, handler: { (action: UIAlertAction) in })
+        alertController.addAction(confirmAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func onStartGameInfoPressed(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Start Game", message: SpycodesMessage.startGameInfoString, preferredStyle: .Alert)
+        let confirmAction = UIAlertAction(title: "Dismiss", style: .Default, handler: { (action: UIAlertAction) in })
+        alertController.addAction(confirmAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     @IBAction func onBackButtonPressed(sender: AnyObject) {
         self.returnToLobby(reason: nil)
     }
     
     @IBAction func minigameToggleChanged(sender: AnyObject) {
+        Room.instance.resetPlayers()
+        
         if minigameToggle.on {
             GameMode.instance.mode = GameMode.Mode.MiniGame
-            Room.instance.resetPlayers()
             Statistics.instance.reset()
         } else {
             GameMode.instance.mode = GameMode.Mode.RegularGame
@@ -52,11 +69,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             CardCollection.instance = CardCollection()
             Round.instance = Round()
             self.goToGame()
-        } else {
-            let alertController = UIAlertController(title: "Cannot Start Game", message: SpycodesMessage.cannotStartGameString, preferredStyle: .Alert)
-            let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in })
-            alertController.addAction(confirmAction)
-            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
@@ -72,6 +84,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             MultipeerManager.instance.initBrowser()
             
             self.startGame.hidden = false
+            self.startGame.alpha = 0.3
+            self.startGame.enabled = false
             self.startGameButtonHeightConstraint.constant = self.startGameButtonDefaultHeight
         }
         else {
@@ -126,7 +140,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private func refreshView() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
-            self.checkRoomSize()
+            self.checkRoom()
             self.updateMinigameToggle()
             self.updateStatisticsDashboard()
         })
@@ -169,7 +183,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    private func checkRoomSize() {
+    private func checkRoom() {
         if !Player.instance.isHost() {
             return
         }
@@ -187,20 +201,31 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                 MultipeerManager.instance.startBrowser()
             }
         }
+        
+        if Room.instance.canStartGame() {
+            startGame.alpha = 1.0
+            startGame.enabled = true
+        } else {
+            startGame.alpha = 0.3
+            startGame.enabled = false
+        }
     }
     
     private func updateMinigameToggle() {
         if !Player.instance.isHost() {
             if GameMode.instance.mode == GameMode.Mode.RegularGame {    // Don't show the minigame indicator if it is regular game
+                self.minigameInfoButton.hidden = true
                 self.minigameToggleView.hidden = true
                 self.minigameToggleViewHeightConstraint.constant = 0
                 return
             } else {
+                self.minigameInfoButton.hidden = false
                 self.minigameToggleView.hidden = false
                 self.minigameToggleViewHeightConstraint.constant = self.minigameToggleViewDefaultHeight
             }
             self.minigameToggle.enabled = false
         } else {
+            self.minigameInfoButton.hidden = false
             if Room.instance.players.count > 3 {
                 self.minigameToggle.enabled = false
             } else {
