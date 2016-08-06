@@ -21,7 +21,8 @@ class InstructionsPageViewController: UIPageViewController, UIPageViewController
             self.instantiateViewControllerWithStoryboardIdentifier("welcome-view-controller"),
             self.instantiateViewControllerWithStoryboardIdentifier("setup-instruction-view"),
             self.instantiateViewControllerWithStoryboardIdentifier("teams-instruction-view"),
-            self.instantiateViewControllerWithStoryboardIdentifier("cluegiver-instruction-view")
+            self.instantiateViewControllerWithStoryboardIdentifier("cluegiver-instruction-view"),
+            self.instantiateViewControllerWithStoryboardIdentifier("non-cluegiver-instruction-view")
         ]
     }()
     

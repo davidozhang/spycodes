@@ -585,6 +585,108 @@
             </objects>
             <point key="canvasLocation" x="-601" y="4122"/>
         </scene>
+        <!--Non-Cluegiver Instruction View Controller-->
+        <scene sceneID="UY1-Hc-U15">
+            <objects>
+                <viewController storyboardIdentifier="non-cluegiver-instruction-view" title="Non-Cluegiver Instruction View Controller" id="YzM-VS-5ZG" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cFL-wu-h4M"/>
+                        <viewControllerLayoutGuide type="bottom" id="o3C-kb-jQk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BbA-uW-f8B">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Non-Cluegiver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tak-bq-y29">
+                                <rect key="frame" x="210" y="28" width="180.5" height="37"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-eO-I0y">
+                                <rect key="frame" x="40" y="263.5" width="520" height="73.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weB-KK-LgT">
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="28.5"/>
+                                        <string key="text">Once clue and number of words are set, remaining team players should work together and guess the words by tapping on the word cards. At least one guess must be made each round. When guessing is done, the cluegiver can end the round.</string>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cluegiver-Unfilled" translatesAutoresizingMaskIntoConstraints="NO" id="GfD-eG-lVl">
+                                        <rect key="frame" x="235" y="38.5" width="50" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="Glq-lq-BvA"/>
+                                            <constraint firstAttribute="height" constant="35" id="QWm-JV-imp"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="weB-KK-LgT" firstAttribute="leading" secondItem="fM7-eO-I0y" secondAttribute="leading" id="DH4-wv-MzS"/>
+                                    <constraint firstItem="weB-KK-LgT" firstAttribute="top" secondItem="fM7-eO-I0y" secondAttribute="top" id="E9K-SX-uOj"/>
+                                    <constraint firstItem="GfD-eG-lVl" firstAttribute="top" secondItem="weB-KK-LgT" secondAttribute="bottom" constant="10" id="Eyq-4z-oiH"/>
+                                    <constraint firstItem="GfD-eG-lVl" firstAttribute="centerX" secondItem="fM7-eO-I0y" secondAttribute="centerX" id="Jwr-6f-vht"/>
+                                    <constraint firstAttribute="bottom" secondItem="GfD-eG-lVl" secondAttribute="bottom" id="iKE-rJ-yzt"/>
+                                    <constraint firstAttribute="trailing" secondItem="weB-KK-LgT" secondAttribute="trailing" id="tch-ME-ci5"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zpc-dd-M9C" userLabel="Page Number View">
+                                <rect key="frame" x="213.5" y="533.5" width="173" height="56.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to continue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Fy-fa-Hsv">
+                                        <rect key="frame" x="0.0" y="0.0" width="173" height="28"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5/7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcx-rC-PFT">
+                                        <rect key="frame" x="69.5" y="28" width="35" height="29"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="lcx-rC-PFT" firstAttribute="top" secondItem="3Fy-fa-Hsv" secondAttribute="bottom" id="32l-Ks-qtP"/>
+                                    <constraint firstItem="3Fy-fa-Hsv" firstAttribute="top" secondItem="Zpc-dd-M9C" secondAttribute="top" id="BZO-KK-1hL"/>
+                                    <constraint firstItem="lcx-rC-PFT" firstAttribute="centerX" secondItem="Zpc-dd-M9C" secondAttribute="centerX" id="L1c-Dn-Jei"/>
+                                    <constraint firstItem="lcx-rC-PFT" firstAttribute="centerX" secondItem="Zpc-dd-M9C" secondAttribute="centerX" id="Ukc-pc-KnS"/>
+                                    <constraint firstItem="3Fy-fa-Hsv" firstAttribute="centerX" secondItem="Zpc-dd-M9C" secondAttribute="centerX" id="eQN-lU-wrd"/>
+                                    <constraint firstItem="3Fy-fa-Hsv" firstAttribute="leading" secondItem="Zpc-dd-M9C" secondAttribute="leading" id="ewL-wP-kyC"/>
+                                    <constraint firstAttribute="bottom" secondItem="lcx-rC-PFT" secondAttribute="bottom" id="hVh-mh-DXr"/>
+                                    <constraint firstAttribute="trailing" secondItem="3Fy-fa-Hsv" secondAttribute="trailing" id="nal-WC-Llu"/>
+                                    <constraint firstItem="3Fy-fa-Hsv" firstAttribute="leading" secondItem="Zpc-dd-M9C" secondAttribute="leading" id="sae-Bq-J7y"/>
+                                    <constraint firstAttribute="trailing" secondItem="3Fy-fa-Hsv" secondAttribute="trailing" id="yGr-8K-uLB"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ewL-wP-kyC"/>
+                                        <exclude reference="nal-WC-Llu"/>
+                                        <exclude reference="eQN-lU-wrd"/>
+                                        <exclude reference="L1c-Dn-Jei"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fM7-eO-I0y" firstAttribute="centerY" secondItem="BbA-uW-f8B" secondAttribute="centerY" id="1XO-nj-5p2"/>
+                            <constraint firstAttribute="trailing" secondItem="fM7-eO-I0y" secondAttribute="trailing" constant="40" id="Gra-J3-h9f"/>
+                            <constraint firstItem="Zpc-dd-M9C" firstAttribute="centerX" secondItem="BbA-uW-f8B" secondAttribute="centerX" id="MjA-6h-Wew"/>
+                            <constraint firstItem="o3C-kb-jQk" firstAttribute="top" secondItem="Zpc-dd-M9C" secondAttribute="bottom" constant="10" id="N8o-KM-52N"/>
+                            <constraint firstItem="fM7-eO-I0y" firstAttribute="leading" secondItem="BbA-uW-f8B" secondAttribute="leading" constant="40" id="ZvK-Lm-Bq7"/>
+                            <constraint firstItem="Tak-bq-y29" firstAttribute="top" secondItem="cFL-wu-h4M" secondAttribute="bottom" constant="8" id="pBl-xO-fWa"/>
+                            <constraint firstItem="Tak-bq-y29" firstAttribute="centerX" secondItem="BbA-uW-f8B" secondAttribute="centerX" id="qPA-bb-mbz"/>
+                            <constraint firstItem="fM7-eO-I0y" firstAttribute="centerX" secondItem="BbA-uW-f8B" secondAttribute="centerX" id="qeh-4N-mv7"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SGz-kk-78Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-601" y="4864"/>
+        </scene>
         <!--Setup Instruction View Controller-->
         <scene sceneID="XbV-tj-TzI">
             <objects>
@@ -1580,6 +1682,7 @@
         <image name="Back" width="100" height="100"/>
         <image name="Chart" width="100" height="100"/>
         <image name="Cluegiver-Filled" width="100" height="66"/>
+        <image name="Cluegiver-Unfilled" width="100" height="66"/>
         <image name="Confirm" width="100" height="100"/>
         <image name="Github-Icon" width="560" height="560"/>
         <image name="Horizontal-Line" width="100" height="100"/>
