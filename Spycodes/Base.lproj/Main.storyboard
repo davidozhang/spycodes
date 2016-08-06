@@ -501,7 +501,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sqj-6P-3b8">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sqj-6P-3b8" userLabel="Cluegiver Instruction View">
                                 <rect key="frame" x="40" y="261" width="520" height="78.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tm2-Uk-Fk9">
@@ -603,21 +603,21 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-eO-I0y">
-                                <rect key="frame" x="40" y="263.5" width="520" height="73.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-eO-I0y" userLabel="Clue Instruction View">
+                                <rect key="frame" x="40" y="261" width="520" height="78.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weB-KK-LgT">
                                         <rect key="frame" x="0.0" y="0.0" width="520" height="28.5"/>
-                                        <string key="text">Once clue and number of words are set, remaining team players should work together and guess the words by tapping on the word cards. At least one guess must be made each round. When guessing is done, the cluegiver can end the round.</string>
+                                        <string key="text">Once clue and number of words are set, remaining team players should work together and guess the words. Tapping on a card means final decision for a guess. At least one guess must be made each round. Once guessing is done, the cluegiver can end the round.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cluegiver-Unfilled" translatesAutoresizingMaskIntoConstraints="NO" id="GfD-eG-lVl">
-                                        <rect key="frame" x="235" y="38.5" width="50" height="35"/>
+                                        <rect key="frame" x="235" y="38.5" width="50" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Glq-lq-BvA"/>
-                                            <constraint firstAttribute="height" constant="35" id="QWm-JV-imp"/>
+                                            <constraint firstAttribute="height" constant="40" id="QWm-JV-imp"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -686,6 +686,115 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SGz-kk-78Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-601" y="4864"/>
+        </scene>
+        <!--Clue Instruction View Controller-->
+        <scene sceneID="hdN-qt-mPK">
+            <objects>
+                <viewController storyboardIdentifier="clue-instruction-view" title="Clue Instruction View Controller" id="eFq-1W-Bv5" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xiQ-W2-YXd"/>
+                        <viewControllerLayoutGuide type="bottom" id="igB-Qa-dFV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Tgl-EW-4Qt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCJ-bb-YuQ">
+                                <rect key="frame" x="271" y="28" width="58.5" height="37"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mpk-tC-u6K">
+                                <rect key="frame" x="40" y="204" width="520" height="192"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXN-1o-u41">
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="142"/>
+                                        <string key="text">The given clue must be about meaning of the words. The cluegiver is allowed to spell out the clue. The cluegiver is NOT allowed to use proper names and compound, hyphenated or homonym words as clue.</string>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Confirm" translatesAutoresizingMaskIntoConstraints="NO" id="16b-KC-KSD">
+                                        <rect key="frame" x="240" y="152" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="FFI-Cr-dMQ"/>
+                                            <constraint firstAttribute="height" constant="40" id="lnE-WR-Pp0"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="XXN-1o-u41" firstAttribute="centerX" secondItem="mpk-tC-u6K" secondAttribute="centerX" id="0kD-Ex-BWD"/>
+                                    <constraint firstAttribute="bottom" secondItem="16b-KC-KSD" secondAttribute="bottom" id="5nA-Mm-UUj"/>
+                                    <constraint firstItem="16b-KC-KSD" firstAttribute="top" secondItem="XXN-1o-u41" secondAttribute="bottom" constant="10" id="6Zw-mn-ewY"/>
+                                    <constraint firstItem="16b-KC-KSD" firstAttribute="centerX" secondItem="mpk-tC-u6K" secondAttribute="centerX" id="AOP-2B-u3m"/>
+                                    <constraint firstAttribute="trailing" secondItem="XXN-1o-u41" secondAttribute="trailing" id="FuW-Po-7i2"/>
+                                    <constraint firstItem="XXN-1o-u41" firstAttribute="leading" secondItem="mpk-tC-u6K" secondAttribute="leading" id="IKX-Ea-q6C"/>
+                                    <constraint firstItem="XXN-1o-u41" firstAttribute="top" secondItem="mpk-tC-u6K" secondAttribute="top" id="Zle-jv-PDe"/>
+                                    <constraint firstItem="16b-KC-KSD" firstAttribute="top" secondItem="mpk-tC-u6K" secondAttribute="top" constant="10" id="hIf-8C-qrG"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="hIf-8C-qrG"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abl-lc-SQs" userLabel="Page Number View">
+                                <rect key="frame" x="213.5" y="533.5" width="173" height="56.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to continue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj3-Qp-YdA">
+                                        <rect key="frame" x="0.0" y="0.0" width="173" height="28"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6/7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9e-m6-5sX">
+                                        <rect key="frame" x="69.5" y="28" width="35" height="29"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="fj3-Qp-YdA" secondAttribute="trailing" id="7X7-J5-LYe"/>
+                                    <constraint firstItem="i9e-m6-5sX" firstAttribute="centerX" secondItem="Abl-lc-SQs" secondAttribute="centerX" id="DA5-7R-fAF"/>
+                                    <constraint firstItem="i9e-m6-5sX" firstAttribute="centerX" secondItem="Abl-lc-SQs" secondAttribute="centerX" id="EHa-50-wKY"/>
+                                    <constraint firstItem="fj3-Qp-YdA" firstAttribute="centerX" secondItem="Abl-lc-SQs" secondAttribute="centerX" id="H0K-u9-oG9"/>
+                                    <constraint firstItem="fj3-Qp-YdA" firstAttribute="leading" secondItem="Abl-lc-SQs" secondAttribute="leading" id="H3C-uz-5cj"/>
+                                    <constraint firstAttribute="bottom" secondItem="i9e-m6-5sX" secondAttribute="bottom" id="Hf0-F3-qg7"/>
+                                    <constraint firstItem="i9e-m6-5sX" firstAttribute="top" secondItem="fj3-Qp-YdA" secondAttribute="bottom" id="Y5I-gN-cse"/>
+                                    <constraint firstAttribute="trailing" secondItem="fj3-Qp-YdA" secondAttribute="trailing" id="kQ2-ks-KNX"/>
+                                    <constraint firstItem="fj3-Qp-YdA" firstAttribute="leading" secondItem="Abl-lc-SQs" secondAttribute="leading" id="pjp-Ft-fsD"/>
+                                    <constraint firstItem="fj3-Qp-YdA" firstAttribute="top" secondItem="Abl-lc-SQs" secondAttribute="top" id="sDO-ta-270"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="pjp-Ft-fsD"/>
+                                        <exclude reference="7X7-J5-LYe"/>
+                                        <exclude reference="H0K-u9-oG9"/>
+                                        <exclude reference="EHa-50-wKY"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kCJ-bb-YuQ" firstAttribute="centerX" secondItem="Tgl-EW-4Qt" secondAttribute="centerX" id="9NY-pq-nxD"/>
+                            <constraint firstItem="mpk-tC-u6K" firstAttribute="leading" secondItem="Tgl-EW-4Qt" secondAttribute="leading" constant="40" id="CW3-rC-PQ3"/>
+                            <constraint firstItem="kCJ-bb-YuQ" firstAttribute="top" secondItem="xiQ-W2-YXd" secondAttribute="bottom" constant="8" id="DeD-S4-DrO"/>
+                            <constraint firstAttribute="trailing" secondItem="mpk-tC-u6K" secondAttribute="trailing" constant="40" id="K5H-uV-CKH"/>
+                            <constraint firstItem="mpk-tC-u6K" firstAttribute="centerX" secondItem="Tgl-EW-4Qt" secondAttribute="centerX" id="WVT-mW-yoL"/>
+                            <constraint firstItem="igB-Qa-dFV" firstAttribute="top" secondItem="Abl-lc-SQs" secondAttribute="bottom" constant="10" id="j8G-EA-Q6J"/>
+                            <constraint firstItem="mpk-tC-u6K" firstAttribute="centerY" secondItem="Tgl-EW-4Qt" secondAttribute="centerY" id="rdr-Ho-Tvl"/>
+                            <constraint firstItem="Abl-lc-SQs" firstAttribute="centerX" secondItem="Tgl-EW-4Qt" secondAttribute="centerX" id="yPh-cH-gKt"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wtj-qw-aJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-601" y="5606"/>
         </scene>
         <!--Setup Instruction View Controller-->
         <scene sceneID="XbV-tj-TzI">
