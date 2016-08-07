@@ -17,10 +17,6 @@ extension UIColor {
         return UIColor.init(red: 133/255, green: 193/255, blue: 245/255, alpha: 1.0)
     }
     
-    static func spycodesLightYellowColor() -> UIColor {
-        return UIColor.init(red: 244/255, green: 186/255, blue: 112/255, alpha: 0.3)
-    }
-    
     static func spycodesBlackColor() -> UIColor {
         return UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.3)
     }
@@ -32,9 +28,7 @@ extension UIColor {
         else if team == Team.Blue {
             return UIColor.spycodesLightBlueColor()
         }
-        else if team == Team.Neutral {
-            return UIColor.spycodesLightYellowColor()
-        } else {
+        else {
             return UIColor.spycodesBlackColor()
         }
     }
