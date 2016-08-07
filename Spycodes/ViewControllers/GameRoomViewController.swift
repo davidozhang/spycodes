@@ -8,8 +8,6 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
     
-    private var playerRoundStarted = false
-    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var clueTextField: UITextField!
     @IBOutlet weak var numberOfWordsTextField: UITextField!
@@ -221,15 +219,6 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultLoseString)
                 return
             }
-            
-            if Round.instance.currentTeam == Player.instance.team {
-                if !playerRoundStarted {
-                    AudioToolboxManager.instance.vibrate()
-                    playerRoundStarted = true
-                }
-            } else {
-                playerRoundStarted = false
-            }
         }
         else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
             Room.instance = room
@@ -412,6 +401,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == self.clueTextField && textField.text?.characters.count >= 1 {
             Round.instance.clue = self.clueTextField.text
+            self.broadcastEssentialData()
             self.numberOfWordsTextField.becomeFirstResponder()
         } else if textField == self.numberOfWordsTextField && textField.text?.characters.count >= 1 {
             if Round.instance.isClueSet() {

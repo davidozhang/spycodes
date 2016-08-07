@@ -58,7 +58,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         self.broadcastEssentialData()
         
         self.broadcastOptionalData(Statistics.instance)
-        self.broadcastOptionalData(GameMode.instance)
     }
     
     @IBAction func unwindToPregameRoom(segue: UIStoryboardSegue) {}
@@ -84,12 +83,14 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             MultipeerManager.instance.initBrowser()
             
             self.startGame.hidden = false
+            self.startGameInfoButton.hidden = false
             self.startGame.alpha = 0.3
             self.startGame.enabled = false
             self.startGameButtonHeightConstraint.constant = self.startGameButtonDefaultHeight
         }
         else {
             self.startGame.hidden = true
+            self.startGameInfoButton.hidden = true
             self.startGameButtonHeightConstraint.constant = 0
         }
         
@@ -148,7 +149,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     @objc
     private func broadcastEssentialData() {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+        var data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+        MultipeerManager.instance.broadcastData(data)
+        
+        data = NSKeyedArchiver.archivedDataWithRootObject(GameMode.instance)
         MultipeerManager.instance.broadcastData(data)
     }
     
