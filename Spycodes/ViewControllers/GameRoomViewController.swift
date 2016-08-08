@@ -38,6 +38,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.broadcastEssentialData), name: SpycodesNotificationKey.autoConvertBystanderCardNotificationkey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.broadcastEssentialData), name: SpycodesNotificationKey.autoEliminateNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.didEndGameWithNotification), name: SpycodesNotificationKey.minigameGameOverNotificationKey, object: nil)
     }
@@ -73,6 +74,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         }
         self.refreshTimer?.invalidate()
         
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.autoConvertBystanderCardNotificationkey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.autoEliminateNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.minigameGameOverNotificationKey, object: nil)
     }
@@ -231,7 +233,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
                 return
             }
-            else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) && GameMode.instance.mode == GameMode.Mode.RegularGame {
+            else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) {
                 self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultLoseString)
                 return
             }
@@ -273,7 +275,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 25
+        return 22
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -318,6 +320,9 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         let opponentTeam = Team(rawValue: playerTeam.rawValue ^ 1)
         
         if cardAtIndexTeam == Team.Neutral || cardAtIndexTeam == opponentTeam {
+            if cardAtIndexTeam == Team.Neutral {
+                CardCollection.instance.autoConvertNeutralCardToTeamCard()
+            }
             self.didEndRound()
         }
         

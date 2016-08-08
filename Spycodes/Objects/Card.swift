@@ -57,4 +57,8 @@ class Card: NSObject, NSCoding {
     func getTeam() -> Team {
         return self.team
     }
+    
+    func setTeam(team: Team) {
+        self.team = team
+    }
 }
