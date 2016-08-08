@@ -13,8 +13,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var startGame: SpycodesButton!
-    @IBOutlet weak var redStatisticsLabel: UILabel!
-    @IBOutlet weak var blueStatisticsLabel: UILabel!
+    @IBOutlet weak var statisticsImageView: UIImageView!
+    @IBOutlet weak var statisticsLabel: UILabel!
     @IBOutlet weak var minigameToggle: UISwitch!
     @IBOutlet weak var minigameInfoButton: UIButton!
     @IBOutlet weak var startGameInfoButton: UIButton!
@@ -47,10 +47,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func minigameToggleChanged(sender: AnyObject) {
         Room.instance.resetPlayers()
+        Statistics.instance.reset()
         
         if minigameToggle.on {
             GameMode.instance.mode = GameMode.Mode.MiniGame
-            Statistics.instance.reset()
         } else {
             GameMode.instance.mode = GameMode.Mode.RegularGame
         }
@@ -246,16 +246,17 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     private func updateStatisticsDashboard() {
         if GameMode.instance.mode == GameMode.Mode.MiniGame {
-            self.statisticsDashboardView.hidden = true
-            self.statisticsDashboardViewHeightConstraint.constant = 0
-            return
+            self.statisticsImageView.image = UIImage(named: "Medal")
+            if let bestRecord = Statistics.instance.getBestRecord() {
+                self.statisticsLabel.text = "Best Record: " + String(bestRecord)
+            } else {
+                self.statisticsLabel.text = "Best Record: --"
+            }
         } else {
-            self.statisticsDashboardView.hidden = false
-            self.statisticsDashboardViewHeightConstraint.constant = self.statisticsDashboardDefaultHeight
-        }
-        if let redNumberOfWins = Statistics.instance.getStatistics()[Team.Red], blueNumberOfWins = Statistics.instance.getStatistics()[Team.Blue] {
-            self.redStatisticsLabel.text = String(redNumberOfWins)
-            self.blueStatisticsLabel.text = String(blueNumberOfWins)
+            self.statisticsImageView.image = UIImage(named: "Chart")
+            if let redNumberOfWins = Statistics.instance.getStatistics()[Team.Red], blueNumberOfWins = Statistics.instance.getStatistics()[Team.Blue] {
+                self.statisticsLabel.text = "Red: " + String(redNumberOfWins) + " Blue: " + String(blueNumberOfWins)
+            }
         }
     }
     

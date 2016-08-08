@@ -217,6 +217,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             }
             else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.MiniGame {
                 self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
+                Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
                 return
             }
             else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) && GameMode.instance.mode == GameMode.Mode.RegularGame {
@@ -329,6 +330,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
             } else {
                 self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
+                Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
+                self.broadcastOptionalData(Statistics.instance)
             }
         }
     }
