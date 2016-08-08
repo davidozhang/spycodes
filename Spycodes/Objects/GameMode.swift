@@ -23,4 +23,8 @@ class GameMode: NSObject, NSCoding {
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.mode?.rawValue, forKey: "mode")
     }
+    
+    func reset() {
+        self.mode = GameMode.Mode.RegularGame
+    }
 }

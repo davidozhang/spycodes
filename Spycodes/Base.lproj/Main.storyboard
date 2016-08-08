@@ -1515,13 +1515,16 @@
                                     <constraint firstItem="vGW-o9-03c" firstAttribute="leading" secondItem="GE8-dk-J4b" secondAttribute="leading" id="MDI-DL-Fpw"/>
                                     <constraint firstAttribute="trailing" secondItem="3wE-c8-LD8" secondAttribute="trailing" constant="20" symbolic="YES" id="NhC-NT-VYG"/>
                                     <constraint firstItem="3wE-c8-LD8" firstAttribute="centerY" secondItem="vGW-o9-03c" secondAttribute="centerY" id="PjB-Tt-foJ"/>
+                                    <constraint firstItem="3wE-c8-LD8" firstAttribute="centerY" secondItem="GE8-dk-J4b" secondAttribute="centerY" id="T5W-ML-Mrh"/>
                                     <constraint firstAttribute="trailing" secondItem="TAi-cx-Vh8" secondAttribute="trailing" id="ncz-Kj-rmD"/>
                                     <constraint firstAttribute="bottom" secondItem="3wE-c8-LD8" secondAttribute="bottom" constant="5" id="nq7-Ox-gDR"/>
                                     <constraint firstItem="TAi-cx-Vh8" firstAttribute="leading" secondItem="3wE-c8-LD8" secondAttribute="trailing" constant="10" id="w4Q-Ft-GmI"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="1Mi-5C-UTU"/>
                                         <exclude reference="NhC-NT-VYG"/>
+                                        <exclude reference="nq7-Ox-gDR"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -1714,6 +1717,17 @@
                                     <constraint firstItem="1J8-w3-IbM" firstAttribute="leading" secondItem="Two-zP-PDk" secondAttribute="trailing" constant="8" id="nbD-hc-lJf"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUf-TJ-d5l" userLabel="Back Button">
+                                <rect key="frame" x="182" y="70.5" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="4in-hr-7jc"/>
+                                    <constraint firstAttribute="height" constant="30" id="Ozq-uH-Lel"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Back"/>
+                                <connections>
+                                    <action selector="onBackButtonPressed:" destination="yX4-d1-WHr" eventType="touchUpInside" id="2IY-wZ-XeY"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scv-CB-Z0e" userLabel="Dashboard View">
                                 <rect key="frame" x="232" y="70" width="136" height="30"/>
                                 <subviews>
@@ -1836,6 +1850,9 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-Ow-5JW" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
                                 <rect key="frame" x="242" y="529" width="117" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="sGn-4Y-MCz"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="End Round">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1867,8 +1884,10 @@
                             <constraint firstItem="MFz-T6-caL" firstAttribute="top" secondItem="udo-t2-F4l" secondAttribute="bottom" id="Ff7-pC-9PN"/>
                             <constraint firstItem="XFn-Ic-8z8" firstAttribute="top" secondItem="DMO-Jt-Cx9" secondAttribute="bottom" constant="8" id="Iba-97-XXz"/>
                             <constraint firstItem="sgr-T9-WXe" firstAttribute="top" secondItem="scv-CB-Z0e" secondAttribute="bottom" constant="15" id="JRV-E5-SJm"/>
+                            <constraint firstItem="scv-CB-Z0e" firstAttribute="centerY" secondItem="dUf-TJ-d5l" secondAttribute="centerY" id="MRV-x6-fha"/>
                             <constraint firstItem="scv-CB-Z0e" firstAttribute="centerX" secondItem="hUt-sP-cEd" secondAttribute="centerX" id="Q0f-bJ-zsa"/>
                             <constraint firstItem="zv5-wp-R42" firstAttribute="leading" secondItem="XFn-Ic-8z8" secondAttribute="trailing" constant="8" id="R47-u2-1CJ"/>
+                            <constraint firstItem="XFn-Ic-8z8" firstAttribute="centerY" secondItem="dUf-TJ-d5l" secondAttribute="centerY" id="Wbx-uy-pLd"/>
                             <constraint firstItem="sgr-T9-WXe" firstAttribute="leading" secondItem="hUt-sP-cEd" secondAttribute="leading" constant="20" id="XPd-9w-c1z"/>
                             <constraint firstItem="sgr-T9-WXe" firstAttribute="centerX" secondItem="hUt-sP-cEd" secondAttribute="centerX" id="XcD-oF-i6W"/>
                             <constraint firstItem="zv5-wp-R42" firstAttribute="centerY" secondItem="XFn-Ic-8z8" secondAttribute="centerY" id="Zu7-Vv-TbC"/>
@@ -1878,13 +1897,17 @@
                             <constraint firstItem="MFz-T6-caL" firstAttribute="leading" secondItem="hUt-sP-cEd" secondAttribute="leading" constant="20" id="eg8-o5-DVT"/>
                             <constraint firstItem="MFz-T6-caL" firstAttribute="centerX" secondItem="hUt-sP-cEd" secondAttribute="centerX" id="g3c-ew-Uuq"/>
                             <constraint firstItem="udo-t2-F4l" firstAttribute="top" secondItem="sgr-T9-WXe" secondAttribute="bottom" constant="15" id="gUa-0h-uJQ"/>
+                            <constraint firstItem="dUf-TJ-d5l" firstAttribute="leading" secondItem="hUt-sP-cEd" secondAttribute="leading" constant="30" id="j1i-H3-0Ez"/>
+                            <constraint firstItem="scv-CB-Z0e" firstAttribute="leading" secondItem="dUf-TJ-d5l" secondAttribute="trailing" constant="20" id="lhJ-dn-QiJ"/>
                             <constraint firstAttribute="trailing" secondItem="udo-t2-F4l" secondAttribute="trailing" constant="20" id="nb5-UO-f02"/>
                             <constraint firstAttribute="trailing" secondItem="XFn-Ic-8z8" secondAttribute="trailing" id="nbF-aP-iEj"/>
                             <constraint firstItem="PlM-Ow-5JW" firstAttribute="top" secondItem="MFz-T6-caL" secondAttribute="bottom" constant="15" id="vfi-AA-Mub"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="j1i-H3-0Ez"/>
                                 <exclude reference="gUa-0h-uJQ"/>
+                                <exclude reference="Wbx-uy-pLd"/>
                                 <exclude reference="boa-xi-Mma"/>
                                 <exclude reference="nbF-aP-iEj"/>
                             </mask>
@@ -1896,6 +1919,7 @@
                         <outlet property="collectionView" destination="udo-t2-F4l" id="dkZ-d6-YKx"/>
                         <outlet property="confirmButton" destination="zv5-wp-R42" id="euX-ZZ-rXH"/>
                         <outlet property="endRoundButton" destination="PlM-Ow-5JW" id="YQM-Y0-lsz"/>
+                        <outlet property="endRoundButtonHeightConstraint" destination="sGn-4Y-MCz" id="nz6-uD-qOA"/>
                         <outlet property="numberOfWordsTextField" destination="1J8-w3-IbM" id="OZo-0w-hSZ"/>
                         <outlet property="teamLabel" destination="p06-Ae-1HJ" id="NrV-HJ-nZH"/>
                         <segue destination="Isy-vz-eu5" kind="unwind" identifier="pregame-room" unwindAction="unwindToPregameRoom:" id="0dq-Te-mES"/>
@@ -1923,8 +1947,8 @@
         <image name="Wifi" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="87V-6a-5kI"/>
         <segue reference="yme-7x-s1N"/>
+        <segue reference="87V-6a-5kI"/>
         <segue reference="w37-nV-hgw"/>
         <segue reference="M2x-yW-um3"/>
     </inferredMetricsTieBreakers>

@@ -379,7 +379,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
         else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
             Round.instance = round
-            self.goToGame()
+            // TODO: Improve Round handling logic
+            if !Round.instance.abort {
+                self.goToGame()
+            }
         }
         else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
             Statistics.instance = statistics

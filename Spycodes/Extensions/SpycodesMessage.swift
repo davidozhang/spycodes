@@ -11,4 +11,5 @@ class SpycodesMessage {
     static let minigameInfoString = "Minigame can be played with 2-3 players."
     
     static let playerDisconnectedString = "A player in the game has disconnected."
+    static let playerAbortedString = "A player in the game has aborted the game."
 }

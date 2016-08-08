@@ -54,6 +54,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         MultipeerManager.instance.startBrowser()
         
         Player.instance.reset()
+        GameMode.instance.reset()
         Statistics.instance.reset()
         Room.instance.connectedPeers.removeAll()
         Room.instance.players.removeAll()

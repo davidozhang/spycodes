@@ -4,6 +4,7 @@ import UIKit
 class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MultipeerManagerDelegate, UITextFieldDelegate {
     private let reuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
+    private let endRoundButtonDefaultHeight: CGFloat = 50
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -16,6 +17,14 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     @IBOutlet weak var endRoundButton: SpycodesButton!
     @IBOutlet weak var confirmButton: UIButton!
+    
+    @IBOutlet weak var endRoundButtonHeightConstraint: NSLayoutConstraint!
+    
+    @IBAction func onBackButtonPressed(sender: AnyObject) {
+        Round.instance.abortGame()
+        self.broadcastEssentialData()
+        self.performSegueWithIdentifier("pregame-room", sender: self)
+    }
     
     @IBAction func onConfirmPressed(sender: AnyObject) {
         self.didConfirm()
@@ -46,8 +55,10 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         if Player.instance.isClueGiver() {
             self.endRoundButton.hidden = false
+            self.endRoundButtonHeightConstraint.constant = self.endRoundButtonDefaultHeight
         } else {
             self.endRoundButton.hidden = true
+            self.endRoundButtonHeightConstraint.constant = 0
         }
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameRoomViewController.refreshView), userInfo: nil, repeats: true)    // Refresh room every second
@@ -208,7 +219,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
             Round.instance = round
             if Round.instance.abort {
-                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerDisconnectedString)
+                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerAbortedString)
                 return
             }
             else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.RegularGame {
