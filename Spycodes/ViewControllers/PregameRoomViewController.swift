@@ -285,12 +285,14 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         
         if Player.instance.isHost() || Player.instance == playerAtIndex {
             cell.teamSwitch.enabled = true
+            cell.clueGiverImage.alpha = 1.0
             
             if GameMode.instance.mode == GameMode.Mode.MiniGame {
                 cell.teamSwitch.enabled = false
             }
         } else {
             cell.teamSwitch.enabled = false
+            cell.clueGiverImage.alpha = 0.3
         }
 
         if playerAtIndex.isClueGiver() {
