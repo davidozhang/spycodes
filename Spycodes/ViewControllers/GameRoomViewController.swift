@@ -211,11 +211,15 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerDisconnectedString)
                 return
             }
-            else if Round.instance.winningTeam == Player.instance.team {
+            else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.RegularGame {
                 self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
                 return
             }
-            else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) {
+            else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.MiniGame {
+                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
+                return
+            }
+            else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) && GameMode.instance.mode == GameMode.Mode.RegularGame {
                 self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultLoseString)
                 return
             }
@@ -318,10 +322,14 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             Round.instance.winningTeam = playerTeam
             self.broadcastEssentialData()
             
-            Statistics.instance.recordWinForTeam(playerTeam)
-            self.broadcastOptionalData(Statistics.instance)
-            
-            self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
+            if GameMode.instance.mode == GameMode.Mode.RegularGame {
+                Statistics.instance.recordWinForTeam(playerTeam)
+                self.broadcastOptionalData(Statistics.instance)
+                
+                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
+            } else {
+                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
+            }
         }
     }
     
