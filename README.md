@@ -2,8 +2,6 @@
 
 A local peer-to-peer multiplayer word association game inspired by the minimalist style of Spyfall.
 
-The game is anticipated to be launched on the App Store early Fall!
-
 ## Installation/Usage
 
 1. Download XCode
@@ -15,6 +13,8 @@ The game is anticipated to be launched on the App Store early Fall!
 ## Contributing
 
 If you enjoy playing the game, then you should help contribute to making it even more awesome!
+
+See all the exciting new features planned for Spycodes: https://trello.com/b/AIWsf7zZ/spycodes
 
 Code Contribution:
 
