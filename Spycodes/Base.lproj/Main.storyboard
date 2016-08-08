@@ -1526,7 +1526,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kCT-FC-Wj4" userLabel="Statistics Dashboard View">
-                                <rect key="frame" x="217" y="124" width="166" height="32"/>
+                                <rect key="frame" x="221.5" y="124" width="157" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Chart" translatesAutoresizingMaskIntoConstraints="NO" id="Crb-fR-RGp">
                                         <rect key="frame" x="0.0" y="8" width="20" height="20"/>
@@ -1535,27 +1535,9 @@
                                             <constraint firstAttribute="height" constant="20" id="wxe-FC-KXo"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTc-OY-I4E">
-                                        <rect key="frame" x="28" y="4" width="40" height="28"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red 0 Blue 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTc-OY-I4E">
+                                        <rect key="frame" x="28" y="4" width="129" height="28"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="24"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rK-DA-NwM">
-                                        <rect key="frame" x="152" y="4" width="14" height="29"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sm4-Kb-8OD">
-                                        <rect key="frame" x="76" y="4" width="14" height="29"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqm-Yg-Dg8">
-                                        <rect key="frame" x="100" y="4" width="44" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="24"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1564,18 +1546,12 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="rTc-OY-I4E" secondAttribute="bottom" id="6lI-8I-fPM"/>
                                     <constraint firstItem="Crb-fR-RGp" firstAttribute="leading" secondItem="kCT-FC-Wj4" secondAttribute="leading" id="BBl-yo-NFy"/>
-                                    <constraint firstItem="hqm-Yg-Dg8" firstAttribute="leading" secondItem="Sm4-Kb-8OD" secondAttribute="trailing" constant="10" id="DCK-Mu-Ejz"/>
                                     <constraint firstAttribute="height" constant="32" id="MIa-n5-bvl"/>
                                     <constraint firstItem="rTc-OY-I4E" firstAttribute="leading" secondItem="kCT-FC-Wj4" secondAttribute="leading" id="U7P-VI-oQD"/>
-                                    <constraint firstItem="Sm4-Kb-8OD" firstAttribute="leading" secondItem="rTc-OY-I4E" secondAttribute="trailing" constant="8" id="UKe-ll-yvt"/>
                                     <constraint firstItem="rTc-OY-I4E" firstAttribute="centerY" secondItem="Crb-fR-RGp" secondAttribute="centerY" id="WX4-es-rfo"/>
                                     <constraint firstItem="rTc-OY-I4E" firstAttribute="leading" secondItem="Crb-fR-RGp" secondAttribute="trailing" constant="8" id="bv9-Fh-DAv"/>
+                                    <constraint firstAttribute="trailing" secondItem="rTc-OY-I4E" secondAttribute="trailing" id="faW-o4-wDk"/>
                                     <constraint firstItem="rTc-OY-I4E" firstAttribute="top" secondItem="kCT-FC-Wj4" secondAttribute="top" constant="5" id="g2s-7Y-nD6"/>
-                                    <constraint firstItem="6rK-DA-NwM" firstAttribute="leading" secondItem="hqm-Yg-Dg8" secondAttribute="trailing" constant="8" id="iCy-jQ-3kl"/>
-                                    <constraint firstItem="Sm4-Kb-8OD" firstAttribute="centerY" secondItem="rTc-OY-I4E" secondAttribute="centerY" id="iE1-wX-ZPW"/>
-                                    <constraint firstItem="6rK-DA-NwM" firstAttribute="centerY" secondItem="rTc-OY-I4E" secondAttribute="centerY" id="iza-Yg-c6S"/>
-                                    <constraint firstAttribute="trailing" secondItem="6rK-DA-NwM" secondAttribute="trailing" id="sSM-Ch-L8J"/>
-                                    <constraint firstItem="hqm-Yg-Dg8" firstAttribute="centerY" secondItem="rTc-OY-I4E" secondAttribute="centerY" id="wGn-B3-0yZ"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1671,18 +1647,18 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="blueStatisticsLabel" destination="6rK-DA-NwM" id="JLX-CR-11A"/>
                         <outlet property="minigameInfoButton" destination="TAi-cx-Vh8" id="Ifw-OB-H6M"/>
                         <outlet property="minigameToggle" destination="3wE-c8-LD8" id="KBa-U5-Qqa"/>
                         <outlet property="minigameToggleView" destination="GE8-dk-J4b" id="9H4-YN-13V"/>
                         <outlet property="minigameToggleViewHeightConstraint" destination="8i0-yZ-nMg" id="mmC-rk-ofv"/>
-                        <outlet property="redStatisticsLabel" destination="Sm4-Kb-8OD" id="gyb-7H-6rN"/>
                         <outlet property="roomNameLabel" destination="Mc1-YN-1oP" id="UVj-Yy-Wno"/>
                         <outlet property="startGame" destination="084-kN-Fki" id="ryC-Vh-gDH"/>
                         <outlet property="startGameButtonHeightConstraint" destination="nTZ-rc-cUK" id="FzE-gm-f9g"/>
                         <outlet property="startGameInfoButton" destination="rtz-7Q-ljm" id="uDR-2c-NsP"/>
                         <outlet property="statisticsDashboardView" destination="kCT-FC-Wj4" id="odz-nY-QRi"/>
                         <outlet property="statisticsDashboardViewHeightConstraint" destination="MIa-n5-bvl" id="3KY-o7-JDT"/>
+                        <outlet property="statisticsImageView" destination="Crb-fR-RGp" id="AZn-7O-zWy"/>
+                        <outlet property="statisticsLabel" destination="rTc-OY-I4E" id="EO5-JK-f2P"/>
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
                         <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="87V-6a-5kI"/>
                         <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-room" id="pzx-vK-usD"/>
