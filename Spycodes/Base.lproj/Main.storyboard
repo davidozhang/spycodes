@@ -605,17 +605,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-eO-I0y" userLabel="Clue Instruction View">
-                                <rect key="frame" x="40" y="216.5" width="520" height="168"/>
+                                <rect key="frame" x="40" y="204.5" width="520" height="192"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weB-KK-LgT">
-                                        <rect key="frame" x="0.0" y="0.0" width="520" height="118"/>
-                                        <string key="text">Once the clue and number of words is known, players of a team should work together and guess the words. Tapping on a Bystander card ends the round, and tapping on a Sniper card loses the game for the team. Once players are done guessing, the cluegiver can end the round.</string>
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="142"/>
+                                        <string key="text">Once the clue and number of words is known, players of a team should work together to guess the words. Tapping on a Bystander card turns a remaining Bystander card into an extra card for your team. Tapping on a Sniper card loses the game instantly for your team. The cluegiver can end the round once guessing is done.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cluegiver-Unfilled" translatesAutoresizingMaskIntoConstraints="NO" id="GfD-eG-lVl">
-                                        <rect key="frame" x="235" y="128" width="50" height="40"/>
+                                        <rect key="frame" x="235" y="152" width="50" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Glq-lq-BvA"/>
                                             <constraint firstAttribute="height" constant="40" id="QWm-JV-imp"/>
@@ -872,17 +872,15 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTC-Ag-aot">
-                                <rect key="frame" x="520" y="29" width="50" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="506-5e-Qx5">
+                                <rect key="frame" x="520" y="21.5" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="sai-Mv-9Ua"/>
+                                    <constraint firstAttribute="width" constant="50" id="B7c-jg-led"/>
+                                    <constraint firstAttribute="height" constant="50" id="eDr-nR-8eq"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
-                                <state key="normal" title="Done">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                                <state key="normal" title="Button" image="Next"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="main-menu" modalTransitionStyle="flipHorizontal" id="w37-nV-hgw"/>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="main-menu" modalTransitionStyle="flipHorizontal" id="nAp-px-c42"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -890,9 +888,9 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="jts-Cm-5bq" secondAttribute="trailing" constant="40" id="6Qc-2e-Xvp"/>
                             <constraint firstItem="jts-Cm-5bq" firstAttribute="leading" secondItem="nKi-ml-TnN" secondAttribute="leading" constant="40" id="Das-gy-8k9"/>
+                            <constraint firstItem="506-5e-Qx5" firstAttribute="centerY" secondItem="mbX-Gn-esX" secondAttribute="centerY" id="E9n-j6-niy"/>
+                            <constraint firstAttribute="trailing" secondItem="506-5e-Qx5" secondAttribute="trailing" constant="30" id="GMg-Rq-MfJ"/>
                             <constraint firstItem="kBi-Eo-8Rj" firstAttribute="top" secondItem="kf8-uN-E1I" secondAttribute="bottom" constant="10" id="KvR-Zj-JQZ"/>
-                            <constraint firstItem="LTC-Ag-aot" firstAttribute="centerY" secondItem="mbX-Gn-esX" secondAttribute="centerY" id="LDN-Xg-hCA"/>
-                            <constraint firstAttribute="trailing" secondItem="LTC-Ag-aot" secondAttribute="trailing" constant="30" id="SBw-Yr-4zq"/>
                             <constraint firstItem="jts-Cm-5bq" firstAttribute="centerX" secondItem="nKi-ml-TnN" secondAttribute="centerX" id="WCI-cS-7Du"/>
                             <constraint firstItem="mbX-Gn-esX" firstAttribute="centerX" secondItem="nKi-ml-TnN" secondAttribute="centerX" id="irQ-0A-Uuy"/>
                             <constraint firstItem="kf8-uN-E1I" firstAttribute="centerX" secondItem="nKi-ml-TnN" secondAttribute="centerX" id="ntX-kb-k9I"/>
@@ -928,7 +926,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1f-mf-C1s">
                                         <rect key="frame" x="0.0" y="0.0" width="520" height="94.5"/>
-                                        <string key="text">The game is round-based and consists of 25 word cards: 9 for the starting team, 8 for the other team, 7 Bystanders and 1 Sniper. The goal is to have your team guess all of the team's cards before the other team does.</string>
+                                        <string key="text">The game is round-based and consists of 22 word cards: 8 for the starting team, 7 for the other team, 6 Bystanders and 1 Sniper. The goal is to have your team guess all of the team's cards before the other team does.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -1718,7 +1716,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUf-TJ-d5l" userLabel="Back Button">
-                                <rect key="frame" x="182" y="70.5" width="30" height="30"/>
+                                <rect key="frame" x="169.5" y="70.5" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="4in-hr-7jc"/>
                                     <constraint firstAttribute="height" constant="30" id="Ozq-uH-Lel"/>
@@ -1729,7 +1727,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scv-CB-Z0e" userLabel="Dashboard View">
-                                <rect key="frame" x="232" y="70" width="136" height="30"/>
+                                <rect key="frame" x="219.5" y="70" width="161" height="30"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Stack" translatesAutoresizingMaskIntoConstraints="NO" id="KX5-WN-Z6i">
                                         <rect key="frame" x="93" y="5" width="20" height="20"/>
@@ -1738,10 +1736,10 @@
                                             <constraint firstAttribute="height" constant="20" id="wzB-kL-7TQ"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="647-e2-brJ">
-                                        <rect key="frame" x="121" y="15" width="15" height="0.0"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="647-e2-brJ">
+                                        <rect key="frame" x="121" y="15" width="40" height="0.0"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="15" id="t3M-ww-Tp0"/>
+                                            <constraint firstAttribute="width" constant="40" id="t3M-ww-Tp0"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="24"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1905,8 +1903,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="j1i-H3-0Ez"/>
                                 <exclude reference="gUa-0h-uJQ"/>
+                                <exclude reference="j1i-H3-0Ez"/>
                                 <exclude reference="Wbx-uy-pLd"/>
                                 <exclude reference="boa-xi-Mma"/>
                                 <exclude reference="nbF-aP-iEj"/>
@@ -1941,6 +1939,7 @@
         <image name="Github-Icon" width="560" height="560"/>
         <image name="Horizontal-Line" width="100" height="100"/>
         <image name="Info" width="100" height="100"/>
+        <image name="Next" width="100" height="100"/>
         <image name="Spy" width="290" height="280"/>
         <image name="Stack" width="100" height="100"/>
         <image name="Team" width="100" height="100"/>
@@ -1948,8 +1947,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yme-7x-s1N"/>
-        <segue reference="87V-6a-5kI"/>
-        <segue reference="w37-nV-hgw"/>
+        <segue reference="IIH-9T-29V"/>
+        <segue reference="nAp-px-c42"/>
         <segue reference="M2x-yW-um3"/>
     </inferredMetricsTieBreakers>
 </document>
