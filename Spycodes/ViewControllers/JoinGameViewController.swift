@@ -26,10 +26,7 @@ class JoinGameViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: UITextFieldDelegate
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        guard let text = self.userNameTextField.text else { return true }
-        
-        let length = text.characters.count + string.characters.count - range.length
-        return length <= 8
+        return true
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
