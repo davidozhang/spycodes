@@ -1,6 +1,6 @@
 # Spycodes
 
-A local peer-to-peer multiplayer word association game inspired by the minimalist style of Spyfall.
+A local peer-to-peer multiplayer word association game inspired by the minimalist style of Spyfall. It is now available on the App Store!
 
 ## Installation/Usage
 
@@ -27,6 +27,10 @@ Code Contribution:
 4. Push to the branch: `git push origin new-feature`
 
 5. Submit a pull request :)
+
+Word List Contribution:
+
+1. If you have words that you are interested in submitting to the word list, feel free to contact me directly at davzee@hotmail.com, or add the words to the file at Extensions/SpycodesWordList.swift and submit as PR!
 
 Issue Contribution:
 
