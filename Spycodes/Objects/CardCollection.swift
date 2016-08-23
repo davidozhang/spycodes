@@ -4,7 +4,7 @@ class CardCollection: NSObject, NSCoding {
     static var instance = CardCollection()
     
     private var keyObject = Key()
-    private let words = SpycodesWordList.getTwentyTwoShuffledWords()
+    private let words = SpycodesWordList.getShuffledWords()
     
     var cards = [Card]()
     var key = [Team]()
@@ -19,7 +19,7 @@ class CardCollection: NSObject, NSCoding {
             self.key = self.keyObject.getKey()
             self.startingTeam = self.keyObject.getStartingTeam()
         }
-        for i in 0..<22 {
+        for i in 0..<SpycodesConstant.cardCount {
             self.cards.append(Card(word: words[i], selected: false, team: self.key[i]))
         }
     }
@@ -56,7 +56,7 @@ class CardCollection: NSObject, NSCoding {
         opponentRemainingCards = opponentRemainingCards.shuffled
         if opponentRemainingCards.count > 0 {
             let eliminatedCard = opponentRemainingCards[0]
-            for i in 0..<22 {
+            for i in 0..<SpycodesConstant.cardCount {
                 if self.cards[i].getWord() == eliminatedCard.getWord() {
                     self.cards[i].setSelected()
                     return
@@ -71,7 +71,7 @@ class CardCollection: NSObject, NSCoding {
         neutralRemainingCards = neutralRemainingCards.shuffled
         if neutralRemainingCards.count > 0 {
             let convertedCard = neutralRemainingCards[0]
-            for i in 0..<22 {
+            for i in 0..<SpycodesConstant.cardCount {
                 if self.cards[i].getWord() == convertedCard.getWord() {
                     self.cards[i].setTeam(Player.instance.team)
                     NSNotificationCenter.defaultCenter().postNotificationName(SpycodesNotificationKey.autoConvertBystanderCardNotificationkey, object: self, userInfo: nil)
