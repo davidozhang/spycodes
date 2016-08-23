@@ -44,4 +44,3 @@ class JoinGameViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
-

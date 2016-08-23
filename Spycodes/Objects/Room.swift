@@ -33,6 +33,7 @@ class Room: NSObject, NSCoding {
     
     deinit {
         self.players.removeAll()
+        self.connectedPeers.removeAll()
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
@@ -124,5 +125,10 @@ class Room: NSObject, NSCoding {
             player.clueGiver = false
             player.team = Team.Red
         }
+    }
+    
+    func reset() {
+        self.players.removeAll()
+        self.connectedPeers.removeAll()
     }
 }

@@ -33,4 +33,8 @@ class Lobby {
     func removeRoomWithUUID(uuid: String) {
         self.rooms = self.rooms.filter({($0 as Room).getUUID() != uuid})
     }
+    
+    func reset() {
+        self.rooms.removeAll()
+    }
 }

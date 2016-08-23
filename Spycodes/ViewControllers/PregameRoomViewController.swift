@@ -207,11 +207,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         if Room.instance.canStartGame() {
-            startGame.alpha = 1.0
-            startGame.enabled = true
+            self.startGame.alpha = 1.0
+            self.startGame.enabled = true
         } else {
-            startGame.alpha = 0.3
-            startGame.enabled = false
+            self.startGame.alpha = 0.3
+            self.startGame.enabled = false
         }
     }
     
@@ -255,7 +255,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         } else {
             self.statisticsImageView.image = UIImage(named: "Chart")
             if let redNumberOfWins = Statistics.instance.getStatistics()[Team.Red], blueNumberOfWins = Statistics.instance.getStatistics()[Team.Blue] {
-                self.statisticsLabel.text = "Red: " + String(redNumberOfWins) + " Blue: " + String(blueNumberOfWins)
+                self.statisticsLabel.text = "Red: " + String(redNumberOfWins) + "\tBlue: " + String(blueNumberOfWins)
             }
         }
     }
@@ -303,7 +303,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         cell.index = indexPath.row
-        
         cell.delegate = self
         
         return cell
