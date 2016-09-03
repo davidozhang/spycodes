@@ -11,11 +11,9 @@ class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let versionString: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
-        
-        let buildNumber: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as! String
-        
-        self.versionNumberLabel.text = versionString
-        self.buildNumberLabel.text = "(\(buildNumber))"
+        if let versionString: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String, buildNumber: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as? String {
+            self.versionNumberLabel.text = versionString
+            self.buildNumberLabel.text = "(\(buildNumber))"
+        }
     }
 }

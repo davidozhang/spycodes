@@ -15,8 +15,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func onBackPressed(sender: AnyObject) {
-        Player.instance.setIsHost(false)
-        Player.instance.setIsClueGiver(false)
+        Player.instance.reset()
         self.performSegueWithIdentifier("main-menu", sender: self)
     }
     
@@ -51,19 +50,24 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(animated)
         
         MultipeerManager.instance.delegate = self
-        MultipeerManager.instance.startBrowser()
         
         Player.instance.reset()
         GameMode.instance.reset()
         Statistics.instance.reset()
-        Room.instance.connectedPeers.removeAll()
-        Room.instance.players.removeAll()
+        Lobby.instance.reset()
+        Room.instance.reset()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Start browser here to eliminate the flicker of room name when host goes from pregame room to lobby
+        MultipeerManager.instance.startBrowser()
     }
     
     override func viewWillDisappear(animated: Bool) {
         MultipeerManager.instance.stopBrowser()
         self.refreshTimer?.invalidate()
-        Lobby.instance = Lobby()
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,11 +97,11 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! LobbyRoomViewCell
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? LobbyRoomViewCell else { return UITableViewCell() }
         let roomAtIndex = Lobby.instance.rooms[indexPath.row]
+        
         cell.roomUUID = roomAtIndex.getUUID()
         cell.roomNameLabel.text = String(indexPath.row + 1) + ". " + roomAtIndex.name
-        
         cell.delegate = self
         
         return cell

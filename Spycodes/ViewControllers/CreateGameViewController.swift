@@ -3,13 +3,12 @@ import UIKit
 class CreateGameViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var roomNameTextField: SpycodesTextField!
     
-    // MARK: Action
     // MARK: Actions
     @IBAction func unwindToCreateGame(sender: UIStoryboardSegue) {}
     
     @IBAction func onBackPressed(sender: AnyObject) {
-        Player.instance.setIsHost(false)
-        Room.instance.players.removeAll()
+        Player.instance.reset()
+        Room.instance.reset()
         self.performSegueWithIdentifier("main-menu", sender: self)
     }
     

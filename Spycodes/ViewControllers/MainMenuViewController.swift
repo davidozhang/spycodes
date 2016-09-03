@@ -9,6 +9,7 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Account for iPhone 4 screen size
         if UIScreen.mainScreen().bounds.size.height == 480 {
             self.spycodesLabelHeightConstraint.constant = 0
             self.spycodesIconTopConstraint.constant = 40
@@ -39,4 +40,3 @@ class MainMenuViewController: UIViewController {
         self.performSegueWithIdentifier("about", sender: self)
     }
 }
-

@@ -43,6 +43,7 @@
 		63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED451D28B47200142780 /* PregameRoomViewCell.swift */; };
 		63FF7CE81D4E8471002D2B97 /* SpycodesNotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */; };
 		63FFA4B11D50635B006A181B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63FFA4B01D50635B006A181B /* GameKit.framework */; };
+		CF33BE2D1D6D04EA00D0E105 /* SpycodesConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF33BE2C1D6D04EA00D0E105 /* SpycodesConstant.swift */; };
 		CF5A8DCC1D46D95F0032F581 /* SpycodesMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		63FDED451D28B47200142780 /* PregameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PregameRoomViewCell.swift; path = Views/PregameRoomViewCell.swift; sourceTree = "<group>"; };
 		63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesNotificationKey.swift; path = Extensions/SpycodesNotificationKey.swift; sourceTree = "<group>"; };
 		63FFA4B01D50635B006A181B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		CF33BE2C1D6D04EA00D0E105 /* SpycodesConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesConstant.swift; path = Extensions/SpycodesConstant.swift; sourceTree = "<group>"; };
 		CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesMessage.swift; path = Extensions/SpycodesMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,6 +165,7 @@
 			children = (
 				63486DA41D3DDC9800795403 /* SpycodesArray.swift */,
 				63A04D1C1D1A7F37005A2914 /* SpycodesButton.swift */,
+				CF33BE2C1D6D04EA00D0E105 /* SpycodesConstant.swift */,
 				CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */,
 				63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */,
 				63FA54DF1D1BBB73004515DA /* SpycodesTextField.swift */,
@@ -301,6 +304,7 @@
 				63486DA51D3DDC9800795403 /* SpycodesArray.swift in Sources */,
 				637310CB1D3B292F00EA5D7A /* GameRoomViewController.swift in Sources */,
 				63CB4F081D3CB3C300211D3A /* GameRoomViewCell.swift in Sources */,
+				CF33BE2D1D6D04EA00D0E105 /* SpycodesConstant.swift in Sources */,
 				63CA90CA1D4280CC0027CA80 /* Spycodes.xcdatamodeld in Sources */,
 				63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */,
 				63EAF9A51D41F1C400BC554E /* AudioToolboxManager.swift in Sources */,
