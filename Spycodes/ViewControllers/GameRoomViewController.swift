@@ -6,6 +6,10 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private let edgeInset: CGFloat = 12
     private let endRoundButtonDefaultHeight: CGFloat = 50
     private let animationAlpha: CGFloat = 0.4
+    private let animationDuration: NSTimeInterval = 0.75
+    
+    private var buttonAnimationStarted = false
+    private var textFieldAnimationStarted = false
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -110,27 +114,37 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     private func startButtonAnimations() {
-        self.confirmButton.alpha = 1.0
+        if !self.buttonAnimationStarted {
+            self.confirmButton.alpha = 1.0
+            UIView.animateWithDuration(self.animationDuration, delay: 0.0, options: [.Autoreverse, .Repeat, .CurveEaseInOut, .AllowUserInteraction], animations: {
+                self.confirmButton.alpha = self.animationAlpha
+                }, completion: nil)
+        }
         
-        UIView.animateWithDuration(1.0, delay: 0.0, options: [.Autoreverse, .Repeat, .CurveEaseInOut, .AllowUserInteraction], animations: {
-            self.confirmButton.alpha = self.animationAlpha
-            }, completion: nil)
+        self.buttonAnimationStarted = true
     }
     
     private func stopButtonAnimations() {
+        self.buttonAnimationStarted = false
         self.confirmButton.layer.removeAllAnimations()
         
         self.confirmButton.alpha = 0.4
     }
     
     private func startTextFieldAnimations() {
-        UIView.animateWithDuration(1.0, delay: 0.0, options: [.Autoreverse, .Repeat, .CurveEaseInOut, .AllowUserInteraction], animations: {
-            self.clueTextField.alpha = self.animationAlpha
-            self.numberOfWordsTextField.alpha = self.animationAlpha
-            }, completion: nil)
+        if !self.textFieldAnimationStarted {
+            UIView.animateWithDuration(self.animationDuration, delay: 0.0, options: [.Autoreverse, .Repeat, .CurveEaseInOut, .AllowUserInteraction], animations: {
+                self.clueTextField.alpha = self.animationAlpha
+                self.numberOfWordsTextField.alpha = self.animationAlpha
+                }, completion: nil)
+        }
+        
+        self.textFieldAnimationStarted = true
     }
     
     private func stopTextFieldAnimations() {
+        self.textFieldAnimationStarted = false
+        
         self.clueTextField.layer.removeAllAnimations()
         self.numberOfWordsTextField.layer.removeAllAnimations()
         
