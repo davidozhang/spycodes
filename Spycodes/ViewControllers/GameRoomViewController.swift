@@ -5,6 +5,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private let reuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
     private let endRoundButtonDefaultHeight: CGFloat = 50
+    private let animationAlpha: CGFloat = 0.4
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -108,6 +109,35 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         MultipeerManager.instance.broadcastData(data)
     }
     
+    private func startButtonAnimations() {
+        self.confirmButton.alpha = 1.0
+        
+        UIView.animateWithDuration(1.0, delay: 0.0, options: [.Autoreverse, .Repeat, .CurveEaseInOut, .AllowUserInteraction], animations: {
+            self.confirmButton.alpha = self.animationAlpha
+            }, completion: nil)
+    }
+    
+    private func stopButtonAnimations() {
+        self.confirmButton.layer.removeAllAnimations()
+        
+        self.confirmButton.alpha = 0.4
+    }
+    
+    private func startTextFieldAnimations() {
+        UIView.animateWithDuration(1.0, delay: 0.0, options: [.Autoreverse, .Repeat, .CurveEaseInOut, .AllowUserInteraction], animations: {
+            self.clueTextField.alpha = self.animationAlpha
+            self.numberOfWordsTextField.alpha = self.animationAlpha
+            }, completion: nil)
+    }
+    
+    private func stopTextFieldAnimations() {
+        self.clueTextField.layer.removeAllAnimations()
+        self.numberOfWordsTextField.layer.removeAllAnimations()
+        
+        self.clueTextField.alpha = 1.0
+        self.numberOfWordsTextField.alpha = 1.0
+    }
+    
     private func updateDashboard() {
         self.cardsRemainingLabel.text = String(CardCollection.instance.getCardsRemainingForTeam(Player.instance.team))
         
@@ -120,6 +150,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 self.clueTextField.text = Round.instance.clue
                 self.numberOfWordsTextField.text = Round.instance.numberOfWords
                 
+                self.stopTextFieldAnimations()
+                
                 self.clueTextField.enabled = false
                 self.numberOfWordsTextField.enabled = false
             }
@@ -127,6 +159,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 if Player.instance.isClueGiver() {
                     self.clueTextField.text = Round.defaultClueGiverClue
                     self.numberOfWordsTextField.text = Round.defaultNumberOfWords
+                    
+                    self.startTextFieldAnimations()
                     
                     self.confirmButton.hidden = false
                     self.clueTextField.enabled = true
@@ -164,10 +198,10 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         }
         
         if self.clueTextField.text?.characters.count > 0 && self.clueTextField.text != Round.defaultClueGiverClue && self.numberOfWordsTextField.text?.characters.count > 0 && self.numberOfWordsTextField.text != Round.defaultNumberOfWords {
-            self.confirmButton.alpha = 1.0
             self.confirmButton.enabled = true
+            self.startButtonAnimations()
         } else {
-            self.confirmButton.alpha = 0.3
+            self.stopButtonAnimations()
             self.confirmButton.enabled = false
         }
     }
@@ -384,6 +418,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
+        self.stopTextFieldAnimations()
+        
         if textField == self.clueTextField {
             if textField.text == Round.defaultClueGiverClue {
                 textField.text = ""
