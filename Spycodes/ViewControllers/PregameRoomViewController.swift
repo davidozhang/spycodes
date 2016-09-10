@@ -67,6 +67,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             // Instantiate next game's card collection and round
             CardCollection.instance = CardCollection()
             Round.instance = Round()
+            self.broadcastOptionalData(CardCollection.instance)
+            self.broadcastOptionalData(Round.instance)
             self.goToGame()
         }
     }
@@ -81,18 +83,12 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             MultipeerManager.instance.initSession()
             MultipeerManager.instance.initAdvertiser()
             MultipeerManager.instance.initBrowser()
-            
-            self.startGame.hidden = false
-            self.startGameInfoButton.hidden = false
-            self.startGame.alpha = 0.3
-            self.startGame.enabled = false
-            self.startGameButtonHeightConstraint.constant = self.startGameButtonDefaultHeight
         }
-        else {
-            self.startGame.hidden = true
-            self.startGameInfoButton.hidden = true
-            self.startGameButtonHeightConstraint.constant = 0
-        }
+        self.startGame.hidden = false
+        self.startGameInfoButton.hidden = false
+        self.startGame.alpha = 0.3
+        self.startGame.enabled = false
+        self.startGameButtonHeightConstraint.constant = self.startGameButtonDefaultHeight
         
         self.roomNameLabel.text = Room.instance.name
     }
@@ -188,6 +184,14 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     private func checkRoom() {
+        if Room.instance.canStartGame() {
+            self.startGame.alpha = 1.0
+            self.startGame.enabled = true
+        } else {
+            self.startGame.alpha = 0.3
+            self.startGame.enabled = false
+        }
+        
         if !Player.instance.isHost() {
             return
         }
@@ -204,14 +208,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             if !MultipeerManager.instance.browserOn {
                 MultipeerManager.instance.startBrowser()
             }
-        }
-        
-        if Room.instance.canStartGame() {
-            self.startGame.alpha = 1.0
-            self.startGame.enabled = true
-        } else {
-            self.startGame.alpha = 0.3
-            self.startGame.enabled = false
         }
     }
     

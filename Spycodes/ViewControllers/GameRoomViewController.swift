@@ -59,13 +59,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(GameRoomViewController.broadcastEssentialData), userInfo: nil, repeats: true)  // Broadcast host's card collection and round every 2 seconds
         }
         
-        if Player.instance.isClueGiver() {
-            self.endRoundButton.hidden = false
-            self.endRoundButtonHeightConstraint.constant = self.endRoundButtonDefaultHeight
-        } else {
-            self.endRoundButton.hidden = true
-            self.endRoundButtonHeightConstraint.constant = 0
-        }
+        self.endRoundButton.hidden = false
+        self.endRoundButtonHeightConstraint.constant = self.endRoundButtonDefaultHeight
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameRoomViewController.refreshView), userInfo: nil, repeats: true)    // Refresh room every second
         
@@ -192,10 +187,6 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     private func updateEndRoundButton() {
-        if !Player.instance.isClueGiver() {
-            return
-        }
-        
         if Round.instance.currentTeam == Player.instance.team {
             self.endRoundButton.alpha = 1.0
             self.endRoundButton.enabled = true
