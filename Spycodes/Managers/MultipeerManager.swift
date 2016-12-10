@@ -97,7 +97,7 @@ class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     }
     
     // MARK: MCNearbyServiceAdvertiserDelegate
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession) -> Void) {
+    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession?) -> Void) {
         invitationHandler(true, self.session!)
     }
     
