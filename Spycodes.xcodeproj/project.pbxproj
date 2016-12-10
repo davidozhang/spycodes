@@ -12,7 +12,8 @@
 		63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C6B1D2996B60005AC66 /* Lobby.swift */; };
 		630681A31D62FD6300539773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A21D62FD6300539773 /* LaunchScreen.storyboard */; };
 		630681A51D62FD6900539773 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A41D62FD6900539773 /* Main.storyboard */; };
-		6310C43F1D531B7E00187B7D /* InstructionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6310C43E1D531B7E00187B7D /* InstructionsPageViewController.swift */; };
+		6317B9331DFBE2340069FF48 /* SpycodesLogoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317B9321DFBE2340069FF48 /* SpycodesLogoLabel.swift */; };
+		6317B93D1DFBEE720069FF48 /* SpycodesNavigationBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317B93C1DFBEE720069FF48 /* SpycodesNavigationBarLabel.swift */; };
 		63486DA51D3DDC9800795403 /* SpycodesArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA41D3DDC9800795403 /* SpycodesArray.swift */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
 		637310CB1D3B292F00EA5D7A /* GameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */; };
@@ -24,7 +25,7 @@
 		63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D0D1D1A5713005A2914 /* Assets.xcassets */; };
 		63A04D1D1D1A7F37005A2914 /* SpycodesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1C1D1A7F37005A2914 /* SpycodesButton.swift */; };
 		63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */; };
-		63AB64CD1D4880A600C4FF22 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB64CC1D4880A600C4FF22 /* AboutViewController.swift */; };
+		63AB64CD1D4880A600C4FF22 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB64CC1D4880A600C4FF22 /* SettingsViewController.swift */; };
 		63CA90CA1D4280CC0027CA80 /* Spycodes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63CA90C81D4280CC0027CA80 /* Spycodes.xcdatamodeld */; };
 		63CB4F081D3CB3C300211D3A /* GameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F071D3CB3C300211D3A /* GameRoomViewCell.swift */; };
 		63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F091D3CB88D00211D3A /* Card.swift */; };
@@ -53,7 +54,8 @@
 		63067C6B1D2996B60005AC66 /* Lobby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lobby.swift; path = Objects/Lobby.swift; sourceTree = "<group>"; };
 		630681A21D62FD6300539773 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		630681A41D62FD6900539773 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Storyboards/Main.storyboard; sourceTree = "<group>"; };
-		6310C43E1D531B7E00187B7D /* InstructionsPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstructionsPageViewController.swift; path = ViewControllers/InstructionsPageViewController.swift; sourceTree = "<group>"; };
+		6317B9321DFBE2340069FF48 /* SpycodesLogoLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesLogoLabel.swift; path = Extensions/SpycodesLogoLabel.swift; sourceTree = "<group>"; };
+		6317B93C1DFBEE720069FF48 /* SpycodesNavigationBarLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesNavigationBarLabel.swift; path = Extensions/SpycodesNavigationBarLabel.swift; sourceTree = "<group>"; };
 		63486DA41D3DDC9800795403 /* SpycodesArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesArray.swift; path = Extensions/SpycodesArray.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
 		637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameRoomViewController.swift; path = ViewControllers/GameRoomViewController.swift; sourceTree = "<group>"; };
@@ -67,7 +69,7 @@
 		63A04D121D1A5713005A2914 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63A04D1C1D1A7F37005A2914 /* SpycodesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesButton.swift; path = Extensions/SpycodesButton.swift; sourceTree = "<group>"; };
 		63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainMenuViewController.swift; path = ViewControllers/MainMenuViewController.swift; sourceTree = "<group>"; };
-		63AB64CC1D4880A600C4FF22 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewController.swift; path = ViewControllers/AboutViewController.swift; sourceTree = "<group>"; };
+		63AB64CC1D4880A600C4FF22 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = ViewControllers/SettingsViewController.swift; sourceTree = "<group>"; };
 		63CA90C91D4280CC0027CA80 /* Codenames.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Codenames.xcdatamodel; sourceTree = "<group>"; };
 		63CB4F071D3CB3C300211D3A /* GameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameRoomViewCell.swift; path = Views/GameRoomViewCell.swift; sourceTree = "<group>"; };
 		63CB4F091D3CB88D00211D3A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Objects/Card.swift; sourceTree = "<group>"; };
@@ -148,10 +150,9 @@
 		63A04D1A1D1A7F25005A2914 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				63AB64CC1D4880A600C4FF22 /* AboutViewController.swift */,
+				63AB64CC1D4880A600C4FF22 /* SettingsViewController.swift */,
 				63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */,
 				637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */,
-				6310C43E1D531B7E00187B7D /* InstructionsPageViewController.swift */,
 				63FDED311D2648D600142780 /* JoinGameViewController.swift */,
 				63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */,
 				63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */,
@@ -166,7 +167,9 @@
 				63486DA41D3DDC9800795403 /* SpycodesArray.swift */,
 				63A04D1C1D1A7F37005A2914 /* SpycodesButton.swift */,
 				CF33BE2C1D6D04EA00D0E105 /* SpycodesConstant.swift */,
+				6317B9321DFBE2340069FF48 /* SpycodesLogoLabel.swift */,
 				CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */,
+				6317B93C1DFBEE720069FF48 /* SpycodesNavigationBarLabel.swift */,
 				63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */,
 				63FA54DF1D1BBB73004515DA /* SpycodesTextField.swift */,
 				63CB4F0D1D3DAA5A00211D3A /* SpycodesWordList.swift */,
@@ -308,6 +311,7 @@
 				CF33BE2D1D6D04EA00D0E105 /* SpycodesConstant.swift in Sources */,
 				63CA90CA1D4280CC0027CA80 /* Spycodes.xcdatamodeld in Sources */,
 				63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */,
+				6317B9331DFBE2340069FF48 /* SpycodesLogoLabel.swift in Sources */,
 				63EAF9A51D41F1C400BC554E /* AudioToolboxManager.swift in Sources */,
 				63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */,
 				63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */,
@@ -315,13 +319,13 @@
 				63FDED391D26557200142780 /* Room.swift in Sources */,
 				6378C6511D4C6F46009BD0CA /* GameMode.swift in Sources */,
 				63FA54E01D1BBB73004515DA /* SpycodesTextField.swift in Sources */,
-				6310C43F1D531B7E00187B7D /* InstructionsPageViewController.swift in Sources */,
+				6317B93D1DFBEE720069FF48 /* SpycodesNavigationBarLabel.swift in Sources */,
 				63067C6A1D2982DD0005AC66 /* LobbyRoomViewCell.swift in Sources */,
 				63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */,
 				63FDED351D264BE800142780 /* Player.swift in Sources */,
 				63A04D1D1D1A7F37005A2914 /* SpycodesButton.swift in Sources */,
 				63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */,
-				63AB64CD1D4880A600C4FF22 /* AboutViewController.swift in Sources */,
+				63AB64CD1D4880A600C4FF22 /* SettingsViewController.swift in Sources */,
 				63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */,
 				63FDED321D2648D600142780 /* JoinGameViewController.swift in Sources */,
 			);

@@ -24,4 +24,8 @@ class MainMenuViewController: UIViewController {
     @IBAction func onJoinGame(sender: AnyObject) {
         self.performSegueWithIdentifier("join-game", sender: self)
     }
+    
+    @IBAction func onSettingsTapped(sender: AnyObject) {
+        self.performSegueWithIdentifier("settings", sender: self)
+    }
 }
