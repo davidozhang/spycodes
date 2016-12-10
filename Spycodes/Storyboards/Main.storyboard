@@ -22,132 +22,94 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spycodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwp-LV-dpu">
-                                <rect key="frame" x="89.5" y="188" width="196" height="55"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYZ-sL-kCY">
+                                <rect key="frame" x="97" y="170" width="181" height="328"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spy" translatesAutoresizingMaskIntoConstraints="NO" id="4mz-Ms-1Ld">
+                                        <rect key="frame" x="26.5" y="0.0" width="128" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="128" id="olh-Nu-wzw"/>
+                                            <constraint firstAttribute="height" constant="128" id="rNC-HL-uV8"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spycodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwp-LV-dpu">
+                                        <rect key="frame" x="14.5" y="128" width="153" height="43"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="36"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdj-Hd-5OI" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="231" width="141" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Ofo-gX-pWl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Create Game">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Ofo-gX-pWl"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="onCreateGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0f2-EE-nST"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBi-9c-KRm" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="287" width="141" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="1hV-px-VJN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Join Game">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="1hV-px-VJN"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="onJoinGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F7w-v0-i5q"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="RIg-4C-8ag"/>
+                                    <constraint firstItem="Mdj-Hd-5OI" firstAttribute="centerX" secondItem="pYZ-sL-kCY" secondAttribute="centerX" id="0Fo-UK-SAW"/>
+                                    <constraint firstItem="CBi-9c-KRm" firstAttribute="leading" secondItem="Mdj-Hd-5OI" secondAttribute="leading" id="A9W-e8-WRf"/>
+                                    <constraint firstAttribute="trailing" secondItem="Mdj-Hd-5OI" secondAttribute="trailing" constant="20" id="HV7-1n-x2y"/>
+                                    <constraint firstItem="kwp-LV-dpu" firstAttribute="top" secondItem="4mz-Ms-1Ld" secondAttribute="bottom" id="Qsj-7D-KaW"/>
+                                    <constraint firstAttribute="bottom" secondItem="CBi-9c-KRm" secondAttribute="bottom" id="Vif-4J-d7t"/>
+                                    <constraint firstItem="kwp-LV-dpu" firstAttribute="centerX" secondItem="pYZ-sL-kCY" secondAttribute="centerX" id="XAu-Od-2MI"/>
+                                    <constraint firstItem="CBi-9c-KRm" firstAttribute="centerX" secondItem="pYZ-sL-kCY" secondAttribute="centerX" id="ZeZ-nt-214"/>
+                                    <constraint firstItem="4mz-Ms-1Ld" firstAttribute="centerX" secondItem="pYZ-sL-kCY" secondAttribute="centerX" id="bwb-zW-5y5"/>
+                                    <constraint firstItem="Mdj-Hd-5OI" firstAttribute="top" secondItem="kwp-LV-dpu" secondAttribute="bottom" constant="60" id="eGx-ej-B5D"/>
+                                    <constraint firstItem="CBi-9c-KRm" firstAttribute="top" secondItem="Mdj-Hd-5OI" secondAttribute="bottom" constant="15" id="iLJ-wk-0CR"/>
+                                    <constraint firstItem="Mdj-Hd-5OI" firstAttribute="leading" secondItem="pYZ-sL-kCY" secondAttribute="leading" constant="20" id="kV2-L0-eMk"/>
+                                    <constraint firstItem="4mz-Ms-1Ld" firstAttribute="top" secondItem="pYZ-sL-kCY" secondAttribute="top" id="rK8-rL-W0O"/>
+                                    <constraint firstItem="CBi-9c-KRm" firstAttribute="trailing" secondItem="Mdj-Hd-5OI" secondAttribute="trailing" id="uxI-GP-k70"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="48"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBi-9c-KRm" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="427" width="200" height="50"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Jm-jD-vJs">
+                                <rect key="frame" x="315" y="45" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="1hV-px-VJN"/>
-                                    <constraint firstAttribute="width" constant="200" id="KKg-D2-Ocd"/>
-                                    <constraint firstAttribute="height" constant="50" id="kwe-yL-DaK"/>
+                                    <constraint firstAttribute="height" constant="30" id="3jb-xr-Dqv"/>
+                                    <constraint firstAttribute="width" constant="30" id="TKm-bi-D15"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Join Game">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="1hV-px-VJN"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="onJoinGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F7w-v0-i5q"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTx-L1-vkT" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="492" width="200" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="aL6-xJ-woz"/>
-                                    <constraint firstAttribute="height" constant="50" id="iT4-Gb-x6N"/>
-                                    <constraint firstAttribute="width" constant="200" id="l13-3g-7B1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Instructions">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="aL6-xJ-woz"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="onInstructions:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b0l-Gf-ccb"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2i2-Pu-U1X" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="557" width="200" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="DVW-wZ-gSh"/>
-                                    <constraint firstAttribute="height" constant="50" id="Kdt-Kb-iN8"/>
-                                    <constraint firstAttribute="height" constant="40" id="UE3-cr-lOB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="30" maxY="10"/>
-                                <state key="normal" title="About">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="UE3-cr-lOB"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="onAbout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Mt-HW-rLm"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spy" translatesAutoresizingMaskIntoConstraints="NO" id="4mz-Ms-1Ld">
-                                <rect key="frame" x="123.5" y="60" width="128" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="128" id="olh-Nu-wzw"/>
-                                    <constraint firstAttribute="height" constant="128" id="rNC-HL-uV8"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdj-Hd-5OI" customClass="SpycodesButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="362" width="200" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Ofo-gX-pWl"/>
-                                    <constraint firstAttribute="width" constant="200" id="Oq6-qj-m0l"/>
-                                    <constraint firstAttribute="height" constant="50" id="cqF-Tx-JMG"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Create Game">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Ofo-gX-pWl"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="onCreateGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0f2-EE-nST"/>
-                                </connections>
+                                <state key="normal" title="Button" image="Settings"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="4mz-Ms-1Ld" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0Mk-mz-Een"/>
-                            <constraint firstItem="2i2-Pu-U1X" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EOg-jd-Cif"/>
-                            <constraint firstItem="Mdj-Hd-5OI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PVi-Dl-kgK"/>
-                            <constraint firstItem="CBi-9c-KRm" firstAttribute="top" secondItem="Mdj-Hd-5OI" secondAttribute="bottom" constant="15" id="Tx6-Im-6mn"/>
-                            <constraint firstItem="2i2-Pu-U1X" firstAttribute="top" secondItem="qTx-L1-vkT" secondAttribute="bottom" constant="15" id="VLh-I5-ISI"/>
-                            <constraint firstItem="4mz-Ms-1Ld" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="Xxl-Tb-xMF"/>
-                            <constraint firstItem="CBi-9c-KRm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Z7D-ub-Yxn"/>
-                            <constraint firstItem="qTx-L1-vkT" firstAttribute="top" secondItem="CBi-9c-KRm" secondAttribute="bottom" constant="15" id="aPl-6t-hnK"/>
-                            <constraint firstItem="qTx-L1-vkT" firstAttribute="top" secondItem="CBi-9c-KRm" secondAttribute="bottom" constant="30" id="buL-0J-g0T"/>
-                            <constraint firstItem="kwp-LV-dpu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="120" id="eEh-NQ-YDZ"/>
-                            <constraint firstItem="kwp-LV-dpu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jnH-98-A0C"/>
-                            <constraint firstItem="kwp-LV-dpu" firstAttribute="top" secondItem="4mz-Ms-1Ld" secondAttribute="bottom" id="l5A-8z-RMt"/>
-                            <constraint firstItem="qTx-L1-vkT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mdh-xj-3C8"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2i2-Pu-U1X" secondAttribute="bottom" constant="60" id="sLn-KO-VZf"/>
+                            <constraint firstItem="9Jm-jD-vJs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="25" id="B1a-Nd-qJT"/>
+                            <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="F5G-fC-j66"/>
+                            <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GIg-cQ-q81"/>
+                            <constraint firstAttribute="trailing" secondItem="9Jm-jD-vJs" secondAttribute="trailing" constant="30" id="OKL-UC-Cyv"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="eEh-NQ-YDZ"/>
-                                <exclude reference="buL-0J-g0T"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
-                        <outlet property="aboutButtonBottomConstraint" destination="sLn-KO-VZf" id="qP5-7F-CVR"/>
-                        <outlet property="spycodesIconTopConstraint" destination="Xxl-Tb-xMF" id="uCP-45-yC7"/>
-                        <outlet property="spycodesLabelHeightConstraint" destination="RIg-4C-8ag" id="Qzr-N1-zCD"/>
                         <segue destination="os2-Wc-CLV" kind="presentation" identifier="create-game" modalTransitionStyle="flipHorizontal" id="7WM-P4-SMa"/>
                         <segue destination="oCE-jf-1fM" kind="presentation" identifier="join-game" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
                         <segue destination="a1u-5S-T8S" kind="presentation" identifier="about" modalTransitionStyle="flipHorizontal" id="hYk-y3-ogQ"/>
@@ -156,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="219" y="339"/>
+            <point key="canvasLocation" x="218.40000000000001" y="338.68065967016497"/>
         </scene>
         <!--Create Game View Controller-->
         <scene sceneID="OZB-hn-iNT">
@@ -237,14 +199,15 @@
         <!--Instructions Page View Controller-->
         <scene sceneID="8Yo-PD-wbA">
             <objects>
-                <pageViewController storyboardIdentifier="instructions-page-view-controller" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="8Pj-EZ-fXD" customClass="InstructionsPageViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MOr-E9-YX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pageViewController storyboardIdentifier="instructions-page-view-controller" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="8Pj-EZ-fXD" customClass="InstructionsPageViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController"/>
             </objects>
             <point key="canvasLocation" x="-601" y="1156"/>
         </scene>
         <!--Introduction Instruction View Controller-->
         <scene sceneID="ulO-Iy-BXy">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e2x-hP-iTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="welcome-view-controller" title="Introduction Instruction View Controller" id="dmd-uQ-mhq" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GaO-QY-IfC"/>
@@ -382,13 +345,13 @@
                         </variation>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e2x-hP-iTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-601" y="1930"/>
         </scene>
         <!--Teams Instruction View Controller-->
         <scene sceneID="7q8-Pu-qIm">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gYG-Sp-s8S" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="teams-instruction-view" title="Teams Instruction View Controller" id="VM1-3l-ign" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GE7-mL-F9C"/>
@@ -490,13 +453,13 @@
                         </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gYG-Sp-s8S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-601" y="3390"/>
         </scene>
         <!--Cluegiver Instruction View Controller-->
         <scene sceneID="dwU-nH-YAO">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Eb-Jw-CB0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="cluegiver-instruction-view" title="Cluegiver Instruction View Controller" id="uZV-bc-L0L" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="H5m-GY-TKF"/>
@@ -592,13 +555,13 @@
                         </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Eb-Jw-CB0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-601" y="4122"/>
         </scene>
         <!--Non-Cluegiver Instruction View Controller-->
         <scene sceneID="UY1-Hc-U15">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SGz-kk-78Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="non-cluegiver-instruction-view" title="Non-Cluegiver Instruction View Controller" id="YzM-VS-5ZG" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cFL-wu-h4M"/>
@@ -694,13 +657,13 @@
                         </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SGz-kk-78Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-601" y="4864"/>
         </scene>
         <!--Clue Instruction View Controller-->
         <scene sceneID="hdN-qt-mPK">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wtj-qw-aJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="clue-instruction-view" title="Clue Instruction View Controller" id="eFq-1W-Bv5" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xiQ-W2-YXd"/>
@@ -803,13 +766,13 @@
                         </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wtj-qw-aJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-601" y="5606"/>
         </scene>
         <!--Minigame Instruction View Controller-->
         <scene sceneID="A9n-BN-rqf">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eMo-XO-EFi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="minigame-instruction-view" title="Minigame Instruction View Controller" id="ioO-SA-UjF" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="abQ-ZR-OGv"/>
@@ -909,13 +872,13 @@
                         </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eMo-XO-EFi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-601" y="6341"/>
         </scene>
         <!--Setup Instruction View Controller-->
         <scene sceneID="XbV-tj-TzI">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1pX-bf-b8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="setup-instruction-view" title="Setup Instruction View Controller" id="pVz-T1-rGc" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NNe-Vu-7em"/>
@@ -1011,13 +974,14 @@
                         </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1pX-bf-b8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-601" y="2658"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="WAq-IW-uDf">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BvF-PD-3yV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="MRI-pe-guf" userLabel="Exit" sceneMemberID="exit"/>
                 <viewController storyboardIdentifier="about-view-controller" id="a1u-5S-T8S" customClass="AboutViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1Dy-CL-HLv"/>
@@ -1174,8 +1138,6 @@
                         <segue destination="MRI-pe-guf" kind="unwind" identifier="main-menu" unwindAction="unwindToMainMenu:" id="Dtp-p6-J8p"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BvF-PD-3yV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="MRI-pe-guf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="219" y="1156"/>
         </scene>
@@ -1956,15 +1918,16 @@
         <image name="Horizontal-Line" width="100" height="100"/>
         <image name="Info" width="100" height="100"/>
         <image name="Next" width="100" height="100"/>
+        <image name="Settings" width="100" height="100"/>
         <image name="Spy" width="290" height="280"/>
         <image name="Stack" width="100" height="100"/>
         <image name="Team" width="100" height="100"/>
         <image name="Wifi" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OKD-OH-6Td"/>
         <segue reference="M2x-yW-um3"/>
-        <segue reference="7yd-xs-fux"/>
+        <segue reference="nAp-px-c42"/>
         <segue reference="VCz-No-0ZF"/>
+        <segue reference="7yd-xs-fux"/>
     </inferredMetricsTieBreakers>
 </document>

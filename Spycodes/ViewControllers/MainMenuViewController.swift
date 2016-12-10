@@ -8,13 +8,6 @@ class MainMenuViewController: UIViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Account for iPhone 4 screen size
-        if UIScreen.mainScreen().bounds.size.height == 480 {
-            self.spycodesLabelHeightConstraint.constant = 0
-            self.spycodesIconTopConstraint.constant = 40
-            self.aboutButtonBottomConstraint.constant = 40
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,13 +23,5 @@ class MainMenuViewController: UIViewController {
 
     @IBAction func onJoinGame(sender: AnyObject) {
         self.performSegueWithIdentifier("join-game", sender: self)
-    }
-    
-    @IBAction func onInstructions(sender: AnyObject) {
-        self.performSegueWithIdentifier("instructions", sender: self)
-    }
-    
-    @IBAction func onAbout(sender: AnyObject) {
-        self.performSegueWithIdentifier("about", sender: self)
     }
 }
