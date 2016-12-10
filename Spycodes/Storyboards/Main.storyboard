@@ -1192,7 +1192,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="32" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4s9-er-VpV" customClass="SpycodesTextField" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="181" y="278" width="238" height="44"/>
+                                <rect key="frame" x="68.5" y="311.5" width="238" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="f6G-L2-vEk"/>
                                     <constraint firstAttribute="width" constant="238" id="hzU-qF-QjJ"/>
@@ -1218,7 +1218,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Your Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MdV-j8-107">
-                                <rect key="frame" x="192" y="211" width="216" height="37"/>
+                                <rect key="frame" x="79.5" y="244.5" width="216" height="37"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="32"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1226,12 +1226,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="MdV-j8-107" firstAttribute="centerX" secondItem="Muy-4C-ske" secondAttribute="centerX" constant="112.5" id="2Jb-fb-Ut9"/>
+                            <constraint firstItem="MdV-j8-107" firstAttribute="centerX" secondItem="Muy-4C-ske" secondAttribute="centerX" id="2Jb-fb-Ut9"/>
                             <constraint firstItem="YYY-fp-HQH" firstAttribute="leading" secondItem="Muy-4C-ske" secondAttribute="leadingMargin" constant="30" id="AeL-Wa-K9c"/>
                             <constraint firstItem="YYY-fp-HQH" firstAttribute="top" secondItem="O2o-J1-ZW6" secondAttribute="bottom" constant="25" id="Eg0-Iq-8ta"/>
-                            <constraint firstItem="4s9-er-VpV" firstAttribute="centerY" secondItem="Muy-4C-ske" secondAttribute="centerY" constant="-33.5" id="UwC-kY-pWD"/>
+                            <constraint firstItem="4s9-er-VpV" firstAttribute="centerY" secondItem="Muy-4C-ske" secondAttribute="centerY" id="UwC-kY-pWD"/>
                             <constraint firstItem="4s9-er-VpV" firstAttribute="top" secondItem="MdV-j8-107" secondAttribute="bottom" constant="30" id="VGE-mn-yDM"/>
-                            <constraint firstItem="4s9-er-VpV" firstAttribute="centerX" secondItem="Muy-4C-ske" secondAttribute="centerX" constant="112.5" id="Y8l-Ag-BaX"/>
+                            <constraint firstItem="4s9-er-VpV" firstAttribute="centerX" secondItem="Muy-4C-ske" secondAttribute="centerX" id="Y8l-Ag-BaX"/>
                             <constraint firstItem="YYY-fp-HQH" firstAttribute="top" secondItem="O2o-J1-ZW6" secondAttribute="bottom" constant="25" id="jX4-VY-4jD"/>
                             <constraint firstItem="YYY-fp-HQH" firstAttribute="leading" secondItem="Muy-4C-ske" secondAttribute="leading" constant="30" id="mzV-ye-Ssq"/>
                             <constraint firstItem="YYY-fp-HQH" firstAttribute="top" secondItem="O2o-J1-ZW6" secondAttribute="bottom" constant="25" id="n5F-Cc-qVu"/>
@@ -1655,8 +1655,8 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Yg8-eX-EZE"/>
-                                <exclude reference="6DZ-tE-h64"/>
                                 <exclude reference="gTl-TY-3Ra"/>
+                                <exclude reference="6DZ-tE-h64"/>
                                 <exclude reference="Vsi-Wx-L0j"/>
                                 <exclude reference="C75-cN-z70"/>
                                 <exclude reference="XBE-ff-nvo"/>
@@ -1919,8 +1919,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="gUa-0h-uJQ"/>
                                 <exclude reference="j1i-H3-0Ez"/>
+                                <exclude reference="gUa-0h-uJQ"/>
                                 <exclude reference="Wbx-uy-pLd"/>
                                 <exclude reference="boa-xi-Mma"/>
                                 <exclude reference="nbF-aP-iEj"/>
