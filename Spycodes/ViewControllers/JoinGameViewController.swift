@@ -13,8 +13,8 @@ class JoinGameViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         self.userNameTextField.delegate = self
         self.userNameTextField.becomeFirstResponder()

@@ -4,18 +4,29 @@ class SpycodesTextField: UITextField {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.layer.borderColor = UIColor.darkGrayColor().CGColor
-        self.layer.borderWidth = 1.0
-        self.font = UIFont(name: "HelveticaNeue-UltraLight", size: 32)
-        
         self.autocorrectionType = UITextAutocorrectionType.No
-        
+        self.borderStyle = .None
+        self.font = UIFont(name: "HelveticaNeue-Thin", size: 32)
     }
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
-        if action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(UIResponderStandardEditActions.select(_:)) || action == #selector(UIResponderStandardEditActions.selectAll(_:)) || action == #selector(UIResponderStandardEditActions.paste(_:)) {
+        if action == #selector(UIResponderStandardEditActions.copy(_:))
+        || action == #selector(UIResponderStandardEditActions.select(_:))
+        || action == #selector(UIResponderStandardEditActions.selectAll(_:))
+        || action == #selector(UIResponderStandardEditActions.paste(_:)) {
             return false
         }
+        
         return super.canPerformAction(action, withSender: sender)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let bottomBorder = CALayer()
+        bottomBorder.frame = CGRect(x: 0.0, y: self.frame.size.height - 1.0, width: self.frame.size.width, height: 1.0)
+        bottomBorder.backgroundColor = UIColor.darkGrayColor().CGColor
+        
+        self.layer.addSublayer(bottomBorder)
     }
 }

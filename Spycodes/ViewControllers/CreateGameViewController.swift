@@ -13,8 +13,8 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         self.roomNameTextField.delegate = self
         self.roomNameTextField.becomeFirstResponder()
