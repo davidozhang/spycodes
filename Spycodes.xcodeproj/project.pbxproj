@@ -31,6 +31,7 @@
 		63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F091D3CB88D00211D3A /* Card.swift */; };
 		63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */; };
 		63CB4F0E1D3DAA5A00211D3A /* SpycodesWordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0D1D3DAA5A00211D3A /* SpycodesWordList.swift */; };
+		63DE6A041DFCFA7700938D5A /* SpycodesRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DE6A031DFCFA7700938D5A /* SpycodesRoundedButton.swift */; };
 		63EAF9A31D41D2E700BC554E /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A21D41D2E700BC554E /* Round.swift */; };
 		63EAF9A51D41F1C400BC554E /* AudioToolboxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A41D41F1C400BC554E /* AudioToolboxManager.swift */; };
 		63FA54E01D1BBB73004515DA /* SpycodesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA54DF1D1BBB73004515DA /* SpycodesTextField.swift */; };
@@ -75,6 +76,7 @@
 		63CB4F091D3CB88D00211D3A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Objects/Card.swift; sourceTree = "<group>"; };
 		63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardCollection.swift; path = Objects/CardCollection.swift; sourceTree = "<group>"; };
 		63CB4F0D1D3DAA5A00211D3A /* SpycodesWordList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesWordList.swift; path = Extensions/SpycodesWordList.swift; sourceTree = "<group>"; };
+		63DE6A031DFCFA7700938D5A /* SpycodesRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesRoundedButton.swift; path = Extensions/SpycodesRoundedButton.swift; sourceTree = "<group>"; };
 		63EAF9A21D41D2E700BC554E /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Round.swift; path = Objects/Round.swift; sourceTree = "<group>"; };
 		63EAF9A41D41F1C400BC554E /* AudioToolboxManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioToolboxManager.swift; path = Managers/AudioToolboxManager.swift; sourceTree = "<group>"; };
 		63FA54DF1D1BBB73004515DA /* SpycodesTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesTextField.swift; path = Extensions/SpycodesTextField.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */,
 				6317B93C1DFBEE720069FF48 /* SpycodesNavigationBarLabel.swift */,
 				63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */,
+				63DE6A031DFCFA7700938D5A /* SpycodesRoundedButton.swift */,
 				63FA54DF1D1BBB73004515DA /* SpycodesTextField.swift */,
 				63CB4F0D1D3DAA5A00211D3A /* SpycodesWordList.swift */,
 				639BA3151D38AFEF002F2A18 /* SpycodesUIColor.swift */,
@@ -322,6 +325,7 @@
 				6317B93D1DFBEE720069FF48 /* SpycodesNavigationBarLabel.swift in Sources */,
 				63067C6A1D2982DD0005AC66 /* LobbyRoomViewCell.swift in Sources */,
 				63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */,
+				63DE6A041DFCFA7700938D5A /* SpycodesRoundedButton.swift in Sources */,
 				63FDED351D264BE800142780 /* Player.swift in Sources */,
 				63A04D1D1D1A7F37005A2914 /* SpycodesButton.swift in Sources */,
 				63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */,

@@ -10,6 +10,7 @@ class PregameRoomViewCell: UITableViewCell {
     
     var index: Int?
     var delegate: PregameRoomViewCellDelegate?
+    var teamSelectionEnabled = true
     
     @IBOutlet weak var clueGiverImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -23,6 +24,10 @@ class PregameRoomViewCell: UITableViewCell {
     }
     
     @IBAction func switchToggled(sender: AnyObject) {
+        if !teamSelectionEnabled {
+            return
+        }
+        
         if let index = self.index {
             delegate?.teamDidChangeAtIndex(index, team: teamSwitch.on)
         }

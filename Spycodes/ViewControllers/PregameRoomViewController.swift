@@ -3,7 +3,6 @@ import UIKit
 
 class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
     private let identifier = "pregame-room-view-cell"
-    private let startGameButtonDefaultHeight: CGFloat = 50
     private let minigameToggleViewDefaultHeight: CGFloat = 41
     private let statisticsDashboardDefaultHeight: CGFloat = 32
     
@@ -20,7 +19,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var startGameInfoButton: UIButton!
     
     @IBOutlet weak var minigameToggleViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var startGameButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var statisticsDashboardViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var minigameToggleView: UIView!
@@ -88,7 +86,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         self.startGameInfoButton.hidden = false
         self.startGame.alpha = 0.3
         self.startGame.enabled = false
-        self.startGameButtonHeightConstraint.constant = self.startGameButtonDefaultHeight
         
         self.roomNameLabel.text = Room.instance.name
     }
@@ -250,8 +247,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             }
         } else {
             self.statisticsImageView.image = UIImage(named: "Chart")
-            if let redNumberOfWins = Statistics.instance.getStatistics()[Team.Red], blueNumberOfWins = Statistics.instance.getStatistics()[Team.Blue] {
-                self.statisticsLabel.text = "Red: " + String(redNumberOfWins) + "\tBlue: " + String(blueNumberOfWins)
+            if let redNumberOfWins = Statistics.instance.getStatistics()[Team.Red], let blueNumberOfWins = Statistics.instance.getStatistics()[Team.Blue] {
+                self.statisticsLabel.text = "Red: " + String(redNumberOfWins) + " Blue: " + String(blueNumberOfWins)
             }
         }
     }
@@ -265,9 +262,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as! PregameRoomViewCell
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? PregameRoomViewCell else { return UITableViewCell() }
         let playerAtIndex = Room.instance.players[indexPath.row]
-        cell.nameLabel.text = String(indexPath.row + 1) + ". " + playerAtIndex.name
+        
+        cell.nameLabel.text = playerAtIndex.name
         
         // Determine team switch color
         if playerAtIndex.team == Team.Red {
@@ -277,18 +275,18 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         if Player.instance == playerAtIndex {
-            cell.nameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 32)
+            cell.nameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 24)
         }
         
         if Player.instance.isHost() || Player.instance == playerAtIndex {
-            cell.teamSwitch.enabled = true
+            cell.teamSelectionEnabled = true
             cell.clueGiverImage.alpha = 1.0
             
             if GameMode.instance.mode == GameMode.Mode.MiniGame {
-                cell.teamSwitch.enabled = false
+                cell.teamSelectionEnabled = false
             }
         } else {
-            cell.teamSwitch.enabled = false
+            cell.teamSelectionEnabled = false
             cell.clueGiverImage.alpha = 0.3
         }
 
