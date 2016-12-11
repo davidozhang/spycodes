@@ -93,7 +93,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Jm-jD-vJs" userLabel="Settings Button">
-                                <rect key="frame" x="320" y="35" width="25" height="25"/>
+                                <rect key="frame" x="325" y="28" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="3jb-xr-Dqv"/>
                                     <constraint firstAttribute="width" constant="25" id="TKm-bi-D15"/>
@@ -106,10 +106,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="9Jm-jD-vJs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="15" id="B1a-Nd-qJT"/>
+                            <constraint firstItem="9Jm-jD-vJs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="B1a-Nd-qJT"/>
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="F5G-fC-j66"/>
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GIg-cQ-q81"/>
-                            <constraint firstAttribute="trailing" secondItem="9Jm-jD-vJs" secondAttribute="trailing" constant="30" id="OKL-UC-Cyv"/>
+                            <constraint firstAttribute="trailing" secondItem="9Jm-jD-vJs" secondAttribute="trailing" constant="25" id="OKL-UC-Cyv"/>
                         </constraints>
                     </view>
                     <connections>
@@ -148,7 +148,7 @@
                                 </variation>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvz-Ab-Jtm" userLabel="Back Button">
-                                <rect key="frame" x="30" y="35" width="35" height="35"/>
+                                <rect key="frame" x="15" y="24" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="5hn-mt-nDj"/>
                                     <constraint firstAttribute="height" constant="35" id="N7N-Jf-Kua"/>
@@ -159,7 +159,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30P-eT-EpI" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="140.5" y="42" width="94" height="21"/>
+                                <rect key="frame" x="140.5" y="31" width="94" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -172,8 +172,8 @@
                             <constraint firstItem="eTE-OI-uxt" firstAttribute="leading" secondItem="AZq-9W-7DJ" secondAttribute="leading" constant="40" id="GJn-wH-k4c"/>
                             <constraint firstItem="rvz-Ab-Jtm" firstAttribute="leading" secondItem="AZq-9W-7DJ" secondAttribute="leading" constant="30" id="MLR-Cr-0c2"/>
                             <constraint firstItem="30P-eT-EpI" firstAttribute="centerX" secondItem="AZq-9W-7DJ" secondAttribute="centerX" id="TgB-kQ-X7K"/>
-                            <constraint firstItem="rvz-Ab-Jtm" firstAttribute="top" secondItem="uCt-xz-jhL" secondAttribute="bottom" constant="15" id="b4j-Ui-9yt"/>
-                            <constraint firstItem="rvz-Ab-Jtm" firstAttribute="leading" secondItem="AZq-9W-7DJ" secondAttribute="leading" constant="30" id="b6y-Vv-kgo"/>
+                            <constraint firstItem="rvz-Ab-Jtm" firstAttribute="top" secondItem="uCt-xz-jhL" secondAttribute="bottom" constant="4" id="b4j-Ui-9yt"/>
+                            <constraint firstItem="rvz-Ab-Jtm" firstAttribute="leading" secondItem="AZq-9W-7DJ" secondAttribute="leading" constant="15" id="b6y-Vv-kgo"/>
                             <constraint firstItem="eTE-OI-uxt" firstAttribute="centerX" secondItem="AZq-9W-7DJ" secondAttribute="centerX" id="jcK-sW-gwH"/>
                             <constraint firstItem="rvz-Ab-Jtm" firstAttribute="top" secondItem="uCt-xz-jhL" secondAttribute="bottom" constant="25" id="kVd-VN-Ocn"/>
                             <constraint firstItem="30P-eT-EpI" firstAttribute="centerY" secondItem="rvz-Ab-Jtm" secondAttribute="centerY" id="pTj-3P-Goy"/>
@@ -209,7 +209,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOI-Eo-Htd" userLabel="Back Button">
-                                <rect key="frame" x="30" y="35" width="35" height="35"/>
+                                <rect key="frame" x="15" y="24" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="0CE-dv-grx"/>
                                     <constraint firstAttribute="width" constant="35" id="AMc-NW-RCy"/>
@@ -220,7 +220,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gev-Gq-JtW" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="155.5" y="42.5" width="64" height="21"/>
+                                <rect key="frame" x="155.5" y="31.5" width="64" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -229,8 +229,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gev-Gq-JtW" firstAttribute="centerX" secondItem="Vhf-dS-IgE" secondAttribute="centerX" id="Ec1-oK-yno"/>
-                            <constraint firstItem="eOI-Eo-Htd" firstAttribute="leading" secondItem="Vhf-dS-IgE" secondAttribute="leading" constant="30" id="RKf-bv-n4H"/>
-                            <constraint firstItem="eOI-Eo-Htd" firstAttribute="top" secondItem="Ag9-NQ-eB2" secondAttribute="bottom" constant="15" id="Vb0-Lb-99A"/>
+                            <constraint firstItem="eOI-Eo-Htd" firstAttribute="leading" secondItem="Vhf-dS-IgE" secondAttribute="leading" constant="15" id="RKf-bv-n4H"/>
+                            <constraint firstItem="eOI-Eo-Htd" firstAttribute="top" secondItem="Ag9-NQ-eB2" secondAttribute="bottom" constant="4" id="Vb0-Lb-99A"/>
                             <constraint firstItem="gev-Gq-JtW" firstAttribute="centerY" secondItem="eOI-Eo-Htd" secondAttribute="centerY" id="wyW-Qv-fdA"/>
                         </constraints>
                     </view>
@@ -269,7 +269,7 @@
                                 </variation>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYY-fp-HQH" userLabel="Back Button">
-                                <rect key="frame" x="30" y="35" width="35" height="35"/>
+                                <rect key="frame" x="15" y="24" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="6OD-rQ-5oE"/>
                                     <constraint firstAttribute="height" constant="35" id="Wdf-Df-5Gl"/>
@@ -280,7 +280,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPo-CD-ok9" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="145.5" y="42" width="84" height="21"/>
+                                <rect key="frame" x="145.5" y="31" width="84" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -290,13 +290,13 @@
                         <constraints>
                             <constraint firstItem="KPo-CD-ok9" firstAttribute="centerX" secondItem="Muy-4C-ske" secondAttribute="centerX" id="84y-w8-fNp"/>
                             <constraint firstItem="YYY-fp-HQH" firstAttribute="leading" secondItem="Muy-4C-ske" secondAttribute="leadingMargin" constant="30" id="AeL-Wa-K9c"/>
-                            <constraint firstItem="YYY-fp-HQH" firstAttribute="top" secondItem="O2o-J1-ZW6" secondAttribute="bottom" constant="15" id="Eg0-Iq-8ta"/>
+                            <constraint firstItem="YYY-fp-HQH" firstAttribute="top" secondItem="O2o-J1-ZW6" secondAttribute="bottom" constant="4" id="Eg0-Iq-8ta"/>
                             <constraint firstItem="KPo-CD-ok9" firstAttribute="centerY" secondItem="YYY-fp-HQH" secondAttribute="centerY" id="K5X-38-vbm"/>
                             <constraint firstItem="4s9-er-VpV" firstAttribute="centerY" secondItem="Muy-4C-ske" secondAttribute="centerY" id="UwC-kY-pWD"/>
                             <constraint firstItem="4s9-er-VpV" firstAttribute="centerX" secondItem="Muy-4C-ske" secondAttribute="centerX" id="Y8l-Ag-BaX"/>
                             <constraint firstItem="4s9-er-VpV" firstAttribute="leading" secondItem="Muy-4C-ske" secondAttribute="leading" constant="40" id="fUZ-yd-kqF"/>
                             <constraint firstItem="YYY-fp-HQH" firstAttribute="top" secondItem="O2o-J1-ZW6" secondAttribute="bottom" constant="25" id="jX4-VY-4jD"/>
-                            <constraint firstItem="YYY-fp-HQH" firstAttribute="leading" secondItem="Muy-4C-ske" secondAttribute="leading" constant="30" id="mzV-ye-Ssq"/>
+                            <constraint firstItem="YYY-fp-HQH" firstAttribute="leading" secondItem="Muy-4C-ske" secondAttribute="leading" constant="15" id="mzV-ye-Ssq"/>
                             <constraint firstItem="YYY-fp-HQH" firstAttribute="top" secondItem="O2o-J1-ZW6" secondAttribute="bottom" constant="25" id="n5F-Cc-qVu"/>
                             <constraint firstAttribute="trailing" secondItem="4s9-er-VpV" secondAttribute="trailing" constant="40" id="p0y-1X-DvL"/>
                         </constraints>
@@ -334,7 +334,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FNd-tS-fuD">
-                                <rect key="frame" x="0.0" y="90" width="375" height="557"/>
+                                <rect key="frame" x="0.0" y="79" width="375" height="568"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lobby-room-view-cell" id="fGf-dk-B8F" customClass="LobbyRoomViewCell" customModule="Spycodes" customModuleProvider="target">
@@ -379,7 +379,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AvE-ax-qBg" userLabel="Back Button">
-                                <rect key="frame" x="30" y="35" width="35" height="35"/>
+                                <rect key="frame" x="15" y="24" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Cy3-aR-t94"/>
                                     <constraint firstAttribute="width" constant="35" id="hCE-wR-ncQ"/>
@@ -390,7 +390,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lobby" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcv-1n-gd1" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="163.5" y="42.5" width="48" height="21"/>
+                                <rect key="frame" x="163.5" y="31.5" width="48" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -398,7 +398,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="AvE-ax-qBg" firstAttribute="top" secondItem="E2v-cR-e0P" secondAttribute="bottom" constant="15" id="5bW-ax-rSm"/>
+                            <constraint firstItem="AvE-ax-qBg" firstAttribute="top" secondItem="E2v-cR-e0P" secondAttribute="bottom" constant="4" id="5bW-ax-rSm"/>
                             <constraint firstItem="AvE-ax-qBg" firstAttribute="top" secondItem="D01-O5-iI2" secondAttribute="topMargin" constant="30" id="5d3-Zk-vi2"/>
                             <constraint firstItem="dcv-1n-gd1" firstAttribute="centerX" secondItem="D01-O5-iI2" secondAttribute="centerX" id="A8h-oR-71e"/>
                             <constraint firstItem="dcv-1n-gd1" firstAttribute="centerY" secondItem="AvE-ax-qBg" secondAttribute="centerY" id="Jac-sy-TUe"/>
@@ -407,7 +407,7 @@
                             <constraint firstItem="AvE-ax-qBg" firstAttribute="leading" secondItem="D01-O5-iI2" secondAttribute="leadingMargin" constant="30" id="Wb1-9G-z5z"/>
                             <constraint firstAttribute="trailing" secondItem="FNd-tS-fuD" secondAttribute="trailing" id="bS2-ly-A2E"/>
                             <constraint firstItem="FNd-tS-fuD" firstAttribute="top" secondItem="AvE-ax-qBg" secondAttribute="bottom" constant="20" id="egI-p9-dkK"/>
-                            <constraint firstItem="AvE-ax-qBg" firstAttribute="leading" secondItem="D01-O5-iI2" secondAttribute="leading" constant="30" id="fWY-93-iSJ"/>
+                            <constraint firstItem="AvE-ax-qBg" firstAttribute="leading" secondItem="D01-O5-iI2" secondAttribute="leading" constant="15" id="fWY-93-iSJ"/>
                             <constraint firstItem="AvE-ax-qBg" firstAttribute="top" secondItem="E2v-cR-e0P" secondAttribute="bottom" constant="30" id="uVH-wG-i9R"/>
                         </constraints>
                         <variation key="default">
@@ -991,8 +991,8 @@
         <image name="Team" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VCz-No-0ZF"/>
-        <segue reference="Vg7-zN-QuD"/>
         <segue reference="yme-7x-s1N"/>
+        <segue reference="VCz-No-0ZF"/>
+        <segue reference="M2x-yW-um3"/>
     </inferredMetricsTieBreakers>
 </document>

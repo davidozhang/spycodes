@@ -6,7 +6,7 @@ class SpycodesTextField: UITextField {
         super.init(coder: aDecoder)
         self.autocorrectionType = UITextAutocorrectionType.No
         self.borderStyle = .None
-        self.font = UIFont(name: "HelveticaNeue-Thin", size: 32)
+        self.font = UIFont(name: "HelveticaNeue-Thin", size: 24)
     }
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
