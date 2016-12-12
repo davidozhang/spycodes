@@ -350,7 +350,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
             var attributedString: NSMutableAttributedString =  NSMutableAttributedString(string: cardAtIndex.getWord())
             if cardAtIndex.getTeam() == Player.instance.team {
-                attributedString = NSMutableAttributedString(string: cardAtIndex.getWord(), attributes: [NSFontAttributeName : UIFont(name: "HelveticaNeue-Light", size: 20)!])
+                attributedString = NSMutableAttributedString(string: cardAtIndex.getWord(), attributes: [NSFontAttributeName : UIFont(name: "HelveticaNeue-Light", size: 18)!])
             }
             if cardAtIndex.isSelected() {
                 attributedString.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributedString.length))
@@ -416,6 +416,14 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         return UIEdgeInsetsMake(self.topBarViewHeightConstraint.constant + 8, edgeInset, self.bottomBarViewHeightConstraint.constant + 8, edgeInset)
     }
     
+    // MARK: Collection View Cell Size
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let viewBounds = collectionView.bounds
+        let modifiedWidth = (viewBounds.width - 2 * edgeInset - minCellSpacing) / 2
+        return CGSize(width: modifiedWidth, height: viewBounds.height/12)
+    }
+    
+    // MARK: Collection View Interitem Spacing
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return minCellSpacing
     }
