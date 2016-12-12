@@ -4,6 +4,7 @@ import UIKit
 class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MultipeerManagerDelegate, UITextFieldDelegate {
     private let reuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
+    private let minCellSpacing: CGFloat = 12
     private let endRoundButtonDefaultHeight: CGFloat = 50
     private let animationAlpha: CGFloat = 0.4
     private let animationDuration: NSTimeInterval = 0.75
@@ -20,10 +21,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     @IBOutlet weak var cardsRemainingLabel: UILabel!
     @IBOutlet weak var teamLabel: UILabel!
     
-    @IBOutlet weak var endRoundButton: SpycodesButton!
+    @IBOutlet weak var endRoundButton: SpycodesRoundedButton!
     @IBOutlet weak var confirmButton: UIButton!
-    
-    @IBOutlet weak var endRoundButtonHeightConstraint: NSLayoutConstraint!
     
     @IBAction func onBackButtonPressed(sender: AnyObject) {
         Round.instance.abortGame()
@@ -60,7 +59,6 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         }
         
         self.endRoundButton.hidden = false
-        self.endRoundButtonHeightConstraint.constant = self.endRoundButtonDefaultHeight
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameRoomViewController.refreshView), userInfo: nil, repeats: true)    // Refresh room every second
         
@@ -230,11 +228,11 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         Round.instance.winningTeam = Team.Blue
         self.broadcastEssentialData()
         if let userInfo = notification.userInfo {
-            self.didEndGame(title: userInfo["title"] as! String, reason: userInfo["reason"] as! String)
+            self.didEndGame(userInfo["title"] as! String, reason: userInfo["reason"] as! String)
         }
     }
     
-    private func didEndGame(title title: String, reason: String) {
+    private func didEndGame(title: String, reason: String) {
         if Player.instance.isHost() {
             self.broadcastTimer?.invalidate()
         }
@@ -260,20 +258,20 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
             Round.instance = round
             if Round.instance.abort {
-                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerAbortedString)
+                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerAbortedString)
                 return
             }
             else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.RegularGame {
-                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
+                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
                 return
             }
             else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.MiniGame {
-                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
+                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
                 Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
                 return
             }
             else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) {
-                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultLoseString)
+                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: Round.defaultLoseString)
                 return
             }
         }
@@ -288,7 +286,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     func newPeerAddedToSession(peerID: MCPeerID) {}
     
     func peerDisconnectedFromSession(peerID: MCPeerID) {
-        if let uuid = Room.instance.connectedPeers[peerID], player = Room.instance.getPlayerWithUUID(uuid) {
+        if let uuid = Room.instance.connectedPeers[peerID], let player = Room.instance.getPlayerWithUUID(uuid) {
             
             Room.instance.removePlayerWithUUID(uuid)
             self.broadcastOptionalData(Room.instance)
@@ -303,7 +301,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             } else {
                 Round.instance.abortGame()
                 self.broadcastEssentialData()
-                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerDisconnectedString)
+                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerDisconnectedString)
             }
         }
     }
@@ -372,7 +370,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             Statistics.instance.recordWinForTeam(opponentTeam!)
             self.broadcastOptionalData(Statistics.instance)
             
-            self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultLoseString)
+            self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: Round.defaultLoseString)
         }
         else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
             Round.instance.winningTeam = playerTeam
@@ -382,29 +380,33 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 Statistics.instance.recordWinForTeam(playerTeam)
                 self.broadcastOptionalData(Statistics.instance)
                 
-                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
+                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
             } else {
-                self.didEndGame(title: SpycodesMessage.returningToPregameRoomString, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
+                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
                 Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
                 self.broadcastOptionalData(Statistics.instance)
             }
         }
     }
     
-    // Cell Size
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: 150, height: 50)
-    }
-    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(edgeInset, edgeInset, edgeInset, edgeInset)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return minCellSpacing
+    }
+    
+    // MARK: Collection View Cell Line Spacing
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return minCellSpacing
     }
     
     // MARK: Touch
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
         
-        if let allTouches = event?.allTouches(), touch = allTouches.first {
+        if let allTouches = event?.allTouches(), let touch = allTouches.first {
             if self.clueTextField.isFirstResponder() && touch.view != self.clueTextField {
                 self.clueTextField.resignFirstResponder()
             } else if self.numberOfWordsTextField.isFirstResponder() && touch.view != self.numberOfWordsTextField {
