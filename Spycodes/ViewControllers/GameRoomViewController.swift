@@ -5,7 +5,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private let reuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
     private let minCellSpacing: CGFloat = 12
-    private let endRoundButtonDefaultHeight: CGFloat = 50
+    private let elementGapSpace: CGFloat = 8
+    private let confirmButtonDefaultWidth: CGFloat = 22
     private let animationAlpha: CGFloat = 0.4
     private let animationDuration: NSTimeInterval = 0.75
     
@@ -16,6 +17,9 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private var refreshTimer: NSTimer?
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var topBarView: UIView!
+    @IBOutlet var bottomBarView: UIView!
+    @IBOutlet var topBarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var clueTextField: UITextField!
     @IBOutlet weak var numberOfWordsTextField: UITextField!
     @IBOutlet weak var cardsRemainingLabel: UILabel!
@@ -23,6 +27,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     @IBOutlet weak var endRoundButton: SpycodesRoundedButton!
     @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet var confirmButtonWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var confirmButtonLeadingSpaceConstraint: NSLayoutConstraint!
     
     @IBAction func onBackButtonPressed(sender: AnyObject) {
         Round.instance.abortGame()
@@ -64,6 +70,18 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         self.teamLabel.text = Player.instance.team == Team.Red ? "Red" : "Blue"
         self.confirmButton.hidden = true
+        self.confirmButtonLeadingSpaceConstraint.constant = 0
+        self.confirmButtonWidthConstraint.constant = 0
+        
+        let topBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
+        topBlurView.frame = self.topBarView.bounds
+        self.topBarView.addSubview(topBlurView)
+        self.topBarView.sendSubviewToBack(topBlurView)
+        
+        let bottomBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
+        bottomBlurView.frame = self.bottomBarView.bounds
+        self.bottomBarView.addSubview(bottomBlurView)
+        self.bottomBarView.sendSubviewToBack(bottomBlurView)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -169,6 +187,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                     
                     self.startTextFieldAnimations()
                     
+                    self.confirmButtonLeadingSpaceConstraint.constant = self.elementGapSpace
+                    self.confirmButtonWidthConstraint.constant = self.confirmButtonDefaultWidth
                     self.confirmButton.hidden = false
                     self.clueTextField.enabled = true
                     self.numberOfWordsTextField.enabled = true
@@ -215,6 +235,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         self.clueTextField.enabled = false
         self.numberOfWordsTextField.enabled = false
         self.confirmButton.hidden = true
+        self.confirmButtonLeadingSpaceConstraint.constant = 0
+        self.confirmButtonWidthConstraint.constant = 0
         self.broadcastEssentialData()
     }
     
