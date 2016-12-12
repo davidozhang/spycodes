@@ -706,7 +706,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="udo-t2-F4l">
-                                <rect key="frame" x="20" y="132" width="335" height="444"/>
+                                <rect key="frame" x="20" y="338" width="307" height="238"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kdn-LK-Bc8">
                                     <size key="itemSize" width="150" height="50"/>
@@ -716,7 +716,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="game-room-view-cell" id="PYS-7b-Gca" customClass="GameRoomViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
+                                        <rect key="frame" x="79" y="0.0" width="150" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
@@ -744,27 +744,6 @@
                                     <outlet property="delegate" destination="yX4-d1-WHr" id="6lq-a8-blv"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWW-d1-JFl" userLabel="Bottom Bar View">
-                                <rect key="frame" x="0.0" y="576" width="375" height="91"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-Ow-5JW" customClass="SpycodesRoundedButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="129" y="25" width="117" height="41"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <state key="normal" title="End Round">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onEndRoundPressed:" destination="yX4-d1-WHr" eventType="touchUpInside" id="yjA-CU-vfW"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="PlM-Ow-5JW" firstAttribute="centerX" secondItem="hWW-d1-JFl" secondAttribute="centerX" id="K6b-md-OZQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="PlM-Ow-5JW" secondAttribute="bottom" constant="25" id="b0F-3S-fOV"/>
-                                    <constraint firstItem="PlM-Ow-5JW" firstAttribute="top" secondItem="hWW-d1-JFl" secondAttribute="top" constant="25" id="hlQ-Hv-qK1"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vhy-Dr-vSM" userLabel="Top Bar View">
                                 <rect key="frame" x="0.0" y="20" width="375" height="77"/>
                                 <subviews>
@@ -900,10 +879,32 @@
                                     <constraint firstItem="XFn-Ic-8z8" firstAttribute="centerY" secondItem="dUf-TJ-d5l" secondAttribute="centerY" id="wIq-Xa-AdX"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hWW-d1-JFl" userLabel="Bottom Bar View">
+                                <rect key="frame" x="0.0" y="183" width="375" height="91"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-Ow-5JW" customClass="SpycodesRoundedButton" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="129" y="25" width="117" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="End Round">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onEndRoundPressed:" destination="yX4-d1-WHr" eventType="touchUpInside" id="yjA-CU-vfW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="PlM-Ow-5JW" firstAttribute="centerX" secondItem="hWW-d1-JFl" secondAttribute="centerX" id="K6b-md-OZQ"/>
+                                    <constraint firstAttribute="height" constant="91" id="Rze-jR-htc"/>
+                                    <constraint firstAttribute="bottom" secondItem="PlM-Ow-5JW" secondAttribute="bottom" constant="25" id="b0F-3S-fOV"/>
+                                    <constraint firstItem="PlM-Ow-5JW" firstAttribute="top" secondItem="hWW-d1-JFl" secondAttribute="top" constant="25" id="hlQ-Hv-qK1"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="hWW-d1-JFl" firstAttribute="top" secondItem="udo-t2-F4l" secondAttribute="bottom" id="FWd-b8-Q8F"/>
+                            <constraint firstItem="Zrc-Nf-5YD" firstAttribute="top" secondItem="udo-t2-F4l" secondAttribute="bottom" id="FXJ-Gf-nEM"/>
                             <constraint firstAttribute="trailing" secondItem="hWW-d1-JFl" secondAttribute="trailing" id="KC8-yt-JaN"/>
                             <constraint firstItem="Vhy-Dr-vSM" firstAttribute="leading" secondItem="hUt-sP-cEd" secondAttribute="leading" id="SNj-un-spR"/>
                             <constraint firstItem="hWW-d1-JFl" firstAttribute="centerX" secondItem="hUt-sP-cEd" secondAttribute="centerX" id="SqN-sg-IXy"/>
@@ -918,6 +919,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomBarView" destination="hWW-d1-JFl" id="2Xx-DX-TdC"/>
+                        <outlet property="bottomBarViewHeightConstraint" destination="Rze-jR-htc" id="6i0-O2-uh8"/>
                         <outlet property="cardsRemainingLabel" destination="647-e2-brJ" id="at7-pZ-ksU"/>
                         <outlet property="clueTextField" destination="Two-zP-PDk" id="6um-Qp-jju"/>
                         <outlet property="collectionView" destination="udo-t2-F4l" id="dkZ-d6-YKx"/>
