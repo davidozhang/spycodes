@@ -76,11 +76,13 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         let topBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
         topBlurView.frame = self.topBarView.bounds
+        topBlurView.clipsToBounds = true
         self.topBarView.addSubview(topBlurView)
         self.topBarView.sendSubviewToBack(topBlurView)
         
         let bottomBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
         bottomBlurView.frame = self.bottomBarView.bounds
+        bottomBlurView.clipsToBounds = true
         self.bottomBarView.addSubview(bottomBlurView)
         self.bottomBarView.sendSubviewToBack(bottomBlurView)
     }
