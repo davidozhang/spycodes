@@ -447,7 +447,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5W3-A0-VGs">
-                                <rect key="frame" x="0.0" y="142" width="414" height="513"/>
+                                <rect key="frame" x="0.0" y="142" width="414" height="517"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="pregame-room-view-cell" id="PVh-e3-TPn" customClass="PregameRoomViewCell" customModule="Spycodes" customModuleProvider="target">
@@ -613,7 +613,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="084-kN-Fki" customClass="SpycodesRoundedButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="146.66666666666669" y="670" width="121.00000000000006" height="41"/>
+                                <rect key="frame" x="146.66666666666669" y="677" width="121.00000000000006" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Start Game">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -623,7 +623,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtz-7Q-ljm">
-                                <rect key="frame" x="277.66666666666669" y="681" width="20" height="20"/>
+                                <rect key="frame" x="277.66666666666669" y="688" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="0eP-wH-o73"/>
                                     <constraint firstAttribute="width" constant="20" id="WIO-yI-4pm"/>
@@ -643,7 +643,7 @@
                             <constraint firstItem="rtz-7Q-ljm" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leadingMargin" constant="10" id="C75-cN-z70"/>
                             <constraint firstItem="Mc1-YN-1oP" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="8" id="DoL-Mf-2x1"/>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" id="JyP-Fd-tkk"/>
-                            <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="084-kN-Fki" secondAttribute="bottom" constant="25" id="MLH-VU-LgP"/>
+                            <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="084-kN-Fki" secondAttribute="bottom" constant="18" id="MLH-VU-LgP"/>
                             <constraint firstItem="Mc1-YN-1oP" firstAttribute="leading" secondItem="Zpa-v1-yiA" secondAttribute="trailing" constant="5" id="Np8-zc-yxC"/>
                             <constraint firstItem="GE8-dk-J4b" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="SR9-mL-KVb"/>
                             <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="30" id="Vsi-Wx-L0j"/>
@@ -656,7 +656,7 @@
                             <constraint firstAttribute="trailing" secondItem="5W3-A0-VGs" secondAttribute="trailing" id="jKW-MX-l9L"/>
                             <constraint firstItem="Zpa-v1-yiA" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" constant="15" id="ks2-G4-0fn"/>
                             <constraint firstItem="kCT-FC-Wj4" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="oLS-aX-3HI"/>
-                            <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="15" id="p1M-C1-aTZ"/>
+                            <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="18" id="p1M-C1-aTZ"/>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="top" secondItem="kCT-FC-Wj4" secondAttribute="bottom" constant="15" id="qft-V1-myo"/>
                             <constraint firstItem="rtz-7Q-ljm" firstAttribute="centerY" secondItem="084-kN-Fki" secondAttribute="centerY" id="rcs-aP-djG"/>
                             <constraint firstItem="kCT-FC-Wj4" firstAttribute="top" secondItem="GE8-dk-J4b" secondAttribute="bottom" id="u9n-xo-T0e"/>
@@ -706,7 +706,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="udo-t2-F4l">
-                                <rect key="frame" x="20" y="20" width="374" height="716"/>
+                                <rect key="frame" x="20" y="0.0" width="374" height="736"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kdn-LK-Bc8">
                                     <size key="itemSize" width="150" height="50"/>
@@ -745,10 +745,10 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vhy-Dr-vSM" userLabel="Top Bar View">
-                                <rect key="frame" x="0.0" y="20" width="414" height="77"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="97"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUf-TJ-d5l" userLabel="Back Button">
-                                        <rect key="frame" x="15" y="4" width="35" height="35"/>
+                                        <rect key="frame" x="15" y="24" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="4in-hr-7jc"/>
                                             <constraint firstAttribute="height" constant="35" id="Ozq-uH-Lel"/>
@@ -759,7 +759,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFn-Ic-8z8" userLabel="Clue Number View">
-                                        <rect key="frame" x="178.33333333333334" y="9" width="58" height="25"/>
+                                        <rect key="frame" x="178.33333333333334" y="29" width="58" height="25"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="32" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Two-zP-PDk" userLabel="Clue Text Field">
                                                 <rect key="frame" x="0.0" y="0.0" width="10" height="25"/>
@@ -805,7 +805,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scv-CB-Z0e" userLabel="Dashboard View">
-                                        <rect key="frame" x="171.33333333333334" y="43" width="72" height="30"/>
+                                        <rect key="frame" x="171.33333333333334" y="63" width="72" height="30"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Team" translatesAutoresizingMaskIntoConstraints="NO" id="vkP-5T-eUP">
                                                 <rect key="frame" x="0.0" y="5" width="20" height="20"/>
@@ -872,18 +872,18 @@
                                     <constraint firstItem="scv-CB-Z0e" firstAttribute="top" secondItem="dUf-TJ-d5l" secondAttribute="bottom" constant="4" id="7wU-RE-aJk"/>
                                     <constraint firstItem="scv-CB-Z0e" firstAttribute="centerX" secondItem="Vhy-Dr-vSM" secondAttribute="centerX" id="KDs-5b-v6M"/>
                                     <constraint firstAttribute="bottom" secondItem="scv-CB-Z0e" secondAttribute="bottom" constant="4" id="Ve6-4I-Lo6"/>
-                                    <constraint firstItem="dUf-TJ-d5l" firstAttribute="top" secondItem="Vhy-Dr-vSM" secondAttribute="top" constant="4" id="ctG-Le-6na"/>
+                                    <constraint firstAttribute="height" constant="97" id="cP6-J4-cEl"/>
+                                    <constraint firstItem="dUf-TJ-d5l" firstAttribute="top" secondItem="Vhy-Dr-vSM" secondAttribute="top" constant="24" id="ctG-Le-6na"/>
                                     <constraint firstItem="dUf-TJ-d5l" firstAttribute="leading" secondItem="Vhy-Dr-vSM" secondAttribute="leading" constant="15" id="g9s-yP-02L"/>
                                     <constraint firstItem="XFn-Ic-8z8" firstAttribute="centerX" secondItem="Vhy-Dr-vSM" secondAttribute="centerX" id="r7u-l3-uVe"/>
-                                    <constraint firstAttribute="height" constant="77" id="sVD-z2-xHs"/>
                                     <constraint firstItem="XFn-Ic-8z8" firstAttribute="centerY" secondItem="dUf-TJ-d5l" secondAttribute="centerY" id="wIq-Xa-AdX"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWW-d1-JFl" userLabel="Bottom Bar View">
-                                <rect key="frame" x="0.0" y="645" width="414" height="91"/>
+                                <rect key="frame" x="0.0" y="659" width="414" height="77"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-Ow-5JW" customClass="SpycodesRoundedButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="148.66666666666669" y="25" width="117.00000000000006" height="41"/>
+                                        <rect key="frame" x="148.66666666666669" y="18" width="117.00000000000006" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="End Round">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -896,9 +896,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="PlM-Ow-5JW" firstAttribute="centerX" secondItem="hWW-d1-JFl" secondAttribute="centerX" id="K6b-md-OZQ"/>
-                                    <constraint firstAttribute="height" constant="91" id="Rze-jR-htc"/>
-                                    <constraint firstAttribute="bottom" secondItem="PlM-Ow-5JW" secondAttribute="bottom" constant="25" id="b0F-3S-fOV"/>
-                                    <constraint firstItem="PlM-Ow-5JW" firstAttribute="top" secondItem="hWW-d1-JFl" secondAttribute="top" constant="25" id="hlQ-Hv-qK1"/>
+                                    <constraint firstAttribute="height" constant="77" id="Rze-jR-htc"/>
+                                    <constraint firstAttribute="bottom" secondItem="PlM-Ow-5JW" secondAttribute="bottom" constant="18" id="b0F-3S-fOV"/>
+                                    <constraint firstItem="PlM-Ow-5JW" firstAttribute="top" secondItem="hWW-d1-JFl" secondAttribute="top" constant="18" id="hlQ-Hv-qK1"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -910,10 +910,10 @@
                             <constraint firstItem="hWW-d1-JFl" firstAttribute="centerX" secondItem="hUt-sP-cEd" secondAttribute="centerX" id="SqN-sg-IXy"/>
                             <constraint firstAttribute="trailing" secondItem="Vhy-Dr-vSM" secondAttribute="trailing" id="bhc-eZ-KCX"/>
                             <constraint firstItem="udo-t2-F4l" firstAttribute="leading" secondItem="hUt-sP-cEd" secondAttribute="leading" constant="20" id="diu-h3-0wZ"/>
-                            <constraint firstItem="udo-t2-F4l" firstAttribute="top" secondItem="DMO-Jt-Cx9" secondAttribute="bottom" id="kiy-W6-uKN"/>
+                            <constraint firstItem="udo-t2-F4l" firstAttribute="top" secondItem="DMO-Jt-Cx9" secondAttribute="bottom" constant="-20" id="kiy-W6-uKN"/>
                             <constraint firstItem="Zrc-Nf-5YD" firstAttribute="top" secondItem="hWW-d1-JFl" secondAttribute="bottom" id="lun-Gf-300"/>
                             <constraint firstAttribute="trailing" secondItem="udo-t2-F4l" secondAttribute="trailing" constant="20" id="nb5-UO-f02"/>
-                            <constraint firstItem="Vhy-Dr-vSM" firstAttribute="top" secondItem="DMO-Jt-Cx9" secondAttribute="bottom" id="o6D-UP-BNv"/>
+                            <constraint firstItem="Vhy-Dr-vSM" firstAttribute="top" secondItem="DMO-Jt-Cx9" secondAttribute="bottom" constant="-20" id="o6D-UP-BNv"/>
                             <constraint firstItem="hWW-d1-JFl" firstAttribute="leading" secondItem="hUt-sP-cEd" secondAttribute="leading" id="oar-WD-iVO"/>
                         </constraints>
                     </view>
@@ -930,7 +930,7 @@
                         <outlet property="numberOfWordsTextField" destination="1J8-w3-IbM" id="OZo-0w-hSZ"/>
                         <outlet property="teamLabel" destination="p06-Ae-1HJ" id="NrV-HJ-nZH"/>
                         <outlet property="topBarView" destination="Vhy-Dr-vSM" id="Vdg-zN-a3H"/>
-                        <outlet property="topBarViewHeightConstraint" destination="sVD-z2-xHs" id="Q4H-Cq-tWf"/>
+                        <outlet property="topBarViewHeightConstraint" destination="cP6-J4-cEl" id="9Gy-Ue-J7O"/>
                         <segue destination="Isy-vz-eu5" kind="unwind" identifier="pregame-room" unwindAction="unwindToPregameRoom:" id="0dq-Te-mES"/>
                         <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="IIH-9T-29V"/>
                     </connections>
@@ -953,8 +953,8 @@
         <image name="Team" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Vg7-zN-QuD"/>
         <segue reference="IIH-9T-29V"/>
         <segue reference="yme-7x-s1N"/>
-        <segue reference="Vg7-zN-QuD"/>
     </inferredMetricsTieBreakers>
 </document>
