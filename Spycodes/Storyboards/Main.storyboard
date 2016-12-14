@@ -229,8 +229,32 @@
                                 <rect key="frame" x="0.0" y="72.666666666666686" width="414" height="663.33333333333326"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="version-view-cell" id="dEs-4e-hxQ" userLabel="version-view-cell" customClass="VersionViewCell" customModule="Spycodes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="eyq-bY-9pP" userLabel="section-header-view-cell" customClass="SectionHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eyq-bY-9pP" id="dM7-bA-7gn">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoW-xI-FRC">
+                                                    <rect key="frame" x="35" y="0.0" width="48.666666666666671" height="44"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="BoW-xI-FRC" firstAttribute="leading" secondItem="dM7-bA-7gn" secondAttribute="leading" constant="35" id="T2f-Zv-Aka"/>
+                                                <constraint firstItem="BoW-xI-FRC" firstAttribute="top" secondItem="dM7-bA-7gn" secondAttribute="top" id="kcf-Bc-4uZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="BoW-xI-FRC" secondAttribute="bottom" id="vlB-fH-qQU"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="header" destination="BoW-xI-FRC" id="sML-Hk-EQt"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="version-view-cell" id="dEs-4e-hxQ" userLabel="version-view-cell" customClass="VersionViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dEs-4e-hxQ" id="Sds-bd-CSc">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -243,14 +267,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNU-WM-6B5">
-                                                    <rect key="frame" x="303.66666666666669" y="10.333333333333336" width="28" height="24"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                    <rect key="frame" x="311.33333333333331" y="11.666666666666668" width="25.333333333333371" height="21.333333333333332"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(160)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFO-u5-KiB">
-                                                    <rect key="frame" x="335.66666666666669" y="10.333333333333336" width="44" height="24"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                                    <rect key="frame" x="340.66666666666669" y="11.666666666666668" width="39" height="21.333333333333332"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
