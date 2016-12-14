@@ -344,25 +344,37 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as! GameRoomViewCell
         let cardAtIndex = CardCollection.instance.cards[indexPath.row]
         
+        cell.wordLabel.textColor = UIColor.whiteColor()
         cell.wordLabel.text = cardAtIndex.getWord()
         
         cell.contentView.backgroundColor = UIColor.clearColor()
         
         if Player.instance.isClueGiver() {
-            cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
-            var attributedString: NSMutableAttributedString =  NSMutableAttributedString(string: cardAtIndex.getWord())
-            if cardAtIndex.getTeam() == Player.instance.team {
-                attributedString = NSMutableAttributedString(string: cardAtIndex.getWord(), attributes: [NSFontAttributeName : UIFont(name: "HelveticaNeue-Light", size: 18)!])
+            if cardAtIndex.getTeam() == .Neutral {
+                cell.wordLabel.textColor = UIColor.darkGrayColor()
             }
+            cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
+            let attributedString: NSMutableAttributedString =  NSMutableAttributedString(string: cardAtIndex.getWord())
             if cardAtIndex.isSelected() {
-                attributedString.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributedString.length))
+                attributedString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, attributedString.length))
             }
             cell.wordLabel.attributedText = attributedString
             return cell
         }
         
         if cardAtIndex.isSelected() {
+            if cardAtIndex.getTeam() == .Neutral {
+                cell.wordLabel.textColor = UIColor.darkGrayColor()
+                
+                let attributedString: NSMutableAttributedString =  NSMutableAttributedString(string: cardAtIndex.getWord())
+                if cardAtIndex.isSelected() {
+                    attributedString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, attributedString.length))
+                }
+                cell.wordLabel.attributedText = attributedString
+            }
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
+        } else {
+            cell.wordLabel.textColor = UIColor.darkGrayColor()
         }
         
         return cell
