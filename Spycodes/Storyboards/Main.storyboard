@@ -345,13 +345,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zag-jE-Vdk">
-                                                    <rect key="frame" x="25" y="10" width="45" height="24"/>
+                                                    <rect key="frame" x="35" y="10" width="45" height="24"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIx-Jw-5YW" userLabel="Join Button">
-                                                    <rect key="frame" x="356" y="4.6666666666666679" width="33" height="35"/>
+                                                    <rect key="frame" x="346" y="4.6666666666666679" width="33" height="35"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="20"/>
                                                     <state key="normal" title="Join">
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -362,9 +362,9 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="FIx-Jw-5YW" secondAttribute="trailing" constant="25" id="Fua-py-u53"/>
+                                                <constraint firstAttribute="trailing" secondItem="FIx-Jw-5YW" secondAttribute="trailing" constant="35" id="Fua-py-u53"/>
                                                 <constraint firstItem="FIx-Jw-5YW" firstAttribute="centerY" secondItem="vDa-dr-0HF" secondAttribute="centerY" id="SwQ-da-nHO"/>
-                                                <constraint firstItem="zag-jE-Vdk" firstAttribute="leading" secondItem="vDa-dr-0HF" secondAttribute="leading" constant="25" id="WYS-Dv-Wo2"/>
+                                                <constraint firstItem="zag-jE-Vdk" firstAttribute="leading" secondItem="vDa-dr-0HF" secondAttribute="leading" constant="35" id="WYS-Dv-Wo2"/>
                                                 <constraint firstItem="zag-jE-Vdk" firstAttribute="centerY" secondItem="vDa-dr-0HF" secondAttribute="centerY" id="wGi-ZS-Jwb"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -458,7 +458,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d84-Az-a9v">
-                                                    <rect key="frame" x="25" y="8" width="267" height="28.666666666666664"/>
+                                                    <rect key="frame" x="35" y="8" width="247" height="28.666666666666664"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="300" id="xaW-k5-dCT"/>
                                                     </constraints>
@@ -472,7 +472,7 @@
                                                     </variation>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4xn-Al-HcR" userLabel="Team Switch">
-                                                    <rect key="frame" x="297" y="7" width="51" height="31"/>
+                                                    <rect key="frame" x="287" y="7" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="49" id="KNF-8P-97h"/>
                                                         <constraint firstAttribute="height" constant="31" id="yHa-Vy-0eQ"/>
@@ -482,7 +482,7 @@
                                                     </connections>
                                                 </switch>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cluegiver-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="4mv-rH-4Dm">
-                                                    <rect key="frame" x="354" y="9" width="35" height="25"/>
+                                                    <rect key="frame" x="344" y="9" width="35" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="Qqy-dE-Ufe"/>
                                                         <constraint firstAttribute="width" constant="35" id="pZq-43-xl3"/>
@@ -495,9 +495,9 @@
                                                 <constraint firstItem="4xn-Al-HcR" firstAttribute="leading" secondItem="d84-Az-a9v" secondAttribute="trailing" constant="5" id="FFO-1C-XBM"/>
                                                 <constraint firstItem="4xn-Al-HcR" firstAttribute="leading" secondItem="d84-Az-a9v" secondAttribute="trailing" id="FZz-pq-zND"/>
                                                 <constraint firstItem="4mv-rH-4Dm" firstAttribute="leading" secondItem="4xn-Al-HcR" secondAttribute="trailing" constant="8" id="LG2-4v-WiF"/>
-                                                <constraint firstAttribute="trailing" secondItem="4mv-rH-4Dm" secondAttribute="trailing" constant="25" id="dXH-vQ-s4Q"/>
+                                                <constraint firstAttribute="trailing" secondItem="4mv-rH-4Dm" secondAttribute="trailing" constant="35" id="dXH-vQ-s4Q"/>
                                                 <constraint firstItem="4mv-rH-4Dm" firstAttribute="centerY" secondItem="d84-Az-a9v" secondAttribute="centerY" id="gti-7X-iAR"/>
-                                                <constraint firstItem="d84-Az-a9v" firstAttribute="leading" secondItem="rq2-uF-F29" secondAttribute="leading" constant="25" id="unX-kK-LLJ"/>
+                                                <constraint firstItem="d84-Az-a9v" firstAttribute="leading" secondItem="rq2-uF-F29" secondAttribute="leading" constant="35" id="unX-kK-LLJ"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -667,8 +667,8 @@
                                 <exclude reference="6DZ-tE-h64"/>
                                 <exclude reference="gTl-TY-3Ra"/>
                                 <exclude reference="Vsi-Wx-L0j"/>
-                                <exclude reference="C75-cN-z70"/>
                                 <exclude reference="XBE-ff-nvo"/>
+                                <exclude reference="C75-cN-z70"/>
                             </mask>
                         </variation>
                     </view>
@@ -953,8 +953,8 @@
         <image name="Team" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="VCz-No-0ZF"/>
         <segue reference="Vg7-zN-QuD"/>
-        <segue reference="IIH-9T-29V"/>
         <segue reference="yme-7x-s1N"/>
     </inferredMetricsTieBreakers>
 </document>
