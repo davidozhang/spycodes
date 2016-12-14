@@ -225,16 +225,72 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mxy-b5-O5c">
+                                <rect key="frame" x="0.0" y="72.666666666666686" width="414" height="663.33333333333326"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="version-view-cell" id="dEs-4e-hxQ" userLabel="version-view-cell" customClass="VersionViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dEs-4e-hxQ" id="Sds-bd-CSc">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMD-gn-KBX">
+                                                    <rect key="frame" x="35" y="0.0" width="54.333333333333329" height="44"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNU-WM-6B5">
+                                                    <rect key="frame" x="303.66666666666669" y="10.333333333333336" width="28" height="24"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(160)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFO-u5-KiB">
+                                                    <rect key="frame" x="335.66666666666669" y="10.333333333333336" width="44" height="24"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="aFO-u5-KiB" firstAttribute="centerY" secondItem="TMD-gn-KBX" secondAttribute="centerY" id="9wD-KL-9xj"/>
+                                                <constraint firstAttribute="bottom" secondItem="TMD-gn-KBX" secondAttribute="bottom" id="E7N-Gi-WaJ"/>
+                                                <constraint firstItem="TMD-gn-KBX" firstAttribute="top" secondItem="Sds-bd-CSc" secondAttribute="top" id="Ldr-Mz-JWL"/>
+                                                <constraint firstItem="aFO-u5-KiB" firstAttribute="leading" secondItem="aNU-WM-6B5" secondAttribute="trailing" constant="4" id="khV-bM-m1H"/>
+                                                <constraint firstItem="aNU-WM-6B5" firstAttribute="centerY" secondItem="TMD-gn-KBX" secondAttribute="centerY" id="mrQ-Oq-GGn"/>
+                                                <constraint firstItem="TMD-gn-KBX" firstAttribute="leading" secondItem="Sds-bd-CSc" secondAttribute="leading" constant="35" id="q7Z-Qh-fTQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="aFO-u5-KiB" secondAttribute="trailing" constant="35" id="yXR-t4-3L2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="buildNumberLabel" destination="aFO-u5-KiB" id="axP-k2-9fH"/>
+                                            <outlet property="versionNumberLabel" destination="aNU-WM-6B5" id="c85-NZ-p1A"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="E72-I9-0mo" id="jDk-Ae-s6T"/>
+                                    <outlet property="delegate" destination="E72-I9-0mo" id="KQy-op-PEf"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gev-Gq-JtW" firstAttribute="centerX" secondItem="Vhf-dS-IgE" secondAttribute="centerX" id="Ec1-oK-yno"/>
+                            <constraint firstItem="SnD-qp-ajy" firstAttribute="top" secondItem="mxy-b5-O5c" secondAttribute="bottom" id="QGU-TS-6ZY"/>
                             <constraint firstItem="eOI-Eo-Htd" firstAttribute="leading" secondItem="Vhf-dS-IgE" secondAttribute="leading" constant="15" id="RKf-bv-n4H"/>
                             <constraint firstItem="eOI-Eo-Htd" firstAttribute="top" secondItem="Ag9-NQ-eB2" secondAttribute="bottom" constant="4" id="Vb0-Lb-99A"/>
+                            <constraint firstItem="mxy-b5-O5c" firstAttribute="top" secondItem="gev-Gq-JtW" secondAttribute="bottom" constant="20" id="j1s-Pn-dNl"/>
+                            <constraint firstAttribute="trailing" secondItem="mxy-b5-O5c" secondAttribute="trailing" id="mA5-ZE-JGV"/>
+                            <constraint firstItem="mxy-b5-O5c" firstAttribute="leading" secondItem="Vhf-dS-IgE" secondAttribute="leading" id="sgh-gH-NhI"/>
                             <constraint firstItem="gev-Gq-JtW" firstAttribute="centerY" secondItem="eOI-Eo-Htd" secondAttribute="centerY" id="wyW-Qv-fdA"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="tableView" destination="mxy-b5-O5c" id="V0u-Kd-6YR"/>
                         <segue destination="XK5-pZ-i5L" kind="unwind" identifier="main-menu" unwindAction="unwindToMainMenu:" id="I2d-Jd-G8R"/>
                     </connections>
                 </viewController>
@@ -447,7 +503,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5W3-A0-VGs">
-                                <rect key="frame" x="0.0" y="142" width="414" height="517"/>
+                                <rect key="frame" x="0.0" y="147" width="414" height="512"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="pregame-room-view-cell" id="PVh-e3-TPn" customClass="PregameRoomViewCell" customModule="Spycodes" customModuleProvider="target">
@@ -657,7 +713,7 @@
                             <constraint firstItem="Zpa-v1-yiA" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" constant="15" id="ks2-G4-0fn"/>
                             <constraint firstItem="kCT-FC-Wj4" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="oLS-aX-3HI"/>
                             <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="18" id="p1M-C1-aTZ"/>
-                            <constraint firstItem="5W3-A0-VGs" firstAttribute="top" secondItem="kCT-FC-Wj4" secondAttribute="bottom" constant="15" id="qft-V1-myo"/>
+                            <constraint firstItem="5W3-A0-VGs" firstAttribute="top" secondItem="kCT-FC-Wj4" secondAttribute="bottom" constant="20" id="qft-V1-myo"/>
                             <constraint firstItem="rtz-7Q-ljm" firstAttribute="centerY" secondItem="084-kN-Fki" secondAttribute="centerY" id="rcs-aP-djG"/>
                             <constraint firstItem="kCT-FC-Wj4" firstAttribute="top" secondItem="GE8-dk-J4b" secondAttribute="bottom" id="u9n-xo-T0e"/>
                         </constraints>
@@ -954,7 +1010,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="VCz-No-0ZF"/>
-        <segue reference="Vg7-zN-QuD"/>
-        <segue reference="yme-7x-s1N"/>
+        <segue reference="M2x-yW-um3"/>
+        <segue reference="7yd-xs-fux"/>
     </inferredMetricsTieBreakers>
 </document>

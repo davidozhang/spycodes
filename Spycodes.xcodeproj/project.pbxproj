@@ -21,6 +21,7 @@
 		637F195F1D46010E00FB4047 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F195E1D46010E00FB4047 /* Statistics.swift */; };
 		63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* MultipeerManager.swift */; };
 		639BA3161D38AFEF002F2A18 /* SpycodesUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BA3151D38AFEF002F2A18 /* SpycodesUIColor.swift */; };
+		639E17661E00E50E00640540 /* VersionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17651E00E50E00640540 /* VersionViewCell.swift */; };
 		63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* AppDelegate.swift */; };
 		63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D0D1D1A5713005A2914 /* Assets.xcassets */; };
 		63A04D1D1D1A7F37005A2914 /* SpycodesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1C1D1A7F37005A2914 /* SpycodesButton.swift */; };
@@ -64,6 +65,7 @@
 		637F195E1D46010E00FB4047 /* Statistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Statistics.swift; path = Objects/Statistics.swift; sourceTree = "<group>"; };
 		63920A361D3090D60073E7F7 /* MultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipeerManager.swift; path = Managers/MultipeerManager.swift; sourceTree = "<group>"; };
 		639BA3151D38AFEF002F2A18 /* SpycodesUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesUIColor.swift; path = Extensions/SpycodesUIColor.swift; sourceTree = "<group>"; };
+		639E17651E00E50E00640540 /* VersionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VersionViewCell.swift; path = Views/VersionViewCell.swift; sourceTree = "<group>"; };
 		63A04D001D1A5713005A2914 /* Spycodes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spycodes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63A04D031D1A5713005A2914 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63A04D0D1D1A5713005A2914 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				63CB4F071D3CB3C300211D3A /* GameRoomViewCell.swift */,
 				63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */,
 				63FDED451D28B47200142780 /* PregameRoomViewCell.swift */,
+				639E17651E00E50E00640540 /* VersionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				63486DA51D3DDC9800795403 /* SpycodesArray.swift in Sources */,
 				637310CB1D3B292F00EA5D7A /* GameRoomViewController.swift in Sources */,
 				63CB4F081D3CB3C300211D3A /* GameRoomViewCell.swift in Sources */,
+				639E17661E00E50E00640540 /* VersionViewCell.swift in Sources */,
 				CF33BE2D1D6D04EA00D0E105 /* SpycodesConstant.swift in Sources */,
 				63CA90CA1D4280CC0027CA80 /* Spycodes.xcdatamodeld in Sources */,
 				63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */,
