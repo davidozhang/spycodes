@@ -13,6 +13,7 @@ class Round: NSObject, NSCoding {
     var currentTeam: Team?
     var clue: String?
     var numberOfWords: String?
+    var numberOfGuesses = 0
     var winningTeam: Team?
     var abort = false
     
@@ -29,6 +30,10 @@ class Round: NSObject, NSCoding {
         }
         if let winningTeam = aDecoder.decodeObjectForKey("winningTeam") as? Int {
             self.winningTeam = Team(rawValue: winningTeam)
+        }
+        
+        if let numberOfGuesses = aDecoder.decodeObjectForKey("numberOfGuesses") as? Int {
+            self.numberOfGuesses = numberOfGuesses
         }
         
         self.abort = aDecoder.decodeBoolForKey("abort")
@@ -48,6 +53,7 @@ class Round: NSObject, NSCoding {
             aCoder.encodeObject(winningTeam, forKey: "winningTeam")
         }
         
+        aCoder.encodeObject(self.numberOfGuesses, forKey: "numberOfGuesses")
         aCoder.encodeBool(self.abort, forKey: "abort")
     }
     
@@ -66,6 +72,7 @@ class Round: NSObject, NSCoding {
     func endRound(endingTeam: Team) {
         self.clue = nil
         self.numberOfWords = nil
+        self.numberOfGuesses = 0
         
         if GameMode.instance.mode == GameMode.Mode.MiniGame {
             CardCollection.instance.autoEliminateOpponentTeamCard(Team.Blue)

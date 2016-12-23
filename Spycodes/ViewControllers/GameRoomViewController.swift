@@ -208,7 +208,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     private func updateEndRoundButton() {
-        if Round.instance.currentTeam == Player.instance.team {
+        if Round.instance.currentTeam == Player.instance.team && Round.instance.numberOfGuesses > 0 {
             self.endRoundButton.alpha = 1.0
             self.endRoundButton.enabled = true
         }
@@ -385,6 +385,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             return
         }
         
+        Round.instance.numberOfGuesses += 1
         CardCollection.instance.cards[indexPath.row].setSelected()
         self.broadcastEssentialData()
         
@@ -399,6 +400,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             }
             self.didEndRound()
         }
+        
+        
         
         if cardAtIndexTeam == Team.Assassin || CardCollection.instance.getCardsRemainingForTeam(opponentTeam!) == 0 {
             Round.instance.winningTeam = opponentTeam
