@@ -140,7 +140,7 @@
                                     <constraint firstAttribute="width" constant="50" id="dC1-xg-WgO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="dC1-xg-WgO"/>
@@ -341,7 +341,7 @@
                                     <constraint firstAttribute="width" constant="50" id="f6G-L2-vEk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="f6G-L2-vEk"/>
@@ -1034,7 +1034,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="VCz-No-0ZF"/>
-        <segue reference="M2x-yW-um3"/>
+        <segue reference="Vg7-zN-QuD"/>
         <segue reference="7yd-xs-fux"/>
     </inferredMetricsTieBreakers>
 </document>
