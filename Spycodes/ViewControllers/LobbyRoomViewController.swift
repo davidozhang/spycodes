@@ -15,15 +15,16 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func onBackPressed(sender: AnyObject) {
-        Player.instance.reset()
-        self.performSegueWithIdentifier("main-menu", sender: self)
+        self.performSegueWithIdentifier("access-code", sender: self)
     }
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MultipeerManager.instance.initPeerID(Player.instance.name)
+        guard let name = Player.instance.name else { return }
+        
+        MultipeerManager.instance.initPeerID(name)
         MultipeerManager.instance.initBrowser()
         MultipeerManager.instance.initSession()
         
@@ -40,7 +41,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.emptyStateLabel = UILabel(frame: self.tableView.frame)
         self.emptyStateLabel?.text = "Rooms created will show here.\nMake sure Wifi is enabled."
-        self.emptyStateLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 20)
+        self.emptyStateLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 18)
         self.emptyStateLabel?.textAlignment = .Center
         self.emptyStateLabel?.numberOfLines = 0
         self.emptyStateLabel?.center = self.view.center
@@ -48,20 +49,11 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         MultipeerManager.instance.delegate = self
-        
-        Player.instance.reset()
-        GameMode.instance.reset()
-        Statistics.instance.reset()
-        Lobby.instance.reset()
-        Room.instance.reset()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        // Start browser here to eliminate the flicker of room name when host goes from pregame room to lobby
         MultipeerManager.instance.startBrowser()
     }
     
@@ -91,6 +83,8 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     @objc
     private func onTimeout() {
         self.timeoutTimer?.invalidate()
+        MultipeerManager.instance.stopAdvertiser()
+        
         self.joinGameAlertController?.dismissViewControllerAnimated(true, completion: nil)
         self.presentViewController(self.timeoutAlertController!, animated: true, completion: nil)
     }

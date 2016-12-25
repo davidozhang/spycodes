@@ -10,7 +10,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private var refreshTimer: NSTimer?
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var roomNameLabel: UILabel!
+    @IBOutlet var accessCodeLabel: SpycodesNavigationBarLabel!
     @IBOutlet weak var startGame: SpycodesButton!
     @IBOutlet weak var statisticsImageView: UIImageView!
     @IBOutlet weak var statisticsLabel: UILabel!
@@ -40,7 +40,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func onBackButtonPressed(sender: AnyObject) {
-        self.returnToLobby(reason: nil)
+        self.returnToMainMenu(reason: nil)
     }
     
     @IBAction func minigameToggleChanged(sender: AnyObject) {
@@ -76,6 +76,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         
         if Player.instance.isHost() {
+            Room.instance.generateNewAccessCode()
             MultipeerManager.instance.initPeerID(Room.instance.getUUID())
             MultipeerManager.instance.initDiscoveryInfo(["room-uuid": Room.instance.getUUID(), "room-name": Room.instance.name])
             MultipeerManager.instance.initSession()
@@ -87,7 +88,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         self.startGame.alpha = 0.3
         self.startGame.enabled = false
         
-        self.roomNameLabel.text = Room.instance.name
+        self.accessCodeLabel.text = "Access Code: " + Room.instance.getAccessCode()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -160,21 +161,21 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         })
     }
     
-    private func goToLobby() {
+    private func goToMainMenu() {
         dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("lobby-room", sender: self)
+            self.performSegueWithIdentifier("main-menu", sender: self)
         })
     }
     
-    private func returnToLobby(reason reason: String?) {
+    private func returnToMainMenu(reason reason: String?) {
         if reason == nil {
-            self.goToLobby()
+            self.goToMainMenu()
             return
         }
         
-        let alertController = UIAlertController(title: "Returning To Lobby", message: reason, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Returning To Main Menu", message: reason, preferredStyle: .Alert)
         let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-            self.goToLobby()
+            self.goToMainMenu()
         })
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -255,7 +256,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "lobby-room" {
+        if segue.identifier == "main-menu" {
             MultipeerManager.instance.terminate()
         }
     }
@@ -337,8 +338,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     // MARK: MultipeerManagerDelegate
     func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        if let info = info where info["joinRoomWithUUID"] == Room.instance.getUUID() {
+        if let info = info where info["joinRoomWithUUID"] == Room.instance.getUUID() {  // Backwards compatibility with v1.0
             // Invite peer that explicitly advertised discovery info containing joinRoomWithUUID entry that has the UUID of the host room
+            MultipeerManager.instance.invitePeerToSession(peerID)
+        } else if let info = info where info["joinRoomWithAccessCode"] == Room.instance.getAccessCode() {
+            // Invite peer that explicitly advertised discovery info containing joinRoomWithAccessCode entry that has the access code of the host room
             MultipeerManager.instance.invitePeerToSession(peerID)
         }
     }
@@ -361,7 +365,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             
             // Room has been terminated or local player has been removed from room
             if !Room.instance.playerWithUUIDInRoom(Player.instance.getUUID()) {
-                self.returnToLobby(reason: SpycodesMessage.removedFromRoomString)
+                self.returnToMainMenu(reason: SpycodesMessage.removedFromRoomString)
             }
         }
         else if let gameMode = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? GameMode {
@@ -390,7 +394,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                 // Room has been terminated if host player is disconnected
                 if player.isHost() {
                     Room.instance.players.removeAll()
-                    self.returnToLobby(reason: SpycodesMessage.hostDisconnectedString)
+                    self.returnToMainMenu(reason: SpycodesMessage.hostDisconnectedString)
                     return
                 }
             }

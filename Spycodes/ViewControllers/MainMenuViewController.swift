@@ -8,6 +8,12 @@ class MainMenuViewController: UIViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Player.instance.reset()
+        GameMode.instance.reset()
+        Lobby.instance.reset()
+        Statistics.instance.reset()
+        Room.instance.reset()
     }
 
     override func didReceiveMemoryWarning() {
@@ -18,11 +24,12 @@ class MainMenuViewController: UIViewController {
     @IBAction func unwindToMainMenu(sender: UIStoryboardSegue) {}
     
     @IBAction func onCreateGame(sender: AnyObject) {
-        self.performSegueWithIdentifier("create-game", sender: self)
+        Player.instance.setIsHost(true)
+        self.performSegueWithIdentifier("player-name", sender: self)
     }
 
     @IBAction func onJoinGame(sender: AnyObject) {
-        self.performSegueWithIdentifier("join-game", sender: self)
+        self.performSegueWithIdentifier("player-name", sender: self)
     }
     
     @IBAction func onSettingsTapped(sender: AnyObject) {

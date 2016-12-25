@@ -1,14 +1,12 @@
 import UIKit
 
-class CreateGameViewController: UIViewController, UITextFieldDelegate {
-    @IBOutlet weak var roomNameTextField: SpycodesTextField!
+class PlayerNameViewController: UIViewController, UITextFieldDelegate {
+    @IBOutlet weak var userNameTextField: SpycodesTextField!
     
     // MARK: Actions
-    @IBAction func unwindToCreateGame(sender: UIStoryboardSegue) {}
+    @IBAction func unwindToPlayerName(sender: UIStoryboardSegue) {}
     
     @IBAction func onBackPressed(sender: AnyObject) {
-        Player.instance.reset()
-        Room.instance.reset()
         self.performSegueWithIdentifier("main-menu", sender: self)
     }
     
@@ -16,8 +14,12 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.roomNameTextField.delegate = self
-        self.roomNameTextField.becomeFirstResponder()
+        if let name = Player.instance.name where name.characters.count > 0 {
+            self.userNameTextField.text = name
+        }
+        
+        self.userNameTextField.delegate = self
+        self.userNameTextField.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,15 +32,18 @@ class CreateGameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if let name = self.roomNameTextField.text where name.characters.count >= 1 {
-            Player.instance.setIsHost(true)
-            Room.instance.name = name
+        if let name = self.userNameTextField.text where name.characters.count >= 1 {
+            Player.instance.name = name
             
             if Room.instance.getPlayerWithUUID(Player.instance.getUUID()) == nil {
                 Room.instance.addPlayer(Player.instance)
             }
             
-            self.performSegueWithIdentifier("join-game", sender: self)
+            if Player.instance.isHost() {
+                self.performSegueWithIdentifier("pregame-room", sender: self)
+            } else {
+                self.performSegueWithIdentifier("access-code", sender: self)
+            }
             return true
         }
         else {

@@ -4,7 +4,7 @@ import UIKit
 class Player: NSObject, NSCoding {
     static var instance = Player()
     
-    var name: String
+    var name: String?
     var team: Team
     var clueGiver: Bool
     var host: Bool
@@ -12,7 +12,6 @@ class Player: NSObject, NSCoding {
     private var uuid: String
     
     override init() {
-        self.name = "Nameless"
         self.uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
         self.team = Team.Red
         self.clueGiver = false
