@@ -1,6 +1,9 @@
 import UIKit
 
 class MainMenuViewController: UIViewController {
+    private static let appID = 1141711201
+    private static let appStoreURL = "itms-apps://itunes.apple.com/app/id\(appID)"
+    
     @IBOutlet weak var spycodesLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var spycodesIconTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var aboutButtonBottomConstraint: NSLayoutConstraint!
@@ -22,6 +25,11 @@ class MainMenuViewController: UIViewController {
 
     // MARK: Actions
     @IBAction func unwindToMainMenu(sender: UIStoryboardSegue) {}
+    
+    @IBAction func onAppStoreTapped(sender: AnyObject) {
+        let url = NSURL(string: MainMenuViewController.appStoreURL)
+        UIApplication.sharedApplication().openURL(url!)
+    }
     
     @IBAction func onCreateGame(sender: AnyObject) {
         Player.instance.setIsHost(true)
