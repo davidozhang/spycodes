@@ -83,6 +83,8 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     @objc
     private func onTimeout() {
         self.timeoutTimer?.invalidate()
+        MultipeerManager.instance.stopAdvertiser()
+        
         self.joinGameAlertController?.dismissViewControllerAnimated(true, completion: nil)
         self.presentViewController(self.timeoutAlertController!, animated: true, completion: nil)
     }

@@ -293,14 +293,22 @@
                                     <action selector="onBrowseLobbyTapped:" destination="RKo-Nr-UiC" eventType="touchUpInside" id="l5V-LT-ZwS"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxf-jD-guR" customClass="SpycodesStatusLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="182.66666666666663" y="60" width="49.333333333333343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YZq-dn-08N" firstAttribute="leading" secondItem="4RA-z8-adq" secondAttribute="leading" constant="15" id="3aY-m3-z73"/>
                             <constraint firstItem="YZq-dn-08N" firstAttribute="top" secondItem="c1p-sO-flb" secondAttribute="bottom" constant="4" id="4Gi-Jl-hX9"/>
+                            <constraint firstItem="Lxf-jD-guR" firstAttribute="centerX" secondItem="4RA-z8-adq" secondAttribute="centerX" id="6BW-d2-guP"/>
                             <constraint firstItem="fJJ-9X-JwH" firstAttribute="centerY" secondItem="YZq-dn-08N" secondAttribute="centerY" id="Ccq-AE-zip"/>
                             <constraint firstItem="8qd-Lb-OLK" firstAttribute="centerX" secondItem="4RA-z8-adq" secondAttribute="centerX" id="D52-xF-TJR"/>
                             <constraint firstItem="8qd-Lb-OLK" firstAttribute="top" secondItem="GPS-2G-a9x" secondAttribute="bottom" constant="8" id="KqM-Ia-DET"/>
+                            <constraint firstItem="Lxf-jD-guR" firstAttribute="top" secondItem="fJJ-9X-JwH" secondAttribute="bottom" constant="8" id="N8G-xd-F9R"/>
                             <constraint firstItem="GPS-2G-a9x" firstAttribute="leading" secondItem="4RA-z8-adq" secondAttribute="leading" constant="80" id="Rfe-ee-mEh"/>
                             <constraint firstItem="GPS-2G-a9x" firstAttribute="centerY" secondItem="4RA-z8-adq" secondAttribute="centerY" id="fVz-tm-dbd"/>
                             <constraint firstItem="GPS-2G-a9x" firstAttribute="centerX" secondItem="4RA-z8-adq" secondAttribute="centerX" id="gcR-ix-LyY"/>
@@ -310,6 +318,7 @@
                     </view>
                     <connections>
                         <outlet property="accessCodeTextField" destination="GPS-2G-a9x" id="8H7-d0-tsj"/>
+                        <outlet property="statusLabel" destination="Lxf-jD-guR" id="MYy-k5-4mw"/>
                         <segue destination="vJw-If-bFy" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="417-vA-iX0"/>
                         <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" id="N7R-5v-7k6"/>
                         <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="B0l-Dk-Id6"/>

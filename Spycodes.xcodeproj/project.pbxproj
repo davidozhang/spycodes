@@ -20,6 +20,7 @@
 		6378C6511D4C6F46009BD0CA /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378C6501D4C6F46009BD0CA /* GameMode.swift */; };
 		637F195F1D46010E00FB4047 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F195E1D46010E00FB4047 /* Statistics.swift */; };
 		637FF00A1E0F0B620076DC25 /* AccessCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637FF0091E0F0B620076DC25 /* AccessCodeViewController.swift */; };
+		637FF00C1E103BA40076DC25 /* SpycodesStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637FF00B1E103BA40076DC25 /* SpycodesStatusLabel.swift */; };
 		63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* MultipeerManager.swift */; };
 		639BA3161D38AFEF002F2A18 /* SpycodesUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BA3151D38AFEF002F2A18 /* SpycodesUIColor.swift */; };
 		639E17661E00E50E00640540 /* VersionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17651E00E50E00640540 /* VersionViewCell.swift */; };
@@ -65,6 +66,7 @@
 		6378C6501D4C6F46009BD0CA /* GameMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameMode.swift; path = Objects/GameMode.swift; sourceTree = "<group>"; };
 		637F195E1D46010E00FB4047 /* Statistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Statistics.swift; path = Objects/Statistics.swift; sourceTree = "<group>"; };
 		637FF0091E0F0B620076DC25 /* AccessCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccessCodeViewController.swift; path = ViewControllers/AccessCodeViewController.swift; sourceTree = "<group>"; };
+		637FF00B1E103BA40076DC25 /* SpycodesStatusLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesStatusLabel.swift; path = Extensions/SpycodesStatusLabel.swift; sourceTree = "<group>"; };
 		63920A361D3090D60073E7F7 /* MultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipeerManager.swift; path = Managers/MultipeerManager.swift; sourceTree = "<group>"; };
 		639BA3151D38AFEF002F2A18 /* SpycodesUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesUIColor.swift; path = Extensions/SpycodesUIColor.swift; sourceTree = "<group>"; };
 		639E17651E00E50E00640540 /* VersionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VersionViewCell.swift; path = Views/VersionViewCell.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				6317B93C1DFBEE720069FF48 /* SpycodesNavigationBarLabel.swift */,
 				63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */,
 				63DE6A031DFCFA7700938D5A /* SpycodesRoundedButton.swift */,
+				637FF00B1E103BA40076DC25 /* SpycodesStatusLabel.swift */,
 				63FA54DF1D1BBB73004515DA /* SpycodesTextField.swift */,
 				63CB4F0D1D3DAA5A00211D3A /* SpycodesWordList.swift */,
 				639BA3151D38AFEF002F2A18 /* SpycodesUIColor.swift */,
@@ -337,6 +340,7 @@
 				63FDED351D264BE800142780 /* Player.swift in Sources */,
 				63A04D1D1D1A7F37005A2914 /* SpycodesButton.swift in Sources */,
 				63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */,
+				637FF00C1E103BA40076DC25 /* SpycodesStatusLabel.swift in Sources */,
 				63AB64CD1D4880A600C4FF22 /* SettingsViewController.swift in Sources */,
 				63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */,
 				63FDED321D2648D600142780 /* PlayerNameViewController.swift in Sources */,

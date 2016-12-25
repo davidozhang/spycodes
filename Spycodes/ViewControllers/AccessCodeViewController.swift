@@ -6,9 +6,8 @@ class AccessCodeViewController: UIViewController, UITextFieldDelegate, Multipeer
     
     private var timeoutTimer: NSTimer?
     private var refreshTimer: NSTimer?
-    private var joinGameAlertController: UIAlertController?
-    private var timeoutAlertController: UIAlertController?
 
+    @IBOutlet var statusLabel: SpycodesStatusLabel!
     @IBOutlet var accessCodeTextField: SpycodesTextField!
     
     @IBAction func unwindToAccessCode(sender: UIStoryboardSegue) {}
@@ -29,15 +28,8 @@ class AccessCodeViewController: UIViewController, UITextFieldDelegate, Multipeer
         
         MultipeerManager.instance.initPeerID(name)
         MultipeerManager.instance.initSession()
-        
-        self.joinGameAlertController = UIAlertController(title: "Joining Room", message: SpycodesMessage.joiningRoomString, preferredStyle: .Alert)
-        
-        self.timeoutAlertController = UIAlertController(title: "Oops", message: SpycodesMessage.failedToJoinRoomString, preferredStyle: .Alert)
-        let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-            MultipeerManager.instance.stopAdvertiser()
-            MultipeerManager.instance.stopSession()
-        })
-        self.timeoutAlertController?.addAction(confirmAction)
+
+        self.statusLabel.text = "Enter access code"
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -61,8 +53,12 @@ class AccessCodeViewController: UIViewController, UITextFieldDelegate, Multipeer
     @objc
     private func onTimeout() {
         self.timeoutTimer?.invalidate()
-        self.joinGameAlertController?.dismissViewControllerAnimated(true, completion: nil)
-        self.presentViewController(self.timeoutAlertController!, animated: true, completion: nil)
+        MultipeerManager.instance.stopAdvertiser()
+        
+        self.statusLabel.text = "Failed to join room"
+        self.accessCodeTextField.enabled = true
+        self.accessCodeTextField.textColor = UIColor.blackColor()
+        self.accessCodeTextField.becomeFirstResponder()
     }
     
     private func joinRoomWithAccessCode(accessCode: String) {
@@ -72,12 +68,15 @@ class AccessCodeViewController: UIViewController, UITextFieldDelegate, Multipeer
         MultipeerManager.instance.startAdvertiser()
         
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.defaultTimeoutInterval, target: self, selector: #selector(AccessCodeViewController.onTimeout), userInfo: nil, repeats: false)
+        self.statusLabel.text = "Joining room..."
+        self.accessCodeTextField.enabled = false
+        self.accessCodeTextField.textColor = UIColor.lightGrayColor()
     }
     
     // MARK: UITextFieldDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField.text?.characters.count == 4 {
-            self.joinRoomWithAccessCode(textField.text!)
+        if let accessCode = textField.text where accessCode.characters.count > 0 {
+            self.joinRoomWithAccessCode(accessCode)
             return true
         }
         
