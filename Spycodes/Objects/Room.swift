@@ -37,11 +37,16 @@ class Room: NSObject, NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        if let name = aDecoder.decodeObjectForKey("name") as? String, uuid = aDecoder.decodeObjectForKey("uuid") as? String, accessCode = aDecoder.decodeObjectForKey("accessCode") as? String, players = aDecoder.decodeObjectForKey("players") as? [Player], connectedPeers = aDecoder.decodeObjectForKey("connectedPeers") as? [MCPeerID: String] {
-            self.init(name: name, uuid: uuid, accessCode: accessCode, players: players, connectedPeers: connectedPeers)
-        } else if let name = aDecoder.decodeObjectForKey("name") as? String, uuid = aDecoder.decodeObjectForKey("uuid") as? String, players = aDecoder.decodeObjectForKey("players") as? [Player], connectedPeers = aDecoder.decodeObjectForKey("connectedPeers") as? [MCPeerID: String] {
-            // Backwards compatibility with v1.0
-            self.init(name: name, uuid: uuid, players: players, connectedPeers: connectedPeers)
+        if let name = aDecoder.decodeObjectForKey("name") as? String,
+               uuid = aDecoder.decodeObjectForKey("uuid") as? String,
+               players = aDecoder.decodeObjectForKey("players") as? [Player],
+               connectedPeers = aDecoder.decodeObjectForKey("connectedPeers") as? [MCPeerID: String] {
+            if let accessCode = aDecoder.decodeObjectForKey("accessCode") as? String {
+                self.init(name: name, uuid: uuid, accessCode: accessCode, players: players, connectedPeers: connectedPeers)
+            } else {
+                // Backwards compatibility with v1.0
+                self.init(name: name, uuid: uuid, players: players, connectedPeers: connectedPeers)
+            }
         } else {
             self.init()
         }
