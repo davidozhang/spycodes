@@ -15,7 +15,6 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func onBackPressed(sender: AnyObject) {
-        Player.instance.reset()
         self.performSegueWithIdentifier("access-code", sender: self)
     }
     
@@ -50,20 +49,11 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         MultipeerManager.instance.delegate = self
-        
-        Player.instance.reset()
-        GameMode.instance.reset()
-        Statistics.instance.reset()
-        Lobby.instance.reset()
-        Room.instance.reset()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        // Start browser here to eliminate the flicker of room name when host goes from pregame room to lobby
         MultipeerManager.instance.startBrowser()
     }
     

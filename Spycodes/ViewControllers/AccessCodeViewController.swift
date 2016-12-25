@@ -17,7 +17,6 @@ class AccessCodeViewController: UIViewController, UITextFieldDelegate, Multipeer
         self.performSegueWithIdentifier("lobby-room", sender: self)
     }
     
-    
     @IBAction func onBackButtonTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("player-name", sender: self)
     }
@@ -29,7 +28,6 @@ class AccessCodeViewController: UIViewController, UITextFieldDelegate, Multipeer
         guard let name = Player.instance.name else { return }
         
         MultipeerManager.instance.initPeerID(name)
-        MultipeerManager.instance.initBrowser()
         MultipeerManager.instance.initSession()
         
         self.joinGameAlertController = UIAlertController(title: "Joining Room", message: SpycodesMessage.joiningRoomString, preferredStyle: .Alert)
@@ -44,13 +42,7 @@ class AccessCodeViewController: UIViewController, UITextFieldDelegate, Multipeer
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
         MultipeerManager.instance.delegate = self
-        
-        Player.instance.reset()
-        GameMode.instance.reset()
-        Statistics.instance.reset()
-        Room.instance.reset()
     }
     
     override func viewDidAppear(animated: Bool) {

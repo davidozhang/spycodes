@@ -8,6 +8,12 @@ class MainMenuViewController: UIViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Player.instance.reset()
+        GameMode.instance.reset()
+        Lobby.instance.reset()
+        Statistics.instance.reset()
+        Room.instance.reset()
     }
 
     override func didReceiveMemoryWarning() {

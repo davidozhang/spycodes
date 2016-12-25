@@ -7,9 +7,6 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
     @IBAction func unwindToPlayerName(sender: UIStoryboardSegue) {}
     
     @IBAction func onBackPressed(sender: AnyObject) {
-        Player.instance.reset()
-        Room.instance.reset()
-        
         self.performSegueWithIdentifier("main-menu", sender: self)
     }
     
