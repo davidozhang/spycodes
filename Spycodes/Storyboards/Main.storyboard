@@ -92,6 +92,28 @@
                                     <constraint firstItem="CBi-9c-KRm" firstAttribute="trailing" secondItem="Mdj-Hd-5OI" secondAttribute="trailing" id="uxI-GP-k70"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVQ-XY-iCb" userLabel="Share Button">
+                                <rect key="frame" x="281" y="29" width="23" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="23" id="ObR-YH-jjb"/>
+                                    <constraint firstAttribute="height" constant="23" id="ZfG-qu-xYL"/>
+                                </constraints>
+                                <state key="normal" image="Share"/>
+                                <connections>
+                                    <action selector="onShareTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6zQ-WB-64A"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8H-tV-b9A" userLabel="App Store Button">
+                                <rect key="frame" x="320" y="26" width="28" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="4K1-ob-WXy"/>
+                                    <constraint firstAttribute="width" constant="28" id="RdS-Js-x21"/>
+                                </constraints>
+                                <state key="normal" image="App-Store"/>
+                                <connections>
+                                    <action selector="onAppStoreTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3WN-ju-szS"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Jm-jD-vJs" userLabel="Settings Button">
                                 <rect key="frame" x="364" y="28" width="25" height="25"/>
                                 <constraints>
@@ -103,29 +125,29 @@
                                     <action selector="onSettingsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ntr-op-08v"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8H-tV-b9A" userLabel="App Store Button">
-                                <rect key="frame" x="318" y="25.666666666666664" width="30" height="29.999999999999993"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="4K1-ob-WXy"/>
-                                    <constraint firstAttribute="width" constant="30" id="RdS-Js-x21"/>
-                                </constraints>
-                                <state key="normal" image="App-Store"/>
-                                <connections>
-                                    <action selector="onAppStoreTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3WN-ju-szS"/>
-                                </connections>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link copied!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7k-je-1Mo" customClass="SpycodesStatusLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="246.33333333333337" y="60" width="92.666666666666629" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="9Jm-jD-vJs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="B1a-Nd-qJT"/>
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="F5G-fC-j66"/>
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GIg-cQ-q81"/>
+                            <constraint firstItem="B8H-tV-b9A" firstAttribute="leading" secondItem="eVQ-XY-iCb" secondAttribute="trailing" constant="16" id="HcC-HB-xv6"/>
+                            <constraint firstItem="P7k-je-1Mo" firstAttribute="top" secondItem="eVQ-XY-iCb" secondAttribute="bottom" constant="8" id="JXk-nz-51t"/>
                             <constraint firstAttribute="trailing" secondItem="9Jm-jD-vJs" secondAttribute="trailing" constant="25" id="OKL-UC-Cyv"/>
                             <constraint firstItem="9Jm-jD-vJs" firstAttribute="centerY" secondItem="B8H-tV-b9A" secondAttribute="centerY" id="Tnr-xQ-paH"/>
                             <constraint firstItem="9Jm-jD-vJs" firstAttribute="leading" secondItem="B8H-tV-b9A" secondAttribute="trailing" constant="16" id="afR-Ud-wYS"/>
+                            <constraint firstItem="B8H-tV-b9A" firstAttribute="centerY" secondItem="eVQ-XY-iCb" secondAttribute="centerY" id="jBI-Qh-D6W"/>
+                            <constraint firstItem="eVQ-XY-iCb" firstAttribute="centerX" secondItem="P7k-je-1Mo" secondAttribute="centerX" id="lPY-od-mxM"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="linkCopiedLabel" destination="P7k-je-1Mo" id="ro3-ep-BNa"/>
                         <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
                         <segue destination="E72-I9-0mo" kind="presentation" identifier="settings" modalTransitionStyle="flipHorizontal" id="jrJ-f8-x4U"/>
                     </connections>
@@ -1049,12 +1071,13 @@
         <image name="Confirm" width="100" height="100"/>
         <image name="Info" width="100" height="100"/>
         <image name="Settings" width="100" height="100"/>
+        <image name="Share" width="100" height="100"/>
         <image name="Spy" width="290" height="280"/>
         <image name="Stack" width="100" height="100"/>
         <image name="Team" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FY4-wF-ZYf"/>
+        <segue reference="wBM-IP-ibq"/>
         <segue reference="N7R-5v-7k6"/>
     </inferredMetricsTieBreakers>
 </document>
