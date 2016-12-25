@@ -19,6 +19,7 @@
 		637310CB1D3B292F00EA5D7A /* GameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */; };
 		6378C6511D4C6F46009BD0CA /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378C6501D4C6F46009BD0CA /* GameMode.swift */; };
 		637F195F1D46010E00FB4047 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F195E1D46010E00FB4047 /* Statistics.swift */; };
+		637FF00A1E0F0B620076DC25 /* AccessCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637FF0091E0F0B620076DC25 /* AccessCodeViewController.swift */; };
 		63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* MultipeerManager.swift */; };
 		639BA3161D38AFEF002F2A18 /* SpycodesUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BA3151D38AFEF002F2A18 /* SpycodesUIColor.swift */; };
 		639E17661E00E50E00640540 /* VersionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17651E00E50E00640540 /* VersionViewCell.swift */; };
@@ -37,8 +38,7 @@
 		63EAF9A31D41D2E700BC554E /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A21D41D2E700BC554E /* Round.swift */; };
 		63EAF9A51D41F1C400BC554E /* AudioToolboxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A41D41F1C400BC554E /* AudioToolboxManager.swift */; };
 		63FA54E01D1BBB73004515DA /* SpycodesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA54DF1D1BBB73004515DA /* SpycodesTextField.swift */; };
-		63FA54E21D1BBD8E004515DA /* CreateGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */; };
-		63FDED321D2648D600142780 /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED311D2648D600142780 /* JoinGameViewController.swift */; };
+		63FDED321D2648D600142780 /* PlayerNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED311D2648D600142780 /* PlayerNameViewController.swift */; };
 		63FDED351D264BE800142780 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED341D264BE800142780 /* Player.swift */; };
 		63FDED371D264CF300142780 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED361D264CF300142780 /* Team.swift */; };
 		63FDED391D26557200142780 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED381D26557200142780 /* Room.swift */; };
@@ -64,6 +64,7 @@
 		637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameRoomViewController.swift; path = ViewControllers/GameRoomViewController.swift; sourceTree = "<group>"; };
 		6378C6501D4C6F46009BD0CA /* GameMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameMode.swift; path = Objects/GameMode.swift; sourceTree = "<group>"; };
 		637F195E1D46010E00FB4047 /* Statistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Statistics.swift; path = Objects/Statistics.swift; sourceTree = "<group>"; };
+		637FF0091E0F0B620076DC25 /* AccessCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccessCodeViewController.swift; path = ViewControllers/AccessCodeViewController.swift; sourceTree = "<group>"; };
 		63920A361D3090D60073E7F7 /* MultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipeerManager.swift; path = Managers/MultipeerManager.swift; sourceTree = "<group>"; };
 		639BA3151D38AFEF002F2A18 /* SpycodesUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesUIColor.swift; path = Extensions/SpycodesUIColor.swift; sourceTree = "<group>"; };
 		639E17651E00E50E00640540 /* VersionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VersionViewCell.swift; path = Views/VersionViewCell.swift; sourceTree = "<group>"; };
@@ -84,8 +85,7 @@
 		63EAF9A21D41D2E700BC554E /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Round.swift; path = Objects/Round.swift; sourceTree = "<group>"; };
 		63EAF9A41D41F1C400BC554E /* AudioToolboxManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioToolboxManager.swift; path = Managers/AudioToolboxManager.swift; sourceTree = "<group>"; };
 		63FA54DF1D1BBB73004515DA /* SpycodesTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesTextField.swift; path = Extensions/SpycodesTextField.swift; sourceTree = "<group>"; };
-		63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateGameViewController.swift; path = ViewControllers/CreateGameViewController.swift; sourceTree = "<group>"; };
-		63FDED311D2648D600142780 /* JoinGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JoinGameViewController.swift; path = ViewControllers/JoinGameViewController.swift; sourceTree = "<group>"; };
+		63FDED311D2648D600142780 /* PlayerNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerNameViewController.swift; path = ViewControllers/PlayerNameViewController.swift; sourceTree = "<group>"; };
 		63FDED341D264BE800142780 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = Objects/Player.swift; sourceTree = "<group>"; };
 		63FDED361D264CF300142780 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Objects/Team.swift; sourceTree = "<group>"; };
 		63FDED381D26557200142780 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Room.swift; path = Objects/Room.swift; sourceTree = "<group>"; };
@@ -156,10 +156,10 @@
 		63A04D1A1D1A7F25005A2914 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				637FF0091E0F0B620076DC25 /* AccessCodeViewController.swift */,
 				63AB64CC1D4880A600C4FF22 /* SettingsViewController.swift */,
-				63FA54E11D1BBD8E004515DA /* CreateGameViewController.swift */,
 				637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */,
-				63FDED311D2648D600142780 /* JoinGameViewController.swift */,
+				63FDED311D2648D600142780 /* PlayerNameViewController.swift */,
 				63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */,
 				63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */,
 				63FDED3A1D265BAF00142780 /* PregameRoomViewController.swift */,
@@ -304,7 +304,6 @@
 			files = (
 				63FDED371D264CF300142780 /* Team.swift in Sources */,
 				637F195F1D46010E00FB4047 /* Statistics.swift in Sources */,
-				63FA54E21D1BBD8E004515DA /* CreateGameViewController.swift in Sources */,
 				63FDED3B1D265BAF00142780 /* PregameRoomViewController.swift in Sources */,
 				63EAF9A31D41D2E700BC554E /* Round.swift in Sources */,
 				63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */,
@@ -324,6 +323,7 @@
 				6317B9331DFBE2340069FF48 /* SpycodesLogoLabel.swift in Sources */,
 				63EAF9A51D41F1C400BC554E /* AudioToolboxManager.swift in Sources */,
 				63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */,
+				637FF00A1E0F0B620076DC25 /* AccessCodeViewController.swift in Sources */,
 				63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */,
 				639BA3161D38AFEF002F2A18 /* SpycodesUIColor.swift in Sources */,
 				63FDED391D26557200142780 /* Room.swift in Sources */,
@@ -339,7 +339,7 @@
 				63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */,
 				63AB64CD1D4880A600C4FF22 /* SettingsViewController.swift in Sources */,
 				63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */,
-				63FDED321D2648D600142780 /* JoinGameViewController.swift in Sources */,
+				63FDED321D2648D600142780 /* PlayerNameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

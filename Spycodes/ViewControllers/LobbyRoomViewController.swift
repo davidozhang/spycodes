@@ -16,14 +16,16 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func onBackPressed(sender: AnyObject) {
         Player.instance.reset()
-        self.performSegueWithIdentifier("main-menu", sender: self)
+        self.performSegueWithIdentifier("access-code", sender: self)
     }
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MultipeerManager.instance.initPeerID(Player.instance.name)
+        guard let name = Player.instance.name else { return }
+        
+        MultipeerManager.instance.initPeerID(name)
         MultipeerManager.instance.initBrowser()
         MultipeerManager.instance.initSession()
         
@@ -40,7 +42,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.emptyStateLabel = UILabel(frame: self.tableView.frame)
         self.emptyStateLabel?.text = "Rooms created will show here.\nMake sure Wifi is enabled."
-        self.emptyStateLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 20)
+        self.emptyStateLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 18)
         self.emptyStateLabel?.textAlignment = .Center
         self.emptyStateLabel?.numberOfLines = 0
         self.emptyStateLabel?.center = self.view.center

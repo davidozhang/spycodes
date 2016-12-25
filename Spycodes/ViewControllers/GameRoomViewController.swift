@@ -319,7 +319,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             if player.isHost() {
                 let alertController = UIAlertController(title: SpycodesMessage.returningToLobbyString, message: SpycodesMessage.hostDisconnectedString, preferredStyle: .Alert)
                 let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-                    self.performSegueWithIdentifier("lobby-room", sender: self)
+                    self.performSegueWithIdentifier("main-menu", sender: self)
                 })
                 alertController.addAction(confirmAction)
                 self.presentViewController(alertController, animated: true, completion: nil)

@@ -113,88 +113,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="os2-Wc-CLV" kind="presentation" identifier="create-game" modalTransitionStyle="flipHorizontal" id="7WM-P4-SMa"/>
-                        <segue destination="oCE-jf-1fM" kind="presentation" identifier="join-game" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
+                        <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
                         <segue destination="E72-I9-0mo" kind="presentation" identifier="settings" modalTransitionStyle="flipHorizontal" id="jrJ-f8-x4U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="218.40000000000001" y="338.68065967016497"/>
-        </scene>
-        <!--Create Game View Controller-->
-        <scene sceneID="OZB-hn-iNT">
-            <objects>
-                <viewController storyboardIdentifier="create-game-view-controller" id="os2-Wc-CLV" customClass="CreateGameViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="uCt-xz-jhL"/>
-                        <viewControllerLayoutGuide type="bottom" id="t04-Sz-EKe"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="AZq-9W-7DJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Room Name" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eTE-OI-uxt" customClass="SpycodesTextField" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="40" y="358.66666666666669" width="334" height="19"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="dC1-xg-WgO"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="dC1-xg-WgO"/>
-                                    </mask>
-                                </variation>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvz-Ab-Jtm" userLabel="Back Button">
-                                <rect key="frame" x="15" y="24" width="35" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="5hn-mt-nDj"/>
-                                    <constraint firstAttribute="height" constant="35" id="N7N-Jf-Kua"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="Back"/>
-                                <connections>
-                                    <action selector="onBackPressed:" destination="os2-Wc-CLV" eventType="touchUpInside" id="hSt-ir-clV"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30P-eT-EpI" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="160" y="31" width="94" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="eTE-OI-uxt" secondAttribute="trailing" constant="40" id="ADJ-We-fzX"/>
-                            <constraint firstItem="eTE-OI-uxt" firstAttribute="centerY" secondItem="AZq-9W-7DJ" secondAttribute="centerY" id="BLa-rz-TwJ"/>
-                            <constraint firstItem="eTE-OI-uxt" firstAttribute="leading" secondItem="AZq-9W-7DJ" secondAttribute="leading" constant="40" id="GJn-wH-k4c"/>
-                            <constraint firstItem="rvz-Ab-Jtm" firstAttribute="leading" secondItem="AZq-9W-7DJ" secondAttribute="leading" constant="30" id="MLR-Cr-0c2"/>
-                            <constraint firstItem="30P-eT-EpI" firstAttribute="centerX" secondItem="AZq-9W-7DJ" secondAttribute="centerX" id="TgB-kQ-X7K"/>
-                            <constraint firstItem="rvz-Ab-Jtm" firstAttribute="top" secondItem="uCt-xz-jhL" secondAttribute="bottom" constant="4" id="b4j-Ui-9yt"/>
-                            <constraint firstItem="rvz-Ab-Jtm" firstAttribute="leading" secondItem="AZq-9W-7DJ" secondAttribute="leading" constant="15" id="b6y-Vv-kgo"/>
-                            <constraint firstItem="eTE-OI-uxt" firstAttribute="centerX" secondItem="AZq-9W-7DJ" secondAttribute="centerX" id="jcK-sW-gwH"/>
-                            <constraint firstItem="rvz-Ab-Jtm" firstAttribute="top" secondItem="uCt-xz-jhL" secondAttribute="bottom" constant="25" id="kVd-VN-Ocn"/>
-                            <constraint firstItem="30P-eT-EpI" firstAttribute="centerY" secondItem="rvz-Ab-Jtm" secondAttribute="centerY" id="pTj-3P-Goy"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="MLR-Cr-0c2"/>
-                                <exclude reference="kVd-VN-Ocn"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="roomNameTextField" destination="eTE-OI-uxt" id="8Qg-9L-oCD"/>
-                        <segue destination="oCE-jf-1fM" kind="presentation" identifier="join-game" modalTransitionStyle="flipHorizontal" id="Vg7-zN-QuD"/>
-                        <segue destination="wXM-Cf-7ve" kind="unwind" identifier="main-menu" unwindAction="unwindToMainMenu:" id="h9g-R7-NQk"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="P66-gy-EDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="wXM-Cf-7ve" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="1026" y="339"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="ypS-pD-Jcm">
@@ -321,12 +246,84 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FxR-5z-KAa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="XK5-pZ-i5L" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="216.80000000000001" y="1154.5727136431785"/>
+            <point key="canvasLocation" x="217" y="1156"/>
         </scene>
-        <!--Join Game View Controller-->
+        <!--Access Code View Controller-->
+        <scene sceneID="fR9-Wd-feD">
+            <objects>
+                <viewController id="RKo-Nr-UiC" customClass="AccessCodeViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="c1p-sO-flb"/>
+                        <viewControllerLayoutGuide type="bottom" id="nkF-4R-UGL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4RA-z8-adq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZq-dn-08N" userLabel="Back Button">
+                                <rect key="frame" x="15" y="24" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="7Ei-9K-ZoL"/>
+                                    <constraint firstAttribute="width" constant="35" id="usp-eM-Gje"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Back"/>
+                                <connections>
+                                    <action selector="onBackButtonTapped:" destination="RKo-Nr-UiC" eventType="touchUpInside" id="jX7-Xr-XmJ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Access Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJJ-9X-JwH" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="156.66666666666669" y="31" width="101.00000000000006" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GPS-2G-a9x" customClass="SpycodesTextField" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="80" y="359.66666666666669" width="254" height="17"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="RKo-Nr-UiC" id="BhR-nO-7Hm"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qd-Lb-OLK">
+                                <rect key="frame" x="158.66666666666666" y="384.66666666666669" width="97" height="30"/>
+                                <state key="normal" title="Browse Lobby"/>
+                                <connections>
+                                    <action selector="onBrowseLobbyTapped:" destination="RKo-Nr-UiC" eventType="touchUpInside" id="l5V-LT-ZwS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YZq-dn-08N" firstAttribute="leading" secondItem="4RA-z8-adq" secondAttribute="leading" constant="15" id="3aY-m3-z73"/>
+                            <constraint firstItem="YZq-dn-08N" firstAttribute="top" secondItem="c1p-sO-flb" secondAttribute="bottom" constant="4" id="4Gi-Jl-hX9"/>
+                            <constraint firstItem="fJJ-9X-JwH" firstAttribute="centerY" secondItem="YZq-dn-08N" secondAttribute="centerY" id="Ccq-AE-zip"/>
+                            <constraint firstItem="8qd-Lb-OLK" firstAttribute="centerX" secondItem="4RA-z8-adq" secondAttribute="centerX" id="D52-xF-TJR"/>
+                            <constraint firstItem="8qd-Lb-OLK" firstAttribute="top" secondItem="GPS-2G-a9x" secondAttribute="bottom" constant="8" id="KqM-Ia-DET"/>
+                            <constraint firstItem="GPS-2G-a9x" firstAttribute="leading" secondItem="4RA-z8-adq" secondAttribute="leading" constant="80" id="Rfe-ee-mEh"/>
+                            <constraint firstItem="GPS-2G-a9x" firstAttribute="centerY" secondItem="4RA-z8-adq" secondAttribute="centerY" id="fVz-tm-dbd"/>
+                            <constraint firstItem="GPS-2G-a9x" firstAttribute="centerX" secondItem="4RA-z8-adq" secondAttribute="centerX" id="gcR-ix-LyY"/>
+                            <constraint firstAttribute="trailing" secondItem="GPS-2G-a9x" secondAttribute="trailing" constant="80" id="pn9-gS-JSE"/>
+                            <constraint firstItem="fJJ-9X-JwH" firstAttribute="centerX" secondItem="4RA-z8-adq" secondAttribute="centerX" id="yr1-Rc-0Ke"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="accessCodeTextField" destination="GPS-2G-a9x" id="8H7-d0-tsj"/>
+                        <segue destination="vJw-If-bFy" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="417-vA-iX0"/>
+                        <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" id="N7R-5v-7k6"/>
+                        <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="B0l-Dk-Id6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ll0-UV-VBC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="vJw-If-bFy" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1012" y="1156"/>
+        </scene>
+        <!--Player Name View Controller-->
         <scene sceneID="1W7-Yu-MRm">
             <objects>
-                <viewController storyboardIdentifier="join-game-view-controller" id="oCE-jf-1fM" customClass="JoinGameViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="player-name-view-controller" id="oCE-jf-1fM" customClass="PlayerNameViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O2o-J1-ZW6"/>
                         <viewControllerLayoutGuide type="bottom" id="s1v-bI-7WK"/>
@@ -391,15 +388,15 @@
                     <connections>
                         <outlet property="userNameTextField" destination="4s9-er-VpV" id="KFG-Mj-S6u"/>
                         <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" id="7yd-xs-fux"/>
-                        <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="VCz-No-0ZF"/>
                         <segue destination="Z98-DM-ptk" kind="unwind" identifier="main-menu" unwindAction="unwindToMainMenu:" id="XBQ-Hk-25x"/>
                         <segue destination="Z98-DM-ptk" kind="unwind" identifier="create-game" unwindAction="unwindToCreateGame:" id="r71-v7-SSI"/>
+                        <segue destination="RKo-Nr-UiC" kind="presentation" identifier="access-code" modalTransitionStyle="flipHorizontal" id="9Td-mv-cvu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sKn-Jb-gii" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Z98-DM-ptk" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1026" y="1156"/>
+            <point key="canvasLocation" x="1013" y="338"/>
         </scene>
         <!--Lobby Room View Controller-->
         <scene sceneID="9yO-IX-SF2">
@@ -501,10 +498,11 @@
                     <connections>
                         <outlet property="tableView" destination="FNd-tS-fuD" id="dYw-vq-L2t"/>
                         <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" id="yme-7x-s1N"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="main-menu" modalTransitionStyle="flipHorizontal" id="S9C-N9-jPP"/>
+                        <segue destination="ntM-nG-bNl" kind="unwind" identifier="access-code" unwindAction="unwindToAccessCode:" id="YIC-Fc-wg7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKI-qh-D1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ntM-nG-bNl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1827" y="1156"/>
         </scene>
@@ -520,7 +518,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Pregame Room Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mc1-YN-1oP" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Access Code: 1234" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mc1-YN-1oP" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
                                 <rect key="frame" x="55" y="28" width="304" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -753,11 +751,11 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="accessCodeLabel" destination="Mc1-YN-1oP" id="3cd-5g-4FA"/>
                         <outlet property="minigameInfoButton" destination="TAi-cx-Vh8" id="Ifw-OB-H6M"/>
                         <outlet property="minigameToggle" destination="3wE-c8-LD8" id="KBa-U5-Qqa"/>
                         <outlet property="minigameToggleView" destination="GE8-dk-J4b" id="9H4-YN-13V"/>
                         <outlet property="minigameToggleViewHeightConstraint" destination="8i0-yZ-nMg" id="mmC-rk-ofv"/>
-                        <outlet property="roomNameLabel" destination="Mc1-YN-1oP" id="UVj-Yy-Wno"/>
                         <outlet property="startGame" destination="084-kN-Fki" id="ryC-Vh-gDH"/>
                         <outlet property="startGameInfoButton" destination="rtz-7Q-ljm" id="uDR-2c-NsP"/>
                         <outlet property="statisticsDashboardView" destination="kCT-FC-Wj4" id="odz-nY-QRi"/>
@@ -765,8 +763,8 @@
                         <outlet property="statisticsImageView" destination="Crb-fR-RGp" id="AZn-7O-zWy"/>
                         <outlet property="statisticsLabel" destination="rTc-OY-I4E" id="EO5-JK-f2P"/>
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
-                        <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="87V-6a-5kI"/>
                         <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-room" id="pzx-vK-usD"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="main-menu" modalTransitionStyle="flipHorizontal" id="wBM-IP-ibq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lDc-cz-jrN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1012,7 +1010,7 @@
                         <outlet property="topBarView" destination="Vhy-Dr-vSM" id="Vdg-zN-a3H"/>
                         <outlet property="topBarViewHeightConstraint" destination="cP6-J4-cEl" id="9Gy-Ue-J7O"/>
                         <segue destination="Isy-vz-eu5" kind="unwind" identifier="pregame-room" unwindAction="unwindToPregameRoom:" id="0dq-Te-mES"/>
-                        <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="IIH-9T-29V"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="main-menu" modalTransitionStyle="flipHorizontal" id="FY4-wF-ZYf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfM-Nb-l9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1033,8 +1031,7 @@
         <image name="Team" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VCz-No-0ZF"/>
-        <segue reference="Vg7-zN-QuD"/>
-        <segue reference="7yd-xs-fux"/>
+        <segue reference="FY4-wF-ZYf"/>
+        <segue reference="N7R-5v-7k6"/>
     </inferredMetricsTieBreakers>
 </document>
