@@ -281,7 +281,14 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             CardCollection.instance = cardCollection
         }
         else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
+            let previousTeam = Round.instance.currentTeam
             Round.instance = round
+            
+            let currentTeam = Round.instance.currentTeam
+            if previousTeam != currentTeam && currentTeam == Player.instance.team {
+                AudioToolboxManager.instance.vibrate()
+            }
+            
             if Round.instance.abort {
                 self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerAbortedString)
                 return
