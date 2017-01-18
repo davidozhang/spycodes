@@ -88,7 +88,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         self.startGame.alpha = 0.3
         self.startGame.enabled = false
         
-        self.accessCodeLabel.text = "Access Code: " + Room.instance.getAccessCode()
+        if Room.instance.name != Room.instance.getAccessCode() {
+            self.accessCodeLabel.text = "Room Name: " + Room.instance.name
+        } else {
+            self.accessCodeLabel.text = "Access Code: " + Room.instance.getAccessCode()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
