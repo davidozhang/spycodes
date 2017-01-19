@@ -12,8 +12,8 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var aboutButtonBottomConstraint: NSLayoutConstraint!
     
     // MARK: Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         self.linkCopiedLabel.hidden = true
         
         Player.instance.reset()
