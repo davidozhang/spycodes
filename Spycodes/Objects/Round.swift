@@ -34,6 +34,8 @@ class Round: NSObject, NSCoding {
         
         if let numberOfGuesses = aDecoder.decodeObjectForKey("numberOfGuesses") as? Int {
             self.numberOfGuesses = numberOfGuesses
+        } else {
+            self.numberOfGuesses = Int.max  // Backwards compatibility with v1.0
         }
         
         self.abort = aDecoder.decodeBoolForKey("abort")
