@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -881,7 +881,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFn-Ic-8z8" userLabel="Clue Number View">
-                                        <rect key="frame" x="178.33333333333334" y="29" width="58" height="25"/>
+                                        <rect key="frame" x="193.33333333333334" y="29" width="28" height="25"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="32" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Two-zP-PDk" userLabel="Clue Text Field">
                                                 <rect key="frame" x="0.0" y="0.0" width="10" height="25"/>
@@ -899,31 +899,17 @@
                                                     <outlet property="delegate" destination="yX4-d1-WHr" id="6DQ-aj-h2Q"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zv5-wp-R42" userLabel="Confirm Button">
-                                                <rect key="frame" x="36" y="-12.333333333333332" width="22" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="22" id="0zN-TD-ueX"/>
-                                                    <constraint firstAttribute="height" constant="50" id="RzG-nV-GpB"/>
-                                                </constraints>
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="15" maxX="0.0" maxY="15"/>
-                                                <state key="normal" title="Button" image="Confirm"/>
-                                                <connections>
-                                                    <action selector="onConfirmPressed:" destination="yX4-d1-WHr" eventType="touchUpInside" id="bJh-MW-QOu"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Two-zP-PDk" firstAttribute="leading" secondItem="XFn-Ic-8z8" secondAttribute="leading" id="0tD-oY-FQZ"/>
                                             <constraint firstAttribute="bottom" secondItem="Two-zP-PDk" secondAttribute="bottom" id="AKM-4t-W4U"/>
                                             <constraint firstItem="Two-zP-PDk" firstAttribute="top" secondItem="XFn-Ic-8z8" secondAttribute="top" id="Axw-cP-BpN"/>
-                                            <constraint firstItem="zv5-wp-R42" firstAttribute="leading" secondItem="1J8-w3-IbM" secondAttribute="trailing" constant="8" id="Hu0-BS-to4"/>
+                                            <constraint firstAttribute="trailing" secondItem="1J8-w3-IbM" secondAttribute="trailing" id="GWv-mK-Sa9"/>
                                             <constraint firstItem="Two-zP-PDk" firstAttribute="centerY" secondItem="XFn-Ic-8z8" secondAttribute="centerY" id="Iwb-2o-v1B"/>
                                             <constraint firstItem="1J8-w3-IbM" firstAttribute="top" secondItem="XFn-Ic-8z8" secondAttribute="top" id="Rnb-8z-RHl"/>
                                             <constraint firstItem="1J8-w3-IbM" firstAttribute="centerY" secondItem="XFn-Ic-8z8" secondAttribute="centerY" id="n4v-ez-ECI"/>
                                             <constraint firstItem="1J8-w3-IbM" firstAttribute="leading" secondItem="Two-zP-PDk" secondAttribute="trailing" constant="8" id="nbD-hc-lJf"/>
-                                            <constraint firstItem="zv5-wp-R42" firstAttribute="centerY" secondItem="1J8-w3-IbM" secondAttribute="centerY" id="qny-JF-0AG"/>
-                                            <constraint firstAttribute="trailing" secondItem="zv5-wp-R42" secondAttribute="trailing" id="via-gy-5DQ"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scv-CB-Z0e" userLabel="Dashboard View">
@@ -1004,14 +990,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWW-d1-JFl" userLabel="Bottom Bar View">
                                 <rect key="frame" x="0.0" y="659" width="414" height="77"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-Ow-5JW" customClass="SpycodesRoundedButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="148.66666666666669" y="18" width="117.00000000000006" height="41"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-Ow-5JW" userLabel="Action Button" customClass="SpycodesRoundedButton" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="192.66666666666666" y="18" width="30" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <state key="normal" title="End Round">
+                                        <state key="normal">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="onEndRoundPressed:" destination="yX4-d1-WHr" eventType="touchUpInside" id="yjA-CU-vfW"/>
+                                            <action selector="onActionButtonTapped:" destination="yX4-d1-WHr" eventType="touchUpInside" id="AjL-cC-kYa"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1040,15 +1026,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actionButton" destination="PlM-Ow-5JW" id="ao0-VY-gF5"/>
                         <outlet property="bottomBarView" destination="hWW-d1-JFl" id="2Xx-DX-TdC"/>
+                        <outlet property="bottomBarViewBottomMarginConstraint" destination="lun-Gf-300" id="BOT-1S-oIr"/>
                         <outlet property="bottomBarViewHeightConstraint" destination="Rze-jR-htc" id="6i0-O2-uh8"/>
                         <outlet property="cardsRemainingLabel" destination="647-e2-brJ" id="at7-pZ-ksU"/>
                         <outlet property="clueTextField" destination="Two-zP-PDk" id="6um-Qp-jju"/>
                         <outlet property="collectionView" destination="udo-t2-F4l" id="dkZ-d6-YKx"/>
-                        <outlet property="confirmButton" destination="zv5-wp-R42" id="euX-ZZ-rXH"/>
-                        <outlet property="confirmButtonLeadingSpaceConstraint" destination="Hu0-BS-to4" id="DIc-jw-ScY"/>
-                        <outlet property="confirmButtonWidthConstraint" destination="0zN-TD-ueX" id="l1A-vP-1o6"/>
-                        <outlet property="endRoundButton" destination="PlM-Ow-5JW" id="YQM-Y0-lsz"/>
                         <outlet property="numberOfWordsTextField" destination="1J8-w3-IbM" id="OZo-0w-hSZ"/>
                         <outlet property="teamLabel" destination="p06-Ae-1HJ" id="NrV-HJ-nZH"/>
                         <outlet property="topBarView" destination="Vhy-Dr-vSM" id="Vdg-zN-a3H"/>
@@ -1068,7 +1052,6 @@
         <image name="Back" width="100" height="100"/>
         <image name="Chart" width="100" height="100"/>
         <image name="Cluegiver-Filled" width="100" height="66"/>
-        <image name="Confirm" width="100" height="100"/>
         <image name="Info" width="100" height="100"/>
         <image name="Settings" width="100" height="100"/>
         <image name="Share" width="100" height="100"/>
@@ -1077,7 +1060,7 @@
         <image name="Team" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wBM-IP-ibq"/>
+        <segue reference="FY4-wF-ZYf"/>
         <segue reference="N7R-5v-7k6"/>
     </inferredMetricsTieBreakers>
 </document>

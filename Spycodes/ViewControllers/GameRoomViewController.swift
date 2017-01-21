@@ -5,10 +5,11 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private let reuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
     private let minCellSpacing: CGFloat = 12
-    private let elementGapSpace: CGFloat = 8
-    private let confirmButtonDefaultWidth: CGFloat = 22
+    
     private let animationAlpha: CGFloat = 0.4
     private let animationDuration: NSTimeInterval = 0.75
+    
+    private var actionButtonState: ActionButtonState = .EndRound
     
     private var buttonAnimationStarted = false
     private var textFieldAnimationStarted = false
@@ -21,15 +22,13 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     @IBOutlet var bottomBarView: UIView!
     @IBOutlet var topBarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var bottomBarViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var bottomBarViewBottomMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var clueTextField: UITextField!
     @IBOutlet weak var numberOfWordsTextField: UITextField!
     @IBOutlet weak var cardsRemainingLabel: UILabel!
     @IBOutlet weak var teamLabel: UILabel!
     
-    @IBOutlet weak var endRoundButton: SpycodesRoundedButton!
-    @IBOutlet weak var confirmButton: UIButton!
-    @IBOutlet var confirmButtonWidthConstraint: NSLayoutConstraint!
-    @IBOutlet var confirmButtonLeadingSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet var actionButton: SpycodesRoundedButton!
     
     @IBAction func onBackButtonPressed(sender: AnyObject) {
         Round.instance.abortGame()
@@ -37,12 +36,12 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         self.performSegueWithIdentifier("pregame-room", sender: self)
     }
     
-    @IBAction func onConfirmPressed(sender: AnyObject) {
-        self.didConfirm()
-    }
-    
-    @IBAction func onEndRoundPressed(sender: AnyObject) {
-        self.didEndRound()
+    @IBAction func onActionButtonTapped(sender: AnyObject) {
+        if actionButtonState == .Confirm {
+            self.didConfirm()
+        } else if actionButtonState == .EndRound {
+            self.didEndRound()
+        }
     }
     
     // MARK: Lifecycle
@@ -52,6 +51,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.broadcastEssentialData), name: SpycodesNotificationKey.autoConvertBystanderCardNotificationkey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.broadcastEssentialData), name: SpycodesNotificationKey.autoEliminateNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.didEndGameWithNotification), name: SpycodesNotificationKey.minigameGameOverNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -65,14 +66,11 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(GameRoomViewController.broadcastEssentialData), userInfo: nil, repeats: true)  // Broadcast host's card collection and round every 2 seconds
         }
         
-        self.endRoundButton.hidden = false
+        self.actionButton.hidden = false
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(GameRoomViewController.refreshView), userInfo: nil, repeats: true)    // Refresh room every second
         
         self.teamLabel.text = Player.instance.team == Team.Red ? "Red" : "Blue"
-        self.confirmButton.hidden = true
-        self.confirmButtonLeadingSpaceConstraint.constant = 0
-        self.confirmButtonWidthConstraint.constant = 0
         
         let topBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
         topBlurView.frame = self.topBarView.bounds
@@ -96,6 +94,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.autoConvertBystanderCardNotificationkey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.autoEliminateNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.minigameGameOverNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -107,8 +107,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private func refreshView() {
         dispatch_async(dispatch_get_main_queue(), {
             self.updateDashboard()
-            self.updateEndRoundButton()
-            self.updateConfirmButton()
+            self.updateActionButton()
             self.collectionView.reloadData()
         })
     }
@@ -129,9 +128,9 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     private func startButtonAnimations() {
         if !self.buttonAnimationStarted {
-            self.confirmButton.alpha = 1.0
+            self.actionButton.alpha = 1.0
             UIView.animateWithDuration(self.animationDuration, delay: 0.0, options: [.Autoreverse, .Repeat, .CurveEaseInOut, .AllowUserInteraction], animations: {
-                self.confirmButton.alpha = self.animationAlpha
+                self.actionButton.alpha = self.animationAlpha
                 }, completion: nil)
         }
         
@@ -140,9 +139,9 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     private func stopButtonAnimations() {
         self.buttonAnimationStarted = false
-        self.confirmButton.layer.removeAllAnimations()
+        self.actionButton.layer.removeAllAnimations()
         
-        self.confirmButton.alpha = 0.4
+        self.actionButton.alpha = 0.4
     }
     
     private func startTextFieldAnimations() {
@@ -190,9 +189,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                     
                     self.startTextFieldAnimations()
                     
-                    self.confirmButtonLeadingSpaceConstraint.constant = self.elementGapSpace
-                    self.confirmButtonWidthConstraint.constant = self.confirmButtonDefaultWidth
-                    self.confirmButton.hidden = false
+                    self.actionButtonState = .Confirm
                     self.clueTextField.enabled = true
                     self.numberOfWordsTextField.enabled = true
                 }
@@ -207,28 +204,33 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         }
     }
     
-    private func updateEndRoundButton() {
-        if Round.instance.currentTeam == Player.instance.team && Round.instance.numberOfGuesses > 0 {
-            self.endRoundButton.alpha = 1.0
-            self.endRoundButton.enabled = true
-        }
-        else {
-            self.endRoundButton.alpha = 0.3
-            self.endRoundButton.enabled = false
-        }
-    }
-    
-    private func updateConfirmButton() {
-        if !Player.instance.isClueGiver() || Round.instance.currentTeam != Player.instance.team {
-            return
-        }
-        
-        if self.clueTextField.text?.characters.count > 0 && self.clueTextField.text != Round.defaultClueGiverClue && self.numberOfWordsTextField.text?.characters.count > 0 && self.numberOfWordsTextField.text != Round.defaultNumberOfWords {
-            self.confirmButton.enabled = true
-            self.startButtonAnimations()
-        } else {
+    private func updateActionButton() {
+        if self.actionButtonState == .Confirm {
+            self.actionButton.setTitle("Confirm", forState: .Normal)
+            
+            if !Player.instance.isClueGiver() || Round.instance.currentTeam != Player.instance.team {
+                return
+            }
+            
+            if self.clueTextField.text?.characters.count > 0 && self.clueTextField.text != Round.defaultClueGiverClue && self.numberOfWordsTextField.text?.characters.count > 0 && self.numberOfWordsTextField.text != Round.defaultNumberOfWords {
+                self.actionButton.enabled = true
+                self.startButtonAnimations()
+            } else {
+                self.stopButtonAnimations()
+                self.actionButton.enabled = false
+            }
+        } else if self.actionButtonState == .EndRound {
+            self.actionButton.setTitle("End Round", forState: .Normal)
             self.stopButtonAnimations()
-            self.confirmButton.enabled = false
+            
+            if Round.instance.currentTeam == Player.instance.team && Round.instance.numberOfGuesses > 0 {
+                self.actionButton.alpha = 1.0
+                self.actionButton.enabled = true
+            }
+            else {
+                self.actionButton.alpha = 0.4
+                self.actionButton.enabled = false
+            }
         }
     }
     
@@ -237,9 +239,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         Round.instance.numberOfWords = self.numberOfWordsTextField.text
         self.clueTextField.enabled = false
         self.numberOfWordsTextField.enabled = false
-        self.confirmButton.hidden = true
-        self.confirmButtonLeadingSpaceConstraint.constant = 0
-        self.confirmButtonWidthConstraint.constant = 0
+        self.actionButtonState = .EndRound
+
         self.broadcastEssentialData()
     }
     
@@ -269,6 +270,19 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         })
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
+        if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let rect = frame.CGRectValue()
+            self.bottomBarViewBottomMarginConstraint.constant = rect.size.height
+        }
+    }
+    
+    @objc
+    private func keyboardWillHide(notification: NSNotification) {
+        self.bottomBarViewBottomMarginConstraint.constant = 0
     }
     
     // MARK: MultipeerManagerDelegate
