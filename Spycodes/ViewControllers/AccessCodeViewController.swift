@@ -23,12 +23,6 @@ class AccessCodeViewController: UIViewController, UITextFieldDelegate, Multipeer
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        guard let name = Player.instance.name else { return }
-        
-        MultipeerManager.instance.initPeerID(name)
-        MultipeerManager.instance.initSession()
-
         self.statusLabel.text = "Enter access code"
     }
     
@@ -63,6 +57,10 @@ class AccessCodeViewController: UIViewController, UITextFieldDelegate, Multipeer
     
     private func joinRoomWithAccessCode(accessCode: String) {
         // Start advertising to allow host room to invite into session
+        guard let name = Player.instance.name else { return }
+        MultipeerManager.instance.initPeerID(name)
+        MultipeerManager.instance.initSession()
+        
         MultipeerManager.instance.initDiscoveryInfo(["joinRoomWithAccessCode": accessCode])
         MultipeerManager.instance.initAdvertiser()
         MultipeerManager.instance.startAdvertiser()
