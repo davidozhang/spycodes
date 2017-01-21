@@ -58,7 +58,7 @@ class Room: NSObject, NSCoding {
     }
     
     private static func generateAccessCode() -> String {
-        let letters : NSString = "abcdefghijklmnopqrstuvwxyz0123456789"
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyz"
         var result = ""
         
         for _ in 0 ..< accessCodeLength {
