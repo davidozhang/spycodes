@@ -12,9 +12,13 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var aboutButtonBottomConstraint: NSLayoutConstraint!
     
     // MARK: Lifecycle
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.linkCopiedLabel.hidden = true
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.linkCopiedLabel.hidden = true
         
         Player.instance.reset()
         GameMode.instance.reset()
