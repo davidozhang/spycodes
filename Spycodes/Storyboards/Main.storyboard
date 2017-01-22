@@ -974,10 +974,19 @@
                                             </mask>
                                         </variation>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AnM-2b-hAX">
+                                        <rect key="frame" x="371" y="30" width="23" height="23"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="ZxG-Pt-o29"/>
+                                            <constraint firstAttribute="width" constant="23" id="vLp-uf-sBE"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="History"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="scv-CB-Z0e" firstAttribute="top" secondItem="dUf-TJ-d5l" secondAttribute="bottom" constant="4" id="7wU-RE-aJk"/>
+                                    <constraint firstItem="AnM-2b-hAX" firstAttribute="centerY" secondItem="dUf-TJ-d5l" secondAttribute="centerY" id="A4y-jc-FV0"/>
                                     <constraint firstItem="scv-CB-Z0e" firstAttribute="centerX" secondItem="Vhy-Dr-vSM" secondAttribute="centerX" id="KDs-5b-v6M"/>
                                     <constraint firstAttribute="bottom" secondItem="scv-CB-Z0e" secondAttribute="bottom" constant="4" id="Ve6-4I-Lo6"/>
                                     <constraint firstAttribute="height" constant="97" id="cP6-J4-cEl"/>
@@ -985,6 +994,7 @@
                                     <constraint firstItem="dUf-TJ-d5l" firstAttribute="leading" secondItem="Vhy-Dr-vSM" secondAttribute="leading" constant="15" id="g9s-yP-02L"/>
                                     <constraint firstItem="XFn-Ic-8z8" firstAttribute="centerX" secondItem="Vhy-Dr-vSM" secondAttribute="centerX" id="r7u-l3-uVe"/>
                                     <constraint firstItem="XFn-Ic-8z8" firstAttribute="centerY" secondItem="dUf-TJ-d5l" secondAttribute="centerY" id="wIq-Xa-AdX"/>
+                                    <constraint firstAttribute="trailing" secondItem="AnM-2b-hAX" secondAttribute="trailing" constant="20" id="wlA-dZ-xup"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWW-d1-JFl" userLabel="Bottom Bar View">
@@ -1052,6 +1062,7 @@
         <image name="Back" width="100" height="100"/>
         <image name="Chart" width="100" height="100"/>
         <image name="Cluegiver-Filled" width="100" height="66"/>
+        <image name="History" width="100" height="100"/>
         <image name="Info" width="100" height="100"/>
         <image name="Settings" width="100" height="100"/>
         <image name="Share" width="100" height="100"/>
