@@ -1,36 +1,22 @@
 import UIKit
 
 protocol PregameRoomViewCellDelegate {
-    func teamDidChangeAtIndex(index: Int, team: Bool)
+    func teamDidChangeAtSectionAndIndex(section: Int, index: Int)
 }
 
 class PregameRoomViewCell: UITableViewCell {
-    let onColor = UIColor.spycodesRedColor()
-    let offColor = UIColor.spycodesBlueColor()
-    
+    var section: Int?
     var index: Int?
     var delegate: PregameRoomViewCellDelegate?
-    var teamSelectionEnabled = true
     
-    @IBOutlet weak var clueGiverImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var teamSwitch: UISwitch!
+    @IBOutlet var cluegiverButton: UIButton!
+    @IBOutlet var editButton: UIButton!
+    @IBOutlet var teamChangeButton: UIButton!
     
-    override func awakeFromNib() {
-        self.teamSwitch.onTintColor = self.onColor
-        self.teamSwitch.tintColor = self.offColor
-        self.teamSwitch.layer.cornerRadius = 16
-        self.teamSwitch.backgroundColor = self.offColor
-    }
-    
-    @IBAction func switchToggled(sender: AnyObject) {
-        if !teamSelectionEnabled {
-            return
+    @IBAction func onTeamChangeButtonTapped(sender: AnyObject) {
+        if let section = section, index = index {
+            delegate?.teamDidChangeAtSectionAndIndex(section, index: index)
         }
-        
-        if let index = self.index {
-            delegate?.teamDidChangeAtIndex(index, team: teamSwitch.on)
-        }
-        
     }
 }

@@ -3,7 +3,7 @@ import UIKit
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private let sections = ["About"]
     private let versionViewCellReuseIdentifier = "version-view-cell"
-    private let sectionHeaderCellReuseIdentifier = "section-header-view-cell"
+    private let sectionHeaderCellReuseIdentifier = "settings-view-section-header-view-cell"
     
     @IBOutlet var tableView: UITableView!
     @IBAction func onBackTapped(sender: AnyObject) {
@@ -19,7 +19,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let sectionHeader = self.tableView.dequeueReusableCellWithIdentifier(self.sectionHeaderCellReuseIdentifier) as? SectionHeaderViewCell else { return nil
+        guard let sectionHeader = self.tableView.dequeueReusableCellWithIdentifier(self.sectionHeaderCellReuseIdentifier) as? SettingsViewSectionHeaderViewCell else { return nil
         }
         
         sectionHeader.header.text = sections[section]
