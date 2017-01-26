@@ -13,6 +13,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     private var buttonAnimationStarted = false
     private var textFieldAnimationStarted = false
+    private var cluegiverIsEditing = false
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -169,7 +170,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         self.cardsRemainingLabel.text = String(CardCollection.instance.getCardsRemainingForTeam(Player.instance.team))
         
         if Round.instance.currentTeam == Player.instance.team {
-            if self.clueTextField.isFirstResponder() || self.numberOfWordsTextField.isFirstResponder() {
+            if self.cluegiverIsEditing {
                 return  // Cluegiver is editing the clue/number of words
             }
             
@@ -235,6 +236,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     private func didConfirm() {
+        self.cluegiverIsEditing = false
+        
         Round.instance.clue = self.clueTextField.text
         Round.instance.numberOfWords = self.numberOfWordsTextField.text
         self.clueTextField.enabled = false
@@ -291,6 +294,10 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     func lostPeer(peerID: MCPeerID) {}
     
     func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
+        if self.cluegiverIsEditing {
+            return
+        }
+        
         if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
             CardCollection.instance = cardCollection
         }
@@ -495,6 +502,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     func textFieldDidBeginEditing(textField: UITextField) {
         self.stopTextFieldAnimations()
+        
+        self.cluegiverIsEditing = true
         
         if textField == self.clueTextField {
             if textField.text == Round.defaultClueGiverClue {
