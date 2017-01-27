@@ -11,8 +11,8 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: Lifecycle
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         if let name = Player.instance.name where name.characters.count > 0 {
             self.userNameTextField.text = name
