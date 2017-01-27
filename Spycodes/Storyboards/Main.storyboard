@@ -322,8 +322,8 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qd-Lb-OLK">
-                                <rect key="frame" x="158.66666666666666" y="384.66666666666669" width="97" height="30"/>
-                                <state key="normal" title="Browse Lobby"/>
+                                <rect key="frame" x="101" y="384.66666666666669" width="213" height="30"/>
+                                <state key="normal" title="No access code? Browse lobby"/>
                                 <connections>
                                     <action selector="onBrowseLobbyTapped:" destination="RKo-Nr-UiC" eventType="touchUpInside" id="l5V-LT-ZwS"/>
                                 </connections>
