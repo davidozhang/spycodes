@@ -502,6 +502,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     func textFieldDidBeginEditing(textField: UITextField) {
         self.stopTextFieldAnimations()
+        textField.invalidateIntrinsicContentSize()
         
         self.cluegiverIsEditing = true
         
