@@ -323,7 +323,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     // MARK: PregameRoomViewCellDelegate
     func teamDidChangeForPlayerWithUUID(uuid: String, originalTeam: Team) {
-        
         if let player = Room.instance.getPlayerWithUUID(uuid), newTeam = Team(rawValue: originalTeam.rawValue ^ 1){
             if Player.instance.getUUID() == player.getUUID() {
                 Player.instance.team = newTeam
@@ -332,6 +331,5 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             player.team = newTeam
             self.broadcastEssentialData()
         }
-        
     }
 }
