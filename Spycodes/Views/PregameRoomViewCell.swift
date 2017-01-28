@@ -1,12 +1,11 @@
 import UIKit
 
 protocol PregameRoomViewCellDelegate {
-    func teamDidChangeAtSectionAndIndex(section: Int, index: Int)
+    func teamDidChangeForPlayerWithUUID(uuid: String, originalTeam: Team)
 }
 
 class PregameRoomViewCell: UITableViewCell {
-    var section: Int?
-    var index: Int?
+    var player: Player?
     var delegate: PregameRoomViewCellDelegate?
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -15,8 +14,8 @@ class PregameRoomViewCell: UITableViewCell {
     @IBOutlet var teamChangeButton: UIButton!
     
     @IBAction func onTeamChangeButtonTapped(sender: AnyObject) {
-        if let section = section, index = index {
-            delegate?.teamDidChangeAtSectionAndIndex(section, index: index)
+        if let player = player {
+            delegate?.teamDidChangeForPlayerWithUUID(player.getUUID(), originalTeam: player.team)
         }
     }
 }

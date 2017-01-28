@@ -2,7 +2,7 @@ import MultipeerConnectivity
 import UIKit
 
 class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
-    private let sections = ["Team Red", "Team Blue"]
+    private let sections: [Team] = [.Red, .Blue]
     private let pregameRoomCellReuseIdentifier = "pregame-room-view-cell"
     private let sectionHeaderCellReuseIdentifier = "pregame-room-section-header-view-cell"
     
@@ -214,7 +214,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             cell.teamChangeButton.enabled = false
         }
         
-        cell.index = indexPath.row
+        cell.player = Room.instance.players[indexPath.row]
         cell.delegate = self
         
         return cell
@@ -230,7 +230,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         guard let sectionHeader = self.tableView.dequeueReusableCellWithIdentifier(self.sectionHeaderCellReuseIdentifier) as? PregameRoomViewSectionHeaderViewCell else { return nil
         }
         
-        sectionHeader.header.text = sections[section]
+        if sections[section] == .Red {
+            sectionHeader.header.text = "Team Red"
+        } else {
+            sectionHeader.header.text = "Team Blue"
+        }
         return sectionHeader
     }
     
@@ -241,9 +245,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: // Red
-            return Room.instance.players.filter({($0 as Player).team == .Red}).count
+            return Room.instance.getCountForTeam(.Red)
         case 1: // Blue
-            return Room.instance.players.filter({($0 as Player).team == .Blue}).count
+            return Room.instance.getCountForTeam(.Blue)
         default:
             return 0
         }
@@ -318,5 +322,16 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     // MARK: PregameRoomViewCellDelegate
-    func teamDidChangeAtSectionAndIndex(section: Int, index: Int) {}
+    func teamDidChangeForPlayerWithUUID(uuid: String, originalTeam: Team) {
+        
+        if let player = Room.instance.getPlayerWithUUID(uuid), newTeam = Team(rawValue: originalTeam.rawValue ^ 1){
+            if Player.instance.getUUID() == player.getUUID() {
+                Player.instance.team = newTeam
+            }
+            
+            player.team = newTeam
+            self.broadcastEssentialData()
+        }
+        
+    }
 }

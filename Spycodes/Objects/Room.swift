@@ -109,6 +109,10 @@ class Room: NSObject, NSCoding {
         }
     }
     
+    func getCountForTeam(team: Team) -> Int {
+        return Room.instance.players.filter({($0 as Player).team == team}).count
+    }
+    
     func setNameOfPlayerAtIndex(index: Int, name: String) {
         if index < self.players.count {
             self.players[index].name = name
