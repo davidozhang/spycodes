@@ -10,6 +10,6 @@ class SpycodesMessage {
     static let startGameInfoString = "1. A cluegiver must be selected for each team.\n2. If regular game will be played, each team must have at least 2 players."
     static let minigameInfoString = "Minigame can be played with 2-3 players."
     
-    static let playerDisconnectedString = "A player in the game has disconnected."
+    static let playerDisconnectedString = "A player in the game has left."
     static let playerAbortedString = "A player in the game has aborted the game."
 }
