@@ -35,6 +35,12 @@ class PregameSettingsViewController: UIViewController {
         Room.instance.resetPlayers()
         Statistics.instance.reset()
         
+        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+            Room.instance.addCPUPlayer()
+        } else {
+            Room.instance.removeCPUPlayer()
+        }
+        
         var data = NSKeyedArchiver.archivedDataWithRootObject(GameMode.instance)
         MultipeerManager.instance.broadcastData(data)
         
