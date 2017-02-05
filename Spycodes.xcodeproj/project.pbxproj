@@ -17,6 +17,7 @@
 		632A25471E46F0DC0003D1F8 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A25461E46F0DC0003D1F8 /* ScoreViewController.swift */; };
 		632A25491E46FB290003D1F8 /* SpycodesLargeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A25481E46FB290003D1F8 /* SpycodesLargeLabel.swift */; };
 		632A254B1E46FD330003D1F8 /* PregameSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A254A1E46FD330003D1F8 /* PregameSettingsViewController.swift */; };
+		632A254D1E470A1D0003D1F8 /* SpycodesNavigationBarBoldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A254C1E470A1D0003D1F8 /* SpycodesNavigationBarBoldLabel.swift */; };
 		63486DA51D3DDC9800795403 /* SpycodesArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA41D3DDC9800795403 /* SpycodesArray.swift */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
 		636B61F71E331CA100F660C0 /* ActionButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B61F61E331CA100F660C0 /* ActionButtonState.swift */; };
@@ -67,6 +68,7 @@
 		632A25461E46F0DC0003D1F8 /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreViewController.swift; path = ViewControllers/ScoreViewController.swift; sourceTree = "<group>"; };
 		632A25481E46FB290003D1F8 /* SpycodesLargeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesLargeLabel.swift; path = Extensions/SpycodesLargeLabel.swift; sourceTree = "<group>"; };
 		632A254A1E46FD330003D1F8 /* PregameSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PregameSettingsViewController.swift; path = ViewControllers/PregameSettingsViewController.swift; sourceTree = "<group>"; };
+		632A254C1E470A1D0003D1F8 /* SpycodesNavigationBarBoldLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesNavigationBarBoldLabel.swift; path = Extensions/SpycodesNavigationBarBoldLabel.swift; sourceTree = "<group>"; };
 		63486DA41D3DDC9800795403 /* SpycodesArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesArray.swift; path = Extensions/SpycodesArray.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
 		636B61F61E331CA100F660C0 /* ActionButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionButtonState.swift; path = Objects/ActionButtonState.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				6317B9321DFBE2340069FF48 /* SpycodesLogoLabel.swift */,
 				CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */,
 				6317B93C1DFBEE720069FF48 /* SpycodesNavigationBarLabel.swift */,
+				632A254C1E470A1D0003D1F8 /* SpycodesNavigationBarBoldLabel.swift */,
 				63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */,
 				63DE6A031DFCFA7700938D5A /* SpycodesRoundedButton.swift */,
 				632A25481E46FB290003D1F8 /* SpycodesLargeLabel.swift */,
@@ -328,6 +331,7 @@
 				CF5A8DCC1D46D95F0032F581 /* SpycodesMessage.swift in Sources */,
 				63486DA91D3DE29C00795403 /* Key.swift in Sources */,
 				63FF7CE81D4E8471002D2B97 /* SpycodesNotificationKey.swift in Sources */,
+				632A254D1E470A1D0003D1F8 /* SpycodesNavigationBarBoldLabel.swift in Sources */,
 				63CB4F0E1D3DAA5A00211D3A /* SpycodesWordList.swift in Sources */,
 				632A25491E46FB290003D1F8 /* SpycodesLargeLabel.swift in Sources */,
 				63486DA51D3DDC9800795403 /* SpycodesArray.swift in Sources */,
