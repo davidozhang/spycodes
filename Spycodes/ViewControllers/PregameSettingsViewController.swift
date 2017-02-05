@@ -3,6 +3,10 @@ import UIKit
 class PregameSettingsViewController: UIViewController {
     @IBOutlet var minigameSettingToggle: UISwitch!
     
+    @IBAction func onExitTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(false, completion: nil)
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

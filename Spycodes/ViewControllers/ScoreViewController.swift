@@ -4,6 +4,10 @@ class ScoreViewController: UIViewController {
     @IBOutlet var headerLabel: SpycodesNavigationBarLabel!
     @IBOutlet var scoreLabel: SpycodesLargeLabel!
     
+    @IBAction func onExitTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(false, completion: nil)
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
