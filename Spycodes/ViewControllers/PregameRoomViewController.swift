@@ -276,7 +276,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         let playerAtIndex = Room.instance.players[indexPath.row]
         let team = playerAtIndex.team
         
-        if !Player.instance.isHost() && Player.instance.getUUID() != playerAtIndex.getUUID() {
+        if Player.instance.team != team {
             return
         }
         
@@ -288,11 +288,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         
-        let oldClueGiver = Player.instance.isClueGiver()
-        Room.instance.players[indexPath.row].setIsClueGiver(!oldClueGiver)
+        Room.instance.players[indexPath.row].setIsClueGiver(true)
         
         if Player.instance.getUUID() == playerAtIndex.getUUID() {
-            Player.instance.setIsClueGiver(!oldClueGiver)
+            Player.instance.setIsClueGiver(true)
         }
         
         self.broadcastEssentialData()
