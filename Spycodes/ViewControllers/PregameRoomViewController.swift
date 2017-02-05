@@ -274,9 +274,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         
         // Determine team switch color
         if playerAtIndex.team == Team.Red {
-            cell.teamSwitch.on = true
+            cell.segmentedControl.selectedSegmentIndex = 0
         } else {
-            cell.teamSwitch.on = false
+            cell.segmentedControl.selectedSegmentIndex = 1
         }
         
         if Player.instance == playerAtIndex {
@@ -409,14 +409,10 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     // MARK: PregameRoomViewCellDelegate
-    func teamDidChangeAtIndex(index: Int, team redTeam: Bool) {
+    func teamUpdatedAtIndex(index: Int, newTeam: Team) {
         let playerAtIndex = Room.instance.players[index]
         
-        if redTeam {
-            Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.team = Team.Red
-        } else {
-            Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.team = Team.Blue
-        }
+        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.team = newTeam
         
         Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsClueGiver(false)
         self.broadcastEssentialData()
