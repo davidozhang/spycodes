@@ -1,10 +1,8 @@
 import MultipeerConnectivity
 import UIKit
 
-class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
+class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
     private let identifier = "pregame-room-view-cell"
-    private let minigameToggleViewDefaultHeight: CGFloat = 41
-    private let statisticsDashboardDefaultHeight: CGFloat = 32
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -15,6 +13,13 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var startGameInfoButton: UIButton!
     
     // MARK: Actions
+    @IBAction func onScoreButtonTapped(sender: AnyObject) {
+        self.performSegueWithIdentifier("score-view", sender: self)
+    }
+    
+    @IBAction func onSettingsButtonTapped(sender: AnyObject) {
+    }
+    
     @IBAction func onStartGameInfoPressed(sender: AnyObject) {
         let alertController = UIAlertController(title: "Start Game", message: SpycodesMessage.startGameInfoString, preferredStyle: .Alert)
         let confirmAction = UIAlertAction(title: "Dismiss", style: .Default, handler: { (action: UIAlertAction) in })
@@ -174,10 +179,30 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    // MARK: Popover Presentation Controller Delegate
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+    
     // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "main-menu" {
             MultipeerManager.instance.terminate()
+        } else if segue.identifier == "score-view" {
+            if let vc = segue.destinationViewController as? ScoreViewController {
+                let modalWidth = UIScreen.mainScreen().bounds.width - 60
+                let modalHeight = UIScreen.mainScreen().bounds.height/4
+                
+                vc.modalPresentationStyle = .Popover
+                vc.preferredContentSize = CGSize(width: modalWidth, height: modalHeight)
+
+                if let popvc = vc.popoverPresentationController {
+                    popvc.delegate = self
+                    popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+                    popvc.sourceView = self.view
+                    popvc.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                }
+            }
         }
     }
     
