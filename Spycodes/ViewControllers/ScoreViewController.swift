@@ -2,7 +2,7 @@ import UIKit
 
 class ScoreViewController: UIViewController {
     @IBOutlet var headerLabel: SpycodesNavigationBarLabel!
-    @IBOutlet var scoreLabel: SpycodesScoreLabel!
+    @IBOutlet var scoreLabel: SpycodesLargeLabel!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -11,7 +11,9 @@ class ScoreViewController: UIViewController {
             self.headerLabel.text = "Minigame"
             
             if let bestRecord = Statistics.instance.getBestRecord() {
-                self.scoreLabel.text = "Minigame Best Record: " + String(bestRecord)
+                self.scoreLabel.text = "Best Record: " + String(bestRecord)
+            } else {
+                self.scoreLabel.text = "Best Record: --"
             }
         } else {
             let statistics = Statistics.instance.getStatistics()
