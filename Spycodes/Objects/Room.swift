@@ -152,7 +152,7 @@ class Room: NSObject, NSCoding {
             }
         }
         else if GameMode.instance.mode == GameMode.Mode.MiniGame && (self.players.count == 3 || self.players.count == 4) {
-            if self.getClueGiverUUIDForTeam(Team.Red) != nil || self.getClueGiverUUIDForTeam(Team.Blue) != nil {
+            if self.getClueGiverUUIDForTeam(Team.Red) != nil && self.getClueGiverUUIDForTeam(Team.Blue) != nil {
                 return true
             }
             else {
