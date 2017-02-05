@@ -8,6 +8,7 @@ class SpycodesMessage {
     static let hostDisconnectedString = "Host player has left."
     static let removedFromRoomString = "You have been removed from the room."
     static let startGameInfoString = "1. A cluegiver must be selected for each team.\n2. If regular game will be played, each team must have at least 2 players."
+    static let endRoundInfoString = "Your team must make at least one guess before you can end the round."
     static let minigameInfoString = "Minigame can be played with 2-3 players."
     
     static let playerDisconnectedString = "A player in the game has disconnected."

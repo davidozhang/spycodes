@@ -30,6 +30,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     @IBOutlet weak var teamLabel: UILabel!
     
     @IBOutlet var actionButton: SpycodesRoundedButton!
+    @IBOutlet var infoButton: UIButton!
     
     @IBAction func onBackButtonPressed(sender: AnyObject) {
         Round.instance.abortGame()
@@ -43,6 +44,13 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         } else if actionButtonState == .EndRound {
             self.didEndRound()
         }
+    }
+    
+    @IBAction func onInfoButtonTapped(sender: AnyObject) {
+        let alertController = UIAlertController(title: "End Round", message: SpycodesMessage.endRoundInfoString, preferredStyle: .Alert)
+        let confirmAction = UIAlertAction(title: "Dismiss", style: .Default, handler: { (action: UIAlertAction) in })
+        alertController.addAction(confirmAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     // MARK: Lifecycle
@@ -207,6 +215,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     private func updateActionButton() {
         if self.actionButtonState == .Confirm {
+            self.infoButton.hidden = true
             self.actionButton.setTitle("Confirm", forState: .Normal)
             
             if !Player.instance.isClueGiver() || Round.instance.currentTeam != Player.instance.team {
@@ -221,6 +230,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 self.actionButton.enabled = false
             }
         } else if self.actionButtonState == .EndRound {
+            self.infoButton.hidden = false
             self.actionButton.setTitle("End Round", forState: .Normal)
             self.stopButtonAnimations()
             
