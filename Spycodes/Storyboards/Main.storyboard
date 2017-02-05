@@ -565,13 +565,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uY7-CO-ar3" userLabel="Score View">
                                 <rect key="frame" x="158.33333333333331" y="339" width="97.999999999999943" height="58"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTi-t5-lP1" userLabel="Header" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="26.666666666666657" y="0.0" width="45" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTi-t5-lP1" userLabel="Header" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="21" y="0.0" width="56" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red 0:0 Blue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpl-EB-t5X" userLabel="Score Label" customClass="SpycodesScoreLabel" customModule="Spycodes" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red 0:0 Blue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpl-EB-t5X" userLabel="Score Label" customClass="SpycodesLargeLabel" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="37" width="97.999999999999972" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -604,6 +604,81 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpr-js-qM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2669.5652173913045" y="1156.7934782608697"/>
+        </scene>
+        <!--Pregame Settings View Controller-->
+        <scene sceneID="0dT-Qt-rjK">
+            <objects>
+                <viewController storyboardIdentifier="pregame-settings-view-controller" id="hAj-oC-PSM" customClass="PregameSettingsViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="A7A-1x-tF7"/>
+                        <viewControllerLayoutGuide type="bottom" id="x2l-8T-fmy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NTC-2k-zV9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2E3-jp-MY8" userLabel="Game Settings View">
+                                <rect key="frame" x="137" y="339" width="140" height="58"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8L-W0-auC" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="14" y="0.0" width="113" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PRT-yQ-D4h">
+                                        <rect key="frame" x="0.0" y="37" width="140" height="21"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minigame" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tyo-O4-u4u" customClass="SpycodesLargeLabel" customModule="Spycodes" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="75" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a9D-4e-Di5">
+                                                <rect key="frame" x="91" y="-5" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="minigameSettingToggleChanged:" destination="hAj-oC-PSM" eventType="valueChanged" id="Ib0-d0-GPd"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="a9D-4e-Di5" firstAttribute="leading" secondItem="Tyo-O4-u4u" secondAttribute="trailing" constant="16" id="73D-sT-Eze"/>
+                                            <constraint firstAttribute="bottom" secondItem="Tyo-O4-u4u" secondAttribute="bottom" id="9Ay-qz-OfF"/>
+                                            <constraint firstItem="Tyo-O4-u4u" firstAttribute="top" secondItem="PRT-yQ-D4h" secondAttribute="top" id="EEJ-mB-0nn"/>
+                                            <constraint firstAttribute="trailing" secondItem="a9D-4e-Di5" secondAttribute="trailing" id="kvS-0g-hGP"/>
+                                            <constraint firstItem="a9D-4e-Di5" firstAttribute="centerY" secondItem="Tyo-O4-u4u" secondAttribute="centerY" id="u6U-Ca-mQN"/>
+                                            <constraint firstItem="Tyo-O4-u4u" firstAttribute="leading" secondItem="PRT-yQ-D4h" secondAttribute="leading" id="w3N-oN-j85"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="f8L-W0-auC" firstAttribute="centerX" secondItem="2E3-jp-MY8" secondAttribute="centerX" id="2Gy-Lh-GMB"/>
+                                    <constraint firstItem="PRT-yQ-D4h" firstAttribute="top" secondItem="f8L-W0-auC" secondAttribute="bottom" constant="16" id="4gW-7H-P9Z"/>
+                                    <constraint firstAttribute="trailing" secondItem="PRT-yQ-D4h" secondAttribute="trailing" id="Fph-7u-arD"/>
+                                    <constraint firstItem="f8L-W0-auC" firstAttribute="top" secondItem="2E3-jp-MY8" secondAttribute="top" id="LDa-bo-pET"/>
+                                    <constraint firstItem="PRT-yQ-D4h" firstAttribute="centerX" secondItem="2E3-jp-MY8" secondAttribute="centerX" id="NQU-fh-oVO"/>
+                                    <constraint firstAttribute="bottom" secondItem="PRT-yQ-D4h" secondAttribute="bottom" id="pnQ-Ru-hXf"/>
+                                    <constraint firstItem="PRT-yQ-D4h" firstAttribute="leading" secondItem="2E3-jp-MY8" secondAttribute="leading" id="s82-La-FQ9"/>
+                                    <constraint firstItem="f8L-W0-auC" firstAttribute="centerX" secondItem="2E3-jp-MY8" secondAttribute="centerX" id="tYm-3w-eVH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2E3-jp-MY8" firstAttribute="centerY" secondItem="NTC-2k-zV9" secondAttribute="centerY" id="KDt-lI-rUi"/>
+                            <constraint firstItem="2E3-jp-MY8" firstAttribute="centerX" secondItem="NTC-2k-zV9" secondAttribute="centerX" id="VJ6-Eq-Owm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="minigameSettingToggle" destination="a9D-4e-Di5" id="4rW-RP-wDE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cPD-PP-F7z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3534.7826086956525" y="1155.9782608695652"/>
         </scene>
         <!--Pregame Room View Controller-->
         <scene sceneID="xkD-W1-Ufh">
@@ -803,6 +878,9 @@
                         <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-room" id="pzx-vK-usD"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="main-menu" modalTransitionStyle="flipHorizontal" id="wBM-IP-ibq"/>
                         <segue destination="svw-k6-RuP" kind="popoverPresentation" identifier="score-view" popoverAnchorView="ch0-Rf-qt2" id="jZC-ZA-rpc">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
+                        <segue destination="hAj-oC-PSM" kind="popoverPresentation" identifier="pregame-settings" popoverAnchorView="ch0-Rf-qt2" id="k9u-SF-IPt">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                     </connections>

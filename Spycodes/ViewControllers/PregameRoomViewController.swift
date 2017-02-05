@@ -18,6 +18,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func onSettingsButtonTapped(sender: AnyObject) {
+        self.performSegueWithIdentifier("pregame-settings", sender: self)
     }
     
     @IBAction func onStartGameInfoPressed(sender: AnyObject) {
@@ -196,6 +197,21 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                 vc.modalPresentationStyle = .Popover
                 vc.preferredContentSize = CGSize(width: modalWidth, height: modalHeight)
 
+                if let popvc = vc.popoverPresentationController {
+                    popvc.delegate = self
+                    popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+                    popvc.sourceView = self.view
+                    popvc.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                }
+            }
+        } else if segue.identifier == "pregame-settings" {
+            if let vc = segue.destinationViewController as? PregameSettingsViewController {
+                let modalWidth = UIScreen.mainScreen().bounds.width - 60
+                let modalHeight = UIScreen.mainScreen().bounds.height/4
+                
+                vc.modalPresentationStyle = .Popover
+                vc.preferredContentSize = CGSize(width: modalWidth, height: modalHeight)
+                
                 if let popvc = vc.popoverPresentationController {
                     popvc.delegate = self
                     popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
