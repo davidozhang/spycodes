@@ -28,8 +28,16 @@ class PregameSettingsViewController: UIViewController {
             GameMode.instance.mode = GameMode.Mode.RegularGame
         }
         
-        let data = NSKeyedArchiver.archivedDataWithRootObject(GameMode.instance)
+        Room.instance.resetPlayers()
+        Statistics.instance.reset()
+        
+        var data = NSKeyedArchiver.archivedDataWithRootObject(GameMode.instance)
+        MultipeerManager.instance.broadcastData(data)
+        
+        data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+        MultipeerManager.instance.broadcastData(data)
+        
+        data = NSKeyedArchiver.archivedDataWithRootObject(Statistics.instance)
         MultipeerManager.instance.broadcastData(data)
     }
-    
 }

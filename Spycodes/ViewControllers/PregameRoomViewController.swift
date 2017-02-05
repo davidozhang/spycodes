@@ -3,6 +3,8 @@ import UIKit
 
 class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
     private let identifier = "pregame-room-view-cell"
+    private let modalWidth = UIScreen.mainScreen().bounds.width - 60
+    private let modalHeight = UIScreen.mainScreen().bounds.height/4
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -194,11 +196,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             MultipeerManager.instance.terminate()
         } else if segue.identifier == "score-view" {
             if let vc = segue.destinationViewController as? ScoreViewController {
-                let modalWidth = UIScreen.mainScreen().bounds.width - 60
-                let modalHeight = UIScreen.mainScreen().bounds.height/4
-                
                 vc.modalPresentationStyle = .Popover
-                vc.preferredContentSize = CGSize(width: modalWidth, height: modalHeight)
+                vc.preferredContentSize = CGSize(width: self.modalWidth, height: self.modalHeight)
 
                 if let popvc = vc.popoverPresentationController {
                     popvc.delegate = self
@@ -209,11 +208,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             }
         } else if segue.identifier == "pregame-settings" {
             if let vc = segue.destinationViewController as? PregameSettingsViewController {
-                let modalWidth = UIScreen.mainScreen().bounds.width - 60
-                let modalHeight = UIScreen.mainScreen().bounds.height/4
-                
                 vc.modalPresentationStyle = .Popover
-                vc.preferredContentSize = CGSize(width: modalWidth, height: modalHeight)
+                vc.preferredContentSize = CGSize(width: self.modalWidth, height: self.modalHeight)
                 
                 if let popvc = vc.popoverPresentationController {
                     popvc.delegate = self
@@ -235,7 +231,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         cell.index = indexPath.row
         cell.delegate = self
         
-        // Determine team switch color
         if playerAtIndex.team == Team.Red {
             cell.segmentedControl.selectedSegmentIndex = 0
         } else {
@@ -255,16 +250,23 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.teamSelectionEnabled = false
                 cell.segmentedControl.alpha = 0.3
             }
+            
+            if Room.instance.getClueGiverUUIDForTeam(Player.instance.team) == nil {
+                cell.clueGiverImage.tintColor = UIColor.spycodesRedColor()
+            } else {
+                cell.clueGiverImage.tintColor = UIColor.darkGrayColor()
+            }
         } else {
             cell.teamSelectionEnabled = false
             cell.clueGiverImage.alpha = 0.3
             cell.segmentedControl.alpha = 0.3
+            cell.clueGiverImage.tintColor = UIColor.darkGrayColor()
         }
 
         if playerAtIndex.isClueGiver() {
             cell.clueGiverImage.image = UIImage(named: "Crown-Filled")
         } else {
-            cell.clueGiverImage.image = UIImage(named: "Crown-Unfilled")
+            cell.clueGiverImage.image = UIImage(named: "Crown-Unfilled")?.imageWithRenderingMode(.AlwaysTemplate)
         }
         
         return cell
@@ -286,10 +288,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         
-        Room.instance.players[indexPath.row].setIsClueGiver(true)
+        let oldClueGiver = Player.instance.isClueGiver()
+        Room.instance.players[indexPath.row].setIsClueGiver(!oldClueGiver)
         
         if Player.instance.getUUID() == playerAtIndex.getUUID() {
-            Player.instance.setIsClueGiver(true)
+            Player.instance.setIsClueGiver(!oldClueGiver)
         }
         
         self.broadcastEssentialData()
