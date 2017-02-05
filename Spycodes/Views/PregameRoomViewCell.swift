@@ -1,36 +1,29 @@
 import UIKit
 
 protocol PregameRoomViewCellDelegate {
-    func teamDidChangeAtIndex(index: Int, team: Bool)
+    func teamUpdatedAtIndex(index: Int, newTeam: Team)
 }
 
 class PregameRoomViewCell: UITableViewCell {
-    let onColor = UIColor.spycodesRedColor()
-    let offColor = UIColor.spycodesBlueColor()
-    
     var index: Int?
     var delegate: PregameRoomViewCellDelegate?
     var teamSelectionEnabled = true
     
     @IBOutlet weak var clueGiverImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var teamSwitch: UISwitch!
+    @IBOutlet var segmentedControl: UISegmentedControl!
     
     override func awakeFromNib() {
-        self.teamSwitch.onTintColor = self.onColor
-        self.teamSwitch.tintColor = self.offColor
-        self.teamSwitch.layer.cornerRadius = 16
-        self.teamSwitch.backgroundColor = self.offColor
+        self.segmentedControl.tintColor = UIColor.darkGrayColor()
     }
     
-    @IBAction func switchToggled(sender: AnyObject) {
+    @IBAction func segmentedControlToggled(sender: UISegmentedControl) {
         if !teamSelectionEnabled {
             return
         }
         
         if let index = self.index {
-            delegate?.teamDidChangeAtIndex(index, team: teamSwitch.on)
+            delegate?.teamUpdatedAtIndex(index, newTeam: Team(rawValue: segmentedControl.selectedSegmentIndex)!)
         }
-        
     }
 }

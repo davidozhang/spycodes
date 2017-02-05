@@ -580,7 +580,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d84-Az-a9v">
-                                                    <rect key="frame" x="35" y="8" width="247" height="28.666666666666664"/>
+                                                    <rect key="frame" x="35" y="8" width="205" height="28.666666666666664"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="300" id="xaW-k5-dCT"/>
                                                     </constraints>
@@ -593,18 +593,21 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4xn-Al-HcR" userLabel="Team Switch">
-                                                    <rect key="frame" x="287" y="7" width="51" height="31"/>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="i4n-ia-kgW" userLabel="Segmented Control">
+                                                    <rect key="frame" x="245" y="8.3333333333333357" width="83" height="29"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="KNF-8P-97h"/>
-                                                        <constraint firstAttribute="height" constant="31" id="yHa-Vy-0eQ"/>
+                                                        <constraint firstAttribute="width" constant="83" id="IZP-7P-XMJ"/>
                                                     </constraints>
+                                                    <segments>
+                                                        <segment title="Red"/>
+                                                        <segment title="Blue"/>
+                                                    </segments>
                                                     <connections>
-                                                        <action selector="switchToggled:" destination="PVh-e3-TPn" eventType="valueChanged" id="5x8-pM-NNx"/>
+                                                        <action selector="segmentedControlToggled:" destination="PVh-e3-TPn" eventType="valueChanged" id="5OG-Ej-yJy"/>
                                                     </connections>
-                                                </switch>
+                                                </segmentedControl>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cluegiver-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="4mv-rH-4Dm">
-                                                    <rect key="frame" x="344" y="9" width="35" height="25"/>
+                                                    <rect key="frame" x="344" y="10" width="35" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="Qqy-dE-Ufe"/>
                                                         <constraint firstAttribute="width" constant="35" id="pZq-43-xl3"/>
@@ -612,25 +615,20 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="4xn-Al-HcR" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="0zb-fE-yi0"/>
                                                 <constraint firstItem="d84-Az-a9v" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="1oP-67-mY5"/>
-                                                <constraint firstItem="4xn-Al-HcR" firstAttribute="leading" secondItem="d84-Az-a9v" secondAttribute="trailing" constant="5" id="FFO-1C-XBM"/>
-                                                <constraint firstItem="4xn-Al-HcR" firstAttribute="leading" secondItem="d84-Az-a9v" secondAttribute="trailing" id="FZz-pq-zND"/>
-                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="leading" secondItem="4xn-Al-HcR" secondAttribute="trailing" constant="8" id="LG2-4v-WiF"/>
+                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="leading" secondItem="d84-Az-a9v" secondAttribute="trailing" constant="104" id="CUV-93-cU6"/>
+                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="centerY" secondItem="d84-Az-a9v" secondAttribute="centerY" id="Laf-Zg-ov4"/>
+                                                <constraint firstItem="i4n-ia-kgW" firstAttribute="centerY" secondItem="d84-Az-a9v" secondAttribute="centerY" id="LlD-kZ-zW1"/>
+                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="leading" secondItem="i4n-ia-kgW" secondAttribute="trailing" constant="16" id="RhZ-Rz-agz"/>
                                                 <constraint firstAttribute="trailing" secondItem="4mv-rH-4Dm" secondAttribute="trailing" constant="35" id="dXH-vQ-s4Q"/>
                                                 <constraint firstItem="4mv-rH-4Dm" firstAttribute="centerY" secondItem="d84-Az-a9v" secondAttribute="centerY" id="gti-7X-iAR"/>
                                                 <constraint firstItem="d84-Az-a9v" firstAttribute="leading" secondItem="rq2-uF-F29" secondAttribute="leading" constant="35" id="unX-kK-LLJ"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="FZz-pq-zND"/>
-                                                </mask>
-                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="clueGiverImage" destination="4mv-rH-4Dm" id="55W-Y5-9DF"/>
                                             <outlet property="nameLabel" destination="d84-Az-a9v" id="6T9-Jb-ZH6"/>
-                                            <outlet property="teamSwitch" destination="4xn-Al-HcR" id="WxV-HX-LhQ"/>
+                                            <outlet property="segmentedControl" destination="i4n-ia-kgW" id="4JJ-I9-yCa"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1060,7 +1058,7 @@
         <image name="Team" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FY4-wF-ZYf"/>
-        <segue reference="N7R-5v-7k6"/>
+        <segue reference="wBM-IP-ibq"/>
+        <segue reference="yme-7x-s1N"/>
     </inferredMetricsTieBreakers>
 </document>
