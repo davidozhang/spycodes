@@ -4,6 +4,11 @@ import UIKit
 class Player: NSObject, NSCoding {
     static var instance = Player()
     
+    enum PlayerType: Int {
+        case CPU = 0
+        case Human = 1
+    }
+    
     var name: String?
     var team: Team
     var clueGiver: Bool

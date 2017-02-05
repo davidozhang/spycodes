@@ -17,6 +17,8 @@
 		63486DA51D3DDC9800795403 /* SpycodesArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA41D3DDC9800795403 /* SpycodesArray.swift */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
 		636B61F71E331CA100F660C0 /* ActionButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B61F61E331CA100F660C0 /* ActionButtonState.swift */; };
+		636B61FD1E35600600F660C0 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B61FC1E35600600F660C0 /* History.swift */; };
+		636B61FF1E3561E700F660C0 /* HistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B61FE1E3561E700F660C0 /* HistoryEntry.swift */; };
 		637310CB1D3B292F00EA5D7A /* GameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */; };
 		6378C6511D4C6F46009BD0CA /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378C6501D4C6F46009BD0CA /* GameMode.swift */; };
 		637F195F1D46010E00FB4047 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F195E1D46010E00FB4047 /* Statistics.swift */; };
@@ -64,6 +66,8 @@
 		63486DA41D3DDC9800795403 /* SpycodesArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesArray.swift; path = Extensions/SpycodesArray.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
 		636B61F61E331CA100F660C0 /* ActionButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionButtonState.swift; path = Objects/ActionButtonState.swift; sourceTree = "<group>"; };
+		636B61FC1E35600600F660C0 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = History.swift; path = Objects/History.swift; sourceTree = "<group>"; };
+		636B61FE1E3561E700F660C0 /* HistoryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HistoryEntry.swift; path = Objects/HistoryEntry.swift; sourceTree = "<group>"; };
 		637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameRoomViewController.swift; path = ViewControllers/GameRoomViewController.swift; sourceTree = "<group>"; };
 		6378C6501D4C6F46009BD0CA /* GameMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameMode.swift; path = Objects/GameMode.swift; sourceTree = "<group>"; };
 		637F195E1D46010E00FB4047 /* Statistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Statistics.swift; path = Objects/Statistics.swift; sourceTree = "<group>"; };
@@ -206,6 +210,8 @@
 				63CB4F091D3CB88D00211D3A /* Card.swift */,
 				63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */,
 				6378C6501D4C6F46009BD0CA /* GameMode.swift */,
+				636B61FC1E35600600F660C0 /* History.swift */,
+				636B61FE1E3561E700F660C0 /* HistoryEntry.swift */,
 				63486DA81D3DE29C00795403 /* Key.swift */,
 				63067C6B1D2996B60005AC66 /* Lobby.swift */,
 				63FDED341D264BE800142780 /* Player.swift */,
@@ -323,6 +329,7 @@
 				637310CB1D3B292F00EA5D7A /* GameRoomViewController.swift in Sources */,
 				636B61F71E331CA100F660C0 /* ActionButtonState.swift in Sources */,
 				63CB4F081D3CB3C300211D3A /* GameRoomViewCell.swift in Sources */,
+				636B61FF1E3561E700F660C0 /* HistoryEntry.swift in Sources */,
 				639E17661E00E50E00640540 /* VersionViewCell.swift in Sources */,
 				CF33BE2D1D6D04EA00D0E105 /* SpycodesConstant.swift in Sources */,
 				63CA90CA1D4280CC0027CA80 /* Spycodes.xcdatamodeld in Sources */,
@@ -346,6 +353,7 @@
 				63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */,
 				637FF00C1E103BA40076DC25 /* SpycodesStatusLabel.swift in Sources */,
 				63AB64CD1D4880A600C4FF22 /* SettingsViewController.swift in Sources */,
+				636B61FD1E35600600F660C0 /* History.swift in Sources */,
 				63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */,
 				63FDED321D2648D600142780 /* PlayerNameViewController.swift in Sources */,
 			);
