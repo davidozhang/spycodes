@@ -8,7 +8,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private var refreshTimer: NSTimer?
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var accessCodeLabel: SpycodesNavigationBarLabel!
+    @IBOutlet var accessCodeTypeLabel: SpycodesNavigationBarLabel!
+    @IBOutlet var accessCodeLabel: SpycodesNavigationBarBoldLabel!
     @IBOutlet weak var startGame: SpycodesButton!
     @IBOutlet weak var startGameInfoButton: UIButton!
     
@@ -64,9 +65,11 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         self.startGame.enabled = false
         
         if Room.instance.name != Room.instance.getAccessCode() {
-            self.accessCodeLabel.text = "Room Name: " + Room.instance.name
+            self.accessCodeTypeLabel.text = "Room Name: "
+            self.accessCodeLabel.text = Room.instance.name
         } else {
-            self.accessCodeLabel.text = "Access Code: " + Room.instance.getAccessCode()
+            self.accessCodeTypeLabel.text = "Access Code: "
+            self.accessCodeLabel.text = Room.instance.getAccessCode()
         }
     }
     
