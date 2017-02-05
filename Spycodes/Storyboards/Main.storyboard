@@ -550,6 +550,61 @@
             </objects>
             <point key="canvasLocation" x="1827" y="1156"/>
         </scene>
+        <!--Score View Controller-->
+        <scene sceneID="3ga-29-RNe">
+            <objects>
+                <viewController storyboardIdentifier="score-view-controller" id="svw-k6-RuP" customClass="ScoreViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cMA-i1-rVg"/>
+                        <viewControllerLayoutGuide type="bottom" id="hI3-9L-fIA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dzz-PV-Hhe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uY7-CO-ar3" userLabel="Score View">
+                                <rect key="frame" x="158.33333333333331" y="339" width="97.999999999999943" height="58"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTi-t5-lP1" userLabel="Header" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="26.666666666666657" y="0.0" width="45" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red 0:0 Blue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpl-EB-t5X" userLabel="Score Label" customClass="SpycodesScoreLabel" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="37" width="97.999999999999972" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="mpl-EB-t5X" secondAttribute="bottom" id="4Gp-Ys-RQs"/>
+                                    <constraint firstAttribute="trailing" secondItem="mpl-EB-t5X" secondAttribute="trailing" id="5OI-NT-Ipi"/>
+                                    <constraint firstItem="TTi-t5-lP1" firstAttribute="centerX" secondItem="uY7-CO-ar3" secondAttribute="centerX" id="HdH-2j-mFc"/>
+                                    <constraint firstItem="mpl-EB-t5X" firstAttribute="top" secondItem="TTi-t5-lP1" secondAttribute="bottom" constant="16" id="Jo2-xA-NdP"/>
+                                    <constraint firstItem="mpl-EB-t5X" firstAttribute="leading" secondItem="uY7-CO-ar3" secondAttribute="leading" id="ak5-CR-Eby"/>
+                                    <constraint firstItem="mpl-EB-t5X" firstAttribute="centerX" secondItem="uY7-CO-ar3" secondAttribute="centerX" id="hhL-Gh-hhW"/>
+                                    <constraint firstItem="TTi-t5-lP1" firstAttribute="top" secondItem="uY7-CO-ar3" secondAttribute="top" id="zTz-j8-YkX"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uY7-CO-ar3" firstAttribute="centerX" secondItem="dzz-PV-Hhe" secondAttribute="centerX" id="KYb-fJ-H4D"/>
+                            <constraint firstItem="uY7-CO-ar3" firstAttribute="centerY" secondItem="dzz-PV-Hhe" secondAttribute="centerY" id="OIu-Th-mb5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="headerLabel" destination="TTi-t5-lP1" id="Fvb-z4-2BN"/>
+                        <outlet property="scoreLabel" destination="mpl-EB-t5X" id="dP1-J7-nVQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kpr-js-qM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2669.5652173913045" y="1156.7934782608697"/>
+        </scene>
         <!--Pregame Room View Controller-->
         <scene sceneID="xkD-W1-Ufh">
             <objects>
@@ -672,21 +727,27 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tRc-cU-XFH" userLabel="Dashboard View">
                                 <rect key="frame" x="169" y="54" width="76" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wOJ-Ar-eQn">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wOJ-Ar-eQn" userLabel="Statistics Button">
                                         <rect key="frame" x="0.0" y="0.0" width="35" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="5vV-oD-Kwb"/>
                                             <constraint firstAttribute="height" constant="40" id="mdM-Mh-gVP"/>
                                         </constraints>
                                         <state key="normal" image="Counter"/>
+                                        <connections>
+                                            <action selector="onScoreButtonTapped:" destination="VkA-D4-zlT" eventType="touchUpInside" id="bGO-Vp-ej9"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="klt-Pv-0ZO">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="klt-Pv-0ZO" userLabel="Settings Button">
                                         <rect key="frame" x="51" y="8.3333333333333357" width="25" height="24.999999999999993"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="Gxb-d8-G4D"/>
                                             <constraint firstAttribute="width" constant="25" id="KKg-UD-q8b"/>
                                         </constraints>
                                         <state key="normal" image="Settings"/>
+                                        <connections>
+                                            <action selector="onSettingsButtonTapped:" destination="VkA-D4-zlT" eventType="touchUpInside" id="6qX-Pq-ihC"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -741,6 +802,9 @@
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
                         <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-room" id="pzx-vK-usD"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="main-menu" modalTransitionStyle="flipHorizontal" id="wBM-IP-ibq"/>
+                        <segue destination="svw-k6-RuP" kind="popoverPresentation" identifier="score-view" popoverAnchorView="ch0-Rf-qt2" id="jZC-ZA-rpc">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lDc-cz-jrN" userLabel="First Responder" sceneMemberID="firstResponder"/>
