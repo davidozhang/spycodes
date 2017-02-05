@@ -4,6 +4,7 @@ import MultipeerConnectivity
 class Room: NSObject, NSCoding {
     static var instance = Room()
     static let accessCodeLength = 4
+    static let CPU_UUID = "CPU"
     
     var name: String
     var players = [Player]()
@@ -99,6 +100,15 @@ class Room: NSObject, NSCoding {
         self.players.append(player)
     }
     
+    func addCPUPlayer() {
+        let cpu = Player(name: "CPU", uuid: Room.CPU_UUID, team: Team.Blue, clueGiver: true, host: false)
+        self.players.append(cpu)
+    }
+    
+    func removeCPUPlayer() {
+        self.removePlayerWithUUID(Room.CPU_UUID)
+    }
+    
     func getPlayerWithUUID(uuid: String) -> Player? {
         let filtered = self.players.filter({($0 as Player).getUUID() == uuid})
         if filtered.count == 1 {
@@ -141,7 +151,7 @@ class Room: NSObject, NSCoding {
                 return false
             }
         }
-        else if GameMode.instance.mode == GameMode.Mode.MiniGame && (self.players.count == 2 || self.players.count == 3) {
+        else if GameMode.instance.mode == GameMode.Mode.MiniGame && (self.players.count == 3 || self.players.count == 4) {
             if self.getClueGiverUUIDForTeam(Team.Red) != nil || self.getClueGiverUUIDForTeam(Team.Blue) != nil {
                 return true
             }
