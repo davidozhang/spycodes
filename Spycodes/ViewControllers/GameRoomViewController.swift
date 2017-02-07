@@ -357,7 +357,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             if player.isHost() {
                 let alertController = UIAlertController(title: SpycodesMessage.returningToLobbyString, message: SpycodesMessage.hostDisconnectedString, preferredStyle: .Alert)
                 let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-                    self.performSegueWithIdentifier("main-menu", sender: self)
+                    self.performSegueWithIdentifier("main-menu", sender: self)      // TODO: Replace this with unwind segue. Not important, since this situation only occurs rarely.
                 })
                 alertController.addAction(confirmAction)
                 self.presentViewController(alertController, animated: true, completion: nil)
