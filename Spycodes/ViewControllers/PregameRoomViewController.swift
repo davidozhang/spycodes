@@ -139,7 +139,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     private func goToMainMenu() {
         dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("main-menu", sender: self)
+            self.performSegueWithIdentifier("player-name", sender: self)
         })
     }
     
@@ -192,7 +192,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "main-menu" {
+        if segue.identifier == "player-name" {
             MultipeerManager.instance.terminate()
         } else if segue.identifier == "score-view" {
             if let vc = segue.destinationViewController as? ScoreViewController {

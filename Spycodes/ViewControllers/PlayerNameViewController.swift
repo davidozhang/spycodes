@@ -4,7 +4,11 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userNameTextField: SpycodesTextField!
     
     // MARK: Actions
-    @IBAction func unwindToPlayerName(sender: UIStoryboardSegue) {}
+    @IBAction func unwindToPlayerName(sender: UIStoryboardSegue) {
+        if let _ = sender.sourceViewController as? PregameRoomViewController {
+            self.performSegueWithIdentifier("main-menu", sender: self)
+        }
+    }
     
     @IBAction func onBackPressed(sender: AnyObject) {
         self.performSegueWithIdentifier("main-menu", sender: self)
