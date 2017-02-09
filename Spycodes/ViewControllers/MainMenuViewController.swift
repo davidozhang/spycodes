@@ -7,30 +7,7 @@ class MainMenuViewController: UIViewController {
     private var timer: NSTimer?
     
     @IBOutlet var linkCopiedLabel: SpycodesStatusLabel!
-    @IBOutlet weak var spycodesLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var spycodesIconTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var aboutButtonBottomConstraint: NSLayoutConstraint!
     
-    // MARK: Lifecycle
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.linkCopiedLabel.hidden = true
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        Player.instance.reset()
-        GameMode.instance.reset()
-        Lobby.instance.reset()
-        Statistics.instance.reset()
-        Room.instance.reset()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
     // MARK: Actions
     @IBAction func unwindToMainMenu(sender: UIStoryboardSegue) {}
     
@@ -49,13 +26,39 @@ class MainMenuViewController: UIViewController {
         Player.instance.setIsHost(true)
         self.performSegueWithIdentifier("player-name", sender: self)
     }
-
+    
     @IBAction func onJoinGame(sender: AnyObject) {
         self.performSegueWithIdentifier("player-name", sender: self)
     }
     
     @IBAction func onSettingsTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("settings", sender: self)
+    }
+    
+    // MARK: Lifecycle
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.linkCopiedLabel.hidden = true
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Player.instance.reset()
+        GameMode.instance.reset()
+        Lobby.instance.reset()
+        Statistics.instance.reset()
+        Room.instance.reset()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.timer?.invalidate()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     @objc
