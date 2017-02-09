@@ -239,10 +239,12 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         
         if Player.instance == playerAtIndex {
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 24)
+            cell.teamSelectionEnabled = true
+        } else {
+            cell.teamSelectionEnabled = false
         }
         
         if Player.instance.team == playerAtIndex.team {
-            cell.teamSelectionEnabled = true
             cell.clueGiverImage.alpha = 1.0
             cell.segmentedControl.alpha = 1.0
             
@@ -257,7 +259,6 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.clueGiverImage.tintColor = UIColor.darkGrayColor()
             }
         } else {
-            cell.teamSelectionEnabled = false
             cell.clueGiverImage.alpha = 0.3
             cell.segmentedControl.alpha = 0.3
             cell.clueGiverImage.tintColor = UIColor.darkGrayColor()
