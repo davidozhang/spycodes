@@ -28,16 +28,23 @@ class AccessCodeViewController: UIViewController, UITextFieldDelegate, Multipeer
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.accessCodeTextField.delegate = self
         MultipeerManager.instance.delegate = self
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+        
         self.accessCodeTextField.becomeFirstResponder()
     }
     
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.refreshTimer?.invalidate()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.accessCodeTextField.delegate = nil
     }
     
     override func didReceiveMemoryWarning() {

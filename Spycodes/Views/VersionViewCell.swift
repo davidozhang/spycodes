@@ -1,8 +1,8 @@
 import UIKit
 
 class VersionViewCell: UITableViewCell {
-    @IBOutlet var versionNumberLabel: UILabel!
-    @IBOutlet var buildNumberLabel: UILabel!
+    @IBOutlet weak var versionNumberLabel: UILabel!
+    @IBOutlet weak var buildNumberLabel: UILabel!
     
     override func awakeFromNib() {
         if let versionString: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String, buildNumber: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as? String {

@@ -18,20 +18,21 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet var topBarView: UIView!
-    @IBOutlet var bottomBarView: UIView!
     @IBOutlet var topBarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var bottomBarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var bottomBarViewBottomMarginConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var bottomBarView: UIView!
     @IBOutlet weak var clueTextField: UITextField!
     @IBOutlet weak var numberOfWordsTextField: UITextField!
     @IBOutlet weak var cardsRemainingLabel: UILabel!
     @IBOutlet weak var teamLabel: UILabel!
+    @IBOutlet weak var actionButton: SpycodesRoundedButton!
+    @IBOutlet weak var infoButton: UIButton!
     
-    @IBOutlet var actionButton: SpycodesRoundedButton!
-    @IBOutlet var infoButton: UIButton!
-    
+    // MARK: Actions
     @IBAction func onBackButtonPressed(sender: AnyObject) {
         Round.instance.abortGame()
         self.broadcastEssentialData()
@@ -67,6 +68,12 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        
+        self.clueTextField.delegate = self
+        self.numberOfWordsTextField.delegate = self
+        
         MultipeerManager.instance.delegate = self
         
         Round.instance.setStartingTeam(CardCollection.instance.startingTeam)
@@ -95,6 +102,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         if Player.instance.isHost() {
             self.broadcastTimer?.invalidate()
         }
@@ -105,6 +114,16 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.minigameGameOverNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.collectionView.dataSource = nil
+        self.collectionView.delegate = nil
+        
+        self.clueTextField.delegate = nil
+        self.numberOfWordsTextField.delegate = nil
     }
     
     override func didReceiveMemoryWarning() {

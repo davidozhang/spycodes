@@ -1,13 +1,15 @@
 import UIKit
 
 class ScoreViewController: UIViewController {
-    @IBOutlet var headerLabel: SpycodesNavigationBarLabel!
-    @IBOutlet var scoreLabel: SpycodesLargeLabel!
+    @IBOutlet weak var headerLabel: SpycodesNavigationBarLabel!
+    @IBOutlet weak var scoreLabel: SpycodesLargeLabel!
     
+    // MARK: Actions
     @IBAction func onExitTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(false, completion: nil)
     }
     
+    // MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -27,5 +29,11 @@ class ScoreViewController: UIViewController {
                 self.scoreLabel.text = "Red " + String(red) + " : " + String(blue) + " Blue"
             }
         }
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.popoverPresentationController?.delegate = nil
     }
 }

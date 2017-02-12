@@ -49,17 +49,26 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
         MultipeerManager.instance.delegate = self
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         MultipeerManager.instance.startBrowser()
     }
     
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         MultipeerManager.instance.stopBrowser()
         self.refreshTimer?.invalidate()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.tableView.dataSource = nil
+        self.tableView.delegate = nil
     }
     
     override func didReceiveMemoryWarning() {

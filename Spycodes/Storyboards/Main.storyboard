@@ -255,10 +255,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="E72-I9-0mo" id="jDk-Ae-s6T"/>
-                                    <outlet property="delegate" destination="E72-I9-0mo" id="KQy-op-PEf"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -317,9 +313,6 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                                <connections>
-                                    <outlet property="delegate" destination="RKo-Nr-UiC" id="BhR-nO-7Hm"/>
-                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qd-Lb-OLK">
                                 <rect key="frame" x="100.66666666666669" y="384.66666666666669" width="213" height="30"/>
@@ -494,10 +487,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="qHt-PL-X7v" id="Yz0-d5-5p5"/>
-                                    <outlet property="delegate" destination="qHt-PL-X7v" id="1O8-hV-Ooh"/>
-                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AvE-ax-qBg" userLabel="Back Button">
                                 <rect key="frame" x="15" y="24" width="35" height="35"/>
@@ -855,10 +844,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="VkA-D4-zlT" id="yn9-M9-iOE"/>
-                                    <outlet property="delegate" destination="VkA-D4-zlT" id="8Z1-pE-dFd"/>
-                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="084-kN-Fki" customClass="SpycodesRoundedButton" customModule="Spycodes" customModuleProvider="target">
                                 <rect key="frame" x="146.66666666666669" y="677" width="121.00000000000006" height="41"/>
@@ -979,10 +964,6 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="yX4-d1-WHr" id="bqR-mC-XEF"/>
-                                    <outlet property="delegate" destination="yX4-d1-WHr" id="6lq-a8-blv"/>
-                                </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vhy-Dr-vSM" userLabel="Top Bar View">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="97"/>
@@ -1005,17 +986,11 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="10" height="25"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="yX4-d1-WHr" id="CRe-ZK-xzR"/>
-                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="32" translatesAutoresizingMaskIntoConstraints="NO" id="1J8-w3-IbM" userLabel="Number of Words Field">
                                                 <rect key="frame" x="18" y="0.0" width="10" height="24"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="yX4-d1-WHr" id="6DQ-aj-h2Q"/>
-                                                </connections>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

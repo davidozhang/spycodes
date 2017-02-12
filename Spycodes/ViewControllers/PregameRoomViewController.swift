@@ -10,8 +10,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     private var refreshTimer: NSTimer?
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var accessCodeTypeLabel: SpycodesNavigationBarLabel!
-    @IBOutlet var accessCodeLabel: SpycodesNavigationBarBoldLabel!
+    @IBOutlet weak var accessCodeTypeLabel: SpycodesNavigationBarLabel!
+    @IBOutlet weak var accessCodeLabel: SpycodesNavigationBarBoldLabel!
     @IBOutlet weak var startGame: SpycodesButton!
     @IBOutlet weak var startGameInfoButton: UIButton!
     
@@ -78,6 +78,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
         MultipeerManager.instance.delegate = self
         
         if Player.instance.isHost() {
@@ -96,12 +99,21 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         if Player.instance.isHost() {
             MultipeerManager.instance.stopAdvertiser()
             MultipeerManager.instance.stopBrowser()
             self.broadcastTimer?.invalidate()
         }
         self.refreshTimer?.invalidate()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.tableView.dataSource = nil
+        self.tableView.delegate = nil
     }
     
     override func didReceiveMemoryWarning() {

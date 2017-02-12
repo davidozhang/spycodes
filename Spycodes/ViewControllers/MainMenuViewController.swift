@@ -6,7 +6,7 @@ class MainMenuViewController: UIViewController {
     private static let appStoreWebURL = "https://itunes.apple.com/ca/app/spycodes/id1141711201?mt=8"
     private var timer: NSTimer?
     
-    @IBOutlet var linkCopiedLabel: SpycodesStatusLabel!
+    @IBOutlet weak var linkCopiedLabel: SpycodesStatusLabel!
     
     // MARK: Actions
     @IBAction func unwindToMainMenu(sender: UIStoryboardSegue) {}

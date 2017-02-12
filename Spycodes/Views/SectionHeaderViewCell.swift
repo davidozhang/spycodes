@@ -1,5 +1,5 @@
 import UIKit
 
 class SectionHeaderViewCell: UITableViewCell {
-    @IBOutlet var header: UILabel!
+    @IBOutlet weak var header: UILabel!
 }

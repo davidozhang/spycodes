@@ -1,17 +1,18 @@
 import UIKit
 
-protocol PregameRoomViewCellDelegate {
+protocol PregameRoomViewCellDelegate: class {
     func teamUpdatedAtIndex(index: Int, newTeam: Team)
 }
 
 class PregameRoomViewCell: UITableViewCell {
+    weak var delegate: PregameRoomViewCellDelegate?
+    
     var index: Int?
-    var delegate: PregameRoomViewCellDelegate?
     var teamSelectionEnabled = true
     
     @IBOutlet weak var clueGiverImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     override func awakeFromNib() {
         self.segmentedControl.tintColor = UIColor.darkGrayColor()

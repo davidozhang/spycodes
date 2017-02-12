@@ -1,11 +1,11 @@
 import UIKit
 
-protocol LobbyRoomViewCellDelegate {
+protocol LobbyRoomViewCellDelegate: class {
     func joinRoomWithUUID(uuid: String)
 }
 
 class LobbyRoomViewCell: UITableViewCell {
-    var delegate: LobbyRoomViewCellDelegate?
+    weak var delegate: LobbyRoomViewCellDelegate?
     var roomUUID: String?
 
     @IBOutlet weak var roomNameLabel: UILabel!

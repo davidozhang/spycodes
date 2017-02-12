@@ -22,6 +22,12 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
         self.userNameTextField.becomeFirstResponder()
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.userNameTextField.delegate = nil
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
