@@ -34,6 +34,10 @@ class PregameSettingsViewController: UIViewController {
         MultipeerManager.instance.broadcastData(data)
     }
     
+    deinit {
+        print(NSStringFromClass(self.dynamicType))
+    }
+    
     // MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
