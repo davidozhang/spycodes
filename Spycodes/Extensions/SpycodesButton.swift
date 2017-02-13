@@ -16,11 +16,11 @@ class SpycodesButton: UIButton {
         didSet {
             if highlighted {
                 self.backgroundColor = UIColor.darkGrayColor()
-                self.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Highlighted)
+                self.titleLabel?.textColor = UIColor.whiteColor()
             }
             else {
                 self.backgroundColor = UIColor.whiteColor()
-                self.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+                self.titleLabel?.textColor = UIColor.darkGrayColor()
             }
         }
     }
