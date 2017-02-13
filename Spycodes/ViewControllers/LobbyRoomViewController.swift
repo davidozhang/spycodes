@@ -20,7 +20,7 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
     }
     
     @IBAction func onBackButtonTapped(sender: AnyObject) {
-        super.performUnwindSegue(false)
+        super.performUnwindSegue(false, completionHandler: nil)
     }
     
     // MARK: Lifecycle

@@ -9,7 +9,7 @@ class PlayerNameViewController: UnwindableViewController, UITextFieldDelegate {
     }
     
     @IBAction func onBackButtonTapped(sender: AnyObject) {
-        super.performUnwindSegue(true)
+        super.performUnwindSegue(true, completionHandler: nil)
     }
     
     // MARK: Lifecycle

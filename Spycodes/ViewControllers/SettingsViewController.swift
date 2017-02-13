@@ -9,7 +9,7 @@ class SettingsViewController: UnwindableViewController, UITableViewDelegate, UIT
     
     // MARK: Actions
     @IBAction func onBackTapped(sender: AnyObject) {
-        super.performUnwindSegue(true)
+        super.performUnwindSegue(true, completionHandler: nil)
     }
     
     // MARK: Lifecycle

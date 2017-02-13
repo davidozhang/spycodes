@@ -17,7 +17,7 @@ class UnwindableViewController: UIViewController {
         }
     }
     
-    func performUnwindSegue(returnToRootViewController: Bool) {
+    func performUnwindSegue(returnToRootViewController: Bool, completionHandler: ((Void) -> Void)?) {
         if isRootViewController {
             return
         }
@@ -27,6 +27,10 @@ class UnwindableViewController: UIViewController {
         
         if let previousViewControllerIdentifier = self.previousViewControllerIdentifier {
             self.performSegueWithIdentifier(previousViewControllerIdentifier, sender: self)
+            
+            if let completionHandler = completionHandler {
+                completionHandler();
+            }
         }
         
         self.previousViewControllerIdentifier = nil
@@ -35,7 +39,7 @@ class UnwindableViewController: UIViewController {
     func unwindedToSelf(sender: UIStoryboardSegue) {
         if let source = sender.sourceViewController as? UnwindableViewController {
             if source.returnToRootViewController {  // Propagate down the view controller hierarchy
-                self.performUnwindSegue(true)
+                self.performUnwindSegue(true, completionHandler: nil)
             }
         }
     }

@@ -19,7 +19,7 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, M
     }
     
     @IBAction func onBackButtonTapped(sender: AnyObject) {
-        self.performUnwindSegue(false)
+        super.performUnwindSegue(false, completionHandler: nil)
     }
     
     // MARK: Lifecycle

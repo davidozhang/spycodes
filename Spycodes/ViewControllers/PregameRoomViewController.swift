@@ -156,7 +156,9 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
     
     private func goToMainMenu() {
         dispatch_async(dispatch_get_main_queue(), {
-            self.performUnwindSegue(true)
+            self.performUnwindSegue(true, completionHandler: { () in
+                MultipeerManager.instance.terminate()
+            })
         })
     }
     
@@ -211,9 +213,8 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super._prepareForSegue(segue, sender: sender)
         
-        if segue.identifier == "main-menu" {
-            MultipeerManager.instance.terminate()
-        } else if segue.identifier == "score-view" {
+        // All segues identified here should be forward direction only
+        if segue.identifier == "score-view" {
             if let vc = segue.destinationViewController as? ScoreViewController {
                 vc.modalPresentationStyle = .Popover
                 vc.preferredContentSize = CGSize(width: self.modalWidth, height: self.modalHeight)

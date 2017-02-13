@@ -37,7 +37,7 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
         Round.instance.abortGame()
         self.broadcastEssentialData()
         
-        super.performUnwindSegue(false)
+        super.performUnwindSegue(false, completionHandler: nil)
     }
     
     @IBAction func onActionButtonTapped(sender: AnyObject) {
@@ -302,7 +302,7 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
         
         let alertController = UIAlertController(title: title, message: reason, preferredStyle: .Alert)
         let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-            self.performUnwindSegue(false)
+            super.performUnwindSegue(false, completionHandler: nil)
         })
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -380,7 +380,7 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
             if player.isHost() {
                 let alertController = UIAlertController(title: SpycodesMessage.returningToLobbyString, message: SpycodesMessage.hostDisconnectedString, preferredStyle: .Alert)
                 let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-                    self.performUnwindSegue(true)
+                    super.performUnwindSegue(true, completionHandler: nil)
                 })
                 alertController.addAction(confirmAction)
                 self.presentViewController(alertController, animated: true, completion: nil)
