@@ -1,8 +1,8 @@
 import MultipeerConnectivity
 import UIKit
 
-class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MultipeerManagerDelegate, UITextFieldDelegate {
-    private let reuseIdentifier = "game-room-view-cell"
+class GameRoomViewController: UnwindableViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MultipeerManagerDelegate, UITextFieldDelegate {
+    private let cellReuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
     private let minCellSpacing: CGFloat = 12
     
@@ -18,24 +18,26 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet var topBarView: UIView!
-    @IBOutlet var bottomBarView: UIView!
     @IBOutlet var topBarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var bottomBarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var bottomBarViewBottomMarginConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var bottomBarView: UIView!
     @IBOutlet weak var clueTextField: UITextField!
     @IBOutlet weak var numberOfWordsTextField: UITextField!
     @IBOutlet weak var cardsRemainingLabel: UILabel!
     @IBOutlet weak var teamLabel: UILabel!
+    @IBOutlet weak var actionButton: SpycodesRoundedButton!
+    @IBOutlet weak var infoButton: UIButton!
     
-    @IBOutlet var actionButton: SpycodesRoundedButton!
-    @IBOutlet var infoButton: UIButton!
-    
-    @IBAction func onBackButtonPressed(sender: AnyObject) {
+    // MARK: Actions
+    @IBAction func onBackButtonTapped(sender: AnyObject) {
         Round.instance.abortGame()
         self.broadcastEssentialData()
-        self.performSegueWithIdentifier("pregame-room", sender: self)
+        
+        super.performUnwindSegue(false, completionHandler: nil)
     }
     
     @IBAction func onActionButtonTapped(sender: AnyObject) {
@@ -67,6 +69,15 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Unwindable view controller identifier
+        self.unwindableIdentifier = "game-room"
+        
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        
+        self.clueTextField.delegate = self
+        self.numberOfWordsTextField.delegate = self
+        
         MultipeerManager.instance.delegate = self
         
         Round.instance.setStartingTeam(CardCollection.instance.startingTeam)
@@ -95,6 +106,8 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         if Player.instance.isHost() {
             self.broadcastTimer?.invalidate()
         }
@@ -105,6 +118,16 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.minigameGameOverNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.collectionView.dataSource = nil
+        self.collectionView.delegate = nil
+        
+        self.clueTextField.delegate = nil
+        self.numberOfWordsTextField.delegate = nil
     }
     
     override func didReceiveMemoryWarning() {
@@ -279,7 +302,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
         
         let alertController = UIAlertController(title: title, message: reason, preferredStyle: .Alert)
         let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-            self.performSegueWithIdentifier("pregame-room", sender: self)
+            super.performUnwindSegue(false, completionHandler: nil)
         })
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -357,7 +380,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
             if player.isHost() {
                 let alertController = UIAlertController(title: SpycodesMessage.returningToLobbyString, message: SpycodesMessage.hostDisconnectedString, preferredStyle: .Alert)
                 let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-                    self.performSegueWithIdentifier("main-menu", sender: self)
+                    super.performUnwindSegue(true, completionHandler: nil)
                 })
                 alertController.addAction(confirmAction)
                 self.presentViewController(alertController, animated: true, completion: nil)
@@ -379,7 +402,7 @@ class GameRoomViewController: UIViewController, UICollectionViewDelegateFlowLayo
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as! GameRoomViewCell
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as? GameRoomViewCell else { return UICollectionViewCell() }
         let cardAtIndex = CardCollection.instance.cards[indexPath.row]
         
         cell.wordLabel.textColor = UIColor.whiteColor()

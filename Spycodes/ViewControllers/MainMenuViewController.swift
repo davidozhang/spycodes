@@ -1,15 +1,17 @@
 import UIKit
 
-class MainMenuViewController: UIViewController {
+class MainMenuViewController: UnwindableViewController {
     private static let appID = 1141711201
     private static let appStoreURL = "itms-apps://itunes.apple.com/app/id\(appID)"
     private static let appStoreWebURL = "https://itunes.apple.com/ca/app/spycodes/id1141711201?mt=8"
     private var timer: NSTimer?
     
-    @IBOutlet var linkCopiedLabel: SpycodesStatusLabel!
+    @IBOutlet weak var linkCopiedLabel: SpycodesStatusLabel!
     
     // MARK: Actions
-    @IBAction func unwindToMainMenu(sender: UIStoryboardSegue) {}
+    @IBAction func unwindToMainMenu(sender: UIStoryboardSegue) {
+        super.unwindedToSelf(sender)
+    }
     
     @IBAction func onShareTapped(sender: AnyObject) {
         UIPasteboard.generalPasteboard().string = MainMenuViewController.appStoreWebURL
@@ -38,6 +40,11 @@ class MainMenuViewController: UIViewController {
     // MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Currently this view is the root view controller for unwinding logic
+        self.unwindableIdentifier = "main-menu"
+        self.isRootViewController = true
+        
         self.linkCopiedLabel.hidden = true
     }
     
@@ -61,6 +68,11 @@ class MainMenuViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super._prepareForSegue(segue, sender: sender)
+    }
+    
+    // MARK: Private
     @objc
     private func onTimeout() {
         self.linkCopiedLabel.hidden = true

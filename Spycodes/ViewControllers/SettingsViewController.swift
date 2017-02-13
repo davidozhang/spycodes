@@ -1,15 +1,36 @@
 import UIKit
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: UnwindableViewController, UITableViewDelegate, UITableViewDataSource {
     private let sections = ["About"]
     private let versionViewCellReuseIdentifier = "version-view-cell"
     private let sectionHeaderCellReuseIdentifier = "section-header-view-cell"
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: Actions
     @IBAction func onBackTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("main-menu", sender: self)
+        super.performUnwindSegue(true, completionHandler: nil)
     }
     
+    // MARK: Lifecycle
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Unwindable view controller identifier
+        self.unwindableIdentifier = "settings"
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.tableView.dataSource = nil
+        self.tableView.delegate = nil
+    }
+    
+    // MARK: Table View Delegate
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sections.count
     }

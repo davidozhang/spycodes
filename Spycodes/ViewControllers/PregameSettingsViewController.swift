@@ -1,28 +1,11 @@
 import UIKit
 
 class PregameSettingsViewController: UIViewController {
-    @IBOutlet var minigameSettingToggle: UISwitch!
+    @IBOutlet weak var minigameSettingToggle: UISwitch!
     
+    // MARK: Actions
     @IBAction func onExitTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(false, completion: nil)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if GameMode.instance.mode == GameMode.Mode.MiniGame {
-            self.minigameSettingToggle.setOn(true, animated: false)
-        } else {
-            self.minigameSettingToggle.setOn(false, animated: false)
-        }
-        
-        if Player.instance.isHost() {
-            self.minigameSettingToggle.enabled = true
-            self.minigameSettingToggle.alpha = 1.0
-        } else {
-            self.minigameSettingToggle.enabled = false
-            self.minigameSettingToggle.alpha = 0.5
-        }
     }
     
     @IBAction func minigameSettingToggleChanged(sender: AnyObject) {
@@ -49,5 +32,30 @@ class PregameSettingsViewController: UIViewController {
         
         data = NSKeyedArchiver.archivedDataWithRootObject(Statistics.instance)
         MultipeerManager.instance.broadcastData(data)
+    }
+    
+    // MARK: Lifecycle
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+            self.minigameSettingToggle.setOn(true, animated: false)
+        } else {
+            self.minigameSettingToggle.setOn(false, animated: false)
+        }
+        
+        if Player.instance.isHost() {
+            self.minigameSettingToggle.enabled = true
+            self.minigameSettingToggle.alpha = 1.0
+        } else {
+            self.minigameSettingToggle.enabled = false
+            self.minigameSettingToggle.alpha = 0.5
+        }
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.popoverPresentationController?.delegate = nil
     }
 }

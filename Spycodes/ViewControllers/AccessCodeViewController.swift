@@ -1,7 +1,7 @@
 import MultipeerConnectivity
 import UIKit
 
-class AccessCodeViewController: UIViewController, UITextFieldDelegate, MultipeerManagerDelegate {
+class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, MultipeerManagerDelegate {
     private let defaultTimeoutInterval: NSTimeInterval = 10     // Default timeout after 10 seconds
     
     private var timeoutTimer: NSTimer?
@@ -10,14 +10,16 @@ class AccessCodeViewController: UIViewController, UITextFieldDelegate, Multipeer
     @IBOutlet var statusLabel: SpycodesStatusLabel!
     @IBOutlet var accessCodeTextField: SpycodesTextField!
     
-    @IBAction func unwindToAccessCode(sender: UIStoryboardSegue) {}
+    @IBAction func unwindToAccessCode(sender: UIStoryboardSegue) {
+        super.unwindedToSelf(sender)
+    }
     
     @IBAction func onBrowseLobbyTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("lobby-room", sender: self)
     }
     
     @IBAction func onBackButtonTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("player-name", sender: self)
+        super.performUnwindSegue(false, completionHandler: nil)
     }
     
     // MARK: Lifecycle
@@ -28,20 +30,34 @@ class AccessCodeViewController: UIViewController, UITextFieldDelegate, Multipeer
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Unwindable view controller identifier
+        self.unwindableIdentifier = "access-code"
+        
+        self.accessCodeTextField.delegate = self
         MultipeerManager.instance.delegate = self
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+        
         self.accessCodeTextField.becomeFirstResponder()
     }
     
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.refreshTimer?.invalidate()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.accessCodeTextField.delegate = nil
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super._prepareForSegue(segue, sender: sender)
     }
     
     @objc

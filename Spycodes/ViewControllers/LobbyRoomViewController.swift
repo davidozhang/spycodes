@@ -1,8 +1,8 @@
 import MultipeerConnectivity
 import UIKit
 
-class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, LobbyRoomViewCellDelegate {
-    private let identifier = "lobby-room-view-cell"
+class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, LobbyRoomViewCellDelegate {
+    private let cellReuseIdentifier = "lobby-room-view-cell"
     private let defaultTimeoutInterval: NSTimeInterval = 10     // Default timeout after 10 seconds
     
     private var timeoutTimer: NSTimer?
@@ -14,8 +14,13 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBAction func onBackPressed(sender: AnyObject) {
-        self.performSegueWithIdentifier("access-code", sender: self)
+    // MARK: Actions
+    @IBAction func unwindToLobbyRoom(sender: UIStoryboardSegue) {
+        super.unwindedToSelf(sender)
+    }
+    
+    @IBAction func onBackButtonTapped(sender: AnyObject) {
+        super.performUnwindSegue(false, completionHandler: nil)
     }
     
     // MARK: Lifecycle
@@ -49,17 +54,29 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Unwindable view controller identifier
+        self.unwindableIdentifier = "lobby-room"
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
         MultipeerManager.instance.delegate = self
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         MultipeerManager.instance.startBrowser()
     }
     
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         MultipeerManager.instance.stopBrowser()
         self.refreshTimer?.invalidate()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.tableView.dataSource = nil
+        self.tableView.delegate = nil
     }
     
     override func didReceiveMemoryWarning() {
@@ -91,7 +108,7 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? LobbyRoomViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as? LobbyRoomViewCell else { return UITableViewCell() }
         let roomAtIndex = Lobby.instance.rooms[indexPath.row]
         
         cell.roomUUID = roomAtIndex.getUUID()
@@ -107,6 +124,11 @@ class LobbyRoomViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Lobby.instance.rooms.count
+    }
+    
+    // MARK: Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super._prepareForSegue(segue, sender: sender)
     }
     
     // MARK: LobbyRoomViewCellDelegate
