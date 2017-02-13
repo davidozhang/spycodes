@@ -37,6 +37,10 @@ class MainMenuViewController: UnwindableViewController {
         self.performSegueWithIdentifier("settings", sender: self)
     }
     
+    deinit {
+        print(NSStringFromClass(self.dynamicType))
+    }
+    
     // MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

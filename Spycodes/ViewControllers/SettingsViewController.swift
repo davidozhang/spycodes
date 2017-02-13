@@ -12,6 +12,10 @@ class SettingsViewController: UnwindableViewController, UITableViewDelegate, UIT
         super.performUnwindSegue(true, completionHandler: nil)
     }
     
+    deinit {
+        print(NSStringFromClass(self.dynamicType))
+    }
+    
     // MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

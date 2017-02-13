@@ -55,6 +55,10 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    deinit {
+        print(NSStringFromClass(self.dynamicType))
+    }
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

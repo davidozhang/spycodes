@@ -9,6 +9,10 @@ class ScoreViewController: UIViewController {
         self.dismissViewControllerAnimated(false, completion: nil)
     }
     
+    deinit {
+        print(NSStringFromClass(self.dynamicType))
+    }
+    
     // MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

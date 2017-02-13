@@ -23,6 +23,10 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
         super.performUnwindSegue(false, completionHandler: nil)
     }
     
+    deinit {
+        print(NSStringFromClass(self.dynamicType))
+    }
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
