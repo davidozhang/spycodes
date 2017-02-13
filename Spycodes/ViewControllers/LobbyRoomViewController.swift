@@ -24,7 +24,7 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
     }
     
     deinit {
-        print(NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
     }
     
     // MARK: Lifecycle

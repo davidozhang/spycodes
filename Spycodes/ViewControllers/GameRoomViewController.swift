@@ -56,7 +56,7 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
     }
     
     deinit {
-        print(NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
     }
     
     // MARK: Lifecycle
