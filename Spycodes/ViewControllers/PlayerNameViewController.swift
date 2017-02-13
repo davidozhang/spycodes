@@ -1,18 +1,23 @@
 import UIKit
 
-class PlayerNameViewController: UIViewController, UITextFieldDelegate {
+class PlayerNameViewController: UnwindableViewController, UITextFieldDelegate {
     @IBOutlet weak var userNameTextField: SpycodesTextField!
     
     // MARK: Actions
-    @IBAction func unwindToPlayerName(sender: UIStoryboardSegue) {}
+    @IBAction func unwindToPlayerName(sender: UIStoryboardSegue) {
+        super.unwindedToSelf(sender)
+    }
     
-    @IBAction func onBackPressed(sender: AnyObject) {
-        self.performSegueWithIdentifier("main-menu", sender: self)
+    @IBAction func onBackButtonTapped(sender: AnyObject) {
+        super.performUnwindSegue(true)
     }
     
     // MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Unwindable view controller identifier
+        self.unwindableIdentifier = "player-name"
         
         if let name = Player.instance.name where name.characters.count > 0 {
             self.userNameTextField.text = name
@@ -30,6 +35,10 @@ class PlayerNameViewController: UIViewController, UITextFieldDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super._prepareForSegue(segue, sender: sender)
     }
     
     // MARK: UITextFieldDelegate

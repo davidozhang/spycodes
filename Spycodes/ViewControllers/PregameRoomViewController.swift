@@ -1,8 +1,8 @@
 import MultipeerConnectivity
 import UIKit
 
-class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
-    private let identifier = "pregame-room-view-cell"
+class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
+    private let cellReuseIdentifier = "pregame-room-view-cell"
     private let modalWidth = UIScreen.mainScreen().bounds.width - 60
     private let modalHeight = UIScreen.mainScreen().bounds.height/4
     
@@ -31,11 +31,13 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func onBackButtonPressed(sender: AnyObject) {
+    @IBAction func onBackButtonTapped(sender: AnyObject) {
         self.returnToMainMenu(reason: nil)
     }
     
-    @IBAction func unwindToPregameRoom(segue: UIStoryboardSegue) {}
+    @IBAction func unwindToPregameRoom(segue: UIStoryboardSegue) {
+        super.unwindedToSelf(segue)
+    }
     
     @IBAction func onStartGame(sender: AnyObject) {
         if Room.instance.canStartGame() {
@@ -77,6 +79,9 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Unwindable view controller identifier
+        self.unwindableIdentifier = "pregame-room"
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -151,7 +156,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     private func goToMainMenu() {
         dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("main-menu", sender: self)
+            self.performUnwindSegue(true)
         })
     }
     
@@ -204,6 +209,8 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super._prepareForSegue(segue, sender: sender)
+        
         if segue.identifier == "main-menu" {
             MultipeerManager.instance.terminate()
         } else if segue.identifier == "score-view" {
@@ -235,7 +242,7 @@ class PregameRoomViewController: UIViewController, UITableViewDelegate, UITableV
     
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? PregameRoomViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as? PregameRoomViewCell else { return UITableViewCell() }
         
         let playerAtIndex = Room.instance.players[indexPath.row]
         

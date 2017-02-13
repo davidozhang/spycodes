@@ -1,6 +1,6 @@
 import UIKit
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: UnwindableViewController, UITableViewDelegate, UITableViewDataSource {
     private let sections = ["About"]
     private let versionViewCellReuseIdentifier = "version-view-cell"
     private let sectionHeaderCellReuseIdentifier = "section-header-view-cell"
@@ -9,12 +9,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: Actions
     @IBAction func onBackTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("main-menu", sender: self)
+        super.performUnwindSegue(true)
     }
     
     // MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Unwindable view controller identifier
+        self.unwindableIdentifier = "settings"
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
