@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D31F8461E5788F1007CD672 /* SpycodesInfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D31F8451E5788F1007CD672 /* SpycodesInfoLabel.swift */; };
 		630674181D51BE9800339EC8 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630674171D51BE9800339EC8 /* Timer.swift */; };
 		63067C6A1D2982DD0005AC66 /* LobbyRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */; };
 		63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C6B1D2996B60005AC66 /* Lobby.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D31F8451E5788F1007CD672 /* SpycodesInfoLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesInfoLabel.swift; path = Extensions/SpycodesInfoLabel.swift; sourceTree = "<group>"; };
 		630674171D51BE9800339EC8 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Objects/Timer.swift; sourceTree = "<group>"; };
 		63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyRoomViewCell.swift; path = Views/LobbyRoomViewCell.swift; sourceTree = "<group>"; };
 		63067C6B1D2996B60005AC66 /* Lobby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lobby.swift; path = Objects/Lobby.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				63486DA41D3DDC9800795403 /* SpycodesArray.swift */,
 				63A04D1C1D1A7F37005A2914 /* SpycodesButton.swift */,
 				CF33BE2C1D6D04EA00D0E105 /* SpycodesConstant.swift */,
+				5D31F8451E5788F1007CD672 /* SpycodesInfoLabel.swift */,
 				6317B9321DFBE2340069FF48 /* SpycodesLogoLabel.swift */,
 				CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */,
 				6317B93C1DFBEE720069FF48 /* SpycodesNavigationBarLabel.swift */,
@@ -327,6 +330,7 @@
 				637F195F1D46010E00FB4047 /* Statistics.swift in Sources */,
 				63FDED3B1D265BAF00142780 /* PregameRoomViewController.swift in Sources */,
 				63EAF9A31D41D2E700BC554E /* Round.swift in Sources */,
+				5D31F8461E5788F1007CD672 /* SpycodesInfoLabel.swift in Sources */,
 				632A254B1E46FD330003D1F8 /* PregameSettingsViewController.swift in Sources */,
 				63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */,
 				63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */,
