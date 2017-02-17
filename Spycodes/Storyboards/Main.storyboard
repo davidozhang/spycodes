@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -619,10 +619,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2E3-jp-MY8" userLabel="Game Settings View">
-                                <rect key="frame" x="137" y="339" width="140" height="58"/>
+                                <rect key="frame" x="137" y="320.66666666666669" width="140" height="95"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8L-W0-auC" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="14" y="0.0" width="113" height="21"/>
+                                        <rect key="frame" x="13.666666666666657" y="0.0" width="113.00000000000003" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -653,15 +653,23 @@
                                             <constraint firstItem="Tyo-O4-u4u" firstAttribute="leading" secondItem="PRT-yQ-D4h" secondAttribute="leading" id="w3N-oN-j85"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xo-lj-Tai" customClass="SpycodesInfoLabel" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="55.666666666666657" y="74" width="29" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="f8L-W0-auC" firstAttribute="centerX" secondItem="2E3-jp-MY8" secondAttribute="centerX" id="2Gy-Lh-GMB"/>
                                     <constraint firstItem="PRT-yQ-D4h" firstAttribute="top" secondItem="f8L-W0-auC" secondAttribute="bottom" constant="16" id="4gW-7H-P9Z"/>
                                     <constraint firstAttribute="trailing" secondItem="PRT-yQ-D4h" secondAttribute="trailing" id="Fph-7u-arD"/>
+                                    <constraint firstAttribute="bottom" secondItem="8Xo-lj-Tai" secondAttribute="bottom" id="Iur-bv-BMt"/>
                                     <constraint firstItem="f8L-W0-auC" firstAttribute="top" secondItem="2E3-jp-MY8" secondAttribute="top" id="LDa-bo-pET"/>
                                     <constraint firstItem="PRT-yQ-D4h" firstAttribute="centerX" secondItem="2E3-jp-MY8" secondAttribute="centerX" id="NQU-fh-oVO"/>
-                                    <constraint firstAttribute="bottom" secondItem="PRT-yQ-D4h" secondAttribute="bottom" id="pnQ-Ru-hXf"/>
+                                    <constraint firstItem="8Xo-lj-Tai" firstAttribute="centerX" secondItem="2E3-jp-MY8" secondAttribute="centerX" id="RxU-I3-asg"/>
+                                    <constraint firstItem="8Xo-lj-Tai" firstAttribute="top" secondItem="PRT-yQ-D4h" secondAttribute="bottom" constant="16" id="m4b-Ue-Are"/>
                                     <constraint firstItem="PRT-yQ-D4h" firstAttribute="leading" secondItem="2E3-jp-MY8" secondAttribute="leading" id="s82-La-FQ9"/>
                                     <constraint firstItem="f8L-W0-auC" firstAttribute="centerX" secondItem="2E3-jp-MY8" secondAttribute="centerX" id="tYm-3w-eVH"/>
                                 </constraints>
@@ -687,6 +695,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="infoLabel" destination="8Xo-lj-Tai" id="Bfe-jd-Odh"/>
                         <outlet property="minigameSettingToggle" destination="a9D-4e-Di5" id="4rW-RP-wDE"/>
                     </connections>
                 </viewController>
@@ -791,11 +800,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d84-Az-a9v">
-                                                    <rect key="frame" x="35" y="8" width="194" height="28.666666666666664"/>
+                                                    <rect key="frame" x="35" y="12.333333333333336" width="194" height="20.333333333333329"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="300" id="xaW-k5-dCT"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">

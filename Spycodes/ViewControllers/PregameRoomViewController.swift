@@ -265,6 +265,7 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 24)
             cell.teamSelectionEnabled = true
         } else {
+            cell.nameLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 24)
             cell.teamSelectionEnabled = false
         }
         

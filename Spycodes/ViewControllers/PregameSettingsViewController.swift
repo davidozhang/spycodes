@@ -2,6 +2,7 @@ import UIKit
 
 class PregameSettingsViewController: UIViewController {
     @IBOutlet weak var minigameSettingToggle: UISwitch!
+    @IBOutlet weak var infoLabel: UILabel!
     
     // MARK: Actions
     @IBAction func onExitTapped(sender: AnyObject) {
@@ -48,13 +49,7 @@ class PregameSettingsViewController: UIViewController {
             self.minigameSettingToggle.setOn(false, animated: false)
         }
         
-        if Player.instance.isHost() {
-            self.minigameSettingToggle.enabled = true
-            self.minigameSettingToggle.alpha = 1.0
-        } else {
-            self.minigameSettingToggle.enabled = false
-            self.minigameSettingToggle.alpha = 0.5
-        }
+        self.infoLabel.text = SpycodesMessage.minigameInfoString
     }
     
     override func viewDidDisappear(animated: Bool) {
