@@ -4,9 +4,17 @@ class ScoreViewController: UIViewController {
     @IBOutlet weak var headerLabel: SpycodesNavigationBarLabel!
     @IBOutlet weak var scoreLabel: SpycodesLargeLabel!
     
+    weak var pregameRoomViewController: PregameRoomViewController?
+    
     // MARK: Actions
     @IBAction func onExitTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(false, completion: nil)
+        self.dismissViewControllerAnimated(false) {
+            if let pregameRoomViewController = self.pregameRoomViewController {
+                pregameRoomViewController.hideDimView()
+            }
+            
+            self.pregameRoomViewController = nil
+        }
     }
     
     deinit {

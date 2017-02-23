@@ -4,9 +4,17 @@ class PregameSettingsViewController: UIViewController {
     @IBOutlet weak var minigameSettingToggle: UISwitch!
     @IBOutlet weak var infoLabel: UILabel!
     
+    weak var pregameRoomViewController: PregameRoomViewController?
+    
     // MARK: Actions
     @IBAction func onExitTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(false, completion: nil)
+        self.dismissViewControllerAnimated(false) {
+            if let pregameRoomViewController = self.pregameRoomViewController {
+                pregameRoomViewController.hideDimView()
+            }
+            
+            self.pregameRoomViewController = nil
+        }
     }
     
     @IBAction func minigameSettingToggleChanged(sender: AnyObject) {

@@ -21,6 +21,10 @@ extension UIColor {
         return UIColor.init(red: 0, green: 146/255, blue: 76/255, alpha: 1.0)
     }
     
+    static func dimBackgroundColor() -> UIColor {
+        return UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+    }
+    
     static func colorForTeam(team: Team) -> UIColor {
         switch team {
         case Team.Red:
