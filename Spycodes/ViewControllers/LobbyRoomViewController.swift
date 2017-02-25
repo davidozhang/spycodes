@@ -114,13 +114,14 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
         self.timeoutTimer?.invalidate()
         MultipeerManager.instance.stopAdvertiser()
         
-        self.statusLabel.text = SpycodesMessage.failStatus
+        self.statusLabel.text = SpycodesString.failStatus
+        self.state = .Failed
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.shortTimeoutInterval, target: self, selector: #selector(LobbyRoomViewController.restoreStatus), userInfo: nil, repeats: false)
     }
     
     @objc
     private func restoreStatus() {
-        self.statusLabel.text = SpycodesMessage.normalLobbyRoomStatus
+        self.statusLabel.text = SpycodesString.normalLobbyRoomStatus
         self.state = .Normal
     }
     
@@ -172,7 +173,7 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
         MultipeerManager.instance.startAdvertiser()
         
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.defaultTimeoutInterval, target: self, selector: #selector(LobbyRoomViewController.onTimeout), userInfo: nil, repeats: false)
-        self.statusLabel.text = SpycodesMessage.pendingStatus
+        self.statusLabel.text = SpycodesString.pendingStatus
     }
     
     // MARK: MultipeerManagerDelegate

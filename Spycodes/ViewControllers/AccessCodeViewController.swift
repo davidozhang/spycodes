@@ -71,7 +71,7 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, M
         self.timeoutTimer?.invalidate()
         MultipeerManager.instance.stopAdvertiser()
         
-        self.statusLabel.text = SpycodesMessage.failStatus
+        self.statusLabel.text = SpycodesString.failStatus
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.shortTimeoutInterval, target: self, selector: #selector(AccessCodeViewController.restoreStatus), userInfo: nil, repeats: false)
         
         self.accessCodeTextField.enabled = true
@@ -81,7 +81,7 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, M
     
     @objc
     private func restoreStatus() {
-        self.statusLabel.text = SpycodesMessage.normalAccessCodeStatus
+        self.statusLabel.text = SpycodesString.normalAccessCodeStatus
     }
     
     private func joinRoomWithAccessCode(accessCode: String) {
@@ -97,7 +97,7 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, M
         self.timeoutTimer?.invalidate()
         
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.defaultTimeoutInterval, target: self, selector: #selector(AccessCodeViewController.onTimeout), userInfo: nil, repeats: false)
-        self.statusLabel.text = SpycodesMessage.pendingStatus
+        self.statusLabel.text = SpycodesString.pendingStatus
         self.accessCodeTextField.enabled = false
         self.accessCodeTextField.textColor = UIColor.lightGrayColor()
     }

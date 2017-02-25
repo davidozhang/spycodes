@@ -57,7 +57,7 @@ class PregameSettingsViewController: UIViewController {
             self.minigameSettingToggle.setOn(false, animated: false)
         }
         
-        self.infoLabel.text = SpycodesMessage.minigameInfoString
+        self.infoLabel.text = SpycodesString.minigameInfo
     }
     
     override func viewDidDisappear(animated: Bool) {

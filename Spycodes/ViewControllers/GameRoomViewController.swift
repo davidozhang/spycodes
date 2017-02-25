@@ -49,7 +49,7 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
     }
     
     @IBAction func onInfoButtonTapped(sender: AnyObject) {
-        let alertController = UIAlertController(title: "End Round", message: SpycodesMessage.endRoundInfoString, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "End Round", message: SpycodesString.endRoundInfo, preferredStyle: .Alert)
         let confirmAction = UIAlertAction(title: "Dismiss", style: .Default, handler: { (action: UIAlertAction) in })
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -293,8 +293,8 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
     private func didEndGameWithNotification(notification: NSNotification) {
         Round.instance.winningTeam = Team.Blue
         self.broadcastEssentialData()
-        if let userInfo = notification.userInfo {
-            self.didEndGame(userInfo["title"] as! String, reason: userInfo["reason"] as! String)
+        if let userInfo = notification.userInfo, title = userInfo["title"] as? String, reason = userInfo["reason"] as? String {
+            self.didEndGame(title, reason: reason)
         }
     }
     
@@ -348,20 +348,20 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
             }
             
             if Round.instance.abort {
-                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerAbortedString)
+                self.didEndGame(SpycodesString.returningToPregameRoomHeader, reason: SpycodesString.playerAborted)
                 return
             }
             else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.RegularGame {
-                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
+                self.didEndGame(SpycodesString.returningToPregameRoomHeader, reason: Round.defaultWinString)
                 return
             }
             else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.MiniGame {
-                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
+                self.didEndGame(SpycodesString.returningToPregameRoomHeader, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
                 Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
                 return
             }
             else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) {
-                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: Round.defaultLoseString)
+                self.didEndGame(SpycodesString.returningToPregameRoomHeader, reason: Round.defaultLoseString)
                 return
             }
         }
@@ -382,7 +382,7 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
             self.broadcastOptionalData(Room.instance)
             
             if player.isHost() {
-                let alertController = UIAlertController(title: SpycodesMessage.returningToLobbyString, message: SpycodesMessage.hostDisconnectedString, preferredStyle: .Alert)
+                let alertController = UIAlertController(title: SpycodesString.returningToMainMenuHeader, message: SpycodesString.hostDisconnected, preferredStyle: .Alert)
                 let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
                     super.performUnwindSegue(true, completionHandler: nil)
                 })
@@ -391,7 +391,7 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
             } else {
                 Round.instance.abortGame()
                 self.broadcastEssentialData()
-                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: SpycodesMessage.playerDisconnectedString)
+                self.didEndGame(SpycodesString.returningToPregameRoomHeader, reason: SpycodesString.playerDisconnected)
             }
         }
     }
@@ -475,7 +475,7 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
             Statistics.instance.recordWinForTeam(opponentTeam!)
             self.broadcastOptionalData(Statistics.instance)
             
-            self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: Round.defaultLoseString)
+            self.didEndGame(SpycodesString.returningToPregameRoomHeader, reason: Round.defaultLoseString)
         }
         else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
             Round.instance.winningTeam = playerTeam
@@ -485,9 +485,9 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
                 Statistics.instance.recordWinForTeam(playerTeam)
                 self.broadcastOptionalData(Statistics.instance)
                 
-                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: Round.defaultWinString)
+                self.didEndGame(SpycodesString.returningToPregameRoomHeader, reason: Round.defaultWinString)
             } else {
-                self.didEndGame(SpycodesMessage.returningToPregameRoomString, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
+                self.didEndGame(SpycodesString.returningToPregameRoomHeader, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
                 Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
                 self.broadcastOptionalData(Statistics.instance)
             }

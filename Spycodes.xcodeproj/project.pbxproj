@@ -57,7 +57,7 @@
 		63FF7CE81D4E8471002D2B97 /* SpycodesNotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */; };
 		63FFA4B11D50635B006A181B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63FFA4B01D50635B006A181B /* GameKit.framework */; };
 		CF33BE2D1D6D04EA00D0E105 /* SpycodesConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF33BE2C1D6D04EA00D0E105 /* SpycodesConstant.swift */; };
-		CF5A8DCC1D46D95F0032F581 /* SpycodesMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */; };
+		CF5A8DCC1D46D95F0032F581 /* SpycodesString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8DCB1D46D95F0032F581 /* SpycodesString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,7 +113,7 @@
 		63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesNotificationKey.swift; path = Extensions/SpycodesNotificationKey.swift; sourceTree = "<group>"; };
 		63FFA4B01D50635B006A181B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		CF33BE2C1D6D04EA00D0E105 /* SpycodesConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesConstant.swift; path = Extensions/SpycodesConstant.swift; sourceTree = "<group>"; };
-		CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesMessage.swift; path = Extensions/SpycodesMessage.swift; sourceTree = "<group>"; };
+		CF5A8DCB1D46D95F0032F581 /* SpycodesString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesString.swift; path = Extensions/SpycodesString.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,7 +196,7 @@
 				CF33BE2C1D6D04EA00D0E105 /* SpycodesConstant.swift */,
 				5D31F8451E5788F1007CD672 /* SpycodesInfoLabel.swift */,
 				6317B9321DFBE2340069FF48 /* SpycodesLogoLabel.swift */,
-				CF5A8DCB1D46D95F0032F581 /* SpycodesMessage.swift */,
+				CF5A8DCB1D46D95F0032F581 /* SpycodesString.swift */,
 				6317B93C1DFBEE720069FF48 /* SpycodesNavigationBarLabel.swift */,
 				632A254C1E470A1D0003D1F8 /* SpycodesNavigationBarBoldLabel.swift */,
 				63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */,
@@ -338,7 +338,7 @@
 				63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */,
 				63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */,
 				630674181D51BE9800339EC8 /* Timer.swift in Sources */,
-				CF5A8DCC1D46D95F0032F581 /* SpycodesMessage.swift in Sources */,
+				CF5A8DCC1D46D95F0032F581 /* SpycodesString.swift in Sources */,
 				63486DA91D3DE29C00795403 /* Key.swift in Sources */,
 				6329BEFF1E615ADD004E6151 /* LobbyRoomState.swift in Sources */,
 				63FF7CE81D4E8471002D2B97 /* SpycodesNotificationKey.swift in Sources */,

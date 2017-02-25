@@ -27,7 +27,7 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
     }
     
     @IBAction func onStartGameInfoPressed(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Start Game", message: SpycodesMessage.startGameInfoString, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Start Game", message: SpycodesString.startGameInfo, preferredStyle: .Alert)
         let confirmAction = UIAlertAction(title: "Dismiss", style: .Default, handler: { (action: UIAlertAction) in })
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -384,11 +384,6 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
             if let player = Room.instance.getPlayerWithUUID(Player.instance.getUUID()) {
                 Player.instance = player
             }
-            
-            // Room has been terminated or local player has been removed from room
-            if !Room.instance.playerWithUUIDInRoom(Player.instance.getUUID()) {
-                self.returnToMainMenu(reason: SpycodesMessage.removedFromRoomString)
-            }
         }
         else if let gameMode = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? GameMode {
             GameMode.instance = gameMode
@@ -416,7 +411,7 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
                 // Room has been terminated if host player is disconnected
                 if player.isHost() {
                     Room.instance.players.removeAll()
-                    self.returnToMainMenu(reason: SpycodesMessage.hostDisconnectedString)
+                    self.returnToMainMenu(reason: SpycodesString.hostDisconnected)
                     return
                 }
             }
