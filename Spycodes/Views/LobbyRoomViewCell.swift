@@ -8,6 +8,7 @@ class LobbyRoomViewCell: UITableViewCell {
     weak var delegate: LobbyRoomViewCellDelegate?
     var roomUUID: String?
 
+    @IBOutlet var joinRoomButton: UIButton!
     @IBOutlet weak var roomNameLabel: UILabel!
     
     override func awakeFromNib() {}

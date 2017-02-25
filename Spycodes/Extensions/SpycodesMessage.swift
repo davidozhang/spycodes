@@ -2,8 +2,11 @@ class SpycodesMessage {
     static let returningToLobbyString = "Returning to Lobby Room"
     static let returningToPregameRoomString = "Returning to Pregame Room"
     static let gameOverString = "Game Over"
-    static let joiningRoomString = "Joining room..."
-    static let failedToJoinRoomString = "Sorry, failed to join room."
+    
+    static let normalAccessCodeStatus = "Enter access code"
+    static let normalLobbyRoomStatus = "Find a room to join"
+    static let pendingStatus = "Joining room..."
+    static let failStatus = "Failed to join room"
     
     static let hostDisconnectedString = "Host player has left."
     static let removedFromRoomString = "You have been removed from the room."
