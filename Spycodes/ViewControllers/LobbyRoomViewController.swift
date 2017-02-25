@@ -3,16 +3,22 @@ import UIKit
 
 class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, LobbyRoomViewCellDelegate {
     private let cellReuseIdentifier = "lobby-room-view-cell"
+    private let trailingSpace: CGFloat = 35
     private let defaultTimeoutInterval: NSTimeInterval = 10     // Default timeout after 10 seconds
+    private let shortTimeoutInterval: NSTimeInterval = 3
+    
+    private var state: LobbyRoomState = .Normal
+    private var joiningRoomUUID: String?
     
     private var timeoutTimer: NSTimer?
     private var refreshTimer: NSTimer?
-    private var joinGameAlertController: UIAlertController?
-    private var timeoutAlertController: UIAlertController?
     
     private var emptyStateLabel: UILabel?
+    private let activityIndicator = UIActivityIndicatorView()
     
+    @IBOutlet weak var statusLabel: SpycodesStatusLabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     
     // MARK: Actions
     @IBAction func unwindToLobbyRoom(sender: UIStoryboardSegue) {
@@ -39,14 +45,8 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
         
         self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(LobbyRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh lobby every second
         
-        self.joinGameAlertController = UIAlertController(title: "Joining Room", message: SpycodesMessage.joiningRoomString, preferredStyle: .Alert)
-        
-        self.timeoutAlertController = UIAlertController(title: "Oops", message: SpycodesMessage.failedToJoinRoomString, preferredStyle: .Alert)
-        let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
-            MultipeerManager.instance.stopAdvertiser()
-            MultipeerManager.instance.stopSession()
-        })
-        self.timeoutAlertController?.addAction(confirmAction)
+        self.activityIndicator.backgroundColor = UIColor.clearColor()
+        self.activityIndicator.activityIndicatorViewStyle = .Gray
         
         self.emptyStateLabel = UILabel(frame: self.tableView.frame)
         self.emptyStateLabel?.text = "Rooms created will show here.\nMake sure Wifi is enabled."
@@ -54,6 +54,8 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
         self.emptyStateLabel?.textAlignment = .Center
         self.emptyStateLabel?.numberOfLines = 0
         self.emptyStateLabel?.center = self.view.center
+        
+        self.restoreStatus()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -92,11 +94,17 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
     private func refreshView() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
-            if self.tableView.numberOfRowsInSection(0) == 0 {
+            if Lobby.instance.rooms.count == 0 {
                 self.tableView.backgroundView = self.emptyStateLabel
-            }
-            else {
+                self.restoreStatus()
+            } else {
                 self.tableView.backgroundView = nil
+            }
+            
+            if self.state == .JoiningRoom {
+                self.tableViewTrailingSpaceConstraint.constant = self.trailingSpace
+            } else {
+                self.tableViewTrailingSpaceConstraint.constant = 0
             }
         })
     }
@@ -106,8 +114,14 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
         self.timeoutTimer?.invalidate()
         MultipeerManager.instance.stopAdvertiser()
         
-        self.joinGameAlertController?.dismissViewControllerAnimated(true, completion: nil)
-        self.presentViewController(self.timeoutAlertController!, animated: true, completion: nil)
+        self.statusLabel.text = SpycodesMessage.failStatus
+        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.shortTimeoutInterval, target: self, selector: #selector(LobbyRoomViewController.restoreStatus), userInfo: nil, repeats: false)
+    }
+    
+    @objc
+    private func restoreStatus() {
+        self.statusLabel.text = SpycodesMessage.normalLobbyRoomStatus
+        self.state = .Normal
     }
     
     // MARK: UITableViewDelegate
@@ -118,6 +132,18 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
         cell.roomUUID = roomAtIndex.getUUID()
         cell.roomNameLabel.text = roomAtIndex.name
         cell.delegate = self
+        
+        if state == .JoiningRoom {
+            if cell.roomUUID == self.joiningRoomUUID {
+                cell.accessoryView = self.activityIndicator
+                self.activityIndicator.startAnimating()
+            }
+            
+            cell.joinRoomButton.hidden = true
+        } else {
+            cell.accessoryView = nil
+            cell.joinRoomButton.hidden = false
+        }
         
         return cell
     }
@@ -138,12 +164,15 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
     // MARK: LobbyRoomViewCellDelegate
     func joinRoomWithUUID(uuid: String) {
         // Start advertising to allow host room to invite into session
+        self.state = .JoiningRoom
+        self.joiningRoomUUID = uuid
+        
         MultipeerManager.instance.initDiscoveryInfo(["joinRoomWithUUID": uuid])
         MultipeerManager.instance.initAdvertiser()
         MultipeerManager.instance.startAdvertiser()
         
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.defaultTimeoutInterval, target: self, selector: #selector(LobbyRoomViewController.onTimeout), userInfo: nil, repeats: false)
-        self.presentViewController(self.joinGameAlertController!, animated: true, completion: nil)
+        self.statusLabel.text = SpycodesMessage.pendingStatus
     }
     
     // MARK: MultipeerManagerDelegate
@@ -166,10 +195,9 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
             let data = NSKeyedArchiver.archivedDataWithRootObject(Player.instance)
             MultipeerManager.instance.broadcastData(data)
             
-            self.joinGameAlertController?.dismissViewControllerAnimated(true, completion: {
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.performSegueWithIdentifier("pregame-room", sender: self)
-                })
+            dispatch_async(dispatch_get_main_queue(), {
+                self.restoreStatus()
+                self.performSegueWithIdentifier("pregame-room", sender: self)
             })
         }
     }

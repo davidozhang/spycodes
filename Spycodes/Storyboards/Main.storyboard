@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -447,7 +447,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FNd-tS-fuD">
-                                <rect key="frame" x="0.0" y="79" width="414" height="637"/>
+                                <rect key="frame" x="0.0" y="89.666666666666686" width="414" height="646.33333333333326"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lobby-room-view-cell" id="fGf-dk-B8F" customClass="LobbyRoomViewCell" customModule="Spycodes" customModuleProvider="target">
@@ -482,6 +482,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="joinRoomButton" destination="FIx-Jw-5YW" id="9Mi-6c-P8F"/>
                                             <outlet property="roomNameLabel" destination="zag-jE-Vdk" id="NpF-fK-MvL"/>
                                         </connections>
                                     </tableViewCell>
@@ -504,18 +505,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbQ-mi-CiE" customClass="SpycodesStatusLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="183" y="60.666666666666671" width="49.333333333333343" height="21.000000000000014"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="AvE-ax-qBg" firstAttribute="top" secondItem="E2v-cR-e0P" secondAttribute="bottom" constant="4" id="5bW-ax-rSm"/>
                             <constraint firstItem="AvE-ax-qBg" firstAttribute="top" secondItem="D01-O5-iI2" secondAttribute="topMargin" constant="30" id="5d3-Zk-vi2"/>
+                            <constraint firstItem="hbQ-mi-CiE" firstAttribute="centerX" secondItem="D01-O5-iI2" secondAttribute="centerX" id="A1X-en-q2U"/>
                             <constraint firstItem="dcv-1n-gd1" firstAttribute="centerX" secondItem="D01-O5-iI2" secondAttribute="centerX" id="A8h-oR-71e"/>
+                            <constraint firstItem="FNd-tS-fuD" firstAttribute="top" secondItem="hbQ-mi-CiE" secondAttribute="bottom" constant="8" id="Cro-bh-fQ7"/>
                             <constraint firstItem="dcv-1n-gd1" firstAttribute="centerY" secondItem="AvE-ax-qBg" secondAttribute="centerY" id="Jac-sy-TUe"/>
+                            <constraint firstItem="NSb-Fu-D4E" firstAttribute="top" secondItem="FNd-tS-fuD" secondAttribute="bottom" id="KqV-vm-bYq"/>
                             <constraint firstItem="FNd-tS-fuD" firstAttribute="leading" secondItem="D01-O5-iI2" secondAttribute="leading" id="LBR-Nx-8uO"/>
-                            <constraint firstItem="NSb-Fu-D4E" firstAttribute="top" secondItem="FNd-tS-fuD" secondAttribute="bottom" constant="20" id="MM3-NT-w8B"/>
                             <constraint firstItem="AvE-ax-qBg" firstAttribute="leading" secondItem="D01-O5-iI2" secondAttribute="leadingMargin" constant="30" id="Wb1-9G-z5z"/>
+                            <constraint firstItem="hbQ-mi-CiE" firstAttribute="top" secondItem="dcv-1n-gd1" secondAttribute="bottom" constant="8" id="bRr-9E-Pmm"/>
                             <constraint firstAttribute="trailing" secondItem="FNd-tS-fuD" secondAttribute="trailing" id="bS2-ly-A2E"/>
-                            <constraint firstItem="FNd-tS-fuD" firstAttribute="top" secondItem="AvE-ax-qBg" secondAttribute="bottom" constant="20" id="egI-p9-dkK"/>
                             <constraint firstItem="AvE-ax-qBg" firstAttribute="leading" secondItem="D01-O5-iI2" secondAttribute="leading" constant="15" id="fWY-93-iSJ"/>
                             <constraint firstItem="AvE-ax-qBg" firstAttribute="top" secondItem="E2v-cR-e0P" secondAttribute="bottom" constant="30" id="uVH-wG-i9R"/>
                         </constraints>
@@ -528,7 +537,9 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="statusLabel" destination="hbQ-mi-CiE" id="tGP-qx-HIX"/>
                         <outlet property="tableView" destination="FNd-tS-fuD" id="dYw-vq-L2t"/>
+                        <outlet property="tableViewTrailingSpaceConstraint" destination="bS2-ly-A2E" id="fT6-ED-bgj"/>
                         <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" id="yme-7x-s1N"/>
                         <segue destination="ntM-nG-bNl" kind="unwind" identifier="access-code" unwindAction="unwindToAccessCode:" id="YIC-Fc-wg7"/>
                     </connections>
@@ -536,7 +547,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKI-qh-D1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ntM-nG-bNl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1827" y="1156"/>
+            <point key="canvasLocation" x="1826.0869565217392" y="1155.9782608695652"/>
         </scene>
         <!--Score View Controller-->
         <scene sceneID="3ga-29-RNe">
@@ -1178,6 +1189,6 @@
         <image name="Team" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7yd-xs-fux"/>
+        <segue reference="yme-7x-s1N"/>
     </inferredMetricsTieBreakers>
 </document>
