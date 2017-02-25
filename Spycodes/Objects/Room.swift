@@ -139,29 +139,43 @@ class Room: NSObject, NSCoding {
         return self.getPlayerWithUUID(uuid) != nil
     }
     
-    func canStartGame() -> Bool {
-        if GameMode.instance.mode == GameMode.Mode.RegularGame && self.players.count >= 4 {
+    func teamSizesValid() -> Bool {
+        if GameMode.instance.mode == GameMode.Mode.RegularGame {
             let redValid = self.players.filter({($0 as Player).team == Team.Red}).count >= 2
             let blueValid = self.players.filter({($0 as Player).team == Team.Blue}).count >= 2
             
-            if redValid && blueValid && self.getClueGiverUUIDForTeam(Team.Red) != nil && self.getClueGiverUUIDForTeam(Team.Blue) != nil {
+            if redValid && blueValid {
                 return true
             }
-            else {
-                return false
+            
+            return false
+        } else {    // Minigame
+            if self.players.count == 3 || self.players.count == 4 {
+                return true
             }
+            
+            return false
         }
-        else if GameMode.instance.mode == GameMode.Mode.MiniGame && (self.players.count == 3 || self.players.count == 4) {
+    }
+    
+    func cluegiversSelected() -> Bool {
+        if GameMode.instance.mode == GameMode.Mode.RegularGame {
             if self.getClueGiverUUIDForTeam(Team.Red) != nil && self.getClueGiverUUIDForTeam(Team.Blue) != nil {
                 return true
             }
-            else {
-                return false
+            
+            return false
+        } else {    // Minigame
+            if self.getClueGiverUUIDForTeam(Team.Red) != nil && self.getClueGiverUUIDForTeam(Team.Blue) != nil {
+                return true
             }
-        }
-        else {
+
             return false
         }
+    }
+    
+    func canStartGame() -> Bool {
+        return teamSizesValid() && cluegiversSelected()
     }
     
     func getClueGiverUUIDForTeam(team: Team) -> String? {

@@ -27,7 +27,8 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
     }
     
     @IBAction func onStartGameInfoPressed(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Start Game", message: SpycodesString.startGameInfo, preferredStyle: .Alert)
+        let message = self.composeChecklist()
+        let alertController = UIAlertController(title: "Start Game", message: message, preferredStyle: .Alert)
         let confirmAction = UIAlertAction(title: "Dismiss", style: .Default, handler: { (action: UIAlertAction) in })
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -223,6 +224,40 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
     
     private func showDimView() {
         self.view.addSubview(self.dimView)
+    }
+    
+    private func composeChecklist() -> String {
+        var message = ""
+        
+        // Team size check
+        if Room.instance.teamSizesValid() {
+            message += SpycodesString.completed + " "
+        } else {
+            message += SpycodesString.incomplete + " "
+        }
+        
+        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+            message += SpycodesString.minigameTeamSizeInfo
+        } else {
+            message += SpycodesString.regularGameTeamSizeInfo
+        }
+        
+        message += "\n"
+        
+        // Cluegiver check
+        if Room.instance.cluegiversSelected() {
+            message += SpycodesString.completed + " "
+        } else {
+            message += SpycodesString.incomplete + " "
+        }
+        
+        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+            message += SpycodesString.minigameCluegiverInfo
+        } else {
+            message += SpycodesString.regularGameCluegiverInfo
+        }
+        
+        return message
     }
     
     // MARK: Popover Presentation Controller Delegate
