@@ -16,9 +16,9 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
     private var emptyStateLabel: UILabel?
     private let activityIndicator = UIActivityIndicatorView()
     
-    @IBOutlet var statusLabel: SpycodesStatusLabel!
+    @IBOutlet weak var statusLabel: SpycodesStatusLabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     
     // MARK: Actions
     @IBAction func unwindToLobbyRoom(sender: UIStoryboardSegue) {
@@ -94,10 +94,10 @@ class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UI
     private func refreshView() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
-            if self.tableView.numberOfRowsInSection(0) == 0 {
+            if Lobby.instance.rooms.count == 0 {
                 self.tableView.backgroundView = self.emptyStateLabel
-            }
-            else {
+                self.restoreStatus()
+            } else {
                 self.tableView.backgroundView = nil
             }
             
