@@ -2,7 +2,7 @@ import MultipeerConnectivity
 import UIKit
 
 class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, UITextFieldBackspaceDelegate, MultipeerManagerDelegate {
-    private let allowedCharactersSet = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyz")
+    private let allowedCharactersSet = NSCharacterSet(charactersInString: Room.accessCodeAllowedCharacters as String)
     private let defaultTimeoutInterval: NSTimeInterval = 10
     private let shortTimeoutInterval: NSTimeInterval = 3
     
@@ -128,6 +128,7 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, U
                 self.joinRoomWithAccessCode(accessCode)
             }
             
+            // Advance cursor to next text field
             for view in textFieldsView.subviews as [UIView] {
                 if let textField = view as? UITextField where textField.tag == currentTag + 1 {
                     textField.becomeFirstResponder()
@@ -163,7 +164,8 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, U
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         let currentTag = textField.tag
         
-        if currentTag == self.lastTag {
+        // Allow return key if cursor is on last text field and it is filled
+        if currentTag == self.lastTag && textField.text?.characters.count == 1 {
             let accessCode = self.accessCodeCharacters.componentsJoinedByString("")
             self.joinRoomWithAccessCode(accessCode)
             
@@ -174,10 +176,12 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, U
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        // Disallow all special characters
         if string.rangeOfCharacterFromSet(self.allowedCharactersSet.invertedSet) != nil {
             return false
         }
         
+        // Edge case where the last text field is filled
         if textField.text?.characters.count == 1 {
             self.lastTextFieldWasFilled = true
         }
@@ -189,11 +193,13 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, U
     func onBackspaceDetected(textField: UITextField) {
         let currentTag = textField.tag
         
+        // If currently on last text field and it was filled, do not advance cursor to previous text field
         if self.lastTextFieldWasFilled {
             self.lastTextFieldWasFilled = false
             return
         }
         
+        // Advance cursor to previous text field
         for view in textFieldsView.subviews as [UIView] {
             if let nextTextField = view as? UITextField where nextTextField.tag == currentTag - 1 {
                 nextTextField.becomeFirstResponder()
