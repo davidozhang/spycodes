@@ -315,12 +315,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCC-FN-amc" userLabel="Text Fields View">
-                                <rect key="frame" x="99" y="350" width="216" height="36"/>
+                                <rect key="frame" x="99" y="344" width="216" height="48"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h0u-5Z-rSG" customClass="SpycodesSingleCharacterTextField" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="48" height="36"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="MHY-d7-Ycg"/>
+                                            <constraint firstAttribute="height" constant="48" id="MHY-d7-Ycg"/>
                                             <constraint firstAttribute="width" constant="48" id="xXo-n6-fCu"/>
                                         </constraints>
                                         <nil key="textColor"/>
@@ -328,29 +328,29 @@
                                         <textInputTraits key="textInputTraits" returnKeyType="join"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vgx-ec-qFU" customClass="SpycodesSingleCharacterTextField" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="56" y="0.0" width="48" height="36"/>
+                                        <rect key="frame" x="56" y="0.0" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="RUj-Ih-TV4"/>
-                                            <constraint firstAttribute="height" constant="36" id="rhJ-5U-eo0"/>
+                                            <constraint firstAttribute="height" constant="48" id="rhJ-5U-eo0"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="join"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0hI-eT-gVT" customClass="SpycodesSingleCharacterTextField" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="112" y="0.0" width="48" height="36"/>
+                                        <rect key="frame" x="112" y="0.0" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="6J5-HM-dq7"/>
-                                            <constraint firstAttribute="height" constant="36" id="WDX-EZ-Idg"/>
+                                            <constraint firstAttribute="height" constant="48" id="WDX-EZ-Idg"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="join"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2oC-34-Lha" customClass="SpycodesSingleCharacterTextField" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="168" y="0.0" width="48" height="36"/>
+                                        <rect key="frame" x="168" y="0.0" width="48" height="48"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="Jdd-JH-UGH"/>
+                                            <constraint firstAttribute="height" constant="48" id="Jdd-JH-UGH"/>
                                             <constraint firstAttribute="width" constant="48" id="rai-Ae-mgd"/>
                                         </constraints>
                                         <nil key="textColor"/>
@@ -374,11 +374,11 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhf-Nl-0FI" userLabel="Transparent View">
-                                <rect key="frame" x="99" y="350" width="216" height="36"/>
+                                <rect key="frame" x="99" y="344" width="216" height="48"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qd-Lb-OLK">
-                                <rect key="frame" x="100.66666666666674" y="392.66666666666674" width="213" height="30"/>
+                                <rect key="frame" x="100.66666666666669" y="400" width="213" height="30"/>
                                 <state key="normal" title="No access code? Browse lobby"/>
                                 <connections>
                                     <action selector="onBrowseLobbyTapped:" destination="RKo-Nr-UiC" eventType="touchUpInside" id="l5V-LT-ZwS"/>
