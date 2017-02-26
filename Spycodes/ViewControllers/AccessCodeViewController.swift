@@ -187,6 +187,11 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, U
         // Edge case where the last text field is filled
         if textField.text?.characters.count == 1 {
             self.lastTextFieldWasFilled = true
+            
+            // Disallow appending to existing text in last text field
+            if string.characters.count > 0 {
+                return false
+            }
         }
         
         return true
