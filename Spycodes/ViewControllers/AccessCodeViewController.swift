@@ -1,15 +1,24 @@
 import MultipeerConnectivity
 import UIKit
 
-class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, MultipeerManagerDelegate {
+class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, UITextFieldBackspaceDelegate, MultipeerManagerDelegate {
+    private let allowedCharactersSet = NSCharacterSet(charactersInString: Room.accessCodeAllowedCharacters as String)
     private let defaultTimeoutInterval: NSTimeInterval = 10
     private let shortTimeoutInterval: NSTimeInterval = 3
     
+    private let firstTag = 0
+    private let lastTag = 3
+    
     private var timeoutTimer: NSTimer?
     private var refreshTimer: NSTimer?
-
-    @IBOutlet var statusLabel: SpycodesStatusLabel!
-    @IBOutlet var accessCodeTextField: SpycodesTextField!
+    
+    private var lastTextFieldWasFilled = false
+    
+    private var accessCodeCharacters = NSMutableArray(capacity: SpycodesConstant.accessCodeLength)
+    
+    @IBOutlet weak var statusLabel: SpycodesStatusLabel!
+    @IBOutlet weak var textFieldsView: UIView!
+    @IBOutlet var browseLobbyButton: UIButton!
     
     @IBAction func unwindToAccessCode(sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
@@ -40,10 +49,20 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, M
         // Unwindable view controller identifier
         self.unwindableIdentifier = "access-code"
         
-        self.accessCodeTextField.delegate = self
         MultipeerManager.instance.delegate = self
         
-        self.accessCodeTextField.becomeFirstResponder()
+        for view in textFieldsView.subviews as [UIView] {
+            if let textField = view as? SpycodesSingleCharacterTextField {
+                textField.delegate = self
+                textField.backspaceDelegate = self
+                textField.addTarget(self, action: #selector(AccessCodeViewController.textFieldDidChange), forControlEvents: .EditingChanged)
+                
+                // Tags are assigned in the Storyboard
+                if textField.tag == self.firstTag {
+                    textField.becomeFirstResponder()
+                }
+            }
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -55,7 +74,14 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, M
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        self.accessCodeTextField.delegate = nil
+        for view in textFieldsView.subviews as [UIView] {
+            if let textField = view as? SpycodesSingleCharacterTextField {
+                textField.delegate = nil
+                textField.backspaceDelegate = nil
+                textField.removeTarget(self, action: #selector(AccessCodeViewController.textFieldDidChange), forControlEvents: .EditingChanged)
+                textField.text = nil
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,16 +98,45 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, M
         MultipeerManager.instance.stopAdvertiser()
         
         self.statusLabel.text = SpycodesString.failStatus
+        self.browseLobbyButton.hidden = false
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.shortTimeoutInterval, target: self, selector: #selector(AccessCodeViewController.restoreStatus), userInfo: nil, repeats: false)
         
-        self.accessCodeTextField.enabled = true
-        self.accessCodeTextField.textColor = UIColor.blackColor()
-        self.accessCodeTextField.becomeFirstResponder()
+        for view in textFieldsView.subviews as [UIView] {
+            if let textField = view as? UITextField {
+                textField.enabled = true
+                textField.textColor = UIColor.blackColor()
+                
+                if textField.tag == self.lastTag {
+                    textField.becomeFirstResponder()
+                }
+            }
+        }
     }
     
     @objc
     private func restoreStatus() {
         self.statusLabel.text = SpycodesString.normalAccessCodeStatus
+    }
+    
+    @objc
+    private func textFieldDidChange(textField: UITextField) {
+        let currentTag = textField.tag
+        
+        if let character = textField.text where character.characters.count == 1 {
+            self.accessCodeCharacters[currentTag] = character
+            
+            if currentTag == self.lastTag {
+                let accessCode = self.accessCodeCharacters.componentsJoinedByString("")
+                self.joinRoomWithAccessCode(accessCode)
+            }
+            
+            // Advance cursor to next text field
+            for view in textFieldsView.subviews as [UIView] {
+                if let textField = view as? UITextField where textField.tag == currentTag + 1 {
+                    textField.becomeFirstResponder()
+                }
+            }
+        }
     }
     
     private func joinRoomWithAccessCode(accessCode: String) {
@@ -98,18 +153,62 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, M
         
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.defaultTimeoutInterval, target: self, selector: #selector(AccessCodeViewController.onTimeout), userInfo: nil, repeats: false)
         self.statusLabel.text = SpycodesString.pendingStatus
-        self.accessCodeTextField.enabled = false
-        self.accessCodeTextField.textColor = UIColor.lightGrayColor()
+        self.browseLobbyButton.hidden = true
+        
+        for view in textFieldsView.subviews as [UIView] {
+            if let textField = view as? UITextField {
+                textField.enabled = false
+                textField.textColor = UIColor.lightGrayColor()
+            }
+        }
     }
     
     // MARK: UITextFieldDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if let accessCode = textField.text where accessCode.characters.count > 0 {
+        let currentTag = textField.tag
+        
+        // Allow return key if cursor is on last text field and it is filled
+        if currentTag == self.lastTag && textField.text?.characters.count == 1 {
+            let accessCode = self.accessCodeCharacters.componentsJoinedByString("")
             self.joinRoomWithAccessCode(accessCode)
+            
             return true
         }
         
         return false
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        // Disallow all special characters
+        if string.rangeOfCharacterFromSet(self.allowedCharactersSet.invertedSet) != nil {
+            return false
+        }
+        
+        // Edge case where the last text field is filled
+        if textField.text?.characters.count == 1 {
+            self.lastTextFieldWasFilled = true
+        }
+        
+        return true
+    }
+    
+    // MARK: UITextFieldBackspaceDelegate
+    func onBackspaceDetected(textField: UITextField) {
+        let currentTag = textField.tag
+        
+        // If currently on last text field and it was filled, do not advance cursor to previous text field
+        if self.lastTextFieldWasFilled {
+            self.lastTextFieldWasFilled = false
+            return
+        }
+        
+        // Advance cursor to previous text field
+        for view in textFieldsView.subviews as [UIView] {
+            if let nextTextField = view as? UITextField where nextTextField.tag == currentTag - 1 {
+                nextTextField.becomeFirstResponder()
+                nextTextField.text = ""
+            }
+        }
     }
     
     // MARK: MultipeerManagerDelegate
