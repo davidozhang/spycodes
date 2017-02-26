@@ -18,7 +18,7 @@ class SpycodesString {
     static let endRoundInfo = "Your team must make at least one guess before you can end the round."
     static let minigameInfo = "2-3 players play against CPU."
     
-    static let hostDisconnected = "Host player has left."
-    static let playerAborted = "A player in the game has aborted the game."
+    static let hostDisconnected = "Host player has disconnected."
+    static let playerAborted = "A player in the game has aborted."
     static let playerDisconnected = "A player in the game has disconnected."
 }
