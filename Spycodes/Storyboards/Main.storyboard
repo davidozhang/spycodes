@@ -308,45 +308,100 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GPS-2G-a9x" customClass="SpycodesTextField" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="100.66666666666669" y="359.66666666666669" width="213" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxf-jD-guR" customClass="SpycodesStatusLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="182" y="60" width="49.333333333333343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                            </textField>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCC-FN-amc" userLabel="Text Fields View">
+                                <rect key="frame" x="99" y="359" width="216" height="17"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h0u-5Z-rSG" customClass="SpycodesSingleCharacterTextField" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="xXo-n6-fCu"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vgx-ec-qFU" customClass="SpycodesSingleCharacterTextField" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="56" y="0.0" width="48" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="RUj-Ih-TV4"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0hI-eT-gVT" customClass="SpycodesSingleCharacterTextField" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="112" y="0.0" width="48" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="6J5-HM-dq7"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2oC-34-Lha" customClass="SpycodesSingleCharacterTextField" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="168" y="0.0" width="48" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="rai-Ae-mgd"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="vgx-ec-qFU" firstAttribute="centerY" secondItem="h0u-5Z-rSG" secondAttribute="centerY" id="9Er-kf-sSj"/>
+                                    <constraint firstItem="h0u-5Z-rSG" firstAttribute="top" secondItem="oCC-FN-amc" secondAttribute="top" id="Ed3-uy-jwS"/>
+                                    <constraint firstItem="0hI-eT-gVT" firstAttribute="centerY" secondItem="h0u-5Z-rSG" secondAttribute="centerY" id="KEO-d8-c6H"/>
+                                    <constraint firstItem="0hI-eT-gVT" firstAttribute="leading" secondItem="vgx-ec-qFU" secondAttribute="trailing" constant="8" id="N9u-gt-eHr"/>
+                                    <constraint firstAttribute="trailing" secondItem="2oC-34-Lha" secondAttribute="trailing" id="OE7-j9-uLz"/>
+                                    <constraint firstItem="h0u-5Z-rSG" firstAttribute="leading" secondItem="oCC-FN-amc" secondAttribute="leading" id="Vvd-ob-3ro"/>
+                                    <constraint firstItem="h0u-5Z-rSG" firstAttribute="centerY" secondItem="oCC-FN-amc" secondAttribute="centerY" id="cSr-hB-y5C"/>
+                                    <constraint firstItem="vgx-ec-qFU" firstAttribute="leading" secondItem="h0u-5Z-rSG" secondAttribute="trailing" constant="8" id="kI4-Sw-jfu"/>
+                                    <constraint firstAttribute="bottom" secondItem="h0u-5Z-rSG" secondAttribute="bottom" id="kjD-w8-WLY"/>
+                                    <constraint firstItem="2oC-34-Lha" firstAttribute="centerY" secondItem="h0u-5Z-rSG" secondAttribute="centerY" id="ohp-ho-V5q"/>
+                                    <constraint firstItem="2oC-34-Lha" firstAttribute="leading" secondItem="0hI-eT-gVT" secondAttribute="trailing" constant="8" id="tUe-Jy-odY"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhf-Nl-0FI" userLabel="Transparent View">
+                                <rect key="frame" x="99" y="359" width="216" height="17"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qd-Lb-OLK">
-                                <rect key="frame" x="100.66666666666669" y="384.66666666666669" width="213" height="30"/>
+                                <rect key="frame" x="100.66666666666669" y="384" width="213" height="30"/>
                                 <state key="normal" title="No access code? Browse lobby"/>
                                 <connections>
                                     <action selector="onBrowseLobbyTapped:" destination="RKo-Nr-UiC" eventType="touchUpInside" id="l5V-LT-ZwS"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxf-jD-guR" customClass="SpycodesStatusLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="182.66666666666663" y="60" width="49.333333333333343" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YZq-dn-08N" firstAttribute="leading" secondItem="4RA-z8-adq" secondAttribute="leading" constant="15" id="3aY-m3-z73"/>
                             <constraint firstItem="YZq-dn-08N" firstAttribute="top" secondItem="c1p-sO-flb" secondAttribute="bottom" constant="4" id="4Gi-Jl-hX9"/>
                             <constraint firstItem="Lxf-jD-guR" firstAttribute="centerX" secondItem="4RA-z8-adq" secondAttribute="centerX" id="6BW-d2-guP"/>
+                            <constraint firstItem="oCC-FN-amc" firstAttribute="bottom" secondItem="rhf-Nl-0FI" secondAttribute="bottom" id="CTx-Nd-ATJ"/>
                             <constraint firstItem="fJJ-9X-JwH" firstAttribute="centerY" secondItem="YZq-dn-08N" secondAttribute="centerY" id="Ccq-AE-zip"/>
-                            <constraint firstItem="8qd-Lb-OLK" firstAttribute="centerX" secondItem="4RA-z8-adq" secondAttribute="centerX" id="D52-xF-TJR"/>
-                            <constraint firstItem="8qd-Lb-OLK" firstAttribute="top" secondItem="GPS-2G-a9x" secondAttribute="bottom" constant="8" id="KqM-Ia-DET"/>
                             <constraint firstItem="Lxf-jD-guR" firstAttribute="top" secondItem="fJJ-9X-JwH" secondAttribute="bottom" constant="8" id="N8G-xd-F9R"/>
-                            <constraint firstItem="8qd-Lb-OLK" firstAttribute="trailing" secondItem="GPS-2G-a9x" secondAttribute="trailing" id="Sx1-fi-X8b"/>
-                            <constraint firstItem="8qd-Lb-OLK" firstAttribute="leading" secondItem="GPS-2G-a9x" secondAttribute="leading" id="fVg-0A-z5H"/>
-                            <constraint firstItem="GPS-2G-a9x" firstAttribute="centerY" secondItem="4RA-z8-adq" secondAttribute="centerY" id="fVz-tm-dbd"/>
-                            <constraint firstItem="GPS-2G-a9x" firstAttribute="centerX" secondItem="4RA-z8-adq" secondAttribute="centerX" id="gcR-ix-LyY"/>
+                            <constraint firstItem="oCC-FN-amc" firstAttribute="trailing" secondItem="rhf-Nl-0FI" secondAttribute="trailing" id="Rsd-dV-8uJ"/>
+                            <constraint firstItem="8qd-Lb-OLK" firstAttribute="centerX" secondItem="4RA-z8-adq" secondAttribute="centerX" id="TSg-2n-RdP"/>
+                            <constraint firstItem="oCC-FN-amc" firstAttribute="centerY" secondItem="4RA-z8-adq" secondAttribute="centerY" id="id3-mL-67I"/>
+                            <constraint firstItem="oCC-FN-amc" firstAttribute="centerX" secondItem="4RA-z8-adq" secondAttribute="centerX" id="kOr-qh-7en"/>
+                            <constraint firstItem="oCC-FN-amc" firstAttribute="top" secondItem="rhf-Nl-0FI" secondAttribute="top" id="l5a-gb-GwT"/>
+                            <constraint firstItem="8qd-Lb-OLK" firstAttribute="top" secondItem="oCC-FN-amc" secondAttribute="bottom" constant="8" id="vwq-Lw-i8p"/>
                             <constraint firstItem="fJJ-9X-JwH" firstAttribute="centerX" secondItem="4RA-z8-adq" secondAttribute="centerX" id="yr1-Rc-0Ke"/>
+                            <constraint firstItem="oCC-FN-amc" firstAttribute="leading" secondItem="rhf-Nl-0FI" secondAttribute="leading" id="zha-tv-ncz"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="accessCodeTextField" destination="GPS-2G-a9x" id="8H7-d0-tsj"/>
                         <outlet property="statusLabel" destination="Lxf-jD-guR" id="MYy-k5-4mw"/>
+                        <outlet property="textFieldsView" destination="oCC-FN-amc" id="Ahu-DB-j5h"/>
                         <segue destination="vJw-If-bFy" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="417-vA-iX0"/>
                         <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" id="N7R-5v-7k6"/>
                         <segue destination="qHt-PL-X7v" kind="presentation" identifier="lobby-room" id="B0l-Dk-Id6"/>
@@ -355,7 +410,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ll0-UV-VBC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="vJw-If-bFy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1012" y="1156"/>
+            <point key="canvasLocation" x="1011.5942028985507" y="1155.9782608695652"/>
         </scene>
         <!--Player Name View Controller-->
         <scene sceneID="1W7-Yu-MRm">
@@ -1189,6 +1244,6 @@
         <image name="Team" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yme-7x-s1N"/>
+        <segue reference="N7R-5v-7k6"/>
     </inferredMetricsTieBreakers>
 </document>

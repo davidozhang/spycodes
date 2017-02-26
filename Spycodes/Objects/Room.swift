@@ -3,8 +3,8 @@ import MultipeerConnectivity
 
 class Room: NSObject, NSCoding {
     static var instance = Room()
-    static let accessCodeLength = 4
     static let CPU_UUID = "CPU"
+    static let accessCodeAllowedCharacters: NSString = "abcdefghijklmnopqrstuvwxyz"
     
     var name: String
     var players = [Player]()
@@ -59,12 +59,11 @@ class Room: NSObject, NSCoding {
     }
     
     private static func generateAccessCode() -> String {
-        let letters : NSString = "abcdefghijklmnopqrstuvwxyz"
         var result = ""
         
-        for _ in 0 ..< accessCodeLength {
-            let rand = arc4random_uniform(UInt32(letters.length))
-            var nextChar = letters.characterAtIndex(Int(rand))
+        for _ in 0 ..< SpycodesConstant.accessCodeLength {
+            let rand = arc4random_uniform(UInt32(Room.accessCodeAllowedCharacters.length))
+            var nextChar = Room.accessCodeAllowedCharacters.characterAtIndex(Int(rand))
             result += NSString(characters: &nextChar, length: 1) as String
         }
         
