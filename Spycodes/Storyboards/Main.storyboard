@@ -303,23 +303,24 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Access Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJJ-9X-JwH" customClass="SpycodesNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="156.66666666666669" y="31" width="101.00000000000006" height="21"/>
+                                <rect key="frame" x="157" y="31" width="101" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxf-jD-guR" customClass="SpycodesStatusLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="182" y="60" width="49.333333333333343" height="21"/>
+                                <rect key="frame" x="182" y="60" width="50" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCC-FN-amc" userLabel="Text Fields View">
-                                <rect key="frame" x="99" y="359" width="216" height="17"/>
+                                <rect key="frame" x="99" y="350" width="216" height="36"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h0u-5Z-rSG" customClass="SpycodesSingleCharacterTextField" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="48" height="17"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="36"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="MHY-d7-Ycg"/>
                                             <constraint firstAttribute="width" constant="48" id="xXo-n6-fCu"/>
                                         </constraints>
                                         <nil key="textColor"/>
@@ -327,26 +328,29 @@
                                         <textInputTraits key="textInputTraits" returnKeyType="join"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vgx-ec-qFU" customClass="SpycodesSingleCharacterTextField" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="56" y="0.0" width="48" height="17"/>
+                                        <rect key="frame" x="56" y="0.0" width="48" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="RUj-Ih-TV4"/>
+                                            <constraint firstAttribute="height" constant="36" id="rhJ-5U-eo0"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="join"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0hI-eT-gVT" customClass="SpycodesSingleCharacterTextField" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="112" y="0.0" width="48" height="17"/>
+                                        <rect key="frame" x="112" y="0.0" width="48" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="6J5-HM-dq7"/>
+                                            <constraint firstAttribute="height" constant="36" id="WDX-EZ-Idg"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="join"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2oC-34-Lha" customClass="SpycodesSingleCharacterTextField" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="168" y="0.0" width="48" height="17"/>
+                                        <rect key="frame" x="168" y="0.0" width="48" height="36"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="Jdd-JH-UGH"/>
                                             <constraint firstAttribute="width" constant="48" id="rai-Ae-mgd"/>
                                         </constraints>
                                         <nil key="textColor"/>
@@ -370,11 +374,11 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhf-Nl-0FI" userLabel="Transparent View">
-                                <rect key="frame" x="99" y="359" width="216" height="17"/>
+                                <rect key="frame" x="99" y="350" width="216" height="36"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qd-Lb-OLK">
-                                <rect key="frame" x="100.66666666666669" y="384" width="213" height="30"/>
+                                <rect key="frame" x="100.66666666666674" y="392.66666666666674" width="213" height="30"/>
                                 <state key="normal" title="No access code? Browse lobby"/>
                                 <connections>
                                     <action selector="onBrowseLobbyTapped:" destination="RKo-Nr-UiC" eventType="touchUpInside" id="l5V-LT-ZwS"/>
@@ -400,6 +404,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="browseLobbyButton" destination="8qd-Lb-OLK" id="gRs-fA-BHl"/>
                         <outlet property="statusLabel" destination="Lxf-jD-guR" id="MYy-k5-4mw"/>
                         <outlet property="textFieldsView" destination="oCC-FN-amc" id="Ahu-DB-j5h"/>
                         <segue destination="vJw-If-bFy" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="417-vA-iX0"/>

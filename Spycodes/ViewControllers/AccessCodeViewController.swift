@@ -18,6 +18,7 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, U
     
     @IBOutlet weak var statusLabel: SpycodesStatusLabel!
     @IBOutlet weak var textFieldsView: UIView!
+    @IBOutlet var browseLobbyButton: UIButton!
     
     @IBAction func unwindToAccessCode(sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
@@ -97,6 +98,7 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, U
         MultipeerManager.instance.stopAdvertiser()
         
         self.statusLabel.text = SpycodesString.failStatus
+        self.browseLobbyButton.hidden = false
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.shortTimeoutInterval, target: self, selector: #selector(AccessCodeViewController.restoreStatus), userInfo: nil, repeats: false)
         
         for view in textFieldsView.subviews as [UIView] {
@@ -151,6 +153,7 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, U
         
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.defaultTimeoutInterval, target: self, selector: #selector(AccessCodeViewController.onTimeout), userInfo: nil, repeats: false)
         self.statusLabel.text = SpycodesString.pendingStatus
+        self.browseLobbyButton.hidden = true
         
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? UITextField {

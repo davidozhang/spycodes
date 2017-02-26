@@ -26,6 +26,7 @@ class SpycodesSingleCharacterTextField: SpycodesTextField {
     
     override func deleteBackward() {
         super.deleteBackward()
+        
         backspaceDelegate?.onBackspaceDetected(self)
     }
     
