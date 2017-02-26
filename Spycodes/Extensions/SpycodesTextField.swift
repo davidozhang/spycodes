@@ -4,9 +4,10 @@ class SpycodesTextField: UITextField {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
         self.autocorrectionType = UITextAutocorrectionType.No
         self.borderStyle = .None
-        self.font = UIFont(name: "HelveticaNeue-Thin", size: 24)
+        self.font = UIFont(name: "HelveticaNeue-Thin", size: 36)
     }
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
@@ -25,7 +26,7 @@ class SpycodesTextField: UITextField {
         
         let bottomBorder = CALayer()
         bottomBorder.frame = CGRect(x: 0.0, y: self.frame.size.height - 1.0, width: self.frame.size.width, height: 1.0)
-        bottomBorder.backgroundColor = UIColor.darkGrayColor().CGColor
+        bottomBorder.backgroundColor = UIColor.lightGrayColor().CGColor
         
         self.layer.addSublayer(bottomBorder)
     }
