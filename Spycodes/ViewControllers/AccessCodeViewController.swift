@@ -128,13 +128,12 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, U
             if currentTag == self.lastTag {
                 let accessCode = self.accessCodeCharacters.componentsJoinedByString("")
                 self.joinRoomWithAccessCode(accessCode)
+                return
             }
             
             // Advance cursor to next text field
-            for view in textFieldsView.subviews as [UIView] {
-                if let textField = view as? UITextField where textField.tag == currentTag + 1 {
-                    textField.becomeFirstResponder()
-                }
+            if let nextTextField = textFieldsView.subviews[currentTag + 1] as? UITextField {
+                nextTextField.becomeFirstResponder()
             }
         }
     }
@@ -159,6 +158,10 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, U
             if let textField = view as? UITextField {
                 textField.enabled = false
                 textField.textColor = UIColor.lightGrayColor()
+                
+                if textField.tag == self.lastTag {
+                    textField.resignFirstResponder()
+                }
             }
         }
     }
@@ -207,12 +210,14 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, U
             return
         }
         
+        if currentTag == self.firstTag {
+            return
+        }
+        
         // Advance cursor to previous text field
-        for view in textFieldsView.subviews as [UIView] {
-            if let nextTextField = view as? UITextField where nextTextField.tag == currentTag - 1 {
-                nextTextField.becomeFirstResponder()
-                nextTextField.text = ""
-            }
+        if let nextTextField = textFieldsView.subviews[currentTag - 1] as? UITextField {
+            nextTextField.becomeFirstResponder()
+            nextTextField.text = ""
         }
     }
     
