@@ -66,13 +66,9 @@ class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, U
     }
     
     override func viewWillDisappear(animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillDisappear(animated)
         
         self.refreshTimer?.invalidate()
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
         
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? SpycodesSingleCharacterTextField {

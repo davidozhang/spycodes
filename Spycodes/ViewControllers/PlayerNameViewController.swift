@@ -31,10 +31,11 @@ class PlayerNameViewController: UnwindableViewController, UITextFieldDelegate {
         self.userNameTextField.becomeFirstResponder()
     }
     
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         
         self.userNameTextField.delegate = nil
+        self.userNameTextField.resignFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
