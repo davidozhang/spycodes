@@ -1,13 +1,17 @@
 import MultipeerConnectivity
 import UIKit
 
-class GameRoomViewController: UnwindableViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MultipeerManagerDelegate, UITextFieldDelegate {
+class GameRoomViewController: UnwindableViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, MultipeerManagerDelegate, UITextFieldDelegate {
     private let cellReuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
     private let minCellSpacing: CGFloat = 12
+    private let modalWidth = UIScreen.mainScreen().bounds.width - 60
+    private let modalHeight = UIScreen.mainScreen().bounds.height/2
     
     private let animationAlpha: CGFloat = 0.4
     private let animationDuration: NSTimeInterval = 0.75
+    
+    private let dimView = UIView()
     
     private var actionButtonState: ActionButtonState = .EndRound
     
@@ -60,6 +64,10 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.didEndGameWithNotification), name: SpycodesNotificationKey.minigameGameOverNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        
+        self.dimView.tag = 1
+        self.dimView.frame = UIScreen.mainScreen().bounds
+        self.dimView.backgroundColor = UIColor.dimBackgroundColor()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -130,6 +138,42 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: Popover Presentation Controller Delegate
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+        self.hideDimView()
+    }
+    
+    // MARK: Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "help-view" {
+            if let vc = segue.destinationViewController as? HelpViewController {
+                vc.gameRoomViewController = self
+                vc.modalPresentationStyle = .Popover
+                vc.preferredContentSize = CGSize(width: self.modalWidth, height: self.modalHeight)
+                
+                if let popvc = vc.popoverPresentationController {
+                    popvc.delegate = self
+                    popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+                    popvc.sourceView = self.view
+                    popvc.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                }
+            }
+            
+            self.showDimView()
+        }
+    }
+    
+    // MARK: Public
+    func hideDimView() {
+        if let view = self.view.viewWithTag(1) {
+            view.removeFromSuperview()
+        }
+    }
+    
     // MARK: Private
     @objc
     private func refreshView() {
@@ -152,6 +196,10 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
     private func broadcastOptionalData(object: NSObject) {
         let data = NSKeyedArchiver.archivedDataWithRootObject(object)
         MultipeerManager.instance.broadcastData(data)
+    }
+    
+    private func showDimView() {
+        self.view.addSubview(self.dimView)
     }
     
     private func startButtonAnimations() {
@@ -254,8 +302,7 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
             if Round.instance.currentTeam == Player.instance.team {
                 self.actionButton.alpha = 1.0
                 self.actionButton.enabled = true
-            }
-            else {
+            } else {
                 self.actionButton.alpha = 0.4
                 self.actionButton.enabled = false
             }
