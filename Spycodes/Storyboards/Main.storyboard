@@ -1258,7 +1258,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDR-yr-yah" userLabel="Description Label" customClass="SpycodesHelpDescriptionLabel" customModule="Spycodes" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDR-yr-yah" userLabel="Description Label" customClass="SpycodesHelpDescriptionLabel" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="37" width="374" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -1294,6 +1294,9 @@
                                     <constraint firstAttribute="width" constant="35" id="vVc-h8-bER"/>
                                 </constraints>
                                 <state key="normal" image="Back"/>
+                                <connections>
+                                    <action selector="onLeftTapped:" destination="e9C-iv-SDh" eventType="touchUpInside" id="UHF-5a-fQz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="net-Cb-pBu" userLabel="Next Button">
                                 <rect key="frame" x="364" y="693" width="35" height="35"/>
@@ -1302,6 +1305,9 @@
                                     <constraint firstAttribute="width" constant="35" id="RTg-I9-u4B"/>
                                 </constraints>
                                 <state key="normal" image="Next"/>
+                                <connections>
+                                    <action selector="onRightTapped:" destination="e9C-iv-SDh" eventType="touchUpInside" id="Tub-HV-MVn"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1321,11 +1327,13 @@
                     <connections>
                         <outlet property="descriptionLabel" destination="FDR-yr-yah" id="AuJ-tn-u7c"/>
                         <outlet property="headerLabel" destination="VAV-w8-wCb" id="nHZ-kd-a1L"/>
+                        <outlet property="leftButton" destination="Zan-j6-pQD" id="BVY-7X-ND1"/>
+                        <outlet property="rightButton" destination="net-Cb-pBu" id="fHR-uW-N7b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HJ3-MJ-N3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3534.7826086956525" y="337.5"/>
+            <point key="canvasLocation" x="3534.7826086956525" y="336.68478260869568"/>
         </scene>
     </scenes>
     <resources>
