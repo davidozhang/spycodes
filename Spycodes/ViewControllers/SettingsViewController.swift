@@ -1,6 +1,6 @@
 import UIKit
 
-class SettingsViewController: UnwindableViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: SpycodesViewController, UITableViewDelegate, UITableViewDataSource {
     private let sections = ["About"]
     private let versionViewCellReuseIdentifier = "version-view-cell"
     private let sectionHeaderCellReuseIdentifier = "section-header-view-cell"

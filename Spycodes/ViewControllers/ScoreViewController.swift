@@ -1,20 +1,12 @@
 import UIKit
 
-class ScoreViewController: UIViewController {
+class ScoreViewController: SpycodesPopoverViewController {
     @IBOutlet weak var headerLabel: SpycodesNavigationBarLabel!
     @IBOutlet weak var scoreLabel: SpycodesLargeLabel!
     
-    weak var pregameRoomViewController: PregameRoomViewController?
-    
     // MARK: Actions
     @IBAction func onExitTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(false) {
-            if let pregameRoomViewController = self.pregameRoomViewController {
-                pregameRoomViewController.hideDimView()
-            }
-            
-            self.pregameRoomViewController = nil
-        }
+        super.onExitTapped()
     }
     
     deinit {
@@ -41,11 +33,5 @@ class ScoreViewController: UIViewController {
                 self.scoreLabel.text = "Red " + String(red) + " : " + String(blue) + " Blue"
             }
         }
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        self.popoverPresentationController?.delegate = nil
     }
 }

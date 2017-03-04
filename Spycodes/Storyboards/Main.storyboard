@@ -1158,7 +1158,7 @@
                                         </constraints>
                                         <state key="normal" title="Button" image="Question"/>
                                         <connections>
-                                            <action selector="onHelpButtonTapped:" destination="yX4-d1-WHr" eventType="touchUpInside" id="FFe-d1-CIF"/>
+                                            <action selector="onHelpButtonTapped:" destination="yX4-d1-WHr" eventType="touchUpInside" id="eWY-A2-2E1"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -1,7 +1,7 @@
 import MultipeerConnectivity
 import UIKit
 
-class AccessCodeViewController: UnwindableViewController, UITextFieldDelegate, UITextFieldBackspaceDelegate, MultipeerManagerDelegate {
+class AccessCodeViewController: SpycodesViewController, UITextFieldDelegate, UITextFieldBackspaceDelegate, MultipeerManagerDelegate {
     private let allowedCharactersSet = NSCharacterSet(charactersInString: Room.accessCodeAllowedCharacters as String)
     private let defaultTimeoutInterval: NSTimeInterval = 10
     private let shortTimeoutInterval: NSTimeInterval = 3
