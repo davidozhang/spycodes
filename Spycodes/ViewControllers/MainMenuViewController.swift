@@ -1,6 +1,6 @@
 import UIKit
 
-class MainMenuViewController: UnwindableViewController {
+class MainMenuViewController: SpycodesViewController {
     private static let appID = 1141711201
     private static let appStoreURL = "itms-apps://itunes.apple.com/app/id\(appID)"
     private static let appStoreWebURL = "https://itunes.apple.com/ca/app/spycodes/id1141711201?mt=8"

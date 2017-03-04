@@ -1,6 +1,6 @@
 import UIKit
 
-class PlayerNameViewController: UnwindableViewController, UITextFieldDelegate {
+class PlayerNameViewController: SpycodesViewController, UITextFieldDelegate {
     @IBOutlet weak var userNameTextField: SpycodesTextField!
     
     // MARK: Actions

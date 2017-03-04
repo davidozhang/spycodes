@@ -1,10 +1,10 @@
 # Spycodes
 
-A local peer-to-peer multiplayer word association game inspired by the minimalist style of Spyfall. It is now available on the App Store!
+A local peer-to-peer multiplayer word association game made for the iPhone. It is now available on the App Store!
 
 ## Installation/Usage
 
-1. Download XCode
+1. Download the latest version of XCode
 
 2. Open Spycodes.xcodeproj
 
@@ -38,4 +38,4 @@ Issue Contribution:
 
 ## License
 
-The codebase is shared under the MIT License. Copyright (c) David Zhang 2016.
+The codebase is shared under the MIT License. Copyright (c) David Zhang 2017.

@@ -1,10 +1,12 @@
 import MultipeerConnectivity
 import UIKit
 
-class GameRoomViewController: UnwindableViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MultipeerManagerDelegate, UITextFieldDelegate {
+class GameRoomViewController: SpycodesViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, MultipeerManagerDelegate, UITextFieldDelegate {
     private let cellReuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
     private let minCellSpacing: CGFloat = 12
+    private let modalWidth = UIScreen.mainScreen().bounds.width - 60
+    private let modalHeight = UIScreen.mainScreen().bounds.height/2
     
     private let animationAlpha: CGFloat = 0.4
     private let animationDuration: NSTimeInterval = 0.75
@@ -45,6 +47,10 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
         } else if actionButtonState == .EndRound {
             self.didEndRound()
         }
+    }
+    
+    @IBAction func onHelpButtonTapped(sender: AnyObject) {
+        self.performSegueWithIdentifier("help-view", sender: self)
     }
     
     deinit {
@@ -128,6 +134,34 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: Popover Presentation Controller Delegate
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+        super.hideDimView()
+        popoverPresentationController.delegate = nil
+    }
+    
+    // MARK: Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let vc = segue.destinationViewController as? SpycodesPopoverViewController {
+            super.showDimView()
+            
+            vc.rootViewController = self
+            vc.modalPresentationStyle = .Popover
+            vc.preferredContentSize = CGSize(width: self.modalWidth, height: self.modalHeight)
+            
+            if let popvc = vc.popoverPresentationController {
+                popvc.delegate = self
+                popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+                popvc.sourceView = self.view
+                popvc.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            }
+        }
     }
     
     // MARK: Private
@@ -254,8 +288,7 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
             if Round.instance.currentTeam == Player.instance.team {
                 self.actionButton.alpha = 1.0
                 self.actionButton.enabled = true
-            }
-            else {
+            } else {
                 self.actionButton.alpha = 0.4
                 self.actionButton.enabled = false
             }

@@ -1,20 +1,12 @@
 import UIKit
 
-class PregameSettingsViewController: UIViewController {
+class PregameSettingsViewController: SpycodesPopoverViewController {
     @IBOutlet weak var minigameSettingToggle: UISwitch!
     @IBOutlet weak var infoLabel: UILabel!
     
-    weak var pregameRoomViewController: PregameRoomViewController?
-    
     // MARK: Actions
     @IBAction func onExitTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(false) {
-            if let pregameRoomViewController = self.pregameRoomViewController {
-                pregameRoomViewController.hideDimView()
-            }
-            
-            self.pregameRoomViewController = nil
-        }
+        super.onExitTapped()
     }
     
     @IBAction func minigameSettingToggleChanged(sender: AnyObject) {
@@ -58,11 +50,5 @@ class PregameSettingsViewController: UIViewController {
         }
         
         self.infoLabel.text = SpycodesString.minigameInfo
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        self.popoverPresentationController?.delegate = nil
     }
 }

@@ -1,12 +1,10 @@
 import MultipeerConnectivity
 import UIKit
 
-class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
+class PregameRoomViewController: SpycodesViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, MultipeerManagerDelegate, PregameRoomViewCellDelegate {
     private let cellReuseIdentifier = "pregame-room-view-cell"
     private let modalWidth = UIScreen.mainScreen().bounds.width - 60
     private let modalHeight = UIScreen.mainScreen().bounds.height/4
-    
-    private let dimView = UIView()
     
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -82,10 +80,6 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
             self.accessCodeTypeLabel.text = "Access Code: "
             self.accessCodeLabel.text = Room.instance.getAccessCode()
         }
-        
-        self.dimView.tag = 1
-        self.dimView.frame = UIScreen.mainScreen().bounds
-        self.dimView.backgroundColor = UIColor.dimBackgroundColor()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -134,13 +128,6 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    // MARK: Public
-    func hideDimView() {
-        if let view = self.view.viewWithTag(1) {
-            view.removeFromSuperview()
-        }
     }
     
     // MARK: Private
@@ -222,10 +209,6 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
         }
     }
     
-    private func showDimView() {
-        self.view.addSubview(self.dimView)
-    }
-    
     private func composeChecklist() -> String {
         var message = ""
         
@@ -266,7 +249,8 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
     }
     
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
-        self.hideDimView()
+        super.hideDimView()
+        popoverPresentationController.delegate = nil
     }
     
     // MARK: Segue
@@ -274,35 +258,18 @@ class PregameRoomViewController: UnwindableViewController, UITableViewDelegate, 
         super._prepareForSegue(segue, sender: sender)
         
         // All segues identified here should be forward direction only
-        if segue.identifier == "score-view" {
-            if let vc = segue.destinationViewController as? ScoreViewController {
-                vc.pregameRoomViewController = self
-                vc.modalPresentationStyle = .Popover
-                vc.preferredContentSize = CGSize(width: self.modalWidth, height: self.modalHeight)
+        if let vc = segue.destinationViewController as? SpycodesPopoverViewController {
+            super.showDimView()
+            
+            vc.rootViewController = self
+            vc.modalPresentationStyle = .Popover
+            vc.preferredContentSize = CGSize(width: self.modalWidth, height: self.modalHeight)
 
-                if let popvc = vc.popoverPresentationController {
-                    popvc.delegate = self
-                    popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-                    popvc.sourceView = self.view
-                    popvc.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-                }
-                
-                self.showDimView()
-            }
-        } else if segue.identifier == "pregame-settings" {
-            if let vc = segue.destinationViewController as? PregameSettingsViewController {
-                vc.pregameRoomViewController = self
-                vc.modalPresentationStyle = .Popover
-                vc.preferredContentSize = CGSize(width: self.modalWidth, height: self.modalHeight)
-                
-                if let popvc = vc.popoverPresentationController {
-                    popvc.delegate = self
-                    popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-                    popvc.sourceView = self.view
-                    popvc.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-                }
-                
-                self.showDimView()
+            if let popvc = vc.popoverPresentationController {
+                popvc.delegate = self
+                popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+                popvc.sourceView = self.view
+                popvc.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
             }
         }
     }

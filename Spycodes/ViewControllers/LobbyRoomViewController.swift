@@ -1,7 +1,7 @@
 import MultipeerConnectivity
 import UIKit
 
-class LobbyRoomViewController: UnwindableViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, LobbyRoomViewCellDelegate {
+class LobbyRoomViewController: SpycodesViewController, UITableViewDelegate, UITableViewDataSource, MultipeerManagerDelegate, LobbyRoomViewCellDelegate {
     private let cellReuseIdentifier = "lobby-room-view-cell"
     private let trailingSpace: CGFloat = 35
     private let defaultTimeoutInterval: NSTimeInterval = 10     // Default timeout after 10 seconds
