@@ -13,12 +13,15 @@ class AccessCodeViewController: SpycodesViewController, UITextFieldDelegate, UIT
     private var refreshTimer: NSTimer?
     
     private var lastTextFieldWasFilled = false
+    private var keyboardDidShow = false
     
     private var accessCodeCharacters = NSMutableArray(capacity: SpycodesConstant.accessCodeLength)
     
     @IBOutlet weak var statusLabel: SpycodesStatusLabel!
     @IBOutlet weak var textFieldsView: UIView!
-    @IBOutlet var browseLobbyButton: UIButton!
+    @IBOutlet weak var browseLobbyButton: UIButton!
+    @IBOutlet weak var statusLabelTopMarginConstraint: NSLayoutConstraint!
+    @IBOutlet weak var contentViewVerticalCenterConstraint: NSLayoutConstraint!
     
     @IBAction func unwindToAccessCode(sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
@@ -76,6 +79,10 @@ class AccessCodeViewController: SpycodesViewController, UITextFieldDelegate, UIT
                 textField.backspaceDelegate = nil
                 textField.removeTarget(self, action: #selector(AccessCodeViewController.textFieldDidChange), forControlEvents: .EditingChanged)
                 textField.text = nil
+                
+                if textField.isFirstResponder() {
+                    textField.resignFirstResponder()
+                }
             }
         }
     }
@@ -132,6 +139,24 @@ class AccessCodeViewController: SpycodesViewController, UITextFieldDelegate, UIT
                 nextTextField.becomeFirstResponder()
             }
         }
+    }
+    
+    override func keyboardWillShow(notification: NSNotification) {
+        if self.keyboardDidShow {
+            return
+        }
+        
+        if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            self.keyboardDidShow = true
+            
+            let rect = frame.CGRectValue()
+            self.contentViewVerticalCenterConstraint.constant -= rect.height / 2 - self.statusLabelTopMarginConstraint.constant
+        }
+    }
+    
+    override func keyboardWillHide(notification: NSNotification) {
+        self.keyboardDidShow = false
+        self.contentViewVerticalCenterConstraint.constant = 0
     }
     
     private func joinRoomWithAccessCode(accessCode: String) {

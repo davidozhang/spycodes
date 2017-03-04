@@ -183,7 +183,6 @@
 			isa = PBXGroup;
 			children = (
 				637FF0091E0F0B620076DC25 /* AccessCodeViewController.swift */,
-				63AB64CC1D4880A600C4FF22 /* SettingsViewController.swift */,
 				637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */,
 				636DC0CD1E67D90800DE5EC6 /* HelpViewController.swift */,
 				63FDED311D2648D600142780 /* PlayerNameViewController.swift */,
@@ -192,6 +191,7 @@
 				63FDED3A1D265BAF00142780 /* PregameRoomViewController.swift */,
 				632A254A1E46FD330003D1F8 /* PregameSettingsViewController.swift */,
 				632A25461E46F0DC0003D1F8 /* ScoreViewController.swift */,
+				63AB64CC1D4880A600C4FF22 /* SettingsViewController.swift */,
 				632E4E451E6A91C8004E7180 /* SpycodesPopoverViewController.swift */,
 				6329BEFC1E512ADF004E6151 /* SpycodesViewController.swift */,
 			);

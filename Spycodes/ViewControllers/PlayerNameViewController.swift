@@ -2,6 +2,8 @@ import UIKit
 
 class PlayerNameViewController: SpycodesViewController, UITextFieldDelegate {
     @IBOutlet weak var userNameTextField: SpycodesTextField!
+    @IBOutlet weak var headerLabelTopMarginConstraint: NSLayoutConstraint!
+    @IBOutlet weak var userNameTextFieldVerticalCenterConstraint: NSLayoutConstraint!
     
     // MARK: Actions
     @IBAction func unwindToPlayerName(sender: UIStoryboardSegue) {
@@ -44,6 +46,17 @@ class PlayerNameViewController: SpycodesViewController, UITextFieldDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super._prepareForSegue(segue, sender: sender)
+    }
+    
+    override func keyboardWillShow(notification: NSNotification) {
+        if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let rect = frame.CGRectValue()
+            self.userNameTextFieldVerticalCenterConstraint.constant -= rect.height / 2 - self.headerLabelTopMarginConstraint.constant
+        }
+    }
+    
+    override func keyboardWillHide(notification: NSNotification) {        
+        self.userNameTextFieldVerticalCenterConstraint.constant = 0
     }
     
     // MARK: UITextFieldDelegate

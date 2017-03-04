@@ -17,6 +17,20 @@ class SpycodesViewController: UIViewController {
         self.dimView.backgroundColor = UIColor.dimBackgroundColor()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SpycodesViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SpycodesViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
     func _prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if unwindingSegue {
             return
@@ -63,4 +77,10 @@ class SpycodesViewController: UIViewController {
             view.removeFromSuperview()
         }
     }
+    
+    @objc
+    func keyboardWillShow(notification: NSNotification) {}
+    
+    @objc
+    func keyboardWillHide(notification: NSNotification) {}
 }

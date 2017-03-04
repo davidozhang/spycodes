@@ -31,7 +31,7 @@ class SpycodesString {
     static let clueHeader = "Clue"
     static let guessHeader = "Guessing Time"
     static let roundEndHeader = "Round End"
-    static let endingHeader = "Ending Message"
+    static let endingHeader = "Final Note"
     
     // Help view description strings
     static let minigameIntro = "You are currently playing a Minigame with your teammates on Team Red versus a CPU player on Team Blue. There are 22 words in total: 8 Red, 7 Blue, 6 Neutral (white) and 1 Assassin (black)."

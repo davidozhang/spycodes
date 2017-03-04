@@ -64,8 +64,6 @@ class GameRoomViewController: SpycodesViewController, UICollectionViewDelegateFl
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.broadcastEssentialData), name: SpycodesNotificationKey.autoConvertBystanderCardNotificationkey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.broadcastEssentialData), name: SpycodesNotificationKey.autoEliminateNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.didEndGameWithNotification), name: SpycodesNotificationKey.minigameGameOverNotificationKey, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameRoomViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -118,8 +116,6 @@ class GameRoomViewController: SpycodesViewController, UICollectionViewDelegateFl
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.autoConvertBystanderCardNotificationkey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.autoEliminateNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SpycodesNotificationKey.minigameGameOverNotificationKey, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -335,16 +331,14 @@ class GameRoomViewController: SpycodesViewController, UICollectionViewDelegateFl
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    @objc
-    private func keyboardWillShow(notification: NSNotification) {
+    override func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let rect = frame.CGRectValue()
             self.bottomBarViewBottomMarginConstraint.constant = rect.size.height
         }
     }
-    
-    @objc
-    private func keyboardWillHide(notification: NSNotification) {
+                                                                                                                                                                                                                                                                                                                             
+    override func keyboardWillHide(notification: NSNotification) {
         self.bottomBarViewBottomMarginConstraint.constant = 0
     }
     
