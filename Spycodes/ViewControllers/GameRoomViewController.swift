@@ -30,7 +30,6 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
     @IBOutlet weak var cardsRemainingLabel: UILabel!
     @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet weak var actionButton: SpycodesRoundedButton!
-    @IBOutlet weak var infoButton: UIButton!
     
     // MARK: Actions
     @IBAction func onBackButtonTapped(sender: AnyObject) {
@@ -46,13 +45,6 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
         } else if actionButtonState == .EndRound {
             self.didEndRound()
         }
-    }
-    
-    @IBAction func onInfoButtonTapped(sender: AnyObject) {
-        let alertController = UIAlertController(title: "End Round", message: SpycodesString.endRoundInfo, preferredStyle: .Alert)
-        let confirmAction = UIAlertAction(title: "Dismiss", style: .Default, handler: { (action: UIAlertAction) in })
-        alertController.addAction(confirmAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     deinit {
@@ -242,7 +234,6 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
     
     private func updateActionButton() {
         if self.actionButtonState == .Confirm {
-            self.infoButton.hidden = true
             self.actionButton.setTitle("Confirm", forState: .Normal)
             
             if !Player.instance.isClueGiver() || Round.instance.currentTeam != Player.instance.team {
@@ -257,11 +248,10 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
                 self.actionButton.enabled = false
             }
         } else if self.actionButtonState == .EndRound {
-            self.infoButton.hidden = false
             self.actionButton.setTitle("End Round", forState: .Normal)
             self.stopButtonAnimations()
             
-            if Round.instance.currentTeam == Player.instance.team && Round.instance.numberOfGuesses > 0 {
+            if Round.instance.currentTeam == Player.instance.team {
                 self.actionButton.alpha = 1.0
                 self.actionButton.enabled = true
             }
@@ -450,7 +440,6 @@ class GameRoomViewController: UnwindableViewController, UICollectionViewDelegate
             return
         }
         
-        Round.instance.numberOfGuesses += 1
         CardCollection.instance.cards[indexPath.row].setSelected()
         self.broadcastEssentialData()
         
