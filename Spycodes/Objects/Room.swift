@@ -61,7 +61,7 @@ class Room: NSObject, NSCoding {
     private static func generateAccessCode() -> String {
         var result = ""
         
-        for _ in 0 ..< SpycodesConstant.accessCodeLength {
+        for _ in 0 ..< SCConstants.accessCodeLength {
             let rand = arc4random_uniform(UInt32(Room.accessCodeAllowedCharacters.length))
             var nextChar = Room.accessCodeAllowedCharacters.characterAtIndex(Int(rand))
             result += NSString(characters: &nextChar, length: 1) as String
