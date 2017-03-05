@@ -1,6 +1,6 @@
 class SpycodesString {
-    static let completed = "👍"
-    static let incomplete = "😔"
+    static let completed = "✅"
+    static let incomplete = "❌"
     
     static let returningToMainMenuHeader = "Returning to Main Menu"
     static let returningToPregameRoomHeader = "Returning to Pregame Room"
