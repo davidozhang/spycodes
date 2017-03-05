@@ -8,120 +8,118 @@
 
 /* Begin PBXBuildFile section */
 		630674181D51BE9800339EC8 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630674171D51BE9800339EC8 /* Timer.swift */; };
-		63067C6A1D2982DD0005AC66 /* LobbyRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */; };
+		63067C6A1D2982DD0005AC66 /* SCLobbyRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C691D2982DD0005AC66 /* SCLobbyRoomViewCell.swift */; };
 		63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C6B1D2996B60005AC66 /* Lobby.swift */; };
 		630681A31D62FD6300539773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A21D62FD6300539773 /* LaunchScreen.storyboard */; };
-		630681A51D62FD6900539773 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A41D62FD6900539773 /* Main.storyboard */; };
-		6329BEFD1E512ADF004E6151 /* SpycodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6329BEFC1E512ADF004E6151 /* SpycodesViewController.swift */; };
-		6329BEFF1E615ADD004E6151 /* LobbyRoomState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6329BEFE1E615ADD004E6151 /* LobbyRoomState.swift */; };
-		632A25471E46F0DC0003D1F8 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A25461E46F0DC0003D1F8 /* ScoreViewController.swift */; };
-		632A254B1E46FD330003D1F8 /* PregameSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A254A1E46FD330003D1F8 /* PregameSettingsViewController.swift */; };
-		632E4E461E6A91C8004E7180 /* SpycodesPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E4E451E6A91C8004E7180 /* SpycodesPopoverViewController.swift */; };
-		63486DA51D3DDC9800795403 /* SpycodesArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA41D3DDC9800795403 /* SpycodesArray.swift */; };
+		630681A51D62FD6900539773 /* Spycodes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A41D62FD6900539773 /* Spycodes.storyboard */; };
+		6329BEFD1E512ADF004E6151 /* SCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6329BEFC1E512ADF004E6151 /* SCViewController.swift */; };
+		632A25471E46F0DC0003D1F8 /* SCScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A25461E46F0DC0003D1F8 /* SCScoreViewController.swift */; };
+		632A254B1E46FD330003D1F8 /* SCPregameSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A254A1E46FD330003D1F8 /* SCPregameSettingsViewController.swift */; };
+		632E4E461E6A91C8004E7180 /* SCPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E4E451E6A91C8004E7180 /* SCPopoverViewController.swift */; };
+		63486DA51D3DDC9800795403 /* SCArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA41D3DDC9800795403 /* SCArray.swift */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
-		636B61F71E331CA100F660C0 /* ActionButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B61F61E331CA100F660C0 /* ActionButtonState.swift */; };
-		636DC0CE1E67D90800DE5EC6 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636DC0CD1E67D90800DE5EC6 /* HelpViewController.swift */; };
-		637310CB1D3B292F00EA5D7A /* GameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */; };
+		636DC0CE1E67D90800DE5EC6 /* SCHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636DC0CD1E67D90800DE5EC6 /* SCHelpViewController.swift */; };
+		637310CB1D3B292F00EA5D7A /* SCGameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637310CA1D3B292F00EA5D7A /* SCGameRoomViewController.swift */; };
 		6378C6511D4C6F46009BD0CA /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6378C6501D4C6F46009BD0CA /* GameMode.swift */; };
 		637F195F1D46010E00FB4047 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F195E1D46010E00FB4047 /* Statistics.swift */; };
-		637FF00A1E0F0B620076DC25 /* AccessCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637FF0091E0F0B620076DC25 /* AccessCodeViewController.swift */; };
-		63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* MultipeerManager.swift */; };
-		639BA3161D38AFEF002F2A18 /* SpycodesUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BA3151D38AFEF002F2A18 /* SpycodesUIColor.swift */; };
-		639E17661E00E50E00640540 /* VersionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17651E00E50E00640540 /* VersionViewCell.swift */; };
-		639E17681E00EADB00640540 /* SectionHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17671E00EADB00640540 /* SectionHeaderViewCell.swift */; };
-		63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* AppDelegate.swift */; };
+		637FF00A1E0F0B620076DC25 /* SCAccessCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637FF0091E0F0B620076DC25 /* SCAccessCodeViewController.swift */; };
+		63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */; };
+		639BA3161D38AFEF002F2A18 /* SCUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BA3151D38AFEF002F2A18 /* SCUIColor.swift */; };
+		639E17661E00E50E00640540 /* SCVersionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17651E00E50E00640540 /* SCVersionViewCell.swift */; };
+		639E17681E00EADB00640540 /* SCSectionHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */; };
+		63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* SCAppDelegate.swift */; };
 		63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D0D1D1A5713005A2914 /* Assets.xcassets */; };
-		63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */; };
-		63AB64CD1D4880A600C4FF22 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB64CC1D4880A600C4FF22 /* SettingsViewController.swift */; };
+		63A04D1F1D1A7F3E005A2914 /* SCMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1E1D1A7F3E005A2914 /* SCMainMenuViewController.swift */; };
+		63AB64CD1D4880A600C4FF22 /* SCSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB64CC1D4880A600C4FF22 /* SCSettingsViewController.swift */; };
 		63CA90CA1D4280CC0027CA80 /* Spycodes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63CA90C81D4280CC0027CA80 /* Spycodes.xcdatamodeld */; };
-		63CB4F081D3CB3C300211D3A /* GameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F071D3CB3C300211D3A /* GameRoomViewCell.swift */; };
+		63CB4F081D3CB3C300211D3A /* SCGameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */; };
 		63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F091D3CB88D00211D3A /* Card.swift */; };
 		63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */; };
-		63CB4F0E1D3DAA5A00211D3A /* SpycodesWordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0D1D3DAA5A00211D3A /* SpycodesWordList.swift */; };
-		63D256811E6BA6BA0061D80C /* SpycodesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256761E6BA6BA0061D80C /* SpycodesButton.swift */; };
-		63D256821E6BA6BA0061D80C /* SpycodesHelpDescriptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256771E6BA6BA0061D80C /* SpycodesHelpDescriptionLabel.swift */; };
-		63D256831E6BA6BA0061D80C /* SpycodesInfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256781E6BA6BA0061D80C /* SpycodesInfoLabel.swift */; };
-		63D256841E6BA6BA0061D80C /* SpycodesLargeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256791E6BA6BA0061D80C /* SpycodesLargeLabel.swift */; };
-		63D256851E6BA6BA0061D80C /* SpycodesLogoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567A1E6BA6BA0061D80C /* SpycodesLogoLabel.swift */; };
-		63D256861E6BA6BA0061D80C /* SpycodesNavigationBarBoldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567B1E6BA6BA0061D80C /* SpycodesNavigationBarBoldLabel.swift */; };
-		63D256871E6BA6BA0061D80C /* SpycodesNavigationBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567C1E6BA6BA0061D80C /* SpycodesNavigationBarLabel.swift */; };
-		63D256881E6BA6BA0061D80C /* SpycodesRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567D1E6BA6BA0061D80C /* SpycodesRoundedButton.swift */; };
-		63D256891E6BA6BA0061D80C /* SpycodesSingleCharacterTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567E1E6BA6BA0061D80C /* SpycodesSingleCharacterTextField.swift */; };
-		63D2568A1E6BA6BA0061D80C /* SpycodesStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567F1E6BA6BA0061D80C /* SpycodesStatusLabel.swift */; };
-		63D2568B1E6BA6BA0061D80C /* SpycodesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256801E6BA6BA0061D80C /* SpycodesTextField.swift */; };
+		63CB4F0E1D3DAA5A00211D3A /* SCWordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0D1D3DAA5A00211D3A /* SCWordList.swift */; };
+		63D256811E6BA6BA0061D80C /* SCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256761E6BA6BA0061D80C /* SCButton.swift */; };
+		63D256821E6BA6BA0061D80C /* SCHelpDescriptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256771E6BA6BA0061D80C /* SCHelpDescriptionLabel.swift */; };
+		63D256831E6BA6BA0061D80C /* SCInfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256781E6BA6BA0061D80C /* SCInfoLabel.swift */; };
+		63D256841E6BA6BA0061D80C /* SCLargeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256791E6BA6BA0061D80C /* SCLargeLabel.swift */; };
+		63D256851E6BA6BA0061D80C /* SCLogoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567A1E6BA6BA0061D80C /* SCLogoLabel.swift */; };
+		63D256861E6BA6BA0061D80C /* SCNavigationBarBoldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567B1E6BA6BA0061D80C /* SCNavigationBarBoldLabel.swift */; };
+		63D256871E6BA6BA0061D80C /* SCNavigationBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567C1E6BA6BA0061D80C /* SCNavigationBarLabel.swift */; };
+		63D256881E6BA6BA0061D80C /* SCRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567D1E6BA6BA0061D80C /* SCRoundedButton.swift */; };
+		63D256891E6BA6BA0061D80C /* SCSingleCharacterTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567E1E6BA6BA0061D80C /* SCSingleCharacterTextField.swift */; };
+		63D2568A1E6BA6BA0061D80C /* SCStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567F1E6BA6BA0061D80C /* SCStatusLabel.swift */; };
+		63D2568B1E6BA6BA0061D80C /* SCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256801E6BA6BA0061D80C /* SCTextField.swift */; };
 		63EAF9A31D41D2E700BC554E /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A21D41D2E700BC554E /* Round.swift */; };
-		63EAF9A51D41F1C400BC554E /* AudioToolboxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A41D41F1C400BC554E /* AudioToolboxManager.swift */; };
-		63FDED321D2648D600142780 /* PlayerNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED311D2648D600142780 /* PlayerNameViewController.swift */; };
+		63EAF9A51D41F1C400BC554E /* SCAudioToolboxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A41D41F1C400BC554E /* SCAudioToolboxManager.swift */; };
+		63F2B7A61E6BB8F600F602D1 /* SCStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F2B7A51E6BB8F600F602D1 /* SCStates.swift */; };
+		63FDED321D2648D600142780 /* SCPlayerNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED311D2648D600142780 /* SCPlayerNameViewController.swift */; };
 		63FDED351D264BE800142780 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED341D264BE800142780 /* Player.swift */; };
 		63FDED371D264CF300142780 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED361D264CF300142780 /* Team.swift */; };
 		63FDED391D26557200142780 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED381D26557200142780 /* Room.swift */; };
-		63FDED3B1D265BAF00142780 /* PregameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED3A1D265BAF00142780 /* PregameRoomViewController.swift */; };
-		63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */; };
-		63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED451D28B47200142780 /* PregameRoomViewCell.swift */; };
-		63FF7CE81D4E8471002D2B97 /* SpycodesNotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */; };
+		63FDED3B1D265BAF00142780 /* SCPregameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED3A1D265BAF00142780 /* SCPregameRoomViewController.swift */; };
+		63FDED411D265F6D00142780 /* SCLobbyRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED401D265F6D00142780 /* SCLobbyRoomViewController.swift */; };
+		63FDED461D28B47200142780 /* SCPregameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED451D28B47200142780 /* SCPregameRoomViewCell.swift */; };
+		63FF7CE81D4E8471002D2B97 /* SCNotificationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FF7CE71D4E8471002D2B97 /* SCNotificationKeys.swift */; };
 		63FFA4B11D50635B006A181B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63FFA4B01D50635B006A181B /* GameKit.framework */; };
-		CF33BE2D1D6D04EA00D0E105 /* SpycodesConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF33BE2C1D6D04EA00D0E105 /* SpycodesConstant.swift */; };
-		CF5A8DCC1D46D95F0032F581 /* SpycodesString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8DCB1D46D95F0032F581 /* SpycodesString.swift */; };
+		CF33BE2D1D6D04EA00D0E105 /* SCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF33BE2C1D6D04EA00D0E105 /* SCConstants.swift */; };
+		CF5A8DCC1D46D95F0032F581 /* SCStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5A8DCB1D46D95F0032F581 /* SCStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		630674171D51BE9800339EC8 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Objects/Timer.swift; sourceTree = "<group>"; };
-		63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyRoomViewCell.swift; path = Views/LobbyRoomViewCell.swift; sourceTree = "<group>"; };
+		63067C691D2982DD0005AC66 /* SCLobbyRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLobbyRoomViewCell.swift; path = Views/SCLobbyRoomViewCell.swift; sourceTree = "<group>"; };
 		63067C6B1D2996B60005AC66 /* Lobby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lobby.swift; path = Objects/Lobby.swift; sourceTree = "<group>"; };
 		630681A21D62FD6300539773 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		630681A41D62FD6900539773 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Storyboards/Main.storyboard; sourceTree = "<group>"; };
-		6329BEFC1E512ADF004E6151 /* SpycodesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesViewController.swift; path = ViewControllers/SpycodesViewController.swift; sourceTree = "<group>"; };
-		6329BEFE1E615ADD004E6151 /* LobbyRoomState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyRoomState.swift; path = Objects/LobbyRoomState.swift; sourceTree = "<group>"; };
-		632A25461E46F0DC0003D1F8 /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreViewController.swift; path = ViewControllers/ScoreViewController.swift; sourceTree = "<group>"; };
-		632A254A1E46FD330003D1F8 /* PregameSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PregameSettingsViewController.swift; path = ViewControllers/PregameSettingsViewController.swift; sourceTree = "<group>"; };
-		632E4E451E6A91C8004E7180 /* SpycodesPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesPopoverViewController.swift; path = ViewControllers/SpycodesPopoverViewController.swift; sourceTree = "<group>"; };
-		63486DA41D3DDC9800795403 /* SpycodesArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesArray.swift; path = Extensions/SpycodesArray.swift; sourceTree = "<group>"; };
+		630681A41D62FD6900539773 /* Spycodes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Spycodes.storyboard; path = Storyboards/Spycodes.storyboard; sourceTree = "<group>"; };
+		6329BEFC1E512ADF004E6151 /* SCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCViewController.swift; path = ViewControllers/SCViewController.swift; sourceTree = "<group>"; };
+		632A25461E46F0DC0003D1F8 /* SCScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCScoreViewController.swift; path = ViewControllers/SCScoreViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		632A254A1E46FD330003D1F8 /* SCPregameSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCPregameSettingsViewController.swift; path = ViewControllers/SCPregameSettingsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		632E4E451E6A91C8004E7180 /* SCPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPopoverViewController.swift; path = ViewControllers/SCPopoverViewController.swift; sourceTree = "<group>"; };
+		63486DA41D3DDC9800795403 /* SCArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCArray.swift; path = Extensions/SCArray.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
-		636B61F61E331CA100F660C0 /* ActionButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionButtonState.swift; path = Objects/ActionButtonState.swift; sourceTree = "<group>"; };
-		636DC0CD1E67D90800DE5EC6 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HelpViewController.swift; path = ViewControllers/HelpViewController.swift; sourceTree = "<group>"; };
-		637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameRoomViewController.swift; path = ViewControllers/GameRoomViewController.swift; sourceTree = "<group>"; };
+		636DC0CD1E67D90800DE5EC6 /* SCHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCHelpViewController.swift; path = ViewControllers/SCHelpViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		637310CA1D3B292F00EA5D7A /* SCGameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCGameRoomViewController.swift; path = ViewControllers/SCGameRoomViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		6378C6501D4C6F46009BD0CA /* GameMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameMode.swift; path = Objects/GameMode.swift; sourceTree = "<group>"; };
 		637F195E1D46010E00FB4047 /* Statistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Statistics.swift; path = Objects/Statistics.swift; sourceTree = "<group>"; };
-		637FF0091E0F0B620076DC25 /* AccessCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccessCodeViewController.swift; path = ViewControllers/AccessCodeViewController.swift; sourceTree = "<group>"; };
-		63920A361D3090D60073E7F7 /* MultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipeerManager.swift; path = Managers/MultipeerManager.swift; sourceTree = "<group>"; };
-		639BA3151D38AFEF002F2A18 /* SpycodesUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesUIColor.swift; path = Extensions/SpycodesUIColor.swift; sourceTree = "<group>"; };
-		639E17651E00E50E00640540 /* VersionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VersionViewCell.swift; path = Views/VersionViewCell.swift; sourceTree = "<group>"; };
-		639E17671E00EADB00640540 /* SectionHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionHeaderViewCell.swift; path = Views/SectionHeaderViewCell.swift; sourceTree = "<group>"; };
+		637FF0091E0F0B620076DC25 /* SCAccessCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCAccessCodeViewController.swift; path = ViewControllers/SCAccessCodeViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCMultipeerManager.swift; path = Managers/SCMultipeerManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		639BA3151D38AFEF002F2A18 /* SCUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUIColor.swift; path = Extensions/SCUIColor.swift; sourceTree = "<group>"; };
+		639E17651E00E50E00640540 /* SCVersionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCVersionViewCell.swift; path = Views/SCVersionViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCSectionHeaderViewCell.swift; path = Views/SCSectionHeaderViewCell.swift; sourceTree = "<group>"; };
 		63A04D001D1A5713005A2914 /* Spycodes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spycodes.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		63A04D031D1A5713005A2914 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		63A04D031D1A5713005A2914 /* SCAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SCAppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63A04D0D1D1A5713005A2914 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63A04D121D1A5713005A2914 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainMenuViewController.swift; path = ViewControllers/MainMenuViewController.swift; sourceTree = "<group>"; };
-		63AB64CC1D4880A600C4FF22 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = ViewControllers/SettingsViewController.swift; sourceTree = "<group>"; };
+		63A04D1E1D1A7F3E005A2914 /* SCMainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCMainMenuViewController.swift; path = ViewControllers/SCMainMenuViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63AB64CC1D4880A600C4FF22 /* SCSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCSettingsViewController.swift; path = ViewControllers/SCSettingsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63CA90C91D4280CC0027CA80 /* Codenames.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Codenames.xcdatamodel; sourceTree = "<group>"; };
-		63CB4F071D3CB3C300211D3A /* GameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameRoomViewCell.swift; path = Views/GameRoomViewCell.swift; sourceTree = "<group>"; };
+		63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCGameRoomViewCell.swift; path = Views/SCGameRoomViewCell.swift; sourceTree = "<group>"; };
 		63CB4F091D3CB88D00211D3A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Objects/Card.swift; sourceTree = "<group>"; };
-		63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardCollection.swift; path = Objects/CardCollection.swift; sourceTree = "<group>"; };
-		63CB4F0D1D3DAA5A00211D3A /* SpycodesWordList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesWordList.swift; path = Extensions/SpycodesWordList.swift; sourceTree = "<group>"; };
-		63D256761E6BA6BA0061D80C /* SpycodesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesButton.swift; path = Utilities/SpycodesButton.swift; sourceTree = "<group>"; };
-		63D256771E6BA6BA0061D80C /* SpycodesHelpDescriptionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesHelpDescriptionLabel.swift; path = Utilities/SpycodesHelpDescriptionLabel.swift; sourceTree = "<group>"; };
-		63D256781E6BA6BA0061D80C /* SpycodesInfoLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesInfoLabel.swift; path = Utilities/SpycodesInfoLabel.swift; sourceTree = "<group>"; };
-		63D256791E6BA6BA0061D80C /* SpycodesLargeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesLargeLabel.swift; path = Utilities/SpycodesLargeLabel.swift; sourceTree = "<group>"; };
-		63D2567A1E6BA6BA0061D80C /* SpycodesLogoLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesLogoLabel.swift; path = Utilities/SpycodesLogoLabel.swift; sourceTree = "<group>"; };
-		63D2567B1E6BA6BA0061D80C /* SpycodesNavigationBarBoldLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesNavigationBarBoldLabel.swift; path = Utilities/SpycodesNavigationBarBoldLabel.swift; sourceTree = "<group>"; };
-		63D2567C1E6BA6BA0061D80C /* SpycodesNavigationBarLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesNavigationBarLabel.swift; path = Utilities/SpycodesNavigationBarLabel.swift; sourceTree = "<group>"; };
-		63D2567D1E6BA6BA0061D80C /* SpycodesRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesRoundedButton.swift; path = Utilities/SpycodesRoundedButton.swift; sourceTree = "<group>"; };
-		63D2567E1E6BA6BA0061D80C /* SpycodesSingleCharacterTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesSingleCharacterTextField.swift; path = Utilities/SpycodesSingleCharacterTextField.swift; sourceTree = "<group>"; };
-		63D2567F1E6BA6BA0061D80C /* SpycodesStatusLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesStatusLabel.swift; path = Utilities/SpycodesStatusLabel.swift; sourceTree = "<group>"; };
-		63D256801E6BA6BA0061D80C /* SpycodesTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesTextField.swift; path = Utilities/SpycodesTextField.swift; sourceTree = "<group>"; };
-		63EAF9A21D41D2E700BC554E /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Round.swift; path = Objects/Round.swift; sourceTree = "<group>"; };
-		63EAF9A41D41F1C400BC554E /* AudioToolboxManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioToolboxManager.swift; path = Managers/AudioToolboxManager.swift; sourceTree = "<group>"; };
-		63FDED311D2648D600142780 /* PlayerNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerNameViewController.swift; path = ViewControllers/PlayerNameViewController.swift; sourceTree = "<group>"; };
+		63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CardCollection.swift; path = Objects/CardCollection.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63CB4F0D1D3DAA5A00211D3A /* SCWordList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCWordList.swift; path = Extensions/SCWordList.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63D256761E6BA6BA0061D80C /* SCButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCButton.swift; path = Utilities/SCButton.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63D256771E6BA6BA0061D80C /* SCHelpDescriptionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCHelpDescriptionLabel.swift; path = Utilities/SCHelpDescriptionLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63D256781E6BA6BA0061D80C /* SCInfoLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCInfoLabel.swift; path = Utilities/SCInfoLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63D256791E6BA6BA0061D80C /* SCLargeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCLargeLabel.swift; path = Utilities/SCLargeLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63D2567A1E6BA6BA0061D80C /* SCLogoLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCLogoLabel.swift; path = Utilities/SCLogoLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63D2567B1E6BA6BA0061D80C /* SCNavigationBarBoldLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCNavigationBarBoldLabel.swift; path = Utilities/SCNavigationBarBoldLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63D2567C1E6BA6BA0061D80C /* SCNavigationBarLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCNavigationBarLabel.swift; path = Utilities/SCNavigationBarLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63D2567D1E6BA6BA0061D80C /* SCRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCRoundedButton.swift; path = Utilities/SCRoundedButton.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63D2567E1E6BA6BA0061D80C /* SCSingleCharacterTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCSingleCharacterTextField.swift; path = Utilities/SCSingleCharacterTextField.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63D2567F1E6BA6BA0061D80C /* SCStatusLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCStatusLabel.swift; path = Utilities/SCStatusLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63D256801E6BA6BA0061D80C /* SCTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCTextField.swift; path = Utilities/SCTextField.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63EAF9A21D41D2E700BC554E /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Round.swift; path = Objects/Round.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63EAF9A41D41F1C400BC554E /* SCAudioToolboxManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAudioToolboxManager.swift; path = Managers/SCAudioToolboxManager.swift; sourceTree = "<group>"; };
+		63F2B7A51E6BB8F600F602D1 /* SCStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCStates.swift; path = Extensions/SCStates.swift; sourceTree = "<group>"; };
+		63FDED311D2648D600142780 /* SCPlayerNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCPlayerNameViewController.swift; path = ViewControllers/SCPlayerNameViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63FDED341D264BE800142780 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = Objects/Player.swift; sourceTree = "<group>"; };
 		63FDED361D264CF300142780 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Objects/Team.swift; sourceTree = "<group>"; };
-		63FDED381D26557200142780 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Room.swift; path = Objects/Room.swift; sourceTree = "<group>"; };
-		63FDED3A1D265BAF00142780 /* PregameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PregameRoomViewController.swift; path = ViewControllers/PregameRoomViewController.swift; sourceTree = "<group>"; };
-		63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyRoomViewController.swift; path = ViewControllers/LobbyRoomViewController.swift; sourceTree = "<group>"; };
-		63FDED451D28B47200142780 /* PregameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PregameRoomViewCell.swift; path = Views/PregameRoomViewCell.swift; sourceTree = "<group>"; };
-		63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesNotificationKey.swift; path = Extensions/SpycodesNotificationKey.swift; sourceTree = "<group>"; };
+		63FDED381D26557200142780 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Room.swift; path = Objects/Room.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63FDED3A1D265BAF00142780 /* SCPregameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCPregameRoomViewController.swift; path = ViewControllers/SCPregameRoomViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63FDED401D265F6D00142780 /* SCLobbyRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCLobbyRoomViewController.swift; path = ViewControllers/SCLobbyRoomViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63FDED451D28B47200142780 /* SCPregameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameRoomViewCell.swift; path = Views/SCPregameRoomViewCell.swift; sourceTree = "<group>"; };
+		63FF7CE71D4E8471002D2B97 /* SCNotificationKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCNotificationKeys.swift; path = Extensions/SCNotificationKeys.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63FFA4B01D50635B006A181B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		CF33BE2C1D6D04EA00D0E105 /* SpycodesConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesConstant.swift; path = Extensions/SpycodesConstant.swift; sourceTree = "<group>"; };
-		CF5A8DCB1D46D95F0032F581 /* SpycodesString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpycodesString.swift; path = Extensions/SpycodesString.swift; sourceTree = "<group>"; };
+		CF33BE2C1D6D04EA00D0E105 /* SCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCConstants.swift; path = Extensions/SCConstants.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		CF5A8DCB1D46D95F0032F581 /* SCStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCStrings.swift; path = Extensions/SCStrings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,8 +137,8 @@
 		63920A351D3090BC0073E7F7 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				63EAF9A41D41F1C400BC554E /* AudioToolboxManager.swift */,
-				63920A361D3090D60073E7F7 /* MultipeerManager.swift */,
+				63EAF9A41D41F1C400BC554E /* SCAudioToolboxManager.swift */,
+				63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -165,7 +163,7 @@
 		63A04D021D1A5713005A2914 /* Spycodes */ = {
 			isa = PBXGroup;
 			children = (
-				63A04D031D1A5713005A2914 /* AppDelegate.swift */,
+				63A04D031D1A5713005A2914 /* SCAppDelegate.swift */,
 				63A04D0D1D1A5713005A2914 /* Assets.xcassets */,
 				63A04D121D1A5713005A2914 /* Info.plist */,
 				63CA90C81D4280CC0027CA80 /* Spycodes.xcdatamodeld */,
@@ -183,18 +181,18 @@
 		63A04D1A1D1A7F25005A2914 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				637FF0091E0F0B620076DC25 /* AccessCodeViewController.swift */,
-				637310CA1D3B292F00EA5D7A /* GameRoomViewController.swift */,
-				636DC0CD1E67D90800DE5EC6 /* HelpViewController.swift */,
-				63FDED311D2648D600142780 /* PlayerNameViewController.swift */,
-				63FDED401D265F6D00142780 /* LobbyRoomViewController.swift */,
-				63A04D1E1D1A7F3E005A2914 /* MainMenuViewController.swift */,
-				63FDED3A1D265BAF00142780 /* PregameRoomViewController.swift */,
-				632A254A1E46FD330003D1F8 /* PregameSettingsViewController.swift */,
-				632A25461E46F0DC0003D1F8 /* ScoreViewController.swift */,
-				63AB64CC1D4880A600C4FF22 /* SettingsViewController.swift */,
-				632E4E451E6A91C8004E7180 /* SpycodesPopoverViewController.swift */,
-				6329BEFC1E512ADF004E6151 /* SpycodesViewController.swift */,
+				637FF0091E0F0B620076DC25 /* SCAccessCodeViewController.swift */,
+				637310CA1D3B292F00EA5D7A /* SCGameRoomViewController.swift */,
+				636DC0CD1E67D90800DE5EC6 /* SCHelpViewController.swift */,
+				63FDED401D265F6D00142780 /* SCLobbyRoomViewController.swift */,
+				63A04D1E1D1A7F3E005A2914 /* SCMainMenuViewController.swift */,
+				63FDED311D2648D600142780 /* SCPlayerNameViewController.swift */,
+				632E4E451E6A91C8004E7180 /* SCPopoverViewController.swift */,
+				63FDED3A1D265BAF00142780 /* SCPregameRoomViewController.swift */,
+				632A254A1E46FD330003D1F8 /* SCPregameSettingsViewController.swift */,
+				632A25461E46F0DC0003D1F8 /* SCScoreViewController.swift */,
+				63AB64CC1D4880A600C4FF22 /* SCSettingsViewController.swift */,
+				6329BEFC1E512ADF004E6151 /* SCViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -202,12 +200,13 @@
 		63A04D1B1D1A7F2B005A2914 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				63486DA41D3DDC9800795403 /* SpycodesArray.swift */,
-				CF33BE2C1D6D04EA00D0E105 /* SpycodesConstant.swift */,
-				CF5A8DCB1D46D95F0032F581 /* SpycodesString.swift */,
-				63FF7CE71D4E8471002D2B97 /* SpycodesNotificationKey.swift */,
-				63CB4F0D1D3DAA5A00211D3A /* SpycodesWordList.swift */,
-				639BA3151D38AFEF002F2A18 /* SpycodesUIColor.swift */,
+				63486DA41D3DDC9800795403 /* SCArray.swift */,
+				CF33BE2C1D6D04EA00D0E105 /* SCConstants.swift */,
+				63FF7CE71D4E8471002D2B97 /* SCNotificationKeys.swift */,
+				63F2B7A51E6BB8F600F602D1 /* SCStates.swift */,
+				CF5A8DCB1D46D95F0032F581 /* SCStrings.swift */,
+				639BA3151D38AFEF002F2A18 /* SCUIColor.swift */,
+				63CB4F0D1D3DAA5A00211D3A /* SCWordList.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -215,17 +214,17 @@
 		63D256751E6BA6600061D80C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				63D256761E6BA6BA0061D80C /* SpycodesButton.swift */,
-				63D256771E6BA6BA0061D80C /* SpycodesHelpDescriptionLabel.swift */,
-				63D256781E6BA6BA0061D80C /* SpycodesInfoLabel.swift */,
-				63D256791E6BA6BA0061D80C /* SpycodesLargeLabel.swift */,
-				63D2567A1E6BA6BA0061D80C /* SpycodesLogoLabel.swift */,
-				63D2567B1E6BA6BA0061D80C /* SpycodesNavigationBarBoldLabel.swift */,
-				63D2567C1E6BA6BA0061D80C /* SpycodesNavigationBarLabel.swift */,
-				63D2567D1E6BA6BA0061D80C /* SpycodesRoundedButton.swift */,
-				63D2567E1E6BA6BA0061D80C /* SpycodesSingleCharacterTextField.swift */,
-				63D2567F1E6BA6BA0061D80C /* SpycodesStatusLabel.swift */,
-				63D256801E6BA6BA0061D80C /* SpycodesTextField.swift */,
+				63D256761E6BA6BA0061D80C /* SCButton.swift */,
+				63D256771E6BA6BA0061D80C /* SCHelpDescriptionLabel.swift */,
+				63D256781E6BA6BA0061D80C /* SCInfoLabel.swift */,
+				63D256791E6BA6BA0061D80C /* SCLargeLabel.swift */,
+				63D2567A1E6BA6BA0061D80C /* SCLogoLabel.swift */,
+				63D2567B1E6BA6BA0061D80C /* SCNavigationBarBoldLabel.swift */,
+				63D2567C1E6BA6BA0061D80C /* SCNavigationBarLabel.swift */,
+				63D2567D1E6BA6BA0061D80C /* SCRoundedButton.swift */,
+				63D2567E1E6BA6BA0061D80C /* SCSingleCharacterTextField.swift */,
+				63D2567F1E6BA6BA0061D80C /* SCStatusLabel.swift */,
+				63D256801E6BA6BA0061D80C /* SCTextField.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -234,7 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				630681A21D62FD6300539773 /* LaunchScreen.storyboard */,
-				630681A41D62FD6900539773 /* Main.storyboard */,
+				630681A41D62FD6900539773 /* Spycodes.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -242,13 +241,11 @@
 		63FDED331D264BD800142780 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				636B61F61E331CA100F660C0 /* ActionButtonState.swift */,
 				63CB4F091D3CB88D00211D3A /* Card.swift */,
 				63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */,
 				6378C6501D4C6F46009BD0CA /* GameMode.swift */,
 				63486DA81D3DE29C00795403 /* Key.swift */,
 				63067C6B1D2996B60005AC66 /* Lobby.swift */,
-				6329BEFE1E615ADD004E6151 /* LobbyRoomState.swift */,
 				63FDED341D264BE800142780 /* Player.swift */,
 				63FDED381D26557200142780 /* Room.swift */,
 				63EAF9A21D41D2E700BC554E /* Round.swift */,
@@ -262,11 +259,11 @@
 		63FDED421D28B42300142780 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				63CB4F071D3CB3C300211D3A /* GameRoomViewCell.swift */,
-				63067C691D2982DD0005AC66 /* LobbyRoomViewCell.swift */,
-				63FDED451D28B47200142780 /* PregameRoomViewCell.swift */,
-				639E17671E00EADB00640540 /* SectionHeaderViewCell.swift */,
-				639E17651E00E50E00640540 /* VersionViewCell.swift */,
+				63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */,
+				63067C691D2982DD0005AC66 /* SCLobbyRoomViewCell.swift */,
+				63FDED451D28B47200142780 /* SCPregameRoomViewCell.swift */,
+				639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */,
+				639E17651E00E50E00640540 /* SCVersionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -336,7 +333,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				630681A51D62FD6900539773 /* Main.storyboard in Resources */,
+				630681A51D62FD6900539773 /* Spycodes.storyboard in Resources */,
 				63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */,
 				630681A31D62FD6300539773 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -349,57 +346,56 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				636DC0CE1E67D90800DE5EC6 /* HelpViewController.swift in Sources */,
+				636DC0CE1E67D90800DE5EC6 /* SCHelpViewController.swift in Sources */,
 				63FDED371D264CF300142780 /* Team.swift in Sources */,
 				637F195F1D46010E00FB4047 /* Statistics.swift in Sources */,
-				63FDED3B1D265BAF00142780 /* PregameRoomViewController.swift in Sources */,
+				63FDED3B1D265BAF00142780 /* SCPregameRoomViewController.swift in Sources */,
 				63EAF9A31D41D2E700BC554E /* Round.swift in Sources */,
-				632A254B1E46FD330003D1F8 /* PregameSettingsViewController.swift in Sources */,
+				632A254B1E46FD330003D1F8 /* SCPregameSettingsViewController.swift in Sources */,
 				63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */,
-				63A04D1F1D1A7F3E005A2914 /* MainMenuViewController.swift in Sources */,
-				63D256841E6BA6BA0061D80C /* SpycodesLargeLabel.swift in Sources */,
-				63D256871E6BA6BA0061D80C /* SpycodesNavigationBarLabel.swift in Sources */,
+				63A04D1F1D1A7F3E005A2914 /* SCMainMenuViewController.swift in Sources */,
+				63D256841E6BA6BA0061D80C /* SCLargeLabel.swift in Sources */,
+				63D256871E6BA6BA0061D80C /* SCNavigationBarLabel.swift in Sources */,
 				630674181D51BE9800339EC8 /* Timer.swift in Sources */,
-				CF5A8DCC1D46D95F0032F581 /* SpycodesString.swift in Sources */,
-				632E4E461E6A91C8004E7180 /* SpycodesPopoverViewController.swift in Sources */,
+				CF5A8DCC1D46D95F0032F581 /* SCStrings.swift in Sources */,
+				632E4E461E6A91C8004E7180 /* SCPopoverViewController.swift in Sources */,
 				63486DA91D3DE29C00795403 /* Key.swift in Sources */,
-				6329BEFF1E615ADD004E6151 /* LobbyRoomState.swift in Sources */,
-				63D256811E6BA6BA0061D80C /* SpycodesButton.swift in Sources */,
-				63FF7CE81D4E8471002D2B97 /* SpycodesNotificationKey.swift in Sources */,
-				63CB4F0E1D3DAA5A00211D3A /* SpycodesWordList.swift in Sources */,
-				63486DA51D3DDC9800795403 /* SpycodesArray.swift in Sources */,
-				637310CB1D3B292F00EA5D7A /* GameRoomViewController.swift in Sources */,
-				63D2568B1E6BA6BA0061D80C /* SpycodesTextField.swift in Sources */,
-				63D256831E6BA6BA0061D80C /* SpycodesInfoLabel.swift in Sources */,
-				636B61F71E331CA100F660C0 /* ActionButtonState.swift in Sources */,
-				632A25471E46F0DC0003D1F8 /* ScoreViewController.swift in Sources */,
-				63D256891E6BA6BA0061D80C /* SpycodesSingleCharacterTextField.swift in Sources */,
-				63CB4F081D3CB3C300211D3A /* GameRoomViewCell.swift in Sources */,
-				63D256851E6BA6BA0061D80C /* SpycodesLogoLabel.swift in Sources */,
-				639E17661E00E50E00640540 /* VersionViewCell.swift in Sources */,
-				CF33BE2D1D6D04EA00D0E105 /* SpycodesConstant.swift in Sources */,
+				63D256811E6BA6BA0061D80C /* SCButton.swift in Sources */,
+				63FF7CE81D4E8471002D2B97 /* SCNotificationKeys.swift in Sources */,
+				63CB4F0E1D3DAA5A00211D3A /* SCWordList.swift in Sources */,
+				63486DA51D3DDC9800795403 /* SCArray.swift in Sources */,
+				637310CB1D3B292F00EA5D7A /* SCGameRoomViewController.swift in Sources */,
+				63D2568B1E6BA6BA0061D80C /* SCTextField.swift in Sources */,
+				63D256831E6BA6BA0061D80C /* SCInfoLabel.swift in Sources */,
+				632A25471E46F0DC0003D1F8 /* SCScoreViewController.swift in Sources */,
+				63D256891E6BA6BA0061D80C /* SCSingleCharacterTextField.swift in Sources */,
+				63CB4F081D3CB3C300211D3A /* SCGameRoomViewCell.swift in Sources */,
+				63D256851E6BA6BA0061D80C /* SCLogoLabel.swift in Sources */,
+				639E17661E00E50E00640540 /* SCVersionViewCell.swift in Sources */,
+				CF33BE2D1D6D04EA00D0E105 /* SCConstants.swift in Sources */,
 				63CA90CA1D4280CC0027CA80 /* Spycodes.xcdatamodeld in Sources */,
-				63920A371D3090D60073E7F7 /* MultipeerManager.swift in Sources */,
-				63D256881E6BA6BA0061D80C /* SpycodesRoundedButton.swift in Sources */,
-				63EAF9A51D41F1C400BC554E /* AudioToolboxManager.swift in Sources */,
+				63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */,
+				63F2B7A61E6BB8F600F602D1 /* SCStates.swift in Sources */,
+				63D256881E6BA6BA0061D80C /* SCRoundedButton.swift in Sources */,
+				63EAF9A51D41F1C400BC554E /* SCAudioToolboxManager.swift in Sources */,
 				63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */,
-				6329BEFD1E512ADF004E6151 /* SpycodesViewController.swift in Sources */,
-				63D256861E6BA6BA0061D80C /* SpycodesNavigationBarBoldLabel.swift in Sources */,
-				637FF00A1E0F0B620076DC25 /* AccessCodeViewController.swift in Sources */,
-				63D2568A1E6BA6BA0061D80C /* SpycodesStatusLabel.swift in Sources */,
-				63FDED411D265F6D00142780 /* LobbyRoomViewController.swift in Sources */,
-				639BA3161D38AFEF002F2A18 /* SpycodesUIColor.swift in Sources */,
+				6329BEFD1E512ADF004E6151 /* SCViewController.swift in Sources */,
+				63D256861E6BA6BA0061D80C /* SCNavigationBarBoldLabel.swift in Sources */,
+				637FF00A1E0F0B620076DC25 /* SCAccessCodeViewController.swift in Sources */,
+				63D2568A1E6BA6BA0061D80C /* SCStatusLabel.swift in Sources */,
+				63FDED411D265F6D00142780 /* SCLobbyRoomViewController.swift in Sources */,
+				639BA3161D38AFEF002F2A18 /* SCUIColor.swift in Sources */,
 				63FDED391D26557200142780 /* Room.swift in Sources */,
-				63D256821E6BA6BA0061D80C /* SpycodesHelpDescriptionLabel.swift in Sources */,
+				63D256821E6BA6BA0061D80C /* SCHelpDescriptionLabel.swift in Sources */,
 				6378C6511D4C6F46009BD0CA /* GameMode.swift in Sources */,
-				63067C6A1D2982DD0005AC66 /* LobbyRoomViewCell.swift in Sources */,
-				639E17681E00EADB00640540 /* SectionHeaderViewCell.swift in Sources */,
-				63FDED461D28B47200142780 /* PregameRoomViewCell.swift in Sources */,
+				63067C6A1D2982DD0005AC66 /* SCLobbyRoomViewCell.swift in Sources */,
+				639E17681E00EADB00640540 /* SCSectionHeaderViewCell.swift in Sources */,
+				63FDED461D28B47200142780 /* SCPregameRoomViewCell.swift in Sources */,
 				63FDED351D264BE800142780 /* Player.swift in Sources */,
-				63A04D041D1A5713005A2914 /* AppDelegate.swift in Sources */,
-				63AB64CD1D4880A600C4FF22 /* SettingsViewController.swift in Sources */,
+				63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */,
+				63AB64CD1D4880A600C4FF22 /* SCSettingsViewController.swift in Sources */,
 				63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */,
-				63FDED321D2648D600142780 /* PlayerNameViewController.swift in Sources */,
+				63FDED321D2648D600142780 /* SCPlayerNameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
