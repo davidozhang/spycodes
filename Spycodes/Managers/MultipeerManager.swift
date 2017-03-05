@@ -1,6 +1,6 @@
 import MultipeerConnectivity
 
-protocol MultipeerManagerDelegate {
+protocol MultipeerManagerDelegate: class {
     func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String:String]?)
     func lostPeer(peerID: MCPeerID)
     func didReceiveData(data: NSData, fromPeer peerID: MCPeerID)
@@ -10,7 +10,7 @@ protocol MultipeerManagerDelegate {
 
 class MultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
     static let instance = MultipeerManager()
-    var delegate: MultipeerManagerDelegate?
+    weak var delegate: MultipeerManagerDelegate?
     
     private let serviceType = "Spycodes"
     private var discoveryInfo: [String: String]?

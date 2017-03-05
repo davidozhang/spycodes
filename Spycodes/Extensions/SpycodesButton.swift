@@ -6,7 +6,7 @@ class SpycodesButton: UIButton {
         super.init(coder: aDecoder)
         self.contentEdgeInsets = UIEdgeInsetsMake(10, 30, 10, 30)
         self.titleLabel?.textColor = UIColor.darkGrayColor()
-        self.titleLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 24)
+        self.titleLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 20)
         self.layer.borderColor = UIColor.darkGrayColor().CGColor
         self.layer.borderWidth = 1.0
         self.layer.cornerRadius = 5.0
@@ -16,11 +16,11 @@ class SpycodesButton: UIButton {
         didSet {
             if highlighted {
                 self.backgroundColor = UIColor.darkGrayColor()
-                self.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Highlighted)
+                self.titleLabel?.textColor = UIColor.whiteColor()
             }
             else {
                 self.backgroundColor = UIColor.whiteColor()
-                self.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+                self.titleLabel?.textColor = UIColor.darkGrayColor()
             }
         }
     }

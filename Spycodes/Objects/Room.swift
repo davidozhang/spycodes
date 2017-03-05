@@ -3,18 +3,23 @@ import MultipeerConnectivity
 
 class Room: NSObject, NSCoding {
     static var instance = Room()
+    static let CPU_UUID = "CPU"
+    static let accessCodeAllowedCharacters: NSString = "abcdefghijklmnopqrstuvwxyz"
     
     var name: String
     var players = [Player]()
     var connectedPeers = [MCPeerID: String]()
     
     private var uuid: String
+    private var accessCode: String
     
     override init() {
-        self.name = "Default"
         self.uuid = NSUUID().UUIDString
+        self.accessCode = Room.generateAccessCode()
+        self.name = self.accessCode     // Backwards compatibility with v1.0
     }
     
+    // Backwards compatibility with v1.0
     convenience init(name: String, uuid: String, players: [Player], connectedPeers: [MCPeerID: String]) {
         self.init()
         self.name = name
@@ -23,9 +28,26 @@ class Room: NSObject, NSCoding {
         self.connectedPeers = connectedPeers
     }
     
+    convenience init(name: String, uuid: String, accessCode: String, players: [Player], connectedPeers: [MCPeerID: String]) {
+        self.init()
+        self.name = name
+        self.uuid = uuid
+        self.accessCode = accessCode
+        self.players = players
+        self.connectedPeers = connectedPeers
+    }
+    
     required convenience init?(coder aDecoder: NSCoder) {
-        if let name = aDecoder.decodeObjectForKey("name") as? String, uuid = aDecoder.decodeObjectForKey("uuid") as? String, players = aDecoder.decodeObjectForKey("players") as? [Player], connectedPeers = aDecoder.decodeObjectForKey("connectedPeers") as? [MCPeerID: String] {
-            self.init(name: name, uuid: uuid, players: players, connectedPeers: connectedPeers)
+        if let name = aDecoder.decodeObjectForKey("name") as? String,
+               uuid = aDecoder.decodeObjectForKey("uuid") as? String,
+               players = aDecoder.decodeObjectForKey("players") as? [Player],
+               connectedPeers = aDecoder.decodeObjectForKey("connectedPeers") as? [MCPeerID: String] {
+            if let accessCode = aDecoder.decodeObjectForKey("accessCode") as? String {
+                self.init(name: name, uuid: uuid, accessCode: accessCode, players: players, connectedPeers: connectedPeers)
+            } else {
+                // Backwards compatibility with v1.0
+                self.init(name: name, uuid: uuid, players: players, connectedPeers: connectedPeers)
+            }
         } else {
             self.init()
         }
@@ -36,11 +58,29 @@ class Room: NSObject, NSCoding {
         self.connectedPeers.removeAll()
     }
     
+    private static func generateAccessCode() -> String {
+        var result = ""
+        
+        for _ in 0 ..< SpycodesConstant.accessCodeLength {
+            let rand = arc4random_uniform(UInt32(Room.accessCodeAllowedCharacters.length))
+            var nextChar = Room.accessCodeAllowedCharacters.characterAtIndex(Int(rand))
+            result += NSString(characters: &nextChar, length: 1) as String
+        }
+        
+        return result
+    }
+    
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.name, forKey: "name")
         aCoder.encodeObject(self.uuid, forKey: "uuid")
+        aCoder.encodeObject(self.accessCode, forKey: "accessCode")
         aCoder.encodeObject(self.players, forKey: "players")
         aCoder.encodeObject(self.connectedPeers, forKey: "connectedPeers")
+    }
+    
+    func generateNewAccessCode() {
+        self.accessCode = Room.generateAccessCode()
+        self.name = self.accessCode
     }
     
     func getUUID() -> String {
@@ -51,8 +91,21 @@ class Room: NSObject, NSCoding {
         self.uuid = uuid
     }
     
+    func getAccessCode() -> String {
+        return self.accessCode
+    }
+    
     func addPlayer(player: Player) {
         self.players.append(player)
+    }
+    
+    func addCPUPlayer() {
+        let cpu = Player(name: "CPU", uuid: Room.CPU_UUID, team: Team.Blue, clueGiver: true, host: false)
+        self.players.append(cpu)
+    }
+    
+    func removeCPUPlayer() {
+        self.removePlayerWithUUID(Room.CPU_UUID)
     }
     
     func getPlayerWithUUID(uuid: String) -> Player? {
@@ -85,29 +138,43 @@ class Room: NSObject, NSCoding {
         return self.getPlayerWithUUID(uuid) != nil
     }
     
-    func canStartGame() -> Bool {
-        if GameMode.instance.mode == GameMode.Mode.RegularGame && self.players.count >= 4 {
+    func teamSizesValid() -> Bool {
+        if GameMode.instance.mode == GameMode.Mode.RegularGame {
             let redValid = self.players.filter({($0 as Player).team == Team.Red}).count >= 2
             let blueValid = self.players.filter({($0 as Player).team == Team.Blue}).count >= 2
             
-            if redValid && blueValid && self.getClueGiverUUIDForTeam(Team.Red) != nil && self.getClueGiverUUIDForTeam(Team.Blue) != nil {
+            if redValid && blueValid {
                 return true
             }
-            else {
-                return false
-            }
-        }
-        else if GameMode.instance.mode == GameMode.Mode.MiniGame && (self.players.count == 2 || self.players.count == 3) {
-            if self.getClueGiverUUIDForTeam(Team.Red) != nil || self.getClueGiverUUIDForTeam(Team.Blue) != nil {
+            
+            return false
+        } else {    // Minigame
+            if self.players.count == 3 || self.players.count == 4 {
                 return true
             }
-            else {
-                return false
-            }
-        }
-        else {
+            
             return false
         }
+    }
+    
+    func cluegiversSelected() -> Bool {
+        if GameMode.instance.mode == GameMode.Mode.RegularGame {
+            if self.getClueGiverUUIDForTeam(Team.Red) != nil && self.getClueGiverUUIDForTeam(Team.Blue) != nil {
+                return true
+            }
+            
+            return false
+        } else {    // Minigame
+            if self.getClueGiverUUIDForTeam(Team.Red) != nil && self.getClueGiverUUIDForTeam(Team.Blue) != nil {
+                return true
+            }
+
+            return false
+        }
+    }
+    
+    func canStartGame() -> Bool {
+        return teamSizesValid() && cluegiversSelected()
     }
     
     func getClueGiverUUIDForTeam(team: Team) -> String? {
