@@ -194,7 +194,7 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
             return
         }
         
-        let maxRoomSize = GameMode.instance.mode == GameMode.Mode.RegularGame ? 8 : 3
+        let maxRoomSize = GameMode.instance.mode == GameMode.Mode.RegularGame ? SCConstants.regularGameMaxSize : SCConstants.minigameMaxSize
         
         if Room.instance.players.count >= maxRoomSize {
             SCMultipeerManager.instance.stopAdvertiser()
