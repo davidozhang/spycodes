@@ -47,8 +47,8 @@ class SpycodesString {
     static let playerClue = "A 1-word clue and number will show at the top once your leader is done coming up with it. The number represents the amount of words corresponding to that clue. You cannot talk or make eye contact with your leader!"
     static let playerGuess = "Now it is your turn to guess! You can tap End Round at any time. If your team guesses the Assassin word, then it is Game Over. Guessing an enemy team word will end the round. Guessing a neutral word will convert another neutral word into your team's word."
     
-    static let regularGameRoundEnd = "The other team will now follow the same process. Once they are done guessing they will hand the round back to your team. The round exchanges until one team guesses all its words."
-    static let minigameRoundEnd = "After each round ends, the CPU automatically eliminates one of its words and hands the round back to your team. Your teammates must try to guess all of your team's words before the CPU finishes all its words."
+    static let regularGameRoundEnd = "The other team will now follow the same process. Once they are done guessing they will hand the round back to your team. The round exchanges until one team guesses all of its words."
+    static let minigameRoundEnd = "After each round ends, the CPU automatically eliminates one of its words and hands the round back to your team. Your teammates must try to guess all of your team's words before the CPU finishes all of its words."
     static let regularGameEndMessage = "Your team's wins and losses are tracked after each game. Try to win as many games as possible!"
     static let minigameEndMessage = "Your best record is based on the number of words remaining on the CPU team after each successful game. Try to aim for as high a number as possible!"
 }
