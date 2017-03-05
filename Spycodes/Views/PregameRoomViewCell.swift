@@ -8,7 +8,6 @@ class PregameRoomViewCell: UITableViewCell {
     weak var delegate: PregameRoomViewCellDelegate?
     
     var index: Int?
-    var teamSelectionEnabled = true
     
     @IBOutlet weak var clueGiverImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -18,11 +17,7 @@ class PregameRoomViewCell: UITableViewCell {
         self.segmentedControl.tintColor = UIColor.darkGrayColor()
     }
     
-    @IBAction func segmentedControlToggled(sender: UISegmentedControl) {
-        if !teamSelectionEnabled {
-            return
-        }
-        
+    @IBAction func segmentedControlToggled(sender: UISegmentedControl) {        
         if let index = self.index {
             delegate?.teamUpdatedAtIndex(index, newTeam: Team(rawValue: segmentedControl.selectedSegmentIndex)!)
         }

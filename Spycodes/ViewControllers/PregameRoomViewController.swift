@@ -292,10 +292,8 @@ class PregameRoomViewController: SpycodesViewController, UITableViewDelegate, UI
         
         if Player.instance == playerAtIndex {
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 24)
-            cell.teamSelectionEnabled = true
         } else {
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 24)
-            cell.teamSelectionEnabled = false
         }
         
         if Player.instance.team == playerAtIndex.team {
@@ -303,7 +301,6 @@ class PregameRoomViewController: SpycodesViewController, UITableViewDelegate, UI
             cell.segmentedControl.alpha = 1.0
             
             if GameMode.instance.mode == GameMode.Mode.MiniGame {
-                cell.teamSelectionEnabled = false
                 cell.segmentedControl.alpha = 0.3
             }
             
