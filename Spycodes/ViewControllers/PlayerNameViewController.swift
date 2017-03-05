@@ -40,6 +40,12 @@ class PlayerNameViewController: SpycodesViewController, UITextFieldDelegate {
         self.userNameTextField.resignFirstResponder()
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.userNameTextFieldVerticalCenterConstraint.constant = 0
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -51,12 +57,8 @@ class PlayerNameViewController: SpycodesViewController, UITextFieldDelegate {
     override func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let rect = frame.CGRectValue()
-            self.userNameTextFieldVerticalCenterConstraint.constant -= rect.height / 2 - self.headerLabelTopMarginConstraint.constant
+            self.userNameTextFieldVerticalCenterConstraint.constant = -(rect.height / 2 - self.headerLabelTopMarginConstraint.constant)
         }
-    }
-    
-    override func keyboardWillHide(notification: NSNotification) {        
-        self.userNameTextFieldVerticalCenterConstraint.constant = 0
     }
     
     // MARK: UITextFieldDelegate

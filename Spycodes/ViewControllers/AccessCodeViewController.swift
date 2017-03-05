@@ -8,6 +8,7 @@ class AccessCodeViewController: SpycodesViewController, UITextFieldDelegate, UIT
     
     private let firstTag = 0
     private let lastTag = 3
+    @IBOutlet weak var statusLabelTopMarginConstraint: NSLayoutConstraint!
     
     private var timeoutTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -20,7 +21,7 @@ class AccessCodeViewController: SpycodesViewController, UITextFieldDelegate, UIT
     @IBOutlet weak var statusLabel: SpycodesStatusLabel!
     @IBOutlet weak var textFieldsView: UIView!
     @IBOutlet weak var browseLobbyButton: UIButton!
-    @IBOutlet weak var statusLabelTopMarginConstraint: NSLayoutConstraint!
+    @IBOutlet weak var headerTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentViewVerticalCenterConstraint: NSLayoutConstraint!
     
     @IBAction func unwindToAccessCode(sender: UIStoryboardSegue) {
@@ -150,12 +151,13 @@ class AccessCodeViewController: SpycodesViewController, UITextFieldDelegate, UIT
             self.keyboardDidShow = true
             
             let rect = frame.CGRectValue()
-            self.contentViewVerticalCenterConstraint.constant -= rect.height / 2 - self.statusLabelTopMarginConstraint.constant
+            self.contentViewVerticalCenterConstraint.constant = -(rect.height / 2 - self.headerTopMarginConstraint.constant - self.statusLabelTopMarginConstraint.constant)
         }
     }
     
     override func keyboardWillHide(notification: NSNotification) {
         self.keyboardDidShow = false
+        
         self.contentViewVerticalCenterConstraint.constant = 0
     }
     
