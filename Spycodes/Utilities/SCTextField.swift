@@ -8,6 +8,7 @@ class SCTextField: UITextField {
         self.autocorrectionType = UITextAutocorrectionType.No
         self.borderStyle = .None
         self.font = UIFont(name: "HelveticaNeue-Thin", size: 36)
+        self.tintColor = UIColor.lightGrayColor()
     }
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {

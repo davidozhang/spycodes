@@ -317,10 +317,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bm-f0-0Jn" userLabel="Content View">
                                 <rect key="frame" x="99" y="325" width="216" height="86"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhf-Nl-0FI" userLabel="Transparent View">
-                                        <rect key="frame" x="0.0" y="0.0" width="216" height="48"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qd-Lb-OLK">
                                         <rect key="frame" x="1.6666666666666714" y="56" width="213" height="30"/>
                                         <state key="normal" title="No access code? Browse lobby"/>
@@ -386,6 +382,10 @@
                                             <constraint firstItem="2oC-34-Lha" firstAttribute="centerY" secondItem="h0u-5Z-rSG" secondAttribute="centerY" id="ohp-ho-V5q"/>
                                             <constraint firstItem="2oC-34-Lha" firstAttribute="leading" secondItem="0hI-eT-gVT" secondAttribute="trailing" constant="8" id="tUe-Jy-odY"/>
                                         </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhf-Nl-0FI" userLabel="Transparent View">
+                                        <rect key="frame" x="0.0" y="0.0" width="216" height="48"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
