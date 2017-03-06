@@ -282,8 +282,13 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
             self.stopButtonAnimations()
             
             if Round.instance.currentTeam == Player.instance.team {
-                self.actionButton.alpha = 1.0
-                self.actionButton.enabled = true
+                if Round.instance.isClueSet() && Round.instance.isNumberOfWordsSet() {
+                    self.actionButton.alpha = 1.0
+                    self.actionButton.enabled = true
+                } else {
+                    self.actionButton.alpha = 0.4
+                    self.actionButton.enabled = false
+                }
             } else {
                 self.actionButton.alpha = 0.4
                 self.actionButton.enabled = false
@@ -481,8 +486,6 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
             }
             self.didEndRound()
         }
-        
-        
         
         if cardAtIndexTeam == Team.Assassin || CardCollection.instance.getCardsRemainingForTeam(opponentTeam!) == 0 {
             Round.instance.winningTeam = opponentTeam
