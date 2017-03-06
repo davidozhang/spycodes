@@ -1,6 +1,6 @@
 import UIKit
 
-class GameRoomViewCell: UICollectionViewCell {
+class SCGameRoomViewCell: UICollectionViewCell {
     
     @IBOutlet weak var wordLabel: UILabel!
     

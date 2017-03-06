@@ -423,7 +423,7 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as? GameRoomViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as? SCGameRoomViewCell else { return UICollectionViewCell() }
         let cardAtIndex = CardCollection.instance.cards[indexPath.row]
         
         cell.wordLabel.textColor = UIColor.whiteColor()

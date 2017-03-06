@@ -1023,7 +1023,7 @@
         <!--Game Room View Controller-->
         <scene sceneID="9GO-gD-g4A">
             <objects>
-                <viewController storyboardIdentifier="game-room-view-controller" id="yX4-d1-WHr" customClass="GameRoomViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="game-room-view-controller" id="yX4-d1-WHr" customClass="SCGameRoomViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DMO-Jt-Cx9"/>
                         <viewControllerLayoutGuide type="bottom" id="Zrc-Nf-5YD"/>
@@ -1042,7 +1042,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="game-room-view-cell" id="PYS-7b-Gca" customClass="SCGameRoomViewCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="game-room-view-cell" id="PYS-7b-Gca" customClass="SCGameRoomViewCell" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
