@@ -227,25 +227,8 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
             message += SCStrings.regularGameTeamSizeInfo
         }
         
-        message += "\n"
-        
-        // Cluegiver check
-        if Room.instance.cluegiversSelected() {
-            message += SCStrings.completed + " "
-        } else {
-            message += SCStrings.incomplete + " "
-        }
-        
-        if GameMode.instance.mode == GameMode.Mode.MiniGame {
-            message += SCStrings.minigameCluegiverInfo
-        } else {
-            message += SCStrings.regularGameCluegiverInfo
-        }
-        
-        if !Room.instance.cluegiversSelected() {
-            message += "\n\n"
-            message += SCStrings.selectLeaderInfo
-        }
+        message += "\n\n"
+        message += SCStrings.selectLeaderInfo
         
         return message
     }
