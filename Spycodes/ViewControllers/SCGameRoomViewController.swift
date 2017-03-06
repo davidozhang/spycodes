@@ -440,11 +440,18 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
             if cardAtIndex.getTeam() == .Neutral {
                 cell.wordLabel.textColor = UIColor.darkGrayColor()
             }
+            
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
+            
             let attributedString: NSMutableAttributedString =  NSMutableAttributedString(string: cardAtIndex.getWord())
+            
             if cardAtIndex.isSelected() {
+                cell.alpha = 0.4
                 attributedString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, attributedString.length))
+            } else {
+                cell.alpha = 1.0
             }
+            
             cell.wordLabel.attributedText = attributedString
             return cell
         }
