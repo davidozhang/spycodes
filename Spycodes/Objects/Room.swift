@@ -80,7 +80,13 @@ class Room: NSObject, NSCoding {
     
     func orderPlayers() {
         self.players.sortInPlace({ player1, player2 in
-            player1.team.rawValue < player2.team.rawValue
+            if player1.team.rawValue < player2.team.rawValue {
+                return true
+            } else if player1.team.rawValue == player2.team.rawValue {
+                return player1.isClueGiver()
+            } else {
+                return false
+            }
         })
     }
     
