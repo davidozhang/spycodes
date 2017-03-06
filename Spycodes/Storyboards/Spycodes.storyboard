@@ -944,56 +944,64 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="084-kN-Fki" customClass="SCRoundedButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="146.66666666666669" y="677" width="121.00000000000006" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Start Game">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="onStartGame:" destination="VkA-D4-zlT" eventType="touchUpInside" id="YTM-QW-2fA"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtz-7Q-ljm">
-                                <rect key="frame" x="277.66666666666669" y="680.66666666666663" width="35" height="35"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wg9-oN-c0G">
+                                <rect key="frame" x="125" y="677" width="164" height="41"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtz-7Q-ljm">
+                                        <rect key="frame" x="129" y="3" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="0eP-wH-o73"/>
+                                            <constraint firstAttribute="width" constant="35" id="WIO-yI-4pm"/>
+                                        </constraints>
+                                        <state key="normal" image="Checklist"/>
+                                        <connections>
+                                            <action selector="onStartGameInfoPressed:" destination="VkA-D4-zlT" eventType="touchUpInside" id="edm-nT-yWY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="084-kN-Fki" customClass="SCRoundedButton" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="121" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Start Game">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onStartGame:" destination="VkA-D4-zlT" eventType="touchUpInside" id="YTM-QW-2fA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="0eP-wH-o73"/>
-                                    <constraint firstAttribute="width" constant="35" id="WIO-yI-4pm"/>
+                                    <constraint firstAttribute="bottom" secondItem="084-kN-Fki" secondAttribute="bottom" id="7XZ-V6-kMf"/>
+                                    <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="wg9-oN-c0G" secondAttribute="top" id="Iy4-x1-Itk"/>
+                                    <constraint firstItem="084-kN-Fki" firstAttribute="leading" secondItem="wg9-oN-c0G" secondAttribute="leading" id="YdZ-vb-dAf"/>
+                                    <constraint firstItem="rtz-7Q-ljm" firstAttribute="centerY" secondItem="084-kN-Fki" secondAttribute="centerY" id="eML-fO-sbI"/>
+                                    <constraint firstItem="rtz-7Q-ljm" firstAttribute="leading" secondItem="084-kN-Fki" secondAttribute="trailing" constant="8" id="ff0-n9-yBy"/>
+                                    <constraint firstAttribute="trailing" secondItem="rtz-7Q-ljm" secondAttribute="trailing" id="zag-oE-iG6"/>
                                 </constraints>
-                                <state key="normal" image="Checklist"/>
-                                <connections>
-                                    <action selector="onStartGameInfoPressed:" destination="VkA-D4-zlT" eventType="touchUpInside" id="edm-nT-yWY"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tRc-cU-XFH" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="2KW-bT-HfL"/>
+                            <constraint firstItem="wg9-oN-c0G" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="3gU-lc-IfX"/>
+                            <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="wg9-oN-c0G" secondAttribute="bottom" constant="18" id="5jB-E0-FnI"/>
                             <constraint firstItem="Zpa-v1-yiA" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="4" id="8dz-30-dLK"/>
                             <constraint firstItem="2Qg-Lg-n4v" firstAttribute="centerY" secondItem="Zpa-v1-yiA" secondAttribute="centerY" id="9Ek-xP-CnH"/>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="top" secondItem="tRc-cU-XFH" secondAttribute="bottom" constant="16" id="9qr-Mh-zrG"/>
-                            <constraint firstItem="rtz-7Q-ljm" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leadingMargin" constant="10" id="C75-cN-z70"/>
                             <constraint firstItem="2Qg-Lg-n4v" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="Gll-fD-nwq"/>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" id="JyP-Fd-tkk"/>
-                            <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="084-kN-Fki" secondAttribute="bottom" constant="18" id="MLH-VU-LgP"/>
-                            <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="30" id="Vsi-Wx-L0j"/>
                             <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="50" id="XBE-ff-nvo"/>
                             <constraint firstItem="Zpa-v1-yiA" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="20" id="Yg8-eX-EZE"/>
                             <constraint firstItem="tRc-cU-XFH" firstAttribute="top" secondItem="2Qg-Lg-n4v" secondAttribute="bottom" id="d7x-EM-gxs"/>
-                            <constraint firstItem="rtz-7Q-ljm" firstAttribute="leading" secondItem="084-kN-Fki" secondAttribute="trailing" constant="10" id="e2C-hf-iKg"/>
-                            <constraint firstItem="084-kN-Fki" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="h2n-yW-c3a"/>
                             <constraint firstAttribute="trailing" secondItem="5W3-A0-VGs" secondAttribute="trailing" id="jKW-MX-l9L"/>
                             <constraint firstItem="Zpa-v1-yiA" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" constant="15" id="ks2-G4-0fn"/>
-                            <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="18" id="p1M-C1-aTZ"/>
-                            <constraint firstItem="rtz-7Q-ljm" firstAttribute="centerY" secondItem="084-kN-Fki" secondAttribute="centerY" id="rcs-aP-djG"/>
+                            <constraint firstItem="wg9-oN-c0G" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="18" id="ur5-3e-gon"/>
                             <constraint firstItem="2Qg-Lg-n4v" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="8" id="x3O-jC-Q5S"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Yg8-eX-EZE"/>
-                                <exclude reference="Vsi-Wx-L0j"/>
                                 <exclude reference="XBE-ff-nvo"/>
-                                <exclude reference="C75-cN-z70"/>
                             </mask>
                         </variation>
                     </view>
