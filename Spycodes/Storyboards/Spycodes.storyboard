@@ -955,12 +955,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtz-7Q-ljm">
-                                <rect key="frame" x="277.66666666666669" y="688" width="20" height="20"/>
+                                <rect key="frame" x="277.66666666666669" y="680.66666666666663" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="0eP-wH-o73"/>
-                                    <constraint firstAttribute="width" constant="20" id="WIO-yI-4pm"/>
+                                    <constraint firstAttribute="height" constant="35" id="0eP-wH-o73"/>
+                                    <constraint firstAttribute="width" constant="35" id="WIO-yI-4pm"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="Info"/>
+                                <state key="normal" image="Checklist"/>
                                 <connections>
                                     <action selector="onStartGameInfoPressed:" destination="VkA-D4-zlT" eventType="touchUpInside" id="edm-nT-yWY"/>
                                 </connections>
@@ -1358,10 +1358,10 @@
     <resources>
         <image name="App-Store" width="100" height="100"/>
         <image name="Back" width="100" height="100"/>
+        <image name="Checklist" width="50" height="50"/>
         <image name="Counter" width="100" height="100"/>
         <image name="Crown-Filled" width="100" height="100"/>
         <image name="Exit" width="42" height="42"/>
-        <image name="Info" width="100" height="100"/>
         <image name="Next" width="100" height="100"/>
         <image name="Question" width="100" height="100"/>
         <image name="Settings" width="100" height="100"/>

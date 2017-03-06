@@ -242,6 +242,11 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
             message += SCStrings.regularGameCluegiverInfo
         }
         
+        if !Room.instance.cluegiversSelected() {
+            message += "\n\n"
+            message += SCStrings.selectLeaderInfo
+        }
+        
         return message
     }
     
@@ -306,22 +311,15 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
         
         if Player.instance.team == playerAtIndex.team {
             cell.clueGiverImage.alpha = 1.0
-            
-            if Room.instance.getClueGiverUUIDForTeam(Player.instance.team) == nil {
-                cell.clueGiverImage.tintColor = UIColor.spycodesRedColor()
-            } else {
-                cell.clueGiverImage.tintColor = UIColor.darkGrayColor()
-            }
         } else {
             cell.clueGiverImage.alpha = 0.3
-            cell.segmentedControl.enabled = false
-            cell.clueGiverImage.tintColor = UIColor.darkGrayColor()
         }
 
         if playerAtIndex.isClueGiver() {
             cell.clueGiverImage.image = UIImage(named: "Crown-Filled")
+            cell.clueGiverImage.hidden = false
         } else {
-            cell.clueGiverImage.image = UIImage(named: "Crown-Unfilled")?.imageWithRenderingMode(.AlwaysTemplate)
+            cell.clueGiverImage.hidden = true
         }
         
         return cell
