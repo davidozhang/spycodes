@@ -78,7 +78,7 @@ class Room: NSObject, NSCoding {
         aCoder.encodeObject(self.connectedPeers, forKey: "connectedPeers")
     }
     
-    func orderPlayers() {
+    func refresh() {
         self.players.sortInPlace({ player1, player2 in
             if player1.team.rawValue < player2.team.rawValue {
                 return true
@@ -88,6 +88,14 @@ class Room: NSObject, NSCoding {
                 return false
             }
         })
+        
+        if self.getClueGiverUUIDForTeam(Team.Red) == nil {
+            self.autoAssignCluegiverForTeam(Team.Red)
+        }
+        
+        if self.getClueGiverUUIDForTeam(Team.Blue) == nil {
+            self.autoAssignCluegiverForTeam(Team.Blue)
+        }
     }
     
     func generateNewAccessCode() {
@@ -118,6 +126,15 @@ class Room: NSObject, NSCoding {
     
     func removeCPUPlayer() {
         self.removePlayerWithUUID(Room.CPU_UUID)
+    }
+    
+    func autoAssignCluegiverForTeam(team: Team) {
+        for player in self.players {
+            if player.team == team {
+                player.setIsClueGiver(true)
+                return
+            }
+        }
     }
     
     func getPlayerWithUUID(uuid: String) -> Player? {

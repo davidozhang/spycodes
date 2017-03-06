@@ -137,7 +137,7 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
             self.tableView.reloadData()
             self.checkRoom()
             
-            Room.instance.orderPlayers()
+            Room.instance.refresh()
         })
     }
     
