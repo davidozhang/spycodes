@@ -78,6 +78,12 @@ class Room: NSObject, NSCoding {
         aCoder.encodeObject(self.connectedPeers, forKey: "connectedPeers")
     }
     
+    func orderPlayers() {
+        self.players.sortInPlace({ player1, player2 in
+            player1.team.rawValue < player2.team.rawValue
+        })
+    }
+    
     func generateNewAccessCode() {
         self.accessCode = Room.generateAccessCode()
         self.name = self.accessCode

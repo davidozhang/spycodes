@@ -136,6 +136,8 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView.reloadData()
             self.checkRoom()
+            
+            Room.instance.orderPlayers()
         })
     }
     
@@ -292,17 +294,18 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
         
         if Player.instance == playerAtIndex {
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 24)
+            cell.segmentedControl.enabled = true
+            
+            if GameMode.instance.mode == GameMode.Mode.MiniGame {
+                cell.segmentedControl.enabled = false
+            }
         } else {
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 24)
+            cell.segmentedControl.enabled = false
         }
         
         if Player.instance.team == playerAtIndex.team {
             cell.clueGiverImage.alpha = 1.0
-            cell.segmentedControl.alpha = 1.0
-            
-            if GameMode.instance.mode == GameMode.Mode.MiniGame {
-                cell.segmentedControl.alpha = 0.3
-            }
             
             if Room.instance.getClueGiverUUIDForTeam(Player.instance.team) == nil {
                 cell.clueGiverImage.tintColor = UIColor.spycodesRedColor()
@@ -311,7 +314,7 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
             }
         } else {
             cell.clueGiverImage.alpha = 0.3
-            cell.segmentedControl.alpha = 0.3
+            cell.segmentedControl.enabled = false
             cell.clueGiverImage.tintColor = UIColor.darkGrayColor()
         }
 
