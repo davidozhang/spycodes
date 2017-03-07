@@ -291,12 +291,6 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 24)
             cell.segmentedControl.enabled = false
         }
-        
-        if Player.instance.team == playerAtIndex.team {
-            cell.clueGiverImage.alpha = 1.0
-        } else {
-            cell.clueGiverImage.alpha = 0.3
-        }
 
         if playerAtIndex.isClueGiver() {
             cell.clueGiverImage.image = UIImage(named: "Crown-Filled")
