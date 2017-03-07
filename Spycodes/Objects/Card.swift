@@ -1,14 +1,14 @@
 import Foundation
 
 class Card: NSObject, NSCoding {
-    private var word: String
-    private var selected: Bool
-    private var team: Team
+    fileprivate var word: String
+    fileprivate var selected: Bool
+    fileprivate var team: Team
     
     override init() {
         self.word = "Default"
         self.selected = false
-        self.team = Team.Red
+        self.team = Team.red
     }
     
     convenience init(word: String, selected: Bool, team: Team) {
@@ -28,18 +28,18 @@ class Card: NSObject, NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        if let word = aDecoder.decodeObjectForKey("word") as? String, team = aDecoder.decodeObjectForKey("team") as? Int {
-            let selected = aDecoder.decodeBoolForKey("selected")
+        if let word = aDecoder.decodeObject(forKey: "word") as? String, let team = aDecoder.decodeObject(forKey: "team") as? Int {
+            let selected = aDecoder.decodeBool(forKey: "selected")
             self.init(word: word, selected: selected, team: team)
         } else {
             self.init()
         }
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.word, forKey: "word")
-        aCoder.encodeBool(self.selected, forKey: "selected")
-        aCoder.encodeObject(self.team.rawValue, forKey: "team")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.word, forKey: "word")
+        aCoder.encode(self.selected, forKey: "selected")
+        aCoder.encode(self.team.rawValue, forKey: "team")
     }
     
     func getWord() -> String {
@@ -58,7 +58,7 @@ class Card: NSObject, NSCoding {
         return self.team
     }
     
-    func setTeam(team: Team) {
+    func setTeam(_ team: Team) {
         self.team = team
     }
 }

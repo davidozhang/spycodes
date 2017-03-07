@@ -2,12 +2,12 @@ import MultipeerConnectivity
 import UIKit
 
 class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, SCMultipeerManagerDelegate, SCPregameRoomViewCellDelegate {
-    private let cellReuseIdentifier = "pregame-room-view-cell"
-    private let modalWidth = UIScreen.mainScreen().bounds.width - 60
-    private let modalHeight = UIScreen.mainScreen().bounds.height/4
+    fileprivate let cellReuseIdentifier = "pregame-room-view-cell"
+    fileprivate let modalWidth = UIScreen.main.bounds.width - 60
+    fileprivate let modalHeight = UIScreen.main.bounds.height/4
     
-    private var broadcastTimer: NSTimer?
-    private var refreshTimer: NSTimer?
+    fileprivate var broadcastTimer: Foundation.Timer?
+    fileprivate var refreshTimer: Foundation.Timer?
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var accessCodeTypeLabel: SCNavigationBarLabel!
@@ -16,31 +16,31 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var startGameInfoButton: UIButton!
     
     // MARK: Actions
-    @IBAction func onScoreButtonTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("score-view", sender: self)
+    @IBAction func onScoreButtonTapped(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "score-view", sender: self)
     }
     
-    @IBAction func onSettingsButtonTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("pregame-settings", sender: self)
+    @IBAction func onSettingsButtonTapped(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "pregame-settings", sender: self)
     }
     
-    @IBAction func onStartGameInfoPressed(sender: AnyObject) {
+    @IBAction func onStartGameInfoPressed(_ sender: AnyObject) {
         let message = self.composeChecklist()
-        let alertController = UIAlertController(title: "Start Game", message: message, preferredStyle: .Alert)
-        let confirmAction = UIAlertAction(title: "Dismiss", style: .Default, handler: { (action: UIAlertAction) in })
+        let alertController = UIAlertController(title: "Start Game", message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Dismiss", style: .default, handler: { (action: UIAlertAction) in })
         alertController.addAction(confirmAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func onBackButtonTapped(sender: AnyObject) {
+    @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         self.returnToMainMenu(reason: nil)
     }
     
-    @IBAction func unwindToPregameRoom(segue: UIStoryboardSegue) {
+    @IBAction func unwindToPregameRoom(_ segue: UIStoryboardSegue) {
         super.unwindedToSelf(segue)
     }
     
-    @IBAction func onStartGame(sender: AnyObject) {
+    @IBAction func onStartGame(_ sender: AnyObject) {
         if Room.instance.canStartGame() {
             // Instantiate next game's card collection and round
             CardCollection.instance = CardCollection()
@@ -52,7 +52,7 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
     }
     
     deinit {
-        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
     
     // MARK: Lifecycle
@@ -68,10 +68,10 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
             SCMultipeerManager.instance.initBrowser()
         }
         
-        self.startGame.hidden = false
-        self.startGameInfoButton.hidden = false
+        self.startGame.isHidden = false
+        self.startGameInfoButton.isHidden = false
         self.startGame.alpha = 0.3
-        self.startGame.enabled = false
+        self.startGame.isEnabled = false
         
         if Room.instance.name != Room.instance.getAccessCode() {
             self.accessCodeTypeLabel.text = "Room Name: "
@@ -82,7 +82,7 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Unwindable view controller identifier
@@ -102,13 +102,13 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
                 Room.instance.connectedPeers[peerID] = Player.instance.getUUID()
             }
             
-            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(SCPregameRoomViewController.broadcastEssentialData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
+            self.broadcastTimer = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(SCPregameRoomViewController.broadcastEssentialData), userInfo: nil, repeats: true)      // Broadcast host's room every 2 seconds
         }
         
-        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(SCPregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
+        self.refreshTimer = Foundation.Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(SCPregameRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh room every second
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         if Player.instance.isHost() {
@@ -119,7 +119,7 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
         self.refreshTimer?.invalidate()
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         self.tableView.dataSource = nil
@@ -132,8 +132,8 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
     
     // MARK: Private
     @objc
-    private func refreshView() {
-        dispatch_async(dispatch_get_main_queue(), {
+    fileprivate func refreshView() {
+        DispatchQueue.main.async(execute: {
             self.tableView.reloadData()
             self.checkRoom()
             
@@ -142,61 +142,61 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
     }
     
     @objc
-    private func broadcastEssentialData() {
-        var data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+    fileprivate func broadcastEssentialData() {
+        var data = NSKeyedArchiver.archivedData(withRootObject: Room.instance)
         SCMultipeerManager.instance.broadcastData(data)
         
-        data = NSKeyedArchiver.archivedDataWithRootObject(GameMode.instance)
+        data = NSKeyedArchiver.archivedData(withRootObject: GameMode.instance)
         SCMultipeerManager.instance.broadcastData(data)
     }
     
-    private func broadcastOptionalData(object: NSObject) {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(object)
+    fileprivate func broadcastOptionalData(_ object: NSObject) {
+        let data = NSKeyedArchiver.archivedData(withRootObject: object)
         SCMultipeerManager.instance.broadcastData(data)
     }
     
-    private func goToGame() {
-        dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("game-room", sender: self)
+    fileprivate func goToGame() {
+        DispatchQueue.main.async(execute: {
+            self.performSegue(withIdentifier: "game-room", sender: self)
         })
     }
     
-    private func goToMainMenu() {
-        dispatch_async(dispatch_get_main_queue(), {
+    fileprivate func goToMainMenu() {
+        DispatchQueue.main.async(execute: {
             self.performUnwindSegue(true, completionHandler: { () in
                 SCMultipeerManager.instance.terminate()
             })
         })
     }
     
-    private func returnToMainMenu(reason reason: String?) {
+    fileprivate func returnToMainMenu(reason: String?) {
         if reason == nil {
             self.goToMainMenu()
             return
         }
         
-        let alertController = UIAlertController(title: "Returning To Main Menu", message: reason, preferredStyle: .Alert)
-        let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
+        let alertController = UIAlertController(title: "Returning To Main Menu", message: reason, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
             self.goToMainMenu()
         })
         alertController.addAction(confirmAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
-    private func checkRoom() {
+    fileprivate func checkRoom() {
         if Room.instance.canStartGame() {
             self.startGame.alpha = 1.0
-            self.startGame.enabled = true
+            self.startGame.isEnabled = true
         } else {
             self.startGame.alpha = 0.3
-            self.startGame.enabled = false
+            self.startGame.isEnabled = false
         }
         
         if !Player.instance.isHost() {
             return
         }
         
-        let maxRoomSize = GameMode.instance.mode == GameMode.Mode.RegularGame ? SCConstants.regularGameMaxSize : SCConstants.minigameMaxSize
+        let maxRoomSize = GameMode.instance.mode == GameMode.Mode.regularGame ? SCConstants.regularGameMaxSize : SCConstants.minigameMaxSize
         
         if Room.instance.players.count >= maxRoomSize {
             SCMultipeerManager.instance.stopAdvertiser()
@@ -211,7 +211,7 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
         }
     }
     
-    private func composeChecklist() -> String {
+    fileprivate func composeChecklist() -> String {
         var message = ""
         
         // Team size check
@@ -221,7 +221,7 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
             message += SCStrings.incomplete + " "
         }
         
-        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+        if GameMode.instance.mode == GameMode.Mode.miniGame {
             message += SCStrings.minigameTeamSizeInfo
         } else {
             message += SCStrings.regularGameTeamSizeInfo
@@ -234,25 +234,25 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
     }
     
     // MARK: Popover Presentation Controller Delegate
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     
-    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         super.hideDimView()
         popoverPresentationController.delegate = nil
     }
     
     // MARK: Segue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super._prepareForSegue(segue, sender: sender)
         
         // All segues identified here should be forward direction only
-        if let vc = segue.destinationViewController as? SCPopoverViewController {
+        if let vc = segue.destination as? SCPopoverViewController {
             super.showDimView()
             
             vc.rootViewController = self
-            vc.modalPresentationStyle = .Popover
+            vc.modalPresentationStyle = .popover
             vc.preferredContentSize = CGSize(width: self.modalWidth, height: self.modalHeight)
 
             if let popvc = vc.popoverPresentationController {
@@ -265,8 +265,8 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
     }
     
     // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as? SCPregameRoomViewCell else { return UITableViewCell() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as? SCPregameRoomViewCell else { return UITableViewCell() }
         
         let playerAtIndex = Room.instance.players[indexPath.row]
         
@@ -274,7 +274,7 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
         cell.index = indexPath.row
         cell.delegate = self
         
-        if playerAtIndex.team == Team.Red {
+        if playerAtIndex.team == Team.red {
             cell.segmentedControl.selectedSegmentIndex = 0
         } else {
             cell.segmentedControl.selectedSegmentIndex = 1
@@ -282,27 +282,27 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
         
         if Player.instance == playerAtIndex {
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 24)
-            cell.segmentedControl.enabled = true
+            cell.segmentedControl.isEnabled = true
             
-            if GameMode.instance.mode == GameMode.Mode.MiniGame {
-                cell.segmentedControl.enabled = false
+            if GameMode.instance.mode == GameMode.Mode.miniGame {
+                cell.segmentedControl.isEnabled = false
             }
         } else {
             cell.nameLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 24)
-            cell.segmentedControl.enabled = false
+            cell.segmentedControl.isEnabled = false
         }
 
         if playerAtIndex.isClueGiver() {
             cell.clueGiverImage.image = UIImage(named: "Crown-Filled")
-            cell.clueGiverImage.hidden = false
+            cell.clueGiverImage.isHidden = false
         } else {
-            cell.clueGiverImage.hidden = true
+            cell.clueGiverImage.isHidden = true
         }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let playerAtIndex = Room.instance.players[indexPath.row]
         let team = playerAtIndex.team
         
@@ -327,16 +327,16 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
         self.broadcastEssentialData()
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Room.instance.players.count
     }
     
     // MARK: SCMultipeerManagerDelegate
-    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+    func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         if let info = info {
             if info["joinRoomWithUUID"] == Room.instance.getUUID() ||
                info["joinRoomWithAccessCode"] == Room.instance.getAccessCode() {
@@ -346,43 +346,43 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
         }
     }
     
-    func lostPeer(peerID: MCPeerID) {}
+    func lostPeer(_ peerID: MCPeerID) {}
     
-    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
-        if let player = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Player {
+    func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
+        if let player = NSKeyedUnarchiver.unarchiveObject(with: data) as? Player {
             Room.instance.connectedPeers[peerID] = player.getUUID()
             if Player.instance.isHost() {
                 Room.instance.addPlayer(player)
             }
         }
-        else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
+        else if let room = NSKeyedUnarchiver.unarchiveObject(with: data) as? Room {
             Room.instance = room
             
             if let player = Room.instance.getPlayerWithUUID(Player.instance.getUUID()) {
                 Player.instance = player
             }
         }
-        else if let gameMode = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? GameMode {
+        else if let gameMode = NSKeyedUnarchiver.unarchiveObject(with: data) as? GameMode {
             GameMode.instance = gameMode
         }
-        else if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
+        else if let cardCollection = NSKeyedUnarchiver.unarchiveObject(with: data) as? CardCollection {
             CardCollection.instance = cardCollection
         }
-        else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
+        else if let round = NSKeyedUnarchiver.unarchiveObject(with: data) as? Round {
             Round.instance = round
             // TODO: Improve Round handling logic
             if !Round.instance.abort {
                 self.goToGame()
             }
         }
-        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
+        else if let statistics = NSKeyedUnarchiver.unarchiveObject(with: data) as? Statistics {
             Statistics.instance = statistics
         }
     }
     
-    func newPeerAddedToSession(peerID: MCPeerID) {}
+    func newPeerAddedToSession(_ peerID: MCPeerID) {}
     
-    func peerDisconnectedFromSession(peerID: MCPeerID) {
+    func peerDisconnectedFromSession(_ peerID: MCPeerID) {
         if let playerUUID = Room.instance.connectedPeers[peerID] {
             if let player = Room.instance.getPlayerWithUUID(playerUUID) {
                 // Room has been terminated if host player is disconnected
@@ -394,12 +394,12 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
             }
             
             Room.instance.removePlayerWithUUID(playerUUID)
-            Room.instance.connectedPeers.removeValueForKey(peerID)
+            Room.instance.connectedPeers.removeValue(forKey: peerID)
         }
     }
     
     // MARK: SCPregameRoomViewCellDelegate
-    func teamUpdatedAtIndex(index: Int, newTeam: Team) {
+    func teamUpdatedAtIndex(_ index: Int, newTeam: Team) {
         let playerAtIndex = Room.instance.players[index]
         
         Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.team = newTeam

@@ -5,13 +5,13 @@ class SCTextField: UITextField {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        self.autocorrectionType = UITextAutocorrectionType.No
-        self.borderStyle = .None
+        self.autocorrectionType = UITextAutocorrectionType.no
+        self.borderStyle = .none
         self.font = UIFont(name: "HelveticaNeue-Thin", size: 36)
-        self.tintColor = UIColor.lightGrayColor()
+        self.tintColor = UIColor.lightGray
     }
     
-    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if action == #selector(UIResponderStandardEditActions.copy(_:))
         || action == #selector(UIResponderStandardEditActions.select(_:))
         || action == #selector(UIResponderStandardEditActions.selectAll(_:))
@@ -27,7 +27,7 @@ class SCTextField: UITextField {
         
         let bottomBorder = CALayer()
         bottomBorder.frame = CGRect(x: 0.0, y: self.frame.size.height - 1.0, width: self.frame.size.width, height: 1.0)
-        bottomBorder.backgroundColor = UIColor.lightGrayColor().CGColor
+        bottomBorder.backgroundColor = UIColor.lightGray.cgColor
         
         self.layer.addSublayer(bottomBorder)
     }

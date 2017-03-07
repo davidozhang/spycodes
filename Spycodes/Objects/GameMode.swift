@@ -2,29 +2,29 @@ import Foundation
 
 class GameMode: NSObject, NSCoding {
     enum Mode: Int {
-        case MiniGame = 0
-        case RegularGame = 1
+        case miniGame = 0
+        case regularGame = 1
     }
     
     static var instance = GameMode()
     var mode: Mode?
 
     override init() {
-        self.mode = Mode.RegularGame
+        self.mode = Mode.regularGame
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        if let mode = aDecoder.decodeObjectForKey("mode") as? Int {
+        if let mode = aDecoder.decodeObject(forKey: "mode") as? Int {
             self.mode = Mode(rawValue: mode)
         }
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.mode?.rawValue, forKey: "mode")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.mode?.rawValue, forKey: "mode")
     }
     
     func reset() {
-        self.mode = GameMode.Mode.RegularGame
+        self.mode = GameMode.Mode.regularGame
     }
 }

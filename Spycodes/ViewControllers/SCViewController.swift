@@ -7,41 +7,41 @@ class SCViewController: UIViewController {
     var unwindingSegue = false
     var isRootViewController = false
     
-    private let dimView = UIView()
+    fileprivate let dimView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.dimView.tag = 1
-        self.dimView.frame = UIScreen.mainScreen().bounds
+        self.dimView.frame = UIScreen.main.bounds
         self.dimView.backgroundColor = UIColor.dimBackgroundColor()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SCViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SCViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    func _prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func _prepareForSegue(_ segue: UIStoryboardSegue, sender: Any?) {
         if unwindingSegue {
             return
         }
         
-        if let destination = segue.destinationViewController as? SCViewController {
+        if let destination = segue.destination as? SCViewController {
             destination.previousViewControllerIdentifier = self.unwindableIdentifier
         }
     }
     
-    func performUnwindSegue(returnToRootViewController: Bool, completionHandler: ((Void) -> Void)?) {
+    func performUnwindSegue(_ returnToRootViewController: Bool, completionHandler: ((Void) -> Void)?) {
         if isRootViewController {
             return
         }
@@ -50,7 +50,7 @@ class SCViewController: UIViewController {
         self.returnToRootViewController = returnToRootViewController
         
         if let previousViewControllerIdentifier = self.previousViewControllerIdentifier {
-            self.performSegueWithIdentifier(previousViewControllerIdentifier, sender: self)
+            self.performSegue(withIdentifier: previousViewControllerIdentifier, sender: self)
             
             if let completionHandler = completionHandler {
                 completionHandler();
@@ -60,8 +60,8 @@ class SCViewController: UIViewController {
         self.previousViewControllerIdentifier = nil
     }
     
-    func unwindedToSelf(sender: UIStoryboardSegue) {
-        if let source = sender.sourceViewController as? SCViewController {
+    func unwindedToSelf(_ sender: UIStoryboardSegue) {
+        if let source = sender.source as? SCViewController {
             if source.returnToRootViewController {  // Propagate down the view controller hierarchy
                 self.performUnwindSegue(true, completionHandler: nil)
             }
@@ -79,8 +79,8 @@ class SCViewController: UIViewController {
     }
     
     @objc
-    func keyboardWillShow(notification: NSNotification) {}
+    func keyboardWillShow(_ notification: Notification) {}
     
     @objc
-    func keyboardWillHide(notification: NSNotification) {}
+    func keyboardWillHide(_ notification: Notification) {}
 }

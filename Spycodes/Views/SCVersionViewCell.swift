@@ -5,7 +5,7 @@ class SCVersionViewCell: UITableViewCell {
     @IBOutlet weak var buildNumberLabel: UILabel!
     
     override func awakeFromNib() {
-        if let versionString: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String, buildNumber: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as? String {
+        if let versionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String, let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
             self.versionNumberLabel.text = versionString
             self.buildNumberLabel.text = "(\(buildNumber))"
         }

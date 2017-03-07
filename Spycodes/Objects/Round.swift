@@ -18,40 +18,40 @@ class Round: NSObject, NSCoding {
     
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        if let currentTeam = aDecoder.decodeObjectForKey("team") as? Int {
+        if let currentTeam = aDecoder.decodeObject(forKey: "team") as? Int {
             self.currentTeam = Team(rawValue: currentTeam)
         }
-        if let clue = aDecoder.decodeObjectForKey("clue") as? String {
+        if let clue = aDecoder.decodeObject(forKey: "clue") as? String {
             self.clue = clue
         }
-        if let numberOfWords = aDecoder.decodeObjectForKey("numberOfWords") as? String {
+        if let numberOfWords = aDecoder.decodeObject(forKey: "numberOfWords") as? String {
             self.numberOfWords = numberOfWords
         }
-        if let winningTeam = aDecoder.decodeObjectForKey("winningTeam") as? Int {
+        if let winningTeam = aDecoder.decodeObject(forKey: "winningTeam") as? Int {
             self.winningTeam = Team(rawValue: winningTeam)
         }
         
-        self.abort = aDecoder.decodeBoolForKey("abort")
+        self.abort = aDecoder.decodeBool(forKey: "abort")
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder) {
         if let team = self.currentTeam?.rawValue {
-            aCoder.encodeObject(team, forKey: "team")
+            aCoder.encode(team, forKey: "team")
         }
         if let clue = self.clue {
-            aCoder.encodeObject(clue, forKey: "clue")
+            aCoder.encode(clue, forKey: "clue")
         }
         if let numberOfWords = self.numberOfWords {
-            aCoder.encodeObject(numberOfWords, forKey: "numberOfWords")
+            aCoder.encode(numberOfWords, forKey: "numberOfWords")
         }
         if let winningTeam = self.winningTeam?.rawValue {
-            aCoder.encodeObject(winningTeam, forKey: "winningTeam")
+            aCoder.encode(winningTeam, forKey: "winningTeam")
         }
         
-        aCoder.encodeBool(self.abort, forKey: "abort")
+        aCoder.encode(self.abort, forKey: "abort")
     }
     
-    func setStartingTeam(team: Team) {
+    func setStartingTeam(_ team: Team) {
         self.currentTeam = team
     }
     
@@ -63,16 +63,16 @@ class Round: NSObject, NSCoding {
         return self.numberOfWords != nil
     }
     
-    func endRound(endingTeam: Team) {
+    func endRound(_ endingTeam: Team) {
         self.clue = nil
         self.numberOfWords = nil
         
-        if GameMode.instance.mode == GameMode.Mode.MiniGame {
-            CardCollection.instance.autoEliminateOpponentTeamCard(Team.Blue)
-            NSNotificationCenter.defaultCenter().postNotificationName(SCNotificationKeys.autoEliminateNotificationKey, object: self, userInfo: nil)
+        if GameMode.instance.mode == GameMode.Mode.miniGame {
+            CardCollection.instance.autoEliminateOpponentTeamCard(Team.blue)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: SCNotificationKeys.autoEliminateNotificationKey), object: self, userInfo: nil)
             
-            if CardCollection.instance.getCardsRemainingForTeam(Team.Blue) == 0 {
-                NSNotificationCenter.defaultCenter().postNotificationName(SCNotificationKeys.minigameGameOverNotificationKey, object: self, userInfo: ["title": "Minigame Game Over", "reason": "Your opponent team won!"])
+            if CardCollection.instance.getCardsRemainingForTeam(Team.blue) == 0 {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: SCNotificationKeys.minigameGameOverNotificationKey), object: self, userInfo: ["title": "Minigame Game Over", "reason": "Your opponent team won!"])
             }
             
             return

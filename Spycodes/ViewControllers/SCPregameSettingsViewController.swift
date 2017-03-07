@@ -5,54 +5,54 @@ class SCPregameSettingsViewController: SCPopoverViewController {
     @IBOutlet weak var infoLabel: UILabel!
     
     // MARK: Actions
-    @IBAction func onExitTapped(sender: AnyObject) {
+    @IBAction func onExitTapped(_ sender: AnyObject) {
         super.onExitTapped()
     }
     
-    @IBAction func minigameSettingToggleChanged(sender: AnyObject) {
-        if self.minigameSettingToggle.on {
-            GameMode.instance.mode = GameMode.Mode.MiniGame
+    @IBAction func minigameSettingToggleChanged(_ sender: AnyObject) {
+        if self.minigameSettingToggle.isOn {
+            GameMode.instance.mode = GameMode.Mode.miniGame
         } else {
-            GameMode.instance.mode = GameMode.Mode.RegularGame
+            GameMode.instance.mode = GameMode.Mode.regularGame
         }
         
         Room.instance.resetPlayers()
         Statistics.instance.reset()
         
-        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+        if GameMode.instance.mode == GameMode.Mode.miniGame {
             Room.instance.addCPUPlayer()
         } else {
             Room.instance.removeCPUPlayer()
         }
         
-        var data = NSKeyedArchiver.archivedDataWithRootObject(GameMode.instance)
+        var data = NSKeyedArchiver.archivedData(withRootObject: GameMode.instance)
         SCMultipeerManager.instance.broadcastData(data)
         
-        data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+        data = NSKeyedArchiver.archivedData(withRootObject: Room.instance)
         SCMultipeerManager.instance.broadcastData(data)
         
-        data = NSKeyedArchiver.archivedDataWithRootObject(Statistics.instance)
+        data = NSKeyedArchiver.archivedData(withRootObject: Statistics.instance)
         SCMultipeerManager.instance.broadcastData(data)
     }
     
     deinit {
-        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
     
     // MARK: Lifecycle
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+        if GameMode.instance.mode == GameMode.Mode.miniGame {
             self.minigameSettingToggle.setOn(true, animated: false)
         } else {
             self.minigameSettingToggle.setOn(false, animated: false)
         }
         
         if Room.instance.teamSizesValid() {
-            self.minigameSettingToggle.enabled = true
+            self.minigameSettingToggle.isEnabled = true
         } else {
-            self.minigameSettingToggle.enabled = false
+            self.minigameSettingToggle.isEnabled = false
         }
         
         self.infoLabel.text = SCStrings.minigameInfo

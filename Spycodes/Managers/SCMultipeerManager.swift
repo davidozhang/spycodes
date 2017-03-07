@@ -1,31 +1,31 @@
 import MultipeerConnectivity
 
 protocol SCMultipeerManagerDelegate: class {
-    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String:String]?)
-    func lostPeer(peerID: MCPeerID)
-    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID)
-    func newPeerAddedToSession(peerID: MCPeerID)
-    func peerDisconnectedFromSession(peerID: MCPeerID)
+    func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String:String]?)
+    func lostPeer(_ peerID: MCPeerID)
+    func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID)
+    func newPeerAddedToSession(_ peerID: MCPeerID)
+    func peerDisconnectedFromSession(_ peerID: MCPeerID)
 }
 
 class SCMultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
     static let instance = SCMultipeerManager()
     weak var delegate: SCMultipeerManagerDelegate?
     
-    private let serviceType = "Spycodes"
-    private var discoveryInfo: [String: String]?
+    fileprivate let serviceType = "Spycodes"
+    fileprivate var discoveryInfo: [String: String]?
     
-    private var peerID: MCPeerID?
-    private var advertiser: MCNearbyServiceAdvertiser?
-    private var browser: MCNearbyServiceBrowser?
-    private var session: MCSession?
+    fileprivate var peerID: MCPeerID?
+    fileprivate var advertiser: MCNearbyServiceAdvertiser?
+    fileprivate var browser: MCNearbyServiceBrowser?
+    fileprivate var session: MCSession?
     
     // Status Variables
     var advertiserOn = false
     var browserOn = false
     
     // MARK: Public
-    func initPeerID(displayName: String) {
+    func initPeerID(_ displayName: String) {
         self.peerID = MCPeerID.init(displayName: displayName)
     }
     
@@ -33,7 +33,7 @@ class SCMultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyS
         return self.peerID
     }
     
-    func initDiscoveryInfo(info: [String: String]) {
+    func initDiscoveryInfo(_ info: [String: String]) {
         self.discoveryInfo = info
     }
     
@@ -82,54 +82,54 @@ class SCMultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyS
         self.advertiserOn = false
     }
     
-    func invitePeerToSession(peerID: MCPeerID) {
-        self.browser?.invitePeer(peerID, toSession: self.session!, withContext: nil, timeout: 30)
+    func invitePeerToSession(_ peerID: MCPeerID) {
+        self.browser?.invitePeer(peerID, to: self.session!, withContext: nil, timeout: 30)
     }
     
-    func broadcastData(data: NSData) {
+    func broadcastData(_ data: Data) {
         do {
-            if let connectedPeers = self.session?.connectedPeers where connectedPeers.count > 0 {
-                try self.session?.sendData(data, toPeers: connectedPeers, withMode: MCSessionSendDataMode.Reliable)
+            if let connectedPeers = self.session?.connectedPeers, connectedPeers.count > 0 {
+                try self.session?.send(data, toPeers: connectedPeers, with: MCSessionSendDataMode.reliable)
             }
         } catch {
-            NSLog("Failed to broadcast the following data to all peers: \(NSString(data: data, encoding: NSUTF8StringEncoding))")
+            NSLog("Failed to broadcast the following data to all peers: \(NSString(data: data, encoding: String.Encoding.utf8.rawValue))")
         }
     }
     
     // MARK: MCNearbyServiceAdvertiserDelegate
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession?) -> Void) {
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         invitationHandler(true, self.session!)
     }
     
     // MARK: MCNearbyServiceBrowserDelegate
-    func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         delegate?.foundPeer(peerID, withDiscoveryInfo: info)
     }
     
-    func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         delegate?.lostPeer(peerID)
     }
     
     // MARK: MCSessionDelegate
-    func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         delegate?.didReceiveData(data, fromPeer: peerID)
     }
     
-    func session(session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, withProgress progress: NSProgress) {}
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {}
     
-    func session(session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, atURL localURL: NSURL, withError error: NSError?) {}
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {}
     
-    func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
     
-    func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
-        if state == MCSessionState.Connected {
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        if state == MCSessionState.connected {
             delegate?.newPeerAddedToSession(peerID)
-        } else if state == MCSessionState.NotConnected {
+        } else if state == MCSessionState.notConnected {
             delegate?.peerDisconnectedFromSession(peerID)
         }
     }
     
-    func session(session: MCSession, didReceiveCertificate certificate: [AnyObject]?, fromPeer peerID: MCPeerID, certificateHandler: (Bool) -> Void) {
+    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
         certificateHandler(true)
     }
 }

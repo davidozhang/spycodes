@@ -1,24 +1,59 @@
 import MultipeerConnectivity
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
 
 class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, SCMultipeerManagerDelegate, UITextFieldDelegate {
-    private let cellReuseIdentifier = "game-room-view-cell"
-    private let edgeInset: CGFloat = 12
-    private let minCellSpacing: CGFloat = 12
-    private let modalWidth = UIScreen.mainScreen().bounds.width - 60
-    private let modalHeight = UIScreen.mainScreen().bounds.height/2
+    fileprivate let cellReuseIdentifier = "game-room-view-cell"
+    fileprivate let edgeInset: CGFloat = 12
+    fileprivate let minCellSpacing: CGFloat = 12
+    fileprivate let modalWidth = UIScreen.main.bounds.width - 60
+    fileprivate let modalHeight = UIScreen.main.bounds.height/2
     
-    private let animationAlpha: CGFloat = 0.4
-    private let animationDuration: NSTimeInterval = 0.75
+    fileprivate let animationAlpha: CGFloat = 0.4
+    fileprivate let animationDuration: TimeInterval = 0.75
     
-    private var actionButtonState: ActionButtonState = .EndRound
+    fileprivate var actionButtonState: ActionButtonState = .endRound
     
-    private var buttonAnimationStarted = false
-    private var textFieldAnimationStarted = false
-    private var cluegiverIsEditing = false
+    fileprivate var buttonAnimationStarted = false
+    fileprivate var textFieldAnimationStarted = false
+    fileprivate var cluegiverIsEditing = false
     
-    private var broadcastTimer: NSTimer?
-    private var refreshTimer: NSTimer?
+    fileprivate var broadcastTimer: Foundation.Timer?
+    fileprivate var refreshTimer: Foundation.Timer?
     
     @IBOutlet var topBarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var bottomBarViewHeightConstraint: NSLayoutConstraint!
@@ -34,39 +69,39 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
     @IBOutlet weak var actionButton: SCRoundedButton!
     
     // MARK: Actions
-    @IBAction func onBackButtonTapped(sender: AnyObject) {
+    @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         Round.instance.abortGame()
         self.broadcastEssentialData()
         
         super.performUnwindSegue(false, completionHandler: nil)
     }
     
-    @IBAction func onActionButtonTapped(sender: AnyObject) {
-        if actionButtonState == .Confirm {
+    @IBAction func onActionButtonTapped(_ sender: AnyObject) {
+        if actionButtonState == .confirm {
             self.didConfirm()
-        } else if actionButtonState == .EndRound {
+        } else if actionButtonState == .endRound {
             self.didEndRound()
         }
     }
     
-    @IBAction func onHelpButtonTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("help-view", sender: self)
+    @IBAction func onHelpButtonTapped(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "help-view", sender: self)
     }
     
     deinit {
-        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), name: SCNotificationKeys.autoConvertBystanderCardNotificationkey, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), name: SCNotificationKeys.autoEliminateNotificationKey, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.didEndGameWithNotification), name: SCNotificationKeys.minigameGameOverNotificationKey, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), name: NSNotification.Name(rawValue: SCNotificationKeys.autoConvertBystanderCardNotificationkey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), name: NSNotification.Name(rawValue: SCNotificationKeys.autoEliminateNotificationKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SCGameRoomViewController.didEndGameWithNotification), name: NSNotification.Name(rawValue: SCNotificationKeys.minigameGameOverNotificationKey), object: nil)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Unwindable view controller identifier
@@ -83,29 +118,29 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         Round.instance.setStartingTeam(CardCollection.instance.startingTeam)
         
         if Player.instance.isHost() {
-            self.broadcastTimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), userInfo: nil, repeats: true)  // Broadcast host's card collection and round every 2 seconds
+            self.broadcastTimer = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), userInfo: nil, repeats: true)  // Broadcast host's card collection and round every 2 seconds
         }
         
-        self.actionButton.hidden = false
+        self.actionButton.isHidden = false
         
-        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(SCGameRoomViewController.refreshView), userInfo: nil, repeats: true)    // Refresh room every second
+        self.refreshTimer = Foundation.Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(SCGameRoomViewController.refreshView), userInfo: nil, repeats: true)    // Refresh room every second
         
-        self.teamLabel.text = Player.instance.team == Team.Red ? "Red" : "Blue"
+        self.teamLabel.text = Player.instance.team == Team.red ? "Red" : "Blue"
         
-        let topBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
+        let topBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.extraLight))
         topBlurView.frame = self.topBarView.bounds
         topBlurView.clipsToBounds = true
         self.topBarView.addSubview(topBlurView)
-        self.topBarView.sendSubviewToBack(topBlurView)
+        self.topBarView.sendSubview(toBack: topBlurView)
         
-        let bottomBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
+        let bottomBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.extraLight))
         bottomBlurView.frame = self.bottomBarView.bounds
         bottomBlurView.clipsToBounds = true
         self.bottomBarView.addSubview(bottomBlurView)
-        self.bottomBarView.sendSubviewToBack(bottomBlurView)
+        self.bottomBarView.sendSubview(toBack: bottomBlurView)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         if Player.instance.isHost() {
@@ -113,12 +148,12 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         }
         self.refreshTimer?.invalidate()
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: SCNotificationKeys.autoConvertBystanderCardNotificationkey, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: SCNotificationKeys.autoEliminateNotificationKey, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: SCNotificationKeys.minigameGameOverNotificationKey, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: SCNotificationKeys.autoConvertBystanderCardNotificationkey), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: SCNotificationKeys.autoEliminateNotificationKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: SCNotificationKeys.minigameGameOverNotificationKey), object: nil)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         self.collectionView.dataSource = nil
@@ -133,22 +168,22 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
     }
     
     // MARK: Popover Presentation Controller Delegate
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     
-    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         super.hideDimView()
         popoverPresentationController.delegate = nil
     }
     
     // MARK: Segue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let vc = segue.destinationViewController as? SCPopoverViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? SCPopoverViewController {
             super.showDimView()
             
             vc.rootViewController = self
-            vc.modalPresentationStyle = .Popover
+            vc.modalPresentationStyle = .popover
             vc.preferredContentSize = CGSize(width: self.modalWidth, height: self.modalHeight)
             
             if let popvc = vc.popoverPresentationController {
@@ -162,8 +197,8 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
     
     // MARK: Private
     @objc
-    private func refreshView() {
-        dispatch_async(dispatch_get_main_queue(), {
+    fileprivate func refreshView() {
+        DispatchQueue.main.async(execute: {
             self.updateDashboard()
             self.updateActionButton()
             self.collectionView.reloadData()
@@ -171,23 +206,23 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
     }
     
     @objc
-    private func broadcastEssentialData() {
-        var data = NSKeyedArchiver.archivedDataWithRootObject(CardCollection.instance)
+    fileprivate func broadcastEssentialData() {
+        var data = NSKeyedArchiver.archivedData(withRootObject: CardCollection.instance)
         SCMultipeerManager.instance.broadcastData(data)
         
-        data = NSKeyedArchiver.archivedDataWithRootObject(Round.instance)
+        data = NSKeyedArchiver.archivedData(withRootObject: Round.instance)
         SCMultipeerManager.instance.broadcastData(data)
     }
     
-    private func broadcastOptionalData(object: NSObject) {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(object)
+    fileprivate func broadcastOptionalData(_ object: NSObject) {
+        let data = NSKeyedArchiver.archivedData(withRootObject: object)
         SCMultipeerManager.instance.broadcastData(data)
     }
     
-    private func startButtonAnimations() {
+    fileprivate func startButtonAnimations() {
         if !self.buttonAnimationStarted {
             self.actionButton.alpha = 1.0
-            UIView.animateWithDuration(self.animationDuration, delay: 0.0, options: [.Autoreverse, .Repeat, .CurveEaseInOut, .AllowUserInteraction], animations: {
+            UIView.animate(withDuration: self.animationDuration, delay: 0.0, options: [.autoreverse, .repeat, .allowUserInteraction], animations: {
                 self.actionButton.alpha = self.animationAlpha
                 }, completion: nil)
         }
@@ -195,16 +230,16 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         self.buttonAnimationStarted = true
     }
     
-    private func stopButtonAnimations() {
+    fileprivate func stopButtonAnimations() {
         self.buttonAnimationStarted = false
         self.actionButton.layer.removeAllAnimations()
         
         self.actionButton.alpha = 0.4
     }
     
-    private func startTextFieldAnimations() {
+    fileprivate func startTextFieldAnimations() {
         if !self.textFieldAnimationStarted {
-            UIView.animateWithDuration(self.animationDuration, delay: 0.0, options: [.Autoreverse, .Repeat, .CurveEaseInOut, .AllowUserInteraction], animations: {
+            UIView.animate(withDuration: self.animationDuration, delay: 0.0, options: [.autoreverse, .repeat, .allowUserInteraction], animations: {
                 self.clueTextField.alpha = self.animationAlpha
                 self.numberOfWordsTextField.alpha = self.animationAlpha
                 }, completion: nil)
@@ -213,7 +248,7 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         self.textFieldAnimationStarted = true
     }
     
-    private func stopTextFieldAnimations() {
+    fileprivate func stopTextFieldAnimations() {
         self.textFieldAnimationStarted = false
         
         self.clueTextField.layer.removeAllAnimations()
@@ -223,7 +258,7 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         self.numberOfWordsTextField.alpha = 1.0
     }
     
-    private func updateDashboard() {
+    fileprivate func updateDashboard() {
         self.cardsRemainingLabel.text = String(CardCollection.instance.getCardsRemainingForTeam(Player.instance.team))
         
         if Round.instance.currentTeam == Player.instance.team {
@@ -237,8 +272,8 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
                 
                 self.stopTextFieldAnimations()
                 
-                self.clueTextField.enabled = false
-                self.numberOfWordsTextField.enabled = false
+                self.clueTextField.isEnabled = false
+                self.numberOfWordsTextField.isEnabled = false
             }
             else {
                 if Player.instance.isClueGiver() {
@@ -247,9 +282,9 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
                     
                     self.startTextFieldAnimations()
                     
-                    self.actionButtonState = .Confirm
-                    self.clueTextField.enabled = true
-                    self.numberOfWordsTextField.enabled = true
+                    self.actionButtonState = .confirm
+                    self.clueTextField.isEnabled = true
+                    self.numberOfWordsTextField.isEnabled = true
                 }
                 else {
                     self.clueTextField.text = Round.defaultIsTurnClue
@@ -262,105 +297,105 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         }
     }
     
-    private func updateActionButton() {
-        if self.actionButtonState == .Confirm {
-            self.actionButton.setTitle("Confirm", forState: .Normal)
+    fileprivate func updateActionButton() {
+        if self.actionButtonState == .confirm {
+            self.actionButton.setTitle("Confirm", for: UIControlState())
             
             if !Player.instance.isClueGiver() || Round.instance.currentTeam != Player.instance.team {
                 return
             }
             
             if self.clueTextField.text?.characters.count > 0 && self.clueTextField.text != Round.defaultClueGiverClue && self.numberOfWordsTextField.text?.characters.count > 0 && self.numberOfWordsTextField.text != Round.defaultNumberOfWords {
-                self.actionButton.enabled = true
+                self.actionButton.isEnabled = true
                 self.startButtonAnimations()
             } else {
                 self.stopButtonAnimations()
-                self.actionButton.enabled = false
+                self.actionButton.isEnabled = false
             }
-        } else if self.actionButtonState == .EndRound {
-            self.actionButton.setTitle("End Round", forState: .Normal)
+        } else if self.actionButtonState == .endRound {
+            self.actionButton.setTitle("End Round", for: UIControlState())
             self.stopButtonAnimations()
             
             if Round.instance.currentTeam == Player.instance.team {
                 if Round.instance.isClueSet() && Round.instance.isNumberOfWordsSet() {
                     self.actionButton.alpha = 1.0
-                    self.actionButton.enabled = true
+                    self.actionButton.isEnabled = true
                 } else {
                     self.actionButton.alpha = 0.4
-                    self.actionButton.enabled = false
+                    self.actionButton.isEnabled = false
                 }
             } else {
                 self.actionButton.alpha = 0.4
-                self.actionButton.enabled = false
+                self.actionButton.isEnabled = false
             }
         }
     }
     
-    private func didConfirm() {
+    fileprivate func didConfirm() {
         self.cluegiverIsEditing = false
         
         Round.instance.clue = self.clueTextField.text
         Round.instance.numberOfWords = self.numberOfWordsTextField.text
-        self.clueTextField.enabled = false
-        self.numberOfWordsTextField.enabled = false
-        self.actionButtonState = .EndRound
+        self.clueTextField.isEnabled = false
+        self.numberOfWordsTextField.isEnabled = false
+        self.actionButtonState = .endRound
 
         self.broadcastEssentialData()
     }
     
-    private func didEndRound() {
+    fileprivate func didEndRound() {
         Round.instance.endRound(Player.instance.team)
         self.broadcastEssentialData()
     }
     
     @objc
-    private func didEndGameWithNotification(notification: NSNotification) {
-        Round.instance.winningTeam = Team.Blue
+    fileprivate func didEndGameWithNotification(_ notification: Notification) {
+        Round.instance.winningTeam = Team.blue
         self.broadcastEssentialData()
-        if let userInfo = notification.userInfo, title = userInfo["title"] as? String, reason = userInfo["reason"] as? String {
+        if let userInfo = notification.userInfo, let title = userInfo["title"] as? String, let reason = userInfo["reason"] as? String {
             self.didEndGame(title, reason: reason)
         }
     }
     
-    private func didEndGame(title: String, reason: String) {
+    fileprivate func didEndGame(_ title: String, reason: String) {
         if Player.instance.isHost() {
             self.broadcastTimer?.invalidate()
         }
         self.refreshTimer?.invalidate()
         
-        let alertController = UIAlertController(title: title, message: reason, preferredStyle: .Alert)
-        let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
+        let alertController = UIAlertController(title: title, message: reason, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
             super.performUnwindSegue(false, completionHandler: nil)
         })
         alertController.addAction(confirmAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
-    override func keyboardWillShow(notification: NSNotification) {
+    override func keyboardWillShow(_ notification: Notification) {
         if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            let rect = frame.CGRectValue()
+            let rect = frame.cgRectValue
             self.bottomBarViewBottomMarginConstraint.constant = rect.size.height
         }
     }
                                                                                                                                                                                                                                                                                                                              
-    override func keyboardWillHide(notification: NSNotification) {
+    override func keyboardWillHide(_ notification: Notification) {
         self.bottomBarViewBottomMarginConstraint.constant = 0
     }
     
     // MARK: SCMultipeerManagerDelegate
-    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {}
+    func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {}
     
-    func lostPeer(peerID: MCPeerID) {}
+    func lostPeer(_ peerID: MCPeerID) {}
     
-    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
+    func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
         if self.cluegiverIsEditing {
             return
         }
         
-        if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
+        if let cardCollection = NSKeyedUnarchiver.unarchiveObject(with: data) as? CardCollection {
             CardCollection.instance = cardCollection
         }
-        else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
+        else if let round = NSKeyedUnarchiver.unarchiveObject(with: data) as? Round {
             let previousTeam = Round.instance.currentTeam
             Round.instance = round
             
@@ -373,13 +408,13 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
                 self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: SCStrings.playerAborted)
                 return
             }
-            else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.RegularGame {
+            else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.regularGame {
                 self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: Round.defaultWinString)
                 return
             }
-            else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.MiniGame {
-                self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
-                Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
+            else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.miniGame {
+                self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
+                Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.blue))
                 return
             }
             else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) {
@@ -387,29 +422,29 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
                 return
             }
         }
-        else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
+        else if let room = NSKeyedUnarchiver.unarchiveObject(with: data) as? Room {
             Room.instance = room
         }
-        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
+        else if let statistics = NSKeyedUnarchiver.unarchiveObject(with: data) as? Statistics {
             Statistics.instance = statistics
         }
     }
     
-    func newPeerAddedToSession(peerID: MCPeerID) {}
+    func newPeerAddedToSession(_ peerID: MCPeerID) {}
     
-    func peerDisconnectedFromSession(peerID: MCPeerID) {
+    func peerDisconnectedFromSession(_ peerID: MCPeerID) {
         if let uuid = Room.instance.connectedPeers[peerID], let player = Room.instance.getPlayerWithUUID(uuid) {
             
             Room.instance.removePlayerWithUUID(uuid)
             self.broadcastOptionalData(Room.instance)
             
             if player.isHost() {
-                let alertController = UIAlertController(title: SCStrings.returningToMainMenuHeader, message: SCStrings.hostDisconnected, preferredStyle: .Alert)
-                let confirmAction = UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
+                let alertController = UIAlertController(title: SCStrings.returningToMainMenuHeader, message: SCStrings.hostDisconnected, preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
                     super.performUnwindSegue(true, completionHandler: nil)
                 })
                 alertController.addAction(confirmAction)
-                self.presentViewController(alertController, animated: true, completion: nil)
+                self.present(alertController, animated: true, completion: nil)
             } else {
                 Round.instance.abortGame()
                 self.broadcastEssentialData()
@@ -419,26 +454,26 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
     }
     
     // MARK: UICollectionViewDelegate
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return SCConstants.cardCount
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as? SCGameRoomViewCell else { return UICollectionViewCell() }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as? SCGameRoomViewCell else { return UICollectionViewCell() }
         let cardAtIndex = CardCollection.instance.cards[indexPath.row]
         
-        cell.wordLabel.textColor = UIColor.whiteColor()
+        cell.wordLabel.textColor = UIColor.white
         cell.wordLabel.text = cardAtIndex.getWord()
         
-        cell.contentView.backgroundColor = UIColor.clearColor()
+        cell.contentView.backgroundColor = UIColor.clear
         
         if Player.instance.isClueGiver() {
-            if cardAtIndex.getTeam() == .Neutral {
-                cell.wordLabel.textColor = UIColor.darkGrayColor()
+            if cardAtIndex.getTeam() == .neutral {
+                cell.wordLabel.textColor = UIColor.darkGray
             }
             
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
@@ -457,8 +492,8 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         }
         
         if cardAtIndex.isSelected() {
-            if cardAtIndex.getTeam() == .Neutral {
-                cell.wordLabel.textColor = UIColor.darkGrayColor()
+            if cardAtIndex.getTeam() == .neutral {
+                cell.wordLabel.textColor = UIColor.darkGray
                 
                 let attributedString: NSMutableAttributedString =  NSMutableAttributedString(string: cardAtIndex.getWord())
                 if cardAtIndex.isSelected() {
@@ -468,13 +503,13 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
             }
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
         } else {
-            cell.wordLabel.textColor = UIColor.darkGrayColor()
+            cell.wordLabel.textColor = UIColor.darkGray
         }
         
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if Player.instance.isClueGiver() || Round.instance.currentTeam != Player.instance.team || !(Round.instance.isClueSet() && Round.instance.isNumberOfWordsSet()) {
             return
         }
@@ -487,14 +522,14 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         let playerTeam = Player.instance.team
         let opponentTeam = Team(rawValue: playerTeam.rawValue ^ 1)
         
-        if cardAtIndexTeam == Team.Neutral || cardAtIndexTeam == opponentTeam {
-            if cardAtIndexTeam == Team.Neutral {
+        if cardAtIndexTeam == Team.neutral || cardAtIndexTeam == opponentTeam {
+            if cardAtIndexTeam == Team.neutral {
                 CardCollection.instance.autoConvertNeutralCardToTeamCard()
             }
             self.didEndRound()
         }
         
-        if cardAtIndexTeam == Team.Assassin || CardCollection.instance.getCardsRemainingForTeam(opponentTeam!) == 0 {
+        if cardAtIndexTeam == Team.assassin || CardCollection.instance.getCardsRemainingForTeam(opponentTeam!) == 0 {
             Round.instance.winningTeam = opponentTeam
             self.broadcastEssentialData()
             
@@ -507,55 +542,55 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
             Round.instance.winningTeam = playerTeam
             self.broadcastEssentialData()
             
-            if GameMode.instance.mode == GameMode.Mode.RegularGame {
+            if GameMode.instance.mode == GameMode.Mode.regularGame {
                 Statistics.instance.recordWinForTeam(playerTeam)
                 self.broadcastOptionalData(Statistics.instance)
                 
                 self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: Round.defaultWinString)
             } else {
-                self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
-                Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
+                self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
+                Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.blue))
                 self.broadcastOptionalData(Statistics.instance)
             }
         }
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(self.topBarViewHeightConstraint.constant + 8, edgeInset, self.bottomBarViewHeightConstraint.constant + 8, edgeInset)
     }
     
     // MARK: Collection View Cell Size
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let viewBounds = collectionView.bounds
         let modifiedWidth = (viewBounds.width - 2 * edgeInset - minCellSpacing) / 2
         return CGSize(width: modifiedWidth, height: viewBounds.height/12)
     }
     
     // MARK: Collection View Interitem Spacing
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return minCellSpacing
     }
     
     // MARK: Collection View Cell Line Spacing
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return minCellSpacing
     }
     
     // MARK: Touch
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         
-        if let allTouches = event?.allTouches(), let touch = allTouches.first {
-            if self.clueTextField.isFirstResponder() && touch.view != self.clueTextField {
+        if let allTouches = event?.allTouches, let touch = allTouches.first {
+            if self.clueTextField.isFirstResponder && touch.view != self.clueTextField {
                 self.clueTextField.resignFirstResponder()
-            } else if self.numberOfWordsTextField.isFirstResponder() && touch.view != self.numberOfWordsTextField {
+            } else if self.numberOfWordsTextField.isFirstResponder && touch.view != self.numberOfWordsTextField {
                 self.numberOfWordsTextField.resignFirstResponder()
             }
         }
     }
     
     // MARK: UITextFieldDelegate
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if Player.instance.isClueGiver() && Round.instance.currentTeam == Player.instance.team {
             return true
         } else {
@@ -563,7 +598,7 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         }
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         self.stopTextFieldAnimations()
         textField.invalidateIntrinsicContentSize()
         
@@ -582,7 +617,7 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         }
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Only allow 1 word precisely
         if string == " " {
             return false
@@ -591,7 +626,7 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         return true
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text == "" {
             if textField == self.clueTextField {
                 self.clueTextField.text = Round.defaultClueGiverClue
@@ -601,7 +636,7 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         }
     }
     
-    func textFieldShouldClear(textField: UITextField) -> Bool {
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField == self.clueTextField {
             textField.placeholder = Round.defaultClueGiverClue
         } else if textField == self.numberOfWordsTextField {
@@ -610,7 +645,7 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         return true
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == self.clueTextField && textField.text?.characters.count >= 1 {
             Round.instance.clue = self.clueTextField.text
             self.broadcastEssentialData()
