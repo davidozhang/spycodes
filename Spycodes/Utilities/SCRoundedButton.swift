@@ -15,11 +15,13 @@ class SCRoundedButton: SCButton {
         didSet {
             if highlighted {
                 self.backgroundColor = UIColor.spycodesDarkGreenColor()
+                
             }
             else {
                 self.backgroundColor = UIColor.spycodesGreenColor()
-                self.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             }
+            
+            self.titleLabel?.textColor = UIColor.whiteColor()
         }
     }
 }
