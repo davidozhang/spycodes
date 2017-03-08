@@ -49,6 +49,12 @@ class SCPregameSettingsViewController: SCPopoverViewController {
             self.minigameSettingToggle.setOn(false, animated: false)
         }
         
+        if Room.instance.teamSizesValid() {
+            self.minigameSettingToggle.enabled = true
+        } else {
+            self.minigameSettingToggle.enabled = false
+        }
+        
         self.infoLabel.text = SCStrings.minigameInfo
     }
 }
