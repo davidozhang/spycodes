@@ -1,7 +1,6 @@
 import UIKit
 
 class SCRoundedButton: SCButton {
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.backgroundColor = UIColor.spycodesGreenColor()
@@ -10,17 +9,17 @@ class SCRoundedButton: SCButton {
         self.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         self.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
     }
-    
+
     override var highlighted: Bool {
         didSet {
             if highlighted {
                 self.backgroundColor = UIColor.spycodesDarkGreenColor()
-                
+
             }
             else {
                 self.backgroundColor = UIColor.spycodesGreenColor()
             }
-            
+
             self.titleLabel?.textColor = UIColor.whiteColor()
         }
     }

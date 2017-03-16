@@ -3,21 +3,21 @@ import UIKit
 
 class Player: NSObject, NSCoding {
     static var instance = Player()
-    
+
     var name: String?
     var team: Team
     var clueGiver: Bool
     var host: Bool
-    
+
     private var uuid: String
-    
+
     override init() {
         self.uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
         self.team = Team.Red
         self.clueGiver = false
         self.host = false
     }
-    
+
     convenience init(name: String, uuid: String, team: Team, clueGiver: Bool, host: Bool) {
         self.init()
         self.name = name
@@ -26,7 +26,7 @@ class Player: NSObject, NSCoding {
         self.clueGiver = clueGiver
         self.host = host
     }
-    
+
     required convenience init?(coder aDecoder: NSCoder) {
         if let name = aDecoder.decodeObjectForKey("name") as? String, uuid = aDecoder.decodeObjectForKey("uuid") as? String, team = aDecoder.decodeObjectForKey("team") as? Int {
             let clueGiver = aDecoder.decodeBoolForKey("clueGiver")
@@ -36,7 +36,7 @@ class Player: NSObject, NSCoding {
             self.init()
         }
     }
-    
+
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.name, forKey: "name")
         aCoder.encodeObject(self.uuid, forKey: "uuid")
@@ -44,27 +44,27 @@ class Player: NSObject, NSCoding {
         aCoder.encodeBool(self.clueGiver, forKey: "clueGiver")
         aCoder.encodeBool(self.host, forKey: "host")
     }
-    
+
     func getUUID() -> String {
         return self.uuid
     }
-    
+
     func setIsClueGiver(isClueGiver: Bool) {
         self.clueGiver = isClueGiver
     }
-    
+
     func setIsHost(isHost: Bool) {
         self.host = isHost
     }
-    
+
     func isClueGiver() -> Bool {
         return self.clueGiver
     }
-    
+
     func isHost() -> Bool {
         return self.host
     }
-    
+
     func reset() {
         self.team = Team.Red
         self.host = false
@@ -72,10 +72,10 @@ class Player: NSObject, NSCoding {
     }
 }
 
-func ==(left: Player, right: Player) -> Bool {
+func == (left: Player, right: Player) -> Bool {
     return left.uuid == right.uuid
 }
 
-func !=(left: Player, right: Player) -> Bool {
+func != (left: Player, right: Player) -> Bool {
     return left.uuid != right.uuid
 }
