@@ -5,25 +5,25 @@ class GameMode: NSObject, NSCoding {
         case MiniGame = 0
         case RegularGame = 1
     }
-    
+
     static var instance = GameMode()
     var mode: Mode?
 
     override init() {
         self.mode = Mode.RegularGame
     }
-    
+
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         if let mode = aDecoder.decodeObjectForKey("mode") as? Int {
             self.mode = Mode(rawValue: mode)
         }
     }
-    
+
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.mode?.rawValue, forKey: "mode")
     }
-    
+
     func reset() {
         self.mode = GameMode.Mode.RegularGame
     }
