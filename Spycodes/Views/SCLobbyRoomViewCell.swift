@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SCLobbyRoomViewCellDelegate: class {
-    func joinRoomWithUUID(uuid: String)
+    func joinRoomWithUUID(_ uuid: String)
 }
 
 class SCLobbyRoomViewCell: UITableViewCell {
@@ -13,7 +13,7 @@ class SCLobbyRoomViewCell: UITableViewCell {
     
     override func awakeFromNib() {}
     
-    @IBAction func onJoin(sender: AnyObject) {
+    @IBAction func onJoin(_ sender: AnyObject) {
         if let roomUUID = self.roomUUID {
             delegate?.joinRoomWithUUID(roomUUID)
         }

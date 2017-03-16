@@ -1,58 +1,58 @@
 import UIKit
 
 class SCMainMenuViewController: SCViewController {
-    private static let appID = 1141711201
-    private static let appStoreURL = "itms-apps://itunes.apple.com/app/id\(appID)"
-    private static let appStoreWebURL = "https://itunes.apple.com/ca/app/spycodes/id1141711201?mt=8"
-    private var timer: NSTimer?
+    fileprivate static let appID = 1141711201
+    fileprivate static let appStoreURL = "itms-apps://itunes.apple.com/app/id\(appID)"
+    fileprivate static let appStoreWebURL = "https://itunes.apple.com/ca/app/spycodes/id1141711201?mt=8"
+    fileprivate var timer: Foundation.Timer?
     
     @IBOutlet weak var linkCopiedLabel: SCStatusLabel!
     
     // MARK: Actions
-    @IBAction func unwindToMainMenu(sender: UIStoryboardSegue) {
+    @IBAction func unwindToMainMenu(_ sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
     }
     
-    @IBAction func onShareTapped(sender: AnyObject) {
-        UIPasteboard.generalPasteboard().string = SCMainMenuViewController.appStoreWebURL
-        self.linkCopiedLabel.hidden = false
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(SCMainMenuViewController.onTimeout), userInfo: nil, repeats: false)
+    @IBAction func onShareTapped(_ sender: AnyObject) {
+        UIPasteboard.general.string = SCMainMenuViewController.appStoreWebURL
+        self.linkCopiedLabel.isHidden = false
+        self.timer = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(SCMainMenuViewController.onTimeout), userInfo: nil, repeats: false)
     }
     
-    @IBAction func onAppStoreTapped(sender: AnyObject) {
-        let url = NSURL(string: SCMainMenuViewController.appStoreURL)
-        UIApplication.sharedApplication().openURL(url!)
+    @IBAction func onAppStoreTapped(_ sender: AnyObject) {
+        let url = URL(string: SCMainMenuViewController.appStoreURL)
+        UIApplication.shared.openURL(url!)
     }
     
-    @IBAction func onCreateGame(sender: AnyObject) {
+    @IBAction func onCreateGame(_ sender: AnyObject) {
         Player.instance.setIsHost(true)
-        self.performSegueWithIdentifier("player-name", sender: self)
+        self.performSegue(withIdentifier: "player-name", sender: self)
     }
     
-    @IBAction func onJoinGame(sender: AnyObject) {
-        self.performSegueWithIdentifier("player-name", sender: self)
+    @IBAction func onJoinGame(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "player-name", sender: self)
     }
     
-    @IBAction func onSettingsTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("settings", sender: self)
+    @IBAction func onSettingsTapped(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "settings", sender: self)
     }
     
     deinit {
-        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
     
     // MARK: Lifecycle
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Currently this view is the root view controller for unwinding logic
         self.unwindableIdentifier = "main-menu"
         self.isRootViewController = true
         
-        self.linkCopiedLabel.hidden = true
+        self.linkCopiedLabel.isHidden = true
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         Player.instance.reset()
@@ -62,7 +62,7 @@ class SCMainMenuViewController: SCViewController {
         Room.instance.reset()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.timer?.invalidate()
@@ -72,13 +72,13 @@ class SCMainMenuViewController: SCViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super._prepareForSegue(segue, sender: sender)
     }
     
     // MARK: Private
     @objc
-    private func onTimeout() {
-        self.linkCopiedLabel.hidden = true
+    fileprivate func onTimeout() {
+        self.linkCopiedLabel.isHidden = true
     }
 }

@@ -3,16 +3,16 @@ import Foundation
 class CardCollection: NSObject, NSCoding {
     static var instance = CardCollection()
     
-    private var keyObject = Key()
-    private let words = SCWordList.getShuffledWords()
+    fileprivate var keyObject = Key()
+    fileprivate let words = SCWordList.getShuffledWords()
     
     var cards = [Card]()
     var key = [Team]()
     var startingTeam: Team
     
     override init() {
-        if GameMode.instance.mode == GameMode.Mode.MiniGame {
-            self.startingTeam = Team.Red
+        if GameMode.instance.mode == GameMode.Mode.miniGame {
+            self.startingTeam = Team.red
             self.keyObject = Key(startingTeam: self.startingTeam)
             self.key = self.keyObject.getKey()
         } else {
@@ -35,23 +35,23 @@ class CardCollection: NSObject, NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        if let cards = aDecoder.decodeObjectForKey("cards") as? [Card] {
+        if let cards = aDecoder.decodeObject(forKey: "cards") as? [Card] {
             self.init(cards: cards)
         } else {
             self.init()
         }
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.cards, forKey: "cards")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.cards, forKey: "cards")
     }
     
-    func getCardsRemainingForTeam(team: Team) -> Int {
+    func getCardsRemainingForTeam(_ team: Team) -> Int {
         return self.cards.filter({($0 as Card).getTeam() == team && !($0 as Card).isSelected()}).count
     }
     
     // Minigame Specific
-    func autoEliminateOpponentTeamCard(opponentTeam: Team) {
+    func autoEliminateOpponentTeamCard(_ opponentTeam: Team) {
         var opponentRemainingCards = self.cards.filter({($0 as Card).getTeam() == opponentTeam && !($0 as Card).isSelected()})
         opponentRemainingCards = opponentRemainingCards.shuffled
         if opponentRemainingCards.count > 0 {
@@ -67,14 +67,14 @@ class CardCollection: NSObject, NSCoding {
     
     // Convert Bystander card to Team Card
     func autoConvertNeutralCardToTeamCard() {
-        var neutralRemainingCards = self.cards.filter({($0 as Card).getTeam() == Team.Neutral && !($0 as Card).isSelected()})
+        var neutralRemainingCards = self.cards.filter({($0 as Card).getTeam() == Team.neutral && !($0 as Card).isSelected()})
         neutralRemainingCards = neutralRemainingCards.shuffled
         if neutralRemainingCards.count > 0 {
             let convertedCard = neutralRemainingCards[0]
             for i in 0..<SCConstants.cardCount {
                 if self.cards[i].getWord() == convertedCard.getWord() {
                     self.cards[i].setTeam(Player.instance.team)
-                    NSNotificationCenter.defaultCenter().postNotificationName(SCNotificationKeys.autoConvertBystanderCardNotificationkey, object: self, userInfo: nil)
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: SCNotificationKeys.autoConvertBystanderCardNotificationkey), object: self, userInfo: nil)
                     return
                 }
             }

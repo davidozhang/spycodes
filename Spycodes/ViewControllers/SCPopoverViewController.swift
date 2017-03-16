@@ -4,13 +4,13 @@ class SCPopoverViewController: UIViewController {
     weak var rootViewController: SCViewController?
     
     func onExitTapped() {
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             self.rootViewController?.hideDimView()
-            self.dismissViewControllerAnimated(false, completion: nil)
+            self.dismiss(animated: false, completion: nil)
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.rootViewController = nil

@@ -6,7 +6,7 @@ class SCGameRoomViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         self.contentView.layer.borderWidth = 1.0
-        self.contentView.layer.borderColor = UIColor.darkGrayColor().CGColor
+        self.contentView.layer.borderColor = UIColor.darkGray.cgColor
         self.contentView.layer.cornerRadius = 5.0
         self.contentView.layer.masksToBounds = true
 

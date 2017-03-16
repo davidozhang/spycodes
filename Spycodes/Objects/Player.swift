@@ -9,11 +9,11 @@ class Player: NSObject, NSCoding {
     var clueGiver: Bool
     var host: Bool
     
-    private var uuid: String
+    fileprivate var uuid: String
     
     override init() {
-        self.uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
-        self.team = Team.Red
+        self.uuid = UIDevice.current.identifierForVendor!.uuidString
+        self.team = Team.red
         self.clueGiver = false
         self.host = false
     }
@@ -28,32 +28,32 @@ class Player: NSObject, NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        if let name = aDecoder.decodeObjectForKey("name") as? String, uuid = aDecoder.decodeObjectForKey("uuid") as? String, team = aDecoder.decodeObjectForKey("team") as? Int {
-            let clueGiver = aDecoder.decodeBoolForKey("clueGiver")
-            let host = aDecoder.decodeBoolForKey("host")
+        if let name = aDecoder.decodeObject(forKey: "name") as? String, let uuid = aDecoder.decodeObject(forKey: "uuid") as? String, let team = aDecoder.decodeObject(forKey: "team") as? Int {
+            let clueGiver = aDecoder.decodeBool(forKey: "clueGiver")
+            let host = aDecoder.decodeBool(forKey: "host")
             self.init(name: name, uuid: uuid, team: Team(rawValue: team)!, clueGiver: clueGiver, host: host)
         } else {
             self.init()
         }
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.name, forKey: "name")
-        aCoder.encodeObject(self.uuid, forKey: "uuid")
-        aCoder.encodeObject(self.team.rawValue, forKey: "team")
-        aCoder.encodeBool(self.clueGiver, forKey: "clueGiver")
-        aCoder.encodeBool(self.host, forKey: "host")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.name, forKey: "name")
+        aCoder.encode(self.uuid, forKey: "uuid")
+        aCoder.encode(self.team.rawValue, forKey: "team")
+        aCoder.encode(self.clueGiver, forKey: "clueGiver")
+        aCoder.encode(self.host, forKey: "host")
     }
     
     func getUUID() -> String {
         return self.uuid
     }
     
-    func setIsClueGiver(isClueGiver: Bool) {
+    func setIsClueGiver(_ isClueGiver: Bool) {
         self.clueGiver = isClueGiver
     }
     
-    func setIsHost(isHost: Bool) {
+    func setIsHost(_ isHost: Bool) {
         self.host = isHost
     }
     
@@ -66,7 +66,7 @@ class Player: NSObject, NSCoding {
     }
     
     func reset() {
-        self.team = Team.Red
+        self.team = Team.red
         self.host = false
         self.clueGiver = false
     }

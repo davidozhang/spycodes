@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		630674181D51BE9800339EC8 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630674171D51BE9800339EC8 /* Timer.swift */; };
 		63067C6A1D2982DD0005AC66 /* SCLobbyRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C691D2982DD0005AC66 /* SCLobbyRoomViewCell.swift */; };
 		63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C6B1D2996B60005AC66 /* Lobby.swift */; };
 		630681A31D62FD6300539773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A21D62FD6300539773 /* LaunchScreen.storyboard */; };
@@ -64,7 +63,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		630674171D51BE9800339EC8 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Objects/Timer.swift; sourceTree = "<group>"; };
 		63067C691D2982DD0005AC66 /* SCLobbyRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLobbyRoomViewCell.swift; path = Views/SCLobbyRoomViewCell.swift; sourceTree = "<group>"; };
 		63067C6B1D2996B60005AC66 /* Lobby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lobby.swift; path = Objects/Lobby.swift; sourceTree = "<group>"; };
 		630681A21D62FD6300539773 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -251,7 +249,6 @@
 				63EAF9A21D41D2E700BC554E /* Round.swift */,
 				637F195E1D46010E00FB4047 /* Statistics.swift */,
 				63FDED361D264CF300142780 /* Team.swift */,
-				630674171D51BE9800339EC8 /* Timer.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -301,7 +298,7 @@
 					63A04CFF1D1A5713005A2914 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 3A8NZ732A3;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -356,7 +353,6 @@
 				63A04D1F1D1A7F3E005A2914 /* SCMainMenuViewController.swift in Sources */,
 				63D256841E6BA6BA0061D80C /* SCLargeLabel.swift in Sources */,
 				63D256871E6BA6BA0061D80C /* SCNavigationBarLabel.swift in Sources */,
-				630674181D51BE9800339EC8 /* Timer.swift in Sources */,
 				CF5A8DCC1D46D95F0032F581 /* SCStrings.swift in Sources */,
 				632E4E461E6A91C8004E7180 /* SCPopoverViewController.swift in Sources */,
 				63486DA91D3DE29C00795403 /* Key.swift in Sources */,
@@ -504,7 +500,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidzhang.Spycodes;
 				PRODUCT_NAME = Spycodes;
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -520,7 +516,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidzhang.Spycodes;
 				PRODUCT_NAME = Spycodes;
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
