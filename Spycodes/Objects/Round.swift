@@ -16,6 +16,24 @@ class Round: NSObject, NSCoding {
     var winningTeam: Team?
     var abort = false
 
+    // MARK: Coder
+    func encodeWithCoder(aCoder: NSCoder) {
+        if let team = self.currentTeam?.rawValue {
+            aCoder.encodeObject(team, forKey: "team")
+        }
+        if let clue = self.clue {
+            aCoder.encodeObject(clue, forKey: "clue")
+        }
+        if let numberOfWords = self.numberOfWords {
+            aCoder.encodeObject(numberOfWords, forKey: "numberOfWords")
+        }
+        if let winningTeam = self.winningTeam?.rawValue {
+            aCoder.encodeObject(winningTeam, forKey: "winningTeam")
+        }
+
+        aCoder.encodeBool(self.abort, forKey: "abort")
+    }
+
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         if let currentTeam = aDecoder.decodeObjectForKey("team") as? Int {
@@ -34,23 +52,7 @@ class Round: NSObject, NSCoding {
         self.abort = aDecoder.decodeBoolForKey("abort")
     }
 
-    func encodeWithCoder(aCoder: NSCoder) {
-        if let team = self.currentTeam?.rawValue {
-            aCoder.encodeObject(team, forKey: "team")
-        }
-        if let clue = self.clue {
-            aCoder.encodeObject(clue, forKey: "clue")
-        }
-        if let numberOfWords = self.numberOfWords {
-            aCoder.encodeObject(numberOfWords, forKey: "numberOfWords")
-        }
-        if let winningTeam = self.winningTeam?.rawValue {
-            aCoder.encodeObject(winningTeam, forKey: "winningTeam")
-        }
-
-        aCoder.encodeBool(self.abort, forKey: "abort")
-    }
-
+    // MARK: Public
     func setStartingTeam(team: Team) {
         self.currentTeam = team
     }

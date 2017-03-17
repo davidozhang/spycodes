@@ -13,6 +13,7 @@ class Room: NSObject, NSCoding {
     private var uuid: String
     private var accessCode: String
 
+    // MARK: Constructor/Destructor
     override init() {
         self.uuid = NSUUID().UUIDString
         self.accessCode = Room.generateAccessCode()
@@ -37,6 +38,20 @@ class Room: NSObject, NSCoding {
         self.connectedPeers = connectedPeers
     }
 
+    deinit {
+        self.players.removeAll()
+        self.connectedPeers.removeAll()
+    }
+
+    // MARK: Coder
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.name, forKey: "name")
+        aCoder.encodeObject(self.uuid, forKey: "uuid")
+        aCoder.encodeObject(self.accessCode, forKey: "accessCode")
+        aCoder.encodeObject(self.players, forKey: "players")
+        aCoder.encodeObject(self.connectedPeers, forKey: "connectedPeers")
+    }
+
     required convenience init?(coder aDecoder: NSCoder) {
         if let name = aDecoder.decodeObjectForKey("name") as? String,
                uuid = aDecoder.decodeObjectForKey("uuid") as? String,
@@ -53,31 +68,7 @@ class Room: NSObject, NSCoding {
         }
     }
 
-    deinit {
-        self.players.removeAll()
-        self.connectedPeers.removeAll()
-    }
-
-    private static func generateAccessCode() -> String {
-        var result = ""
-
-        for _ in 0 ..< SCConstants.accessCodeLength {
-            let rand = arc4random_uniform(UInt32(Room.accessCodeAllowedCharacters.length))
-            var nextChar = Room.accessCodeAllowedCharacters.characterAtIndex(Int(rand))
-            result += NSString(characters: &nextChar, length: 1) as String
-        }
-
-        return result
-    }
-
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.name, forKey: "name")
-        aCoder.encodeObject(self.uuid, forKey: "uuid")
-        aCoder.encodeObject(self.accessCode, forKey: "accessCode")
-        aCoder.encodeObject(self.players, forKey: "players")
-        aCoder.encodeObject(self.connectedPeers, forKey: "connectedPeers")
-    }
-
+    // MARK: Public
     func refresh() {
         self.players.sortInPlace({ player1, player2 in
             if player1.team.rawValue < player2.team.rawValue {
@@ -224,5 +215,18 @@ class Room: NSObject, NSCoding {
     func reset() {
         self.players.removeAll()
         self.connectedPeers.removeAll()
+    }
+
+    // MARK: Private
+    private static func generateAccessCode() -> String {
+        var result = ""
+
+        for _ in 0 ..< SCConstants.accessCodeLength {
+            let rand = arc4random_uniform(UInt32(Room.accessCodeAllowedCharacters.length))
+            var nextChar = Room.accessCodeAllowedCharacters.characterAtIndex(Int(rand))
+            result += NSString(characters: &nextChar, length: 1) as String
+        }
+
+        return result
     }
 }

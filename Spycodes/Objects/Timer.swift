@@ -8,6 +8,7 @@ class Timer: NSObject {
     var timerEndedCallback: (() -> Void)!
     var timerInProgressCallback: ((remainingTime: Int) -> Void)!
 
+    // MARK: Public
     func startTimer(timerEnded: () -> Void, timerInProgress: ((remainingTime: Int) -> Void)) {
         self.startTime = Int(NSDate.timeIntervalSinceReferenceDate())
         self.timerEndedCallback = timerEnded

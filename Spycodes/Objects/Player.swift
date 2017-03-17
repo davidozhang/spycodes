@@ -11,6 +11,7 @@ class Player: NSObject, NSCoding {
 
     private var uuid: String
 
+    // MARK: Constructor/Destructor
     override init() {
         self.uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
         self.team = Team.Red
@@ -27,6 +28,15 @@ class Player: NSObject, NSCoding {
         self.host = host
     }
 
+    // MARK: Coder
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.name, forKey: "name")
+        aCoder.encodeObject(self.uuid, forKey: "uuid")
+        aCoder.encodeObject(self.team.rawValue, forKey: "team")
+        aCoder.encodeBool(self.clueGiver, forKey: "clueGiver")
+        aCoder.encodeBool(self.host, forKey: "host")
+    }
+
     required convenience init?(coder aDecoder: NSCoder) {
         if let name = aDecoder.decodeObjectForKey("name") as? String, uuid = aDecoder.decodeObjectForKey("uuid") as? String, team = aDecoder.decodeObjectForKey("team") as? Int {
             let clueGiver = aDecoder.decodeBoolForKey("clueGiver")
@@ -37,14 +47,7 @@ class Player: NSObject, NSCoding {
         }
     }
 
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.name, forKey: "name")
-        aCoder.encodeObject(self.uuid, forKey: "uuid")
-        aCoder.encodeObject(self.team.rawValue, forKey: "team")
-        aCoder.encodeBool(self.clueGiver, forKey: "clueGiver")
-        aCoder.encodeBool(self.host, forKey: "host")
-    }
-
+    // MARK: Public
     func getUUID() -> String {
         return self.uuid
     }
@@ -72,6 +75,7 @@ class Player: NSObject, NSCoding {
     }
 }
 
+// MARK: Operator
 func == (left: Player, right: Player) -> Bool {
     return left.uuid == right.uuid
 }

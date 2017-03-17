@@ -5,6 +5,18 @@ class Statistics: NSObject, NSCoding {
     private var bestRecord: Int?        // For minigame
     private var statistics = [Team.Red: 0, Team.Blue: 0]        // For regular game
 
+    // MARK: Constructor/Destructor
+    deinit {
+        self.statistics.removeAll()
+    }
+
+    // MARK: Coder
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.statistics[Team.Red], forKey: "red")
+        aCoder.encodeObject(self.statistics[Team.Blue], forKey: "blue")
+        aCoder.encodeObject(self.bestRecord, forKey: "bestRecord")
+    }
+
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         if let red = aDecoder.decodeObjectForKey("red") as? Int, blue = aDecoder.decodeObjectForKey("blue") as? Int {
@@ -15,16 +27,7 @@ class Statistics: NSObject, NSCoding {
         }
     }
 
-    deinit {
-        self.statistics.removeAll()
-    }
-
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.statistics[Team.Red], forKey: "red")
-        aCoder.encodeObject(self.statistics[Team.Blue], forKey: "blue")
-        aCoder.encodeObject(self.bestRecord, forKey: "bestRecord")
-    }
-
+    // MARK: Public
     func recordWinForTeam(winningTeam: Team) {
         self.statistics[winningTeam]! += 1
     }

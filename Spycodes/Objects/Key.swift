@@ -4,6 +4,7 @@ class Key {
     private var startingTeam: Team?
     private var key = [Team]()
 
+    // MARK: Constructor/Destructor
     init() {
         if let startingTeam = Team(rawValue: self.randomBinarySingleDigit()) {
             self.startingTeam = startingTeam
@@ -30,10 +31,7 @@ class Key {
         self.key.removeAll()
     }
 
-    func randomBinarySingleDigit() -> Int {
-        return arc4random_uniform(2) == 0 ? 1 : 0
-    }
-
+    // MARK: Public
     func getKey() -> [Team] {
         return self.key
     }
@@ -44,5 +42,10 @@ class Key {
         } else {
             return Team.Red
         }
+    }
+
+    // MARK: Private
+    private func randomBinarySingleDigit() -> Int {
+        return arc4random_uniform(2) == 0 ? 1 : 0
     }
 }
