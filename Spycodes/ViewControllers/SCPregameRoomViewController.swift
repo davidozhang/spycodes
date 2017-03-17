@@ -1,7 +1,7 @@
 import MultipeerConnectivity
 import UIKit
 
-class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, SCMultipeerManagerDelegate, SCPregameRoomViewCellDelegate {
+class SCPregameRoomViewController: SCViewController {
     private let cellReuseIdentifier = "pregame-room-view-cell"
     private let modalWidth = UIScreen.mainScreen().bounds.width - 60
     private let modalHeight = UIScreen.mainScreen().bounds.height/4
@@ -130,6 +130,27 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
         super.didReceiveMemoryWarning()
     }
 
+    // MARK: Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super._prepareForSegue(segue, sender: sender)
+
+        // All segues identified here should be forward direction only
+        if let vc = segue.destinationViewController as? SCPopoverViewController {
+            super.showDimView()
+
+            vc.rootViewController = self
+            vc.modalPresentationStyle = .Popover
+            vc.preferredContentSize = CGSize(width: self.modalWidth, height: self.modalHeight)
+
+            if let popvc = vc.popoverPresentationController {
+                popvc.delegate = self
+                popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+                popvc.sourceView = self.view
+                popvc.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            }
+        }
+    }
+
     // MARK: Private
     @objc
     private func refreshView() {
@@ -232,39 +253,91 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
 
         return message
     }
+}
 
-    // MARK: Popover Presentation Controller Delegate
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
-    }
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
-    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
-        super.hideDimView()
-        popoverPresentationController.delegate = nil
-    }
-
-    // MARK: Segue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super._prepareForSegue(segue, sender: sender)
-
-        // All segues identified here should be forward direction only
-        if let vc = segue.destinationViewController as? SCPopoverViewController {
-            super.showDimView()
-
-            vc.rootViewController = self
-            vc.modalPresentationStyle = .Popover
-            vc.preferredContentSize = CGSize(width: self.modalWidth, height: self.modalHeight)
-
-            if let popvc = vc.popoverPresentationController {
-                popvc.delegate = self
-                popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-                popvc.sourceView = self.view
-                popvc.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+// MARK: SCMultipeerManagerDelegate
+extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
+    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
+        if let info = info {
+            if info["joinRoomWithUUID"] == Room.instance.getUUID() ||
+                info["joinRoomWithAccessCode"] == Room.instance.getAccessCode() {
+                // joinRoomWithUUID - v1.0; joinRoomWithAccessCode - v2.0
+                SCMultipeerManager.instance.invitePeerToSession(peerID)
             }
         }
     }
 
-    // MARK: UITableViewDelegate
+    func lostPeer(peerID: MCPeerID) {}
+
+    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
+        if let player = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Player {
+            Room.instance.connectedPeers[peerID] = player.getUUID()
+            if Player.instance.isHost() {
+                Room.instance.addPlayer(player)
+            }
+        }
+        else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
+            Room.instance = room
+
+            if let player = Room.instance.getPlayerWithUUID(Player.instance.getUUID()) {
+                Player.instance = player
+            }
+        }
+        else if let gameMode = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? GameMode {
+            GameMode.instance = gameMode
+        }
+        else if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
+            CardCollection.instance = cardCollection
+        }
+        else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
+            Round.instance = round
+            // TODO: Improve Round handling logic
+            if !Round.instance.abort {
+                self.goToGame()
+            }
+        }
+        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
+            Statistics.instance = statistics
+        }
+    }
+
+    func peerDisconnectedFromSession(peerID: MCPeerID) {
+        if let playerUUID = Room.instance.connectedPeers[peerID] {
+            if let player = Room.instance.getPlayerWithUUID(playerUUID) {
+                // Room has been terminated if host player is disconnected
+                if player.isHost() {
+                    Room.instance.players.removeAll()
+                    self.returnToMainMenu(reason: SCStrings.hostDisconnected)
+                    return
+                }
+            }
+
+            Room.instance.removePlayerWithUUID(playerUUID)
+            Room.instance.connectedPeers.removeValueForKey(peerID)
+        }
+    }
+}
+
+// MARK: SCPregameRoomViewCellDelegate
+extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
+    func teamUpdatedAtIndex(index: Int, newTeam: Team) {
+        let playerAtIndex = Room.instance.players[index]
+
+        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.team = newTeam
+
+        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsClueGiver(false)
+        self.broadcastEssentialData()
+    }
+}
+
+// MARK: UITableViewDelegate, UITableViewDataSource
+extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as? SCPregameRoomViewCell else { return UITableViewCell() }
 
@@ -334,77 +407,16 @@ class SCPregameRoomViewController: SCViewController, UITableViewDelegate, UITabl
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Room.instance.players.count
     }
+}
 
-    // MARK: SCMultipeerManagerDelegate
-    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
-        if let info = info {
-            if info["joinRoomWithUUID"] == Room.instance.getUUID() ||
-               info["joinRoomWithAccessCode"] == Room.instance.getAccessCode() {
-                // joinRoomWithUUID - v1.0; joinRoomWithAccessCode - v2.0
-                SCMultipeerManager.instance.invitePeerToSession(peerID)
-            }
-        }
+// MARK: UIPopoverPresentationControllerDelegate
+extension SCPregameRoomViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
     }
 
-    func lostPeer(peerID: MCPeerID) {}
-
-    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
-        if let player = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Player {
-            Room.instance.connectedPeers[peerID] = player.getUUID()
-            if Player.instance.isHost() {
-                Room.instance.addPlayer(player)
-            }
-        }
-        else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
-            Room.instance = room
-
-            if let player = Room.instance.getPlayerWithUUID(Player.instance.getUUID()) {
-                Player.instance = player
-            }
-        }
-        else if let gameMode = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? GameMode {
-            GameMode.instance = gameMode
-        }
-        else if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
-            CardCollection.instance = cardCollection
-        }
-        else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
-            Round.instance = round
-            // TODO: Improve Round handling logic
-            if !Round.instance.abort {
-                self.goToGame()
-            }
-        }
-        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
-            Statistics.instance = statistics
-        }
-    }
-
-    func newPeerAddedToSession(peerID: MCPeerID) {}
-
-    func peerDisconnectedFromSession(peerID: MCPeerID) {
-        if let playerUUID = Room.instance.connectedPeers[peerID] {
-            if let player = Room.instance.getPlayerWithUUID(playerUUID) {
-                // Room has been terminated if host player is disconnected
-                if player.isHost() {
-                    Room.instance.players.removeAll()
-                    self.returnToMainMenu(reason: SCStrings.hostDisconnected)
-                    return
-                }
-            }
-
-            Room.instance.removePlayerWithUUID(playerUUID)
-            Room.instance.connectedPeers.removeValueForKey(peerID)
-        }
-    }
-
-    // MARK: SCPregameRoomViewCellDelegate
-    func teamUpdatedAtIndex(index: Int, newTeam: Team) {
-        let playerAtIndex = Room.instance.players[index]
-
-        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.team = newTeam
-
-        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsClueGiver(false)
-        self.broadcastEssentialData()
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+        super.hideDimView()
+        popoverPresentationController.delegate = nil
     }
 }

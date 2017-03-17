@@ -1,11 +1,11 @@
 import UIKit
 
-protocol UITextFieldBackspaceDelegate: class {
+protocol SCSingleCharacterTextFieldBackspaceDelegate: class {
     func onBackspaceDetected(textField: UITextField)
 }
 
 class SCSingleCharacterTextField: SCTextField {
-    weak var backspaceDelegate: UITextFieldBackspaceDelegate?
+    weak var backspaceDelegate: SCSingleCharacterTextFieldBackspaceDelegate?
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

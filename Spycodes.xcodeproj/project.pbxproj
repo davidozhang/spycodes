@@ -172,13 +172,13 @@
 				63FDED331D264BD800142780 /* Objects */,
 				63FA54E31D1BCFA6004515DA /* Storyboards */,
 				63D256751E6BA6600061D80C /* Utilities */,
-				63A04D1A1D1A7F25005A2914 /* ViewControllers */,
+				63A04D1A1D1A7F25005A2914 /* View Controllers */,
 				63FDED421D28B42300142780 /* Views */,
 			);
 			path = Spycodes;
 			sourceTree = "<group>";
 		};
-		63A04D1A1D1A7F25005A2914 /* ViewControllers */ = {
+		63A04D1A1D1A7F25005A2914 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				637FF0091E0F0B620076DC25 /* SCAccessCodeViewController.swift */,
@@ -194,7 +194,7 @@
 				63AB64CC1D4880A600C4FF22 /* SCSettingsViewController.swift */,
 				6329BEFC1E512ADF004E6151 /* SCViewController.swift */,
 			);
-			name = ViewControllers;
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		63A04D1B1D1A7F2B005A2914 /* Extensions */ = {

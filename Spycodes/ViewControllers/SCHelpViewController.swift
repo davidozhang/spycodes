@@ -45,6 +45,7 @@ class SCHelpViewController: SCPopoverViewController {
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
 
+    // MARK: Actions
     @IBAction func onLeftTapped(sender: AnyObject) {
         self.currentIndex -= 1
         self.reloadView()
@@ -73,6 +74,7 @@ class SCHelpViewController: SCPopoverViewController {
         self.reloadView()
     }
 
+    // MARK: Private
     private func generateStringSequence() -> [String] {
         var result = [String]()
         if GameMode.instance.mode == GameMode.Mode.MiniGame {

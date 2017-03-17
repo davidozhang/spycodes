@@ -1,11 +1,13 @@
 import MultipeerConnectivity
 import UIKit
 
-class SCLobbyRoomViewController: SCViewController, UITableViewDelegate, UITableViewDataSource, SCMultipeerManagerDelegate, SCLobbyRoomViewCellDelegate {
+class SCLobbyRoomViewController: SCViewController {
     private let cellReuseIdentifier = "lobby-room-view-cell"
     private let trailingSpace: CGFloat = 35
     private let defaultTimeoutInterval: NSTimeInterval = 10     // Default timeout after 10 seconds
     private let shortTimeoutInterval: NSTimeInterval = 3
+
+    private let activityIndicator = UIActivityIndicatorView()
 
     private var state: LobbyRoomState = .Normal
     private var joiningRoomUUID: String?
@@ -14,7 +16,6 @@ class SCLobbyRoomViewController: SCViewController, UITableViewDelegate, UITableV
     private var refreshTimer: NSTimer?
 
     private var emptyStateLabel: UILabel?
-    private let activityIndicator = UIActivityIndicatorView()
 
     @IBOutlet weak var statusLabel: SCStatusLabel!
     @IBOutlet weak var tableView: UITableView!
@@ -89,6 +90,11 @@ class SCLobbyRoomViewController: SCViewController, UITableViewDelegate, UITableV
         super.didReceiveMemoryWarning()
     }
 
+    // MARK: Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super._prepareForSegue(segue, sender: sender)
+    }
+
     // MARK: Private
     @objc
     private func refreshView() {
@@ -124,8 +130,63 @@ class SCLobbyRoomViewController: SCViewController, UITableViewDelegate, UITableV
         self.statusLabel.text = SCStrings.normalLobbyRoomStatus
         self.state = .Normal
     }
+}
 
-    // MARK: UITableViewDelegate
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
+
+// MARK: SCMultipeerManagerDelegate
+extension SCLobbyRoomViewController: SCMultipeerManagerDelegate {
+    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
+        if let name = info?["room-name"], uuid = info?["room-uuid"] where !Lobby.instance.hasRoomWithUUID(uuid) {
+            Lobby.instance.addRoomWithNameAndUUID(name, uuid: uuid)
+        }
+    }
+
+    func lostPeer(peerID: MCPeerID) {
+        Lobby.instance.removeRoomWithUUID(peerID.displayName)
+    }
+
+    // Navigate to pregame room only when preliminary sync data from host is received
+    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
+        if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
+            Room.instance = room
+
+            // Inform the room host of local player info
+            let data = NSKeyedArchiver.archivedDataWithRootObject(Player.instance)
+            SCMultipeerManager.instance.broadcastData(data)
+
+            dispatch_async(dispatch_get_main_queue(), {
+                self.restoreStatus()
+                self.performSegueWithIdentifier("pregame-room", sender: self)
+            })
+        }
+    }
+
+    func peerDisconnectedFromSession(peerID: MCPeerID) {}
+}
+
+// MARK: SCLobbyRoomViewCellDelegate
+extension SCLobbyRoomViewController: SCLobbyRoomViewCellDelegate {
+    func joinRoomWithUUID(uuid: String) {
+        // Start advertising to allow host room to invite into session
+        self.state = .JoiningRoom
+        self.joiningRoomUUID = uuid
+
+        SCMultipeerManager.instance.initDiscoveryInfo(["joinRoomWithUUID": uuid])
+        SCMultipeerManager.instance.initAdvertiser()
+        SCMultipeerManager.instance.startAdvertiser()
+
+        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.defaultTimeoutInterval, target: self, selector: #selector(SCLobbyRoomViewController.onTimeout), userInfo: nil, repeats: false)
+        self.statusLabel.text = SCStrings.pendingStatus
+    }
+}
+
+// MARK: UITableViewDelegate, UITableViewDataSource
+extension SCLobbyRoomViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as? SCLobbyRoomViewCell else { return UITableViewCell() }
         let roomAtIndex = Lobby.instance.rooms[indexPath.row]
@@ -156,54 +217,4 @@ class SCLobbyRoomViewController: SCViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Lobby.instance.rooms.count
     }
-
-    // MARK: Segue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super._prepareForSegue(segue, sender: sender)
-    }
-
-    // MARK: SCLobbyRoomViewCellDelegate
-    func joinRoomWithUUID(uuid: String) {
-        // Start advertising to allow host room to invite into session
-        self.state = .JoiningRoom
-        self.joiningRoomUUID = uuid
-
-        SCMultipeerManager.instance.initDiscoveryInfo(["joinRoomWithUUID": uuid])
-        SCMultipeerManager.instance.initAdvertiser()
-        SCMultipeerManager.instance.startAdvertiser()
-
-        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.defaultTimeoutInterval, target: self, selector: #selector(SCLobbyRoomViewController.onTimeout), userInfo: nil, repeats: false)
-        self.statusLabel.text = SCStrings.pendingStatus
-    }
-
-    // MARK: SCMultipeerManagerDelegate
-    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
-        if let name = info?["room-name"], uuid = info?["room-uuid"] where !Lobby.instance.hasRoomWithUUID(uuid) {
-            Lobby.instance.addRoomWithNameAndUUID(name, uuid: uuid)
-        }
-    }
-
-    func lostPeer(peerID: MCPeerID) {
-        Lobby.instance.removeRoomWithUUID(peerID.displayName)
-    }
-
-    // Navigate to pregame room only when preliminary sync data from host is received
-    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
-        if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
-            Room.instance = room
-
-            // Inform the room host of local player info
-            let data = NSKeyedArchiver.archivedDataWithRootObject(Player.instance)
-            SCMultipeerManager.instance.broadcastData(data)
-
-            dispatch_async(dispatch_get_main_queue(), {
-                self.restoreStatus()
-                self.performSegueWithIdentifier("pregame-room", sender: self)
-            })
-        }
-    }
-
-    func newPeerAddedToSession(peerID: MCPeerID) {}
-
-    func peerDisconnectedFromSession(peerID: MCPeerID) {}
 }
