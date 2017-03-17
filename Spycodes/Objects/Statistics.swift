@@ -12,17 +12,20 @@ class Statistics: NSObject, NSCoding {
 
     // MARK: Coder
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.statistics[Team.Red], forKey: "red")
-        aCoder.encodeObject(self.statistics[Team.Blue], forKey: "blue")
-        aCoder.encodeObject(self.bestRecord, forKey: "bestRecord")
+        aCoder.encodeObject(self.statistics[Team.Red], forKey: SCCodingConstants.red)
+        aCoder.encodeObject(self.statistics[Team.Blue], forKey: SCCodingConstants.blue)
+        aCoder.encodeObject(self.bestRecord, forKey: SCCodingConstants.bestRecord)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        if let red = aDecoder.decodeObjectForKey("red") as? Int, blue = aDecoder.decodeObjectForKey("blue") as? Int {
+
+        if let red = aDecoder.decodeObjectForKey(SCCodingConstants.red) as? Int,
+               blue = aDecoder.decodeObjectForKey(SCCodingConstants.blue) as? Int {
             self.statistics = [Team.Red: red, Team.Blue: blue]
         }
-        if let bestRecord = aDecoder.decodeObjectForKey("bestRecord") as? Int {
+
+        if let bestRecord = aDecoder.decodeObjectForKey(SCCodingConstants.bestRecord) as? Int {
             self.bestRecord = bestRecord
         }
     }

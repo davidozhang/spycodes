@@ -37,11 +37,11 @@ class CardCollection: NSObject, NSCoding {
 
     // MARK: Coder
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.cards, forKey: "cards")
+        aCoder.encodeObject(self.cards, forKey: SCCodingConstants.cards)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        if let cards = aDecoder.decodeObjectForKey("cards") as? [Card] {
+        if let cards = aDecoder.decodeObjectForKey(SCCodingConstants.cards) as? [Card] {
             self.init(cards: cards)
         } else {
             self.init()

@@ -45,19 +45,19 @@ class Room: NSObject, NSCoding {
 
     // MARK: Coder
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.name, forKey: "name")
-        aCoder.encodeObject(self.uuid, forKey: "uuid")
-        aCoder.encodeObject(self.accessCode, forKey: "accessCode")
-        aCoder.encodeObject(self.players, forKey: "players")
-        aCoder.encodeObject(self.connectedPeers, forKey: "connectedPeers")
+        aCoder.encodeObject(self.name, forKey: SCCodingConstants.name)
+        aCoder.encodeObject(self.uuid, forKey: SCCodingConstants.uuid)
+        aCoder.encodeObject(self.players, forKey: SCCodingConstants.players)
+        aCoder.encodeObject(self.connectedPeers, forKey: SCCodingConstants.connectedPeers)
+        aCoder.encodeObject(self.accessCode, forKey: SCCodingConstants.accessCode)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        if let name = aDecoder.decodeObjectForKey("name") as? String,
-               uuid = aDecoder.decodeObjectForKey("uuid") as? String,
-               players = aDecoder.decodeObjectForKey("players") as? [Player],
-               connectedPeers = aDecoder.decodeObjectForKey("connectedPeers") as? [MCPeerID: String] {
-            if let accessCode = aDecoder.decodeObjectForKey("accessCode") as? String {
+        if let name = aDecoder.decodeObjectForKey(SCCodingConstants.name) as? String,
+               uuid = aDecoder.decodeObjectForKey(SCCodingConstants.uuid) as? String,
+               players = aDecoder.decodeObjectForKey(SCCodingConstants.players) as? [Player],
+               connectedPeers = aDecoder.decodeObjectForKey(SCCodingConstants.connectedPeers) as? [MCPeerID: String] {
+            if let accessCode = aDecoder.decodeObjectForKey(SCCodingConstants.accessCode) as? String {
                 self.init(name: name, uuid: uuid, accessCode: accessCode, players: players, connectedPeers: connectedPeers)
             } else {
                 // Backwards compatibility with v1.0

@@ -12,6 +12,7 @@
 		63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C6B1D2996B60005AC66 /* Lobby.swift */; };
 		630681A31D62FD6300539773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A21D62FD6300539773 /* LaunchScreen.storyboard */; };
 		630681A51D62FD6900539773 /* Spycodes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A41D62FD6900539773 /* Spycodes.storyboard */; };
+		6325195A1E7BCEDE0006D8B1 /* SCCodingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632519591E7BCEDE0006D8B1 /* SCCodingConstants.swift */; };
 		6329BEFD1E512ADF004E6151 /* SCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6329BEFC1E512ADF004E6151 /* SCViewController.swift */; };
 		632A25471E46F0DC0003D1F8 /* SCScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A25461E46F0DC0003D1F8 /* SCScoreViewController.swift */; };
 		632A254B1E46FD330003D1F8 /* SCPregameSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A254A1E46FD330003D1F8 /* SCPregameSettingsViewController.swift */; };
@@ -69,6 +70,7 @@
 		63067C6B1D2996B60005AC66 /* Lobby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lobby.swift; path = Objects/Lobby.swift; sourceTree = "<group>"; };
 		630681A21D62FD6300539773 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		630681A41D62FD6900539773 /* Spycodes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Spycodes.storyboard; path = Storyboards/Spycodes.storyboard; sourceTree = "<group>"; };
+		632519591E7BCEDE0006D8B1 /* SCCodingConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCCodingConstants.swift; path = Extensions/SCCodingConstants.swift; sourceTree = "<group>"; };
 		6329BEFC1E512ADF004E6151 /* SCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCViewController.swift; path = ViewControllers/SCViewController.swift; sourceTree = "<group>"; };
 		632A25461E46F0DC0003D1F8 /* SCScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCScoreViewController.swift; path = ViewControllers/SCScoreViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		632A254A1E46FD330003D1F8 /* SCPregameSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCPregameSettingsViewController.swift; path = ViewControllers/SCPregameSettingsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				63486DA41D3DDC9800795403 /* SCArray.swift */,
+				632519591E7BCEDE0006D8B1 /* SCCodingConstants.swift */,
 				CF33BE2C1D6D04EA00D0E105 /* SCConstants.swift */,
 				63FF7CE71D4E8471002D2B97 /* SCNotificationKeys.swift */,
 				63F2B7A51E6BB8F600F602D1 /* SCStates.swift */,
@@ -390,6 +393,7 @@
 				63CB4F081D3CB3C300211D3A /* SCGameRoomViewCell.swift in Sources */,
 				63D256851E6BA6BA0061D80C /* SCLogoLabel.swift in Sources */,
 				639E17661E00E50E00640540 /* SCVersionViewCell.swift in Sources */,
+				6325195A1E7BCEDE0006D8B1 /* SCCodingConstants.swift in Sources */,
 				CF33BE2D1D6D04EA00D0E105 /* SCConstants.swift in Sources */,
 				63CA90CA1D4280CC0027CA80 /* Spycodes.xcdatamodeld in Sources */,
 				63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */,
