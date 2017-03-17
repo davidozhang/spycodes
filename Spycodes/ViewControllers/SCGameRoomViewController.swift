@@ -254,8 +254,7 @@ class SCGameRoomViewController: SCViewController {
 
                 self.clueTextField.enabled = false
                 self.numberOfWordsTextField.enabled = false
-            }
-            else {
+            } else {
                 if Player.instance.isClueGiver() {
                     self.clueTextField.text = Round.defaultClueGiverClue
                     self.numberOfWordsTextField.text = Round.defaultNumberOfWords
@@ -265,8 +264,7 @@ class SCGameRoomViewController: SCViewController {
                     self.actionButtonState = .Confirm
                     self.clueTextField.enabled = true
                     self.numberOfWordsTextField.enabled = true
-                }
-                else {
+                } else {
                     self.clueTextField.text = Round.defaultIsTurnClue
                     self.numberOfWordsTextField.text = Round.defaultNumberOfWords
                 }
@@ -367,8 +365,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
 
         if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
             CardCollection.instance = cardCollection
-        }
-        else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
+        } else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
             let previousTeam = Round.instance.currentTeam
             Round.instance = round
 
@@ -380,25 +377,20 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             if Round.instance.abort {
                 self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: SCStrings.playerAborted)
                 return
-            }
-            else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.RegularGame {
+            } else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.RegularGame {
                 self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: Round.defaultWinString)
                 return
-            }
-            else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.MiniGame {
+            } else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.MiniGame {
                 self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
                 Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
                 return
-            }
-            else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) {
+            } else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) {
                 self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: Round.defaultLoseString)
                 return
             }
-        }
-        else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
+        } else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
             Room.instance = room
-        }
-        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
+        } else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
             Statistics.instance = statistics
         }
     }
@@ -514,8 +506,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             self.broadcastOptionalData(Statistics.instance)
 
             self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: Round.defaultLoseString)
-        }
-        else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
+        } else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
             Round.instance.winningTeam = playerTeam
             self.broadcastEssentialData()
 

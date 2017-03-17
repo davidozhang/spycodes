@@ -141,8 +141,7 @@ class Room: NSObject, NSCoding {
         let filtered = self.players.filter({($0 as Player).getUUID() == uuid})
         if filtered.count == 1 {
             return filtered[0]
-        }
-        else {
+        } else {
             return nil
         }
     }
@@ -210,8 +209,7 @@ class Room: NSObject, NSCoding {
         let filtered = self.players.filter({($0 as Player).isClueGiver() && ($0 as Player).team == team})
         if filtered.count == 1 {
             return filtered[0].getUUID()
-        }
-        else {
+        } else {
             return nil
         }
     }

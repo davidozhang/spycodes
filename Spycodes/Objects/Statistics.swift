@@ -40,8 +40,7 @@ class Statistics: NSObject, NSCoding {
     func setBestRecord(record: Int) {
         if self.bestRecord == nil {
             self.bestRecord = record
-        }
-        else if record > bestRecord {
+        } else if record > bestRecord {
             self.bestRecord = record
         }
     }

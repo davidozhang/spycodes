@@ -20,8 +20,7 @@ class Lobby {
         let filtered = self.rooms.filter({($0 as Room).getUUID() == uuid})
         if filtered.count == 1 {
             return filtered[0]
-        }
-        else {
+        } else {
             return nil
         }
     }

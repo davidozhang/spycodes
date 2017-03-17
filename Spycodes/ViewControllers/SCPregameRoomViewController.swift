@@ -281,28 +281,23 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
             if Player.instance.isHost() {
                 Room.instance.addPlayer(player)
             }
-        }
-        else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
+        } else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
             Room.instance = room
 
             if let player = Room.instance.getPlayerWithUUID(Player.instance.getUUID()) {
                 Player.instance = player
             }
-        }
-        else if let gameMode = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? GameMode {
+        } else if let gameMode = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? GameMode {
             GameMode.instance = gameMode
-        }
-        else if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
+        } else if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
             CardCollection.instance = cardCollection
-        }
-        else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
+        } else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
             Round.instance = round
             // TODO: Improve Round handling logic
             if !Round.instance.abort {
                 self.goToGame()
             }
-        }
-        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
+        } else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
             Statistics.instance = statistics
         }
     }
