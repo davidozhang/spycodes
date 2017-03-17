@@ -1,7 +1,7 @@
 import MultipeerConnectivity
 import UIKit
 
-class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, SCMultipeerManagerDelegate, UITextFieldDelegate {
+class SCGameRoomViewController: SCViewController {
     private let cellReuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
     private let minCellSpacing: CGFloat = 12
@@ -20,9 +20,9 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
 
-    @IBOutlet var topBarViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet var bottomBarViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet var bottomBarViewBottomMarginConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topBarViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomBarViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomBarViewBottomMarginConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var topBarView: UIView!
@@ -132,16 +132,6 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         super.didReceiveMemoryWarning()
     }
 
-    // MARK: Popover Presentation Controller Delegate
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
-    }
-
-    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
-        super.hideDimView()
-        popoverPresentationController.delegate = nil
-    }
-
     // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let vc = segue.destinationViewController as? SCPopoverViewController {
@@ -158,6 +148,31 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
                 popvc.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
             }
         }
+    }
+
+    // MARK: Touch
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesBegan(touches, withEvent: event)
+
+        if let allTouches = event?.allTouches(), let touch = allTouches.first {
+            if self.clueTextField.isFirstResponder() && touch.view != self.clueTextField {
+                self.clueTextField.resignFirstResponder()
+            } else if self.numberOfWordsTextField.isFirstResponder() && touch.view != self.numberOfWordsTextField {
+                self.numberOfWordsTextField.resignFirstResponder()
+            }
+        }
+    }
+
+    // MARK: Keyboard
+    override func keyboardWillShow(notification: NSNotification) {
+        if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let rect = frame.CGRectValue()
+            self.bottomBarViewBottomMarginConstraint.constant = rect.size.height
+        }
+    }
+
+    override func keyboardWillHide(notification: NSNotification) {
+        self.bottomBarViewBottomMarginConstraint.constant = 0
     }
 
     // MARK: Private
@@ -239,8 +254,7 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
 
                 self.clueTextField.enabled = false
                 self.numberOfWordsTextField.enabled = false
-            }
-            else {
+            } else {
                 if Player.instance.isClueGiver() {
                     self.clueTextField.text = Round.defaultClueGiverClue
                     self.numberOfWordsTextField.text = Round.defaultNumberOfWords
@@ -250,8 +264,7 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
                     self.actionButtonState = .Confirm
                     self.clueTextField.enabled = true
                     self.numberOfWordsTextField.enabled = true
-                }
-                else {
+                } else {
                     self.clueTextField.text = Round.defaultIsTurnClue
                     self.numberOfWordsTextField.text = Round.defaultNumberOfWords
                 }
@@ -335,23 +348,16 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         alertController.addAction(confirmAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
+}
 
-    override func keyboardWillShow(notification: NSNotification) {
-        if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            let rect = frame.CGRectValue()
-            self.bottomBarViewBottomMarginConstraint.constant = rect.size.height
-        }
-    }
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
-    override func keyboardWillHide(notification: NSNotification) {
-        self.bottomBarViewBottomMarginConstraint.constant = 0
-    }
-
-    // MARK: SCMultipeerManagerDelegate
-    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {}
-
-    func lostPeer(peerID: MCPeerID) {}
-
+// MARK: SCMultipeerManagerDelegate
+extension SCGameRoomViewController: SCMultipeerManagerDelegate {
     func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
         if self.cluegiverIsEditing {
             return
@@ -359,8 +365,7 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
 
         if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
             CardCollection.instance = cardCollection
-        }
-        else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
+        } else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
             let previousTeam = Round.instance.currentTeam
             Round.instance = round
 
@@ -372,30 +377,23 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
             if Round.instance.abort {
                 self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: SCStrings.playerAborted)
                 return
-            }
-            else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.RegularGame {
+            } else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.RegularGame {
                 self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: Round.defaultWinString)
                 return
-            }
-            else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.MiniGame {
+            } else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.MiniGame {
                 self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
                 Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
                 return
-            }
-            else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) {
+            } else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) {
                 self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: Round.defaultLoseString)
                 return
             }
-        }
-        else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
+        } else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
             Room.instance = room
-        }
-        else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
+        } else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
             Statistics.instance = statistics
         }
     }
-
-    func newPeerAddedToSession(peerID: MCPeerID) {}
 
     func peerDisconnectedFromSession(peerID: MCPeerID) {
         if let uuid = Room.instance.connectedPeers[peerID], let player = Room.instance.getPlayerWithUUID(uuid) {
@@ -418,7 +416,13 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         }
     }
 
-    // MARK: UICollectionViewDelegate
+    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {}
+
+    func lostPeer(peerID: MCPeerID) {}
+}
+
+// MARK: UICollectionViewDelegate, UICollectionViewDataSource
+extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -502,8 +506,7 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
             self.broadcastOptionalData(Statistics.instance)
 
             self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: Round.defaultLoseString)
-        }
-        else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
+        } else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
             Round.instance.winningTeam = playerTeam
             self.broadcastEssentialData()
 
@@ -524,37 +527,23 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         return UIEdgeInsetsMake(self.topBarViewHeightConstraint.constant + 8, edgeInset, self.bottomBarViewHeightConstraint.constant + 8, edgeInset)
     }
 
-    // MARK: Collection View Cell Size
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let viewBounds = collectionView.bounds
         let modifiedWidth = (viewBounds.width - 2 * edgeInset - minCellSpacing) / 2
         return CGSize(width: modifiedWidth, height: viewBounds.height/12)
     }
 
-    // MARK: Collection View Interitem Spacing
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return minCellSpacing
     }
 
-    // MARK: Collection View Cell Line Spacing
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return minCellSpacing
     }
+}
 
-    // MARK: Touch
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
-
-        if let allTouches = event?.allTouches(), let touch = allTouches.first {
-            if self.clueTextField.isFirstResponder() && touch.view != self.clueTextField {
-                self.clueTextField.resignFirstResponder()
-            } else if self.numberOfWordsTextField.isFirstResponder() && touch.view != self.numberOfWordsTextField {
-                self.numberOfWordsTextField.resignFirstResponder()
-            }
-        }
-    }
-
-    // MARK: UITextFieldDelegate
+// MARK: UITextFieldDelegate
+extension SCGameRoomViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if Player.instance.isClueGiver() && Round.instance.currentTeam == Player.instance.team {
             return true
@@ -623,5 +612,17 @@ class SCGameRoomViewController: SCViewController, UICollectionViewDelegateFlowLa
         }
 
         return true
+    }
+}
+
+// MARK: UIPopoverPresentationControllerDelegate
+extension SCGameRoomViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+        super.hideDimView()
+        popoverPresentationController.delegate = nil
     }
 }

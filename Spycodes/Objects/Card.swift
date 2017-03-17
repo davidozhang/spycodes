@@ -1,10 +1,11 @@
 import Foundation
 
-class Card: NSObject, NSCoding {
+class Card: NSObject {
     private var word: String
     private var selected: Bool
     private var team: Team
 
+    // MARK: Constructor/Destructor
     override init() {
         self.word = "Default"
         self.selected = false
@@ -27,21 +28,24 @@ class Card: NSObject, NSCoding {
         }
     }
 
+    // MARK: Coder
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.word, forKey: SCCodingConstants.word)
+        aCoder.encodeBool(self.selected, forKey: SCCodingConstants.selected)
+        aCoder.encodeObject(self.team.rawValue, forKey: SCCodingConstants.team)
+    }
+
     required convenience init?(coder aDecoder: NSCoder) {
-        if let word = aDecoder.decodeObjectForKey("word") as? String, team = aDecoder.decodeObjectForKey("team") as? Int {
-            let selected = aDecoder.decodeBoolForKey("selected")
+        if let word = aDecoder.decodeObjectForKey(SCCodingConstants.word) as? String,
+               team = aDecoder.decodeObjectForKey(SCCodingConstants.team) as? Int {
+            let selected = aDecoder.decodeBoolForKey(SCCodingConstants.selected)
             self.init(word: word, selected: selected, team: team)
         } else {
             self.init()
         }
     }
 
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.word, forKey: "word")
-        aCoder.encodeBool(self.selected, forKey: "selected")
-        aCoder.encodeObject(self.team.rawValue, forKey: "team")
-    }
-
+    // MARK: Public
     func getWord() -> String {
         return self.word
     }

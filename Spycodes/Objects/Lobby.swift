@@ -5,10 +5,12 @@ class Lobby {
 
     var rooms = [Room]()
 
+    // MARK: Constructor/Destructor
     deinit {
         self.rooms.removeAll()
     }
 
+    // MARK: Public
     func addRoomWithNameAndUUID(name: String, uuid: String) {
         let room = Room()
         room.name = name
@@ -20,8 +22,7 @@ class Lobby {
         let filtered = self.rooms.filter({($0 as Room).getUUID() == uuid})
         if filtered.count == 1 {
             return filtered[0]
-        }
-        else {
+        } else {
             return nil
         }
     }

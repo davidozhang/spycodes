@@ -4,11 +4,10 @@ protocol SCMultipeerManagerDelegate: class {
     func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String: String]?)
     func lostPeer(peerID: MCPeerID)
     func didReceiveData(data: NSData, fromPeer peerID: MCPeerID)
-    func newPeerAddedToSession(peerID: MCPeerID)
     func peerDisconnectedFromSession(peerID: MCPeerID)
 }
 
-class SCMultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
+class SCMultipeerManager: NSObject {
     static let instance = SCMultipeerManager()
     weak var delegate: SCMultipeerManagerDelegate?
 
@@ -95,13 +94,23 @@ class SCMultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyS
             NSLog("Failed to broadcast the following data to all peers: \(NSString(data: data, encoding: NSUTF8StringEncoding))")
         }
     }
+}
 
-    // MARK: MCNearbyServiceAdvertiserDelegate
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
+
+// MARK: MCNearbyServiceAdvertiserDelegate
+extension SCMultipeerManager: MCNearbyServiceAdvertiserDelegate {
     func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession?) -> Void) {
         invitationHandler(true, self.session!)
     }
+}
 
-    // MARK: MCNearbyServiceBrowserDelegate
+// MARK: MCNearbyServiceBrowserDelegate
+extension SCMultipeerManager: MCNearbyServiceBrowserDelegate {
     func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
         delegate?.foundPeer(peerID, withDiscoveryInfo: info)
     }
@@ -109,8 +118,10 @@ class SCMultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyS
     func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         delegate?.lostPeer(peerID)
     }
+}
 
-    // MARK: MCSessionDelegate
+// MARK: MCSessionDelegate
+extension SCMultipeerManager: MCSessionDelegate {
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
         delegate?.didReceiveData(data, fromPeer: peerID)
     }
@@ -122,9 +133,7 @@ class SCMultipeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbyS
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
 
     func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
-        if state == MCSessionState.Connected {
-            delegate?.newPeerAddedToSession(peerID)
-        } else if state == MCSessionState.NotConnected {
+        if state == MCSessionState.NotConnected {
             delegate?.peerDisconnectedFromSession(peerID)
         }
     }

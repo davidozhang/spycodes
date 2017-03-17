@@ -14,9 +14,7 @@ class SCRoundedButton: SCButton {
         didSet {
             if highlighted {
                 self.backgroundColor = UIColor.spycodesDarkGreenColor()
-
-            }
-            else {
+            } else {
                 self.backgroundColor = UIColor.spycodesGreenColor()
             }
 

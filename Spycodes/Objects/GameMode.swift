@@ -9,21 +9,24 @@ class GameMode: NSObject, NSCoding {
     static var instance = GameMode()
     var mode: Mode?
 
+    // MARK: Constructor/Destructor
     override init() {
         self.mode = Mode.RegularGame
     }
 
+    // MARK: Coder
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.mode?.rawValue, forKey: SCCodingConstants.mode)
+    }
+
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        if let mode = aDecoder.decodeObjectForKey("mode") as? Int {
+        if let mode = aDecoder.decodeObjectForKey(SCCodingConstants.mode) as? Int {
             self.mode = Mode(rawValue: mode)
         }
     }
 
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.mode?.rawValue, forKey: "mode")
-    }
-
+    // MARK: Public
     func reset() {
         self.mode = GameMode.Mode.RegularGame
     }

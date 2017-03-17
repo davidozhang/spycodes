@@ -5,26 +5,32 @@ class Statistics: NSObject, NSCoding {
     private var bestRecord: Int?        // For minigame
     private var statistics = [Team.Red: 0, Team.Blue: 0]        // For regular game
 
-    required convenience init?(coder aDecoder: NSCoder) {
-        self.init()
-        if let red = aDecoder.decodeObjectForKey("red") as? Int, blue = aDecoder.decodeObjectForKey("blue") as? Int {
-            self.statistics = [Team.Red: red, Team.Blue: blue]
-        }
-        if let bestRecord = aDecoder.decodeObjectForKey("bestRecord") as? Int {
-            self.bestRecord = bestRecord
-        }
-    }
-
+    // MARK: Constructor/Destructor
     deinit {
         self.statistics.removeAll()
     }
 
+    // MARK: Coder
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.statistics[Team.Red], forKey: "red")
-        aCoder.encodeObject(self.statistics[Team.Blue], forKey: "blue")
-        aCoder.encodeObject(self.bestRecord, forKey: "bestRecord")
+        aCoder.encodeObject(self.statistics[Team.Red], forKey: SCCodingConstants.red)
+        aCoder.encodeObject(self.statistics[Team.Blue], forKey: SCCodingConstants.blue)
+        aCoder.encodeObject(self.bestRecord, forKey: SCCodingConstants.bestRecord)
     }
 
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+
+        if let red = aDecoder.decodeObjectForKey(SCCodingConstants.red) as? Int,
+               blue = aDecoder.decodeObjectForKey(SCCodingConstants.blue) as? Int {
+            self.statistics = [Team.Red: red, Team.Blue: blue]
+        }
+
+        if let bestRecord = aDecoder.decodeObjectForKey(SCCodingConstants.bestRecord) as? Int {
+            self.bestRecord = bestRecord
+        }
+    }
+
+    // MARK: Public
     func recordWinForTeam(winningTeam: Team) {
         self.statistics[winningTeam]! += 1
     }
@@ -40,8 +46,7 @@ class Statistics: NSObject, NSCoding {
     func setBestRecord(record: Int) {
         if self.bestRecord == nil {
             self.bestRecord = record
-        }
-        else if record > bestRecord {
+        } else if record > bestRecord {
             self.bestRecord = record
         }
     }

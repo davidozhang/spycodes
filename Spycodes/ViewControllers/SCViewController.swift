@@ -9,6 +9,7 @@ class SCViewController: UIViewController {
 
     private let dimView = UIView()
 
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,6 +32,7 @@ class SCViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
 
+    // MARK: SCViewController-Only Functions
     func _prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if unwindingSegue {
             return

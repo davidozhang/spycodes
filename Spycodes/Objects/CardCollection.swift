@@ -10,6 +10,7 @@ class CardCollection: NSObject, NSCoding {
     var key = [Team]()
     var startingTeam: Team
 
+    // MARK: Constructor/Destructor
     override init() {
         if GameMode.instance.mode == GameMode.Mode.MiniGame {
             self.startingTeam = Team.Red
@@ -24,28 +25,30 @@ class CardCollection: NSObject, NSCoding {
         }
     }
 
-    deinit {
-        self.cards.removeAll()
-        self.key.removeAll()
-    }
-
     convenience init(cards: [Card]) {
         self.init()
         self.cards = cards
     }
 
+    deinit {
+        self.cards.removeAll()
+        self.key.removeAll()
+    }
+
+    // MARK: Coder
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.cards, forKey: SCCodingConstants.cards)
+    }
+
     required convenience init?(coder aDecoder: NSCoder) {
-        if let cards = aDecoder.decodeObjectForKey("cards") as? [Card] {
+        if let cards = aDecoder.decodeObjectForKey(SCCodingConstants.cards) as? [Card] {
             self.init(cards: cards)
         } else {
             self.init()
         }
     }
 
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.cards, forKey: "cards")
-    }
-
+    // MARK: Public
     func getCardsRemainingForTeam(team: Team) -> Int {
         return self.cards.filter({($0 as Card).getTeam() == team && !($0 as Card).isSelected()}).count
     }

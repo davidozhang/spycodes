@@ -13,6 +13,7 @@ class Room: NSObject, NSCoding {
     private var uuid: String
     private var accessCode: String
 
+    // MARK: Constructor/Destructor
     override init() {
         self.uuid = NSUUID().UUIDString
         self.accessCode = Room.generateAccessCode()
@@ -37,12 +38,26 @@ class Room: NSObject, NSCoding {
         self.connectedPeers = connectedPeers
     }
 
+    deinit {
+        self.players.removeAll()
+        self.connectedPeers.removeAll()
+    }
+
+    // MARK: Coder
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.name, forKey: SCCodingConstants.name)
+        aCoder.encodeObject(self.uuid, forKey: SCCodingConstants.uuid)
+        aCoder.encodeObject(self.players, forKey: SCCodingConstants.players)
+        aCoder.encodeObject(self.connectedPeers, forKey: SCCodingConstants.connectedPeers)
+        aCoder.encodeObject(self.accessCode, forKey: SCCodingConstants.accessCode)
+    }
+
     required convenience init?(coder aDecoder: NSCoder) {
-        if let name = aDecoder.decodeObjectForKey("name") as? String,
-               uuid = aDecoder.decodeObjectForKey("uuid") as? String,
-               players = aDecoder.decodeObjectForKey("players") as? [Player],
-               connectedPeers = aDecoder.decodeObjectForKey("connectedPeers") as? [MCPeerID: String] {
-            if let accessCode = aDecoder.decodeObjectForKey("accessCode") as? String {
+        if let name = aDecoder.decodeObjectForKey(SCCodingConstants.name) as? String,
+               uuid = aDecoder.decodeObjectForKey(SCCodingConstants.uuid) as? String,
+               players = aDecoder.decodeObjectForKey(SCCodingConstants.players) as? [Player],
+               connectedPeers = aDecoder.decodeObjectForKey(SCCodingConstants.connectedPeers) as? [MCPeerID: String] {
+            if let accessCode = aDecoder.decodeObjectForKey(SCCodingConstants.accessCode) as? String {
                 self.init(name: name, uuid: uuid, accessCode: accessCode, players: players, connectedPeers: connectedPeers)
             } else {
                 // Backwards compatibility with v1.0
@@ -53,31 +68,7 @@ class Room: NSObject, NSCoding {
         }
     }
 
-    deinit {
-        self.players.removeAll()
-        self.connectedPeers.removeAll()
-    }
-
-    private static func generateAccessCode() -> String {
-        var result = ""
-
-        for _ in 0 ..< SCConstants.accessCodeLength {
-            let rand = arc4random_uniform(UInt32(Room.accessCodeAllowedCharacters.length))
-            var nextChar = Room.accessCodeAllowedCharacters.characterAtIndex(Int(rand))
-            result += NSString(characters: &nextChar, length: 1) as String
-        }
-
-        return result
-    }
-
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.name, forKey: "name")
-        aCoder.encodeObject(self.uuid, forKey: "uuid")
-        aCoder.encodeObject(self.accessCode, forKey: "accessCode")
-        aCoder.encodeObject(self.players, forKey: "players")
-        aCoder.encodeObject(self.connectedPeers, forKey: "connectedPeers")
-    }
-
+    // MARK: Public
     func refresh() {
         self.players.sortInPlace({ player1, player2 in
             if player1.team.rawValue < player2.team.rawValue {
@@ -141,8 +132,7 @@ class Room: NSObject, NSCoding {
         let filtered = self.players.filter({($0 as Player).getUUID() == uuid})
         if filtered.count == 1 {
             return filtered[0]
-        }
-        else {
+        } else {
             return nil
         }
     }
@@ -210,8 +200,7 @@ class Room: NSObject, NSCoding {
         let filtered = self.players.filter({($0 as Player).isClueGiver() && ($0 as Player).team == team})
         if filtered.count == 1 {
             return filtered[0].getUUID()
-        }
-        else {
+        } else {
             return nil
         }
     }
@@ -226,5 +215,18 @@ class Room: NSObject, NSCoding {
     func reset() {
         self.players.removeAll()
         self.connectedPeers.removeAll()
+    }
+
+    // MARK: Private
+    private static func generateAccessCode() -> String {
+        var result = ""
+
+        for _ in 0 ..< SCConstants.accessCodeLength {
+            let rand = arc4random_uniform(UInt32(Room.accessCodeAllowedCharacters.length))
+            var nextChar = Room.accessCodeAllowedCharacters.characterAtIndex(Int(rand))
+            result += NSString(characters: &nextChar, length: 1) as String
+        }
+
+        return result
     }
 }

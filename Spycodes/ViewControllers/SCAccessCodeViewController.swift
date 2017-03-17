@@ -1,14 +1,13 @@
 import MultipeerConnectivity
 import UIKit
 
-class SCAccessCodeViewController: SCViewController, UITextFieldDelegate, UITextFieldBackspaceDelegate, SCMultipeerManagerDelegate {
+class SCAccessCodeViewController: SCViewController {
     private let allowedCharactersSet = NSCharacterSet(charactersInString: Room.accessCodeAllowedCharacters as String)
     private let defaultTimeoutInterval: NSTimeInterval = 10
     private let shortTimeoutInterval: NSTimeInterval = 3
 
     private let firstTag = 0
     private let lastTag = 3
-    @IBOutlet weak var statusLabelTopMarginConstraint: NSLayoutConstraint!
 
     private var timeoutTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -23,7 +22,9 @@ class SCAccessCodeViewController: SCViewController, UITextFieldDelegate, UITextF
     @IBOutlet weak var browseLobbyButton: UIButton!
     @IBOutlet weak var headerTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentViewVerticalCenterConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusLabelTopMarginConstraint: NSLayoutConstraint!
 
+    // MARK: Actions
     @IBAction func unwindToAccessCode(sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
     }
@@ -92,10 +93,32 @@ class SCAccessCodeViewController: SCViewController, UITextFieldDelegate, UITextF
         super.didReceiveMemoryWarning()
     }
 
+    // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super._prepareForSegue(segue, sender: sender)
     }
 
+    // MARK: Keyboard
+    override func keyboardWillShow(notification: NSNotification) {
+        if self.keyboardDidShow {
+            return
+        }
+
+        if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            self.keyboardDidShow = true
+
+            let rect = frame.CGRectValue()
+            self.contentViewVerticalCenterConstraint.constant = -(rect.height / 2 - self.headerTopMarginConstraint.constant - self.statusLabelTopMarginConstraint.constant)
+        }
+    }
+
+    override func keyboardWillHide(notification: NSNotification) {
+        self.keyboardDidShow = false
+
+        self.contentViewVerticalCenterConstraint.constant = 0
+    }
+
+    // MARK: Private
     @objc
     private func onTimeout() {
         self.timeoutTimer?.invalidate()
@@ -142,25 +165,6 @@ class SCAccessCodeViewController: SCViewController, UITextFieldDelegate, UITextF
         }
     }
 
-    override func keyboardWillShow(notification: NSNotification) {
-        if self.keyboardDidShow {
-            return
-        }
-
-        if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            self.keyboardDidShow = true
-
-            let rect = frame.CGRectValue()
-            self.contentViewVerticalCenterConstraint.constant = -(rect.height / 2 - self.headerTopMarginConstraint.constant - self.statusLabelTopMarginConstraint.constant)
-        }
-    }
-
-    override func keyboardWillHide(notification: NSNotification) {
-        self.keyboardDidShow = false
-
-        self.contentViewVerticalCenterConstraint.constant = 0
-    }
-
     private func joinRoomWithAccessCode(accessCode: String) {
         // Start advertising to allow host room to invite into session
         guard let name = Player.instance.name else { return }
@@ -188,8 +192,64 @@ class SCAccessCodeViewController: SCViewController, UITextFieldDelegate, UITextF
             }
         }
     }
+}
 
-    // MARK: UITextFieldDelegate
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
+
+// MARK: SCMultipeerManagerDelegate
+extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
+    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
+        // Navigate to pregame room only when preliminary sync data from host is received
+        if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
+            Room.instance = room
+
+            // Inform the room host of local player info
+            let data = NSKeyedArchiver.archivedDataWithRootObject(Player.instance)
+            SCMultipeerManager.instance.broadcastData(data)
+
+            dispatch_async(dispatch_get_main_queue(), {
+                self.restoreStatus()
+                self.performSegueWithIdentifier("pregame-room", sender: self)
+            })
+        }
+    }
+
+    func peerDisconnectedFromSession(peerID: MCPeerID) {}
+
+    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {}
+
+    func lostPeer(peerID: MCPeerID) {}
+}
+
+// MARK: SCSingleCharacterTextFieldBackspaceDelegate
+extension SCAccessCodeViewController: SCSingleCharacterTextFieldBackspaceDelegate {
+    func onBackspaceDetected(textField: UITextField) {
+        let currentTag = textField.tag
+
+        // If currently on last text field and it was filled, do not advance cursor to previous text field
+        if self.lastTextFieldWasFilled {
+            self.lastTextFieldWasFilled = false
+            return
+        }
+
+        if currentTag == self.firstTag {
+            return
+        }
+
+        // Advance cursor to previous text field
+        if let nextTextField = textFieldsView.subviews[currentTag - 1] as? UITextField {
+            nextTextField.becomeFirstResponder()
+            nextTextField.text = ""
+        }
+    }
+}
+
+// MARK: UITextFieldDelegate
+extension SCAccessCodeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         let currentTag = textField.tag
 
@@ -222,50 +282,4 @@ class SCAccessCodeViewController: SCViewController, UITextFieldDelegate, UITextF
 
         return true
     }
-
-    // MARK: UITextFieldBackspaceDelegate
-    func onBackspaceDetected(textField: UITextField) {
-        let currentTag = textField.tag
-
-        // If currently on last text field and it was filled, do not advance cursor to previous text field
-        if self.lastTextFieldWasFilled {
-            self.lastTextFieldWasFilled = false
-            return
-        }
-
-        if currentTag == self.firstTag {
-            return
-        }
-
-        // Advance cursor to previous text field
-        if let nextTextField = textFieldsView.subviews[currentTag - 1] as? UITextField {
-            nextTextField.becomeFirstResponder()
-            nextTextField.text = ""
-        }
-    }
-
-    // MARK: SCMultipeerManagerDelegate
-    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {}
-
-    func lostPeer(peerID: MCPeerID) {}
-
-    // Navigate to pregame room only when preliminary sync data from host is received
-    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
-        if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
-            Room.instance = room
-
-            // Inform the room host of local player info
-            let data = NSKeyedArchiver.archivedDataWithRootObject(Player.instance)
-            SCMultipeerManager.instance.broadcastData(data)
-
-            dispatch_async(dispatch_get_main_queue(), {
-                self.restoreStatus()
-                self.performSegueWithIdentifier("pregame-room", sender: self)
-            })
-        }
-    }
-
-    func newPeerAddedToSession(peerID: MCPeerID) {}
-
-    func peerDisconnectedFromSession(peerID: MCPeerID) {}
 }

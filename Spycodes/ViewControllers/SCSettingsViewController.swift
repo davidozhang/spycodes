@@ -1,6 +1,6 @@
 import UIKit
 
-class SCSettingsViewController: SCViewController, UITableViewDelegate, UITableViewDataSource {
+class SCSettingsViewController: SCViewController {
     private let sections = ["About"]
     private let versionViewCellReuseIdentifier = "version-view-cell"
     private let sectionHeaderCellReuseIdentifier = "section-header-view-cell"
@@ -33,8 +33,16 @@ class SCSettingsViewController: SCViewController, UITableViewDelegate, UITableVi
         self.tableView.dataSource = nil
         self.tableView.delegate = nil
     }
+}
 
-    // MARK: Table View Delegate
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
+
+// MARK: UITableViewDelegate, UITableViewDataSource
+extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sections.count
     }
@@ -63,9 +71,7 @@ class SCSettingsViewController: SCViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.versionViewCellReuseIdentifier) as? SCVersionViewCell else {
-                return UITableViewCell()
-            }
+            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.versionViewCellReuseIdentifier) as? SCVersionViewCell else { return UITableViewCell() }
 
             return cell
         default:

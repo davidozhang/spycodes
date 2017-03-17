@@ -16,8 +16,7 @@ class SCButton: UIButton {
             if highlighted {
                 self.backgroundColor = UIColor.darkGrayColor()
                 self.titleLabel?.textColor = UIColor.whiteColor()
-            }
-            else {
+            } else {
                 self.backgroundColor = UIColor.whiteColor()
                 self.titleLabel?.textColor = UIColor.darkGrayColor()
             }

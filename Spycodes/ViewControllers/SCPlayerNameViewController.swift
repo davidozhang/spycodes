@@ -1,6 +1,6 @@
 import UIKit
 
-class SCPlayerNameViewController: SCViewController, UITextFieldDelegate {
+class SCPlayerNameViewController: SCViewController {
     @IBOutlet weak var userNameTextField: SCTextField!
     @IBOutlet weak var headerLabelTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var userNameTextFieldVerticalCenterConstraint: NSLayoutConstraint!
@@ -50,18 +50,28 @@ class SCPlayerNameViewController: SCViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
     }
 
+    // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super._prepareForSegue(segue, sender: sender)
     }
 
+    // MARK: Keyboard
     override func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let rect = frame.CGRectValue()
             self.userNameTextFieldVerticalCenterConstraint.constant = -(rect.height / 2 - self.headerLabelTopMarginConstraint.constant)
         }
     }
+}
 
-    // MARK: UITextFieldDelegate
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
+
+// MARK: UITextFieldDelegate
+extension SCPlayerNameViewController: UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         return true
     }
@@ -80,8 +90,7 @@ class SCPlayerNameViewController: SCViewController, UITextFieldDelegate {
                 self.performSegueWithIdentifier("access-code", sender: self)
             }
             return true
-        }
-        else {
+        } else {
             return false
         }
     }
