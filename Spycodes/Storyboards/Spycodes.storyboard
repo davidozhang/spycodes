@@ -892,7 +892,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d84-Az-a9v">
-                                                    <rect key="frame" x="35" y="12.5" width="809" height="20"/>
+                                                    <rect key="frame" x="35" y="16" width="809" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="300" id="xaW-k5-dCT"/>
                                                     </constraints>
@@ -927,13 +927,12 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="d84-Az-a9v" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="1oP-67-mY5"/>
+                                                <constraint firstItem="d84-Az-a9v" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" constant="4" id="1oP-67-mY5"/>
                                                 <constraint firstItem="4mv-rH-4Dm" firstAttribute="leading" secondItem="d84-Az-a9v" secondAttribute="trailing" constant="115" id="CUV-93-cU6"/>
-                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="centerY" secondItem="d84-Az-a9v" secondAttribute="centerY" id="Laf-Zg-ov4"/>
-                                                <constraint firstItem="i4n-ia-kgW" firstAttribute="centerY" secondItem="d84-Az-a9v" secondAttribute="centerY" id="LlD-kZ-zW1"/>
                                                 <constraint firstItem="4mv-rH-4Dm" firstAttribute="leading" secondItem="i4n-ia-kgW" secondAttribute="trailing" constant="16" id="RhZ-Rz-agz"/>
+                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="WM6-wm-3dj"/>
+                                                <constraint firstItem="i4n-ia-kgW" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="cmK-aY-UgQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="4mv-rH-4Dm" secondAttribute="trailing" constant="35" id="dXH-vQ-s4Q"/>
-                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="centerY" secondItem="d84-Az-a9v" secondAttribute="centerY" id="gti-7X-iAR"/>
                                                 <constraint firstItem="d84-Az-a9v" firstAttribute="leading" secondItem="rq2-uF-F29" secondAttribute="leading" constant="35" id="unX-kK-LLJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
