@@ -1,8 +1,10 @@
 import UIKit
 
 class SCSettingsViewController: SCViewController {
-    private let sections = ["About"]
+    private let supportURL = "https://www.spycodes.net/support/"
+    private let sections = ["About", "More"]
     private let versionViewCellReuseIdentifier = "version-view-cell"
+    private let supportViewCellReuseIdentifier = "support-view-cell"
     private let sectionHeaderCellReuseIdentifier = "section-header-view-cell"
 
     @IBOutlet weak var tableView: UITableView!
@@ -48,7 +50,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30.0
+        return 44.0
     }
 
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -63,19 +65,39 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         switch section {
         case 0:
             return 1
+        case 1:
+            return 1
         default:
             return 0
         }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        switch indexPath.row {
+        switch indexPath.section {
         case 0:
             guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.versionViewCellReuseIdentifier) as? SCVersionViewCell else { return UITableViewCell() }
 
             return cell
+        case 1:
+            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.supportViewCellReuseIdentifier) as? SCSupportViewCell else { return UITableViewCell() }
+            cell.accessoryType = .DisclosureIndicator
+
+            return cell
         default:
             return UITableViewCell()
+        }
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+
+        switch indexPath.section {
+        case 1:
+            if let supportURL = NSURL(string: self.supportURL) {
+                UIApplication.sharedApplication().openURL(supportURL)
+            }
+        default:
+            return
         }
     }
 }

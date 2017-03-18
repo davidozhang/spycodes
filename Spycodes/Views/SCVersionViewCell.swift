@@ -14,5 +14,7 @@ class SCVersionViewCell: UITableViewCell {
         self.versionLeftLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
         self.versionNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
         self.buildNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Other)
+
+        self.selectionStyle = .None
     }
 }

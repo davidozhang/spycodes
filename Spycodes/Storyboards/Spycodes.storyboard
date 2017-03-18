@@ -122,7 +122,7 @@
                                 </constraints>
                                 <state key="normal" title="Button" image="Settings"/>
                                 <connections>
-                                    <action selector="onSettingsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ntr-op-08v"/>
+                                    <action selector="onSettingsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yto-mP-0DO"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link copied!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7k-je-1Mo" customClass="SCStatusLabel" customModule="Spycodes" customModuleProvider="target">
@@ -159,7 +159,7 @@
         <!--Settings View Controller-->
         <scene sceneID="ypS-pD-Jcm">
             <objects>
-                <viewController id="E72-I9-0mo" customClass="SCSettingsViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="settings-view-controller" id="E72-I9-0mo" customClass="SCSettingsViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ag9-NQ-eB2"/>
                         <viewControllerLayoutGuide type="bottom" id="SnD-qp-ajy"/>
@@ -186,14 +186,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mxy-b5-O5c">
-                                <rect key="frame" x="0.0" y="72.5" width="1024" height="1293.5"/>
+                                <rect key="frame" x="0.0" y="72.5" width="994" height="1293.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="eyq-bY-9pP" userLabel="section-header-view-cell" customClass="SCSectionHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="994" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eyq-bY-9pP" id="dM7-bA-7gn">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="994" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoW-xI-FRC">
@@ -214,10 +214,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="version-view-cell" id="dEs-4e-hxQ" userLabel="version-view-cell" customClass="SCVersionViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="994" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dEs-4e-hxQ" id="Sds-bd-CSc">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="994" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMD-gn-KBX">
@@ -227,13 +227,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNU-WM-6B5">
-                                                    <rect key="frame" x="923.5" y="12" width="21.5" height="20.5"/>
+                                                    <rect key="frame" x="920.5" y="12" width="21.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(160)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFO-u5-KiB">
-                                                    <rect key="frame" x="949" y="12" width="40" height="20.5"/>
+                                                    <rect key="frame" x="946" y="12" width="40" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -246,13 +246,36 @@
                                                 <constraint firstItem="aFO-u5-KiB" firstAttribute="leading" secondItem="aNU-WM-6B5" secondAttribute="trailing" constant="4" id="khV-bM-m1H"/>
                                                 <constraint firstItem="aNU-WM-6B5" firstAttribute="centerY" secondItem="TMD-gn-KBX" secondAttribute="centerY" id="mrQ-Oq-GGn"/>
                                                 <constraint firstItem="TMD-gn-KBX" firstAttribute="leading" secondItem="Sds-bd-CSc" secondAttribute="leading" constant="35" id="q7Z-Qh-fTQ"/>
-                                                <constraint firstAttribute="trailing" secondItem="aFO-u5-KiB" secondAttribute="trailing" constant="35" id="yXR-t4-3L2"/>
+                                                <constraint firstAttribute="trailing" secondItem="aFO-u5-KiB" secondAttribute="trailing" constant="8" id="yXR-t4-3L2"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="buildNumberLabel" destination="aFO-u5-KiB" id="axP-k2-9fH"/>
                                             <outlet property="versionLeftLabel" destination="TMD-gn-KBX" id="i0S-3L-4xU"/>
                                             <outlet property="versionNumberLabel" destination="aNU-WM-6B5" id="c85-NZ-p1A"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="support-view-cell" id="D1K-DV-Uud" customClass="SCSupportViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="116" width="994" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D1K-DV-Uud" id="oFt-WS-gtq">
+                                            <rect key="frame" x="0.0" y="0.0" width="994" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Support" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1f-NH-Wrc">
+                                                    <rect key="frame" x="35" y="11" width="62" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="y1f-NH-Wrc" firstAttribute="centerY" secondItem="oFt-WS-gtq" secondAttribute="centerY" id="70P-TX-MbX"/>
+                                                <constraint firstItem="y1f-NH-Wrc" firstAttribute="leading" secondItem="oFt-WS-gtq" secondAttribute="leading" constant="35" id="Sfw-3E-QEB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="supportLeftLabel" destination="y1f-NH-Wrc" id="2D0-2l-ajA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -265,7 +288,7 @@
                             <constraint firstItem="eOI-Eo-Htd" firstAttribute="leading" secondItem="Vhf-dS-IgE" secondAttribute="leading" constant="15" id="RKf-bv-n4H"/>
                             <constraint firstItem="eOI-Eo-Htd" firstAttribute="top" secondItem="Ag9-NQ-eB2" secondAttribute="bottom" constant="4" id="Vb0-Lb-99A"/>
                             <constraint firstItem="mxy-b5-O5c" firstAttribute="top" secondItem="gev-Gq-JtW" secondAttribute="bottom" constant="20" id="j1s-Pn-dNl"/>
-                            <constraint firstAttribute="trailing" secondItem="mxy-b5-O5c" secondAttribute="trailing" id="mA5-ZE-JGV"/>
+                            <constraint firstAttribute="trailing" secondItem="mxy-b5-O5c" secondAttribute="trailing" constant="30" id="mA5-ZE-JGV"/>
                             <constraint firstItem="mxy-b5-O5c" firstAttribute="leading" secondItem="Vhf-dS-IgE" secondAttribute="leading" id="sgh-gH-NhI"/>
                             <constraint firstItem="gev-Gq-JtW" firstAttribute="centerY" secondItem="eOI-Eo-Htd" secondAttribute="centerY" id="wyW-Qv-fdA"/>
                         </constraints>
@@ -278,12 +301,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FxR-5z-KAa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="XK5-pZ-i5L" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="217" y="1156"/>
+            <point key="canvasLocation" x="216.796875" y="1155.6368960468521"/>
         </scene>
         <!--Access Code View Controller-->
         <scene sceneID="fR9-Wd-feD">
             <objects>
-                <viewController id="RKo-Nr-UiC" customClass="SCAccessCodeViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="access-code-view-controller" id="RKo-Nr-UiC" customClass="SCAccessCodeViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="c1p-sO-flb"/>
                         <viewControllerLayoutGuide type="bottom" id="nkF-4R-UGL"/>
