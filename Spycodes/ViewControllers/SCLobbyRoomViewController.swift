@@ -51,7 +51,7 @@ class SCLobbyRoomViewController: SCViewController {
 
         self.emptyStateLabel = UILabel(frame: self.tableView.frame)
         self.emptyStateLabel?.text = "Rooms created will show here.\nMake sure Wifi is enabled."
-        self.emptyStateLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 18)
+        self.emptyStateLabel?.font = SCFonts.regularSizeFont(SCFonts.FontType.Regular)
         self.emptyStateLabel?.textAlignment = .Center
         self.emptyStateLabel?.numberOfLines = 0
         self.emptyStateLabel?.center = self.view.center

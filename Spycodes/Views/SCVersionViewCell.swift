@@ -11,8 +11,8 @@ class SCVersionViewCell: UITableViewCell {
             self.buildNumberLabel.text = "(\(buildNumber))"
         }
 
-        self.versionLeftLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 18)
-        self.versionNumberLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 18)
-        self.buildNumberLabel.font = UIFont(name: "HelveticaNeue-Light", size: 18)
+        self.versionLeftLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
+        self.versionNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
+        self.buildNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Other)
     }
 }

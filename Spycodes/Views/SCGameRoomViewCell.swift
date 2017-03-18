@@ -5,7 +5,7 @@ class SCGameRoomViewCell: UICollectionViewCell {
     @IBOutlet weak var wordLabel: UILabel!
 
     override func awakeFromNib() {
-        self.wordLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 16)
+        self.wordLabel.font = SCFonts.smallSizeFont(SCFonts.FontType.Medium)
         self.contentView.layer.borderWidth = 1.0
         self.contentView.layer.borderColor = UIColor.darkGrayColor().CGColor
         self.contentView.layer.cornerRadius = 5.0

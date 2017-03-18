@@ -7,7 +7,7 @@ class SCRoundedButton: SCButton {
         self.layer.borderColor = UIColor.clearColor().CGColor
         self.layer.cornerRadius = 22.0
         self.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        self.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
+        self.titleLabel?.font = SCFonts.regularSizeFont(SCFonts.FontType.Bold)
     }
 
     override var highlighted: Bool {
