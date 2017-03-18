@@ -61,6 +61,11 @@ class SCGameRoomViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.clueTextField.font = UIFont(name: "HelveticaNeue-Light", size: 20)
+        self.numberOfWordsTextField.font = UIFont(name: "HelveticaNeue-Light", size: 20)
+        self.teamLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 20)
+        self.cardsRemainingLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 20)
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), name: SCNotificationKeys.autoConvertBystanderCardNotificationkey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), name: SCNotificationKeys.autoEliminateNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.didEndGameWithNotification), name: SCNotificationKeys.minigameGameOverNotificationKey, object: nil)

@@ -11,7 +11,10 @@ class SCLobbyRoomViewCell: UITableViewCell {
     @IBOutlet var joinRoomButton: UIButton!
     @IBOutlet weak var roomNameLabel: UILabel!
 
-    override func awakeFromNib() {}
+    override func awakeFromNib() {
+        self.roomNameLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 20)
+        self.joinRoomButton.titleLabel?.font = UIFont(name: "HelveticaNeue-UltraLight", size: 20)
+    }
 
     @IBAction func onJoin(sender: AnyObject) {
         if let roomUUID = self.roomUUID {
