@@ -1,9 +1,6 @@
 import UIKit
 
 class SCMainMenuViewController: SCViewController {
-    private static let appID = 1141711201
-    private static let appStoreURL = "itms-apps://itunes.apple.com/app/id\(appID)"
-    private static let appStoreWebURL = "https://itunes.apple.com/ca/app/spycodes/id1141711201?mt=8"
     private var timer: NSTimer?
 
     @IBOutlet weak var linkCopiedLabel: SCStatusLabel!
@@ -14,13 +11,13 @@ class SCMainMenuViewController: SCViewController {
     }
 
     @IBAction func onShareTapped(sender: AnyObject) {
-        UIPasteboard.generalPasteboard().string = SCMainMenuViewController.appStoreWebURL
+        UIPasteboard.generalPasteboard().string = SCConstants.appStoreWebURL
         self.linkCopiedLabel.hidden = false
         self.timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(SCMainMenuViewController.onTimeout), userInfo: nil, repeats: false)
     }
 
     @IBAction func onAppStoreTapped(sender: AnyObject) {
-        let url = NSURL(string: SCMainMenuViewController.appStoreURL)
+        let url = NSURL(string: SCConstants.appStoreURL)
         UIApplication.sharedApplication().openURL(url!)
     }
 

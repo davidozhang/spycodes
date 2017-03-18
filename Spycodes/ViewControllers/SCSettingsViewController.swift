@@ -1,10 +1,10 @@
 import UIKit
 
 class SCSettingsViewController: SCViewController {
-    private let supportURL = "https://www.spycodes.net/support/"
     private let sections = ["About", "More"]
+    private let disclosureLabels = ["Support", "Review App", "Website", "Github"]
     private let versionViewCellReuseIdentifier = "version-view-cell"
-    private let supportViewCellReuseIdentifier = "support-view-cell"
+    private let disclosureViewCellReuseIdentifier = "disclosure-view-cell"
     private let sectionHeaderCellReuseIdentifier = "section-header-view-cell"
 
     @IBOutlet weak var tableView: UITableView!
@@ -63,10 +63,10 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
+        case 0: // About
             return 1
-        case 1:
-            return 1
+        case 1: // More
+            return disclosureLabels.count
         default:
             return 0
         }
@@ -74,13 +74,14 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0:
+        case 0: // About
             guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.versionViewCellReuseIdentifier) as? SCVersionViewCell else { return UITableViewCell() }
 
             return cell
-        case 1:
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.supportViewCellReuseIdentifier) as? SCSupportViewCell else { return UITableViewCell() }
-            cell.accessoryType = .DisclosureIndicator
+        case 1: // More
+            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.disclosureViewCellReuseIdentifier) as? SCDisclosureViewCell else { return UITableViewCell() }
+
+            cell.leftLabel.text = disclosureLabels[indexPath.row]
 
             return cell
         default:
@@ -93,8 +94,25 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
         switch indexPath.section {
         case 1:
-            if let supportURL = NSURL(string: self.supportURL) {
-                UIApplication.sharedApplication().openURL(supportURL)
+            switch indexPath.row {
+            case 0:     // Support
+                if let supportURL = NSURL(string: SCConstants.supportURL) {
+                    UIApplication.sharedApplication().openURL(supportURL)
+                }
+            case 1:     // Review App
+                if let appStoreURL = NSURL(string: SCConstants.appStoreURL) {
+                    UIApplication.sharedApplication().openURL(appStoreURL)
+                }
+            case 2:     // Website
+                if let websiteURL = NSURL(string: SCConstants.websiteURL) {
+                    UIApplication.sharedApplication().openURL(websiteURL)
+                }
+            case 3:     // Github
+                if let githubURL = NSURL(string: SCConstants.githubURL) {
+                    UIApplication.sharedApplication().openURL(githubURL)
+                }
+            default:
+                return
             }
         default:
             return
