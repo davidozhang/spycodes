@@ -349,14 +349,14 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         if Player.instance == playerAtIndex {
-            cell.nameLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 24)
+            cell.nameLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Medium)
             cell.segmentedControl.enabled = true
 
             if GameMode.instance.mode == GameMode.Mode.MiniGame {
                 cell.segmentedControl.enabled = false
             }
         } else {
-            cell.nameLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 24)
+            cell.nameLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
             cell.segmentedControl.enabled = false
         }
 

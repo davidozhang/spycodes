@@ -1,6 +1,7 @@
 import UIKit
 
 class SCVersionViewCell: UITableViewCell {
+    @IBOutlet weak var versionLeftLabel: UILabel!
     @IBOutlet weak var versionNumberLabel: UILabel!
     @IBOutlet weak var buildNumberLabel: UILabel!
 
@@ -9,5 +10,9 @@ class SCVersionViewCell: UITableViewCell {
             self.versionNumberLabel.text = versionString
             self.buildNumberLabel.text = "(\(buildNumber))"
         }
+
+        self.versionLeftLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
+        self.versionNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
+        self.buildNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Other)
     }
 }
