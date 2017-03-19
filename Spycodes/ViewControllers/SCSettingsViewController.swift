@@ -1,10 +1,12 @@
 import UIKit
 
 class SCSettingsViewController: SCViewController {
-    private let sections = ["About", "More"]
+    private let sections = ["Customize", "About", "More"]
+    private let customizeLabels = ["Night Mode"]
     private let disclosureLabels = ["Support", "Review App", "Website", "Github", "Icons8"]
     private let versionViewCellReuseIdentifier = "version-view-cell"
     private let disclosureViewCellReuseIdentifier = "disclosure-view-cell"
+    private let toggleViewCellReuseIdentifier = "toggle-view-cell"
     private let sectionHeaderCellReuseIdentifier = "section-header-view-cell"
 
     @IBOutlet weak var tableView: UITableView!
@@ -63,9 +65,11 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: // About
+        case 0: // Customize
+            return customizeLabels.count
+        case 1: // About
             return 1
-        case 1: // More
+        case 2: // More
             return disclosureLabels.count
         default:
             return 0
@@ -74,14 +78,21 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0: // About
+        case 0: // Customize
+            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.toggleViewCellReuseIdentifier) as? SCToggleViewCell else { return UITableViewCell() }
+
+            cell.leftLabel.text = self.customizeLabels[indexPath.row]
+            cell.delegate = self
+
+            return cell
+        case 1: // About
             guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.versionViewCellReuseIdentifier) as? SCVersionViewCell else { return UITableViewCell() }
 
             return cell
-        case 1: // More
+        case 2: // More
             guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.disclosureViewCellReuseIdentifier) as? SCDisclosureViewCell else { return UITableViewCell() }
 
-            cell.leftLabel.text = disclosureLabels[indexPath.row]
+            cell.leftLabel.text = self.disclosureLabels[indexPath.row]
 
             return cell
         default:
@@ -93,7 +104,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
 
         switch indexPath.section {
-        case 1:
+        case 2:
             switch indexPath.row {
             case 0:     // Support
                 if let supportURL = NSURL(string: SCConstants.supportURL) {
@@ -120,6 +131,22 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
         default:
             return
+        }
+    }
+}
+
+extension SCSettingsViewController: SCToggleViewCellDelegate {
+    func onNightModeToggleChanged(nightModeOn: Bool) {
+        dispatch_async(dispatch_get_main_queue()) {
+            SCSettingsManager.instance.enableNightMode(nightModeOn)
+
+            if SCSettingsManager.instance.isNightModeEnabled() {
+                self.view.backgroundColor = UIColor.nightModeBackgroundColor()
+            } else {
+                self.view.backgroundColor = UIColor.whiteColor()
+            }
+
+            self.setNeedsStatusBarAppearanceUpdate()
         }
     }
 }
