@@ -2,7 +2,7 @@ import UIKit
 
 class SCPregameSettingsViewController: SCPopoverViewController {
     @IBOutlet weak var minigameSettingToggle: UISwitch!
-    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var infoLabel: SCLabel!
 
     // MARK: Actions
     @IBAction func onExitTapped(sender: AnyObject) {

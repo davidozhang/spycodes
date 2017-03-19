@@ -7,8 +7,8 @@ class SCRoundedButton: SCButton {
         self.layer.borderColor = UIColor.clearColor().CGColor
         self.layer.cornerRadius = 22.0
         self.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.setTitleColor(UIColor.spycodesGrayColor(), forState: .Highlighted)
         self.titleLabel?.font = SCFonts.regularSizeFont(SCFonts.FontType.Bold)
-        self.titleLabel?.textColor = UIColor.spycodesGrayColor()
     }
 
     override var highlighted: Bool {
@@ -18,8 +18,6 @@ class SCRoundedButton: SCButton {
             } else {
                 self.backgroundColor = UIColor.spycodesGreenColor()
             }
-
-            self.titleLabel?.textColor = UIColor.whiteColor()
         }
     }
 }

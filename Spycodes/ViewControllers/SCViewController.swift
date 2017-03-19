@@ -38,6 +38,14 @@ class SCViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
 
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        if SCSettingsManager.instance.isNightModeEnabled() {
+            return .LightContent
+        } else {
+            return .Default
+        }
+    }
+
     // MARK: SCViewController-Only Functions
     func _prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if unwindingSegue {

@@ -1,8 +1,7 @@
 import UIKit
 
 class SCGameRoomViewCell: UICollectionViewCell {
-
-    @IBOutlet weak var wordLabel: UILabel!
+    @IBOutlet weak var wordLabel: SCLabel!
 
     override func awakeFromNib() {
         self.wordLabel.font = SCFonts.smallSizeFont(SCFonts.FontType.Medium)

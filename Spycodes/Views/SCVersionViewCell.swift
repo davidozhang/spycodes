@@ -1,9 +1,9 @@
 import UIKit
 
 class SCVersionViewCell: SCTableViewCell {
-    @IBOutlet weak var versionLeftLabel: UILabel!
-    @IBOutlet weak var versionNumberLabel: UILabel!
-    @IBOutlet weak var buildNumberLabel: UILabel!
+    @IBOutlet weak var versionLeftLabel: SCLabel!
+    @IBOutlet weak var versionNumberLabel: SCLabel!
+    @IBOutlet weak var buildNumberLabel: SCLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -14,10 +14,7 @@ class SCVersionViewCell: SCTableViewCell {
         }
 
         self.versionLeftLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
-        self.versionLeftLabel.textColor = UIColor.spycodesGrayColor()
         self.versionNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
-        self.versionNumberLabel.textColor = UIColor.spycodesGrayColor()
         self.buildNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Other)
-        self.buildNumberLabel.textColor = UIColor.spycodesGrayColor()
     }
 }

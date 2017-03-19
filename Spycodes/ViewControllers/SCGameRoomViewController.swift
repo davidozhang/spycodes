@@ -30,10 +30,10 @@ class SCGameRoomViewController: SCViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var bottomBarView: UIView!
-    @IBOutlet weak var clueTextField: UITextField!
-    @IBOutlet weak var numberOfWordsTextField: UITextField!
-    @IBOutlet weak var cardsRemainingLabel: UILabel!
-    @IBOutlet weak var teamLabel: UILabel!
+    @IBOutlet weak var clueTextField: SCTextField!
+    @IBOutlet weak var numberOfWordsTextField: SCTextField!
+    @IBOutlet weak var cardsRemainingLabel: SCLabel!
+    @IBOutlet weak var teamLabel: SCLabel!
     @IBOutlet weak var actionButton: SCRoundedButton!
 
     // MARK: Actions
@@ -63,15 +63,6 @@ class SCGameRoomViewController: SCViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.clueTextField.font = SCFonts.regularSizeFont(SCFonts.FontType.Other)
-        self.clueTextField.textColor = UIColor.spycodesGrayColor()
-        self.numberOfWordsTextField.font = SCFonts.regularSizeFont(SCFonts.FontType.Other)
-        self.numberOfWordsTextField.textColor = UIColor.spycodesGrayColor()
-        self.teamLabel.font = SCFonts.regularSizeFont(SCFonts.FontType.Regular)
-        self.teamLabel.textColor = UIColor.spycodesGrayColor()
-        self.cardsRemainingLabel.font = SCFonts.regularSizeFont(SCFonts.FontType.Regular)
-        self.cardsRemainingLabel.textColor = UIColor.spycodesGrayColor()
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), name: SCNotificationKeys.autoConvertBystanderCardNotificationkey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), name: SCNotificationKeys.autoEliminateNotificationKey, object: nil)

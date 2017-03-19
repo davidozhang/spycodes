@@ -22,8 +22,8 @@ extension UIColor {
     }
 
     static func spycodesGrayColor() -> UIColor {
-        // Base color for all text within the app
-        return UIColor(red: 95/255, green: 95/255, blue: 95/255, alpha: 1.0)
+        // Base color that works for both day/night modes
+        return UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1.0)
     }
 
     static func dimBackgroundColor() -> UIColor {

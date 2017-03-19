@@ -30,6 +30,7 @@ class SCMainMenuViewController: SCViewController {
             }
 
             self.updateNightModeButton()
+            self.setNeedsStatusBarAppearanceUpdate()
         }
     }
 

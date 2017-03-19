@@ -10,14 +10,13 @@ class SCPregameRoomViewCell: SCTableViewCell {
     var index: Int?
 
     @IBOutlet weak var clueGiverImage: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var nameLabel: SCLabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         self.segmentedControl.tintColor = UIColor.spycodesGrayColor()
-        self.nameLabel.textColor = UIColor.spycodesGrayColor()
     }
 
     @IBAction func segmentedControlToggled(sender: UISegmentedControl) {

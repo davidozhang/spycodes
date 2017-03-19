@@ -9,13 +9,12 @@ class SCLobbyRoomViewCell: SCTableViewCell {
     var roomUUID: String?
 
     @IBOutlet var joinRoomButton: UIButton!
-    @IBOutlet weak var roomNameLabel: UILabel!
+    @IBOutlet weak var roomNameLabel: SCLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         self.roomNameLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
-        self.roomNameLabel.textColor = UIColor.spycodesGrayColor()
         self.joinRoomButton.titleLabel?.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Other)
         self.joinRoomButton.setTitleColor(UIColor.spycodesGrayColor(), forState: .Normal)
     }
