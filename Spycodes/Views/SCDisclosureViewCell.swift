@@ -1,11 +1,12 @@
 import UIKit
 
-class SCDisclosureViewCell: UITableViewCell {
-    @IBOutlet weak var leftLabel: UILabel!
+class SCDisclosureViewCell: SCTableViewCell {
+    @IBOutlet weak var leftLabel: SCLabel!
 
     override func awakeFromNib() {
+        super.awakeFromNib()
+
         self.leftLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
-        self.selectionStyle = .None
         self.accessoryType = .DisclosureIndicator
     }
 }

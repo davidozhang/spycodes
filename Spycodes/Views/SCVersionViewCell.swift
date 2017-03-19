@@ -1,11 +1,13 @@
 import UIKit
 
-class SCVersionViewCell: UITableViewCell {
-    @IBOutlet weak var versionLeftLabel: UILabel!
-    @IBOutlet weak var versionNumberLabel: UILabel!
-    @IBOutlet weak var buildNumberLabel: UILabel!
+class SCVersionViewCell: SCTableViewCell {
+    @IBOutlet weak var versionLeftLabel: SCLabel!
+    @IBOutlet weak var versionNumberLabel: SCLabel!
+    @IBOutlet weak var buildNumberLabel: SCLabel!
 
     override func awakeFromNib() {
+        super.awakeFromNib()
+
         if let versionString: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String, buildNumber: String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as? String {
             self.versionNumberLabel.text = versionString
             self.buildNumberLabel.text = "(\(buildNumber))"
@@ -14,7 +16,5 @@ class SCVersionViewCell: UITableViewCell {
         self.versionLeftLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
         self.versionNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
         self.buildNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Other)
-
-        self.selectionStyle = .None
     }
 }

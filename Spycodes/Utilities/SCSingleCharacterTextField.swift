@@ -4,7 +4,7 @@ protocol SCSingleCharacterTextFieldBackspaceDelegate: class {
     func onBackspaceDetected(textField: UITextField)
 }
 
-class SCSingleCharacterTextField: SCTextField {
+class SCSingleCharacterTextField: SCUnderlineTextField {
     weak var backspaceDelegate: SCSingleCharacterTextFieldBackspaceDelegate?
 
     required init?(coder aDecoder: NSCoder) {

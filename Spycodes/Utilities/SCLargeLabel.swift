@@ -1,6 +1,6 @@
 import UIKit
 
-class SCLargeLabel: UILabel {
+class SCLargeLabel: SCLabel {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.font = SCFonts.largeSizeFont(SCFonts.FontType.Regular)

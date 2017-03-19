@@ -4,17 +4,19 @@ protocol SCPregameRoomViewCellDelegate: class {
     func teamUpdatedAtIndex(index: Int, newTeam: Team)
 }
 
-class SCPregameRoomViewCell: UITableViewCell {
+class SCPregameRoomViewCell: SCTableViewCell {
     weak var delegate: SCPregameRoomViewCellDelegate?
 
     var index: Int?
 
     @IBOutlet weak var clueGiverImage: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var nameLabel: SCLabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 
     override func awakeFromNib() {
-        self.segmentedControl.tintColor = UIColor.darkGrayColor()
+        super.awakeFromNib()
+
+        self.segmentedControl.tintColor = UIColor.spycodesGrayColor()
     }
 
     @IBAction func segmentedControlToggled(sender: UISegmentedControl) {

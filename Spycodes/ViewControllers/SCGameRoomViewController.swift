@@ -20,6 +20,9 @@ class SCGameRoomViewController: SCViewController {
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
 
+    private var topBlurView: UIVisualEffectView?
+    private var bottomBlurView: UIVisualEffectView?
+
     @IBOutlet weak var topBarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomBarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomBarViewBottomMarginConstraint: NSLayoutConstraint!
@@ -27,10 +30,10 @@ class SCGameRoomViewController: SCViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var bottomBarView: UIView!
-    @IBOutlet weak var clueTextField: UITextField!
-    @IBOutlet weak var numberOfWordsTextField: UITextField!
-    @IBOutlet weak var cardsRemainingLabel: UILabel!
-    @IBOutlet weak var teamLabel: UILabel!
+    @IBOutlet weak var clueTextField: SCTextField!
+    @IBOutlet weak var numberOfWordsTextField: SCTextField!
+    @IBOutlet weak var cardsRemainingLabel: SCLabel!
+    @IBOutlet weak var teamLabel: SCLabel!
     @IBOutlet weak var actionButton: SCRoundedButton!
 
     // MARK: Actions
@@ -60,11 +63,6 @@ class SCGameRoomViewController: SCViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.clueTextField.font = SCFonts.regularSizeFont(SCFonts.FontType.Other)
-        self.numberOfWordsTextField.font = SCFonts.regularSizeFont(SCFonts.FontType.Other)
-        self.teamLabel.font = SCFonts.regularSizeFont(SCFonts.FontType.Regular)
-        self.cardsRemainingLabel.font = SCFonts.regularSizeFont(SCFonts.FontType.Regular)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), name: SCNotificationKeys.autoConvertBystanderCardNotificationkey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), name: SCNotificationKeys.autoEliminateNotificationKey, object: nil)
@@ -97,17 +95,23 @@ class SCGameRoomViewController: SCViewController {
 
         self.teamLabel.text = Player.instance.team == Team.Red ? "Red" : "Blue"
 
-        let topBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
-        topBlurView.frame = self.topBarView.bounds
-        topBlurView.clipsToBounds = true
-        self.topBarView.addSubview(topBlurView)
-        self.topBarView.sendSubviewToBack(topBlurView)
+        if SCSettingsManager.instance.isNightModeEnabled() {
+            self.topBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
+            self.bottomBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
+        } else {
+            self.topBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+            self.bottomBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+        }
 
-        let bottomBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
-        bottomBlurView.frame = self.bottomBarView.bounds
-        bottomBlurView.clipsToBounds = true
-        self.bottomBarView.addSubview(bottomBlurView)
-        self.bottomBarView.sendSubviewToBack(bottomBlurView)
+        self.topBlurView?.frame = self.topBarView.bounds
+        self.topBlurView?.clipsToBounds = true
+        self.topBarView.addSubview(self.topBlurView!)
+        self.topBarView.sendSubviewToBack(self.topBlurView!)
+
+        self.bottomBlurView?.frame = self.bottomBarView.bounds
+        self.bottomBlurView?.clipsToBounds = true
+        self.bottomBarView.addSubview(self.bottomBlurView!)
+        self.bottomBarView.sendSubviewToBack(self.bottomBlurView!)
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -447,7 +451,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
         if Player.instance.isClueGiver() {
             if cardAtIndex.getTeam() == .Neutral {
-                cell.wordLabel.textColor = UIColor.darkGrayColor()
+                cell.wordLabel.textColor = UIColor.spycodesGrayColor()
             }
 
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
@@ -467,7 +471,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
         if cardAtIndex.isSelected() {
             if cardAtIndex.getTeam() == .Neutral {
-                cell.wordLabel.textColor = UIColor.darkGrayColor()
+                cell.wordLabel.textColor = UIColor.spycodesGrayColor()
 
                 let attributedString: NSMutableAttributedString =  NSMutableAttributedString(string: cardAtIndex.getWord())
                 if cardAtIndex.isSelected() {
@@ -477,7 +481,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             }
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
         } else {
-            cell.wordLabel.textColor = UIColor.darkGrayColor()
+            cell.wordLabel.textColor = UIColor.spycodesGrayColor()
         }
 
         return cell
