@@ -85,18 +85,10 @@ class SCViewController: UIViewController {
     }
 
     func showDimView() {
-        if SCSettingsManager.instance.isNightModeEnabled() {
-            return
-        }
-
         self.view.addSubview(self.dimView)
     }
 
     func hideDimView() {
-        if SCSettingsManager.instance.isNightModeEnabled() {
-            return
-        }
-
         if let view = self.view.viewWithTag(1) {
             view.removeFromSuperview()
         }
