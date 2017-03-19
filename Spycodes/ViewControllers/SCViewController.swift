@@ -21,6 +21,12 @@ class SCViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        if SCSettingsManager.instance.isNightModeEnabled() {
+            self.view.backgroundColor = UIColor.nightModeBackgroundColor()
+        } else {
+            self.view.backgroundColor = UIColor.whiteColor()
+        }
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
     }
@@ -71,10 +77,18 @@ class SCViewController: UIViewController {
     }
 
     func showDimView() {
+        if SCSettingsManager.instance.isNightModeEnabled() {
+            return
+        }
+
         self.view.addSubview(self.dimView)
     }
 
     func hideDimView() {
+        if SCSettingsManager.instance.isNightModeEnabled() {
+            return
+        }
+
         if let view = self.view.viewWithTag(1) {
             view.removeFromSuperview()
         }

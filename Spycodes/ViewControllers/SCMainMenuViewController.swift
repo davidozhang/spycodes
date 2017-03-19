@@ -3,6 +3,7 @@ import UIKit
 class SCMainMenuViewController: SCViewController {
     private var timer: NSTimer?
 
+    @IBOutlet weak var nightModeButton: UIButton!
     @IBOutlet weak var linkCopiedLabel: SCStatusLabel!
 
     // MARK: Actions
@@ -16,9 +17,20 @@ class SCMainMenuViewController: SCViewController {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(SCMainMenuViewController.onTimeout), userInfo: nil, repeats: false)
     }
 
-    @IBAction func onAppStoreTapped(sender: AnyObject) {
-        let url = NSURL(string: SCConstants.appStoreURL)
-        UIApplication.sharedApplication().openURL(url!)
+    @IBAction func onNightModeButtonTapped(sender: AnyObject) {
+        let oldSetting = SCSettingsManager.instance
+            .isNightModeEnabled()
+        SCSettingsManager.instance.enableNightMode(!oldSetting)
+
+        dispatch_async(dispatch_get_main_queue()) {
+            if SCSettingsManager.instance.isNightModeEnabled() {
+                self.view.backgroundColor = UIColor.nightModeBackgroundColor()
+            } else {
+                self.view.backgroundColor = UIColor.whiteColor()
+            }
+
+            self.updateNightModeButton()
+        }
     }
 
     @IBAction func onCreateGame(sender: AnyObject) {
@@ -47,10 +59,8 @@ class SCMainMenuViewController: SCViewController {
         self.isRootViewController = true
 
         self.linkCopiedLabel.hidden = true
-    }
 
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+        self.updateNightModeButton()
 
         Player.instance.reset()
         GameMode.instance.reset()
@@ -77,5 +87,15 @@ class SCMainMenuViewController: SCViewController {
     @objc
     private func onTimeout() {
         self.linkCopiedLabel.hidden = true
+    }
+
+    private func updateNightModeButton() {
+        if SCSettingsManager.instance
+            .isNightModeEnabled() {
+            // Night Mode Enabled
+            self.nightModeButton.imageView?.image = UIImage(named: "Sun")
+        } else {
+            self.nightModeButton.imageView?.image = UIImage(named: "Moon")
+        }
     }
 }

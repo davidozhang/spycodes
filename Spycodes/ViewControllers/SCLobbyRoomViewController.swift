@@ -52,6 +52,7 @@ class SCLobbyRoomViewController: SCViewController {
         self.emptyStateLabel = UILabel(frame: self.tableView.frame)
         self.emptyStateLabel?.text = "Rooms created will show here.\nMake sure Wifi is enabled."
         self.emptyStateLabel?.font = SCFonts.regularSizeFont(SCFonts.FontType.Regular)
+        self.emptyStateLabel?.textColor = UIColor.spycodesGrayColor()
         self.emptyStateLabel?.textAlignment = .Center
         self.emptyStateLabel?.numberOfLines = 0
         self.emptyStateLabel?.center = self.view.center
@@ -197,6 +198,11 @@ extension SCLobbyRoomViewController: UITableViewDelegate, UITableViewDataSource 
 
         if state == .JoiningRoom {
             if cell.roomUUID == self.joiningRoomUUID {
+                if SCSettingsManager.instance.isNightModeEnabled() {
+                    self.activityIndicator.activityIndicatorViewStyle = .White
+                } else {
+                    self.activityIndicator.activityIndicatorViewStyle = .Gray
+                }
                 cell.accessoryView = self.activityIndicator
                 self.activityIndicator.startAnimating()
             }

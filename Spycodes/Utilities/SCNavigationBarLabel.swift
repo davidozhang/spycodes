@@ -1,6 +1,6 @@
 import UIKit
 
-class SCNavigationBarLabel: UILabel {
+class SCNavigationBarLabel: SCLabel {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.font = SCFonts.regularSizeFont(SCFonts.FontType.Regular)

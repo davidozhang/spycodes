@@ -7,7 +7,8 @@ class SCTextField: UITextField {
         self.autocorrectionType = UITextAutocorrectionType.No
         self.borderStyle = .None
         self.font = SCFonts.largeSizeFont(SCFonts.FontType.Regular)
-        self.tintColor = UIColor.lightGrayColor()
+        self.textColor = UIColor.spycodesGrayColor()
+        self.tintColor = UIColor.spycodesGrayColor()
     }
 
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
@@ -26,7 +27,7 @@ class SCTextField: UITextField {
 
         let bottomBorder = CALayer()
         bottomBorder.frame = CGRect(x: 0.0, y: self.frame.size.height - 1.0, width: self.frame.size.width, height: 1.0)
-        bottomBorder.backgroundColor = UIColor.lightGrayColor().CGColor
+        bottomBorder.backgroundColor = UIColor.spycodesGrayColor().CGColor
 
         self.layer.addSublayer(bottomBorder)
     }
