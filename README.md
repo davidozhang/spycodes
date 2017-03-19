@@ -1,6 +1,6 @@
 # Spycodes
 
-A local peer-to-peer multiplayer word association game made for the iPhone. It is now available on the App Store!
+A multiplayer word association game for 2-8 players. It is now available on the App Store!
 
 ## Installation/Usage
 
@@ -38,4 +38,4 @@ Issue Contribution:
 
 ## License
 
-The codebase is shared under the MIT License. Copyright (c) David Zhang 2017.
+The codebase is shared under the MIT License. Copyright (c) David Zhang 2016-2017. All Rights Reserved. Redistribution of the codebase in any form commercially is strictly forbidden.
