@@ -2,7 +2,7 @@ import UIKit
 
 class SCSettingsViewController: SCViewController {
     private let sections = ["About", "More"]
-    private let disclosureLabels = ["Support", "Review App", "Website", "Github"]
+    private let disclosureLabels = ["Support", "Review App", "Website", "Github", "Icons8"]
     private let versionViewCellReuseIdentifier = "version-view-cell"
     private let disclosureViewCellReuseIdentifier = "disclosure-view-cell"
     private let sectionHeaderCellReuseIdentifier = "section-header-view-cell"
@@ -110,6 +110,10 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
             case 3:     // Github
                 if let githubURL = NSURL(string: SCConstants.githubURL) {
                     UIApplication.sharedApplication().openURL(githubURL)
+                }
+            case 4: // Icons8
+                if let icons8URL = NSURL(string: SCConstants.icons8URL) {
+                    UIApplication.sharedApplication().openURL(icons8URL)
                 }
             default:
                 return
