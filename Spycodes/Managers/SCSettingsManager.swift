@@ -22,10 +22,6 @@ class SCSettingsManager {
     func retrieve() {
         let storedNightMode = NSUserDefaults.standardUserDefaults().boolForKey(SCUserDefaultsConstants.nightMode)
 
-        if storedNightMode {
-            self.nightMode = storedNightMode
-        } else {
-            self.nightMode = false
-        }
+        self.nightMode = storedNightMode
     }
 }
