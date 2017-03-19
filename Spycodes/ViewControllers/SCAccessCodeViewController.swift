@@ -129,9 +129,9 @@ class SCAccessCodeViewController: SCViewController {
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.shortTimeoutInterval, target: self, selector: #selector(SCAccessCodeViewController.restoreStatus), userInfo: nil, repeats: false)
 
         for view in textFieldsView.subviews as [UIView] {
-            if let textField = view as? UITextField {
+            if let textField = view as? SCSingleCharacterTextField {
                 textField.enabled = true
-                textField.textColor = UIColor.blackColor()
+                textField.textColor = UIColor.spycodesGrayColor()
 
                 if textField.tag == self.lastTag {
                     textField.becomeFirstResponder()
