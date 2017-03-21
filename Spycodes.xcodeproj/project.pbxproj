@@ -12,6 +12,8 @@
 		63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C6B1D2996B60005AC66 /* Lobby.swift */; };
 		630681A31D62FD6300539773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A21D62FD6300539773 /* LaunchScreen.storyboard */; };
 		630681A51D62FD6900539773 /* Spycodes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A41D62FD6900539773 /* Spycodes.storyboard */; };
+		630883681E80E56F006D2428 /* SCVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630883671E80E56F006D2428 /* SCVersionManager.swift */; };
+		6308836A1E80FBD9006D2428 /* SCUpdateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630883691E80FBD9006D2428 /* SCUpdateAppViewController.swift */; };
 		6325195A1E7BCEDE0006D8B1 /* SCCodingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632519591E7BCEDE0006D8B1 /* SCCodingConstants.swift */; };
 		6329BEFD1E512ADF004E6151 /* SCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6329BEFC1E512ADF004E6151 /* SCViewController.swift */; };
 		632A25471E46F0DC0003D1F8 /* SCScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A25461E46F0DC0003D1F8 /* SCScoreViewController.swift */; };
@@ -77,6 +79,8 @@
 		63067C6B1D2996B60005AC66 /* Lobby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lobby.swift; path = Objects/Lobby.swift; sourceTree = "<group>"; };
 		630681A21D62FD6300539773 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		630681A41D62FD6900539773 /* Spycodes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Spycodes.storyboard; path = Storyboards/Spycodes.storyboard; sourceTree = "<group>"; };
+		630883671E80E56F006D2428 /* SCVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCVersionManager.swift; path = Managers/SCVersionManager.swift; sourceTree = "<group>"; };
+		630883691E80FBD9006D2428 /* SCUpdateAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUpdateAppViewController.swift; path = ViewControllers/SCUpdateAppViewController.swift; sourceTree = "<group>"; };
 		632519591E7BCEDE0006D8B1 /* SCCodingConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCCodingConstants.swift; path = Extensions/SCCodingConstants.swift; sourceTree = "<group>"; };
 		6329BEFC1E512ADF004E6151 /* SCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCViewController.swift; path = ViewControllers/SCViewController.swift; sourceTree = "<group>"; };
 		632A25461E46F0DC0003D1F8 /* SCScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCScoreViewController.swift; path = ViewControllers/SCScoreViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -156,6 +160,7 @@
 				63EAF9A41D41F1C400BC554E /* SCAudioToolboxManager.swift */,
 				63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */,
 				6332922A1E7DE9EC0090B09D /* SCSettingsManager.swift */,
+				630883671E80E56F006D2428 /* SCVersionManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -208,6 +213,7 @@
 				63FDED3A1D265BAF00142780 /* SCPregameRoomViewController.swift */,
 				632A254A1E46FD330003D1F8 /* SCPregameSettingsViewController.swift */,
 				632A25461E46F0DC0003D1F8 /* SCScoreViewController.swift */,
+				630883691E80FBD9006D2428 /* SCUpdateAppViewController.swift */,
 				6329BEFC1E512ADF004E6151 /* SCViewController.swift */,
 			);
 			name = "View Controllers";
@@ -405,6 +411,7 @@
 				632E4E461E6A91C8004E7180 /* SCPopoverViewController.swift in Sources */,
 				63486DA91D3DE29C00795403 /* Key.swift in Sources */,
 				63D256811E6BA6BA0061D80C /* SCButton.swift in Sources */,
+				630883681E80E56F006D2428 /* SCVersionManager.swift in Sources */,
 				63FF7CE81D4E8471002D2B97 /* SCNotificationKeys.swift in Sources */,
 				63CB4F0E1D3DAA5A00211D3A /* SCWordList.swift in Sources */,
 				63486DA51D3DDC9800795403 /* SCArray.swift in Sources */,
@@ -422,6 +429,7 @@
 				6325195A1E7BCEDE0006D8B1 /* SCCodingConstants.swift in Sources */,
 				CF33BE2D1D6D04EA00D0E105 /* SCConstants.swift in Sources */,
 				633292211E7CD9E40090B09D /* SCNavigationBarBoldLabel.swift in Sources */,
+				6308836A1E80FBD9006D2428 /* SCUpdateAppViewController.swift in Sources */,
 				63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */,
 				63F2B7A61E6BB8F600F602D1 /* SCStates.swift in Sources */,
 				63D256881E6BA6BA0061D80C /* SCRoundedButton.swift in Sources */,

@@ -149,11 +149,81 @@
                         <outlet property="nightModeButton" destination="B8H-tV-b9A" id="a0W-1H-foh"/>
                         <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
                         <segue destination="E72-I9-0mo" kind="presentation" identifier="settings" modalTransitionStyle="flipHorizontal" id="jrJ-f8-x4U"/>
+                        <segue destination="yZh-az-pDi" kind="presentation" identifier="update-app" id="Ju1-ha-rpA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="217.39130434782609" y="338.31521739130437"/>
+        </scene>
+        <!--Update App View Controller-->
+        <scene sceneID="kYe-nf-cBk">
+            <objects>
+                <viewController id="yZh-az-pDi" customClass="SCUpdateAppViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jHh-Ja-1N0"/>
+                        <viewControllerLayoutGuide type="bottom" id="zvW-ER-O8P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yR4-WV-tqp">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CYW-sE-J7w">
+                                <rect key="frame" x="35" y="648.5" width="954" height="69"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zya-ud-6SF" userLabel="Update Prompt Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="954" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVu-si-jMf" customClass="SCRoundedButton" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="437" y="35" width="81" height="34"/>
+                                        <state key="normal" title="Download"/>
+                                        <connections>
+                                            <action selector="onDownloadTapped:" destination="yZh-az-pDi" eventType="touchUpInside" id="GPi-nB-9QJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Zya-ud-6SF" firstAttribute="leading" secondItem="CYW-sE-J7w" secondAttribute="leading" id="GMF-v0-ah5"/>
+                                    <constraint firstAttribute="bottom" secondItem="sVu-si-jMf" secondAttribute="bottom" id="MS1-w0-odP"/>
+                                    <constraint firstItem="Zya-ud-6SF" firstAttribute="top" secondItem="CYW-sE-J7w" secondAttribute="top" id="RcC-ir-j6h"/>
+                                    <constraint firstItem="sVu-si-jMf" firstAttribute="top" secondItem="Zya-ud-6SF" secondAttribute="bottom" constant="35" id="W20-f8-Gzs"/>
+                                    <constraint firstItem="sVu-si-jMf" firstAttribute="centerX" secondItem="CYW-sE-J7w" secondAttribute="centerX" id="juA-4H-z5J"/>
+                                    <constraint firstAttribute="trailing" secondItem="Zya-ud-6SF" secondAttribute="trailing" id="xbZ-Ks-OtS"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xj8-Wp-zJI" userLabel="Exit Button">
+                                <rect key="frame" x="986" y="28" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7hy-qu-2bm"/>
+                                    <constraint firstAttribute="width" constant="30" id="bll-rv-tgy"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Exit"/>
+                                <connections>
+                                    <action selector="onExitTapped:" destination="yZh-az-pDi" eventType="touchUpInside" id="DgM-fB-LpG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Xj8-Wp-zJI" secondAttribute="trailing" constant="8" id="81t-6Y-kKs"/>
+                            <constraint firstItem="Xj8-Wp-zJI" firstAttribute="top" secondItem="jHh-Ja-1N0" secondAttribute="bottom" constant="8" id="Llm-IP-PDO"/>
+                            <constraint firstItem="CYW-sE-J7w" firstAttribute="leading" secondItem="yR4-WV-tqp" secondAttribute="leading" constant="35" id="bbf-dc-h7c"/>
+                            <constraint firstAttribute="trailing" secondItem="CYW-sE-J7w" secondAttribute="trailing" constant="35" id="lpe-yU-16r"/>
+                            <constraint firstItem="CYW-sE-J7w" firstAttribute="centerY" secondItem="yR4-WV-tqp" secondAttribute="centerY" id="qJG-Mn-iZr"/>
+                            <constraint firstItem="CYW-sE-J7w" firstAttribute="centerX" secondItem="yR4-WV-tqp" secondAttribute="centerX" id="w8N-oL-WMz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="updatePromptLabel" destination="Zya-ud-6SF" id="vlD-c6-BH4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YnQ-Zy-Vu0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-576.5625" y="1155.6368960468521"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="ypS-pD-Jcm">
@@ -1426,6 +1496,6 @@
         <image name="Team" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7yd-xs-fux"/>
+        <segue reference="N7R-5v-7k6"/>
     </inferredMetricsTieBreakers>
 </document>
