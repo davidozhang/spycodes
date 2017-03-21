@@ -14,7 +14,14 @@ class SCUpdateAppViewController: SCViewController {
         }
     }
 
+    deinit {
+        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+    }
+
+    // MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
         self.updatePromptLabel.text = SCStrings.updatePrompt
     }
 }
