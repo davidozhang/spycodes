@@ -2,6 +2,8 @@ class SCStrings {
     static let completed = "✅"
     static let incomplete = "❌"
 
+    static let updatePrompt = "A new version of Spycodes is available on the App Store. Download to get the latest features!"
+
     static let returningToMainMenuHeader = "Returning to Main Menu"
     static let returningToPregameRoomHeader = "Returning to Pregame Room"
     static let gameOverHeader = "Game Over"

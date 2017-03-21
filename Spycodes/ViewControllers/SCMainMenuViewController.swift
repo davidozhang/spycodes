@@ -52,6 +52,14 @@ class SCMainMenuViewController: SCViewController {
     }
 
     // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        SCVersionManager.checkLatestAppVersion({
+            // If app is not on latest app version
+            self.performSegueWithIdentifier("update-app", sender: self)
+        })
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
