@@ -141,7 +141,7 @@ extension SCSettingsViewController: SCToggleViewCellDelegate {
             SCSettingsManager.instance.enableNightMode(nightModeOn)
 
             if SCSettingsManager.instance.isNightModeEnabled() {
-                self.view.backgroundColor = UIColor.nightModeBackgroundColor()
+                self.view.backgroundColor = UIColor.blackColor()
             } else {
                 self.view.backgroundColor = UIColor.whiteColor()
             }

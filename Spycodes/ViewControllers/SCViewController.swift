@@ -25,7 +25,7 @@ class SCViewController: UIViewController {
             let textFieldAppearance = UITextField.appearance()
             textFieldAppearance.keyboardAppearance = .Dark
 
-            self.view.backgroundColor = UIColor.nightModeBackgroundColor()
+            self.view.backgroundColor = UIColor.blackColor()
         } else {
             let textFieldAppearance = UITextField.appearance()
             textFieldAppearance.keyboardAppearance = .Light

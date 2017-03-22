@@ -30,10 +30,6 @@ extension UIColor {
         return UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
     }
 
-    static func nightModeBackgroundColor() -> UIColor {
-        return UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-    }
-
     static func colorForTeam(team: Team) -> UIColor {
         switch team {
         case Team.Red:

@@ -24,7 +24,7 @@ class SCMainMenuViewController: SCViewController {
 
         dispatch_async(dispatch_get_main_queue()) {
             if SCSettingsManager.instance.isNightModeEnabled() {
-                self.view.backgroundColor = UIColor.nightModeBackgroundColor()
+                self.view.backgroundColor = UIColor.blackColor()
             } else {
                 self.view.backgroundColor = UIColor.whiteColor()
             }
