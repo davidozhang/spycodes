@@ -21,15 +21,12 @@ class SCViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        let textFieldAppearance = UITextField.appearance()
         if SCSettingsManager.instance.isNightModeEnabled() {
-            let textFieldAppearance = UITextField.appearance()
             textFieldAppearance.keyboardAppearance = .Dark
-
             self.view.backgroundColor = UIColor.blackColor()
         } else {
-            let textFieldAppearance = UITextField.appearance()
             textFieldAppearance.keyboardAppearance = .Light
-
             self.view.backgroundColor = UIColor.whiteColor()
         }
 
