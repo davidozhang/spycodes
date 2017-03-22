@@ -68,7 +68,7 @@ class CardCollection: NSObject, NSCoding {
         }
     }
 
-    // Convert Bystander card to Team Card
+    // Convert Bystander card to Team Card (Currently disabled)
     func autoConvertNeutralCardToTeamCard() {
         var neutralRemainingCards = self.cards.filter({($0 as Card).getTeam() == Team.Neutral && !($0 as Card).isSelected()})
         neutralRemainingCards = neutralRemainingCards.shuffled
