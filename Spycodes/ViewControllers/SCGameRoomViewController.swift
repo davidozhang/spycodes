@@ -64,7 +64,6 @@ class SCGameRoomViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), name: SCNotificationKeys.autoConvertBystanderCardNotificationkey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.broadcastEssentialData), name: SCNotificationKeys.autoEliminateNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCGameRoomViewController.didEndGameWithNotification), name: SCNotificationKeys.minigameGameOverNotificationKey, object: nil)
     }
@@ -122,7 +121,6 @@ class SCGameRoomViewController: SCViewController {
         }
         self.refreshTimer?.invalidate()
 
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: SCNotificationKeys.autoConvertBystanderCardNotificationkey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SCNotificationKeys.autoEliminateNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SCNotificationKeys.minigameGameOverNotificationKey, object: nil)
     }
@@ -501,9 +499,6 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
         let opponentTeam = Team(rawValue: playerTeam.rawValue ^ 1)
 
         if cardAtIndexTeam == Team.Neutral || cardAtIndexTeam == opponentTeam {
-            if cardAtIndexTeam == Team.Neutral {
-                CardCollection.instance.autoConvertNeutralCardToTeamCard()
-            }
             self.didEndRound()
         }
 
