@@ -7,7 +7,8 @@ class SCVersionManager {
             if let resultCount = dict["resultCount"] as? NSInteger where resultCount == 1,
                let latestAppVersion = dict["results"]?[0]?["version"] as? String,
                let currentAppVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String {
-                if currentAppVersion != latestAppVersion {
+                if let current = Double(currentAppVersion),
+                       latest = Double(latestAppVersion) where current < latest {
                     failure()
                 }
             }
