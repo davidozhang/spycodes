@@ -2,7 +2,6 @@ import MultipeerConnectivity
 import UIKit
 
 class SCLobbyRoomViewController: SCViewController {
-    private let cellReuseIdentifier = "lobby-room-view-cell"
     private let trailingSpace: CGFloat = 35
     private let defaultTimeoutInterval: NSTimeInterval = 10     // Default timeout after 10 seconds
     private let shortTimeoutInterval: NSTimeInterval = 3
@@ -189,7 +188,7 @@ extension SCLobbyRoomViewController: SCLobbyRoomViewCellDelegate {
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCLobbyRoomViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as? SCLobbyRoomViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(SCCellReuseIdentifiers.lobbyRoomViewCell) as? SCLobbyRoomViewCell else { return UITableViewCell() }
         let roomAtIndex = Lobby.instance.rooms[indexPath.row]
 
         cell.roomUUID = roomAtIndex.getUUID()

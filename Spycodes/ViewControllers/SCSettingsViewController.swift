@@ -4,10 +4,6 @@ class SCSettingsViewController: SCViewController {
     private let sections = ["Customize", "About", "More"]
     private let customizeLabels = ["Night Mode"]
     private let disclosureLabels = ["Support", "Review App", "Website", "Github", "Icons8"]
-    private let versionViewCellReuseIdentifier = "version-view-cell"
-    private let disclosureViewCellReuseIdentifier = "disclosure-view-cell"
-    private let toggleViewCellReuseIdentifier = "toggle-view-cell"
-    private let sectionHeaderCellReuseIdentifier = "section-header-view-cell"
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -56,7 +52,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let sectionHeader = self.tableView.dequeueReusableCellWithIdentifier(self.sectionHeaderCellReuseIdentifier) as? SCSectionHeaderViewCell else { return nil
+        guard let sectionHeader = self.tableView.dequeueReusableCellWithIdentifier(SCCellReuseIdentifiers.sectionHeaderCell) as? SCSectionHeaderViewCell else { return nil
         }
 
         sectionHeader.header.text = sections[section]
@@ -79,18 +75,18 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0: // Customize
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.toggleViewCellReuseIdentifier) as? SCToggleViewCell else { return UITableViewCell() }
+            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(SCCellReuseIdentifiers.nightModeToggleViewCell) as? SCToggleViewCell else { return UITableViewCell() }
 
             cell.leftLabel.text = self.customizeLabels[indexPath.row]
             cell.delegate = self
 
             return cell
         case 1: // About
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.versionViewCellReuseIdentifier) as? SCVersionViewCell else { return UITableViewCell() }
+            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(SCCellReuseIdentifiers.versionViewCell) as? SCVersionViewCell else { return UITableViewCell() }
 
             return cell
         case 2: // More
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(self.disclosureViewCellReuseIdentifier) as? SCDisclosureViewCell else { return UITableViewCell() }
+            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(SCCellReuseIdentifiers.disclosureViewCell) as? SCDisclosureViewCell else { return UITableViewCell() }
 
             cell.leftLabel.text = self.disclosureLabels[indexPath.row]
 
@@ -136,17 +132,19 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SCSettingsViewController: SCToggleViewCellDelegate {
-    func onNightModeToggleChanged(nightModeOn: Bool) {
-        dispatch_async(dispatch_get_main_queue()) {
-            SCSettingsManager.instance.enableNightMode(nightModeOn)
+    func onToggleChanged(cell: SCToggleViewCell, enabled: Bool) {
+        if cell.reuseIdentifier == SCCellReuseIdentifiers.nightModeToggleViewCell {
+            dispatch_async(dispatch_get_main_queue()) {
+                SCSettingsManager.instance.enableNightMode(enabled)
 
-            if SCSettingsManager.instance.isNightModeEnabled() {
-                self.view.backgroundColor = UIColor.blackColor()
-            } else {
-                self.view.backgroundColor = UIColor.whiteColor()
+                if SCSettingsManager.instance.isNightModeEnabled() {
+                    self.view.backgroundColor = UIColor.blackColor()
+                } else {
+                    self.view.backgroundColor = UIColor.whiteColor()
+                }
+
+                self.setNeedsStatusBarAppearanceUpdate()
             }
-
-            self.setNeedsStatusBarAppearanceUpdate()
         }
     }
 }

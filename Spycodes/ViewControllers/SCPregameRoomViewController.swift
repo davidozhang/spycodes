@@ -2,7 +2,6 @@ import MultipeerConnectivity
 import UIKit
 
 class SCPregameRoomViewController: SCViewController {
-    private let cellReuseIdentifier = "pregame-room-view-cell"
     private let modalWidth = UIScreen.mainScreen().bounds.width - 60
     private let modalHeight = UIScreen.mainScreen().bounds.height/4
 
@@ -334,7 +333,7 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as? SCPregameRoomViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(SCCellReuseIdentifiers.pregameRoomViewCell) as? SCPregameRoomViewCell else { return UITableViewCell() }
 
         let playerAtIndex = Room.instance.players[indexPath.row]
 

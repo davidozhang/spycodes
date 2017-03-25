@@ -2,7 +2,6 @@ import MultipeerConnectivity
 import UIKit
 
 class SCGameRoomViewController: SCViewController {
-    private let cellReuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
     private let minCellSpacing: CGFloat = 12
     private let modalWidth = UIScreen.mainScreen().bounds.width - 60
@@ -439,7 +438,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as? SCGameRoomViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SCCellReuseIdentifiers.gameRoomViewCell, forIndexPath: indexPath) as? SCGameRoomViewCell else { return UICollectionViewCell() }
         let cardAtIndex = CardCollection.instance.cards[indexPath.row]
 
         cell.wordLabel.textColor = UIColor.whiteColor()
