@@ -18,17 +18,16 @@ class SCToggleViewCell: SCTableViewCell {
 
         toggleSwitch.addTarget(self, action: #selector(SCToggleViewCell.onToggleChanged(_:)), forControlEvents: .ValueChanged)
 
-        if self.reuseIdentifier == SCCellReuseIdentifiers.nightModeToggleViewCell {
-            if SCSettingsManager.instance.isNightModeEnabled() {
-                toggleSwitch.on = true
-            } else {
-                toggleSwitch.on = false
-            }
-        } else if self.reuseIdentifier == SCCellReuseIdentifiers.minigameToggleViewCell {
-            if GameMode.instance.mode == GameMode.Mode.MiniGame {
-                toggleSwitch.on = true
-            } else {
-                toggleSwitch.on = false
+        if let reuseIdentifier = self.reuseIdentifier {
+            switch reuseIdentifier {
+            case SCCellReuseIdentifiers.nightModeToggleViewCell:
+                toggleSwitch.on = SCSettingsManager.instance.isNightModeEnabled()
+            case SCCellReuseIdentifiers.minigameToggleViewCell:
+                toggleSwitch.on = GameMode.instance.mode == GameMode.Mode.MiniGame
+            case SCCellReuseIdentifiers.timerToggleViewCell:
+                toggleSwitch.on = Timer.instance.isEnabled()
+            default:
+                break
             }
         }
 
