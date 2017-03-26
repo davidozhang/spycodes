@@ -191,12 +191,19 @@ class SCGameRoomViewController: SCViewController {
     override func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let rect = frame.CGRectValue()
+
             self.bottomBarViewBottomMarginConstraint.constant = rect.size.height
+            UIView.animateWithDuration(self.animationDuration, animations: {
+                self.view.layoutIfNeeded()
+            })
         }
     }
 
     override func keyboardWillHide(notification: NSNotification) {
         self.bottomBarViewBottomMarginConstraint.constant = 0
+        UIView.animateWithDuration(self.animationDuration, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
 
     // MARK: Private
