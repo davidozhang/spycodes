@@ -308,7 +308,6 @@
 				63A04CFC1D1A5713005A2914 /* Sources */,
 				63A04CFD1D1A5713005A2914 /* Frameworks */,
 				63A04CFE1D1A5713005A2914 /* Resources */,
-				C1CFE78FFF501283E09E846A /* Tailor */,
 			);
 			buildRules = (
 			);
@@ -371,23 +370,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		C1CFE78FFF501283E09E846A /* Tailor */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Tailor;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if hash tailor 2>/dev/null; then\n  tailor --except=trailing-closure,lower-camel-case,function-whitespace\nelse\n  echo \"Warning: Spycodes uses Tailor for linting. Please install Tailor from https://tailor.sh\"\nfi";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		63A04CFC1D1A5713005A2914 /* Sources */ = {
