@@ -21,4 +21,5 @@ class SCCodingConstants {
 
     // Version 2.0+
     static let accessCode = "accessCode"
+    static let timerEnabled = "timerEnabled"
 }

@@ -2,11 +2,13 @@ import MultipeerConnectivity
 import UIKit
 
 class SCGameRoomViewController: SCViewController {
-    private let cellReuseIdentifier = "game-room-view-cell"
     private let edgeInset: CGFloat = 12
     private let minCellSpacing: CGFloat = 12
     private let modalWidth = UIScreen.mainScreen().bounds.width - 60
     private let modalHeight = UIScreen.mainScreen().bounds.height/2
+    private let bottomBarViewDefaultHeight: CGFloat = 77
+    private let timerViewDefaultHeight: CGFloat = 25
+    private let bottomBarViewExtendedHeight: CGFloat = 117
 
     private let animationAlpha: CGFloat = 0.4
     private let animationDuration: NSTimeInterval = 0.75
@@ -25,6 +27,7 @@ class SCGameRoomViewController: SCViewController {
 
     @IBOutlet weak var topBarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomBarViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var timerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomBarViewBottomMarginConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -35,6 +38,7 @@ class SCGameRoomViewController: SCViewController {
     @IBOutlet weak var cardsRemainingLabel: SCLabel!
     @IBOutlet weak var teamLabel: SCLabel!
     @IBOutlet weak var actionButton: SCRoundedButton!
+    @IBOutlet weak var timerLabel: SCLabel!
 
     // MARK: Actions
     @IBAction func onBackButtonTapped(sender: AnyObject) {
@@ -94,6 +98,16 @@ class SCGameRoomViewController: SCViewController {
 
         self.teamLabel.text = Player.instance.team == Team.Red ? "Red" : "Blue"
 
+        if !Timer.instance.isEnabled() {
+            self.bottomBarViewHeightConstraint.constant = self.bottomBarViewDefaultHeight
+            self.timerViewHeightConstraint.constant = 0
+        } else {
+            self.bottomBarViewHeightConstraint.constant = self.bottomBarViewExtendedHeight
+            self.timerViewHeightConstraint.constant = self.timerViewDefaultHeight
+        }
+
+        self.bottomBarView.layoutIfNeeded()
+
         if SCSettingsManager.instance.isNightModeEnabled() {
             self.topBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
             self.bottomBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
@@ -120,6 +134,9 @@ class SCGameRoomViewController: SCViewController {
             self.broadcastTimer?.invalidate()
         }
         self.refreshTimer?.invalidate()
+
+        Timer.instance.state = .Stopped
+        Timer.instance.stopTimer()
 
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SCNotificationKeys.autoEliminateNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SCNotificationKeys.minigameGameOverNotificationKey, object: nil)
@@ -187,6 +204,7 @@ class SCGameRoomViewController: SCViewController {
     private func refreshView() {
         dispatch_async(dispatch_get_main_queue(), {
             self.updateDashboard()
+            self.updateTimer()
             self.updateActionButton()
             self.collectionView.reloadData()
         })
@@ -280,6 +298,52 @@ class SCGameRoomViewController: SCViewController {
             self.clueTextField.text = Round.defaultNonTurnClue
             self.numberOfWordsTextField.text = Round.defaultNumberOfWords
         }
+    }
+
+    private func updateTimer() {
+        if !Timer.instance.isEnabled() {
+            return
+        }
+
+        if Round.instance.currentTeam == Player.instance.team {
+            if Round.instance.isClueSet() &&
+                Round.instance.isNumberOfWordsSet() {
+                if Timer.instance.state == .Stopped {
+                    Timer.instance.state = .WillStart
+                }
+            } else {
+                Timer.instance.state = .Stopped
+            }
+        } else {
+            Timer.instance.state = .Stopped
+        }
+
+        if Timer.instance.state == .Stopped {
+            Timer.instance.stopTimer()
+            self.timerLabel.text = "--:--"
+        } else if Timer.instance.state == .WillStart {
+            Timer.instance.startTimer({
+                self.timerDidEnd()
+                }, timerInProgress: { (remainingTime) in
+                    self.timerInProgress(remainingTime)
+            })
+
+            Timer.instance.state = .Started
+        }
+    }
+
+    private func timerDidEnd() {
+        Timer.instance.state = .Stopped
+        self.didEndRound()
+    }
+
+    private func timerInProgress(remainingTime: Int) {
+        dispatch_async(dispatch_get_main_queue(), {
+            let minutes = remainingTime / 60
+            let seconds = remainingTime % 60
+
+            self.timerLabel.text = String(format: "%d:%02d", minutes, seconds)
+        })
     }
 
     private func updateActionButton() {
@@ -439,7 +503,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as? SCGameRoomViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SCCellReuseIdentifiers.gameRoomViewCell, forIndexPath: indexPath) as? SCGameRoomViewCell else { return UICollectionViewCell() }
         let cardAtIndex = CardCollection.instance.cards[indexPath.row]
 
         cell.wordLabel.textColor = UIColor.whiteColor()

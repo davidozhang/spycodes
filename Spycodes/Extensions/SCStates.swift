@@ -8,3 +8,9 @@ enum LobbyRoomState: Int {
     case JoiningRoom = 1
     case Failed = 2
 }
+
+enum TimerState: Int {
+    case Stopped = 0
+    case WillStart = 1
+    case Started = 2
+}

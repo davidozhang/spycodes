@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SCToggleViewCellDelegate: class {
-    func onNightModeToggleChanged(nightModeOn: Bool)
+    func onToggleChanged(cell: SCToggleViewCell, enabled: Bool)
 }
 
 class SCToggleViewCell: SCTableViewCell {
@@ -18,10 +18,17 @@ class SCToggleViewCell: SCTableViewCell {
 
         toggleSwitch.addTarget(self, action: #selector(SCToggleViewCell.onToggleChanged(_:)), forControlEvents: .ValueChanged)
 
-        if SCSettingsManager.instance.isNightModeEnabled() {
-            toggleSwitch.on = true
-        } else {
-            toggleSwitch.on = false
+        if let reuseIdentifier = self.reuseIdentifier {
+            switch reuseIdentifier {
+            case SCCellReuseIdentifiers.nightModeToggleViewCell:
+                toggleSwitch.on = SCSettingsManager.instance.isNightModeEnabled()
+            case SCCellReuseIdentifiers.minigameToggleViewCell:
+                toggleSwitch.on = GameMode.instance.mode == GameMode.Mode.MiniGame
+            case SCCellReuseIdentifiers.timerToggleViewCell:
+                toggleSwitch.on = Timer.instance.isEnabled()
+            default:
+                break
+            }
         }
 
         self.accessoryView = toggleSwitch
@@ -34,7 +41,7 @@ class SCToggleViewCell: SCTableViewCell {
 
     @objc
     private func onToggleChanged(toggleSwitch: UISwitch) {
-        let nightModeOn = toggleSwitch.on
-        delegate?.onNightModeToggleChanged(nightModeOn)
+        let enabled = toggleSwitch.on
+        delegate?.onToggleChanged(self, enabled: enabled)
     }
 }

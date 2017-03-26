@@ -348,7 +348,7 @@
                                             <outlet property="leftLabel" destination="y1f-NH-Wrc" id="Gsb-CE-ESg"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="toggle-view-cell" id="1fB-6I-btL" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="night-mode-toggle-view-cell" id="1fB-6I-btL" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="160" width="994" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1fB-6I-btL" id="81l-Bn-qfb">
@@ -643,7 +643,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FNd-tS-fuD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FNd-tS-fuD">
                                 <rect key="frame" x="0.0" y="89.5" width="1024" height="1276.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -815,101 +815,106 @@
             <point key="canvasLocation" x="2669.5652173913045" y="1156.7934782608697"/>
         </scene>
         <!--Pregame Settings View Controller-->
-        <scene sceneID="0dT-Qt-rjK">
+        <scene sceneID="KiF-Fa-2Mg">
             <objects>
-                <viewController storyboardIdentifier="pregame-settings-view-controller" id="hAj-oC-PSM" customClass="SCPregameSettingsViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pregame-settings-view-controller" id="3bL-M2-AUr" customClass="SCPregameSettingsViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="A7A-1x-tF7"/>
-                        <viewControllerLayoutGuide type="bottom" id="x2l-8T-fmy"/>
+                        <viewControllerLayoutGuide type="top" id="zOW-yv-fLL"/>
+                        <viewControllerLayoutGuide type="bottom" id="MFH-5E-b4d"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="NTC-2k-zV9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <view key="view" contentMode="scaleToFill" id="ybF-O3-jPA">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2E3-jp-MY8" userLabel="Game Settings View">
-                                <rect key="frame" x="137" y="320.5" width="140" height="95"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8L-W0-auC" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="13.5" y="0.0" width="113" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PRT-yQ-D4h">
-                                        <rect key="frame" x="0.0" y="37" width="140" height="21"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minigame" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tyo-O4-u4u" customClass="SCLargeLabel" customModule="Spycodes" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="75" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a9D-4e-Di5">
-                                                <rect key="frame" x="91" y="-5" width="51" height="31"/>
-                                                <connections>
-                                                    <action selector="minigameSettingToggleChanged:" destination="hAj-oC-PSM" eventType="valueChanged" id="Ib0-d0-GPd"/>
-                                                </connections>
-                                            </switch>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="a9D-4e-Di5" firstAttribute="leading" secondItem="Tyo-O4-u4u" secondAttribute="trailing" constant="16" id="73D-sT-Eze"/>
-                                            <constraint firstAttribute="bottom" secondItem="Tyo-O4-u4u" secondAttribute="bottom" id="9Ay-qz-OfF"/>
-                                            <constraint firstItem="Tyo-O4-u4u" firstAttribute="top" secondItem="PRT-yQ-D4h" secondAttribute="top" id="EEJ-mB-0nn"/>
-                                            <constraint firstAttribute="trailing" secondItem="a9D-4e-Di5" secondAttribute="trailing" id="kvS-0g-hGP"/>
-                                            <constraint firstItem="a9D-4e-Di5" firstAttribute="centerY" secondItem="Tyo-O4-u4u" secondAttribute="centerY" id="u6U-Ca-mQN"/>
-                                            <constraint firstItem="Tyo-O4-u4u" firstAttribute="leading" secondItem="PRT-yQ-D4h" secondAttribute="leading" id="w3N-oN-j85"/>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xo-lj-Tai" customClass="SCInfoLabel" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="55.5" y="74" width="29" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5kH-CH-slb">
+                                <rect key="frame" x="0.0" y="60" width="1024" height="1306"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="minigame-toggle-view-cell" id="bLF-Yn-waq" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bLF-Yn-waq" id="kcz-k9-Q8y">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minigame" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDr-98-WTO" userLabel="Left Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="11" width="75" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZDr-98-WTO" firstAttribute="centerY" secondItem="kcz-k9-Q8y" secondAttribute="centerY" id="J3n-cJ-y0b"/>
+                                                <constraint firstItem="ZDr-98-WTO" firstAttribute="leading" secondItem="kcz-k9-Q8y" secondAttribute="leading" constant="16" id="Xe2-w9-O6Z"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="leftLabel" destination="ZDr-98-WTO" id="0g2-Q5-xcV"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-toggle-view-cell" id="Zem-zZ-zKy" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="1024" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zem-zZ-zKy" id="1zI-RM-1z7">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sn3-UR-n4p" userLabel="Left Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="11" width="44" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Sn3-UR-n4p" firstAttribute="leading" secondItem="1zI-RM-1z7" secondAttribute="leading" constant="16" id="mQa-5X-X9u"/>
+                                                <constraint firstItem="Sn3-UR-n4p" firstAttribute="centerY" secondItem="1zI-RM-1z7" secondAttribute="centerY" id="yyc-US-rQ9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="leftLabel" destination="Sn3-UR-n4p" id="P6B-vl-2p9"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nab-KK-hWx" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="455.5" y="31" width="113" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRf-GO-HN1" userLabel="Exit Button">
+                                <rect key="frame" x="986" y="28" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstItem="f8L-W0-auC" firstAttribute="centerX" secondItem="2E3-jp-MY8" secondAttribute="centerX" id="2Gy-Lh-GMB"/>
-                                    <constraint firstItem="PRT-yQ-D4h" firstAttribute="top" secondItem="f8L-W0-auC" secondAttribute="bottom" constant="16" id="4gW-7H-P9Z"/>
-                                    <constraint firstAttribute="trailing" secondItem="PRT-yQ-D4h" secondAttribute="trailing" id="Fph-7u-arD"/>
-                                    <constraint firstAttribute="bottom" secondItem="8Xo-lj-Tai" secondAttribute="bottom" id="Iur-bv-BMt"/>
-                                    <constraint firstItem="f8L-W0-auC" firstAttribute="top" secondItem="2E3-jp-MY8" secondAttribute="top" id="LDa-bo-pET"/>
-                                    <constraint firstItem="PRT-yQ-D4h" firstAttribute="centerX" secondItem="2E3-jp-MY8" secondAttribute="centerX" id="NQU-fh-oVO"/>
-                                    <constraint firstItem="8Xo-lj-Tai" firstAttribute="centerX" secondItem="2E3-jp-MY8" secondAttribute="centerX" id="RxU-I3-asg"/>
-                                    <constraint firstItem="8Xo-lj-Tai" firstAttribute="top" secondItem="PRT-yQ-D4h" secondAttribute="bottom" constant="16" id="m4b-Ue-Are"/>
-                                    <constraint firstItem="PRT-yQ-D4h" firstAttribute="leading" secondItem="2E3-jp-MY8" secondAttribute="leading" id="s82-La-FQ9"/>
-                                    <constraint firstItem="f8L-W0-auC" firstAttribute="centerX" secondItem="2E3-jp-MY8" secondAttribute="centerX" id="tYm-3w-eVH"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TxB-He-wny" userLabel="Exit Button">
-                                <rect key="frame" x="376" y="28" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="GFD-Di-Hbe"/>
-                                    <constraint firstAttribute="width" constant="30" id="lzc-B3-sSA"/>
+                                    <constraint firstAttribute="width" constant="30" id="K4O-BA-p3x"/>
+                                    <constraint firstAttribute="height" constant="30" id="XeO-cI-mRT"/>
                                 </constraints>
                                 <state key="normal" image="Exit"/>
                                 <connections>
-                                    <action selector="onExitTapped:" destination="hAj-oC-PSM" eventType="touchUpInside" id="Kr2-7V-m88"/>
+                                    <action selector="onExitTapped:" destination="3bL-M2-AUr" eventType="touchUpInside" id="YF2-6B-jz0"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="TxB-He-wny" secondAttribute="trailing" constant="8" id="4Kh-J7-Xz1"/>
-                            <constraint firstItem="2E3-jp-MY8" firstAttribute="centerY" secondItem="NTC-2k-zV9" secondAttribute="centerY" id="KDt-lI-rUi"/>
-                            <constraint firstItem="2E3-jp-MY8" firstAttribute="centerX" secondItem="NTC-2k-zV9" secondAttribute="centerX" id="VJ6-Eq-Owm"/>
-                            <constraint firstItem="TxB-He-wny" firstAttribute="top" secondItem="A7A-1x-tF7" secondAttribute="bottom" constant="8" id="jPo-CB-yk7"/>
+                            <constraint firstItem="5kH-CH-slb" firstAttribute="leading" secondItem="ybF-O3-jPA" secondAttribute="leading" id="4ct-t5-J6n"/>
+                            <constraint firstItem="5kH-CH-slb" firstAttribute="top" secondItem="nab-KK-hWx" secondAttribute="bottom" constant="8" id="FyW-Ij-dUg"/>
+                            <constraint firstItem="eRf-GO-HN1" firstAttribute="top" secondItem="zOW-yv-fLL" secondAttribute="bottom" constant="8" id="OY9-6j-f12"/>
+                            <constraint firstAttribute="trailing" secondItem="eRf-GO-HN1" secondAttribute="trailing" constant="8" id="SSh-JG-5Ef"/>
+                            <constraint firstAttribute="trailing" secondItem="5kH-CH-slb" secondAttribute="trailing" id="VZs-z2-nKJ"/>
+                            <constraint firstItem="nab-KK-hWx" firstAttribute="top" secondItem="zOW-yv-fLL" secondAttribute="bottom" constant="11" id="gZp-4a-UJ3"/>
+                            <constraint firstItem="nab-KK-hWx" firstAttribute="centerX" secondItem="ybF-O3-jPA" secondAttribute="centerX" id="hWX-gx-ffR"/>
+                            <constraint firstItem="MFH-5E-b4d" firstAttribute="top" secondItem="5kH-CH-slb" secondAttribute="bottom" id="yKv-0u-Sdb"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="infoLabel" destination="8Xo-lj-Tai" id="Bfe-jd-Odh"/>
-                        <outlet property="minigameSettingToggle" destination="a9D-4e-Di5" id="4rW-RP-wDE"/>
+                        <outlet property="tableView" destination="5kH-CH-slb" id="qxf-SD-9Se"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cPD-PP-F7z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xMG-qk-cxT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3534.7826086956525" y="1155.9782608695652"/>
+            <point key="canvasLocation" x="3533.7890625" y="1156.9546120058565"/>
         </scene>
         <!--Pregame Room View Controller-->
         <scene sceneID="xkD-W1-Ufh">
@@ -1132,12 +1137,12 @@
                         <segue destination="svw-k6-RuP" kind="popoverPresentation" identifier="score-view" popoverAnchorView="ch0-Rf-qt2" id="jZC-ZA-rpc">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
-                        <segue destination="hAj-oC-PSM" kind="popoverPresentation" identifier="pregame-settings" popoverAnchorView="ch0-Rf-qt2" id="k9u-SF-IPt">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="4eT-dC-kfX"/>
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="lobby-room" unwindAction="unwindToLobbyRoom:" id="JsK-AZ-Qcj"/>
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="access-code" unwindAction="unwindToAccessCode:" id="v3W-bc-vVR"/>
+                        <segue destination="3bL-M2-AUr" kind="popoverPresentation" identifier="pregame-settings" popoverAnchorView="ch0-Rf-qt2" id="NQx-H0-XuP">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lDc-cz-jrN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1323,8 +1328,37 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWW-d1-JFl" userLabel="Bottom Bar View">
                                 <rect key="frame" x="0.0" y="1289" width="1024" height="77"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bw4-Gi-FS4" userLabel="Timer View">
+                                        <rect key="frame" x="495.5" y="18" width="33" height="25"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer" translatesAutoresizingMaskIntoConstraints="NO" id="IwY-ey-aZE">
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="25" id="3uZ-EC-qmK"/>
+                                                    <constraint firstAttribute="height" constant="25" id="ram-6M-6Wp"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5g-Ps-Ju2" userLabel="Timer Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                <rect key="frame" x="33" y="12.5" width="0.0" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="03J-1v-qHl"/>
+                                            <constraint firstItem="IwY-ey-aZE" firstAttribute="centerY" secondItem="bw4-Gi-FS4" secondAttribute="centerY" id="07N-LA-LaF"/>
+                                            <constraint firstItem="C5g-Ps-Ju2" firstAttribute="centerY" secondItem="IwY-ey-aZE" secondAttribute="centerY" id="2Rz-ma-Ce9"/>
+                                            <constraint firstItem="IwY-ey-aZE" firstAttribute="leading" secondItem="bw4-Gi-FS4" secondAttribute="leading" id="6sl-id-2A0"/>
+                                            <constraint firstAttribute="trailing" secondItem="C5g-Ps-Ju2" secondAttribute="trailing" id="Bcm-Q5-zzB"/>
+                                            <constraint firstAttribute="bottom" secondItem="IwY-ey-aZE" secondAttribute="bottom" id="R5l-fJ-NRX"/>
+                                            <constraint firstItem="C5g-Ps-Ju2" firstAttribute="leading" secondItem="IwY-ey-aZE" secondAttribute="trailing" constant="8" id="VgV-3J-ttC"/>
+                                            <constraint firstItem="IwY-ey-aZE" firstAttribute="top" secondItem="bw4-Gi-FS4" secondAttribute="top" id="noR-Sa-dXX"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-Ow-5JW" userLabel="Action Button" customClass="SCRoundedButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="497" y="18" width="30" height="41"/>
+                                        <rect key="frame" x="497.5" y="18" width="30" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1336,10 +1370,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="bw4-Gi-FS4" firstAttribute="top" secondItem="hWW-d1-JFl" secondAttribute="top" constant="18" id="5rj-Um-TLS"/>
                                     <constraint firstItem="PlM-Ow-5JW" firstAttribute="centerX" secondItem="hWW-d1-JFl" secondAttribute="centerX" id="K6b-md-OZQ"/>
                                     <constraint firstAttribute="height" constant="77" id="Rze-jR-htc"/>
                                     <constraint firstAttribute="bottom" secondItem="PlM-Ow-5JW" secondAttribute="bottom" constant="18" id="b0F-3S-fOV"/>
-                                    <constraint firstItem="PlM-Ow-5JW" firstAttribute="top" secondItem="hWW-d1-JFl" secondAttribute="top" constant="18" id="hlQ-Hv-qK1"/>
+                                    <constraint firstItem="bw4-Gi-FS4" firstAttribute="centerX" secondItem="hWW-d1-JFl" secondAttribute="centerX" id="rEA-7N-jm4"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1368,6 +1403,8 @@
                         <outlet property="collectionView" destination="udo-t2-F4l" id="dkZ-d6-YKx"/>
                         <outlet property="numberOfWordsTextField" destination="1J8-w3-IbM" id="OZo-0w-hSZ"/>
                         <outlet property="teamLabel" destination="p06-Ae-1HJ" id="NrV-HJ-nZH"/>
+                        <outlet property="timerLabel" destination="C5g-Ps-Ju2" id="Oeu-Q8-d0w"/>
+                        <outlet property="timerViewHeightConstraint" destination="03J-1v-qHl" id="Bb2-DO-ThR"/>
                         <outlet property="topBarView" destination="Vhy-Dr-vSM" id="Vdg-zN-a3H"/>
                         <outlet property="topBarViewHeightConstraint" destination="cP6-J4-cEl" id="9Gy-Ue-J7O"/>
                         <segue destination="Isy-vz-eu5" kind="unwind" identifier="pregame-room" unwindAction="unwindToPregameRoom:" id="0dq-Te-mES"/>
@@ -1379,7 +1416,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfM-Nb-l9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Isy-vz-eu5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2642.4000000000001" y="338.68065967016497"/>
+            <point key="canvasLocation" x="2641.9921875" y="338.65300146412881"/>
         </scene>
         <!--Help View Controller-->
         <scene sceneID="I3C-gg-tTW">
@@ -1494,8 +1531,9 @@
         <image name="Spy" width="290" height="280"/>
         <image name="Stack" width="100" height="100"/>
         <image name="Team" width="100" height="100"/>
+        <image name="Timer" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="N7R-5v-7k6"/>
+        <segue reference="yme-7x-s1N"/>
     </inferredMetricsTieBreakers>
 </document>
