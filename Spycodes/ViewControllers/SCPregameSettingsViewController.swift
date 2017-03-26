@@ -95,6 +95,9 @@ extension SCPregameSettingsViewController: SCToggleViewCellDelegate {
             SCMultipeerManager.instance.broadcastData(data)
         } else if cell.reuseIdentifier == SCCellReuseIdentifiers.timerToggleViewCell {
             Timer.instance.setEnabled(enabled)
+
+            let data = NSKeyedArchiver.archivedDataWithRootObject(Timer.instance)
+            SCMultipeerManager.instance.broadcastData(data)
         }
     }
 }

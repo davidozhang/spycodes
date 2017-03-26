@@ -1,7 +1,10 @@
 import Foundation
 
-class Timer: NSObject {
-    static let instance = Timer()
+class Timer: NSObject, NSCoding {
+    static var instance = Timer()
+
+    var state: TimerState = .Stopped
+
     private var enabled = false
     private var timer: NSTimer?
     private var startTime: Int?
@@ -9,6 +12,20 @@ class Timer: NSObject {
 
     private var timerEndedCallback: (() -> Void)?
     private var timerInProgressCallback: ((remainingTime: Int) -> Void)?
+
+    deinit {
+        self.timer?.invalidate()
+    }
+
+    // MARK: Coder
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeBool(enabled, forKey: SCCodingConstants.timerEnabled)
+    }
+
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+        self.enabled = aDecoder.decodeBoolForKey(SCCodingConstants.timerEnabled)
+    }
 
     // MARK: Public
     func setEnabled(enabled: Bool) {
@@ -28,6 +45,12 @@ class Timer: NSObject {
         self.timerEndedCallback = timerEnded
         self.timerInProgressCallback = timerInProgress
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(Timer.updateTime), userInfo: nil, repeats: true)
+    }
+
+    func stopTimer() {
+        self.timer?.invalidate()
+        self.timerEndedCallback = nil
+        self.timerInProgressCallback = nil
     }
 
     func updateTime() {

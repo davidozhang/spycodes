@@ -1328,8 +1328,37 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWW-d1-JFl" userLabel="Bottom Bar View">
                                 <rect key="frame" x="0.0" y="1289" width="1024" height="77"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bw4-Gi-FS4" userLabel="Timer View">
+                                        <rect key="frame" x="495.5" y="18" width="33" height="25"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer" translatesAutoresizingMaskIntoConstraints="NO" id="IwY-ey-aZE">
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="25" id="3uZ-EC-qmK"/>
+                                                    <constraint firstAttribute="height" constant="25" id="ram-6M-6Wp"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5g-Ps-Ju2" userLabel="Timer Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                <rect key="frame" x="33" y="12.5" width="0.0" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="03J-1v-qHl"/>
+                                            <constraint firstItem="IwY-ey-aZE" firstAttribute="centerY" secondItem="bw4-Gi-FS4" secondAttribute="centerY" id="07N-LA-LaF"/>
+                                            <constraint firstItem="C5g-Ps-Ju2" firstAttribute="centerY" secondItem="IwY-ey-aZE" secondAttribute="centerY" id="2Rz-ma-Ce9"/>
+                                            <constraint firstItem="IwY-ey-aZE" firstAttribute="leading" secondItem="bw4-Gi-FS4" secondAttribute="leading" id="6sl-id-2A0"/>
+                                            <constraint firstAttribute="trailing" secondItem="C5g-Ps-Ju2" secondAttribute="trailing" id="Bcm-Q5-zzB"/>
+                                            <constraint firstAttribute="bottom" secondItem="IwY-ey-aZE" secondAttribute="bottom" id="R5l-fJ-NRX"/>
+                                            <constraint firstItem="C5g-Ps-Ju2" firstAttribute="leading" secondItem="IwY-ey-aZE" secondAttribute="trailing" constant="8" id="VgV-3J-ttC"/>
+                                            <constraint firstItem="IwY-ey-aZE" firstAttribute="top" secondItem="bw4-Gi-FS4" secondAttribute="top" id="noR-Sa-dXX"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-Ow-5JW" userLabel="Action Button" customClass="SCRoundedButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="497" y="18" width="30" height="41"/>
+                                        <rect key="frame" x="497.5" y="18" width="30" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1341,10 +1370,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="bw4-Gi-FS4" firstAttribute="top" secondItem="hWW-d1-JFl" secondAttribute="top" constant="18" id="5rj-Um-TLS"/>
                                     <constraint firstItem="PlM-Ow-5JW" firstAttribute="centerX" secondItem="hWW-d1-JFl" secondAttribute="centerX" id="K6b-md-OZQ"/>
                                     <constraint firstAttribute="height" constant="77" id="Rze-jR-htc"/>
                                     <constraint firstAttribute="bottom" secondItem="PlM-Ow-5JW" secondAttribute="bottom" constant="18" id="b0F-3S-fOV"/>
-                                    <constraint firstItem="PlM-Ow-5JW" firstAttribute="top" secondItem="hWW-d1-JFl" secondAttribute="top" constant="18" id="hlQ-Hv-qK1"/>
+                                    <constraint firstItem="bw4-Gi-FS4" firstAttribute="centerX" secondItem="hWW-d1-JFl" secondAttribute="centerX" id="rEA-7N-jm4"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1373,6 +1403,8 @@
                         <outlet property="collectionView" destination="udo-t2-F4l" id="dkZ-d6-YKx"/>
                         <outlet property="numberOfWordsTextField" destination="1J8-w3-IbM" id="OZo-0w-hSZ"/>
                         <outlet property="teamLabel" destination="p06-Ae-1HJ" id="NrV-HJ-nZH"/>
+                        <outlet property="timerLabel" destination="C5g-Ps-Ju2" id="Oeu-Q8-d0w"/>
+                        <outlet property="timerViewHeightConstraint" destination="03J-1v-qHl" id="Bb2-DO-ThR"/>
                         <outlet property="topBarView" destination="Vhy-Dr-vSM" id="Vdg-zN-a3H"/>
                         <outlet property="topBarViewHeightConstraint" destination="cP6-J4-cEl" id="9Gy-Ue-J7O"/>
                         <segue destination="Isy-vz-eu5" kind="unwind" identifier="pregame-room" unwindAction="unwindToPregameRoom:" id="0dq-Te-mES"/>
@@ -1384,7 +1416,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfM-Nb-l9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Isy-vz-eu5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2642.4000000000001" y="338.68065967016497"/>
+            <point key="canvasLocation" x="2641.9921875" y="338.65300146412881"/>
         </scene>
         <!--Help View Controller-->
         <scene sceneID="I3C-gg-tTW">
@@ -1499,6 +1531,7 @@
         <image name="Spy" width="290" height="280"/>
         <image name="Stack" width="100" height="100"/>
         <image name="Team" width="100" height="100"/>
+        <image name="Timer" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yme-7x-s1N"/>

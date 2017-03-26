@@ -168,6 +168,9 @@ class SCPregameRoomViewController: SCViewController {
 
         data = NSKeyedArchiver.archivedDataWithRootObject(GameMode.instance)
         SCMultipeerManager.instance.broadcastData(data)
+
+        data = NSKeyedArchiver.archivedDataWithRootObject(Timer.instance)
+        SCMultipeerManager.instance.broadcastData(data)
     }
 
     private func broadcastOptionalData(object: NSObject) {
@@ -298,6 +301,8 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
             }
         } else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
             Statistics.instance = statistics
+        } else if let timer = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Timer {
+            Timer.instance = timer
         }
     }
 
