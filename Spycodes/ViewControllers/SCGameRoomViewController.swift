@@ -136,7 +136,7 @@ class SCGameRoomViewController: SCViewController {
         self.refreshTimer?.invalidate()
 
         Timer.instance.state = .Stopped
-        Timer.instance.stopTimer()
+        Timer.instance.invalidate()
 
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SCNotificationKeys.autoEliminateNotificationKey, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: SCNotificationKeys.minigameGameOverNotificationKey, object: nil)
@@ -321,7 +321,7 @@ class SCGameRoomViewController: SCViewController {
         }
 
         if Timer.instance.state == .Stopped {
-            Timer.instance.stopTimer()
+            Timer.instance.invalidate()
             self.timerLabel.text = "--:--"
         } else if Timer.instance.state == .WillStart {
             Timer.instance.startTimer({
@@ -342,6 +342,12 @@ class SCGameRoomViewController: SCViewController {
         dispatch_async(dispatch_get_main_queue(), {
             let minutes = remainingTime / 60
             let seconds = remainingTime % 60
+
+            if remainingTime > 10 {
+                self.timerLabel.textColor = UIColor.spycodesGrayColor()
+            } else {
+                self.timerLabel.textColor = UIColor.spycodesRedColor()
+            }
 
             self.timerLabel.text = String(format: "%d:%02d", minutes, seconds)
         })

@@ -47,7 +47,7 @@ class Timer: NSObject, NSCoding {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(Timer.updateTime), userInfo: nil, repeats: true)
     }
 
-    func stopTimer() {
+    func invalidate() {
         self.timer?.invalidate()
         self.timerEndedCallback = nil
         self.timerInProgressCallback = nil
@@ -73,5 +73,11 @@ class Timer: NSObject, NSCoding {
                 timerEndedCallback()
             }
         }
+    }
+
+    func reset() {
+        self.enabled = false
+        self.state = .Stopped
+        self.invalidate()
     }
 }
