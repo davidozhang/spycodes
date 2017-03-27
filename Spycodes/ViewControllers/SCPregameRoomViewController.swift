@@ -235,7 +235,7 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         let alertController = UIAlertController(
-            title: "Returning To Main Menu",
+            title: SCStrings.returningToMainMenuHeader,
             message: reason,
             preferredStyle: .Alert
         )
