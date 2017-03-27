@@ -55,6 +55,7 @@ class Timer: NSObject, NSCoding {
     }
 
     func invalidate() {
+        self.state = .Stopped
         self.timer?.invalidate()
         self.timerEndedCallback = nil
         self.timerInProgressCallback = nil
@@ -84,7 +85,6 @@ class Timer: NSObject, NSCoding {
 
     func reset() {
         self.enabled = false
-        self.state = .Stopped
         self.invalidate()
     }
 }

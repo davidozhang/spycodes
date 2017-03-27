@@ -89,14 +89,16 @@ class Round: NSObject, NSCoding {
             )
 
             if CardCollection.instance.getCardsRemainingForTeam(Team.Blue) == 0 {
-                NSNotificationCenter.defaultCenter().postNotificationName(
-                    SCNotificationKeys.minigameGameOverNotificationKey,
-                    object: self,
-                    userInfo: [
-                        "title": "Minigame Game Over",
-                        "reason": "Your opponent team won!"
-                    ]
-                )
+                dispatch_async(dispatch_get_main_queue(), {
+                    NSNotificationCenter.defaultCenter().postNotificationName(
+                        SCNotificationKeys.minigameGameOverNotificationKey,
+                        object: self,
+                        userInfo: [
+                            "title": "Minigame Game Over",
+                            "reason": "Your opponent team won!"
+                        ]
+                    )
+                })
             }
 
             return

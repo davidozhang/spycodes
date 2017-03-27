@@ -18,6 +18,7 @@ class SCGameRoomViewController: SCViewController {
     private var buttonAnimationStarted = false
     private var textFieldAnimationStarted = false
     private var cluegiverIsEditing = false
+    private var gameEnded = false
 
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
@@ -52,7 +53,7 @@ class SCGameRoomViewController: SCViewController {
         if actionButtonState == .Confirm {
             self.didConfirm()
         } else if actionButtonState == .EndRound {
-            self.didEndRound()
+            self.didEndRound(fromTimerExpiry: false)
         }
     }
 
@@ -157,7 +158,6 @@ class SCGameRoomViewController: SCViewController {
         }
         self.refreshTimer?.invalidate()
 
-        Timer.instance.state = .Stopped
         Timer.instance.invalidate()
 
         NSNotificationCenter.defaultCenter().removeObserver(
@@ -394,7 +394,7 @@ class SCGameRoomViewController: SCViewController {
     }
 
     private func timerDidEnd() {
-        self.didEndRound()
+        self.didEndRound(fromTimerExpiry: true)
     }
 
     private func timerInProgress(remainingTime: Int) {
@@ -462,7 +462,7 @@ class SCGameRoomViewController: SCViewController {
         self.broadcastEssentialData()
     }
 
-    private func didEndRound() {
+    private func didEndRound(fromTimerExpiry fromTimerExpiry: Bool) {
         Round.instance.endRound(Player.instance.team)
         self.broadcastEssentialData()
 
@@ -471,48 +471,72 @@ class SCGameRoomViewController: SCViewController {
         }
 
         if Timer.instance.isEnabled() {
-            Timer.instance.state = .Stopped
+            Timer.instance.invalidate()
         }
 
+        if fromTimerExpiry {
+            if Player.instance.isHost() {
+                SCAudioToolboxManager.vibrate()
+
+                // Send 1 action event on timer expiry to avoid duplicate vibrations
+                self.broadcastEndRoundActionEvent()
+            }
+            return
+        }
+
+        self.broadcastEndRoundActionEvent()
+    }
+
+    private func broadcastEndRoundActionEvent() {
         let endRoundEvent = ActionEvent(type: .EndRound)
         self.broadcastOptionalData(endRoundEvent)
     }
 
     @objc
     private func didEndGameWithNotification(notification: NSNotification) {
-        Round.instance.winningTeam = Team.Blue
-        self.broadcastEssentialData()
-        if let userInfo = notification.userInfo,
-               title = userInfo["title"] as? String,
-               reason = userInfo["reason"] as? String {
-            self.didEndGame(title, reason: reason)
+        dispatch_async(dispatch_get_main_queue()) {
+            Round.instance.winningTeam = Team.Blue
+            self.broadcastEssentialData()
+            if let userInfo = notification.userInfo,
+                title = userInfo["title"] as? String,
+                reason = userInfo["reason"] as? String {
+                self.didEndGame(title, reason: reason)
+            }
         }
     }
 
     private func didEndGame(title: String, reason: String) {
-        if Player.instance.isHost() {
-            self.broadcastTimer?.invalidate()
-        }
-        self.refreshTimer?.invalidate()
-
-        let alertController = UIAlertController(
-            title: title,
-            message: reason,
-            preferredStyle: .Alert
-        )
-        let confirmAction = UIAlertAction(
-            title: "OK",
-            style: .Default,
-            handler: { (action: UIAlertAction) in
-                super.performUnwindSegue(false, completionHandler: nil)
+        dispatch_async(dispatch_get_main_queue()) {
+            if self.gameEnded {
+                return
             }
-        )
-        alertController.addAction(confirmAction)
-        self.presentViewController(
-            alertController,
-            animated: true,
-            completion: nil
-        )
+
+            self.gameEnded = true
+
+            if Player.instance.isHost() {
+                self.broadcastTimer?.invalidate()
+            }
+            self.refreshTimer?.invalidate()
+
+            let alertController = UIAlertController(
+                title: title,
+                message: reason,
+                preferredStyle: .Alert
+            )
+            let confirmAction = UIAlertAction(
+                title: "OK",
+                style: .Default,
+                handler: { (action: UIAlertAction) in
+                    super.performUnwindSegue(false, completionHandler: nil)
+                }
+            )
+            alertController.addAction(confirmAction)
+            self.presentViewController(
+                alertController,
+                animated: true,
+                completion: nil
+            )
+        }
     }
 }
 
@@ -525,7 +549,8 @@ class SCGameRoomViewController: SCViewController {
 // MARK: SCMultipeerManagerDelegate
 extension SCGameRoomViewController: SCMultipeerManagerDelegate {
     func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
-        if self.cluegiverIsEditing {
+        if self.cluegiverIsEditing ||
+           self.gameEnded {
             return
         }
 
@@ -708,20 +733,24 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
                         didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if Player.instance.isClueGiver() ||
            Round.instance.currentTeam != Player.instance.team ||
-           !(Round.instance.bothFieldsSet()) {
+           !Round.instance.bothFieldsSet() {
             return
         }
-
-        CardCollection.instance.cards[indexPath.row].setSelected()
-        self.broadcastEssentialData()
 
         let cardAtIndex = CardCollection.instance.cards[indexPath.row]
         let cardAtIndexTeam = cardAtIndex.getTeam()
         let playerTeam = Player.instance.team
         let opponentTeam = Team(rawValue: playerTeam.rawValue ^ 1)
 
+        if cardAtIndex.isSelected() {
+            return
+        }
+
+        CardCollection.instance.cards[indexPath.row].setSelected()
+        self.broadcastEssentialData()
+
         if cardAtIndexTeam == Team.Neutral || cardAtIndexTeam == opponentTeam {
-            self.didEndRound()
+            self.didEndRound(fromTimerExpiry: false)
         }
 
         if cardAtIndexTeam == Team.Assassin ||
