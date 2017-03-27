@@ -72,6 +72,10 @@ class Round: NSObject, NSCoding {
         return self.numberOfWords != nil
     }
 
+    func bothFieldsSet() -> Bool {
+        return self.isClueSet() && self.isNumberOfWordsSet()
+    }
+
     func endRound(endingTeam: Team) {
         self.clue = nil
         self.numberOfWords = nil
