@@ -313,13 +313,8 @@ class SCGameRoomViewController: SCViewController {
         }
 
         if Round.instance.currentTeam == Player.instance.team {
-            if Round.instance.isClueSet() &&
-                Round.instance.isNumberOfWordsSet() {
-                if Timer.instance.state == .Stopped {
-                    Timer.instance.state = .WillStart
-                }
-            } else {
-                Timer.instance.state = .Stopped
+            if Timer.instance.state == .Stopped {
+                Timer.instance.state = .WillStart
             }
         } else {
             Timer.instance.state = .Stopped
@@ -340,7 +335,6 @@ class SCGameRoomViewController: SCViewController {
     }
 
     private func timerDidEnd() {
-        Timer.instance.state = .Stopped
         self.didEndRound()
     }
 
@@ -402,6 +396,15 @@ class SCGameRoomViewController: SCViewController {
     private func didEndRound() {
         Round.instance.endRound(Player.instance.team)
         self.broadcastEssentialData()
+
+        if !Timer.instance.isEnabled() {
+            return
+        }
+
+        Timer.instance.state = .Stopped
+
+        let endRoundEvent = ActionEvent(type: .EndRound)
+        self.broadcastOptionalData(endRoundEvent)
     }
 
     @objc
@@ -470,6 +473,16 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             Room.instance = room
         } else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
             Statistics.instance = statistics
+        } else if let actionEvent = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? ActionEvent {
+            if GameMode.instance.mode == GameMode.Mode.MiniGame {
+                if actionEvent.getType() == ActionEvent.EventType.EndRound {
+                    if !Timer.instance.isEnabled() {
+                        return
+                    }
+
+                    Timer.instance.state = .Stopped
+                }
+            }
         }
     }
 
