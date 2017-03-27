@@ -21,7 +21,10 @@ class SCPregameRoomViewCell: SCTableViewCell {
 
     @IBAction func segmentedControlToggled(sender: UISegmentedControl) {
         if let index = self.index {
-            delegate?.teamUpdatedAtIndex(index, newTeam: Team(rawValue: segmentedControl.selectedSegmentIndex)!)
+            delegate?.teamUpdatedAtIndex(
+                index,
+                newTeam: Team(rawValue: segmentedControl.selectedSegmentIndex)!
+            )
         }
     }
 }

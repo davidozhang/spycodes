@@ -16,7 +16,11 @@ class SCToggleViewCell: SCTableViewCell {
 
         self.leftLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
 
-        toggleSwitch.addTarget(self, action: #selector(SCToggleViewCell.onToggleChanged(_:)), forControlEvents: .ValueChanged)
+        toggleSwitch.addTarget(
+            self,
+            action: #selector(SCToggleViewCell.onToggleChanged(_:)),
+            forControlEvents: .ValueChanged
+        )
 
         if let reuseIdentifier = self.reuseIdentifier {
             switch reuseIdentifier {
@@ -35,7 +39,11 @@ class SCToggleViewCell: SCTableViewCell {
     }
 
     deinit {
-        self.toggleSwitch.removeTarget(self, action: #selector(SCToggleViewCell.onToggleChanged(_:)), forControlEvents: .ValueChanged)
+        self.toggleSwitch.removeTarget(
+            self,
+            action: #selector(SCToggleViewCell.onToggleChanged(_:)),
+            forControlEvents: .ValueChanged
+        )
         self.delegate = nil
     }
 
