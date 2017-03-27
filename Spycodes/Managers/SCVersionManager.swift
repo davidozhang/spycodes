@@ -6,7 +6,9 @@ class SCVersionManager {
         let successHandler: (NSDictionary) -> Void = { dict in
             if let resultCount = dict["resultCount"] as? NSInteger where resultCount == 1,
                let latestAppVersion = dict["results"]?[0]?["version"] as? String,
-               let currentAppVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String {
+               let currentAppVersion = NSBundle.mainBundle().objectForInfoDictionaryKey(
+                   "CFBundleShortVersionString"
+               ) as? String {
                 if let current = Double(currentAppVersion),
                        latest = Double(latestAppVersion) where current < latest {
                     failure()
@@ -20,10 +22,13 @@ class SCVersionManager {
     // MARK: Private
     private static func sendRequest(success: ((NSDictionary) -> Void)) {
         let requestURL = NSURL(string: SCConstants.versionURL)
-        let task = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration()).dataTaskWithURL(requestURL!) { (data, response, error) in
+        let task = NSURLSession(
+            configuration: NSURLSessionConfiguration.defaultSessionConfiguration()).dataTaskWithURL(
+                requestURL!
+            ) { (data, response, error) in
             if let data = data,
                    response = response as? NSHTTPURLResponse,
-                dictionary = SCVersionManager.deserialize(data) {
+                   dictionary = SCVersionManager.deserialize(data) {
                 if response.statusCode == 200 {
                     success(dictionary)
                 }
@@ -39,7 +44,9 @@ class SCVersionManager {
         if let result = NSString(data: data, encoding: NSASCIIStringEncoding),
                data = result.dataUsingEncoding(NSUTF8StringEncoding) {
             do {
-                if let dictionary = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
+                if let dictionary = try NSJSONSerialization.JSONObjectWithData(
+                    data, options: []
+                ) as? NSDictionary {
                     return dictionary
                 }
             } catch {

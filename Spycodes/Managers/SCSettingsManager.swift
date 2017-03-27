@@ -15,12 +15,17 @@ class SCSettingsManager {
     }
 
     func save() {
-        NSUserDefaults.standardUserDefaults().setBool(self.nightMode, forKey: SCUserDefaultsConstants.nightMode)
+        NSUserDefaults.standardUserDefaults().setBool(
+            self.nightMode,
+            forKey: SCUserDefaultsConstants.nightMode
+        )
         NSUserDefaults.standardUserDefaults().synchronize()
     }
 
     func retrieve() {
-        let storedNightMode = NSUserDefaults.standardUserDefaults().boolForKey(SCUserDefaultsConstants.nightMode)
+        let storedNightMode = NSUserDefaults.standardUserDefaults().boolForKey(
+            SCUserDefaultsConstants.nightMode
+        )
 
         self.nightMode = storedNightMode
     }
