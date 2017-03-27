@@ -499,8 +499,8 @@ class SCGameRoomViewController: SCViewController {
             Round.instance.winningTeam = Team.Blue
             self.broadcastEssentialData()
             if let userInfo = notification.userInfo,
-                title = userInfo["title"] as? String,
-                reason = userInfo["reason"] as? String {
+                   title = userInfo["title"] as? String,
+                   reason = userInfo["reason"] as? String {
                 self.didEndGame(title, reason: reason)
             }
         }
@@ -513,7 +513,9 @@ class SCGameRoomViewController: SCViewController {
             }
 
             self.gameEnded = true
+
             Round.instance.endGame()
+            Timer.instance.invalidate()
 
             if Player.instance.isHost() {
                 self.broadcastTimer?.invalidate()
