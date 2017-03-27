@@ -469,17 +469,3 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         return Room.instance.players.count
     }
 }
-
-// MARK: UIPopoverPresentationControllerDelegate
-extension SCPregameRoomViewController: UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyleForPresentationController(
-        controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
-    }
-
-    func popoverPresentationControllerDidDismissPopover(
-        popoverPresentationController: UIPopoverPresentationController) {
-        super.hideDimView()
-        popoverPresentationController.delegate = nil
-    }
-}

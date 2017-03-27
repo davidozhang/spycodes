@@ -871,17 +871,3 @@ extension SCGameRoomViewController: UITextFieldDelegate {
         return true
     }
 }
-
-// MARK: UIPopoverPresentationControllerDelegate
-extension SCGameRoomViewController: UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyleForPresentationController(
-        controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
-    }
-
-    func popoverPresentationControllerDidDismissPopover(
-        popoverPresentationController: UIPopoverPresentationController) {
-        super.hideDimView()
-        popoverPresentationController.delegate = nil
-    }
-}

@@ -30,15 +30,33 @@ class SCViewController: UIViewController {
             self.view.backgroundColor = UIColor.whiteColor()
         }
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCViewController.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SCViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(SCViewController.keyboardWillShow),
+            name: UIKeyboardWillShowNotification,
+            object: nil
+        )
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(SCViewController.keyboardWillHide),
+            name: UIKeyboardWillHideNotification,
+            object: nil
+        )
     }
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
 
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(
+            self,
+            name: UIKeyboardWillShowNotification,
+            object: nil
+        )
+        NSNotificationCenter.defaultCenter().removeObserver(
+            self,
+            name: UIKeyboardWillHideNotification,
+            object: nil
+        )
     }
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -102,4 +120,24 @@ class SCViewController: UIViewController {
 
     @objc
     func keyboardWillHide(notification: NSNotification) {}
+}
+
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
+
+// MARK: UIPopoverPresentationControllerDelegate
+extension SCViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyleForPresentationController(
+        controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+
+    func popoverPresentationControllerDidDismissPopover(
+        popoverPresentationController: UIPopoverPresentationController) {
+        self.hideDimView()
+        popoverPresentationController.delegate = nil
+    }
 }
