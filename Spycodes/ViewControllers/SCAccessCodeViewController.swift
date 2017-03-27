@@ -2,7 +2,9 @@ import MultipeerConnectivity
 import UIKit
 
 class SCAccessCodeViewController: SCViewController {
-    private let allowedCharactersSet = NSCharacterSet(charactersInString: Room.accessCodeAllowedCharacters as String)
+    private let allowedCharactersSet = NSCharacterSet(
+        charactersInString: Room.accessCodeAllowedCharacters as String
+    )
     private let defaultTimeoutInterval: NSTimeInterval = 10
     private let shortTimeoutInterval: NSTimeInterval = 3
 
@@ -15,7 +17,9 @@ class SCAccessCodeViewController: SCViewController {
     private var lastTextFieldWasFilled = false
     private var keyboardDidShow = false
 
-    private var accessCodeCharacters = NSMutableArray(capacity: SCConstants.accessCodeLength)
+    private var accessCodeCharacters = NSMutableArray(
+        capacity: SCConstants.accessCodeLength
+    )
 
     @IBOutlet weak var statusLabel: SCStatusLabel!
     @IBOutlet weak var textFieldsView: UIView!
@@ -60,7 +64,11 @@ class SCAccessCodeViewController: SCViewController {
             if let textField = view as? SCSingleCharacterTextField {
                 textField.delegate = self
                 textField.backspaceDelegate = self
-                textField.addTarget(self, action: #selector(SCAccessCodeViewController.textFieldDidChange), forControlEvents: .EditingChanged)
+                textField.addTarget(
+                    self,
+                    action: #selector(SCAccessCodeViewController.textFieldDidChange),
+                    forControlEvents: .EditingChanged
+                )
 
                 // Tags are assigned in the Storyboard
                 if textField.tag == self.firstTag {
@@ -79,7 +87,11 @@ class SCAccessCodeViewController: SCViewController {
             if let textField = view as? SCSingleCharacterTextField {
                 textField.delegate = nil
                 textField.backspaceDelegate = nil
-                textField.removeTarget(self, action: #selector(SCAccessCodeViewController.textFieldDidChange), forControlEvents: .EditingChanged)
+                textField.removeTarget(
+                    self,
+                    action: #selector(SCAccessCodeViewController.textFieldDidChange),
+                    forControlEvents: .EditingChanged
+                )
                 textField.text = nil
 
                 if textField.isFirstResponder() {
@@ -104,11 +116,16 @@ class SCAccessCodeViewController: SCViewController {
             return
         }
 
-        if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+        if let userInfo = notification.userInfo,
+               frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             self.keyboardDidShow = true
 
             let rect = frame.CGRectValue()
-            self.contentViewVerticalCenterConstraint.constant = -(rect.height / 2 - self.headerTopMarginConstraint.constant - self.statusLabelTopMarginConstraint.constant)
+            let headerTopMargin = self.headerTopMarginConstraint.constant
+            let statusLabelTopMargin = self.statusLabelTopMarginConstraint.constant
+            self.contentViewVerticalCenterConstraint.constant = -(
+                rect.height / 2 - headerTopMargin - statusLabelTopMargin
+            )
         }
     }
 
@@ -126,7 +143,13 @@ class SCAccessCodeViewController: SCViewController {
 
         self.statusLabel.text = SCStrings.failStatus
         self.browseLobbyButton.hidden = false
-        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.shortTimeoutInterval, target: self, selector: #selector(SCAccessCodeViewController.restoreStatus), userInfo: nil, repeats: false)
+        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(
+            self.shortTimeoutInterval,
+            target: self,
+            selector: #selector(SCAccessCodeViewController.restoreStatus),
+            userInfo: nil,
+            repeats: false
+        )
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? SCSingleCharacterTextField {
@@ -177,7 +200,13 @@ class SCAccessCodeViewController: SCViewController {
 
         self.timeoutTimer?.invalidate()
 
-        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.defaultTimeoutInterval, target: self, selector: #selector(SCAccessCodeViewController.onTimeout), userInfo: nil, repeats: false)
+        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(
+            self.defaultTimeoutInterval,
+            target: self,
+            selector: #selector(SCAccessCodeViewController.onTimeout),
+            userInfo: nil,
+            repeats: false
+        )
         self.statusLabel.text = SCStrings.pendingStatus
         self.browseLobbyButton.hidden = true
 
@@ -264,7 +293,9 @@ extension SCAccessCodeViewController: UITextFieldDelegate {
         return false
     }
 
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(textField: UITextField,
+                   shouldChangeCharactersInRange range: NSRange,
+                   replacementString string: String) -> Bool {
         // Disallow all special characters
         if string.rangeOfCharacterFromSet(self.allowedCharactersSet.invertedSet) != nil {
             return false
