@@ -57,9 +57,12 @@ class SCPlayerNameViewController: SCViewController {
 
     // MARK: Keyboard
     override func keyboardWillShow(notification: NSNotification) {
-        if let userInfo = notification.userInfo, let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+        if let userInfo = notification.userInfo,
+               frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let rect = frame.CGRectValue()
-            self.userNameTextFieldVerticalCenterConstraint.constant = -(rect.height / 2 - self.headerLabelTopMarginConstraint.constant)
+            self.userNameTextFieldVerticalCenterConstraint.constant = -(
+                rect.height / 2 - self.headerLabelTopMarginConstraint.constant
+            )
         }
     }
 }
@@ -72,7 +75,9 @@ class SCPlayerNameViewController: SCViewController {
 
 // MARK: UITextFieldDelegate
 extension SCPlayerNameViewController: UITextFieldDelegate {
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(textField: UITextField,
+                   shouldChangeCharactersInRange range: NSRange,
+                   replacementString string: String) -> Bool {
         return true
     }
 
