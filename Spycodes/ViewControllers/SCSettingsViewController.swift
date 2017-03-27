@@ -1,9 +1,19 @@
 import UIKit
 
 class SCSettingsViewController: SCViewController {
-    private let sections = ["Customize", "About", "More"]
+    private let sections = [
+        "Customize",
+        "About",
+        "More"
+    ]
     private let customizeLabels = ["Night Mode"]
-    private let disclosureLabels = ["Support", "Review App", "Website", "Github", "Icons8"]
+    private let disclosureLabels = [
+        "Support",
+        "Review App",
+        "Website",
+        "Github",
+        "Icons8"
+    ]
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -47,19 +57,25 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return sections.count
     }
 
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(tableView: UITableView,
+                   heightForHeaderInSection section: Int) -> CGFloat {
         return 44.0
     }
 
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let sectionHeader = self.tableView.dequeueReusableCellWithIdentifier(SCCellReuseIdentifiers.sectionHeaderCell) as? SCSectionHeaderViewCell else { return nil
+    func tableView(tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
+        guard let sectionHeader = self.tableView.dequeueReusableCellWithIdentifier(
+            SCCellReuseIdentifiers.sectionHeaderCell
+        ) as? SCSectionHeaderViewCell else {
+            return nil
         }
 
         sectionHeader.header.text = sections[section]
         return sectionHeader
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: // Customize
             return customizeLabels.count
@@ -72,21 +88,34 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView,
+                   cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0: // Customize
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(SCCellReuseIdentifiers.nightModeToggleViewCell) as? SCToggleViewCell else { return UITableViewCell() }
+            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(
+                SCCellReuseIdentifiers.nightModeToggleViewCell
+            ) as? SCToggleViewCell else {
+                return UITableViewCell()
+            }
 
             cell.leftLabel.text = self.customizeLabels[indexPath.row]
             cell.delegate = self
 
             return cell
         case 1: // About
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(SCCellReuseIdentifiers.versionViewCell) as? SCVersionViewCell else { return UITableViewCell() }
+            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(
+                SCCellReuseIdentifiers.versionViewCell
+            ) as? SCVersionViewCell else {
+                return UITableViewCell()
+            }
 
             return cell
         case 2: // More
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(SCCellReuseIdentifiers.disclosureViewCell) as? SCDisclosureViewCell else { return UITableViewCell() }
+            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(
+                SCCellReuseIdentifiers.disclosureViewCell
+            ) as? SCDisclosureViewCell else {
+                return UITableViewCell()
+            }
 
             cell.leftLabel.text = self.disclosureLabels[indexPath.row]
 
@@ -96,7 +125,8 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView,
+                   didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
 
         switch indexPath.section {
@@ -131,6 +161,13 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
+
+// MARK: SCToggleViewCellDelegate
 extension SCSettingsViewController: SCToggleViewCellDelegate {
     func onToggleChanged(cell: SCToggleViewCell, enabled: Bool) {
         if cell.reuseIdentifier == SCCellReuseIdentifiers.nightModeToggleViewCell {
