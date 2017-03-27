@@ -574,7 +574,9 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             Statistics.instance = synchronizedObject
         case let synchronizedObject as ActionEvent:
             if synchronizedObject.getType() == ActionEvent.EventType.EndRound {
-                SCAudioToolboxManager.vibrate()
+                if Round.instance.currentTeam == Player.instance.team {
+                    SCAudioToolboxManager.vibrate()
+                }
 
                 if GameMode.instance.mode == GameMode.Mode.MiniGame {
                     if Timer.instance.isEnabled() {
