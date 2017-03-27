@@ -381,6 +381,7 @@ class SCGameRoomViewController: SCViewController {
 
         if Timer.instance.state == .Stopped {
             Timer.instance.invalidate()
+            self.timerLabel.textColor = UIColor.spycodesGrayColor()
             self.timerLabel.text = "--:--"
         } else if Timer.instance.state == .WillStart {
             Timer.instance.startTimer({
