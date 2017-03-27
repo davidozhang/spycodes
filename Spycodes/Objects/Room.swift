@@ -21,7 +21,10 @@ class Room: NSObject, NSCoding {
     }
 
     // Backwards compatibility with v1.0
-    convenience init(name: String, uuid: String, players: [Player], connectedPeers: [MCPeerID: String]) {
+    convenience init(name: String,
+                     uuid: String,
+                     players: [Player],
+                     connectedPeers: [MCPeerID: String]) {
         self.init()
         self.name = name
         self.uuid = uuid
@@ -29,7 +32,11 @@ class Room: NSObject, NSCoding {
         self.connectedPeers = connectedPeers
     }
 
-    convenience init(name: String, uuid: String, accessCode: String, players: [Player], connectedPeers: [MCPeerID: String]) {
+    convenience init(name: String,
+                     uuid: String,
+                     accessCode: String,
+                     players: [Player],
+                     connectedPeers: [MCPeerID: String]) {
         self.init()
         self.name = name
         self.uuid = uuid
@@ -58,10 +65,21 @@ class Room: NSObject, NSCoding {
                players = aDecoder.decodeObjectForKey(SCCodingConstants.players) as? [Player],
                connectedPeers = aDecoder.decodeObjectForKey(SCCodingConstants.connectedPeers) as? [MCPeerID: String] {
             if let accessCode = aDecoder.decodeObjectForKey(SCCodingConstants.accessCode) as? String {
-                self.init(name: name, uuid: uuid, accessCode: accessCode, players: players, connectedPeers: connectedPeers)
+                self.init(
+                    name: name,
+                    uuid: uuid,
+                    accessCode: accessCode,
+                    players: players,
+                    connectedPeers: connectedPeers
+                )
             } else {
                 // Backwards compatibility with v1.0
-                self.init(name: name, uuid: uuid, players: players, connectedPeers: connectedPeers)
+                self.init(
+                    name: name,
+                    uuid: uuid,
+                    players: players,
+                    connectedPeers: connectedPeers
+                )
             }
         } else {
             self.init()
@@ -111,7 +129,13 @@ class Room: NSObject, NSCoding {
     }
 
     func addCPUPlayer() {
-        let cpu = Player(name: "CPU", uuid: Room.cpuUUID, team: Team.Blue, clueGiver: true, host: false)
+        let cpu = Player(
+            name: "CPU",
+            uuid: Room.cpuUUID,
+            team: Team.Blue,
+            clueGiver: true,
+            host: false
+        )
         self.players.append(cpu)
     }
 
@@ -129,7 +153,9 @@ class Room: NSObject, NSCoding {
     }
 
     func getPlayerWithUUID(uuid: String) -> Player? {
-        let filtered = self.players.filter({($0 as Player).getUUID() == uuid})
+        let filtered = self.players.filter({
+            ($0 as Player).getUUID() == uuid
+        })
         if filtered.count == 1 {
             return filtered[0]
         } else {
@@ -150,7 +176,9 @@ class Room: NSObject, NSCoding {
     }
 
     func removePlayerWithUUID(uuid: String) {
-        self.players = self.players.filter({($0 as Player).getUUID() != uuid})
+        self.players = self.players.filter({
+            ($0 as Player).getUUID() != uuid
+        })
     }
 
     func playerWithUUIDInRoom(uuid: String) -> Bool {
@@ -159,8 +187,12 @@ class Room: NSObject, NSCoding {
 
     func teamSizesValid() -> Bool {
         if GameMode.instance.mode == GameMode.Mode.RegularGame {
-            let redValid = self.players.filter({($0 as Player).team == Team.Red}).count >= 2
-            let blueValid = self.players.filter({($0 as Player).team == Team.Blue}).count >= 2
+            let redValid = self.players.filter({
+                ($0 as Player).team == Team.Red
+            }).count >= 2
+            let blueValid = self.players.filter({
+                ($0 as Player).team == Team.Blue
+            }).count >= 2
 
             if redValid && blueValid {
                 return true
@@ -168,7 +200,8 @@ class Room: NSObject, NSCoding {
 
             return false
         } else {    // Minigame
-            if self.players.count == 3 || self.players.count == 4 {
+            if self.players.count == 3 ||
+               self.players.count == 4 {
                 return true
             }
 
@@ -178,13 +211,15 @@ class Room: NSObject, NSCoding {
 
     func cluegiversSelected() -> Bool {
         if GameMode.instance.mode == GameMode.Mode.RegularGame {
-            if self.getClueGiverUUIDForTeam(Team.Red) != nil && self.getClueGiverUUIDForTeam(Team.Blue) != nil {
+            if self.getClueGiverUUIDForTeam(Team.Red) != nil &&
+               self.getClueGiverUUIDForTeam(Team.Blue) != nil {
                 return true
             }
 
             return false
         } else {    // Minigame
-            if self.getClueGiverUUIDForTeam(Team.Red) != nil && self.getClueGiverUUIDForTeam(Team.Blue) != nil {
+            if self.getClueGiverUUIDForTeam(Team.Red) != nil &&
+               self.getClueGiverUUIDForTeam(Team.Blue) != nil {
                 return true
             }
 
@@ -197,7 +232,9 @@ class Room: NSObject, NSCoding {
     }
 
     func getClueGiverUUIDForTeam(team: Team) -> String? {
-        let filtered = self.players.filter({($0 as Player).isClueGiver() && ($0 as Player).team == team})
+        let filtered = self.players.filter({
+            ($0 as Player).isClueGiver() && ($0 as Player).team == team
+        })
         if filtered.count == 1 {
             return filtered[0].getUUID()
         } else {

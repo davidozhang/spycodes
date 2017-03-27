@@ -19,7 +19,11 @@ class Player: NSObject, NSCoding {
         self.host = false
     }
 
-    convenience init(name: String, uuid: String, team: Team, clueGiver: Bool, host: Bool) {
+    convenience init(name: String,
+                     uuid: String,
+                     team: Team,
+                     clueGiver: Bool,
+                     host: Bool) {
         self.init()
         self.name = name
         self.uuid = uuid
@@ -43,7 +47,13 @@ class Player: NSObject, NSCoding {
                team = aDecoder.decodeObjectForKey(SCCodingConstants.team) as? Int {
             let clueGiver = aDecoder.decodeBoolForKey(SCCodingConstants.clueGiver)
             let host = aDecoder.decodeBoolForKey(SCCodingConstants.host)
-            self.init(name: name, uuid: uuid, team: Team(rawValue: team)!, clueGiver: clueGiver, host: host)
+            self.init(
+                name: name,
+                uuid: uuid,
+                team: Team(rawValue: team)!,
+                clueGiver: clueGiver,
+                host: host
+            )
         } else {
             self.init()
         }

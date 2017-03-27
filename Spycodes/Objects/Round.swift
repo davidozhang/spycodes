@@ -82,10 +82,21 @@ class Round: NSObject, NSCoding {
 
         if GameMode.instance.mode == GameMode.Mode.MiniGame {
             CardCollection.instance.autoEliminateOpponentTeamCard(Team.Blue)
-            NSNotificationCenter.defaultCenter().postNotificationName(SCNotificationKeys.autoEliminateNotificationKey, object: self, userInfo: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(
+                SCNotificationKeys.autoEliminateNotificationKey,
+                object: self,
+                userInfo: nil
+            )
 
             if CardCollection.instance.getCardsRemainingForTeam(Team.Blue) == 0 {
-                NSNotificationCenter.defaultCenter().postNotificationName(SCNotificationKeys.minigameGameOverNotificationKey, object: self, userInfo: ["title": "Minigame Game Over", "reason": "Your opponent team won!"])
+                NSNotificationCenter.defaultCenter().postNotificationName(
+                    SCNotificationKeys.minigameGameOverNotificationKey,
+                    object: self,
+                    userInfo: [
+                        "title": "Minigame Game Over",
+                        "reason": "Your opponent team won!"
+                    ]
+                )
             }
 
             return

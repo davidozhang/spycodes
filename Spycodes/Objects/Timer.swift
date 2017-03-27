@@ -36,7 +36,8 @@ class Timer: NSObject, NSCoding {
         return self.enabled
     }
 
-    func startTimer(timerEnded: () -> Void, timerInProgress: ((remainingTime: Int) -> Void)) {
+    func startTimer(timerEnded: () -> Void,
+                    timerInProgress: ((remainingTime: Int) -> Void)) {
         if !self.enabled {
             return
         }
@@ -44,7 +45,13 @@ class Timer: NSObject, NSCoding {
         self.startTime = Int(NSDate.timeIntervalSinceReferenceDate())
         self.timerEndedCallback = timerEnded
         self.timerInProgressCallback = timerInProgress
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(Timer.updateTime), userInfo: nil, repeats: true)
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(
+            1,
+            target: self,
+            selector: #selector(Timer.updateTime),
+            userInfo: nil,
+            repeats: true
+        )
     }
 
     func invalidate() {
