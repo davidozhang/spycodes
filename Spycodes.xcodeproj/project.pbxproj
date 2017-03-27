@@ -58,6 +58,7 @@
 		63D2568A1E6BA6BA0061D80C /* SCStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567F1E6BA6BA0061D80C /* SCStatusLabel.swift */; };
 		63D2568B1E6BA6BA0061D80C /* SCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256801E6BA6BA0061D80C /* SCTextField.swift */; };
 		63DEDEE61E861D6700DE94A1 /* SCCellReuseIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DEDEE51E861D6700DE94A1 /* SCCellReuseIdentifiers.swift */; };
+		63DEDEE81E88921200DE94A1 /* ActionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DEDEE71E88921200DE94A1 /* ActionEvent.swift */; };
 		63EAF9A31D41D2E700BC554E /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A21D41D2E700BC554E /* Round.swift */; };
 		63EAF9A51D41F1C400BC554E /* SCAudioToolboxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A41D41F1C400BC554E /* SCAudioToolboxManager.swift */; };
 		63F2B7A61E6BB8F600F602D1 /* SCStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F2B7A51E6BB8F600F602D1 /* SCStates.swift */; };
@@ -128,6 +129,7 @@
 		63D2567F1E6BA6BA0061D80C /* SCStatusLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCStatusLabel.swift; path = Utilities/SCStatusLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63D256801E6BA6BA0061D80C /* SCTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCTextField.swift; path = Utilities/SCTextField.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63DEDEE51E861D6700DE94A1 /* SCCellReuseIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCCellReuseIdentifiers.swift; path = Extensions/SCCellReuseIdentifiers.swift; sourceTree = "<group>"; };
+		63DEDEE71E88921200DE94A1 /* ActionEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionEvent.swift; path = Objects/ActionEvent.swift; sourceTree = "<group>"; };
 		63EAF9A21D41D2E700BC554E /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Round.swift; path = Objects/Round.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63EAF9A41D41F1C400BC554E /* SCAudioToolboxManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAudioToolboxManager.swift; path = Managers/SCAudioToolboxManager.swift; sourceTree = "<group>"; };
 		63F2B7A51E6BB8F600F602D1 /* SCStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCStates.swift; path = Extensions/SCStates.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 		63FDED331D264BD800142780 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				63DEDEE71E88921200DE94A1 /* ActionEvent.swift */,
 				63CB4F091D3CB88D00211D3A /* Card.swift */,
 				63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */,
 				6378C6501D4C6F46009BD0CA /* GameMode.swift */,
@@ -421,6 +424,7 @@
 				63EAF9A51D41F1C400BC554E /* SCAudioToolboxManager.swift in Sources */,
 				63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */,
 				6329BEFD1E512ADF004E6151 /* SCViewController.swift in Sources */,
+				63DEDEE81E88921200DE94A1 /* ActionEvent.swift in Sources */,
 				6332922D1E7DEBD00090B09D /* SCUserDefaultsConstants.swift in Sources */,
 				637FF00A1E0F0B620076DC25 /* SCAccessCodeViewController.swift in Sources */,
 				6363EB671E7E5A3900CC287B /* SCToggleViewCell.swift in Sources */,
