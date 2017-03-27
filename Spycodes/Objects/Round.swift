@@ -15,6 +15,7 @@ class Round: NSObject, NSCoding {
     var numberOfWords: String?
     var winningTeam: Team?
     var abort = false
+    var gameEnded = false
 
     // MARK: Coder
     func encodeWithCoder(aCoder: NSCoder) {
@@ -35,6 +36,7 @@ class Round: NSObject, NSCoding {
         }
 
         aCoder.encodeBool(self.abort, forKey: SCCodingConstants.abort)
+        aCoder.encodeBool(self.gameEnded, forKey: SCCodingConstants.gameEnded)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
@@ -57,6 +59,7 @@ class Round: NSObject, NSCoding {
         }
 
         self.abort = aDecoder.decodeBoolForKey(SCCodingConstants.abort)
+        self.gameEnded = aDecoder.decodeBoolForKey(SCCodingConstants.gameEnded)
     }
 
     // MARK: Public
@@ -108,5 +111,9 @@ class Round: NSObject, NSCoding {
 
     func abortGame() {
         self.abort = true
+    }
+
+    func endGame() {
+        self.gameEnded = true
     }
 }

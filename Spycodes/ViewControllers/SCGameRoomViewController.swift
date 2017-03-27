@@ -513,6 +513,7 @@ class SCGameRoomViewController: SCViewController {
             }
 
             self.gameEnded = true
+            Round.instance.endGame()
 
             if Player.instance.isHost() {
                 self.broadcastTimer?.invalidate()
