@@ -450,45 +450,61 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             return
         }
 
-        if let cardCollection = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? CardCollection {
-            CardCollection.instance = cardCollection
-        } else if let round = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Round {
-            let previousTeam = Round.instance.currentTeam
-            Round.instance = round
+        let synchronizedObject = NSKeyedUnarchiver.unarchiveObjectWithData(data)
+        let opponentTeam = Team(rawValue: Player.instance.team.rawValue ^ 1)
 
-            let currentTeam = Round.instance.currentTeam
-            if previousTeam != currentTeam && currentTeam == Player.instance.team {
-                SCAudioToolboxManager.vibrate()
-            }
+        switch synchronizedObject {
+        case let synchronizedObject as CardCollection:
+            CardCollection.instance = synchronizedObject
+        case let synchronizedObject as Round:
+            Round.instance = synchronizedObject
 
             if Round.instance.abort {
-                self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: SCStrings.playerAborted)
-                return
-            } else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.RegularGame {
-                self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: Round.defaultWinString)
-                return
-            } else if Round.instance.winningTeam == Player.instance.team && GameMode.instance.mode == GameMode.Mode.MiniGame {
-                self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
-                Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
-                return
-            } else if Round.instance.winningTeam == Team(rawValue: Player.instance.team.rawValue ^ 1) {
-                self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: Round.defaultLoseString)
-                return
-            }
-        } else if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
-            Room.instance = room
-        } else if let statistics = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Statistics {
-            Statistics.instance = statistics
-        } else if let actionEvent = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? ActionEvent {
-            if GameMode.instance.mode == GameMode.Mode.MiniGame {
-                if actionEvent.getType() == ActionEvent.EventType.EndRound {
-                    if !Timer.instance.isEnabled() {
-                        return
-                    }
+                self.didEndGame(
+                    SCStrings.returningToPregameRoomHeader,
+                    reason: SCStrings.playerAborted
+                )
+            } else if Round.instance.winningTeam == Player.instance.team &&
+                      GameMode.instance.mode == GameMode.Mode.RegularGame {
+                self.didEndGame(
+                    SCStrings.returningToPregameRoomHeader,
+                    reason: Round.defaultWinString
+                )
+            } else if Round.instance.winningTeam == Player.instance.team &&
+                      GameMode.instance.mode == GameMode.Mode.MiniGame {
+                self.didEndGame(
+                    SCStrings.returningToPregameRoomHeader,
+                    reason: String(
+                        format: SCStrings.teamWinString,
+                        CardCollection.instance.getCardsRemainingForTeam(Team.Blue)
+                    )
+                )
 
-                    Timer.instance.state = .Stopped
+                Statistics.instance.setBestRecord(
+                    CardCollection.instance.getCardsRemainingForTeam(Team.Blue)
+                )
+            } else if Round.instance.winningTeam == opponentTeam {
+                self.didEndGame(
+                    SCStrings.returningToPregameRoomHeader,
+                    reason: Round.defaultLoseString
+                )
+            }
+        case let synchronizedObject as Room:
+            Room.instance = synchronizedObject
+        case let synchronizedObject as Statistics:
+            Statistics.instance = synchronizedObject
+        case let synchronizedObject as ActionEvent:
+            if synchronizedObject.getType() == ActionEvent.EventType.EndRound {
+                SCAudioToolboxManager.vibrate()
+
+                if GameMode.instance.mode == GameMode.Mode.MiniGame {
+                    if Timer.instance.isEnabled() {
+                        Timer.instance.state = .Stopped
+                    }
                 }
             }
+        default:
+            break
         }
     }
 
@@ -610,7 +626,13 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
                 self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: Round.defaultWinString)
             } else {
-                self.didEndGame(SCStrings.returningToPregameRoomHeader, reason: "Your team won! There were " + String(CardCollection.instance.getCardsRemainingForTeam(Team.Blue)) + " opponent cards remaining. Great work!")       // TODO: Move this String out
+                self.didEndGame(
+                    SCStrings.returningToPregameRoomHeader,
+                    reason: String(
+                        format: SCStrings.teamWinString,
+                        CardCollection.instance.getCardsRemainingForTeam(Team.Blue)
+                    )
+                )
                 Statistics.instance.setBestRecord(CardCollection.instance.getCardsRemainingForTeam(Team.Blue))
                 self.broadcastOptionalData(Statistics.instance)
             }
