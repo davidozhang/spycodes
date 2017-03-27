@@ -43,13 +43,19 @@ class SCLobbyRoomViewController: SCViewController {
         SCMultipeerManager.instance.initBrowser()
         SCMultipeerManager.instance.initSession()
 
-        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(SCLobbyRoomViewController.refreshView), userInfo: nil, repeats: true)     // Refresh lobby every second
+        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(
+            1.0,
+            target: self,
+            selector: #selector(SCLobbyRoomViewController.refreshView),
+            userInfo: nil,
+            repeats: true
+        )
 
         self.activityIndicator.backgroundColor = UIColor.clearColor()
         self.activityIndicator.activityIndicatorViewStyle = .Gray
 
         self.emptyStateLabel = UILabel(frame: self.tableView.frame)
-        self.emptyStateLabel?.text = "Rooms created will show here.\nMake sure Wifi is enabled."
+        self.emptyStateLabel?.text = SCStrings.lobbyRoomEmptyState
         self.emptyStateLabel?.textColor = UIColor.spycodesGrayColor()
         self.emptyStateLabel?.font = SCFonts.regularSizeFont(SCFonts.FontType.Regular)
         self.emptyStateLabel?.textAlignment = .Center
@@ -122,7 +128,13 @@ class SCLobbyRoomViewController: SCViewController {
 
         self.statusLabel.text = SCStrings.failStatus
         self.state = .Failed
-        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.shortTimeoutInterval, target: self, selector: #selector(SCLobbyRoomViewController.restoreStatus), userInfo: nil, repeats: false)
+        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(
+            self.shortTimeoutInterval,
+            target: self,
+            selector: #selector(SCLobbyRoomViewController.restoreStatus),
+            userInfo: nil,
+            repeats: false
+        )
     }
 
     @objc
@@ -141,7 +153,8 @@ class SCLobbyRoomViewController: SCViewController {
 // MARK: SCMultipeerManagerDelegate
 extension SCLobbyRoomViewController: SCMultipeerManagerDelegate {
     func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
-        if let name = info?["room-name"], uuid = info?["room-uuid"] where !Lobby.instance.hasRoomWithUUID(uuid) {
+        if let name = info?["room-name"],
+               uuid = info?["room-uuid"] where !Lobby.instance.hasRoomWithUUID(uuid) {
             Lobby.instance.addRoomWithNameAndUUID(name, uuid: uuid)
         }
     }
@@ -180,15 +193,26 @@ extension SCLobbyRoomViewController: SCLobbyRoomViewCellDelegate {
         SCMultipeerManager.instance.initAdvertiser()
         SCMultipeerManager.instance.startAdvertiser()
 
-        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(self.defaultTimeoutInterval, target: self, selector: #selector(SCLobbyRoomViewController.onTimeout), userInfo: nil, repeats: false)
+        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(
+            self.defaultTimeoutInterval,
+            target: self,
+            selector: #selector(SCLobbyRoomViewController.onTimeout),
+            userInfo: nil,
+            repeats: false
+        )
         self.statusLabel.text = SCStrings.pendingStatus
     }
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCLobbyRoomViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(SCCellReuseIdentifiers.lobbyRoomViewCell) as? SCLobbyRoomViewCell else { return UITableViewCell() }
+    func tableView(tableView: UITableView,
+                   cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCellWithIdentifier(
+            SCCellReuseIdentifiers.lobbyRoomViewCell
+        ) as? SCLobbyRoomViewCell else {
+            return UITableViewCell()
+        }
         let roomAtIndex = Lobby.instance.rooms[indexPath.row]
 
         cell.roomUUID = roomAtIndex.getUUID()
@@ -219,7 +243,8 @@ extension SCLobbyRoomViewController: UITableViewDelegate, UITableViewDataSource 
         return 1
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
         return Lobby.instance.rooms.count
     }
 }
