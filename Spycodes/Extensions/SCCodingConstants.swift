@@ -23,6 +23,7 @@ class SCCodingConstants {
     static let accessCode = "accessCode"
 
     // Version 2.3+
-    static let timerEnabled = "timerEnabled"
     static let actionEventType = "actionEventType"
+    static let gameEnded = "gameEnded"
+    static let timerEnabled = "timerEnabled"
 }

@@ -349,7 +349,8 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
             CardCollection.instance = synchronizedObject
         case let synchronizedObject as Round:
             Round.instance = synchronizedObject
-            if !Round.instance.abort {
+            if !Round.instance.abort &&
+               !Round.instance.gameEnded {
                 self.goToGame()
             }
         case let synchronizedObject as Statistics:
