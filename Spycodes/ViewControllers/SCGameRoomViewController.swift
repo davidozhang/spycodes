@@ -466,11 +466,13 @@ class SCGameRoomViewController: SCViewController {
         Round.instance.endRound(Player.instance.team)
         self.broadcastEssentialData()
 
-        if !Timer.instance.isEnabled() {
-            return
+        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+            SCAudioToolboxManager.vibrate()
         }
 
-        Timer.instance.state = .Stopped
+        if Timer.instance.isEnabled() {
+            Timer.instance.state = .Stopped
+        }
 
         let endRoundEvent = ActionEvent(type: .EndRound)
         self.broadcastOptionalData(endRoundEvent)
