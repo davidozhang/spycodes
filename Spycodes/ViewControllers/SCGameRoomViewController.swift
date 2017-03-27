@@ -7,7 +7,7 @@ class SCGameRoomViewController: SCViewController {
     private let modalWidth = UIScreen.mainScreen().bounds.width - 60
     private let modalHeight = UIScreen.mainScreen().bounds.height/2
     private let bottomBarViewDefaultHeight: CGFloat = 77
-    private let timerViewDefaultHeight: CGFloat = 25
+    private let timerViewDefaultHeight: CGFloat = 20
     private let bottomBarViewExtendedHeight: CGFloat = 117
 
     private let animationAlpha: CGFloat = 0.4

@@ -1329,17 +1329,17 @@
                                 <rect key="frame" x="0.0" y="1289" width="1024" height="77"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bw4-Gi-FS4" userLabel="Timer View">
-                                        <rect key="frame" x="495.5" y="18" width="33" height="25"/>
+                                        <rect key="frame" x="498" y="18" width="28" height="20"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer" translatesAutoresizingMaskIntoConstraints="NO" id="IwY-ey-aZE">
-                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="25" id="3uZ-EC-qmK"/>
-                                                    <constraint firstAttribute="height" constant="25" id="ram-6M-6Wp"/>
+                                                    <constraint firstAttribute="width" constant="20" id="3uZ-EC-qmK"/>
+                                                    <constraint firstAttribute="height" constant="20" id="ram-6M-6Wp"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5g-Ps-Ju2" userLabel="Timer Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                <rect key="frame" x="33" y="12.5" width="0.0" height="0.0"/>
+                                                <rect key="frame" x="28" y="10" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1347,7 +1347,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="03J-1v-qHl"/>
+                                            <constraint firstAttribute="height" constant="20" id="03J-1v-qHl"/>
                                             <constraint firstItem="IwY-ey-aZE" firstAttribute="centerY" secondItem="bw4-Gi-FS4" secondAttribute="centerY" id="07N-LA-LaF"/>
                                             <constraint firstItem="C5g-Ps-Ju2" firstAttribute="centerY" secondItem="IwY-ey-aZE" secondAttribute="centerY" id="2Rz-ma-Ce9"/>
                                             <constraint firstItem="IwY-ey-aZE" firstAttribute="leading" secondItem="bw4-Gi-FS4" secondAttribute="leading" id="6sl-id-2A0"/>
