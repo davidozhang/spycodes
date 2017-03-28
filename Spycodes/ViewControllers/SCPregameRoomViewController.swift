@@ -2,9 +2,6 @@ import MultipeerConnectivity
 import UIKit
 
 class SCPregameRoomViewController: SCViewController {
-    private let modalWidth = UIScreen.mainScreen().bounds.width - 60
-    private let modalHeight = UIScreen.mainScreen().bounds.height/4
-
     private var broadcastTimer: NSTimer?
     private var refreshTimer: NSTimer?
 
@@ -167,10 +164,6 @@ class SCPregameRoomViewController: SCViewController {
 
             vc.rootViewController = self
             vc.modalPresentationStyle = .Popover
-            vc.preferredContentSize = CGSize(
-                width: self.modalWidth,
-                height: self.modalHeight
-            )
 
             if let popvc = vc.popoverPresentationController {
                 popvc.delegate = self

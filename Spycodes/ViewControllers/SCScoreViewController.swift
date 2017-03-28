@@ -33,5 +33,14 @@ class SCScoreViewController: SCPopoverViewController {
                 self.scoreLabel.text = "Red " + String(red) + " : " + String(blue) + " Blue"
             }
         }
+
+        self.preferredContentSize = self.popoverPreferredContentSize()
+    }
+
+    override func popoverPreferredContentSize() -> CGSize {
+        return CGSize(
+            width: super.defaultModalWidth,
+            height: self.headerLabel.frame.height + self.scoreLabel.frame.height + 90
+        )
     }
 }
