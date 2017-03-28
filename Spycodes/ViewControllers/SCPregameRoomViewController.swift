@@ -163,6 +163,11 @@ class SCPregameRoomViewController: SCViewController {
             super.showDimView()
 
             vc.rootViewController = self
+
+            if let vc = segue.destinationViewController as? SCPregameSettingsViewController {
+                vc.delegate = self
+            }
+
             vc.modalPresentationStyle = .Popover
 
             if let popvc = vc.popoverPresentationController {
@@ -381,6 +386,20 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
 
         Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsClueGiver(false)
         self.broadcastEssentialData()
+    }
+}
+
+extension SCPregameRoomViewController: SCPregameSettingsViewControllerDelegate {
+    func onNightModeToggleChanged() {
+        dispatch_async(dispatch_get_main_queue()) {
+            if SCSettingsManager.instance.isNightModeEnabled() {
+                self.view.backgroundColor = UIColor.blackColor()
+            } else {
+                self.view.backgroundColor = UIColor.whiteColor()
+            }
+
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
     }
 }
 

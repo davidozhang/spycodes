@@ -1,7 +1,13 @@
 import UIKit
 
+protocol SCPregameSettingsViewControllerDelegate: class {
+    func onNightModeToggleChanged()
+}
+
 class SCPregameSettingsViewController: SCPopoverViewController {
-    private let settings = ["Minigame", "Timer"]
+    weak var delegate: SCPregameSettingsViewControllerDelegate?
+
+    private let settings = ["Minigame", "Timer", "Night Mode"]
     @IBOutlet weak var tableView: UITableView!
 
     // MARK: Actions
@@ -28,11 +34,15 @@ class SCPregameSettingsViewController: SCPopoverViewController {
 
         self.tableView.dataSource = nil
         self.tableView.delegate = nil
+
+        self.delegate = nil
     }
 
     override func popoverPreferredContentSize() -> CGSize {
-        return CGSize(width: super.defaultModalWidth,
-                      height: CGFloat(60 * self.settings.count + 30))
+        return CGSize(
+            width: super.defaultModalWidth,
+            height: CGFloat(60 * self.settings.count + 30)
+        )
     }
 }
 
@@ -58,10 +68,21 @@ extension SCPregameSettingsViewController: UITableViewDataSource, UITableViewDel
             cell.delegate = self
 
             return cell
-        case 1:
+        case 1: // Timer
             guard let cell = self.tableView.dequeueReusableCellWithIdentifier(
                 SCCellReuseIdentifiers.timerToggleViewCell
             ) as? SCToggleViewCell else {
+                return UITableViewCell()
+            }
+
+            cell.leftLabel.text = self.settings[indexPath.row]
+            cell.delegate = self
+
+            return cell
+        case 2: // Night Mode
+            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(
+                SCCellReuseIdentifiers.nightModeToggleViewCell
+                ) as? SCToggleViewCell else {
                 return UITableViewCell()
             }
 
@@ -117,6 +138,9 @@ extension SCPregameSettingsViewController: SCToggleViewCellDelegate {
 
                 let data = NSKeyedArchiver.archivedDataWithRootObject(Timer.instance)
                 SCMultipeerManager.instance.broadcastData(data)
+            case SCCellReuseIdentifiers.nightModeToggleViewCell:
+                SCSettingsManager.instance.enableNightMode(enabled)
+                self.delegate?.onNightModeToggleChanged()
             default:
                 break
             }
