@@ -19,6 +19,8 @@ class SCPregameSettingsViewController: SCPopoverViewController {
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
+
+        self.preferredContentSize = self.popoverPreferredContentSize()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -26,6 +28,11 @@ class SCPregameSettingsViewController: SCPopoverViewController {
 
         self.tableView.dataSource = nil
         self.tableView.delegate = nil
+    }
+
+    override func popoverPreferredContentSize() -> CGSize {
+        return CGSize(width: super.defaultModalWidth,
+                      height: CGFloat(60 * self.settings.count + 30))
     }
 }
 
