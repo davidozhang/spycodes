@@ -461,6 +461,7 @@ class SCGameRoomViewController: SCViewController {
         self.actionButtonState = .EndRound
 
         self.broadcastEssentialData()
+        self.broadcastActionEvent(.Confirm)
     }
 
     private func didEndRound(fromTimerExpiry fromTimerExpiry: Bool) {
@@ -480,17 +481,17 @@ class SCGameRoomViewController: SCViewController {
                 SCAudioToolboxManager.vibrate()
 
                 // Send 1 action event on timer expiry to avoid duplicate vibrations
-                self.broadcastEndRoundActionEvent()
+                self.broadcastActionEvent(.EndRound)
             }
             return
         }
 
-        self.broadcastEndRoundActionEvent()
+        self.broadcastActionEvent(.EndRound)
     }
 
-    private func broadcastEndRoundActionEvent() {
-        let endRoundEvent = ActionEvent(type: .EndRound)
-        self.broadcastOptionalData(endRoundEvent)
+    private func broadcastActionEvent(eventType: ActionEvent.EventType) {
+        let actionEvent = ActionEvent(type: eventType)
+        self.broadcastOptionalData(actionEvent)
     }
 
     @objc
@@ -611,6 +612,10 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                     if Timer.instance.isEnabled() {
                         Timer.instance.state = .Stopped
                     }
+                }
+            } else if synchronizedObject.getType() == ActionEvent.EventType.Confirm {
+                if Round.instance.currentTeam == Player.instance.team {
+                    SCAudioToolboxManager.vibrate()
                 }
             }
         default:

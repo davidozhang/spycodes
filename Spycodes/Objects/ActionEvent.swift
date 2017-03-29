@@ -3,6 +3,7 @@ import Foundation
 class ActionEvent: NSObject, NSCoding {
     enum EventType: Int {
         case EndRound = 0
+        case Confirm = 1
     }
 
     private var type: EventType?
