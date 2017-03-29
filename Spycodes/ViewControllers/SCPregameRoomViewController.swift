@@ -267,8 +267,8 @@ class SCPregameRoomViewController: SCViewController {
 
 
         let maxRoomSize = GameMode.instance.mode == GameMode.Mode.RegularGame ?
-            SCConstants.regularGameMaxSize :
-            SCConstants.minigameMaxSize
+            SCConstants.roomMaxSize :
+            SCConstants.roomMaxSize + 1     // Account for additional CPU player in minigame
 
         if Room.instance.players.count >= maxRoomSize {
             SCMultipeerManager.instance.stopAdvertiser()
