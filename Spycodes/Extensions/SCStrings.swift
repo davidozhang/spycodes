@@ -19,8 +19,9 @@ class SCStrings {
     static let regularGameTeamSizeInfo = "Both teams have 2-4 players."
     static let minigameCluegiverInfo = "Your team has selected a leader."
     static let regularGameCluegiverInfo = "Both teams have selected leaders."
-    static let selectLeaderInfo = "(Tap yourself or a teammate to nominate as leader for your team)"
-    static let minigameInfo = "2-3 players play against CPU."
+    static let moreInfo = "More Info:"
+    static let selectLeaderInfo = "> Tap yourself or a teammate to nominate as leader for your team."
+    static let minigameInfo = "> Not enough players? Try minigame from game settings!"
 
     static let hostDisconnected = "Host player has disconnected."
     static let playerAborted = "A player in the game has aborted."

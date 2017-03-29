@@ -300,7 +300,14 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         message += "\n\n"
+        message += SCStrings.moreInfo
+        message += "\n\n"
         message += SCStrings.selectLeaderInfo
+
+        if GameMode.instance.mode == GameMode.Mode.RegularGame {
+            message += "\n\n"
+            message += SCStrings.minigameInfo
+        }
 
         return message
     }
