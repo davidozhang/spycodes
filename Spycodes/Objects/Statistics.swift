@@ -14,7 +14,10 @@ class Statistics: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.statistics[Team.red], forKey: SCCodingConstants.red)
         aCoder.encode(self.statistics[Team.blue], forKey: SCCodingConstants.blue)
-        aCoder.encode(self.bestRecord, forKey: SCCodingConstants.bestRecord)
+        
+        if let bestRecord = self.bestRecord {
+            aCoder.encode(bestRecord, forKey: SCCodingConstants.bestRecord)
+        }
     }
 
     required convenience init?(coder aDecoder: NSCoder) {

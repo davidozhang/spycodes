@@ -16,13 +16,15 @@ class ActionEvent: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.type?.rawValue, forKey: SCCodingConstants.actionEventType)
+        if let type = self.type?.rawValue {
+            aCoder.encode(type, forKey: SCCodingConstants.actionEventType)
+        }
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        if let eventType = aDecoder.decodeObject(forKey: SCCodingConstants.actionEventType) as? Int {
-            self.type = EventType(rawValue: eventType)
+        if let type = aDecoder.decodeObject(forKey: SCCodingConstants.actionEventType) as? Int {
+            self.type = EventType(rawValue: type)
         }
     }
 

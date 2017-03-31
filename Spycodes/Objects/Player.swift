@@ -34,7 +34,9 @@ class Player: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.name, forKey: SCCodingConstants.name)
+        if let name = self.name {
+            aCoder.encode(name, forKey: SCCodingConstants.name)
+        }
         aCoder.encode(self.uuid, forKey: SCCodingConstants.uuid)
         aCoder.encode(self.team.rawValue, forKey: SCCodingConstants.team)
         aCoder.encode(self.clueGiver, forKey: SCCodingConstants.clueGiver)
