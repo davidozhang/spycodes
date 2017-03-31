@@ -1,13 +1,13 @@
 import UIKit
 
 class SCSettingsViewController: SCViewController {
-    private let sections = [
+    fileprivate let sections = [
         "Customize",
         "About",
         "More"
     ]
-    private let customizeLabels = ["Night Mode"]
-    private let disclosureLabels = [
+    fileprivate let customizeLabels = ["Night Mode"]
+    fileprivate let disclosureLabels = [
         "Support",
         "Review App",
         "Website",
@@ -18,16 +18,16 @@ class SCSettingsViewController: SCViewController {
     @IBOutlet weak var tableView: UITableView!
 
     // MARK: Actions
-    @IBAction func onBackTapped(sender: AnyObject) {
+    @IBAction func onBackTapped(_ sender: AnyObject) {
         super.performUnwindSegue(true, completionHandler: nil)
     }
 
     deinit {
-        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
 
     // MARK: Lifecycle
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         // Unwindable view controller identifier
@@ -37,7 +37,7 @@ class SCSettingsViewController: SCViewController {
         self.tableView.delegate = self
     }
 
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         self.tableView.dataSource = nil
@@ -53,19 +53,19 @@ class SCSettingsViewController: SCViewController {
 
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
 
-    func tableView(tableView: UITableView,
+    func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
         return 44.0
     }
 
-    func tableView(tableView: UITableView,
+    func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
-        guard let sectionHeader = self.tableView.dequeueReusableCellWithIdentifier(
-            SCCellReuseIdentifiers.sectionHeaderCell
+        guard let sectionHeader = self.tableView.dequeueReusableCell(
+            withIdentifier: SCCellReuseIdentifiers.sectionHeaderCell
         ) as? SCSectionHeaderViewCell else {
             return nil
         }
@@ -74,7 +74,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return sectionHeader
     }
 
-    func tableView(tableView: UITableView,
+    func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: // Customize
@@ -88,12 +88,12 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
-    func tableView(tableView: UITableView,
-                   cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0: // Customize
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(
-                SCCellReuseIdentifiers.nightModeToggleViewCell
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCCellReuseIdentifiers.nightModeToggleViewCell
             ) as? SCToggleViewCell else {
                 return UITableViewCell()
             }
@@ -103,16 +103,16 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
             return cell
         case 1: // About
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(
-                SCCellReuseIdentifiers.versionViewCell
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCCellReuseIdentifiers.versionViewCell
             ) as? SCVersionViewCell else {
                 return UITableViewCell()
             }
 
             return cell
         case 2: // More
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(
-                SCCellReuseIdentifiers.disclosureViewCell
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCCellReuseIdentifiers.disclosureViewCell
             ) as? SCDisclosureViewCell else {
                 return UITableViewCell()
             }
@@ -125,32 +125,32 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
-    func tableView(tableView: UITableView,
-                   didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: false)
 
         switch indexPath.section {
         case 2:
             switch indexPath.row {
             case 0:     // Support
-                if let supportURL = NSURL(string: SCConstants.supportURL) {
-                    UIApplication.sharedApplication().openURL(supportURL)
+                if let supportURL = URL(string: SCConstants.supportURL) {
+                    UIApplication.shared.openURL(supportURL)
                 }
             case 1:     // Review App
-                if let appStoreURL = NSURL(string: SCConstants.appStoreURL) {
-                    UIApplication.sharedApplication().openURL(appStoreURL)
+                if let appStoreURL = URL(string: SCConstants.appStoreURL) {
+                    UIApplication.shared.openURL(appStoreURL)
                 }
             case 2:     // Website
-                if let websiteURL = NSURL(string: SCConstants.websiteURL) {
-                    UIApplication.sharedApplication().openURL(websiteURL)
+                if let websiteURL = URL(string: SCConstants.websiteURL) {
+                    UIApplication.shared.openURL(websiteURL)
                 }
             case 3:     // Github
-                if let githubURL = NSURL(string: SCConstants.githubURL) {
-                    UIApplication.sharedApplication().openURL(githubURL)
+                if let githubURL = URL(string: SCConstants.githubURL) {
+                    UIApplication.shared.openURL(githubURL)
                 }
             case 4: // Icons8
-                if let icons8URL = NSURL(string: SCConstants.icons8URL) {
-                    UIApplication.sharedApplication().openURL(icons8URL)
+                if let icons8URL = URL(string: SCConstants.icons8URL) {
+                    UIApplication.shared.openURL(icons8URL)
                 }
             default:
                 return
@@ -169,15 +169,15 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: SCToggleViewCellDelegate
 extension SCSettingsViewController: SCToggleViewCellDelegate {
-    func onToggleChanged(cell: SCToggleViewCell, enabled: Bool) {
+    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
         if cell.reuseIdentifier == SCCellReuseIdentifiers.nightModeToggleViewCell {
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 SCSettingsManager.instance.enableNightMode(enabled)
 
                 if SCSettingsManager.instance.isNightModeEnabled() {
-                    self.view.backgroundColor = UIColor.blackColor()
+                    self.view.backgroundColor = UIColor.black
                 } else {
-                    self.view.backgroundColor = UIColor.whiteColor()
+                    self.view.backgroundColor = UIColor.white
                 }
 
                 self.setNeedsStatusBarAppearanceUpdate()

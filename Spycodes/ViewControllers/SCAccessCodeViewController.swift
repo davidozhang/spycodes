@@ -2,22 +2,22 @@ import MultipeerConnectivity
 import UIKit
 
 class SCAccessCodeViewController: SCViewController {
-    private let allowedCharactersSet = NSCharacterSet(
-        charactersInString: Room.accessCodeAllowedCharacters as String
+    fileprivate let allowedCharactersSet = CharacterSet(
+        charactersIn: Room.accessCodeAllowedCharacters as String
     )
-    private let defaultTimeoutInterval: NSTimeInterval = 10
-    private let shortTimeoutInterval: NSTimeInterval = 3
+    fileprivate let defaultTimeoutInterval: TimeInterval = 10
+    fileprivate let shortTimeoutInterval: TimeInterval = 3
 
-    private let firstTag = 0
-    private let lastTag = 3
+    fileprivate let firstTag = 0
+    fileprivate let lastTag = 3
 
-    private var timeoutTimer: NSTimer?
-    private var refreshTimer: NSTimer?
+    fileprivate var timeoutTimer: Foundation.Timer?
+    fileprivate var refreshTimer: Foundation.Timer?
 
-    private var lastTextFieldWasFilled = false
-    private var keyboardDidShow = false
+    fileprivate var lastTextFieldWasFilled = false
+    fileprivate var keyboardDidShow = false
 
-    private var accessCodeCharacters = NSMutableArray(
+    fileprivate var accessCodeCharacters = NSMutableArray(
         capacity: SCConstants.accessCodeLength
     )
 
@@ -29,20 +29,20 @@ class SCAccessCodeViewController: SCViewController {
     @IBOutlet weak var statusLabelTopMarginConstraint: NSLayoutConstraint!
 
     // MARK: Actions
-    @IBAction func unwindToAccessCode(sender: UIStoryboardSegue) {
+    @IBAction func unwindToAccessCode(_ sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
     }
 
-    @IBAction func onBrowseLobbyTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("lobby-room", sender: self)
+    @IBAction func onBrowseLobbyTapped(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "lobby-room", sender: self)
     }
 
-    @IBAction func onBackButtonTapped(sender: AnyObject) {
+    @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         super.performUnwindSegue(false, completionHandler: nil)
     }
 
     deinit {
-        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
 
     // MARK: Lifecycle
@@ -52,7 +52,7 @@ class SCAccessCodeViewController: SCViewController {
         self.restoreStatus()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         // Unwindable view controller identifier
@@ -67,7 +67,7 @@ class SCAccessCodeViewController: SCViewController {
                 textField.addTarget(
                     self,
                     action: #selector(SCAccessCodeViewController.textFieldDidChange),
-                    forControlEvents: .EditingChanged
+                    for: .editingChanged
                 )
 
                 // Tags are assigned in the Storyboard
@@ -78,7 +78,7 @@ class SCAccessCodeViewController: SCViewController {
         }
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         self.refreshTimer?.invalidate()
@@ -90,11 +90,11 @@ class SCAccessCodeViewController: SCViewController {
                 textField.removeTarget(
                     self,
                     action: #selector(SCAccessCodeViewController.textFieldDidChange),
-                    forControlEvents: .EditingChanged
+                    for: .editingChanged
                 )
                 textField.text = nil
 
-                if textField.isFirstResponder() {
+                if textField.isFirstResponder {
                     textField.resignFirstResponder()
                 }
             }
@@ -106,21 +106,21 @@ class SCAccessCodeViewController: SCViewController {
     }
 
     // MARK: Segue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super._prepareForSegue(segue, sender: sender)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super._prepareForSegue(segue, sender: sender as AnyObject)
     }
 
     // MARK: Keyboard
-    override func keyboardWillShow(notification: NSNotification) {
+    override func keyboardWillShow(_ notification: Notification) {
         if self.keyboardDidShow {
             return
         }
 
         if let userInfo = notification.userInfo,
-               frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+           let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             self.keyboardDidShow = true
 
-            let rect = frame.CGRectValue()
+            let rect = frame.cgRectValue
             let headerTopMargin = self.headerTopMarginConstraint.constant
             let statusLabelTopMargin = self.statusLabelTopMarginConstraint.constant
             self.contentViewVerticalCenterConstraint.constant = -(
@@ -129,7 +129,7 @@ class SCAccessCodeViewController: SCViewController {
         }
     }
 
-    override func keyboardWillHide(notification: NSNotification) {
+    override func keyboardWillHide(_ notification: Notification) {
         self.keyboardDidShow = false
 
         self.contentViewVerticalCenterConstraint.constant = 0
@@ -137,14 +137,14 @@ class SCAccessCodeViewController: SCViewController {
 
     // MARK: Private
     @objc
-    private func onTimeout() {
+    fileprivate func onTimeout() {
         self.timeoutTimer?.invalidate()
         SCMultipeerManager.instance.stopAdvertiser()
 
         self.statusLabel.text = SCStrings.failStatus
-        self.browseLobbyButton.hidden = false
-        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(
-            self.shortTimeoutInterval,
+        self.browseLobbyButton.isHidden = false
+        self.timeoutTimer = Foundation.Timer.scheduledTimer(
+            timeInterval: self.shortTimeoutInterval,
             target: self,
             selector: #selector(SCAccessCodeViewController.restoreStatus),
             userInfo: nil,
@@ -153,7 +153,7 @@ class SCAccessCodeViewController: SCViewController {
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? SCSingleCharacterTextField {
-                textField.enabled = true
+                textField.isEnabled = true
                 textField.textColor = UIColor.spycodesGrayColor()
 
                 if textField.tag == self.lastTag {
@@ -164,19 +164,19 @@ class SCAccessCodeViewController: SCViewController {
     }
 
     @objc
-    private func restoreStatus() {
+    fileprivate func restoreStatus() {
         self.statusLabel.text = SCStrings.normalAccessCodeStatus
     }
 
     @objc
-    private func textFieldDidChange(textField: UITextField) {
+    fileprivate func textFieldDidChange(_ textField: UITextField) {
         let currentTag = textField.tag
 
-        if let character = textField.text where character.characters.count == 1 {
+        if let character = textField.text, character.characters.count == 1 {
             self.accessCodeCharacters[currentTag] = character
 
             if currentTag == self.lastTag {
-                let accessCode = self.accessCodeCharacters.componentsJoinedByString("")
+                let accessCode = self.accessCodeCharacters.componentsJoined(by: "")
                 self.joinRoomWithAccessCode(accessCode)
                 return
             }
@@ -188,7 +188,7 @@ class SCAccessCodeViewController: SCViewController {
         }
     }
 
-    private func joinRoomWithAccessCode(accessCode: String) {
+    fileprivate func joinRoomWithAccessCode(_ accessCode: String) {
         // Start advertising to allow host room to invite into session
         guard let name = Player.instance.name else { return }
         SCMultipeerManager.instance.initPeerID(name)
@@ -200,20 +200,20 @@ class SCAccessCodeViewController: SCViewController {
 
         self.timeoutTimer?.invalidate()
 
-        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(
-            self.defaultTimeoutInterval,
+        self.timeoutTimer = Foundation.Timer.scheduledTimer(
+            timeInterval: self.defaultTimeoutInterval,
             target: self,
             selector: #selector(SCAccessCodeViewController.onTimeout),
             userInfo: nil,
             repeats: false
         )
         self.statusLabel.text = SCStrings.pendingStatus
-        self.browseLobbyButton.hidden = true
+        self.browseLobbyButton.isHidden = true
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? UITextField {
-                textField.enabled = false
-                textField.textColor = UIColor.lightGrayColor()
+                textField.isEnabled = false
+                textField.textColor = UIColor.lightGray
 
                 if textField.tag == self.lastTag {
                     textField.resignFirstResponder()
@@ -231,32 +231,32 @@ class SCAccessCodeViewController: SCViewController {
 
 // MARK: SCMultipeerManagerDelegate
 extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
-    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID) {
+    func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
         // Navigate to pregame room only when preliminary sync data from host is received
-        if let room = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Room {
+        if let room = NSKeyedUnarchiver.unarchiveObject(with: data) as? Room {
             Room.instance = room
 
             // Inform the room host of local player info
-            let data = NSKeyedArchiver.archivedDataWithRootObject(Player.instance)
+            let data = NSKeyedArchiver.archivedData(withRootObject: Player.instance)
             SCMultipeerManager.instance.broadcastData(data)
 
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.restoreStatus()
-                self.performSegueWithIdentifier("pregame-room", sender: self)
+                self.performSegue(withIdentifier: "pregame-room", sender: self)
             })
         }
     }
 
-    func peerDisconnectedFromSession(peerID: MCPeerID) {}
+    func peerDisconnectedFromSession(_ peerID: MCPeerID) {}
 
-    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {}
+    func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {}
 
-    func lostPeer(peerID: MCPeerID) {}
+    func lostPeer(_ peerID: MCPeerID) {}
 }
 
 // MARK: SCSingleCharacterTextFieldBackspaceDelegate
 extension SCAccessCodeViewController: SCSingleCharacterTextFieldBackspaceDelegate {
-    func onBackspaceDetected(textField: UITextField) {
+    func onBackspaceDetected(_ textField: UITextField) {
         let currentTag = textField.tag
 
         // If currently on last text field and it was filled, do not advance cursor to previous text field
@@ -279,12 +279,12 @@ extension SCAccessCodeViewController: SCSingleCharacterTextFieldBackspaceDelegat
 
 // MARK: UITextFieldDelegate
 extension SCAccessCodeViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let currentTag = textField.tag
 
         // Allow return key if cursor is on last text field and it is filled
         if currentTag == self.lastTag && textField.text?.characters.count == 1 {
-            let accessCode = self.accessCodeCharacters.componentsJoinedByString("")
+            let accessCode = self.accessCodeCharacters.componentsJoined(by: "")
             self.joinRoomWithAccessCode(accessCode)
 
             return true
@@ -293,11 +293,11 @@ extension SCAccessCodeViewController: UITextFieldDelegate {
         return false
     }
 
-    func textField(textField: UITextField,
-                   shouldChangeCharactersInRange range: NSRange,
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         // Disallow all special characters
-        if string.rangeOfCharacterFromSet(self.allowedCharactersSet.invertedSet) != nil {
+        if string.rangeOfCharacter(from: self.allowedCharactersSet.inverted) != nil {
             return false
         }
 

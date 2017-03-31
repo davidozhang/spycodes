@@ -11,14 +11,14 @@ class Lobby {
     }
 
     // MARK: Public
-    func addRoomWithNameAndUUID(name: String, uuid: String) {
+    func addRoomWithNameAndUUID(_ name: String, uuid: String) {
         let room = Room()
         room.name = name
         room.setUUID(uuid)
         self.rooms.append(room)
     }
 
-    func getRoomWithUUID(uuid: String) -> Room? {
+    func getRoomWithUUID(_ uuid: String) -> Room? {
         let filtered = self.rooms.filter({($0 as Room).getUUID() == uuid})
         if filtered.count == 1 {
             return filtered[0]
@@ -27,11 +27,11 @@ class Lobby {
         }
     }
 
-    func hasRoomWithUUID(uuid: String) -> Bool {
+    func hasRoomWithUUID(_ uuid: String) -> Bool {
         return self.getRoomWithUUID(uuid) != nil
     }
 
-    func removeRoomWithUUID(uuid: String) {
+    func removeRoomWithUUID(_ uuid: String) {
         self.rooms = self.rooms.filter({($0 as Room).getUUID() != uuid})
     }
 

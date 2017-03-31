@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SCLobbyRoomViewCellDelegate: class {
-    func joinRoomWithUUID(uuid: String)
+    func joinRoomWithUUID(_ uuid: String)
 }
 
 class SCLobbyRoomViewCell: SCTableViewCell {
@@ -16,10 +16,10 @@ class SCLobbyRoomViewCell: SCTableViewCell {
 
         self.roomNameLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
         self.joinRoomButton.titleLabel?.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Other)
-        self.joinRoomButton.setTitleColor(UIColor.spycodesGrayColor(), forState: .Normal)
+        self.joinRoomButton.setTitleColor(UIColor.spycodesGrayColor(), for: UIControlState())
     }
 
-    @IBAction func onJoin(sender: AnyObject) {
+    @IBAction func onJoin(_ sender: AnyObject) {
         if let roomUUID = self.roomUUID {
             delegate?.joinRoomWithUUID(roomUUID)
         }

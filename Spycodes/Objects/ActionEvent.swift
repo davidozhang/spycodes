@@ -2,11 +2,11 @@ import Foundation
 
 class ActionEvent: NSObject, NSCoding {
     enum EventType: Int {
-        case EndRound = 0
-        case Confirm = 1
+        case endRound = 0
+        case confirm = 1
     }
 
-    private var type: EventType?
+    fileprivate var type: EventType?
 
     // MARK: Constructor/Destructor
     convenience init(type: EventType) {
@@ -15,13 +15,13 @@ class ActionEvent: NSObject, NSCoding {
     }
 
     // MARK: Coder
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.type?.rawValue, forKey: SCCodingConstants.actionEventType)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.type?.rawValue, forKey: SCCodingConstants.actionEventType)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        if let eventType = aDecoder.decodeObjectForKey(SCCodingConstants.actionEventType) as? Int {
+        if let eventType = aDecoder.decodeObject(forKey: SCCodingConstants.actionEventType) as? Int {
             self.type = EventType(rawValue: eventType)
         }
     }

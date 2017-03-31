@@ -2,8 +2,8 @@ import Foundation
 
 class Statistics: NSObject, NSCoding {
     static var instance = Statistics()
-    private var bestRecord: Int?        // For minigame
-    private var statistics = [Team.Red: 0, Team.Blue: 0]        // For regular game
+    fileprivate var bestRecord: Int?        // For minigame
+    fileprivate var statistics = [Team.red: 0, Team.blue: 0]        // For regular game
 
     // MARK: Constructor/Destructor
     deinit {
@@ -11,27 +11,27 @@ class Statistics: NSObject, NSCoding {
     }
 
     // MARK: Coder
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.statistics[Team.Red], forKey: SCCodingConstants.red)
-        aCoder.encodeObject(self.statistics[Team.Blue], forKey: SCCodingConstants.blue)
-        aCoder.encodeObject(self.bestRecord, forKey: SCCodingConstants.bestRecord)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.statistics[Team.red], forKey: SCCodingConstants.red)
+        aCoder.encode(self.statistics[Team.blue], forKey: SCCodingConstants.blue)
+        aCoder.encode(self.bestRecord, forKey: SCCodingConstants.bestRecord)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
 
-        if let red = aDecoder.decodeObjectForKey(SCCodingConstants.red) as? Int,
-               blue = aDecoder.decodeObjectForKey(SCCodingConstants.blue) as? Int {
-            self.statistics = [Team.Red: red, Team.Blue: blue]
+        if let red = aDecoder.decodeObject(forKey: SCCodingConstants.red) as? Int,
+           let blue = aDecoder.decodeObject(forKey: SCCodingConstants.blue) as? Int {
+            self.statistics = [Team.red: red, Team.blue: blue]
         }
 
-        if let bestRecord = aDecoder.decodeObjectForKey(SCCodingConstants.bestRecord) as? Int {
+        if let bestRecord = aDecoder.decodeObject(forKey: SCCodingConstants.bestRecord) as? Int {
             self.bestRecord = bestRecord
         }
     }
 
     // MARK: Public
-    func recordWinForTeam(winningTeam: Team) {
+    func recordWinForTeam(_ winningTeam: Team) {
         self.statistics[winningTeam]! += 1
     }
 
@@ -43,16 +43,16 @@ class Statistics: NSObject, NSCoding {
         return self.bestRecord
     }
 
-    func setBestRecord(record: Int) {
+    func setBestRecord(_ record: Int) {
         if self.bestRecord == nil {
             self.bestRecord = record
-        } else if record > bestRecord {
+        } else if let bestRecord = bestRecord, record > bestRecord {
             self.bestRecord = record
         }
     }
 
     func reset() {
-        self.statistics = [Team.Red: 0, Team.Blue: 0]
+        self.statistics = [Team.red: 0, Team.blue: 0]
         self.bestRecord = nil
     }
 }

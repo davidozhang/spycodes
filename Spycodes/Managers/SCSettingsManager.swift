@@ -3,9 +3,9 @@ import Foundation
 class SCSettingsManager {
     static let instance = SCSettingsManager()
 
-    private var nightMode = false
+    fileprivate var nightMode = false
 
-    func enableNightMode(enabled: Bool) {
+    func enableNightMode(_ enabled: Bool) {
         self.nightMode = enabled
         self.save()
     }
@@ -15,16 +15,16 @@ class SCSettingsManager {
     }
 
     func save() {
-        NSUserDefaults.standardUserDefaults().setBool(
+        UserDefaults.standard.set(
             self.nightMode,
             forKey: SCUserDefaultsConstants.nightMode
         )
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
     }
 
     func retrieve() {
-        let storedNightMode = NSUserDefaults.standardUserDefaults().boolForKey(
-            SCUserDefaultsConstants.nightMode
+        let storedNightMode = UserDefaults.standard.bool(
+            forKey: SCUserDefaultsConstants.nightMode
         )
 
         self.nightMode = storedNightMode

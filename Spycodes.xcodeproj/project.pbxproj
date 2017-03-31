@@ -209,7 +209,6 @@
 				637FF0091E0F0B620076DC25 /* SCAccessCodeViewController.swift */,
 				637310CA1D3B292F00EA5D7A /* SCGameRoomViewController.swift */,
 				636DC0CD1E67D90800DE5EC6 /* SCHelpViewController.swift */,
-				63AB64CC1D4880A600C4FF22 /* SCSettingsViewController.swift */,
 				63FDED401D265F6D00142780 /* SCLobbyRoomViewController.swift */,
 				63A04D1E1D1A7F3E005A2914 /* SCMainMenuViewController.swift */,
 				63FDED311D2648D600142780 /* SCPlayerNameViewController.swift */,
@@ -217,6 +216,7 @@
 				63FDED3A1D265BAF00142780 /* SCPregameRoomViewController.swift */,
 				632A254A1E46FD330003D1F8 /* SCPregameSettingsViewController.swift */,
 				632A25461E46F0DC0003D1F8 /* SCScoreViewController.swift */,
+				63AB64CC1D4880A600C4FF22 /* SCSettingsViewController.swift */,
 				630883691E80FBD9006D2428 /* SCUpdateAppViewController.swift */,
 				6329BEFC1E512ADF004E6151 /* SCViewController.swift */,
 			);
@@ -337,7 +337,7 @@
 					63A04CFF1D1A5713005A2914 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 3A8NZ732A3;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -552,7 +552,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidzhang.Spycodes;
 				PRODUCT_NAME = Spycodes;
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -568,7 +568,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidzhang.Spycodes;
 				PRODUCT_NAME = Spycodes;
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

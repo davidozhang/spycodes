@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SCPregameRoomViewCellDelegate: class {
-    func teamUpdatedAtIndex(index: Int, newTeam: Team)
+    func teamUpdatedAtIndex(_ index: Int, newTeam: Team)
 }
 
 class SCPregameRoomViewCell: SCTableViewCell {
@@ -19,7 +19,7 @@ class SCPregameRoomViewCell: SCTableViewCell {
         self.segmentedControl.tintColor = UIColor.spycodesGrayColor()
     }
 
-    @IBAction func segmentedControlToggled(sender: UISegmentedControl) {
+    @IBAction func segmentedControlToggled(_ sender: UISegmentedControl) {
         if let index = self.index {
             delegate?.teamUpdatedAtIndex(
                 index,

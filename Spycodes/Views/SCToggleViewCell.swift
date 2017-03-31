@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SCToggleViewCellDelegate: class {
-    func onToggleChanged(cell: SCToggleViewCell, enabled: Bool)
+    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool)
 }
 
 class SCToggleViewCell: SCTableViewCell {
@@ -19,17 +19,17 @@ class SCToggleViewCell: SCTableViewCell {
         toggleSwitch.addTarget(
             self,
             action: #selector(SCToggleViewCell.onToggleChanged(_:)),
-            forControlEvents: .ValueChanged
+            for: .valueChanged
         )
 
         if let reuseIdentifier = self.reuseIdentifier {
             switch reuseIdentifier {
             case SCCellReuseIdentifiers.nightModeToggleViewCell:
-                toggleSwitch.on = SCSettingsManager.instance.isNightModeEnabled()
+                toggleSwitch.isOn = SCSettingsManager.instance.isNightModeEnabled()
             case SCCellReuseIdentifiers.minigameToggleViewCell:
-                toggleSwitch.on = GameMode.instance.mode == GameMode.Mode.MiniGame
+                toggleSwitch.isOn = GameMode.instance.mode == GameMode.Mode.miniGame
             case SCCellReuseIdentifiers.timerToggleViewCell:
-                toggleSwitch.on = Timer.instance.isEnabled()
+                toggleSwitch.isOn = Timer.instance.isEnabled()
             default:
                 break
             }
@@ -42,14 +42,14 @@ class SCToggleViewCell: SCTableViewCell {
         self.toggleSwitch.removeTarget(
             self,
             action: #selector(SCToggleViewCell.onToggleChanged(_:)),
-            forControlEvents: .ValueChanged
+            for: .valueChanged
         )
         self.delegate = nil
     }
 
     @objc
-    private func onToggleChanged(toggleSwitch: UISwitch) {
-        let enabled = toggleSwitch.on
+    fileprivate func onToggleChanged(_ toggleSwitch: UISwitch) {
+        let enabled = toggleSwitch.isOn
         delegate?.onToggleChanged(self, enabled: enabled)
     }
 }

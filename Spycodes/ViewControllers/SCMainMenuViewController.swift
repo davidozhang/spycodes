@@ -1,32 +1,32 @@
 import UIKit
 
 class SCMainMenuViewController: SCViewController {
-    private var timer: NSTimer?
+    fileprivate var timer: Foundation.Timer?
 
     @IBOutlet weak var nightModeButton: UIButton!
     @IBOutlet weak var linkCopiedLabel: SCStatusLabel!
 
     // MARK: Actions
-    @IBAction func unwindToMainMenu(sender: UIStoryboardSegue) {
+    @IBAction func unwindToMainMenu(_ sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
     }
 
-    @IBAction func onShareTapped(sender: AnyObject) {
-        UIPasteboard.generalPasteboard().string = SCConstants.appStoreWebURL
-        self.linkCopiedLabel.hidden = false
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(SCMainMenuViewController.onTimeout), userInfo: nil, repeats: false)
+    @IBAction func onShareTapped(_ sender: AnyObject) {
+        UIPasteboard.general.string = SCConstants.appStoreWebURL
+        self.linkCopiedLabel.isHidden = false
+        self.timer = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(SCMainMenuViewController.onTimeout), userInfo: nil, repeats: false)
     }
 
-    @IBAction func onNightModeButtonTapped(sender: AnyObject) {
+    @IBAction func onNightModeButtonTapped(_ sender: AnyObject) {
         let oldSetting = SCSettingsManager.instance
             .isNightModeEnabled()
         SCSettingsManager.instance.enableNightMode(!oldSetting)
 
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             if SCSettingsManager.instance.isNightModeEnabled() {
-                self.view.backgroundColor = UIColor.blackColor()
+                self.view.backgroundColor = UIColor.black
             } else {
-                self.view.backgroundColor = UIColor.whiteColor()
+                self.view.backgroundColor = UIColor.white
             }
 
             self.updateNightModeButton()
@@ -34,21 +34,21 @@ class SCMainMenuViewController: SCViewController {
         }
     }
 
-    @IBAction func onCreateGame(sender: AnyObject) {
+    @IBAction func onCreateGame(_ sender: AnyObject) {
         Player.instance.setIsHost(true)
-        self.performSegueWithIdentifier("player-name", sender: self)
+        self.performSegue(withIdentifier: "player-name", sender: self)
     }
 
-    @IBAction func onJoinGame(sender: AnyObject) {
-        self.performSegueWithIdentifier("player-name", sender: self)
+    @IBAction func onJoinGame(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "player-name", sender: self)
     }
 
-    @IBAction func onSettingsTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("settings", sender: self)
+    @IBAction func onSettingsTapped(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "settings", sender: self)
     }
 
     deinit {
-        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
 
     // MARK: Lifecycle
@@ -57,17 +57,17 @@ class SCMainMenuViewController: SCViewController {
 
         SCVersionManager.checkLatestAppVersion({
             // If app is not on latest app version
-            self.performSegueWithIdentifier("update-app", sender: self)
+            self.performSegue(withIdentifier: "update-app", sender: self)
         })
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         // Currently this view is the root view controller for unwinding logic
         self.unwindableIdentifier = "main-menu"
         self.isRootViewController = true
 
-        self.linkCopiedLabel.hidden = true
+        self.linkCopiedLabel.isHidden = true
 
         self.updateNightModeButton()
 
@@ -78,7 +78,7 @@ class SCMainMenuViewController: SCViewController {
         Room.instance.reset()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         self.timer?.invalidate()
@@ -88,17 +88,17 @@ class SCMainMenuViewController: SCViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super._prepareForSegue(segue, sender: sender)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super._prepareForSegue(segue, sender: sender as AnyObject)
     }
 
     // MARK: Private
     @objc
-    private func onTimeout() {
-        self.linkCopiedLabel.hidden = true
+    fileprivate func onTimeout() {
+        self.linkCopiedLabel.isHidden = true
     }
 
-    private func updateNightModeButton() {
+    fileprivate func updateNightModeButton() {
         if SCSettingsManager.instance
             .isNightModeEnabled() {
             // Night Mode Enabled

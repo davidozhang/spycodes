@@ -1,22 +1,22 @@
 import UIKit
 
 class SCHelpViewController: SCPopoverViewController {
-    private static let maxIndex = 6
-    private static let sharedLeaderStringSequence = [
+    fileprivate static let maxIndex = 6
+    fileprivate static let sharedLeaderStringSequence = [
         SCStrings.leaderGoal,
         SCStrings.leaderEnterClue,
         SCStrings.leaderConfirm,
         SCStrings.leaderGuess
     ]
 
-    private static let sharedPlayerStringSequence = [
+    fileprivate static let sharedPlayerStringSequence = [
         SCStrings.playerGoal,
         SCStrings.playerWait,
         SCStrings.playerClue,
         SCStrings.playerGuess
     ]
 
-    private static let leaderHeaders = [
+    fileprivate static let leaderHeaders = [
         SCStrings.introHeader,
         SCStrings.goalHeader,
         SCStrings.enterClueHeader,
@@ -26,7 +26,7 @@ class SCHelpViewController: SCPopoverViewController {
         SCStrings.endingHeader
     ]
 
-    private static let playerHeaders = [
+    fileprivate static let playerHeaders = [
         SCStrings.introHeader,
         SCStrings.goalHeader,
         SCStrings.waitForClueHeader,
@@ -36,8 +36,8 @@ class SCHelpViewController: SCPopoverViewController {
         SCStrings.endingHeader
     ]
 
-    private var stringSequence = [String]()
-    private var currentIndex = 0
+    fileprivate var stringSequence = [String]()
+    fileprivate var currentIndex = 0
 
     @IBOutlet weak var headerLabel: SCNavigationBarLabel!
     @IBOutlet weak var descriptionLabel: SCHelpDescriptionLabel!
@@ -46,38 +46,38 @@ class SCHelpViewController: SCPopoverViewController {
     @IBOutlet weak var rightButton: UIButton!
 
     // MARK: Actions
-    @IBAction func onLeftTapped(sender: AnyObject) {
+    @IBAction func onLeftTapped(_ sender: AnyObject) {
         self.currentIndex -= 1
         self.reloadView()
     }
 
-    @IBAction func onRightTapped(sender: AnyObject) {
+    @IBAction func onRightTapped(_ sender: AnyObject) {
         self.currentIndex += 1
         self.reloadView()
     }
 
-    @IBAction func onExitTapped(sender: AnyObject) {
+    @IBAction func onExitTapped(_ sender: AnyObject) {
         super.onExitTapped()
     }
 
     deinit {
-        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
 
     // MARK: Lifecycle
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         self.headerLabel.text = "Quick Guide"
         self.stringSequence = generateStringSequence()
-        self.leftButton.hidden = true
+        self.leftButton.isHidden = true
         self.reloadView()
     }
 
     // MARK: Private
-    private func generateStringSequence() -> [String] {
+    fileprivate func generateStringSequence() -> [String] {
         var result = [String]()
-        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+        if GameMode.instance.mode == GameMode.Mode.miniGame {
             result += [SCStrings.minigameIntro]
 
             if Player.instance.isClueGiver() {
@@ -104,18 +104,18 @@ class SCHelpViewController: SCPopoverViewController {
         return result
     }
 
-    private func reloadView() {
-        dispatch_async(dispatch_get_main_queue()) {
+    fileprivate func reloadView() {
+        DispatchQueue.main.async {
             if self.currentIndex == 0 {
-                self.leftButton.hidden = true
+                self.leftButton.isHidden = true
             } else {
-                self.leftButton.hidden = false
+                self.leftButton.isHidden = false
             }
 
             if self.currentIndex == SCHelpViewController.maxIndex {
-                self.rightButton.hidden = true
+                self.rightButton.isHidden = true
             } else {
-                self.rightButton.hidden = false
+                self.rightButton.isHidden = false
             }
 
             if Player.instance.isClueGiver() {

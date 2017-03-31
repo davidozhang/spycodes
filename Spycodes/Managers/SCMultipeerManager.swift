@@ -1,30 +1,30 @@
 import MultipeerConnectivity
 
 protocol SCMultipeerManagerDelegate: class {
-    func foundPeer(peerID: MCPeerID, withDiscoveryInfo info: [String: String]?)
-    func lostPeer(peerID: MCPeerID)
-    func didReceiveData(data: NSData, fromPeer peerID: MCPeerID)
-    func peerDisconnectedFromSession(peerID: MCPeerID)
+    func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String: String]?)
+    func lostPeer(_ peerID: MCPeerID)
+    func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID)
+    func peerDisconnectedFromSession(_ peerID: MCPeerID)
 }
 
 class SCMultipeerManager: NSObject {
     static let instance = SCMultipeerManager()
     weak var delegate: SCMultipeerManagerDelegate?
 
-    private let serviceType = "Spycodes"
-    private var discoveryInfo: [String: String]?
+    fileprivate let serviceType = "Spycodes"
+    fileprivate var discoveryInfo: [String: String]?
 
-    private var peerID: MCPeerID?
-    private var advertiser: MCNearbyServiceAdvertiser?
-    private var browser: MCNearbyServiceBrowser?
-    private var session: MCSession?
+    fileprivate var peerID: MCPeerID?
+    fileprivate var advertiser: MCNearbyServiceAdvertiser?
+    fileprivate var browser: MCNearbyServiceBrowser?
+    fileprivate var session: MCSession?
 
     // Status Variables
     var advertiserOn = false
     var browserOn = false
 
     // MARK: Public
-    func initPeerID(displayName: String) {
+    func initPeerID(_ displayName: String) {
         self.peerID = MCPeerID.init(displayName: displayName)
     }
 
@@ -32,7 +32,7 @@ class SCMultipeerManager: NSObject {
         return self.peerID
     }
 
-    func initDiscoveryInfo(info: [String: String]) {
+    func initDiscoveryInfo(_ info: [String: String]) {
         self.discoveryInfo = info
     }
 
@@ -88,22 +88,22 @@ class SCMultipeerManager: NSObject {
         self.advertiserOn = false
     }
 
-    func invitePeerToSession(peerID: MCPeerID) {
+    func invitePeerToSession(_ peerID: MCPeerID) {
         self.browser?.invitePeer(
             peerID,
-            toSession: self.session!,
+            to: self.session!,
             withContext: nil,
             timeout: 30
         )
     }
 
-    func broadcastData(data: NSData) {
+    func broadcastData(_ data: Data) {
         do {
-            if let connectedPeers = self.session?.connectedPeers where connectedPeers.count > 0 {
-                try self.session?.sendData(
+            if let connectedPeers = self.session?.connectedPeers, connectedPeers.count > 0 {
+                try self.session?.send(
                     data,
                     toPeers: connectedPeers,
-                    withMode: MCSessionSendDataMode.Reliable
+                    with: MCSessionSendDataMode.reliable
                 )
             }
         } catch {}
@@ -118,23 +118,23 @@ class SCMultipeerManager: NSObject {
 
 // MARK: MCNearbyServiceAdvertiserDelegate
 extension SCMultipeerManager: MCNearbyServiceAdvertiserDelegate {
-    func advertiser(advertiser: MCNearbyServiceAdvertiser,
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
                     didReceiveInvitationFromPeer peerID: MCPeerID,
-                    withContext context: NSData?,
-                    invitationHandler: (Bool, MCSession?) -> Void) {
+                    withContext context: Data?,
+                    invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         invitationHandler(true, self.session!)
     }
 }
 
 // MARK: MCNearbyServiceBrowserDelegate
 extension SCMultipeerManager: MCNearbyServiceBrowserDelegate {
-    func browser(browser: MCNearbyServiceBrowser,
+    func browser(_ browser: MCNearbyServiceBrowser,
                  foundPeer peerID: MCPeerID,
                  withDiscoveryInfo info: [String: String]?) {
         delegate?.foundPeer(peerID, withDiscoveryInfo: info)
     }
 
-    func browser(browser: MCNearbyServiceBrowser,
+    func browser(_ browser: MCNearbyServiceBrowser,
                  lostPeer peerID: MCPeerID) {
         delegate?.lostPeer(peerID)
     }
@@ -142,40 +142,40 @@ extension SCMultipeerManager: MCNearbyServiceBrowserDelegate {
 
 // MARK: MCSessionDelegate
 extension SCMultipeerManager: MCSessionDelegate {
-    func session(session: MCSession,
-                 didReceiveData data: NSData,
+    func session(_ session: MCSession,
+                 didReceive data: Data,
                  fromPeer peerID: MCPeerID) {
         delegate?.didReceiveData(data, fromPeer: peerID)
     }
 
-    func session(session: MCSession,
+    func session(_ session: MCSession,
                  didStartReceivingResourceWithName resourceName: String,
                  fromPeer peerID: MCPeerID,
-                 withProgress progress: NSProgress) {}
+                 with progress: Progress) {}
 
-    func session(session: MCSession,
+    func session(_ session: MCSession,
                  didFinishReceivingResourceWithName resourceName: String,
                  fromPeer peerID: MCPeerID,
-                 atURL localURL: NSURL,
-                 withError error: NSError?) {}
+                 at localURL: URL,
+                 withError error: Error?) {}
 
-    func session(session: MCSession,
-                 didReceiveStream stream: NSInputStream,
+    func session(_ session: MCSession,
+                 didReceive stream: InputStream,
                  withName streamName: String,
                  fromPeer peerID: MCPeerID) {}
 
-    func session(session: MCSession,
+    func session(_ session: MCSession,
                  peer peerID: MCPeerID,
-                 didChangeState state: MCSessionState) {
-        if state == MCSessionState.NotConnected {
+                 didChange state: MCSessionState) {
+        if state == MCSessionState.notConnected {
             delegate?.peerDisconnectedFromSession(peerID)
         }
     }
 
-    func session(session: MCSession,
-                 didReceiveCertificate certificate: [AnyObject]?,
+    func session(_ session: MCSession,
+                 didReceiveCertificate certificate: [Any]?,
                  fromPeer peerID: MCPeerID,
-                 certificateHandler: (Bool) -> Void) {
+                 certificateHandler: @escaping (Bool) -> Void) {
         certificateHandler(true)
     }
 }
