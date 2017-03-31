@@ -68,7 +68,7 @@ class SCViewController: UIViewController {
     }
 
     // MARK: SCViewController-Only Functions
-    func _prepareForSegue(_ segue: UIStoryboardSegue, sender: AnyObject?) {
+    func _prepareForSegue(_ segue: UIStoryboardSegue, sender: Any?) {
         if unwindingSegue {
             return
         }

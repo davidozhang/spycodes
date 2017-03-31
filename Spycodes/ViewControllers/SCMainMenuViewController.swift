@@ -89,7 +89,7 @@ class SCMainMenuViewController: SCViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super._prepareForSegue(segue, sender: sender as AnyObject)
+        super._prepareForSegue(segue, sender: sender)
     }
 
     // MARK: Private
