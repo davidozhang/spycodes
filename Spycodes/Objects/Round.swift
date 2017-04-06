@@ -42,9 +42,13 @@ class Round: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
 
-        if let currentTeam = aDecoder.decodeObject(forKey: SCCodingConstants.team) as? Int {
-            self.currentTeam = Team(rawValue: currentTeam)
-        }
+        let currentTeam = aDecoder.decodeObject(
+            forKey: SCCodingConstants.team
+        ) as? Int ?? aDecoder.decodeInteger(
+            forKey: SCCodingConstants.team
+        )
+
+        self.currentTeam = Team(rawValue: currentTeam)
 
         if let clue = aDecoder.decodeObject(forKey: SCCodingConstants.clue) as? String {
             self.clue = clue
@@ -54,12 +58,25 @@ class Round: NSObject, NSCoding {
             self.numberOfWords = numberOfWords
         }
 
-        if let winningTeam = aDecoder.decodeObject(forKey: SCCodingConstants.winningTeam) as? Int {
-            self.winningTeam = Team(rawValue: winningTeam)
-        }
+        let winningTeam = aDecoder.decodeObject(
+            forKey: SCCodingConstants.winningTeam
+        ) as? Int ?? aDecoder.decodeInteger(
+            forKey: SCCodingConstants.winningTeam
+        )
 
-        self.abort = aDecoder.decodeBool(forKey: SCCodingConstants.abort)
-        self.gameEnded = aDecoder.decodeBool(forKey: SCCodingConstants.gameEnded)
+        self.winningTeam = Team(rawValue: winningTeam)
+
+        self.abort = aDecoder.decodeObject(
+            forKey: SCCodingConstants.abort
+        ) as? Bool ?? aDecoder.decodeBool(
+            forKey: SCCodingConstants.abort
+        )
+
+        self.gameEnded = aDecoder.decodeObject(
+            forKey: SCCodingConstants.gameEnded
+        ) as? Bool ?? aDecoder.decodeBool(
+            forKey: SCCodingConstants.gameEnded
+        )
     }
 
     // MARK: Public

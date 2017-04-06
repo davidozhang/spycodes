@@ -23,14 +23,27 @@ class Statistics: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
 
-        if let red = aDecoder.decodeObject(forKey: SCCodingConstants.red) as? Int,
-           let blue = aDecoder.decodeObject(forKey: SCCodingConstants.blue) as? Int {
-            self.statistics = [Team.red: red, Team.blue: blue]
-        }
+        let red = aDecoder.decodeObject(
+            forKey: SCCodingConstants.red
+        ) as? Int ?? aDecoder.decodeInteger(
+            forKey: SCCodingConstants.red
+        )
 
-        if let bestRecord = aDecoder.decodeObject(forKey: SCCodingConstants.bestRecord) as? Int {
-            self.bestRecord = bestRecord
-        }
+        let blue = aDecoder.decodeObject(
+            forKey: SCCodingConstants.blue
+        ) as? Int ?? aDecoder.decodeInteger(
+            forKey: SCCodingConstants.blue
+        )
+
+        self.statistics = [Team.red: red, Team.blue: blue]
+
+        let bestRecord = aDecoder.decodeObject(
+            forKey: SCCodingConstants.bestRecord
+        ) as? Int ?? aDecoder.decodeInteger(
+            forKey: SCCodingConstants.bestRecord
+        )
+
+        self.bestRecord = bestRecord
     }
 
     // MARK: Public

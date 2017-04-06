@@ -36,9 +36,19 @@ class Card: NSObject {
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        if let word = aDecoder.decodeObject(forKey: SCCodingConstants.word) as? String,
-           let team = aDecoder.decodeObject(forKey: SCCodingConstants.team) as? Int {
-            let selected = aDecoder.decodeBool(forKey: SCCodingConstants.selected)
+        if let word = aDecoder.decodeObject(forKey: SCCodingConstants.word) as? String {
+            let team = aDecoder.decodeObject(
+                forKey: SCCodingConstants.team
+            ) as? Int ?? aDecoder.decodeInteger(
+                forKey: SCCodingConstants.team
+            )
+
+            let selected = aDecoder.decodeObject(
+                forKey: SCCodingConstants.selected
+            ) as? Bool ?? aDecoder.decodeBool(
+                forKey: SCCodingConstants.selected
+            )
+
             self.init(word: word, selected: selected, team: team)
         } else {
             self.init()
