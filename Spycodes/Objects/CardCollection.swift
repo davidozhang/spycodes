@@ -20,7 +20,7 @@ class CardCollection: NSObject, NSCoding {
             self.key = self.keyObject.getKey()
             self.startingTeam = self.keyObject.getStartingTeam()
         }
-        for i in 0..<SCConstants.cardCount {
+        for i in 0..<SCConstants.constant.cardCount.rawValue {
             self.cards.append(
                 Card(word: words[i], selected: false, team: self.key[i])
             )
@@ -39,12 +39,12 @@ class CardCollection: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.cards, forKey: SCCodingConstants.cards)
+        aCoder.encode(self.cards, forKey: SCConstants.coding.cards.rawValue)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         if let cards = aDecoder.decodeObject(
-            forKey: SCCodingConstants.cards
+            forKey: SCConstants.coding.cards.rawValue
         ) as? [Card] {
             self.init(cards: cards)
         } else {
@@ -67,31 +67,9 @@ class CardCollection: NSObject, NSCoding {
         opponentRemainingCards = opponentRemainingCards.shuffled
         if opponentRemainingCards.count > 0 {
             let eliminatedCard = opponentRemainingCards[0]
-            for i in 0..<SCConstants.cardCount {
+            for i in 0..<SCConstants.constant.cardCount.rawValue {
                 if self.cards[i].getWord() == eliminatedCard.getWord() {
                     self.cards[i].setSelected()
-                    return
-                }
-            }
-        }
-    }
-
-    // Convert Bystander card to Team Card (Currently disabled)
-    func autoConvertNeutralCardToTeamCard() {
-        var neutralRemainingCards = self.cards.filter({
-            ($0 as Card).getTeam() == Team.neutral && !($0 as Card).isSelected()
-        })
-        neutralRemainingCards = neutralRemainingCards.shuffled
-        if neutralRemainingCards.count > 0 {
-            let convertedCard = neutralRemainingCards[0]
-            for i in 0..<SCConstants.cardCount {
-                if self.cards[i].getWord() == convertedCard.getWord() {
-                    self.cards[i].setTeam(Player.instance.team)
-                    NotificationCenter.default.post(
-                        name: Notification.Name(rawValue: SCNotificationKeys.autoConvertBystanderCardNotificationkey),
-                        object: self,
-                        userInfo: nil
-                    )
                     return
                 }
             }

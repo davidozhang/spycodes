@@ -12,7 +12,7 @@ class SCMainMenuViewController: SCViewController {
     }
 
     @IBAction func onShareTapped(_ sender: AnyObject) {
-        UIPasteboard.general.string = SCConstants.appStoreWebURL
+        UIPasteboard.general.string = SCConstants.url.appStoreWeb.rawValue
         self.linkCopiedLabel.isHidden = false
         self.timer = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(SCMainMenuViewController.onTimeout), userInfo: nil, repeats: false)
     }
@@ -55,7 +55,7 @@ class SCMainMenuViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        SCVersionManager.checkLatestAppVersion({
+        SCAppInfoManager.checkLatestAppVersion({
             // If app is not on latest app version
             self.performSegue(withIdentifier: "update-app", sender: self)
         })

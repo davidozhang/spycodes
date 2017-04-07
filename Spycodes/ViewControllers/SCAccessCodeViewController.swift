@@ -18,7 +18,7 @@ class SCAccessCodeViewController: SCViewController {
     fileprivate var keyboardDidShow = false
 
     fileprivate var accessCodeCharacters = NSMutableArray(
-        capacity: SCConstants.accessCodeLength
+        capacity: SCConstants.constant.accessCodeLength.rawValue
     )
 
     @IBOutlet weak var statusLabel: SCStatusLabel!

@@ -17,15 +17,15 @@ class ActionEvent: NSObject, NSCoding {
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
         if let type = self.type?.rawValue {
-            aCoder.encode(type, forKey: SCCodingConstants.actionEventType)
+            aCoder.encode(type, forKey: SCConstants.coding.actionEventType.rawValue)
         }
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        if aDecoder.containsValue(forKey: SCCodingConstants.actionEventType) {
+        if aDecoder.containsValue(forKey: SCConstants.coding.actionEventType.rawValue) {
             let type = aDecoder.decodeInteger(
-                forKey: SCCodingConstants.actionEventType
+                forKey: SCConstants.coding.actionEventType.rawValue
             )
 
             self.type = EventType(rawValue: type)

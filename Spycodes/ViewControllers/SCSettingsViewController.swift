@@ -65,7 +65,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionHeader = self.tableView.dequeueReusableCell(
-            withIdentifier: SCCellReuseIdentifiers.sectionHeaderCell
+            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
         ) as? SCSectionHeaderViewCell else {
             return nil
         }
@@ -93,7 +93,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0: // Customize
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCCellReuseIdentifiers.nightModeToggleViewCell
+                withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
             ) as? SCToggleViewCell else {
                 return UITableViewCell()
             }
@@ -104,7 +104,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case 1: // About
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCCellReuseIdentifiers.versionViewCell
+                withIdentifier: SCConstants.identifier.versionViewCell.rawValue
             ) as? SCVersionViewCell else {
                 return UITableViewCell()
             }
@@ -112,7 +112,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case 2: // More
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCCellReuseIdentifiers.disclosureViewCell
+                withIdentifier: SCConstants.identifier.disclosureViewCell.rawValue
             ) as? SCDisclosureViewCell else {
                 return UITableViewCell()
             }
@@ -133,23 +133,23 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case 2:
             switch indexPath.row {
             case 0:     // Support
-                if let supportURL = URL(string: SCConstants.supportURL) {
+                if let supportURL = URL(string: SCConstants.url.support.rawValue) {
                     UIApplication.shared.openURL(supportURL)
                 }
             case 1:     // Review App
-                if let appStoreURL = URL(string: SCConstants.appStoreURL) {
+                if let appStoreURL = URL(string: SCConstants.url.appStore.rawValue) {
                     UIApplication.shared.openURL(appStoreURL)
                 }
             case 2:     // Website
-                if let websiteURL = URL(string: SCConstants.websiteURL) {
+                if let websiteURL = URL(string: SCConstants.url.website.rawValue) {
                     UIApplication.shared.openURL(websiteURL)
                 }
             case 3:     // Github
-                if let githubURL = URL(string: SCConstants.githubURL) {
+                if let githubURL = URL(string: SCConstants.url.github.rawValue) {
                     UIApplication.shared.openURL(githubURL)
                 }
             case 4: // Icons8
-                if let icons8URL = URL(string: SCConstants.icons8URL) {
+                if let icons8URL = URL(string: SCConstants.url.icons8.rawValue) {
                     UIApplication.shared.openURL(icons8URL)
                 }
             default:
@@ -170,7 +170,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: SCToggleViewCellDelegate
 extension SCSettingsViewController: SCToggleViewCellDelegate {
     func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
-        if cell.reuseIdentifier == SCCellReuseIdentifiers.nightModeToggleViewCell {
+        if cell.reuseIdentifier == SCConstants.identifier.nightModeToggleViewCell.rawValue {
             DispatchQueue.main.async {
                 SCSettingsManager.instance.enableNightMode(enabled)
 

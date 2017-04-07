@@ -6,7 +6,7 @@ class SCDisclosureViewCell: SCTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.leftLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
+        self.leftLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.Regular)
         self.accessoryType = .disclosureIndicator
     }
 }

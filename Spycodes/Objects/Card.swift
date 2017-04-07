@@ -30,19 +30,19 @@ class Card: NSObject {
 
     // MARK: Coder
     func encodeWithCoder(_ aCoder: NSCoder) {
-        aCoder.encode(self.word, forKey: SCCodingConstants.word)
-        aCoder.encode(self.selected, forKey: SCCodingConstants.selected)
-        aCoder.encode(self.team.rawValue, forKey: SCCodingConstants.team)
+        aCoder.encode(self.word, forKey: SCConstants.coding.word.rawValue)
+        aCoder.encode(self.selected, forKey: SCConstants.coding.selected.rawValue)
+        aCoder.encode(self.team.rawValue, forKey: SCConstants.coding.team.rawValue)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        if let word = aDecoder.decodeObject(forKey: SCCodingConstants.word) as? String {
+        if let word = aDecoder.decodeObject(forKey: SCConstants.coding.word.rawValue) as? String {
             let team = aDecoder.decodeInteger(
-                forKey: SCCodingConstants.team
+                forKey: SCConstants.coding.team.rawValue
             )
 
             let selected = aDecoder.decodeBool(
-                forKey: SCCodingConstants.selected
+                forKey: SCConstants.coding.selected.rawValue
             )
 
             self.init(word: word, selected: selected, team: team)

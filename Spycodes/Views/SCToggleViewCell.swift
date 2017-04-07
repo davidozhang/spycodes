@@ -14,7 +14,7 @@ class SCToggleViewCell: SCTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.leftLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
+        self.leftLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.Regular)
 
         toggleSwitch.addTarget(
             self,
@@ -24,11 +24,11 @@ class SCToggleViewCell: SCTableViewCell {
 
         if let reuseIdentifier = self.reuseIdentifier {
             switch reuseIdentifier {
-            case SCCellReuseIdentifiers.nightModeToggleViewCell:
+            case SCConstants.identifier.nightModeToggleViewCell.rawValue:
                 toggleSwitch.isOn = SCSettingsManager.instance.isNightModeEnabled()
-            case SCCellReuseIdentifiers.minigameToggleViewCell:
+            case SCConstants.identifier.minigameToggleViewCell.rawValue:
                 toggleSwitch.isOn = GameMode.instance.mode == GameMode.Mode.miniGame
-            case SCCellReuseIdentifiers.timerToggleViewCell:
+            case SCConstants.identifier.timerToggleViewCell.rawValue:
                 toggleSwitch.isOn = Timer.instance.isEnabled()
             default:
                 break

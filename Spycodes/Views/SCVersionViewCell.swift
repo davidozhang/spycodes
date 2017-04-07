@@ -8,14 +8,14 @@ class SCVersionViewCell: SCTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        if let versionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
-           let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
-            self.versionNumberLabel.text = versionString
+        if let appVersion = SCAppInfoManager.appVersion,
+           let buildNumber = SCAppInfoManager.buildNumber {
+            self.versionNumberLabel.text = appVersion
             self.buildNumberLabel.text = "(\(buildNumber))"
         }
 
-        self.versionLeftLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
-        self.versionNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
-        self.buildNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Other)
+        self.versionLeftLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.Regular)
+        self.versionNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.Regular)
+        self.buildNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.Other)
     }
 }

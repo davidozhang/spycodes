@@ -2,7 +2,7 @@ import UIKit
 
 class SCFonts {
     // MARK: Font Types
-    enum FontType: String {
+    enum fontType: String {
         case Regular = "AppleSDGothicNeo-UltraLight"
         case Medium = "AppleSDGothicNeo-Medium"
         case Bold = "AppleSDGothicNeo-Bold"
@@ -15,19 +15,19 @@ class SCFonts {
     fileprivate static let regularFontSize: CGFloat = 20
     fileprivate static let smallFontSize: CGFloat = 16
 
-    static func largeSizeFont(_ type: SCFonts.FontType) -> UIFont? {
+    static func largeSizeFont(_ type: SCFonts.fontType) -> UIFont? {
         return UIFont(name: type.rawValue, size: SCFonts.largeFontSize)
     }
 
-    static func intermediateSizeFont(_ type: SCFonts.FontType) -> UIFont? {
+    static func intermediateSizeFont(_ type: SCFonts.fontType) -> UIFont? {
         return UIFont(name: type.rawValue, size: SCFonts.intermediateFontSize)
     }
 
-    static func regularSizeFont(_ type: SCFonts.FontType) -> UIFont? {
+    static func regularSizeFont(_ type: SCFonts.fontType) -> UIFont? {
         return UIFont(name: type.rawValue, size: SCFonts.regularFontSize)
     }
 
-    static func smallSizeFont(_ type: SCFonts.FontType) -> UIFont? {
+    static func smallSizeFont(_ type: SCFonts.fontType) -> UIFont? {
         return UIFont(name: type.rawValue, size: SCFonts.smallFontSize)
     }
 }

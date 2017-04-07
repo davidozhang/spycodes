@@ -17,16 +17,16 @@ class GameMode: NSObject, NSCoding {
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
         if let mode = self.mode?.rawValue {
-            aCoder.encode(mode, forKey: SCCodingConstants.mode)
+            aCoder.encode(mode, forKey: SCConstants.coding.mode.rawValue)
         }
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
 
-        if aDecoder.containsValue(forKey: SCCodingConstants.mode) {
+        if aDecoder.containsValue(forKey: SCConstants.coding.mode.rawValue) {
             let mode = aDecoder.decodeInteger(
-                forKey: SCCodingConstants.mode
+                forKey: SCConstants.coding.mode.rawValue
             )
 
             self.mode = Mode(rawValue: mode)

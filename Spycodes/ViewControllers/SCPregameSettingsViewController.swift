@@ -59,7 +59,7 @@ extension SCPregameSettingsViewController: UITableViewDataSource, UITableViewDel
         switch indexPath.row {
         case 0: // Minigame
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCCellReuseIdentifiers.minigameToggleViewCell
+                withIdentifier: SCConstants.identifier.minigameToggleViewCell.rawValue
             ) as? SCToggleViewCell else {
                 return UITableViewCell()
             }
@@ -70,7 +70,7 @@ extension SCPregameSettingsViewController: UITableViewDataSource, UITableViewDel
             return cell
         case 1: // Timer
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCCellReuseIdentifiers.timerToggleViewCell
+                withIdentifier: SCConstants.identifier.timerToggleViewCell.rawValue
             ) as? SCToggleViewCell else {
                 return UITableViewCell()
             }
@@ -81,7 +81,7 @@ extension SCPregameSettingsViewController: UITableViewDataSource, UITableViewDel
             return cell
         case 2: // Night Mode
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCCellReuseIdentifiers.nightModeToggleViewCell
+                withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
                 ) as? SCToggleViewCell else {
                 return UITableViewCell()
             }
@@ -109,7 +109,7 @@ extension SCPregameSettingsViewController: SCToggleViewCellDelegate {
     func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
-            case SCCellReuseIdentifiers.minigameToggleViewCell:
+            case SCConstants.identifier.minigameToggleViewCell.rawValue:
                 if enabled {
                     GameMode.instance.mode = GameMode.Mode.miniGame
                 } else {
@@ -133,12 +133,12 @@ extension SCPregameSettingsViewController: SCToggleViewCellDelegate {
 
                 data = NSKeyedArchiver.archivedData(withRootObject: Statistics.instance)
                 SCMultipeerManager.instance.broadcastData(data)
-            case SCCellReuseIdentifiers.timerToggleViewCell:
+            case SCConstants.identifier.timerToggleViewCell.rawValue:
                 Timer.instance.setEnabled(enabled)
 
                 let data = NSKeyedArchiver.archivedData(withRootObject: Timer.instance)
                 SCMultipeerManager.instance.broadcastData(data)
-            case SCCellReuseIdentifiers.nightModeToggleViewCell:
+            case SCConstants.identifier.nightModeToggleViewCell.rawValue:
                 SCSettingsManager.instance.enableNightMode(enabled)
                 self.delegate?.onNightModeToggleChanged()
             default:
