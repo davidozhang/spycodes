@@ -99,15 +99,15 @@ class Round: NSObject, NSCoding {
         self.clue = nil
         self.numberOfWords = nil
 
-        if GameMode.instance.mode == GameMode.Mode.miniGame {
-            CardCollection.instance.autoEliminateOpponentTeamCard(Team.blue)
+        if GameMode.instance.getMode() == .miniGame {
+            CardCollection.instance.autoEliminateOpponentTeamCard(.blue)
             NotificationCenter.default.post(
                 name: Notification.Name(rawValue: SCConstants.notificationKey.autoEliminate.rawValue),
                 object: self,
                 userInfo: nil
             )
 
-            if CardCollection.instance.getCardsRemainingForTeam(Team.blue) == 0 {
+            if CardCollection.instance.getCardsRemainingForTeam(.blue) == 0 {
                 DispatchQueue.main.async(execute: {
                     NotificationCenter.default.post(
                         name: Notification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),

@@ -1,13 +1,13 @@
 import Foundation
 
 class GameMode: NSObject, NSCoding {
+    static var instance = GameMode()
+    fileprivate var mode: Mode?
+
     enum Mode: Int {
         case miniGame = 0
         case regularGame = 1
     }
-
-    static var instance = GameMode()
-    var mode: Mode?
 
     // MARK: Constructor/Destructor
     override init() {
@@ -34,7 +34,15 @@ class GameMode: NSObject, NSCoding {
     }
 
     // MARK: Public
+    func getMode() -> Mode? {
+        return self.mode
+    }
+
+    func setMode(mode: Mode) {
+        self.mode = mode
+    }
+
     func reset() {
-        self.mode = GameMode.Mode.regularGame
+        self.mode = .regularGame
     }
 }

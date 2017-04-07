@@ -17,7 +17,7 @@ class SCScoreViewController: SCPopoverViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if GameMode.instance.mode == GameMode.Mode.miniGame {
+        if GameMode.instance.getMode() == .miniGame {
             self.headerLabel.text = "Minigame"
 
             if let bestRecord = Statistics.instance.getBestRecord() {
@@ -29,8 +29,8 @@ class SCScoreViewController: SCPopoverViewController {
             let statistics = Statistics.instance.getStatistics()
 
             self.headerLabel.text = "Regular Game"
-            if let red = statistics[Team.red],
-               let blue = statistics[Team.blue] {
+            if let red = statistics[.red],
+               let blue = statistics[.blue] {
                 self.scoreLabel.text = "Red " + String(red) + " : " + String(blue) + " Blue"
             }
         }
@@ -40,7 +40,7 @@ class SCScoreViewController: SCPopoverViewController {
 
     override func popoverPreferredContentSize() -> CGSize {
         return CGSize(
-            width: super.defaultModalWidth,
+            width: SCPopoverViewController.defaultModalWidth,
             height: self.headerLabel.frame.height + self.scoreLabel.frame.height + 90
         )
     }

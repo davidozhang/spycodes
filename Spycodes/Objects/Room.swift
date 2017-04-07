@@ -66,21 +66,21 @@ class Room: NSObject, NSCoding {
     // MARK: Public
     func refresh() {
         self.players.sort(by: { player1, player2 in
-            if player1.team.rawValue < player2.team.rawValue {
+            if player1.getTeam().rawValue < player2.getTeam().rawValue {
                 return true
-            } else if player1.team.rawValue == player2.team.rawValue {
-                return player1.isClueGiver()
+            } else if player1.getTeam().rawValue == player2.getTeam().rawValue {
+                return player1.isCluegiver()
             } else {
                 return false
             }
         })
 
-        if self.getClueGiverUUIDForTeam(Team.red) == nil {
-            self.autoAssignCluegiverForTeam(Team.red)
+        if self.getClueGiverUUIDForTeam(.red) == nil {
+            self.autoAssignCluegiverForTeam(.red)
         }
 
-        if self.getClueGiverUUIDForTeam(Team.blue) == nil {
-            self.autoAssignCluegiverForTeam(Team.blue)
+        if self.getClueGiverUUIDForTeam(.blue) == nil {
+            self.autoAssignCluegiverForTeam(.blue)
         }
     }
 
@@ -109,7 +109,7 @@ class Room: NSObject, NSCoding {
         let cpu = Player(
             name: "CPU",
             uuid: Room.cpuUUID,
-            team: Team.blue,
+            team: .blue,
             clueGiver: true,
             host: false
         )
@@ -122,7 +122,7 @@ class Room: NSObject, NSCoding {
 
     func autoAssignCluegiverForTeam(_ team: Team) {
         for player in self.players {
-            if player.team == team {
+            if player.getTeam() == team {
                 player.setIsClueGiver(true)
                 return
             }
@@ -142,7 +142,7 @@ class Room: NSObject, NSCoding {
 
     func setNameOfPlayerAtIndex(_ index: Int, name: String) {
         if index < self.players.count {
-            self.players[index].name = name
+            self.players[index].setName(name: name)
         }
     }
 
@@ -163,12 +163,12 @@ class Room: NSObject, NSCoding {
     }
 
     func teamSizesValid() -> Bool {
-        if GameMode.instance.mode == GameMode.Mode.regularGame {
+        if GameMode.instance.getMode() == .regularGame {
             let redValid = self.players.filter({
-                ($0 as Player).team == Team.red
+                ($0 as Player).getTeam() == .red
             }).count >= 2
             let blueValid = self.players.filter({
-                ($0 as Player).team == Team.blue
+                ($0 as Player).getTeam() == .blue
             }).count >= 2
 
             if redValid && blueValid {
@@ -187,16 +187,16 @@ class Room: NSObject, NSCoding {
     }
 
     func cluegiversSelected() -> Bool {
-        if GameMode.instance.mode == GameMode.Mode.regularGame {
-            if self.getClueGiverUUIDForTeam(Team.red) != nil &&
-               self.getClueGiverUUIDForTeam(Team.blue) != nil {
+        if GameMode.instance.getMode() == .regularGame {
+            if self.getClueGiverUUIDForTeam(.red) != nil &&
+               self.getClueGiverUUIDForTeam(.blue) != nil {
                 return true
             }
 
             return false
         } else {    // Minigame
-            if self.getClueGiverUUIDForTeam(Team.red) != nil &&
-               self.getClueGiverUUIDForTeam(Team.blue) != nil {
+            if self.getClueGiverUUIDForTeam(.red) != nil &&
+               self.getClueGiverUUIDForTeam(.blue) != nil {
                 return true
             }
 
@@ -210,7 +210,7 @@ class Room: NSObject, NSCoding {
 
     func getClueGiverUUIDForTeam(_ team: Team) -> String? {
         let filtered = self.players.filter({
-            ($0 as Player).isClueGiver() && ($0 as Player).team == team
+            ($0 as Player).isCluegiver() && ($0 as Player).getTeam() == team
         })
         if filtered.count == 1 {
             return filtered[0].getUUID()
@@ -221,8 +221,8 @@ class Room: NSObject, NSCoding {
 
     func resetPlayers() {
         for player in players {
-            player.clueGiver = false
-            player.team = Team.red
+            player.setIsClueGiver(false)
+            player.setTeam(team: .red)
         }
     }
 

@@ -4,17 +4,16 @@ import UIKit
 class Player: NSObject, NSCoding {
     static var instance = Player()
 
-    var name: String?
-    var team: Team
-    var clueGiver: Bool
-    var host: Bool
-
+    fileprivate var name: String?
+    fileprivate var team: Team
+    fileprivate var clueGiver: Bool
+    fileprivate var host: Bool
     fileprivate var uuid: String
 
     // MARK: Constructor/Destructor
     override init() {
         self.uuid = UIDevice.current.identifierForVendor!.uuidString
-        self.team = Team.red
+        self.team = .red
         self.clueGiver = false
         self.host = false
     }
@@ -69,8 +68,32 @@ class Player: NSObject, NSCoding {
     }
 
     // MARK: Public
+    func getName() -> String? {
+        return self.name
+    }
+
     func getUUID() -> String {
         return self.uuid
+    }
+
+    func getTeam() -> Team {
+        return self.team
+    }
+
+    func isCluegiver() -> Bool {
+        return self.clueGiver
+    }
+
+    func isHost() -> Bool {
+        return self.host
+    }
+
+    func setName(name: String) {
+        self.name = name
+    }
+
+    func setTeam(team: Team) {
+        self.team = team
     }
 
     func setIsClueGiver(_ isClueGiver: Bool) {
@@ -81,16 +104,8 @@ class Player: NSObject, NSCoding {
         self.host = isHost
     }
 
-    func isClueGiver() -> Bool {
-        return self.clueGiver
-    }
-
-    func isHost() -> Bool {
-        return self.host
-    }
-
     func reset() {
-        self.team = Team.red
+        self.team = .red
         self.host = false
         self.clueGiver = false
     }

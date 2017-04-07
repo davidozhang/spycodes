@@ -266,7 +266,7 @@ class SCPregameRoomViewController: SCViewController {
         }
 
 
-        let maxRoomSize = GameMode.instance.mode == GameMode.Mode.regularGame ?
+        let maxRoomSize = GameMode.instance.getMode() == .regularGame ?
             SCConstants.constant.roomMaxSize.rawValue :
             SCConstants.constant.roomMaxSize.rawValue + 1     // Account for additional CPU player in minigame
 
@@ -293,7 +293,7 @@ class SCPregameRoomViewController: SCViewController {
             message += SCStrings.incomplete + " "
         }
 
-        if GameMode.instance.mode == GameMode.Mode.miniGame {
+        if GameMode.instance.getMode() == .miniGame {
             message += SCStrings.minigameTeamSizeInfo
         } else {
             message += SCStrings.regularGameTeamSizeInfo
@@ -304,7 +304,7 @@ class SCPregameRoomViewController: SCViewController {
         message += "\n\n"
         message += SCStrings.selectLeaderInfo
 
-        if GameMode.instance.mode == GameMode.Mode.regularGame {
+        if GameMode.instance.getMode() == .regularGame {
             message += "\n\n"
             message += SCStrings.minigameInfo
         }
@@ -387,7 +387,7 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
     func teamUpdatedAtIndex(_ index: Int, newTeam: Team) {
         let playerAtIndex = Room.instance.players[index]
 
-        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.team = newTeam
+        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setTeam(team: newTeam)
 
         Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsClueGiver(false)
         self.broadcastEssentialData()
@@ -420,11 +420,11 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
         let playerAtIndex = Room.instance.players[indexPath.row]
 
-        cell.nameLabel.text = playerAtIndex.name
+        cell.nameLabel.text = playerAtIndex.getName()
         cell.index = indexPath.row
         cell.delegate = self
 
-        if playerAtIndex.team == Team.red {
+        if playerAtIndex.getTeam() == .red {
             cell.segmentedControl.selectedSegmentIndex = 0
         } else {
             cell.segmentedControl.selectedSegmentIndex = 1
@@ -434,7 +434,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             cell.nameLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.Medium)
             cell.segmentedControl.isEnabled = true
 
-            if GameMode.instance.mode == GameMode.Mode.miniGame {
+            if GameMode.instance.getMode() == .miniGame {
                 cell.segmentedControl.isEnabled = false
             }
         } else {
@@ -442,7 +442,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             cell.segmentedControl.isEnabled = false
         }
 
-        if playerAtIndex.isClueGiver() {
+        if playerAtIndex.isCluegiver() {
             cell.clueGiverImage.image = UIImage(named: "Crown-Filled")
             cell.clueGiverImage.isHidden = false
         } else {
@@ -455,9 +455,9 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         let playerAtIndex = Room.instance.players[indexPath.row]
-        let team = playerAtIndex.team
+        let team = playerAtIndex.getTeam()
 
-        if Player.instance.team != team {
+        if Player.instance.getTeam() != team {
             return
         }
 
