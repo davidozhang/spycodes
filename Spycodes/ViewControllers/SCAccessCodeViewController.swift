@@ -23,7 +23,6 @@ class SCAccessCodeViewController: SCViewController {
 
     @IBOutlet weak var statusLabel: SCStatusLabel!
     @IBOutlet weak var textFieldsView: UIView!
-    @IBOutlet weak var browseLobbyButton: UIButton!
     @IBOutlet weak var headerTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentViewVerticalCenterConstraint: NSLayoutConstraint!
     @IBOutlet weak var statusLabelTopMarginConstraint: NSLayoutConstraint!
@@ -31,10 +30,6 @@ class SCAccessCodeViewController: SCViewController {
     // MARK: Actions
     @IBAction func unwindToAccessCode(_ sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
-    }
-
-    @IBAction func onBrowseLobbyTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: "lobby-room", sender: self)
     }
 
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
@@ -142,7 +137,6 @@ class SCAccessCodeViewController: SCViewController {
         SCMultipeerManager.instance.stopAdvertiser()
 
         self.statusLabel.text = SCStrings.failStatus
-        self.browseLobbyButton.isHidden = false
         self.timeoutTimer = Foundation.Timer.scheduledTimer(
             timeInterval: self.shortTimeoutInterval,
             target: self,
@@ -208,7 +202,6 @@ class SCAccessCodeViewController: SCViewController {
             repeats: false
         )
         self.statusLabel.text = SCStrings.pendingStatus
-        self.browseLobbyButton.isHidden = true
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? UITextField {

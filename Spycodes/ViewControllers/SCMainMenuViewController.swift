@@ -73,7 +73,6 @@ class SCMainMenuViewController: SCViewController {
 
         Player.instance.reset()
         GameMode.instance.reset()
-        Lobby.instance.reset()
         Statistics.instance.reset()
         Room.instance.reset()
     }
