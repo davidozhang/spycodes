@@ -23,13 +23,15 @@ class ActionEvent: NSObject, NSCoding {
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        let type = aDecoder.decodeObject(
-            forKey: SCCodingConstants.actionEventType
-        ) as? Int ?? aDecoder.decodeInteger(
-            forKey: SCCodingConstants.actionEventType
-        )
+        if aDecoder.containsValue(forKey: SCCodingConstants.actionEventType) {
+            let type = aDecoder.decodeObject(
+                forKey: SCCodingConstants.actionEventType
+                ) as? Int ?? aDecoder.decodeInteger(
+                    forKey: SCCodingConstants.actionEventType
+            )
 
-        self.type = EventType(rawValue: type)
+            self.type = EventType(rawValue: type)
+        }
     }
 
     // MARK: Public

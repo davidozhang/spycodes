@@ -37,13 +37,15 @@ class Statistics: NSObject, NSCoding {
 
         self.statistics = [Team.red: red, Team.blue: blue]
 
-        let bestRecord = aDecoder.decodeObject(
-            forKey: SCCodingConstants.bestRecord
-        ) as? Int ?? aDecoder.decodeInteger(
-            forKey: SCCodingConstants.bestRecord
-        )
+        if aDecoder.containsValue(forKey: SCCodingConstants.bestRecord) {
+            let bestRecord = aDecoder.decodeObject(
+                forKey: SCCodingConstants.bestRecord
+            ) as? Int ?? aDecoder.decodeInteger(
+                forKey: SCCodingConstants.bestRecord
+            )
 
-        self.bestRecord = bestRecord
+            self.bestRecord = bestRecord
+        }
     }
 
     // MARK: Public

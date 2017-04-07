@@ -23,13 +23,16 @@ class GameMode: NSObject, NSCoding {
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        let mode = aDecoder.decodeObject(
-            forKey: SCCodingConstants.mode
-        ) as? Int ?? aDecoder.decodeInteger(
-            forKey: SCCodingConstants.mode
-        )
 
-        self.mode = Mode(rawValue: mode)
+        if aDecoder.containsValue(forKey: SCCodingConstants.mode) {
+            let mode = aDecoder.decodeObject(
+                forKey: SCCodingConstants.mode
+                ) as? Int ?? aDecoder.decodeInteger(
+                    forKey: SCCodingConstants.mode
+            )
+
+            self.mode = Mode(rawValue: mode)
+        }
     }
 
     // MARK: Public

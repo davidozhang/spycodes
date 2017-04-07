@@ -42,29 +42,36 @@ class Round: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
 
-        let currentTeam = aDecoder.decodeObject(
-            forKey: SCCodingConstants.team
-        ) as? Int ?? aDecoder.decodeInteger(
-            forKey: SCCodingConstants.team
-        )
+        if aDecoder.containsValue(forKey: SCCodingConstants.team) {
+            let currentTeam = aDecoder.decodeObject(
+                forKey: SCCodingConstants.team
+            ) as? Int ?? aDecoder.decodeInteger(
+                forKey: SCCodingConstants.team
+            )
 
-        self.currentTeam = Team(rawValue: currentTeam)
+            self.currentTeam = Team(rawValue: currentTeam)
+        }
 
-        if let clue = aDecoder.decodeObject(forKey: SCCodingConstants.clue) as? String {
+        if aDecoder.containsValue(forKey: SCCodingConstants.clue),
+           let clue = aDecoder.decodeObject(forKey: SCCodingConstants.clue) as? String {
             self.clue = clue
         }
 
-        if let numberOfWords = aDecoder.decodeObject(forKey: SCCodingConstants.numberOfWords) as? String {
+        if aDecoder.containsValue(forKey: SCCodingConstants.numberOfWords),
+           let numberOfWords = aDecoder.decodeObject(forKey: SCCodingConstants.numberOfWords) as? String {
             self.numberOfWords = numberOfWords
         }
 
-        let winningTeam = aDecoder.decodeObject(
-            forKey: SCCodingConstants.winningTeam
-        ) as? Int ?? aDecoder.decodeInteger(
-            forKey: SCCodingConstants.winningTeam
-        )
+        if aDecoder.containsValue(forKey: SCCodingConstants.winningTeam) {
+            let winningTeam = aDecoder.decodeObject(
+                forKey: SCCodingConstants.winningTeam
+            ) as? Int ?? aDecoder.decodeInteger(
+                forKey: SCCodingConstants.winningTeam
+            )
 
-        self.winningTeam = Team(rawValue: winningTeam)
+            self.winningTeam = Team(rawValue: winningTeam)
+        }
+
 
         self.abort = aDecoder.decodeObject(
             forKey: SCCodingConstants.abort
