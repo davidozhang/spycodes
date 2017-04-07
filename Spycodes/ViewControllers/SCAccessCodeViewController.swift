@@ -18,7 +18,7 @@ class SCAccessCodeViewController: SCViewController {
     fileprivate var keyboardDidShow = false
 
     fileprivate var accessCodeCharacters = NSMutableArray(
-        capacity: SCConstants.accessCodeLength
+        capacity: SCConstants.constant.accessCodeLength.rawValue
     )
 
     @IBOutlet weak var statusLabel: SCStatusLabel!
@@ -51,7 +51,7 @@ class SCAccessCodeViewController: SCViewController {
         super.viewWillAppear(animated)
 
         // Unwindable view controller identifier
-        self.unwindableIdentifier = "access-code"
+        self.unwindableIdentifier = SCConstants.identifier.accessCode.rawValue
 
         SCMultipeerManager.instance.delegate = self
 
@@ -235,7 +235,7 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
 
             DispatchQueue.main.async(execute: {
                 self.restoreStatus()
-                self.performSegue(withIdentifier: "pregame-room", sender: self)
+                self.performSegue(withIdentifier: SCConstants.identifier.pregameRoom.rawValue, sender: self)
             })
         }
     }

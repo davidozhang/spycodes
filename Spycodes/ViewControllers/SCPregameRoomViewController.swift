@@ -13,11 +13,11 @@ class SCPregameRoomViewController: SCViewController {
 
     // MARK: Actions
     @IBAction func onScoreButtonTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: "score-view", sender: self)
+        self.performSegue(withIdentifier: SCConstants.identifier.scoreView.rawValue, sender: self)
     }
 
     @IBAction func onSettingsButtonTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: "pregame-settings", sender: self)
+        self.performSegue(withIdentifier: SCConstants.identifier.pregameSettings.rawValue, sender: self)
     }
 
     @IBAction func onStartGameInfoPressed(_ sender: AnyObject) {
@@ -98,7 +98,7 @@ class SCPregameRoomViewController: SCViewController {
         super.viewWillAppear(animated)
 
         // Unwindable view controller identifier
-        self.unwindableIdentifier = "pregame-room"
+        self.unwindableIdentifier = SCConstants.identifier.pregameRoom.rawValue
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -214,7 +214,7 @@ class SCPregameRoomViewController: SCViewController {
 
     fileprivate func goToGame() {
         DispatchQueue.main.async(execute: {
-            self.performSegue(withIdentifier: "game-room", sender: self)
+            self.performSegue(withIdentifier: SCConstants.identifier.gameRoom.rawValue, sender: self)
         })
     }
 
@@ -267,8 +267,8 @@ class SCPregameRoomViewController: SCViewController {
 
 
         let maxRoomSize = GameMode.instance.mode == GameMode.Mode.regularGame ?
-            SCConstants.roomMaxSize :
-            SCConstants.roomMaxSize + 1     // Account for additional CPU player in minigame
+            SCConstants.constant.roomMaxSize.rawValue :
+            SCConstants.constant.roomMaxSize.rawValue + 1     // Account for additional CPU player in minigame
 
         if Room.instance.players.count >= maxRoomSize {
             SCMultipeerManager.instance.stopAdvertiser()
@@ -413,7 +413,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: SCCellReuseIdentifiers.pregameRoomViewCell
+            withIdentifier: SCConstants.identifier.pregameRoomViewCell.rawValue
         ) as? SCPregameRoomViewCell else {
             return UITableViewCell()
         }
@@ -431,14 +431,14 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         if Player.instance == playerAtIndex {
-            cell.nameLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Medium)
+            cell.nameLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.Medium)
             cell.segmentedControl.isEnabled = true
 
             if GameMode.instance.mode == GameMode.Mode.miniGame {
                 cell.segmentedControl.isEnabled = false
             }
         } else {
-            cell.nameLabel.font = SCFonts.intermediateSizeFont(SCFonts.FontType.Regular)
+            cell.nameLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.Regular)
             cell.segmentedControl.isEnabled = false
         }
 

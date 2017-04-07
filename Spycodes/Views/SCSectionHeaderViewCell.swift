@@ -6,6 +6,6 @@ class SCSectionHeaderViewCell: SCTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.header.font = SCFonts.regularSizeFont(SCFonts.FontType.Bold)
+        self.header.font = SCFonts.regularSizeFont(SCFonts.fontType.Bold)
     }
 }

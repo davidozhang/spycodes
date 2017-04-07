@@ -12,7 +12,7 @@ class SCMainMenuViewController: SCViewController {
     }
 
     @IBAction func onShareTapped(_ sender: AnyObject) {
-        UIPasteboard.general.string = SCConstants.appStoreWebURL
+        UIPasteboard.general.string = SCConstants.url.appStoreWeb.rawValue
         self.linkCopiedLabel.isHidden = false
         self.timer = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(SCMainMenuViewController.onTimeout), userInfo: nil, repeats: false)
     }
@@ -36,15 +36,15 @@ class SCMainMenuViewController: SCViewController {
 
     @IBAction func onCreateGame(_ sender: AnyObject) {
         Player.instance.setIsHost(true)
-        self.performSegue(withIdentifier: "player-name", sender: self)
+        self.performSegue(withIdentifier: SCConstants.identifier.playerName.rawValue, sender: self)
     }
 
     @IBAction func onJoinGame(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: "player-name", sender: self)
+        self.performSegue(withIdentifier: SCConstants.identifier.playerName.rawValue, sender: self)
     }
 
     @IBAction func onSettingsTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: "settings", sender: self)
+        self.performSegue(withIdentifier: SCConstants.identifier.settings.rawValue, sender: self)
     }
 
     deinit {
@@ -55,16 +55,16 @@ class SCMainMenuViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        SCVersionManager.checkLatestAppVersion({
+        SCAppInfoManager.checkLatestAppVersion({
             // If app is not on latest app version
-            self.performSegue(withIdentifier: "update-app", sender: self)
+            self.performSegue(withIdentifier: SCConstants.identifier.updateApp.rawValue, sender: self)
         })
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         // Currently this view is the root view controller for unwinding logic
-        self.unwindableIdentifier = "main-menu"
+        self.unwindableIdentifier = SCConstants.identifier.mainMenu.rawValue
         self.isRootViewController = true
 
         self.linkCopiedLabel.isHidden = true

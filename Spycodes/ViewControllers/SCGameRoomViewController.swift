@@ -58,7 +58,7 @@ class SCGameRoomViewController: SCViewController {
     }
 
     @IBAction func onHelpButtonTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: "help-view", sender: self)
+        self.performSegue(withIdentifier: SCConstants.identifier.helpView.rawValue, sender: self)
     }
 
     deinit {
@@ -72,13 +72,13 @@ class SCGameRoomViewController: SCViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(SCGameRoomViewController.broadcastEssentialData),
-            name: NSNotification.Name(rawValue: SCNotificationKeys.autoEliminateNotificationKey),
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.autoEliminate.rawValue),
             object: nil
         )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(SCGameRoomViewController.didEndGameWithNotification),
-            name: NSNotification.Name(rawValue: SCNotificationKeys.minigameGameOverNotificationKey),
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),
             object: nil
         )
     }
@@ -87,7 +87,7 @@ class SCGameRoomViewController: SCViewController {
         super.viewWillAppear(animated)
 
         // Unwindable view controller identifier
-        self.unwindableIdentifier = "game-room"
+        self.unwindableIdentifier = SCConstants.identifier.gameRoom.rawValue
 
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -162,12 +162,12 @@ class SCGameRoomViewController: SCViewController {
 
         NotificationCenter.default.removeObserver(
             self,
-            name: NSNotification.Name(rawValue: SCNotificationKeys.autoEliminateNotificationKey),
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.autoEliminate.rawValue),
             object: nil
         )
         NotificationCenter.default.removeObserver(
             self,
-            name: NSNotification.Name(rawValue: SCNotificationKeys.minigameGameOverNotificationKey),
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),
             object: nil
         )
     }
@@ -676,13 +676,13 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return SCConstants.cardCount
+        return SCConstants.constant.cardCount.rawValue
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: SCCellReuseIdentifiers.gameRoomViewCell,
+            withReuseIdentifier: SCConstants.identifier.gameRoomViewCell.rawValue,
             for: indexPath
         ) as? SCGameRoomViewCell else {
             return UICollectionViewCell()

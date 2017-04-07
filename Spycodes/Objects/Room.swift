@@ -40,19 +40,19 @@ class Room: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.name, forKey: SCCodingConstants.name)
-        aCoder.encode(self.uuid, forKey: SCCodingConstants.uuid)
-        aCoder.encode(self.players, forKey: SCCodingConstants.players)
-        aCoder.encode(self.connectedPeers, forKey: SCCodingConstants.connectedPeers)
-        aCoder.encode(self.accessCode, forKey: SCCodingConstants.accessCode)
+        aCoder.encode(self.name, forKey: SCConstants.coding.name.rawValue)
+        aCoder.encode(self.uuid, forKey: SCConstants.coding.uuid.rawValue)
+        aCoder.encode(self.players, forKey: SCConstants.coding.players.rawValue)
+        aCoder.encode(self.connectedPeers, forKey: SCConstants.coding.connectedPeers.rawValue)
+        aCoder.encode(self.accessCode, forKey: SCConstants.coding.accessCode.rawValue)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        guard let name = aDecoder.decodeObject(forKey: SCCodingConstants.name) as? String,
-              let uuid = aDecoder.decodeObject(forKey: SCCodingConstants.uuid) as? String,
-              let players = aDecoder.decodeObject(forKey: SCCodingConstants.players) as? [Player],
-              let connectedPeers = aDecoder.decodeObject(forKey: SCCodingConstants.connectedPeers) as? [MCPeerID: String],
-              let accessCode = aDecoder.decodeObject(forKey: SCCodingConstants.accessCode) as? String else { return nil }
+        guard let name = aDecoder.decodeObject(forKey: SCConstants.coding.name.rawValue) as? String,
+              let uuid = aDecoder.decodeObject(forKey: SCConstants.coding.uuid.rawValue) as? String,
+              let players = aDecoder.decodeObject(forKey: SCConstants.coding.players.rawValue) as? [Player],
+              let connectedPeers = aDecoder.decodeObject(forKey: SCConstants.coding.connectedPeers.rawValue) as? [MCPeerID: String],
+              let accessCode = aDecoder.decodeObject(forKey: SCConstants.coding.accessCode.rawValue) as? String else { return nil }
 
         self.init(
             name: name,
@@ -235,7 +235,7 @@ class Room: NSObject, NSCoding {
     fileprivate static func generateAccessCode() -> String {
         var result = ""
 
-        for _ in 0 ..< SCConstants.accessCodeLength {
+        for _ in 0 ..< SCConstants.constant.accessCodeLength.rawValue {
             let rand = arc4random_uniform(UInt32(Room.accessCodeAllowedCharacters.length))
             var nextChar = Room.accessCodeAllowedCharacters.character(at: Int(rand))
             result += NSString(characters: &nextChar, length: 1) as String

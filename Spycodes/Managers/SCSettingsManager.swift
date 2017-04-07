@@ -17,14 +17,14 @@ class SCSettingsManager {
     func save() {
         UserDefaults.standard.set(
             self.nightMode,
-            forKey: SCUserDefaultsConstants.nightMode
+            forKey: SCConstants.userDefaults.nightMode.rawValue
         )
         UserDefaults.standard.synchronize()
     }
 
     func retrieve() {
         let storedNightMode = UserDefaults.standard.bool(
-            forKey: SCUserDefaultsConstants.nightMode
+            forKey: SCConstants.userDefaults.nightMode.rawValue
         )
 
         self.nightMode = storedNightMode

@@ -9,7 +9,7 @@ class SCUpdateAppViewController: SCViewController {
     }
 
     @IBAction func onDownloadTapped(_ sender: AnyObject) {
-        if let appStoreURL = URL(string: SCConstants.appStoreURL) {
+        if let appStoreURL = URL(string: SCConstants.url.appStore.rawValue) {
             UIApplication.shared.openURL(appStoreURL)
         }
     }

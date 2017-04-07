@@ -34,26 +34,26 @@ class Player: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.name, forKey: SCCodingConstants.name)
-        aCoder.encode(self.uuid, forKey: SCCodingConstants.uuid)
-        aCoder.encode(self.team.rawValue, forKey: SCCodingConstants.team)
-        aCoder.encode(self.clueGiver, forKey: SCCodingConstants.clueGiver)
-        aCoder.encode(self.host, forKey: SCCodingConstants.host)
+        aCoder.encode(self.name, forKey: SCConstants.coding.name.rawValue)
+        aCoder.encode(self.uuid, forKey: SCConstants.coding.uuid.rawValue)
+        aCoder.encode(self.team.rawValue, forKey: SCConstants.coding.team.rawValue)
+        aCoder.encode(self.clueGiver, forKey: SCConstants.coding.clueGiver.rawValue)
+        aCoder.encode(self.host, forKey: SCConstants.coding.host.rawValue)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        if let name = aDecoder.decodeObject(forKey: SCCodingConstants.name) as? String,
-           let uuid = aDecoder.decodeObject(forKey: SCCodingConstants.uuid) as? String {
+        if let name = aDecoder.decodeObject(forKey: SCConstants.coding.name.rawValue) as? String,
+           let uuid = aDecoder.decodeObject(forKey: SCConstants.coding.uuid.rawValue) as? String {
             let team = aDecoder.decodeInteger(
-                forKey: SCCodingConstants.team
+                forKey: SCConstants.coding.team.rawValue
             )
 
             let clueGiver = aDecoder.decodeBool(
-                forKey: SCCodingConstants.clueGiver
+                forKey: SCConstants.coding.clueGiver.rawValue
             )
 
             let host = aDecoder.decodeBool(
-                forKey: SCCodingConstants.host
+                forKey: SCConstants.coding.host.rawValue
             )
     
             self.init(

@@ -23,7 +23,7 @@ class SCPlayerNameViewController: SCViewController {
         super.viewWillAppear(animated)
 
         // Unwindable view controller identifier
-        self.unwindableIdentifier = "player-name"
+        self.unwindableIdentifier = SCConstants.identifier.playerName.rawValue
 
         if let name = Player.instance.name, name.characters.count > 0 {
             self.userNameTextField.text = name
@@ -90,9 +90,9 @@ extension SCPlayerNameViewController: UITextFieldDelegate {
             }
 
             if Player.instance.isHost() {
-                self.performSegue(withIdentifier: "pregame-room", sender: self)
+                self.performSegue(withIdentifier: SCConstants.identifier.pregameRoom.rawValue, sender: self)
             } else {
-                self.performSegue(withIdentifier: "access-code", sender: self)
+                self.performSegue(withIdentifier: SCConstants.identifier.accessCode.rawValue, sender: self)
             }
             return true
         } else {

@@ -14,33 +14,34 @@ class Statistics: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         if let red = self.statistics[Team.red],
            let blue = self.statistics[Team.blue] {
-            aCoder.encode(red, forKey: SCCodingConstants.red)
-            aCoder.encode(blue, forKey: SCCodingConstants.blue)
+            aCoder.encode(red, forKey: SCConstants.coding.red.rawValue)
+            aCoder.encode(blue, forKey: SCConstants.coding.blue.rawValue)
         }
         
         if let bestRecord = self.bestRecord {
-            aCoder.encode(bestRecord, forKey: SCCodingConstants.bestRecord)
+            aCoder.encode(bestRecord, forKey: SCConstants.coding.bestRecord.rawValue)
         }
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
 
-        if aDecoder.containsValue(forKey: SCCodingConstants.red), aDecoder.containsValue(forKey: SCCodingConstants.blue) {
+        if aDecoder.containsValue(forKey: SCConstants.coding.red.rawValue),
+           aDecoder.containsValue(forKey: SCConstants.coding.blue.rawValue) {
             let red = aDecoder.decodeInteger(
-                forKey: SCCodingConstants.red
+                forKey: SCConstants.coding.red.rawValue
             )
 
             let blue = aDecoder.decodeInteger(
-                forKey: SCCodingConstants.blue
+                forKey: SCConstants.coding.blue.rawValue
             )
 
             self.statistics = [Team.red: red, Team.blue: blue]
         }
 
-        if aDecoder.containsValue(forKey: SCCodingConstants.bestRecord) {
+        if aDecoder.containsValue(forKey: SCConstants.coding.bestRecord.rawValue) {
             let bestRecord = aDecoder.decodeInteger(
-                forKey: SCCodingConstants.bestRecord
+                forKey: SCConstants.coding.bestRecord.rawValue
             )
 
             self.bestRecord = bestRecord
