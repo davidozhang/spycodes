@@ -25,10 +25,8 @@ class GameMode: NSObject, NSCoding {
         self.init()
 
         if aDecoder.containsValue(forKey: SCCodingConstants.mode) {
-            let mode = aDecoder.decodeObject(
+            let mode = aDecoder.decodeInteger(
                 forKey: SCCodingConstants.mode
-                ) as? Int ?? aDecoder.decodeInteger(
-                    forKey: SCCodingConstants.mode
             )
 
             self.mode = Mode(rawValue: mode)

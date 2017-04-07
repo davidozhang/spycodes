@@ -43,9 +43,7 @@ class Round: NSObject, NSCoding {
         self.init()
 
         if aDecoder.containsValue(forKey: SCCodingConstants.team) {
-            let currentTeam = aDecoder.decodeObject(
-                forKey: SCCodingConstants.team
-            ) as? Int ?? aDecoder.decodeInteger(
+            let currentTeam = aDecoder.decodeInteger(
                 forKey: SCCodingConstants.team
             )
 
@@ -63,9 +61,7 @@ class Round: NSObject, NSCoding {
         }
 
         if aDecoder.containsValue(forKey: SCCodingConstants.winningTeam) {
-            let winningTeam = aDecoder.decodeObject(
-                forKey: SCCodingConstants.winningTeam
-            ) as? Int ?? aDecoder.decodeInteger(
+            let winningTeam = aDecoder.decodeInteger(
                 forKey: SCCodingConstants.winningTeam
             )
 
@@ -73,15 +69,11 @@ class Round: NSObject, NSCoding {
         }
 
 
-        self.abort = aDecoder.decodeObject(
-            forKey: SCCodingConstants.abort
-        ) as? Bool ?? aDecoder.decodeBool(
+        self.abort = aDecoder.decodeBool(
             forKey: SCCodingConstants.abort
         )
 
-        self.gameEnded = aDecoder.decodeObject(
-            forKey: SCCodingConstants.gameEnded
-        ) as? Bool ?? aDecoder.decodeBool(
+        self.gameEnded = aDecoder.decodeBool(
             forKey: SCCodingConstants.gameEnded
         )
     }

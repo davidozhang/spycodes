@@ -44,21 +44,15 @@ class Player: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         if let name = aDecoder.decodeObject(forKey: SCCodingConstants.name) as? String,
            let uuid = aDecoder.decodeObject(forKey: SCCodingConstants.uuid) as? String {
-            let team = aDecoder.decodeObject(
-                forKey: SCCodingConstants.team
-            ) as? Int ?? aDecoder.decodeInteger(
+            let team = aDecoder.decodeInteger(
                 forKey: SCCodingConstants.team
             )
 
-            let clueGiver = aDecoder.decodeObject(
-                forKey: SCCodingConstants.clueGiver
-            ) as? Bool ?? aDecoder.decodeBool(
+            let clueGiver = aDecoder.decodeBool(
                 forKey: SCCodingConstants.clueGiver
             )
 
-            let host = aDecoder.decodeObject(
-                forKey: SCCodingConstants.host
-            ) as? Bool ?? aDecoder.decodeBool(
+            let host = aDecoder.decodeBool(
                 forKey: SCCodingConstants.host
             )
     

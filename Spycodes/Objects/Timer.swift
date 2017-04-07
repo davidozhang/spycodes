@@ -24,9 +24,7 @@ class Timer: NSObject, NSCoding {
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        self.enabled = aDecoder.decodeObject(
-            forKey: SCCodingConstants.timerEnabled
-        ) as? Bool ?? aDecoder.decodeBool(
+        self.enabled = aDecoder.decodeBool(
             forKey: SCCodingConstants.timerEnabled
         )
     }

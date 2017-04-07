@@ -23,24 +23,18 @@ class Statistics: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
 
-        let red = aDecoder.decodeObject(
-            forKey: SCCodingConstants.red
-        ) as? Int ?? aDecoder.decodeInteger(
+        let red = aDecoder.decodeInteger(
             forKey: SCCodingConstants.red
         )
 
-        let blue = aDecoder.decodeObject(
-            forKey: SCCodingConstants.blue
-        ) as? Int ?? aDecoder.decodeInteger(
+        let blue = aDecoder.decodeInteger(
             forKey: SCCodingConstants.blue
         )
 
         self.statistics = [Team.red: red, Team.blue: blue]
 
         if aDecoder.containsValue(forKey: SCCodingConstants.bestRecord) {
-            let bestRecord = aDecoder.decodeObject(
-                forKey: SCCodingConstants.bestRecord
-            ) as? Int ?? aDecoder.decodeInteger(
+            let bestRecord = aDecoder.decodeInteger(
                 forKey: SCCodingConstants.bestRecord
             )
 

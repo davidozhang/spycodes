@@ -43,7 +43,9 @@ class CardCollection: NSObject, NSCoding {
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        if let cards = aDecoder.decodeObject(forKey: SCCodingConstants.cards) as? [Card] {
+        if let cards = aDecoder.decodeObject(
+            forKey: SCCodingConstants.cards
+        ) as? [Card] {
             self.init(cards: cards)
         } else {
             self.init()

@@ -24,10 +24,8 @@ class ActionEvent: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         if aDecoder.containsValue(forKey: SCCodingConstants.actionEventType) {
-            let type = aDecoder.decodeObject(
+            let type = aDecoder.decodeInteger(
                 forKey: SCCodingConstants.actionEventType
-                ) as? Int ?? aDecoder.decodeInteger(
-                    forKey: SCCodingConstants.actionEventType
             )
 
             self.type = EventType(rawValue: type)
