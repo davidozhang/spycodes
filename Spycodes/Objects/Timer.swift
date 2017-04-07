@@ -3,32 +3,34 @@ import Foundation
 class Timer: NSObject, NSCoding {
     static var instance = Timer()
 
-    var state: TimerState = .Stopped
+    var state: TimerState = .stopped
 
-    private var enabled = false
-    private var timer: NSTimer?
-    private var startTime: Int?
-    private var duration: Int = 120
+    fileprivate var enabled = false
+    fileprivate var timer: Foundation.Timer?
+    fileprivate var startTime: Int?
+    fileprivate var duration: Int = 120
 
-    private var timerEndedCallback: (() -> Void)?
-    private var timerInProgressCallback: ((remainingTime: Int) -> Void)?
+    fileprivate var timerEndedCallback: (() -> Void)?
+    fileprivate var timerInProgressCallback: ((_ remainingTime: Int) -> Void)?
 
     deinit {
         self.timer?.invalidate()
     }
 
     // MARK: Coder
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeBool(enabled, forKey: SCCodingConstants.timerEnabled)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(enabled, forKey: SCCodingConstants.timerEnabled)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        self.enabled = aDecoder.decodeBoolForKey(SCCodingConstants.timerEnabled)
+        self.enabled = aDecoder.decodeBool(
+            forKey: SCCodingConstants.timerEnabled
+        )
     }
 
     // MARK: Public
-    func setEnabled(enabled: Bool) {
+    func setEnabled(_ enabled: Bool) {
         self.enabled = enabled
     }
 
@@ -36,17 +38,17 @@ class Timer: NSObject, NSCoding {
         return self.enabled
     }
 
-    func startTimer(timerEnded: () -> Void,
-                    timerInProgress: ((remainingTime: Int) -> Void)) {
+    func startTimer(_ timerEnded: @escaping () -> Void,
+                    timerInProgress: @escaping ((_ remainingTime: Int) -> Void)) {
         if !self.enabled {
             return
         }
 
-        self.startTime = Int(NSDate.timeIntervalSinceReferenceDate())
+        self.startTime = Int(Date.timeIntervalSinceReferenceDate)
         self.timerEndedCallback = timerEnded
         self.timerInProgressCallback = timerInProgress
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(
-            1,
+        self.timer = Foundation.Timer.scheduledTimer(
+            timeInterval: 1,
             target: self,
             selector: #selector(Timer.updateTime),
             userInfo: nil,
@@ -55,7 +57,7 @@ class Timer: NSObject, NSCoding {
     }
 
     func invalidate() {
-        self.state = .Stopped
+        self.state = .stopped
         self.timer?.invalidate()
         self.timerEndedCallback = nil
         self.timerInProgressCallback = nil
@@ -68,12 +70,12 @@ class Timer: NSObject, NSCoding {
 
         guard let startTime = self.startTime else { return }
 
-        let currentTime = Int(NSDate.timeIntervalSinceReferenceDate())
+        let currentTime = Int(Date.timeIntervalSinceReferenceDate)
         let remainingTime = self.duration - (currentTime - startTime)
 
         if remainingTime > 0 {
             if let timerInProgressCallback = self.timerInProgressCallback {
-                timerInProgressCallback(remainingTime: remainingTime)
+                timerInProgressCallback(remainingTime)
             }
         } else {
             self.timer?.invalidate()

@@ -4,22 +4,22 @@ class SCUpdateAppViewController: SCViewController {
     @IBOutlet weak var updatePromptLabel: SCLabel!
 
     // MARK: Actions
-    @IBAction func onExitTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func onExitTapped(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func onDownloadTapped(sender: AnyObject) {
-        if let appStoreURL = NSURL(string: SCConstants.appStoreURL) {
-            UIApplication.sharedApplication().openURL(appStoreURL)
+    @IBAction func onDownloadTapped(_ sender: AnyObject) {
+        if let appStoreURL = URL(string: SCConstants.appStoreURL) {
+            UIApplication.shared.openURL(appStoreURL)
         }
     }
 
     deinit {
-        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
 
     // MARK: Lifecycle
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         self.updatePromptLabel.text = SCStrings.updatePrompt

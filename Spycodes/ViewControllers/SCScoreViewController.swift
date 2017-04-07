@@ -5,19 +5,19 @@ class SCScoreViewController: SCPopoverViewController {
     @IBOutlet weak var scoreLabel: SCLargeLabel!
 
     // MARK: Actions
-    @IBAction func onExitTapped(sender: AnyObject) {
+    @IBAction func onExitTapped(_ sender: AnyObject) {
         super.onExitTapped()
     }
 
     deinit {
-        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
 
     // MARK: Lifecycle
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if GameMode.instance.mode == GameMode.Mode.MiniGame {
+        if GameMode.instance.mode == GameMode.Mode.miniGame {
             self.headerLabel.text = "Minigame"
 
             if let bestRecord = Statistics.instance.getBestRecord() {
@@ -29,7 +29,8 @@ class SCScoreViewController: SCPopoverViewController {
             let statistics = Statistics.instance.getStatistics()
 
             self.headerLabel.text = "Regular Game"
-            if let red = statistics[Team.Red], blue = statistics[Team.Blue] {
+            if let red = statistics[Team.red],
+               let blue = statistics[Team.blue] {
                 self.scoreLabel.text = "Red " + String(red) + " : " + String(blue) + " Blue"
             }
         }

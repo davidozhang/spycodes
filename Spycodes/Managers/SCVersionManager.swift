@@ -2,15 +2,17 @@ import Foundation
 
 class SCVersionManager {
     // MARK: Public
-    static func checkLatestAppVersion(failure: ((Void) -> Void)) {
+    static func checkLatestAppVersion(_ failure: @escaping ((Void) -> Void)) {
         let successHandler: (NSDictionary) -> Void = { dict in
-            if let resultCount = dict["resultCount"] as? NSInteger where resultCount == 1,
-               let latestAppVersion = dict["results"]?[0]?["version"] as? String,
-               let currentAppVersion = NSBundle.mainBundle().objectForInfoDictionaryKey(
-                   "CFBundleShortVersionString"
+            if let resultCount = dict["resultCount"] as? NSInteger, resultCount == 1,
+               let result = dict["results"] as? NSArray,
+               let dict = result[0] as? NSDictionary,
+               let latestAppVersion = dict["version"] as? String,
+               let currentAppVersion = Bundle.main.object(
+                   forInfoDictionaryKey: "CFBundleShortVersionString"
                ) as? String {
                 if let current = Double(currentAppVersion),
-                       latest = Double(latestAppVersion) where current < latest {
+                   let latest = Double(latestAppVersion), current < latest {
                     failure()
                 }
             }
@@ -20,32 +22,32 @@ class SCVersionManager {
     }
 
     // MARK: Private
-    private static func sendRequest(success: ((NSDictionary) -> Void)) {
-        let requestURL = NSURL(string: SCConstants.versionURL)
-        let task = NSURLSession(
-            configuration: NSURLSessionConfiguration.defaultSessionConfiguration()).dataTaskWithURL(
-                requestURL!
-            ) { (data, response, error) in
+    fileprivate static func sendRequest(_ success: @escaping ((NSDictionary) -> Void)) {
+        let requestURL = URL(string: SCConstants.versionURL)
+        let task = URLSession(
+            configuration: URLSessionConfiguration.default).dataTask(
+                with: requestURL!, completionHandler: { (data, response, error) in
             if let data = data,
-                   response = response as? NSHTTPURLResponse,
-                   dictionary = SCVersionManager.deserialize(data) {
+               let response = response as? HTTPURLResponse,
+               let dictionary = SCVersionManager.deserialize(data) {
                 if response.statusCode == 200 {
                     success(dictionary)
                 }
             }
         }
+            ) 
 
         task.resume()
     }
 
-    private static func deserialize(data: NSData?) -> NSDictionary? {
+    fileprivate static func deserialize(_ data: Data?) -> NSDictionary? {
         guard let data = data else { return nil }
 
-        if let result = NSString(data: data, encoding: NSASCIIStringEncoding),
-               data = result.dataUsingEncoding(NSUTF8StringEncoding) {
+        if let result = NSString(data: data, encoding: String.Encoding.ascii.rawValue),
+           let data = result.data(using: String.Encoding.utf8.rawValue) {
             do {
-                if let dictionary = try NSJSONSerialization.JSONObjectWithData(
-                    data, options: []
+                if let dictionary = try JSONSerialization.jsonObject(
+                    with: data, options: []
                 ) as? NSDictionary {
                     return dictionary
                 }

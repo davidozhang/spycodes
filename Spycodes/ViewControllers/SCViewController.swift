@@ -7,78 +7,78 @@ class SCViewController: UIViewController {
     var unwindingSegue = false
     var isRootViewController = false
 
-    private let dimView = UIView()
+    fileprivate let dimView = UIView()
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.dimView.tag = 1
-        self.dimView.frame = UIScreen.mainScreen().bounds
+        self.dimView.frame = UIScreen.main.bounds
         self.dimView.backgroundColor = UIColor.dimBackgroundColor()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         let textFieldAppearance = UITextField.appearance()
         if SCSettingsManager.instance.isNightModeEnabled() {
-            textFieldAppearance.keyboardAppearance = .Dark
-            self.view.backgroundColor = UIColor.blackColor()
+            textFieldAppearance.keyboardAppearance = .dark
+            self.view.backgroundColor = UIColor.black
         } else {
-            textFieldAppearance.keyboardAppearance = .Light
-            self.view.backgroundColor = UIColor.whiteColor()
+            textFieldAppearance.keyboardAppearance = .light
+            self.view.backgroundColor = UIColor.white
         }
 
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(SCViewController.keyboardWillShow),
-            name: UIKeyboardWillShowNotification,
+            name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
         )
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(SCViewController.keyboardWillHide),
-            name: UIKeyboardWillHideNotification,
+            name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        NSNotificationCenter.defaultCenter().removeObserver(
+        NotificationCenter.default.removeObserver(
             self,
-            name: UIKeyboardWillShowNotification,
+            name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
         )
-        NSNotificationCenter.defaultCenter().removeObserver(
+        NotificationCenter.default.removeObserver(
             self,
-            name: UIKeyboardWillHideNotification,
+            name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
     }
 
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle : UIStatusBarStyle {
         if SCSettingsManager.instance.isNightModeEnabled() {
-            return .LightContent
+            return .lightContent
         } else {
-            return .Default
+            return .default
         }
     }
 
     // MARK: SCViewController-Only Functions
-    func _prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func _prepareForSegue(_ segue: UIStoryboardSegue, sender: Any?) {
         if unwindingSegue {
             return
         }
 
-        if let destination = segue.destinationViewController as? SCViewController {
+        if let destination = segue.destination as? SCViewController {
             destination.previousViewControllerIdentifier = self.unwindableIdentifier
         }
     }
 
-    func performUnwindSegue(returnToRootViewController: Bool, completionHandler: ((Void) -> Void)?) {
+    func performUnwindSegue(_ returnToRootViewController: Bool, completionHandler: ((Void) -> Void)?) {
         if isRootViewController {
             return
         }
@@ -87,7 +87,7 @@ class SCViewController: UIViewController {
         self.returnToRootViewController = returnToRootViewController
 
         if let previousViewControllerIdentifier = self.previousViewControllerIdentifier {
-            self.performSegueWithIdentifier(previousViewControllerIdentifier, sender: self)
+            self.performSegue(withIdentifier: previousViewControllerIdentifier, sender: self)
 
             if let completionHandler = completionHandler {
                 completionHandler()
@@ -97,8 +97,8 @@ class SCViewController: UIViewController {
         self.previousViewControllerIdentifier = nil
     }
 
-    func unwindedToSelf(sender: UIStoryboardSegue) {
-        if let source = sender.sourceViewController as? SCViewController {
+    func unwindedToSelf(_ sender: UIStoryboardSegue) {
+        if let source = sender.source as? SCViewController {
             if source.returnToRootViewController {  // Propagate down the view controller hierarchy
                 self.performUnwindSegue(true, completionHandler: nil)
             }
@@ -116,10 +116,10 @@ class SCViewController: UIViewController {
     }
 
     @objc
-    func keyboardWillShow(notification: NSNotification) {}
+    func keyboardWillShow(_ notification: Notification) {}
 
     @objc
-    func keyboardWillHide(notification: NSNotification) {}
+    func keyboardWillHide(_ notification: Notification) {}
 }
 
 //   _____      _                 _
@@ -130,13 +130,13 @@ class SCViewController: UIViewController {
 
 // MARK: UIPopoverPresentationControllerDelegate
 extension SCViewController: UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyleForPresentationController(
-        controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
+    func adaptivePresentationStyle(
+        for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
 
     func popoverPresentationControllerDidDismissPopover(
-        popoverPresentationController: UIPopoverPresentationController) {
+        _ popoverPresentationController: UIPopoverPresentationController) {
         self.hideDimView()
         popoverPresentationController.delegate = nil
     }

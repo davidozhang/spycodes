@@ -6,26 +6,26 @@ class SCPlayerNameViewController: SCViewController {
     @IBOutlet weak var userNameTextFieldVerticalCenterConstraint: NSLayoutConstraint!
 
     // MARK: Actions
-    @IBAction func unwindToPlayerName(sender: UIStoryboardSegue) {
+    @IBAction func unwindToPlayerName(_ sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
     }
 
-    @IBAction func onBackButtonTapped(sender: AnyObject) {
+    @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         super.performUnwindSegue(true, completionHandler: nil)
     }
 
     deinit {
-        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
 
     // MARK: Lifecycle
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         // Unwindable view controller identifier
         self.unwindableIdentifier = "player-name"
 
-        if let name = Player.instance.name where name.characters.count > 0 {
+        if let name = Player.instance.name, name.characters.count > 0 {
             self.userNameTextField.text = name
         }
 
@@ -33,14 +33,14 @@ class SCPlayerNameViewController: SCViewController {
         self.userNameTextField.becomeFirstResponder()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         self.userNameTextField.delegate = nil
         self.userNameTextField.resignFirstResponder()
     }
 
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         self.userNameTextFieldVerticalCenterConstraint.constant = 0
@@ -51,15 +51,15 @@ class SCPlayerNameViewController: SCViewController {
     }
 
     // MARK: Segue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super._prepareForSegue(segue, sender: sender)
     }
 
     // MARK: Keyboard
-    override func keyboardWillShow(notification: NSNotification) {
+    override func keyboardWillShow(_ notification: Notification) {
         if let userInfo = notification.userInfo,
-               frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            let rect = frame.CGRectValue()
+           let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let rect = frame.cgRectValue
             self.userNameTextFieldVerticalCenterConstraint.constant = -(
                 rect.height / 2 - self.headerLabelTopMarginConstraint.constant
             )
@@ -75,14 +75,14 @@ class SCPlayerNameViewController: SCViewController {
 
 // MARK: UITextFieldDelegate
 extension SCPlayerNameViewController: UITextFieldDelegate {
-    func textField(textField: UITextField,
-                   shouldChangeCharactersInRange range: NSRange,
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         return true
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if let name = self.userNameTextField.text where name.characters.count >= 1 {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let name = self.userNameTextField.text, name.characters.count >= 1 {
             Player.instance.name = name
 
             if Room.instance.getPlayerWithUUID(Player.instance.getUUID()) == nil {
@@ -90,9 +90,9 @@ extension SCPlayerNameViewController: UITextFieldDelegate {
             }
 
             if Player.instance.isHost() {
-                self.performSegueWithIdentifier("pregame-room", sender: self)
+                self.performSegue(withIdentifier: "pregame-room", sender: self)
             } else {
-                self.performSegueWithIdentifier("access-code", sender: self)
+                self.performSegue(withIdentifier: "access-code", sender: self)
             }
             return true
         } else {

@@ -8,8 +8,8 @@ class SCVersionViewCell: SCTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        if let versionString = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String,
-               buildNumber = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as? String {
+        if let versionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
+           let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
             self.versionNumberLabel.text = versionString
             self.buildNumberLabel.text = "(\(buildNumber))"
         }

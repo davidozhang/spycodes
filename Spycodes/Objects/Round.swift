@@ -18,52 +18,68 @@ class Round: NSObject, NSCoding {
     var gameEnded = false
 
     // MARK: Coder
-    func encodeWithCoder(aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder) {
         if let team = self.currentTeam?.rawValue {
-            aCoder.encodeObject(team, forKey: SCCodingConstants.team)
+            aCoder.encode(team, forKey: SCCodingConstants.team)
         }
 
         if let clue = self.clue {
-            aCoder.encodeObject(clue, forKey: SCCodingConstants.clue)
+            aCoder.encode(clue, forKey: SCCodingConstants.clue)
         }
 
         if let numberOfWords = self.numberOfWords {
-            aCoder.encodeObject(numberOfWords, forKey: SCCodingConstants.numberOfWords)
+            aCoder.encode(numberOfWords, forKey: SCCodingConstants.numberOfWords)
         }
 
         if let winningTeam = self.winningTeam?.rawValue {
-            aCoder.encodeObject(winningTeam, forKey: SCCodingConstants.winningTeam)
+            aCoder.encode(winningTeam, forKey: SCCodingConstants.winningTeam)
         }
 
-        aCoder.encodeBool(self.abort, forKey: SCCodingConstants.abort)
-        aCoder.encodeBool(self.gameEnded, forKey: SCCodingConstants.gameEnded)
+        aCoder.encode(self.abort, forKey: SCCodingConstants.abort)
+        aCoder.encode(self.gameEnded, forKey: SCCodingConstants.gameEnded)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
 
-        if let currentTeam = aDecoder.decodeObjectForKey(SCCodingConstants.team) as? Int {
+        if aDecoder.containsValue(forKey: SCCodingConstants.team) {
+            let currentTeam = aDecoder.decodeInteger(
+                forKey: SCCodingConstants.team
+            )
+
             self.currentTeam = Team(rawValue: currentTeam)
         }
 
-        if let clue = aDecoder.decodeObjectForKey(SCCodingConstants.clue) as? String {
+        if aDecoder.containsValue(forKey: SCCodingConstants.clue),
+           let clue = aDecoder.decodeObject(forKey: SCCodingConstants.clue) as? String {
             self.clue = clue
         }
 
-        if let numberOfWords = aDecoder.decodeObjectForKey(SCCodingConstants.numberOfWords) as? String {
+        if aDecoder.containsValue(forKey: SCCodingConstants.numberOfWords),
+           let numberOfWords = aDecoder.decodeObject(forKey: SCCodingConstants.numberOfWords) as? String {
             self.numberOfWords = numberOfWords
         }
 
-        if let winningTeam = aDecoder.decodeObjectForKey(SCCodingConstants.winningTeam) as? Int {
+        if aDecoder.containsValue(forKey: SCCodingConstants.winningTeam) {
+            let winningTeam = aDecoder.decodeInteger(
+                forKey: SCCodingConstants.winningTeam
+            )
+
             self.winningTeam = Team(rawValue: winningTeam)
         }
 
-        self.abort = aDecoder.decodeBoolForKey(SCCodingConstants.abort)
-        self.gameEnded = aDecoder.decodeBoolForKey(SCCodingConstants.gameEnded)
+
+        self.abort = aDecoder.decodeBool(
+            forKey: SCCodingConstants.abort
+        )
+
+        self.gameEnded = aDecoder.decodeBool(
+            forKey: SCCodingConstants.gameEnded
+        )
     }
 
     // MARK: Public
-    func setStartingTeam(team: Team) {
+    func setStartingTeam(_ team: Team) {
         self.currentTeam = team
     }
 
@@ -79,22 +95,22 @@ class Round: NSObject, NSCoding {
         return self.isClueSet() && self.isNumberOfWordsSet()
     }
 
-    func endRound(endingTeam: Team) {
+    func endRound(_ endingTeam: Team) {
         self.clue = nil
         self.numberOfWords = nil
 
-        if GameMode.instance.mode == GameMode.Mode.MiniGame {
-            CardCollection.instance.autoEliminateOpponentTeamCard(Team.Blue)
-            NSNotificationCenter.defaultCenter().postNotificationName(
-                SCNotificationKeys.autoEliminateNotificationKey,
+        if GameMode.instance.mode == GameMode.Mode.miniGame {
+            CardCollection.instance.autoEliminateOpponentTeamCard(Team.blue)
+            NotificationCenter.default.post(
+                name: Notification.Name(rawValue: SCNotificationKeys.autoEliminateNotificationKey),
                 object: self,
                 userInfo: nil
             )
 
-            if CardCollection.instance.getCardsRemainingForTeam(Team.Blue) == 0 {
-                dispatch_async(dispatch_get_main_queue(), {
-                    NSNotificationCenter.defaultCenter().postNotificationName(
-                        SCNotificationKeys.minigameGameOverNotificationKey,
+            if CardCollection.instance.getCardsRemainingForTeam(Team.blue) == 0 {
+                DispatchQueue.main.async(execute: {
+                    NotificationCenter.default.post(
+                        name: Notification.Name(rawValue: SCNotificationKeys.minigameGameOverNotificationKey),
                         object: self,
                         userInfo: [
                             "title": "Minigame Game Over",

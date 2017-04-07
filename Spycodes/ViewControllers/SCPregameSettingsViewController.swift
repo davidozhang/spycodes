@@ -7,20 +7,20 @@ protocol SCPregameSettingsViewControllerDelegate: class {
 class SCPregameSettingsViewController: SCPopoverViewController {
     weak var delegate: SCPregameSettingsViewControllerDelegate?
 
-    private let settings = ["Minigame", "Timer", "Night Mode"]
+    fileprivate let settings = ["Minigame", "Timer", "Night Mode"]
     @IBOutlet weak var tableView: UITableView!
 
     // MARK: Actions
-    @IBAction func onExitTapped(sender: AnyObject) {
+    @IBAction func onExitTapped(_ sender: AnyObject) {
         super.onExitTapped()
     }
 
     deinit {
-        print("[DEINIT] " + NSStringFromClass(self.dynamicType))
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
 
     // MARK: Lifecycle
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         self.tableView.dataSource = self
@@ -29,7 +29,7 @@ class SCPregameSettingsViewController: SCPopoverViewController {
         self.preferredContentSize = self.popoverPreferredContentSize()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         self.tableView.dataSource = nil
@@ -54,12 +54,12 @@ class SCPregameSettingsViewController: SCPopoverViewController {
 
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCPregameSettingsViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(tableView: UITableView,
-                   cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0: // Minigame
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(
-                SCCellReuseIdentifiers.minigameToggleViewCell
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCCellReuseIdentifiers.minigameToggleViewCell
             ) as? SCToggleViewCell else {
                 return UITableViewCell()
             }
@@ -69,8 +69,8 @@ extension SCPregameSettingsViewController: UITableViewDataSource, UITableViewDel
 
             return cell
         case 1: // Timer
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(
-                SCCellReuseIdentifiers.timerToggleViewCell
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCCellReuseIdentifiers.timerToggleViewCell
             ) as? SCToggleViewCell else {
                 return UITableViewCell()
             }
@@ -80,8 +80,8 @@ extension SCPregameSettingsViewController: UITableViewDataSource, UITableViewDel
 
             return cell
         case 2: // Night Mode
-            guard let cell = self.tableView.dequeueReusableCellWithIdentifier(
-                SCCellReuseIdentifiers.nightModeToggleViewCell
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCCellReuseIdentifiers.nightModeToggleViewCell
                 ) as? SCToggleViewCell else {
                 return UITableViewCell()
             }
@@ -95,48 +95,48 @@ extension SCPregameSettingsViewController: UITableViewDataSource, UITableViewDel
         }
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    func tableView(tableView: UITableView,
+    func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         return self.settings.count
     }
 }
 
 extension SCPregameSettingsViewController: SCToggleViewCellDelegate {
-    func onToggleChanged(cell: SCToggleViewCell, enabled: Bool) {
+    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
             case SCCellReuseIdentifiers.minigameToggleViewCell:
                 if enabled {
-                    GameMode.instance.mode = GameMode.Mode.MiniGame
+                    GameMode.instance.mode = GameMode.Mode.miniGame
                 } else {
-                    GameMode.instance.mode = GameMode.Mode.RegularGame
+                    GameMode.instance.mode = GameMode.Mode.regularGame
                 }
 
                 Room.instance.resetPlayers()
                 Statistics.instance.reset()
 
-                if GameMode.instance.mode == GameMode.Mode.MiniGame {
+                if GameMode.instance.mode == GameMode.Mode.miniGame {
                     Room.instance.addCPUPlayer()
                 } else {
                     Room.instance.removeCPUPlayer()
                 }
 
-                var data = NSKeyedArchiver.archivedDataWithRootObject(GameMode.instance)
+                var data = NSKeyedArchiver.archivedData(withRootObject: GameMode.instance)
                 SCMultipeerManager.instance.broadcastData(data)
 
-                data = NSKeyedArchiver.archivedDataWithRootObject(Room.instance)
+                data = NSKeyedArchiver.archivedData(withRootObject: Room.instance)
                 SCMultipeerManager.instance.broadcastData(data)
 
-                data = NSKeyedArchiver.archivedDataWithRootObject(Statistics.instance)
+                data = NSKeyedArchiver.archivedData(withRootObject: Statistics.instance)
                 SCMultipeerManager.instance.broadcastData(data)
             case SCCellReuseIdentifiers.timerToggleViewCell:
                 Timer.instance.setEnabled(enabled)
 
-                let data = NSKeyedArchiver.archivedDataWithRootObject(Timer.instance)
+                let data = NSKeyedArchiver.archivedData(withRootObject: Timer.instance)
                 SCMultipeerManager.instance.broadcastData(data)
             case SCCellReuseIdentifiers.nightModeToggleViewCell:
                 SCSettingsManager.instance.enableNightMode(enabled)

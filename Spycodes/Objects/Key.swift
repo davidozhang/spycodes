@@ -1,17 +1,17 @@
 import Foundation
 
 class Key {
-    private var startingTeam: Team?
-    private var key = [Team]()
+    fileprivate var startingTeam: Team?
+    fileprivate var key = [Team]()
 
     // MARK: Constructor/Destructor
     init() {
         if let startingTeam = Team(rawValue: self.randomBinarySingleDigit()) {
             self.startingTeam = startingTeam
-            self.key += [Team.Assassin]
-            self.key += Array(count: 6, repeatedValue: Team.Neutral)
-            self.key += Array(count: 7, repeatedValue: Team.Red)
-            self.key += Array(count: 7, repeatedValue: Team.Blue)
+            self.key += [Team.assassin]
+            self.key += Array(repeating: Team.neutral, count: 6)
+            self.key += Array(repeating: Team.red, count: 7)
+            self.key += Array(repeating: Team.blue, count: 7)
             self.key += [startingTeam]
         }
 
@@ -19,10 +19,10 @@ class Key {
     }
 
     init(startingTeam: Team) {
-        self.key += [Team.Assassin]
-        self.key += Array(count: 6, repeatedValue: Team.Neutral)
-        self.key += Array(count: 7, repeatedValue: Team.Red)
-        self.key += Array(count: 7, repeatedValue: Team.Blue)
+        self.key += [Team.assassin]
+        self.key += Array(repeating: Team.neutral, count: 6)
+        self.key += Array(repeating: Team.red, count: 7)
+        self.key += Array(repeating: Team.blue, count: 7)
         self.key += [startingTeam]
         self.key = self.key.shuffled
     }
@@ -40,12 +40,12 @@ class Key {
         if let startingTeam = self.startingTeam {
             return startingTeam
         } else {
-            return Team.Red
+            return Team.red
         }
     }
 
     // MARK: Private
-    private func randomBinarySingleDigit() -> Int {
+    fileprivate func randomBinarySingleDigit() -> Int {
         return arc4random_uniform(2) == 0 ? 1 : 0
     }
 }

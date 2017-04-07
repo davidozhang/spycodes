@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SCSingleCharacterTextFieldBackspaceDelegate: class {
-    func onBackspaceDetected(textField: UITextField)
+    func onBackspaceDetected(_ textField: UITextField)
 }
 
 class SCSingleCharacterTextField: SCUnderlineTextField {
@@ -10,7 +10,7 @@ class SCSingleCharacterTextField: SCUnderlineTextField {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
-        self.textAlignment = .Center
+        self.textAlignment = .center
     }
 
     override func deleteBackward() {
@@ -19,7 +19,7 @@ class SCSingleCharacterTextField: SCUnderlineTextField {
         backspaceDelegate?.onBackspaceDetected(self)
     }
 
-    override func caretRectForPosition(position: UITextPosition) -> CGRect {
-        return CGRectZero
+    override func caretRect(for position: UITextPosition) -> CGRect {
+        return CGRect.zero
     }
 }
