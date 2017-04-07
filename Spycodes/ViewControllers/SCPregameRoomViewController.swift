@@ -323,9 +323,7 @@ class SCPregameRoomViewController: SCViewController {
 extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
     func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
         if let info = info {
-            if info["joinRoomWithUUID"] == Room.instance.getUUID() ||
-               info["joinRoomWithAccessCode"] == Room.instance.getAccessCode() {
-                // joinRoomWithUUID - v1.0; joinRoomWithAccessCode - v2.0
+            if info["joinRoomWithAccessCode"] == Room.instance.getAccessCode() {
                 SCMultipeerManager.instance.invitePeerToSession(peerID)
             }
         }

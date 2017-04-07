@@ -1,5 +1,5 @@
 class SCCodingConstants {
-    // Version 1.0+
+    // Version 3.0+
     static let abort = "abort"
     static let bestRecord = "bestRecord"
     static let blue = "blue"
@@ -18,11 +18,7 @@ class SCCodingConstants {
     static let winningTeam = "winningTeam"
     static let word = "word"
     static let uuid = "uuid"
-
-    // Version 2.0+
     static let accessCode = "accessCode"
-
-    // Version 2.3+
     static let actionEventType = "actionEventType"
     static let gameEnded = "gameEnded"
     static let timerEnabled = "timerEnabled"
