@@ -627,7 +627,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
     }
 
     func peerDisconnectedFromSession(_ peerID: MCPeerID) {
-        if let uuid = Room.instance.connectedPeers[peerID],
+        if let uuid = Room.instance.getUUIDWithPeerID(peerID: peerID),
            let player = Room.instance.getPlayerWithUUID(uuid) {
 
             Room.instance.removePlayerWithUUID(uuid)

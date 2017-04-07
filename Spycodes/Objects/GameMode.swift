@@ -11,7 +11,7 @@ class GameMode: NSObject, NSCoding {
 
     // MARK: Constructor/Destructor
     override init() {
-        self.mode = Mode.regularGame
+        self.mode = .regularGame
     }
 
     // MARK: Coder

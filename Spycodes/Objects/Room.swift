@@ -3,12 +3,12 @@ import MultipeerConnectivity
 
 class Room: NSObject, NSCoding {
     static var instance = Room()
-    static let cpuUUID = "CPU"
     static let accessCodeAllowedCharacters: NSString = "abcdefghijklmnopqrstuvwxyz"
+    fileprivate static let cpuUUID = "CPU"
 
-    var name: String
-    var players = [Player]()
-    var connectedPeers = [MCPeerID: String]()
+    fileprivate var name: String
+    fileprivate var players = [Player]()
+    fileprivate var connectedPeers = [MCPeerID: String]()
 
     fileprivate var uuid: String
     fileprivate var accessCode: String
@@ -64,6 +64,30 @@ class Room: NSObject, NSCoding {
     }
 
     // MARK: Public
+    func getName() -> String {
+        return self.name
+    }
+
+    func getPlayers() -> [Player] {
+        return self.players
+    }
+
+    func addConnectedPeer(peerID: MCPeerID, uuid: String) {
+        self.connectedPeers[peerID] = uuid
+    }
+
+    func getUUIDWithPeerID(peerID: MCPeerID) -> String? {
+        return self.connectedPeers[peerID]
+    }
+
+    func removeConnectedPeer(peerID: MCPeerID) {
+        self.connectedPeers.removeValue(forKey: peerID)
+    }
+
+    func removeAllPlayers() {
+        self.players.removeAll()
+    }
+
     func refresh() {
         self.players.sort(by: { player1, player2 in
             if player1.getTeam().rawValue < player2.getTeam().rawValue {
@@ -91,10 +115,6 @@ class Room: NSObject, NSCoding {
 
     func getUUID() -> String {
         return self.uuid
-    }
-
-    func setUUID(_ uuid: String) {
-        self.uuid = uuid
     }
 
     func getAccessCode() -> String {
