@@ -347,7 +347,7 @@ class SCGameRoomViewController: SCViewController {
                 self.numberOfWordsTextField.isEnabled = false
             } else {
                 if Player.instance.isCluegiver() {
-                    self.clueTextField.text = Round.defaultClueGiverClue
+                    self.clueTextField.text = Round.defaultCluegiverClue
                     self.numberOfWordsTextField.text = Round.defaultNumberOfWords
 
                     self.startTextFieldAnimations()
@@ -425,7 +425,7 @@ class SCGameRoomViewController: SCViewController {
             if let clueTextFieldCharacterCount = self.clueTextField.text?.characters.count,
                let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.characters.count {
                 if clueTextFieldCharacterCount > 0 &&
-                   self.clueTextField.text != Round.defaultClueGiverClue &&
+                   self.clueTextField.text != Round.defaultCluegiverClue &&
                    numberOfWordsTextFieldCharacterCount > 0 &&
                    self.numberOfWordsTextField.text != Round.defaultNumberOfWords {
                     self.actionButton.isEnabled = true
@@ -855,9 +855,9 @@ extension SCGameRoomViewController: UITextFieldDelegate {
         self.cluegiverIsEditing = true
 
         if textField == self.clueTextField {
-            if textField.text == Round.defaultClueGiverClue {
+            if textField.text == Round.defaultCluegiverClue {
                 textField.text = ""
-                textField.placeholder = Round.defaultClueGiverClue
+                textField.placeholder = Round.defaultCluegiverClue
             }
         } else if textField == self.numberOfWordsTextField {
             if textField.text == Round.defaultNumberOfWords {
@@ -881,7 +881,7 @@ extension SCGameRoomViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text == "" {
             if textField == self.clueTextField {
-                self.clueTextField.text = Round.defaultClueGiverClue
+                self.clueTextField.text = Round.defaultCluegiverClue
             } else if textField == self.numberOfWordsTextField {
                 self.numberOfWordsTextField.text = Round.defaultNumberOfWords
             }
@@ -890,7 +890,7 @@ extension SCGameRoomViewController: UITextFieldDelegate {
 
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField == self.clueTextField {
-            textField.placeholder = Round.defaultClueGiverClue
+            textField.placeholder = Round.defaultCluegiverClue
         } else if textField == self.numberOfWordsTextField {
             textField.placeholder = Round.defaultNumberOfWords
         }

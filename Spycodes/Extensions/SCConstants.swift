@@ -7,7 +7,7 @@ class SCConstants {
         case blue = "blue"
         case cards = "cards"
         case clue = "clue"
-        case clueGiver = "clueGiver"
+        case cluegiver = "cluegiver"
         case connectedPeers = "connectedPeers"
         case enabled = "enabled"
         case gameEnded = "gameEnded"

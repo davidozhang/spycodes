@@ -75,11 +75,11 @@ class Room: NSObject, NSCoding {
             }
         })
 
-        if self.getClueGiverUUIDForTeam(.red) == nil {
+        if self.getCluegiverUUIDForTeam(.red) == nil {
             self.autoAssignCluegiverForTeam(.red)
         }
 
-        if self.getClueGiverUUIDForTeam(.blue) == nil {
+        if self.getCluegiverUUIDForTeam(.blue) == nil {
             self.autoAssignCluegiverForTeam(.blue)
         }
     }
@@ -110,7 +110,7 @@ class Room: NSObject, NSCoding {
             name: "CPU",
             uuid: Room.cpuUUID,
             team: .blue,
-            clueGiver: true,
+            cluegiver: true,
             host: false
         )
         self.players.append(cpu)
@@ -123,7 +123,7 @@ class Room: NSObject, NSCoding {
     func autoAssignCluegiverForTeam(_ team: Team) {
         for player in self.players {
             if player.getTeam() == team {
-                player.setIsClueGiver(true)
+                player.setIsCluegiver(true)
                 return
             }
         }
@@ -188,15 +188,15 @@ class Room: NSObject, NSCoding {
 
     func cluegiversSelected() -> Bool {
         if GameMode.instance.getMode() == .regularGame {
-            if self.getClueGiverUUIDForTeam(.red) != nil &&
-               self.getClueGiverUUIDForTeam(.blue) != nil {
+            if self.getCluegiverUUIDForTeam(.red) != nil &&
+               self.getCluegiverUUIDForTeam(.blue) != nil {
                 return true
             }
 
             return false
         } else {    // Minigame
-            if self.getClueGiverUUIDForTeam(.red) != nil &&
-               self.getClueGiverUUIDForTeam(.blue) != nil {
+            if self.getCluegiverUUIDForTeam(.red) != nil &&
+               self.getCluegiverUUIDForTeam(.blue) != nil {
                 return true
             }
 
@@ -208,7 +208,7 @@ class Room: NSObject, NSCoding {
         return teamSizesValid() && cluegiversSelected()
     }
 
-    func getClueGiverUUIDForTeam(_ team: Team) -> String? {
+    func getCluegiverUUIDForTeam(_ team: Team) -> String? {
         let filtered = self.players.filter({
             ($0 as Player).isCluegiver() && ($0 as Player).getTeam() == team
         })
@@ -221,7 +221,7 @@ class Room: NSObject, NSCoding {
 
     func resetPlayers() {
         for player in players {
-            player.setIsClueGiver(false)
+            player.setIsCluegiver(false)
             player.setTeam(team: .red)
         }
     }

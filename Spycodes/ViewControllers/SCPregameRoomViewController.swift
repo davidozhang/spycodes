@@ -389,7 +389,7 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
 
         Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setTeam(team: newTeam)
 
-        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsClueGiver(false)
+        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsCluegiver(false)
         self.broadcastEssentialData()
     }
 }
@@ -443,10 +443,10 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         if playerAtIndex.isCluegiver() {
-            cell.clueGiverImage.image = UIImage(named: "Crown-Filled")
-            cell.clueGiverImage.isHidden = false
+            cell.cluegiverImage.image = UIImage(named: "Crown-Filled")
+            cell.cluegiverImage.isHidden = false
         } else {
-            cell.clueGiverImage.isHidden = true
+            cell.cluegiverImage.isHidden = true
         }
 
         return cell
@@ -461,18 +461,18 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             return
         }
 
-        if let clueGiverUUID = Room.instance.getClueGiverUUIDForTeam(team) {
-            Room.instance.getPlayerWithUUID(clueGiverUUID)?.setIsClueGiver(false)
+        if let cluegiverUUID = Room.instance.getCluegiverUUIDForTeam(team) {
+            Room.instance.getPlayerWithUUID(cluegiverUUID)?.setIsCluegiver(false)
 
-            if Player.instance.getUUID() == clueGiverUUID {
-                Player.instance.setIsClueGiver(false)
+            if Player.instance.getUUID() == cluegiverUUID {
+                Player.instance.setIsCluegiver(false)
             }
         }
 
-        Room.instance.players[indexPath.row].setIsClueGiver(true)
+        Room.instance.players[indexPath.row].setIsCluegiver(true)
 
         if Player.instance.getUUID() == playerAtIndex.getUUID() {
-            Player.instance.setIsClueGiver(true)
+            Player.instance.setIsCluegiver(true)
         }
 
         self.broadcastEssentialData()

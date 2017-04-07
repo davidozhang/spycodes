@@ -9,7 +9,7 @@ class SCPregameRoomViewCell: SCTableViewCell {
 
     var index: Int?
 
-    @IBOutlet weak var clueGiverImage: UIImageView!
+    @IBOutlet weak var cluegiverImage: UIImageView!
     @IBOutlet weak var nameLabel: SCLabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 
