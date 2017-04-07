@@ -1,18 +1,16 @@
 class SCConstants {
-    enum constant: Int {
-        case cardCount = 22
-        case accessCodeLength = 4
-        case roomMaxSize = 8
-    }
-
     enum coding: String {
         case abort = "abort"
+        case accessCode = "accessCode"
+        case actionEventType = "actionEventType"
         case bestRecord = "bestRecord"
         case blue = "blue"
         case cards = "cards"
         case clue = "clue"
         case clueGiver = "clueGiver"
         case connectedPeers = "connectedPeers"
+        case enabled = "enabled"
+        case gameEnded = "gameEnded"
         case host = "host"
         case mode = "mode"
         case name = "name"
@@ -21,13 +19,15 @@ class SCConstants {
         case red = "red"
         case selected = "selected"
         case team = "team"
+        case uuid = "uuid"
         case winningTeam = "winningTeam"
         case word = "word"
-        case uuid = "uuid"
-        case accessCode = "accessCode"
-        case actionEventType = "actionEventType"
-        case gameEnded = "gameEnded"
-        case timerEnabled = "timerEnabled"
+    }
+
+    enum constant: Int {
+        case accessCodeLength = 4
+        case cardCount = 22
+        case roomMaxSize = 8
     }
 
     enum identifier: String {
@@ -47,12 +47,13 @@ class SCConstants {
     }
 
     enum url: String {
-        case version = "https://itunes.apple.com/lookup?bundleId=com.davidzhang.Spycodes"
-        case support = "https://www.spycodes.net/support/"
+
         case appStore = "itms-apps://itunes.apple.com/app/id1141711201"
         case appStoreWeb = "https://itunes.apple.com/app/spycodes/id1141711201?mt=8"
         case github = "https://github.com/davidozhang/spycodes"
         case icons8 = "https://icons8.com/"
+        case support = "https://www.spycodes.net/support/"
+        case version = "https://itunes.apple.com/lookup?bundleId=com.davidzhang.Spycodes"
         case website = "https://www.spycodes.net/"
     }
 

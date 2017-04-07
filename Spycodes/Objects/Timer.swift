@@ -19,13 +19,13 @@ class Timer: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(enabled, forKey: SCConstants.coding.timerEnabled.rawValue)
+        aCoder.encode(enabled, forKey: SCConstants.coding.enabled.rawValue)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         self.enabled = aDecoder.decodeBool(
-            forKey: SCConstants.coding.timerEnabled.rawValue
+            forKey: SCConstants.coding.enabled.rawValue
         )
     }
 
