@@ -3,12 +3,12 @@ import MultipeerConnectivity
 
 class Room: NSObject, NSCoding {
     static var instance = Room()
-    static let cpuUUID = "CPU"
     static let accessCodeAllowedCharacters: NSString = "abcdefghijklmnopqrstuvwxyz"
+    fileprivate static let cpuUUID = "CPU"
 
-    var name: String
-    var players = [Player]()
-    var connectedPeers = [MCPeerID: String]()
+    fileprivate var name: String
+    fileprivate var players = [Player]()
+    fileprivate var connectedPeers = [MCPeerID: String]()
 
     fileprivate var uuid: String
     fileprivate var accessCode: String
@@ -64,23 +64,47 @@ class Room: NSObject, NSCoding {
     }
 
     // MARK: Public
+    func getName() -> String {
+        return self.name
+    }
+
+    func getPlayers() -> [Player] {
+        return self.players
+    }
+
+    func addConnectedPeer(peerID: MCPeerID, uuid: String) {
+        self.connectedPeers[peerID] = uuid
+    }
+
+    func getUUIDWithPeerID(peerID: MCPeerID) -> String? {
+        return self.connectedPeers[peerID]
+    }
+
+    func removeConnectedPeer(peerID: MCPeerID) {
+        self.connectedPeers.removeValue(forKey: peerID)
+    }
+
+    func removeAllPlayers() {
+        self.players.removeAll()
+    }
+
     func refresh() {
         self.players.sort(by: { player1, player2 in
-            if player1.team.rawValue < player2.team.rawValue {
+            if player1.getTeam().rawValue < player2.getTeam().rawValue {
                 return true
-            } else if player1.team.rawValue == player2.team.rawValue {
-                return player1.isClueGiver()
+            } else if player1.getTeam().rawValue == player2.getTeam().rawValue {
+                return player1.isCluegiver()
             } else {
                 return false
             }
         })
 
-        if self.getClueGiverUUIDForTeam(Team.red) == nil {
-            self.autoAssignCluegiverForTeam(Team.red)
+        if self.getCluegiverUUIDForTeam(.red) == nil {
+            self.autoAssignCluegiverForTeam(.red)
         }
 
-        if self.getClueGiverUUIDForTeam(Team.blue) == nil {
-            self.autoAssignCluegiverForTeam(Team.blue)
+        if self.getCluegiverUUIDForTeam(.blue) == nil {
+            self.autoAssignCluegiverForTeam(.blue)
         }
     }
 
@@ -91,10 +115,6 @@ class Room: NSObject, NSCoding {
 
     func getUUID() -> String {
         return self.uuid
-    }
-
-    func setUUID(_ uuid: String) {
-        self.uuid = uuid
     }
 
     func getAccessCode() -> String {
@@ -109,8 +129,8 @@ class Room: NSObject, NSCoding {
         let cpu = Player(
             name: "CPU",
             uuid: Room.cpuUUID,
-            team: Team.blue,
-            clueGiver: true,
+            team: .blue,
+            cluegiver: true,
             host: false
         )
         self.players.append(cpu)
@@ -122,8 +142,8 @@ class Room: NSObject, NSCoding {
 
     func autoAssignCluegiverForTeam(_ team: Team) {
         for player in self.players {
-            if player.team == team {
-                player.setIsClueGiver(true)
+            if player.getTeam() == team {
+                player.setIsCluegiver(true)
                 return
             }
         }
@@ -142,7 +162,7 @@ class Room: NSObject, NSCoding {
 
     func setNameOfPlayerAtIndex(_ index: Int, name: String) {
         if index < self.players.count {
-            self.players[index].name = name
+            self.players[index].setName(name: name)
         }
     }
 
@@ -163,12 +183,12 @@ class Room: NSObject, NSCoding {
     }
 
     func teamSizesValid() -> Bool {
-        if GameMode.instance.mode == GameMode.Mode.regularGame {
+        if GameMode.instance.getMode() == .regularGame {
             let redValid = self.players.filter({
-                ($0 as Player).team == Team.red
+                ($0 as Player).getTeam() == .red
             }).count >= 2
             let blueValid = self.players.filter({
-                ($0 as Player).team == Team.blue
+                ($0 as Player).getTeam() == .blue
             }).count >= 2
 
             if redValid && blueValid {
@@ -187,16 +207,16 @@ class Room: NSObject, NSCoding {
     }
 
     func cluegiversSelected() -> Bool {
-        if GameMode.instance.mode == GameMode.Mode.regularGame {
-            if self.getClueGiverUUIDForTeam(Team.red) != nil &&
-               self.getClueGiverUUIDForTeam(Team.blue) != nil {
+        if GameMode.instance.getMode() == .regularGame {
+            if self.getCluegiverUUIDForTeam(.red) != nil &&
+               self.getCluegiverUUIDForTeam(.blue) != nil {
                 return true
             }
 
             return false
         } else {    // Minigame
-            if self.getClueGiverUUIDForTeam(Team.red) != nil &&
-               self.getClueGiverUUIDForTeam(Team.blue) != nil {
+            if self.getCluegiverUUIDForTeam(.red) != nil &&
+               self.getCluegiverUUIDForTeam(.blue) != nil {
                 return true
             }
 
@@ -208,9 +228,9 @@ class Room: NSObject, NSCoding {
         return teamSizesValid() && cluegiversSelected()
     }
 
-    func getClueGiverUUIDForTeam(_ team: Team) -> String? {
+    func getCluegiverUUIDForTeam(_ team: Team) -> String? {
         let filtered = self.players.filter({
-            ($0 as Player).isClueGiver() && ($0 as Player).team == team
+            ($0 as Player).isCluegiver() && ($0 as Player).getTeam() == team
         })
         if filtered.count == 1 {
             return filtered[0].getUUID()
@@ -221,8 +241,8 @@ class Room: NSObject, NSCoding {
 
     func resetPlayers() {
         for player in players {
-            player.clueGiver = false
-            player.team = Team.red
+            player.setIsCluegiver(false)
+            player.setTeam(team: .red)
         }
     }
 

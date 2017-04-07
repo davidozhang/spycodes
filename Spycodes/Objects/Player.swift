@@ -4,31 +4,30 @@ import UIKit
 class Player: NSObject, NSCoding {
     static var instance = Player()
 
-    var name: String?
-    var team: Team
-    var clueGiver: Bool
-    var host: Bool
-
+    fileprivate var name: String?
+    fileprivate var team: Team
+    fileprivate var cluegiver: Bool
+    fileprivate var host: Bool
     fileprivate var uuid: String
 
     // MARK: Constructor/Destructor
     override init() {
         self.uuid = UIDevice.current.identifierForVendor!.uuidString
-        self.team = Team.red
-        self.clueGiver = false
+        self.team = .red
+        self.cluegiver = false
         self.host = false
     }
 
     convenience init(name: String,
                      uuid: String,
                      team: Team,
-                     clueGiver: Bool,
+                     cluegiver: Bool,
                      host: Bool) {
         self.init()
         self.name = name
         self.uuid = uuid
         self.team = team
-        self.clueGiver = clueGiver
+        self.cluegiver = cluegiver
         self.host = host
     }
 
@@ -37,7 +36,7 @@ class Player: NSObject, NSCoding {
         aCoder.encode(self.name, forKey: SCConstants.coding.name.rawValue)
         aCoder.encode(self.uuid, forKey: SCConstants.coding.uuid.rawValue)
         aCoder.encode(self.team.rawValue, forKey: SCConstants.coding.team.rawValue)
-        aCoder.encode(self.clueGiver, forKey: SCConstants.coding.clueGiver.rawValue)
+        aCoder.encode(self.cluegiver, forKey: SCConstants.coding.cluegiver.rawValue)
         aCoder.encode(self.host, forKey: SCConstants.coding.host.rawValue)
     }
 
@@ -48,8 +47,8 @@ class Player: NSObject, NSCoding {
                 forKey: SCConstants.coding.team.rawValue
             )
 
-            let clueGiver = aDecoder.decodeBool(
-                forKey: SCConstants.coding.clueGiver.rawValue
+            let cluegiver = aDecoder.decodeBool(
+                forKey: SCConstants.coding.cluegiver.rawValue
             )
 
             let host = aDecoder.decodeBool(
@@ -60,7 +59,7 @@ class Player: NSObject, NSCoding {
                 name: name,
                 uuid: uuid,
                 team: Team(rawValue: team)!,
-                clueGiver: clueGiver,
+                cluegiver: cluegiver,
                 host: host
             )
         } else {
@@ -69,30 +68,46 @@ class Player: NSObject, NSCoding {
     }
 
     // MARK: Public
+    func getName() -> String? {
+        return self.name
+    }
+
     func getUUID() -> String {
         return self.uuid
     }
 
-    func setIsClueGiver(_ isClueGiver: Bool) {
-        self.clueGiver = isClueGiver
+    func getTeam() -> Team {
+        return self.team
     }
 
-    func setIsHost(_ isHost: Bool) {
-        self.host = isHost
-    }
-
-    func isClueGiver() -> Bool {
-        return self.clueGiver
+    func isCluegiver() -> Bool {
+        return self.cluegiver
     }
 
     func isHost() -> Bool {
         return self.host
     }
 
+    func setName(name: String) {
+        self.name = name
+    }
+
+    func setTeam(team: Team) {
+        self.team = team
+    }
+
+    func setIsCluegiver(_ isCluegiver: Bool) {
+        self.cluegiver = isCluegiver
+    }
+
+    func setIsHost(_ isHost: Bool) {
+        self.host = isHost
+    }
+
     func reset() {
-        self.team = Team.red
+        self.team = .red
         self.host = false
-        self.clueGiver = false
+        self.cluegiver = false
     }
 }
 

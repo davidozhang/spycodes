@@ -3,7 +3,7 @@ import Foundation
 class Statistics: NSObject, NSCoding {
     static var instance = Statistics()
     fileprivate var bestRecord: Int?        // For minigame
-    fileprivate var statistics = [Team.red: 0, Team.blue: 0]        // For regular game
+    fileprivate var statistics: [Team: Int] = [.red: 0, .blue: 0]        // For regular game
 
     // MARK: Constructor/Destructor
     deinit {
@@ -12,8 +12,8 @@ class Statistics: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        if let red = self.statistics[Team.red],
-           let blue = self.statistics[Team.blue] {
+        if let red = self.statistics[.red],
+           let blue = self.statistics[.blue] {
             aCoder.encode(red, forKey: SCConstants.coding.red.rawValue)
             aCoder.encode(blue, forKey: SCConstants.coding.blue.rawValue)
         }
@@ -36,7 +36,7 @@ class Statistics: NSObject, NSCoding {
                 forKey: SCConstants.coding.blue.rawValue
             )
 
-            self.statistics = [Team.red: red, Team.blue: blue]
+            self.statistics = [.red: red, .blue: blue]
         }
 
         if aDecoder.containsValue(forKey: SCConstants.coding.bestRecord.rawValue) {
@@ -70,7 +70,7 @@ class Statistics: NSObject, NSCoding {
     }
 
     func reset() {
-        self.statistics = [Team.red: 0, Team.blue: 0]
+        self.statistics = [.red: 0, .blue: 0]
         self.bestRecord = nil
     }
 }

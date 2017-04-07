@@ -184,7 +184,7 @@ class SCAccessCodeViewController: SCViewController {
 
     fileprivate func joinRoomWithAccessCode(_ accessCode: String) {
         // Start advertising to allow host room to invite into session
-        guard let name = Player.instance.name else { return }
+        guard let name = Player.instance.getName() else { return }
         SCMultipeerManager.instance.initPeerID(name)
         SCMultipeerManager.instance.initSession()
 

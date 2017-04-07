@@ -72,7 +72,7 @@ class SCPregameRoomViewController: SCViewController {
             SCMultipeerManager.instance.initPeerID(Room.instance.getUUID())
             SCMultipeerManager.instance.initDiscoveryInfo(
                 ["room-uuid": Room.instance.getUUID(),
-                 "room-name": Room.instance.name
+                 "access-code": Room.instance.getAccessCode()
                 ]
             )
             SCMultipeerManager.instance.initSession()
@@ -85,13 +85,8 @@ class SCPregameRoomViewController: SCViewController {
         self.startGame.alpha = 0.3
         self.startGame.isEnabled = false
 
-        if Room.instance.name != Room.instance.getAccessCode() {
-            self.accessCodeTypeLabel.text = "Room Name: "
-            self.accessCodeLabel.text = Room.instance.name
-        } else {
-            self.accessCodeTypeLabel.text = "Access Code: "
-            self.accessCodeLabel.text = Room.instance.getAccessCode()
-        }
+        self.accessCodeTypeLabel.text = "Access Code: "
+        self.accessCodeLabel.text = Room.instance.getAccessCode()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -111,7 +106,7 @@ class SCPregameRoomViewController: SCViewController {
 
             if let peerID = SCMultipeerManager.instance.getPeerID() {
                 // Host should add itself to the connected peers
-                Room.instance.connectedPeers[peerID] = Player.instance.getUUID()
+                Room.instance.addConnectedPeer(peerID: peerID, uuid: Player.instance.getUUID())
             }
 
             self.broadcastTimer = Foundation.Timer.scheduledTimer(
@@ -266,11 +261,11 @@ class SCPregameRoomViewController: SCViewController {
         }
 
 
-        let maxRoomSize = GameMode.instance.mode == GameMode.Mode.regularGame ?
+        let maxRoomSize = GameMode.instance.getMode() == .regularGame ?
             SCConstants.constant.roomMaxSize.rawValue :
             SCConstants.constant.roomMaxSize.rawValue + 1     // Account for additional CPU player in minigame
 
-        if Room.instance.players.count >= maxRoomSize {
+        if Room.instance.getPlayers().count >= maxRoomSize {
             SCMultipeerManager.instance.stopAdvertiser()
             SCMultipeerManager.instance.stopBrowser()
         } else {
@@ -293,7 +288,7 @@ class SCPregameRoomViewController: SCViewController {
             message += SCStrings.incomplete + " "
         }
 
-        if GameMode.instance.mode == GameMode.Mode.miniGame {
+        if GameMode.instance.getMode() == .miniGame {
             message += SCStrings.minigameTeamSizeInfo
         } else {
             message += SCStrings.regularGameTeamSizeInfo
@@ -304,7 +299,7 @@ class SCPregameRoomViewController: SCViewController {
         message += "\n\n"
         message += SCStrings.selectLeaderInfo
 
-        if GameMode.instance.mode == GameMode.Mode.regularGame {
+        if GameMode.instance.getMode() == .regularGame {
             message += "\n\n"
             message += SCStrings.minigameInfo
         }
@@ -336,7 +331,7 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
 
         switch synchronizedObject {
         case let synchronizedObject as Player:
-            Room.instance.connectedPeers[peerID] = synchronizedObject.getUUID()
+            Room.instance.addConnectedPeer(peerID: peerID, uuid: synchronizedObject.getUUID())
             if Player.instance.isHost() {
                 Room.instance.addPlayer(synchronizedObject)
             }
@@ -352,8 +347,8 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
             CardCollection.instance = synchronizedObject
         case let synchronizedObject as Round:
             Round.instance = synchronizedObject
-            if !Round.instance.abort &&
-               !Round.instance.gameEnded {
+            if !Round.instance.isAborted() &&
+               !Round.instance.hasGameEnded() {
                 self.goToGame()
             }
         case let synchronizedObject as Statistics:
@@ -366,18 +361,18 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
     }
 
     func peerDisconnectedFromSession(_ peerID: MCPeerID) {
-        if let playerUUID = Room.instance.connectedPeers[peerID] {
+        if let playerUUID = Room.instance.getUUIDWithPeerID(peerID: peerID) {
             if let player = Room.instance.getPlayerWithUUID(playerUUID) {
                 // Room has been terminated if host player is disconnected
                 if player.isHost() {
-                    Room.instance.players.removeAll()
+                    Room.instance.removeAllPlayers()
                     self.returnToMainMenu(reason: SCStrings.hostDisconnected)
                     return
                 }
             }
 
             Room.instance.removePlayerWithUUID(playerUUID)
-            Room.instance.connectedPeers.removeValue(forKey: peerID)
+            Room.instance.removeConnectedPeer(peerID: peerID)
         }
     }
 }
@@ -385,11 +380,11 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
 // MARK: SCPregameRoomViewCellDelegate
 extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
     func teamUpdatedAtIndex(_ index: Int, newTeam: Team) {
-        let playerAtIndex = Room.instance.players[index]
+        let playerAtIndex = Room.instance.getPlayers()[index]
 
-        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.team = newTeam
+        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setTeam(team: newTeam)
 
-        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsClueGiver(false)
+        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsCluegiver(false)
         self.broadcastEssentialData()
     }
 }
@@ -418,13 +413,13 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             return UITableViewCell()
         }
 
-        let playerAtIndex = Room.instance.players[indexPath.row]
+        let playerAtIndex = Room.instance.getPlayers()[indexPath.row]
 
-        cell.nameLabel.text = playerAtIndex.name
+        cell.nameLabel.text = playerAtIndex.getName()
         cell.index = indexPath.row
         cell.delegate = self
 
-        if playerAtIndex.team == Team.red {
+        if playerAtIndex.getTeam() == .red {
             cell.segmentedControl.selectedSegmentIndex = 0
         } else {
             cell.segmentedControl.selectedSegmentIndex = 1
@@ -434,7 +429,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             cell.nameLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.Medium)
             cell.segmentedControl.isEnabled = true
 
-            if GameMode.instance.mode == GameMode.Mode.miniGame {
+            if GameMode.instance.getMode() == .miniGame {
                 cell.segmentedControl.isEnabled = false
             }
         } else {
@@ -442,11 +437,11 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             cell.segmentedControl.isEnabled = false
         }
 
-        if playerAtIndex.isClueGiver() {
-            cell.clueGiverImage.image = UIImage(named: "Crown-Filled")
-            cell.clueGiverImage.isHidden = false
+        if playerAtIndex.isCluegiver() {
+            cell.cluegiverImage.image = UIImage(named: "Crown-Filled")
+            cell.cluegiverImage.isHidden = false
         } else {
-            cell.clueGiverImage.isHidden = true
+            cell.cluegiverImage.isHidden = true
         }
 
         return cell
@@ -454,25 +449,25 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        let playerAtIndex = Room.instance.players[indexPath.row]
-        let team = playerAtIndex.team
+        let playerAtIndex = Room.instance.getPlayers()[indexPath.row]
+        let team = playerAtIndex.getTeam()
 
-        if Player.instance.team != team {
+        if Player.instance.getTeam() != team {
             return
         }
 
-        if let clueGiverUUID = Room.instance.getClueGiverUUIDForTeam(team) {
-            Room.instance.getPlayerWithUUID(clueGiverUUID)?.setIsClueGiver(false)
+        if let cluegiverUUID = Room.instance.getCluegiverUUIDForTeam(team) {
+            Room.instance.getPlayerWithUUID(cluegiverUUID)?.setIsCluegiver(false)
 
-            if Player.instance.getUUID() == clueGiverUUID {
-                Player.instance.setIsClueGiver(false)
+            if Player.instance.getUUID() == cluegiverUUID {
+                Player.instance.setIsCluegiver(false)
             }
         }
 
-        Room.instance.players[indexPath.row].setIsClueGiver(true)
+        Room.instance.getPlayers()[indexPath.row].setIsCluegiver(true)
 
         if Player.instance.getUUID() == playerAtIndex.getUUID() {
-            Player.instance.setIsClueGiver(true)
+            Player.instance.setIsCluegiver(true)
         }
 
         self.broadcastEssentialData()
@@ -484,6 +479,6 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return Room.instance.players.count
+        return Room.instance.getPlayers().count
     }
 }

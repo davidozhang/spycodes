@@ -9,7 +9,7 @@ class Card: NSObject {
     override init() {
         self.word = "Default"
         self.selected = false
-        self.team = Team.red
+        self.team = .red
     }
 
     convenience init(word: String, selected: Bool, team: Team) {

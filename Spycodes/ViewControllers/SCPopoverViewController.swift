@@ -3,8 +3,8 @@ import UIKit
 class SCPopoverViewController: UIViewController {
     weak var rootViewController: SCViewController?
 
-    let defaultModalWidth = UIScreen.main.bounds.width - 60
-    let defaultModalHeight = UIScreen.main.bounds.height/2
+    static let defaultModalWidth = UIScreen.main.bounds.width - 60
+    static let defaultModalHeight = UIScreen.main.bounds.height/2
 
     // MARK: Lifecycle
     override func viewWillDisappear(_ animated: Bool) {
@@ -23,8 +23,8 @@ class SCPopoverViewController: UIViewController {
 
     func popoverPreferredContentSize() -> CGSize {
         return CGSize(
-            width: self.defaultModalWidth,
-            height: self.defaultModalHeight
+            width: SCPopoverViewController.defaultModalWidth,
+            height: SCPopoverViewController.defaultModalHeight
         )
     }
 }

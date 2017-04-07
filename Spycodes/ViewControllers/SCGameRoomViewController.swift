@@ -97,7 +97,7 @@ class SCGameRoomViewController: SCViewController {
 
         SCMultipeerManager.instance.delegate = self
 
-        Round.instance.setStartingTeam(CardCollection.instance.startingTeam)
+        Round.instance.setCurrentTeam(CardCollection.instance.getStartingTeam())
 
         if Player.instance.isHost() {
             self.broadcastTimer = Foundation.Timer.scheduledTimer(
@@ -119,7 +119,7 @@ class SCGameRoomViewController: SCViewController {
             repeats: true
         )
 
-        self.teamLabel.text = Player.instance.team == Team.red ? "Red" : "Blue"
+        self.teamLabel.text = Player.instance.getTeam() == .red ? "Red" : "Blue"
 
         if !Timer.instance.isEnabled() {
             self.bottomBarViewHeightConstraint.constant = self.bottomBarViewDefaultHeight
@@ -329,25 +329,25 @@ class SCGameRoomViewController: SCViewController {
 
     fileprivate func updateDashboard() {
         self.cardsRemainingLabel.text = String(
-            CardCollection.instance.getCardsRemainingForTeam(Player.instance.team)
+            CardCollection.instance.getCardsRemainingForTeam(Player.instance.getTeam())
         )
 
-        if Round.instance.currentTeam == Player.instance.team {
+        if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
             if self.cluegiverIsEditing {
                 return  // Cluegiver is editing the clue/number of words
             }
 
             if Round.instance.bothFieldsSet() {
-                self.clueTextField.text = Round.instance.clue
-                self.numberOfWordsTextField.text = Round.instance.numberOfWords
+                self.clueTextField.text = Round.instance.getClue()
+                self.numberOfWordsTextField.text = Round.instance.getNumberOfWords()
 
                 self.stopTextFieldAnimations()
 
                 self.clueTextField.isEnabled = false
                 self.numberOfWordsTextField.isEnabled = false
             } else {
-                if Player.instance.isClueGiver() {
-                    self.clueTextField.text = Round.defaultClueGiverClue
+                if Player.instance.isCluegiver() {
+                    self.clueTextField.text = Round.defaultCluegiverClue
                     self.numberOfWordsTextField.text = Round.defaultNumberOfWords
 
                     self.startTextFieldAnimations()
@@ -371,7 +371,7 @@ class SCGameRoomViewController: SCViewController {
             return
         }
 
-        if Round.instance.currentTeam == Player.instance.team {
+        if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
             if Timer.instance.state == .stopped {
                 Timer.instance.state = .willStart
             }
@@ -417,15 +417,15 @@ class SCGameRoomViewController: SCViewController {
         if self.actionButtonState == .confirm {
             self.actionButton.setTitle("Confirm", for: UIControlState())
 
-            if !Player.instance.isClueGiver() ||
-               Round.instance.currentTeam != Player.instance.team {
+            if !Player.instance.isCluegiver() ||
+               Round.instance.getCurrentTeam() != Player.instance.getTeam() {
                 return
             }
 
             if let clueTextFieldCharacterCount = self.clueTextField.text?.characters.count,
                let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.characters.count {
                 if clueTextFieldCharacterCount > 0 &&
-                   self.clueTextField.text != Round.defaultClueGiverClue &&
+                   self.clueTextField.text != Round.defaultCluegiverClue &&
                    numberOfWordsTextFieldCharacterCount > 0 &&
                    self.numberOfWordsTextField.text != Round.defaultNumberOfWords {
                     self.actionButton.isEnabled = true
@@ -439,7 +439,7 @@ class SCGameRoomViewController: SCViewController {
             self.actionButton.setTitle("End Round", for: UIControlState())
             self.stopButtonAnimations()
 
-            if Round.instance.currentTeam == Player.instance.team {
+            if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
                 if Round.instance.bothFieldsSet() {
                     self.actionButton.alpha = 1.0
                     self.actionButton.isEnabled = true
@@ -457,8 +457,8 @@ class SCGameRoomViewController: SCViewController {
     fileprivate func didConfirm() {
         self.cluegiverIsEditing = false
 
-        Round.instance.clue = self.clueTextField.text
-        Round.instance.numberOfWords = self.numberOfWordsTextField.text
+        Round.instance.setClue(self.clueTextField.text)
+        Round.instance.setNumberOfWords(self.numberOfWordsTextField.text)
         self.clueTextField.isEnabled = false
         self.numberOfWordsTextField.isEnabled = false
         self.actionButtonState = .endRound
@@ -468,10 +468,10 @@ class SCGameRoomViewController: SCViewController {
     }
 
     fileprivate func didEndRound(fromTimerExpiry: Bool) {
-        Round.instance.endRound(Player.instance.team)
+        Round.instance.endRound(Player.instance.getTeam())
         self.broadcastEssentialData()
 
-        if GameMode.instance.mode == GameMode.Mode.miniGame {
+        if GameMode.instance.getMode() == .miniGame {
             SCAudioToolboxManager.vibrate()
         }
 
@@ -500,7 +500,7 @@ class SCGameRoomViewController: SCViewController {
     @objc
     fileprivate func didEndGameWithNotification(_ notification: Notification) {
         DispatchQueue.main.async {
-            Round.instance.winningTeam = Team.blue
+            Round.instance.setWinningTeam(.blue)
             self.broadcastEssentialData()
             if let userInfo = notification.userInfo,
                let title = userInfo["title"] as? String,
@@ -563,7 +563,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
         }
 
         let synchronizedObject = NSKeyedUnarchiver.unarchiveObject(with: data)
-        let opponentTeam = Team(rawValue: Player.instance.team.rawValue ^ 1)
+        let opponentTeam = Team(rawValue: Player.instance.getTeam().rawValue ^ 1)
 
         switch synchronizedObject {
         case let synchronizedObject as CardCollection:
@@ -571,31 +571,31 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
         case let synchronizedObject as Round:
             Round.instance = synchronizedObject
 
-            if Round.instance.abort {
+            if Round.instance.isAborted() {
                 self.didEndGame(
                     SCStrings.returningToPregameRoomHeader,
                     reason: SCStrings.playerAborted
                 )
-            } else if Round.instance.winningTeam == Player.instance.team &&
-                      GameMode.instance.mode == GameMode.Mode.regularGame {
+            } else if Round.instance.getWinningTeam() == Player.instance.getTeam() &&
+                      GameMode.instance.getMode() == .regularGame {
                 self.didEndGame(
                     SCStrings.returningToPregameRoomHeader,
                     reason: Round.defaultWinString
                 )
-            } else if Round.instance.winningTeam == Player.instance.team &&
-                      GameMode.instance.mode == GameMode.Mode.miniGame {
+            } else if Round.instance.getWinningTeam() == Player.instance.getTeam() &&
+                      GameMode.instance.getMode() == .miniGame {
                 self.didEndGame(
                     SCStrings.returningToPregameRoomHeader,
                     reason: String(
                         format: SCStrings.teamWinString,
-                        CardCollection.instance.getCardsRemainingForTeam(Team.blue)
+                        CardCollection.instance.getCardsRemainingForTeam(.blue)
                     )
                 )
 
                 Statistics.instance.setBestRecord(
-                    CardCollection.instance.getCardsRemainingForTeam(Team.blue)
+                    CardCollection.instance.getCardsRemainingForTeam(.blue)
                 )
-            } else if Round.instance.winningTeam == opponentTeam {
+            } else if Round.instance.getWinningTeam() == opponentTeam {
                 self.didEndGame(
                     SCStrings.returningToPregameRoomHeader,
                     reason: Round.defaultLoseString
@@ -607,17 +607,17 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             Statistics.instance = synchronizedObject
         case let synchronizedObject as ActionEvent:
             if synchronizedObject.getType() == ActionEvent.EventType.endRound {
-                if Round.instance.currentTeam == Player.instance.team {
+                if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
                     SCAudioToolboxManager.vibrate()
                 }
 
-                if GameMode.instance.mode == GameMode.Mode.miniGame {
+                if GameMode.instance.getMode() == .miniGame {
                     if Timer.instance.isEnabled() {
                         Timer.instance.state = .stopped
                     }
                 }
             } else if synchronizedObject.getType() == ActionEvent.EventType.confirm {
-                if Round.instance.currentTeam == Player.instance.team {
+                if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
                     SCAudioToolboxManager.vibrate()
                 }
             }
@@ -627,7 +627,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
     }
 
     func peerDisconnectedFromSession(_ peerID: MCPeerID) {
-        if let uuid = Room.instance.connectedPeers[peerID],
+        if let uuid = Room.instance.getUUIDWithPeerID(peerID: peerID),
            let player = Room.instance.getPlayerWithUUID(uuid) {
 
             Room.instance.removePlayerWithUUID(uuid)
@@ -688,14 +688,14 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             return UICollectionViewCell()
         }
 
-        let cardAtIndex = CardCollection.instance.cards[indexPath.row]
+        let cardAtIndex = CardCollection.instance.getCards()[indexPath.row]
 
         cell.wordLabel.textColor = UIColor.white
         cell.wordLabel.text = cardAtIndex.getWord()
 
         cell.contentView.backgroundColor = UIColor.clear
 
-        if Player.instance.isClueGiver() {
+        if Player.instance.isCluegiver() {
             if cardAtIndex.getTeam() == .neutral {
                 cell.wordLabel.textColor = UIColor.spycodesGrayColor()
             }
@@ -743,31 +743,31 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        if Player.instance.isClueGiver() ||
-           Round.instance.currentTeam != Player.instance.team ||
+        if Player.instance.isCluegiver() ||
+           Round.instance.getCurrentTeam() != Player.instance.getTeam() ||
            !Round.instance.bothFieldsSet() {
             return
         }
 
-        let cardAtIndex = CardCollection.instance.cards[indexPath.row]
+        let cardAtIndex = CardCollection.instance.getCards()[indexPath.row]
         let cardAtIndexTeam = cardAtIndex.getTeam()
-        let playerTeam = Player.instance.team
+        let playerTeam = Player.instance.getTeam()
         let opponentTeam = Team(rawValue: playerTeam.rawValue ^ 1)
 
         if cardAtIndex.isSelected() {
             return
         }
 
-        CardCollection.instance.cards[indexPath.row].setSelected()
+        CardCollection.instance.getCards()[indexPath.row].setSelected()
         self.broadcastEssentialData()
 
-        if cardAtIndexTeam == Team.neutral || cardAtIndexTeam == opponentTeam {
+        if cardAtIndexTeam == .neutral || cardAtIndexTeam == opponentTeam {
             self.didEndRound(fromTimerExpiry: false)
         }
 
-        if cardAtIndexTeam == Team.assassin ||
+        if cardAtIndexTeam == .assassin ||
            CardCollection.instance.getCardsRemainingForTeam(opponentTeam!) == 0 {
-            Round.instance.winningTeam = opponentTeam
+            Round.instance.setWinningTeam(opponentTeam)
             self.broadcastEssentialData()
 
             Statistics.instance.recordWinForTeam(opponentTeam!)
@@ -778,10 +778,10 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
                 reason: Round.defaultLoseString
             )
         } else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
-            Round.instance.winningTeam = playerTeam
+            Round.instance.setWinningTeam(playerTeam)
             self.broadcastEssentialData()
 
-            if GameMode.instance.mode == GameMode.Mode.regularGame {
+            if GameMode.instance.getMode() == .regularGame {
                 Statistics.instance.recordWinForTeam(playerTeam)
                 self.broadcastOptionalData(Statistics.instance)
 
@@ -794,11 +794,11 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
                     SCStrings.returningToPregameRoomHeader,
                     reason: String(
                         format: SCStrings.teamWinString,
-                        CardCollection.instance.getCardsRemainingForTeam(Team.blue)
+                        CardCollection.instance.getCardsRemainingForTeam(.blue)
                     )
                 )
                 Statistics.instance.setBestRecord(
-                    CardCollection.instance.getCardsRemainingForTeam(Team.blue)
+                    CardCollection.instance.getCardsRemainingForTeam(.blue)
                 )
                 self.broadcastOptionalData(Statistics.instance)
             }
@@ -840,8 +840,8 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 // MARK: UITextFieldDelegate
 extension SCGameRoomViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if Player.instance.isClueGiver() &&
-           Round.instance.currentTeam == Player.instance.team {
+        if Player.instance.isCluegiver() &&
+           Round.instance.getCurrentTeam() == Player.instance.getTeam() {
             return true
         } else {
             return false
@@ -855,9 +855,9 @@ extension SCGameRoomViewController: UITextFieldDelegate {
         self.cluegiverIsEditing = true
 
         if textField == self.clueTextField {
-            if textField.text == Round.defaultClueGiverClue {
+            if textField.text == Round.defaultCluegiverClue {
                 textField.text = ""
-                textField.placeholder = Round.defaultClueGiverClue
+                textField.placeholder = Round.defaultCluegiverClue
             }
         } else if textField == self.numberOfWordsTextField {
             if textField.text == Round.defaultNumberOfWords {
@@ -881,7 +881,7 @@ extension SCGameRoomViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text == "" {
             if textField == self.clueTextField {
-                self.clueTextField.text = Round.defaultClueGiverClue
+                self.clueTextField.text = Round.defaultCluegiverClue
             } else if textField == self.numberOfWordsTextField {
                 self.numberOfWordsTextField.text = Round.defaultNumberOfWords
             }
@@ -890,7 +890,7 @@ extension SCGameRoomViewController: UITextFieldDelegate {
 
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField == self.clueTextField {
-            textField.placeholder = Round.defaultClueGiverClue
+            textField.placeholder = Round.defaultCluegiverClue
         } else if textField == self.numberOfWordsTextField {
             textField.placeholder = Round.defaultNumberOfWords
         }
@@ -901,7 +901,7 @@ extension SCGameRoomViewController: UITextFieldDelegate {
         if let characterCount = textField.text?.characters.count {
             if textField == self.clueTextField &&
                 characterCount >= 1 {
-                Round.instance.clue = self.clueTextField.text
+                Round.instance.setClue(self.clueTextField.text)
                 self.broadcastEssentialData()
                 self.numberOfWordsTextField.becomeFirstResponder()
             } else if textField == self.numberOfWordsTextField &&

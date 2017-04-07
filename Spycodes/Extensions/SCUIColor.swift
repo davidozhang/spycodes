@@ -32,11 +32,11 @@ extension UIColor {
 
     static func colorForTeam(_ team: Team) -> UIColor {
         switch team {
-        case Team.red:
+        case .red:
             return UIColor.spycodesRedColor()
-        case Team.blue:
+        case .blue:
             return UIColor.spycodesBlueColor()
-        case Team.neutral:
+        case .neutral:
             return UIColor.white
         default:
             return UIColor.spycodesBlackColor()

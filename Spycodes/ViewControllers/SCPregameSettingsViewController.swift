@@ -40,7 +40,7 @@ class SCPregameSettingsViewController: SCPopoverViewController {
 
     override func popoverPreferredContentSize() -> CGSize {
         return CGSize(
-            width: super.defaultModalWidth,
+            width: SCPopoverViewController.defaultModalWidth,
             height: CGFloat(60 * self.settings.count + 30)
         )
     }
@@ -111,15 +111,15 @@ extension SCPregameSettingsViewController: SCToggleViewCellDelegate {
             switch reuseIdentifier {
             case SCConstants.identifier.minigameToggleViewCell.rawValue:
                 if enabled {
-                    GameMode.instance.mode = GameMode.Mode.miniGame
+                    GameMode.instance.setMode(mode: .miniGame)
                 } else {
-                    GameMode.instance.mode = GameMode.Mode.regularGame
+                    GameMode.instance.setMode(mode: .regularGame)
                 }
 
                 Room.instance.resetPlayers()
                 Statistics.instance.reset()
 
-                if GameMode.instance.mode == GameMode.Mode.miniGame {
+                if GameMode.instance.getMode() == .miniGame {
                     Room.instance.addCPUPlayer()
                 } else {
                     Room.instance.removeCPUPlayer()

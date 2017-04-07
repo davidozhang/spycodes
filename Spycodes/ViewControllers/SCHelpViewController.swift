@@ -77,10 +77,10 @@ class SCHelpViewController: SCPopoverViewController {
     // MARK: Private
     fileprivate func generateStringSequence() -> [String] {
         var result = [String]()
-        if GameMode.instance.mode == GameMode.Mode.miniGame {
+        if GameMode.instance.getMode() == .miniGame {
             result += [SCStrings.minigameIntro]
 
-            if Player.instance.isClueGiver() {
+            if Player.instance.isCluegiver() {
                 result += SCHelpViewController.sharedLeaderStringSequence
             } else {
                 result += SCHelpViewController.sharedPlayerStringSequence
@@ -91,7 +91,7 @@ class SCHelpViewController: SCPopoverViewController {
         } else {
             result += [SCStrings.regularGameIntro]
 
-            if Player.instance.isClueGiver() {
+            if Player.instance.isCluegiver() {
                 result += SCHelpViewController.sharedLeaderStringSequence
             } else {
                 result += SCHelpViewController.sharedPlayerStringSequence
@@ -118,7 +118,7 @@ class SCHelpViewController: SCPopoverViewController {
                 self.rightButton.isHidden = false
             }
 
-            if Player.instance.isClueGiver() {
+            if Player.instance.isCluegiver() {
                 self.headerLabel.text = SCHelpViewController.leaderHeaders[self.currentIndex]
             } else {
                 self.headerLabel.text = SCHelpViewController.playerHeaders[self.currentIndex]

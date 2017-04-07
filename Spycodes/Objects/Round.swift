@@ -3,19 +3,19 @@ import Foundation
 class Round: NSObject, NSCoding {
     static var instance = Round()
 
-    static let defaultClueGiverClue = "Enter Clue"
+    static let defaultCluegiverClue = "Enter Clue"
     static let defaultNonTurnClue = "Not Your Turn"
     static let defaultIsTurnClue = "Waiting for Clue"
     static let defaultNumberOfWords = "#"
     static let defaultLoseString = "Your team lost!"
     static let defaultWinString = "Your team won!"
 
-    var currentTeam: Team?
-    var clue: String?
-    var numberOfWords: String?
-    var winningTeam: Team?
-    var abort = false
-    var gameEnded = false
+    fileprivate var currentTeam: Team?
+    fileprivate var clue: String?
+    fileprivate var numberOfWords: String?
+    fileprivate var winningTeam: Team?
+    fileprivate var abort = false
+    fileprivate var gameEnded = false
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
@@ -79,8 +79,48 @@ class Round: NSObject, NSCoding {
     }
 
     // MARK: Public
-    func setStartingTeam(_ team: Team) {
+    func getCurrentTeam() -> Team? {
+        return self.currentTeam
+    }
+
+    func getClue() -> String? {
+        return self.clue
+    }
+
+    func getNumberOfWords() -> String? {
+        return self.numberOfWords
+    }
+
+    func isAborted() -> Bool {
+        return self.abort
+    }
+
+    func getWinningTeam() -> Team? {
+        return self.winningTeam
+    }
+
+    func hasGameEnded() -> Bool {
+        return self.gameEnded
+    }
+
+    func setCurrentTeam(_ team: Team) {
         self.currentTeam = team
+    }
+
+    func setClue(_ clue: String?) {
+        self.clue = clue
+    }
+
+    func setNumberOfWords(_ numberOfWords: String?) {
+        self.numberOfWords = numberOfWords
+    }
+
+    func setAborted() {
+        self.abort = true
+    }
+
+    func setWinningTeam(_ winningTeam: Team?) {
+        self.winningTeam = winningTeam
     }
 
     func isClueSet() -> Bool {
@@ -99,15 +139,15 @@ class Round: NSObject, NSCoding {
         self.clue = nil
         self.numberOfWords = nil
 
-        if GameMode.instance.mode == GameMode.Mode.miniGame {
-            CardCollection.instance.autoEliminateOpponentTeamCard(Team.blue)
+        if GameMode.instance.getMode() == .miniGame {
+            CardCollection.instance.autoEliminateOpponentTeamCard(.blue)
             NotificationCenter.default.post(
                 name: Notification.Name(rawValue: SCConstants.notificationKey.autoEliminate.rawValue),
                 object: self,
                 userInfo: nil
             )
 
-            if CardCollection.instance.getCardsRemainingForTeam(Team.blue) == 0 {
+            if CardCollection.instance.getCardsRemainingForTeam(.blue) == 0 {
                 DispatchQueue.main.async(execute: {
                     NotificationCenter.default.post(
                         name: Notification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),

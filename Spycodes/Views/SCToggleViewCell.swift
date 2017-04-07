@@ -27,7 +27,7 @@ class SCToggleViewCell: SCTableViewCell {
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
                 toggleSwitch.isOn = SCSettingsManager.instance.isNightModeEnabled()
             case SCConstants.identifier.minigameToggleViewCell.rawValue:
-                toggleSwitch.isOn = GameMode.instance.mode == GameMode.Mode.miniGame
+                toggleSwitch.isOn = GameMode.instance.getMode() == .miniGame
             case SCConstants.identifier.timerToggleViewCell.rawValue:
                 toggleSwitch.isOn = Timer.instance.isEnabled()
             default:

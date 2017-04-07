@@ -6,14 +6,14 @@ class CardCollection: NSObject, NSCoding {
     fileprivate var keyObject = Key()
     fileprivate let words = SCWordList.getShuffledWords()
 
-    var cards = [Card]()
-    var key = [Team]()
-    var startingTeam: Team
+    fileprivate var cards = [Card]()
+    fileprivate var key = [Team]()
+    fileprivate var startingTeam: Team
 
     // MARK: Constructor/Destructor
     override init() {
-        if GameMode.instance.mode == GameMode.Mode.miniGame {
-            self.startingTeam = Team.red
+        if GameMode.instance.getMode() == .miniGame {
+            self.startingTeam = .red
             self.keyObject = Key(startingTeam: self.startingTeam)
             self.key = self.keyObject.getKey()
         } else {
@@ -53,6 +53,14 @@ class CardCollection: NSObject, NSCoding {
     }
 
     // MARK: Public
+    func getCards() -> [Card] {
+        return self.cards
+    }
+
+    func getStartingTeam() -> Team {
+        return self.startingTeam
+    }
+
     func getCardsRemainingForTeam(_ team: Team) -> Int {
         return self.cards.filter({
             ($0 as Card).getTeam() == team && !($0 as Card).isSelected()
