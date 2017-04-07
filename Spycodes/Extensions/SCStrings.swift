@@ -8,10 +8,7 @@ class SCStrings {
     static let returningToPregameRoomHeader = "Returning to Pregame Room"
     static let gameOverHeader = "Game Over"
 
-    static let lobbyRoomEmptyState = "Rooms created will show here.\nMake sure Wifi is enabled."
-
     static let normalAccessCodeStatus = "Enter access code"
-    static let normalLobbyRoomStatus = "Find a room to join"
     static let pendingStatus = "Joining room..."
     static let failStatus = "Failed to join room"
 

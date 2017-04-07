@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		630674181D51BE9800339EC8 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630674171D51BE9800339EC8 /* Timer.swift */; };
-		63067C6A1D2982DD0005AC66 /* SCLobbyRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C691D2982DD0005AC66 /* SCLobbyRoomViewCell.swift */; };
-		63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63067C6B1D2996B60005AC66 /* Lobby.swift */; };
 		630681A31D62FD6300539773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A21D62FD6300539773 /* LaunchScreen.storyboard */; };
 		630681A51D62FD6900539773 /* Spycodes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A41D62FD6900539773 /* Spycodes.storyboard */; };
 		630883681E80E56F006D2428 /* SCVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630883671E80E56F006D2428 /* SCVersionManager.swift */; };
@@ -67,7 +65,6 @@
 		63FDED371D264CF300142780 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED361D264CF300142780 /* Team.swift */; };
 		63FDED391D26557200142780 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED381D26557200142780 /* Room.swift */; };
 		63FDED3B1D265BAF00142780 /* SCPregameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED3A1D265BAF00142780 /* SCPregameRoomViewController.swift */; };
-		63FDED411D265F6D00142780 /* SCLobbyRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED401D265F6D00142780 /* SCLobbyRoomViewController.swift */; };
 		63FDED461D28B47200142780 /* SCPregameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED451D28B47200142780 /* SCPregameRoomViewCell.swift */; };
 		63FF7CE81D4E8471002D2B97 /* SCNotificationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FF7CE71D4E8471002D2B97 /* SCNotificationKeys.swift */; };
 		63FFA4B11D50635B006A181B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63FFA4B01D50635B006A181B /* GameKit.framework */; };
@@ -77,8 +74,6 @@
 
 /* Begin PBXFileReference section */
 		630674171D51BE9800339EC8 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Objects/Timer.swift; sourceTree = "<group>"; };
-		63067C691D2982DD0005AC66 /* SCLobbyRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCLobbyRoomViewCell.swift; path = Views/SCLobbyRoomViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		63067C6B1D2996B60005AC66 /* Lobby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lobby.swift; path = Objects/Lobby.swift; sourceTree = "<group>"; };
 		630681A21D62FD6300539773 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		630681A41D62FD6900539773 /* Spycodes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Spycodes.storyboard; path = Storyboards/Spycodes.storyboard; sourceTree = "<group>"; };
 		630883671E80E56F006D2428 /* SCVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCVersionManager.swift; path = Managers/SCVersionManager.swift; sourceTree = "<group>"; };
@@ -138,7 +133,6 @@
 		63FDED361D264CF300142780 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Objects/Team.swift; sourceTree = "<group>"; };
 		63FDED381D26557200142780 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Room.swift; path = Objects/Room.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63FDED3A1D265BAF00142780 /* SCPregameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCPregameRoomViewController.swift; path = ViewControllers/SCPregameRoomViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		63FDED401D265F6D00142780 /* SCLobbyRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCLobbyRoomViewController.swift; path = ViewControllers/SCLobbyRoomViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63FDED451D28B47200142780 /* SCPregameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameRoomViewCell.swift; path = Views/SCPregameRoomViewCell.swift; sourceTree = "<group>"; };
 		63FF7CE71D4E8471002D2B97 /* SCNotificationKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCNotificationKeys.swift; path = Extensions/SCNotificationKeys.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63FFA4B01D50635B006A181B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -209,7 +203,6 @@
 				637FF0091E0F0B620076DC25 /* SCAccessCodeViewController.swift */,
 				637310CA1D3B292F00EA5D7A /* SCGameRoomViewController.swift */,
 				636DC0CD1E67D90800DE5EC6 /* SCHelpViewController.swift */,
-				63FDED401D265F6D00142780 /* SCLobbyRoomViewController.swift */,
 				63A04D1E1D1A7F3E005A2914 /* SCMainMenuViewController.swift */,
 				63FDED311D2648D600142780 /* SCPlayerNameViewController.swift */,
 				632E4E451E6A91C8004E7180 /* SCPopoverViewController.swift */,
@@ -278,7 +271,6 @@
 				63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */,
 				6378C6501D4C6F46009BD0CA /* GameMode.swift */,
 				63486DA81D3DE29C00795403 /* Key.swift */,
-				63067C6B1D2996B60005AC66 /* Lobby.swift */,
 				63FDED341D264BE800142780 /* Player.swift */,
 				63FDED381D26557200142780 /* Room.swift */,
 				63EAF9A21D41D2E700BC554E /* Round.swift */,
@@ -294,7 +286,6 @@
 			children = (
 				633292241E7D0D950090B09D /* SCDisclosureViewCell.swift */,
 				63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */,
-				63067C691D2982DD0005AC66 /* SCLobbyRoomViewCell.swift */,
 				63FDED451D28B47200142780 /* SCPregameRoomViewCell.swift */,
 				639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */,
 				633292261E7DE8B30090B09D /* SCTableViewCell.swift */,
@@ -429,18 +420,15 @@
 				637FF00A1E0F0B620076DC25 /* SCAccessCodeViewController.swift in Sources */,
 				6363EB671E7E5A3900CC287B /* SCToggleViewCell.swift in Sources */,
 				63D2568A1E6BA6BA0061D80C /* SCStatusLabel.swift in Sources */,
-				63FDED411D265F6D00142780 /* SCLobbyRoomViewController.swift in Sources */,
 				639BA3161D38AFEF002F2A18 /* SCUIColor.swift in Sources */,
 				63FDED391D26557200142780 /* Room.swift in Sources */,
 				63D256821E6BA6BA0061D80C /* SCHelpDescriptionLabel.swift in Sources */,
 				6378C6511D4C6F46009BD0CA /* GameMode.swift in Sources */,
-				63067C6A1D2982DD0005AC66 /* SCLobbyRoomViewCell.swift in Sources */,
 				639E17681E00EADB00640540 /* SCSectionHeaderViewCell.swift in Sources */,
 				63FDED461D28B47200142780 /* SCPregameRoomViewCell.swift in Sources */,
 				63FDED351D264BE800142780 /* Player.swift in Sources */,
 				63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */,
 				63AB64CD1D4880A600C4FF22 /* SCSettingsViewController.swift in Sources */,
-				63067C6C1D2996B60005AC66 /* Lobby.swift in Sources */,
 				633292251E7D0D950090B09D /* SCDisclosureViewCell.swift in Sources */,
 				63DEDEE61E861D6700DE94A1 /* SCCellReuseIdentifiers.swift in Sources */,
 				63FDED321D2648D600142780 /* SCPlayerNameViewController.swift in Sources */,
