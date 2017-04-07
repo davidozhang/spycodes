@@ -17,19 +17,7 @@ class Room: NSObject, NSCoding {
     override init() {
         self.uuid = UUID().uuidString
         self.accessCode = Room.generateAccessCode()
-        self.name = self.accessCode     // Backwards compatibility with v1.0
-    }
-
-    // Backwards compatibility with v1.0
-    convenience init(name: String,
-                     uuid: String,
-                     players: [Player],
-                     connectedPeers: [MCPeerID: String]) {
-        self.init()
-        self.name = name
-        self.uuid = uuid
-        self.players = players
-        self.connectedPeers = connectedPeers
+        self.name = self.accessCode
     }
 
     convenience init(name: String,
@@ -60,30 +48,19 @@ class Room: NSObject, NSCoding {
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        if let name = aDecoder.decodeObject(forKey: SCCodingConstants.name) as? String,
-           let uuid = aDecoder.decodeObject(forKey: SCCodingConstants.uuid) as? String,
-           let players = aDecoder.decodeObject(forKey: SCCodingConstants.players) as? [Player],
-           let connectedPeers = aDecoder.decodeObject(forKey: SCCodingConstants.connectedPeers) as? [MCPeerID: String] {
-            if let accessCode = aDecoder.decodeObject(forKey: SCCodingConstants.accessCode) as? String {
-                self.init(
-                    name: name,
-                    uuid: uuid,
-                    accessCode: accessCode,
-                    players: players,
-                    connectedPeers: connectedPeers
-                )
-            } else {
-                // Backwards compatibility with v1.0
-                self.init(
-                    name: name,
-                    uuid: uuid,
-                    players: players,
-                    connectedPeers: connectedPeers
-                )
-            }
-        } else {
-            self.init()
-        }
+        guard let name = aDecoder.decodeObject(forKey: SCCodingConstants.name) as? String,
+              let uuid = aDecoder.decodeObject(forKey: SCCodingConstants.uuid) as? String,
+              let players = aDecoder.decodeObject(forKey: SCCodingConstants.players) as? [Player],
+              let connectedPeers = aDecoder.decodeObject(forKey: SCCodingConstants.connectedPeers) as? [MCPeerID: String],
+              let accessCode = aDecoder.decodeObject(forKey: SCCodingConstants.accessCode) as? String else { return nil }
+
+        self.init(
+            name: name,
+            uuid: uuid,
+            accessCode: accessCode,
+            players: players,
+            connectedPeers: connectedPeers
+        )
     }
 
     // MARK: Public
