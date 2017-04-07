@@ -13,11 +13,11 @@ class SCPregameRoomViewController: SCViewController {
 
     // MARK: Actions
     @IBAction func onScoreButtonTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: "score-view", sender: self)
+        self.performSegue(withIdentifier: SCConstants.identifier.scoreView.rawValue, sender: self)
     }
 
     @IBAction func onSettingsButtonTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: "pregame-settings", sender: self)
+        self.performSegue(withIdentifier: SCConstants.identifier.pregameSettings.rawValue, sender: self)
     }
 
     @IBAction func onStartGameInfoPressed(_ sender: AnyObject) {
@@ -98,7 +98,7 @@ class SCPregameRoomViewController: SCViewController {
         super.viewWillAppear(animated)
 
         // Unwindable view controller identifier
-        self.unwindableIdentifier = "pregame-room"
+        self.unwindableIdentifier = SCConstants.identifier.pregameRoom.rawValue
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -214,7 +214,7 @@ class SCPregameRoomViewController: SCViewController {
 
     fileprivate func goToGame() {
         DispatchQueue.main.async(execute: {
-            self.performSegue(withIdentifier: "game-room", sender: self)
+            self.performSegue(withIdentifier: SCConstants.identifier.gameRoom.rawValue, sender: self)
         })
     }
 

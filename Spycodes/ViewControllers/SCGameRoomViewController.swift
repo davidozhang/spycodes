@@ -58,7 +58,7 @@ class SCGameRoomViewController: SCViewController {
     }
 
     @IBAction func onHelpButtonTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: "help-view", sender: self)
+        self.performSegue(withIdentifier: SCConstants.identifier.helpView.rawValue, sender: self)
     }
 
     deinit {
@@ -87,7 +87,7 @@ class SCGameRoomViewController: SCViewController {
         super.viewWillAppear(animated)
 
         // Unwindable view controller identifier
-        self.unwindableIdentifier = "game-room"
+        self.unwindableIdentifier = SCConstants.identifier.gameRoom.rawValue
 
         self.collectionView.dataSource = self
         self.collectionView.delegate = self

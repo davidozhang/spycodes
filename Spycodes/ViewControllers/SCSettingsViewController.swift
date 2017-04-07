@@ -31,7 +31,7 @@ class SCSettingsViewController: SCViewController {
         super.viewWillAppear(animated)
 
         // Unwindable view controller identifier
-        self.unwindableIdentifier = "settings"
+        self.unwindableIdentifier = SCConstants.identifier.settings.rawValue
 
         self.tableView.dataSource = self
         self.tableView.delegate = self

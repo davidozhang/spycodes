@@ -31,13 +31,23 @@ class SCConstants {
     }
 
     enum identifier: String {
+        case accessCode = "access-code"
         case disclosureViewCell = "disclosure-view-cell"
+        case gameRoom = "game-room"
         case gameRoomViewCell = "game-room-view-cell"
+        case helpView = "help-view"
+        case mainMenu = "main-menu"
         case minigameToggleViewCell = "minigame-toggle-view-cell"
         case nightModeToggleViewCell = "night-mode-toggle-view-cell"
+        case playerName = "player-name"
+        case pregameRoom = "pregame-room"
         case pregameRoomViewCell = "pregame-room-view-cell"
+        case pregameSettings = "pregame-settings"
+        case scoreView = "score-view"
         case sectionHeaderCell = "section-header-view-cell"
+        case settings = "settings"
         case timerToggleViewCell = "timer-toggle-view-cell"
+        case updateApp = "update-app"
         case versionViewCell = "version-view-cell"
     }
 
