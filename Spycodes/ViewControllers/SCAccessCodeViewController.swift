@@ -116,10 +116,8 @@ class SCAccessCodeViewController: SCViewController {
             self.keyboardDidShow = true
 
             let rect = frame.cgRectValue
-            let headerTopMargin = self.headerTopMarginConstraint.constant
-            let statusLabelTopMargin = self.statusLabelTopMarginConstraint.constant
             self.contentViewVerticalCenterConstraint.constant = -(
-                rect.height / 2 - headerTopMargin - statusLabelTopMargin
+                rect.height/2 - self.headerTopMarginConstraint.constant
             )
         }
     }

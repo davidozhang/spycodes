@@ -61,7 +61,7 @@ class SCPlayerNameViewController: SCViewController {
            let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let rect = frame.cgRectValue
             self.userNameTextFieldVerticalCenterConstraint.constant = -(
-                rect.height / 2 - self.headerLabelTopMarginConstraint.constant
+                rect.height/2 - self.headerLabelTopMarginConstraint.constant
             )
         }
     }
