@@ -184,13 +184,11 @@ class SCAccessCodeViewController: SCViewController {
 
     fileprivate func joinRoomWithAccessCode(_ accessCode: String) {
         // Start advertising to allow host room to invite into session
-        guard let name = Player.instance.getName() else { return }
-        SCMultipeerManager.instance.initPeerID(name)
-        SCMultipeerManager.instance.initSession()
-
-        SCMultipeerManager.instance.initDiscoveryInfo(["joinRoomWithAccessCode": accessCode])
-        SCMultipeerManager.instance.initAdvertiser()
-        SCMultipeerManager.instance.startAdvertiser()
+        SCMultipeerManager.instance.setPeerID(Player.instance.getUUID())
+        SCMultipeerManager.instance.startSession()
+        SCMultipeerManager.instance.startAdvertiser(discoveryInfo: [
+            SCConstants.discoveryInfo.accessCode.rawValue: accessCode
+        ])
 
         self.timeoutTimer?.invalidate()
 

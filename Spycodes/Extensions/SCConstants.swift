@@ -30,6 +30,10 @@ class SCConstants {
         case roomMaxSize = 8
     }
 
+    enum discoveryInfo: String {
+        case accessCode = "access-code"
+    }
+
     enum identifier: String {
         case accessCode = "access-code"
         case disclosureViewCell = "disclosure-view-cell"
@@ -57,7 +61,6 @@ class SCConstants {
     }
 
     enum url: String {
-
         case appStore = "itms-apps://itunes.apple.com/app/id1141711201"
         case appStoreWeb = "https://itunes.apple.com/app/spycodes/id1141711201?mt=8"
         case github = "https://github.com/davidozhang/spycodes"
