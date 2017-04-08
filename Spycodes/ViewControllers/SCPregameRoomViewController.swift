@@ -69,15 +69,8 @@ class SCPregameRoomViewController: SCViewController {
 
         if Player.instance.isHost() {
             Room.instance.generateNewAccessCode()
-            SCMultipeerManager.instance.initPeerID(Room.instance.getUUID())
-            SCMultipeerManager.instance.initDiscoveryInfo(
-                ["room-uuid": Room.instance.getUUID(),
-                 "access-code": Room.instance.getAccessCode()
-                ]
-            )
-            SCMultipeerManager.instance.initSession()
-            SCMultipeerManager.instance.initAdvertiser()
-            SCMultipeerManager.instance.initBrowser()
+            SCMultipeerManager.instance.setPeerID(Room.instance.getUUID())
+            SCMultipeerManager.instance.startSession()
         }
 
         self.startGame.isHidden = false
@@ -101,7 +94,7 @@ class SCPregameRoomViewController: SCViewController {
         SCMultipeerManager.instance.delegate = self
 
         if Player.instance.isHost() {
-            SCMultipeerManager.instance.startAdvertiser()
+            SCMultipeerManager.instance.startAdvertiser(discoveryInfo: nil)
             SCMultipeerManager.instance.startBrowser()
 
             if let peerID = SCMultipeerManager.instance.getPeerID() {
@@ -269,12 +262,8 @@ class SCPregameRoomViewController: SCViewController {
             SCMultipeerManager.instance.stopAdvertiser()
             SCMultipeerManager.instance.stopBrowser()
         } else {
-            if !SCMultipeerManager.instance.advertiserOn {
-                SCMultipeerManager.instance.startAdvertiser()
-            }
-            if !SCMultipeerManager.instance.browserOn {
-                SCMultipeerManager.instance.startBrowser()
-            }
+            SCMultipeerManager.instance.startAdvertiser(discoveryInfo: nil)
+            SCMultipeerManager.instance.startBrowser()
         }
     }
 
@@ -317,10 +306,9 @@ class SCPregameRoomViewController: SCViewController {
 // MARK: SCMultipeerManagerDelegate
 extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
     func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
-        if let info = info {
-            if info["joinRoomWithAccessCode"] == Room.instance.getAccessCode() {
-                SCMultipeerManager.instance.invitePeerToSession(peerID)
-            }
+        if let info = info,
+               info[SCConstants.discoveryInfo.accessCode.rawValue] == Room.instance.getAccessCode() {
+            SCMultipeerManager.instance.invitePeerToSession(peerID)
         }
     }
 

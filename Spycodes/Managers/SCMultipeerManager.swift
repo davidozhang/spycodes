@@ -19,12 +19,13 @@ class SCMultipeerManager: NSObject {
     fileprivate var browser: MCNearbyServiceBrowser?
     fileprivate var session: MCSession?
 
-    // Status Variables
-    var advertiserOn = false
-    var browserOn = false
+    fileprivate var advertiserOn = false
+    fileprivate var browserOn = false
 
     // MARK: Public
-    func initPeerID(_ displayName: String) {
+
+    // IMPORTANT: This method must be called prior to all other method calls!
+    func setPeerID(_ displayName: String) {
         self.peerID = MCPeerID.init(displayName: displayName)
     }
 
@@ -32,34 +33,68 @@ class SCMultipeerManager: NSObject {
         return self.peerID
     }
 
-    func initDiscoveryInfo(_ info: [String: String]) {
-        self.discoveryInfo = info
+    func startAdvertiser(discoveryInfo: [String: String]?) {
+        if self.advertiserOn {
+            return
+        }
+
+        self.initAdvertiser(discoveryInfo: discoveryInfo)
+
+        self.advertiser?.startAdvertisingPeer()
+        self.advertiserOn = true
     }
 
-    func initBrowser() {
-        self.browser = MCNearbyServiceBrowser(
-            peer: self.peerID!,
-            serviceType: self.serviceType
-        )
-        self.browser?.delegate = self
+    func stopAdvertiser() {
+        guard let _ = self.advertiser else {
+            return
+        }
+
+        if !self.advertiserOn {
+            return
+        }
+
+        self.advertiser?.stopAdvertisingPeer()
+        self.advertiserOn = false
     }
 
     func startBrowser() {
+        if self.browserOn {
+            return
+        }
+
+        self.initBrowser()
+
         self.browser?.startBrowsingForPeers()
         self.browserOn = true
     }
 
     func stopBrowser() {
+        guard let _ = self.browser else {
+            return
+        }
+
+        if !self.browserOn {
+            return
+        }
+
         self.browser?.stopBrowsingForPeers()
         self.browserOn = false
     }
 
-    func initSession() {
-        self.session = MCSession(peer: self.peerID!)
+    func startSession() {
+        guard let peerID = self.peerID else {
+            return
+        }
+
+        self.session = MCSession(peer: peerID)
         self.session?.delegate = self
     }
 
     func stopSession() {
+        guard let _ = self.session else {
+            return
+        }
+
         self.session?.disconnect()
     }
 
@@ -69,26 +104,11 @@ class SCMultipeerManager: NSObject {
         self.stopSession()
     }
 
-    func initAdvertiser() {
-        self.advertiser = MCNearbyServiceAdvertiser(
-            peer: self.peerID!,
-            discoveryInfo: self.discoveryInfo,
-            serviceType: self.serviceType
-        )
-        self.advertiser?.delegate = self
-    }
-
-    func startAdvertiser() {
-        self.advertiser?.startAdvertisingPeer()
-        self.advertiserOn = true
-    }
-
-    func stopAdvertiser() {
-        self.advertiser?.stopAdvertisingPeer()
-        self.advertiserOn = false
-    }
-
     func invitePeerToSession(_ peerID: MCPeerID) {
+        guard let _ = self.browser else {
+            return
+        }
+
         self.browser?.invitePeer(
             peerID,
             to: self.session!,
@@ -98,6 +118,10 @@ class SCMultipeerManager: NSObject {
     }
 
     func broadcastData(_ data: Data) {
+        guard let _ = self.session else {
+            return
+        }
+
         do {
             if let connectedPeers = self.session?.connectedPeers, connectedPeers.count > 0 {
                 try self.session?.send(
@@ -107,6 +131,32 @@ class SCMultipeerManager: NSObject {
                 )
             }
         } catch {}
+    }
+
+    // MARK: Private
+    private func initAdvertiser(discoveryInfo: [String: String]?) {
+        guard let peerID = self.peerID else {
+            return
+        }
+
+        self.advertiser = MCNearbyServiceAdvertiser(
+            peer: peerID,
+            discoveryInfo: discoveryInfo,
+            serviceType: self.serviceType
+        )
+        self.advertiser?.delegate = self
+    }
+
+    private func initBrowser() {
+        guard let peerID = self.peerID else {
+            return
+        }
+
+        self.browser = MCNearbyServiceBrowser(
+            peer: peerID,
+            serviceType: self.serviceType
+        )
+        self.browser?.delegate = self
     }
 }
 
@@ -122,6 +172,10 @@ extension SCMultipeerManager: MCNearbyServiceAdvertiserDelegate {
                     didReceiveInvitationFromPeer peerID: MCPeerID,
                     withContext context: Data?,
                     invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        guard let _ = self.session else {
+            return
+        }
+
         invitationHandler(true, self.session!)
     }
 }
