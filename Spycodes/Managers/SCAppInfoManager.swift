@@ -3,8 +3,8 @@ import Foundation
 class SCAppInfoManager {
     static let appID = 1141711201
     static let bundleID = "com.davidzhang.Spycodes"
-    static let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-    static let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
+    static let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+    static let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
 
     // MARK: Public
     static func checkLatestAppVersion(_ failure: @escaping ((Void) -> Void)) {
@@ -12,11 +12,8 @@ class SCAppInfoManager {
             if let resultCount = dict["resultCount"] as? NSInteger, resultCount == 1,
                let result = dict["results"] as? NSArray,
                let dict = result[0] as? NSDictionary,
-               let latestAppVersion = dict["version"] as? String,
-               let currentAppVersion = Bundle.main.object(
-                   forInfoDictionaryKey: "CFBundleShortVersionString"
-               ) as? String {
-                if let current = Double(currentAppVersion),
+               let latestAppVersion = dict["version"] as? String {
+                if let current = Double(SCAppInfoManager.appVersion),
                    let latest = Double(latestAppVersion), current < latest {
                     failure()
                 }

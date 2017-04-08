@@ -321,7 +321,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="buildNumberLabel" destination="aFO-u5-KiB" id="axP-k2-9fH"/>
-                                            <outlet property="versionLeftLabel" destination="TMD-gn-KBX" id="i0S-3L-4xU"/>
+                                            <outlet property="leftLabel" destination="TMD-gn-KBX" id="EMs-8K-9kY"/>
                                             <outlet property="versionNumberLabel" destination="aNU-WM-6B5" id="c85-NZ-p1A"/>
                                         </connections>
                                     </tableViewCell>
