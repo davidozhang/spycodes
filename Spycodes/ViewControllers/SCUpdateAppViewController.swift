@@ -1,11 +1,11 @@
 import UIKit
 
-class SCUpdateAppViewController: SCViewController {
+class SCUpdateAppViewController: SCModalViewController {
     @IBOutlet weak var updatePromptLabel: SCLabel!
 
     // MARK: Actions
-    @IBAction func onExitTapped(_ sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func onSwipeDownTapped(_ sender: AnyObject) {
+        super.onDismissal()
     }
 
     @IBAction func onDownloadTapped(_ sender: AnyObject) {

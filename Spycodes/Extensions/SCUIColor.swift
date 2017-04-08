@@ -30,6 +30,14 @@ extension UIColor {
         return UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
     }
 
+    static func darkTintColor() -> UIColor {
+        return UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+    }
+
+    static func lightTintColor() -> UIColor {
+        return UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.3)
+    }
+
     static func colorForTeam(_ team: Team) -> UIColor {
         switch team {
         case .red:
