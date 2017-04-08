@@ -105,7 +105,8 @@ class SCMultipeerManager: NSObject {
     }
 
     func invitePeerToSession(_ peerID: MCPeerID) {
-        guard let _ = self.browser else {
+        guard let _ = self.browser,
+              let _ = self.session else {
             return
         }
 
