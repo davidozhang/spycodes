@@ -16,6 +16,7 @@ class SCSettingsViewController: SCViewController {
     ]
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
 
     // MARK: Actions
     @IBAction func onBackTapped(_ sender: AnyObject) {
@@ -35,6 +36,8 @@ class SCSettingsViewController: SCViewController {
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableViewTrailingSpaceConstraint.constant = 30
+        self.tableView.layoutIfNeeded()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -160,12 +163,6 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
-//   _____      _                 _
-//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
-//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
-//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
-//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: SCToggleViewCellDelegate
 extension SCSettingsViewController: SCToggleViewCellDelegate {

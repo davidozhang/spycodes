@@ -9,16 +9,6 @@ class SCPregameRoomViewController: SCViewController {
     @IBOutlet weak var accessCodeTypeLabel: SCNavigationBarLabel!
     @IBOutlet weak var accessCodeLabel: SCNavigationBarBoldLabel!
     @IBOutlet weak var startGame: SCButton!
-    @IBOutlet weak var startGameInfoButton: UIButton!
-
-    // MARK: Actions
-    @IBAction func onScoreButtonTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: SCConstants.identifier.scoreView.rawValue, sender: self)
-    }
-
-    @IBAction func onSettingsButtonTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: SCConstants.identifier.pregameSettings.rawValue, sender: self)
-    }
 
     @IBAction func onStartGameInfoPressed(_ sender: AnyObject) {
         let message = self.composeChecklist()
@@ -42,6 +32,10 @@ class SCPregameRoomViewController: SCViewController {
 
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         self.returnToMainMenu(reason: nil)
+    }
+
+    @IBAction func onSwipeUpTapped(_ sender: Any) {
+        self.swipeUp()
     }
 
     @IBAction func unwindToPregameRoom(_ segue: UIStoryboardSegue) {
@@ -74,12 +68,15 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         self.startGame.isHidden = false
-        self.startGameInfoButton.isHidden = false
         self.startGame.alpha = 0.3
         self.startGame.isEnabled = false
 
         self.accessCodeTypeLabel.text = "Access Code: "
         self.accessCodeLabel.text = Room.instance.getAccessCode()
+
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(SCPregameRoomViewController.respondToSwipeGesture(gesture:)))
+        swipeGestureRecognizer.direction = .up
+        self.view.addGestureRecognizer(swipeGestureRecognizer)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -147,29 +144,14 @@ class SCPregameRoomViewController: SCViewController {
         super._prepareForSegue(segue, sender: sender)
 
         // All segues identified here should be forward direction only
-        if let vc = segue.destination as? SCPopoverViewController {
-            super.showDimView()
-
-            vc.rootViewController = self
-
-            if let vc = segue.destination as? SCPregameSettingsViewController {
-                vc.delegate = self
-            }
-
-            vc.modalPresentationStyle = .popover
-
-            if let popvc = vc.popoverPresentationController {
-                popvc.delegate = self
-                popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-                popvc.sourceView = self.view
-                popvc.sourceRect = CGRect(
-                    x: self.view.bounds.midX,
-                    y: self.view.bounds.midY,
-                    width: 0,
-                    height: 0
-                )
-            }
+        if let vc = segue.destination as? SCPregameModalViewController {
+            vc.delegate = self
         }
+    }
+
+    // MARK: Swipe Gesture Recognizer
+    func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
+        self.swipeUp()
     }
 
     // MARK: Private
@@ -198,6 +180,10 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate func broadcastOptionalData(_ object: NSObject) {
         let data = NSKeyedArchiver.archivedData(withRootObject: object)
         SCMultipeerManager.instance.broadcastData(data)
+    }
+
+    fileprivate func swipeUp() {
+        self.performSegue(withIdentifier: SCConstants.identifier.pregameModal.rawValue, sender: self)
     }
 
     fileprivate func goToGame() {
@@ -377,7 +363,7 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
     }
 }
 
-extension SCPregameRoomViewController: SCPregameSettingsViewControllerDelegate {
+extension SCPregameRoomViewController: SCPregameModalViewControllerDelegate {
     func onNightModeToggleChanged() {
         DispatchQueue.main.async {
             if SCSettingsManager.instance.isNightModeEnabled() {
