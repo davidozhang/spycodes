@@ -6,6 +6,7 @@ protocol SCPregameModalViewControllerDelegate: class {
 
 class SCPregameModalViewController: SCModalViewController {
     weak var delegate: SCPregameModalViewControllerDelegate?
+    fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sections = [
         "Statistics",
@@ -41,6 +42,14 @@ class SCPregameModalViewController: SCModalViewController {
         self.tableView.layoutIfNeeded()
 
         self.animateSwipeDownButton()
+
+        self.refreshTimer = Foundation.Timer.scheduledTimer(
+            timeInterval: 2.0,
+            target: self,
+            selector: #selector(SCPregameModalViewController.refreshView),
+            userInfo: nil,
+            repeats: true
+        )
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -48,9 +57,18 @@ class SCPregameModalViewController: SCModalViewController {
 
         self.tableView.dataSource = nil
         self.tableView.delegate = nil
+
+        self.refreshTimer?.invalidate()
     }
 
     // MARK: Private
+    @objc
+    fileprivate func refreshView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+
     fileprivate func animateSwipeDownButton() {
         self.swipeDownButton.alpha = 1.0
         UIView.animate(
@@ -144,6 +162,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                         return UITableViewCell()
                 }
 
+                cell.synchronizeToggle()
                 cell.leftLabel.text = self.settingsLabels[indexPath.row]
                 cell.delegate = self
                 
@@ -155,6 +174,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                         return UITableViewCell()
                 }
 
+                cell.synchronizeToggle()
                 cell.leftLabel.text = self.settingsLabels[indexPath.row]
                 cell.delegate = self
 

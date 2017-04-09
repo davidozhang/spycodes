@@ -836,7 +836,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fla-Z8-sHI">
-                                <rect key="frame" x="0.0" y="62" width="1024" height="1304"/>
+                                <rect key="frame" x="0.0" y="54" width="1024" height="1312"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="jcT-II-rZw" userLabel="section-header-view-cell" customClass="SCSectionHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
@@ -962,7 +962,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FjP-pl-Sjb" firstAttribute="centerX" secondItem="lxN-QK-ytI" secondAttribute="centerX" id="0Ap-xU-CO1"/>
-                            <constraint firstItem="fla-Z8-sHI" firstAttribute="top" secondItem="FjP-pl-Sjb" secondAttribute="bottom" constant="8" id="1Dl-fq-TiZ"/>
+                            <constraint firstItem="fla-Z8-sHI" firstAttribute="top" secondItem="FjP-pl-Sjb" secondAttribute="bottom" id="1Dl-fq-TiZ"/>
                             <constraint firstItem="MLa-iE-UmV" firstAttribute="top" secondItem="fla-Z8-sHI" secondAttribute="bottom" id="SWn-Tk-HpF"/>
                             <constraint firstAttribute="trailing" secondItem="fla-Z8-sHI" secondAttribute="trailing" id="Sxy-LK-2FM"/>
                             <constraint firstItem="FjP-pl-Sjb" firstAttribute="top" secondItem="lxN-QK-ytI" secondAttribute="top" constant="24" id="fFl-S5-QCV"/>
