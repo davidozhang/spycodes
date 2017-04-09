@@ -10,9 +10,6 @@ class SCGameRoomViewController: SCViewController {
     fileprivate let timerViewDefaultHeight: CGFloat = 20
     fileprivate let bottomBarViewExtendedHeight: CGFloat = 117
 
-    fileprivate let animationAlpha: CGFloat = 0.4
-    fileprivate let animationDuration: TimeInterval = 0.75
-
     fileprivate var actionButtonState: ActionButtonState = .endRound
 
     fileprivate var buttonAnimationStarted = false
@@ -236,7 +233,7 @@ class SCGameRoomViewController: SCViewController {
 
             self.bottomBarViewBottomMarginConstraint.constant = rect.size.height
             UIView.animate(
-                withDuration: self.animationDuration,
+                withDuration: super.animationDuration,
                 animations: {
                     self.view.layoutIfNeeded()
                 }
@@ -246,7 +243,7 @@ class SCGameRoomViewController: SCViewController {
 
     override func keyboardWillHide(_ notification: Notification) {
         self.bottomBarViewBottomMarginConstraint.constant = 0
-        UIView.animate(withDuration: self.animationDuration, animations: {
+        UIView.animate(withDuration: super.animationDuration, animations: {
             self.view.layoutIfNeeded()
         })
     }
@@ -280,11 +277,11 @@ class SCGameRoomViewController: SCViewController {
         if !self.buttonAnimationStarted {
             self.actionButton.alpha = 1.0
             UIView.animate(
-                withDuration: self.animationDuration,
+                withDuration: super.animationDuration,
                 delay: 0.0,
                 options: [.autoreverse, .repeat, .allowUserInteraction],
                 animations: {
-                    self.actionButton.alpha = self.animationAlpha
+                    self.actionButton.alpha = super.animationAlpha
                 },
                 completion: nil
             )
@@ -303,12 +300,12 @@ class SCGameRoomViewController: SCViewController {
     fileprivate func startTextFieldAnimations() {
         if !self.textFieldAnimationStarted {
             UIView.animate(
-                withDuration: self.animationDuration,
+                withDuration: super.animationDuration,
                 delay: 0.0,
                 options: [.autoreverse, .repeat, .allowUserInteraction],
                 animations: {
-                    self.clueTextField.alpha = self.animationAlpha
-                    self.numberOfWordsTextField.alpha = self.animationAlpha
+                    self.clueTextField.alpha = super.animationAlpha
+                    self.numberOfWordsTextField.alpha = super.animationAlpha
                 },
                 completion: nil
             )

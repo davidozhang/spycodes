@@ -18,6 +18,7 @@ class SCPregameModalViewController: SCModalViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var swipeDownButton: UIButton!
 
     // MARK: Actions
     @IBAction func onSwipeDownTapped(_ sender: Any) {
@@ -36,6 +37,8 @@ class SCPregameModalViewController: SCModalViewController {
         self.tableView.delegate = self
         self.tableViewTrailingSpaceConstraint.constant = 30
         self.tableView.layoutIfNeeded()
+
+        self.animateSwipeDownButton()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,6 +46,20 @@ class SCPregameModalViewController: SCModalViewController {
 
         self.tableView.dataSource = nil
         self.tableView.delegate = nil
+    }
+
+    // MARK: Private
+    fileprivate func animateSwipeDownButton() {
+        self.swipeDownButton.alpha = 1.0
+        UIView.animate(
+            withDuration: super.animationDuration,
+            delay: 0.0,
+            options: [.autoreverse, .repeat, .allowUserInteraction],
+            animations: {
+                self.swipeDownButton.alpha = super.animationAlpha
+        },
+            completion: nil
+        )
     }
 }
 
