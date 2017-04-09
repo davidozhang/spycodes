@@ -3,20 +3,16 @@ import Foundation
 class Statistics: NSObject, NSCoding {
     static var instance = Statistics()
     fileprivate var bestRecord: Int?        // For minigame
-    fileprivate var statistics: [Team: Int] = [.red: 0, .blue: 0]        // For regular game
+    fileprivate var score: [Int] = [0, 0]        // For regular game
 
     // MARK: Constructor/Destructor
     deinit {
-        self.statistics.removeAll()
+        self.score.removeAll()
     }
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        if let red = self.statistics[.red],
-           let blue = self.statistics[.blue] {
-            aCoder.encode(red, forKey: SCConstants.coding.red.rawValue)
-            aCoder.encode(blue, forKey: SCConstants.coding.blue.rawValue)
-        }
+        aCoder.encode(self.score, forKey: SCConstants.coding.score.rawValue)
         
         if let bestRecord = self.bestRecord {
             aCoder.encode(bestRecord, forKey: SCConstants.coding.bestRecord.rawValue)
@@ -26,17 +22,9 @@ class Statistics: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
 
-        if aDecoder.containsValue(forKey: SCConstants.coding.red.rawValue),
-           aDecoder.containsValue(forKey: SCConstants.coding.blue.rawValue) {
-            let red = aDecoder.decodeInteger(
-                forKey: SCConstants.coding.red.rawValue
-            )
-
-            let blue = aDecoder.decodeInteger(
-                forKey: SCConstants.coding.blue.rawValue
-            )
-
-            self.statistics = [.red: red, .blue: blue]
+        if aDecoder.containsValue(forKey: SCConstants.coding.score.rawValue),
+            let score = aDecoder.decodeObject(forKey: SCConstants.coding.score.rawValue) as? [Int] {
+            self.score = score
         }
 
         if aDecoder.containsValue(forKey: SCConstants.coding.bestRecord.rawValue) {
@@ -50,11 +38,11 @@ class Statistics: NSObject, NSCoding {
 
     // MARK: Public
     func recordWinForTeam(_ winningTeam: Team) {
-        self.statistics[winningTeam]! += 1
+        self.score[winningTeam.rawValue] += 1
     }
 
-    func getStatistics() -> [Team: Int] {
-        return self.statistics
+    func getScore() -> [Int] {
+        return self.score
     }
 
     func getBestRecord() -> Int? {
@@ -70,7 +58,7 @@ class Statistics: NSObject, NSCoding {
     }
 
     func reset() {
-        self.statistics = [.red: 0, .blue: 0]
+        self.score = [0, 0]
         self.bestRecord = nil
     }
 }
