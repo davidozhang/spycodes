@@ -130,11 +130,8 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                     cell.statisticsLabel.text = "Best Record: --"
                 }
             } else {
-                let statistics = Statistics.instance.getStatistics()
-                if let red = statistics[.red],
-                    let blue = statistics[.blue] {
-                    cell.statisticsLabel.text = "Red " + String(red) + " : " + String(blue) + " Blue"
-                }
+                let score = Statistics.instance.getScore()
+                cell.statisticsLabel.text = "Red " + String(score[0]) + " : " + String(score[1]) + " Blue"
             }
 
             return cell
