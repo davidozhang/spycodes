@@ -1,6 +1,9 @@
 import UIKit
 
 class SCViewController: UIViewController {
+    let animationDuration: TimeInterval = 0.75
+    let animationAlpha: CGFloat = 0.4
+
     var unwindableIdentifier: String = ""
     var previousViewControllerIdentifier: String?
     var returnToRootViewController = false

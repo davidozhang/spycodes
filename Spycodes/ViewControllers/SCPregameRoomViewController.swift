@@ -9,6 +9,7 @@ class SCPregameRoomViewController: SCViewController {
     @IBOutlet weak var accessCodeTypeLabel: SCNavigationBarLabel!
     @IBOutlet weak var accessCodeLabel: SCNavigationBarBoldLabel!
     @IBOutlet weak var startGame: SCButton!
+    @IBOutlet weak var swipeUpButton: UIButton!
 
     @IBAction func onStartGameInfoPressed(_ sender: AnyObject) {
         let message = self.composeChecklist()
@@ -115,6 +116,8 @@ class SCPregameRoomViewController: SCViewController {
             userInfo: nil,
             repeats: true
         )
+
+        self.animateSwipeUpButton()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -184,6 +187,19 @@ class SCPregameRoomViewController: SCViewController {
 
     fileprivate func swipeUp() {
         self.performSegue(withIdentifier: SCConstants.identifier.pregameModal.rawValue, sender: self)
+    }
+
+    fileprivate func animateSwipeUpButton() {
+        self.swipeUpButton.alpha = 1.0
+        UIView.animate(
+            withDuration: super.animationDuration,
+            delay: 0.0,
+            options: [.autoreverse, .repeat, .allowUserInteraction],
+            animations: {
+                self.swipeUpButton.alpha = super.animationAlpha
+        },
+            completion: nil
+        )
     }
 
     fileprivate func goToGame() {
