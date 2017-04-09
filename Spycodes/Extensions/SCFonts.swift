@@ -3,10 +3,10 @@ import UIKit
 class SCFonts {
     // MARK: Font Types
     enum fontType: String {
-        case Regular = "AppleSDGothicNeo-UltraLight"
-        case Medium = "AppleSDGothicNeo-Medium"
-        case Bold = "AppleSDGothicNeo-Bold"
-        case Other = "AppleSDGothicNeo-Light"
+        case regular = "AppleSDGothicNeo-UltraLight"
+        case medium = "AppleSDGothicNeo-Medium"
+        case bold = "AppleSDGothicNeo-Bold"
+        case other = "AppleSDGothicNeo-Light"
     }
 
     // MARK: Font Sizes

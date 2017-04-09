@@ -335,7 +335,7 @@ class SCGameRoomViewController: SCViewController {
         )
         attributedString.addAttribute(
             NSFontAttributeName,
-            value: SCFonts.regularSizeFont(.Bold) ?? 0,
+            value: SCFonts.regularSizeFont(.bold) ?? 0,
             range: NSMakeRange(0, 1)
         )
 

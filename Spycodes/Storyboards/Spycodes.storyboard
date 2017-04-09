@@ -939,7 +939,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zes-Gf-0qn" customClass="SCLargeLabel" customModule="Spycodes" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zes-Gf-0qn" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
                                                     <rect key="frame" x="35" y="0.0" width="70.5" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -953,7 +953,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="statisticsLabel" destination="Zes-Gf-0qn" id="2S6-Ne-Asv"/>
+                                            <outlet property="statisticsLabel" destination="Zes-Gf-0qn" id="xCc-Q7-sG2"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="description-view-cell" id="ltL-Yl-cwI" customClass="SCDescriptionViewCell" customModule="Spycodes" customModuleProvider="target">

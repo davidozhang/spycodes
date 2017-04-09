@@ -15,7 +15,6 @@ class SCConstants {
         case name = "name"
         case numberOfWords = "numberOfWords"
         case players = "players"
-        case ready = "ready"
         case score = "score"
         case selected = "selected"
         case team = "team"

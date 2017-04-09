@@ -6,6 +6,6 @@ class SCDescriptionViewCell: SCTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.leftLabel.font = SCFonts.regularSizeFont(SCFonts.fontType.Regular)
+        self.leftLabel.font = SCFonts.regularSizeFont(SCFonts.fontType.regular)
     }
 }
