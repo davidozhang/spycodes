@@ -22,6 +22,21 @@ class SCToggleViewCell: SCTableViewCell {
             for: .valueChanged
         )
 
+        self.synchronizeToggle()
+
+        self.accessoryView = toggleSwitch
+    }
+
+    deinit {
+        self.toggleSwitch.removeTarget(
+            self,
+            action: #selector(SCToggleViewCell.onToggleChanged(_:)),
+            for: .valueChanged
+        )
+        self.delegate = nil
+    }
+
+    func synchronizeToggle() {
         if let reuseIdentifier = self.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
@@ -34,17 +49,6 @@ class SCToggleViewCell: SCTableViewCell {
                 break
             }
         }
-
-        self.accessoryView = toggleSwitch
-    }
-
-    deinit {
-        self.toggleSwitch.removeTarget(
-            self,
-            action: #selector(SCToggleViewCell.onToggleChanged(_:)),
-            for: .valueChanged
-        )
-        self.delegate = nil
     }
 
     @objc
