@@ -11,8 +11,8 @@ class SCVersionViewCell: SCTableViewCell {
         self.versionNumberLabel.text = SCAppInfoManager.appVersion
         self.buildNumberLabel.text = "(\(SCAppInfoManager.buildNumber))"
 
-        self.leftLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.Regular)
-        self.versionNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.Regular)
-        self.buildNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.Other)
+        self.leftLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.regular)
+        self.versionNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.regular)
+        self.buildNumberLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.other)
     }
 }
