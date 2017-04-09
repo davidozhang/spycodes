@@ -15,6 +15,7 @@ class SCConstants {
         case name = "name"
         case numberOfWords = "numberOfWords"
         case players = "players"
+        case ready = "ready"
         case score = "score"
         case selected = "selected"
         case team = "team"
@@ -35,6 +36,7 @@ class SCConstants {
 
     enum identifier: String {
         case accessCode = "access-code"
+        case descriptionViewCell = "description-view-cell"
         case disclosureViewCell = "disclosure-view-cell"
         case gameRoom = "game-room"
         case gameRoomViewCell = "game-room-view-cell"
