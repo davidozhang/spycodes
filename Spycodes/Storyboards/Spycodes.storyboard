@@ -956,6 +956,30 @@
                                             <outlet property="statisticsLabel" destination="Zes-Gf-0qn" id="2S6-Ne-Asv"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="description-view-cell" id="ltL-Yl-cwI" customClass="SCDescriptionViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="248" width="1024" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ltL-Yl-cwI" id="uX1-2W-ufn">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwN-q6-e8C" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="35" y="0.0" width="88" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="OwN-q6-e8C" secondAttribute="bottom" id="Sta-Sw-wlA"/>
+                                                <constraint firstItem="OwN-q6-e8C" firstAttribute="leading" secondItem="uX1-2W-ufn" secondAttribute="leading" constant="35" id="XpJ-a9-eGE"/>
+                                                <constraint firstItem="OwN-q6-e8C" firstAttribute="top" secondItem="uX1-2W-ufn" secondAttribute="top" id="gfQ-l0-igc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="leftLabel" destination="OwN-q6-e8C" id="HpT-wm-jld"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>

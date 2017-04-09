@@ -11,26 +11,6 @@ class SCPregameRoomViewController: SCViewController {
     @IBOutlet weak var startGame: SCButton!
     @IBOutlet weak var swipeUpButton: UIButton!
 
-    @IBAction func onStartGameInfoPressed(_ sender: AnyObject) {
-        let message = self.composeChecklist()
-        let alertController = UIAlertController(
-            title: "Start Game",
-            message: message,
-            preferredStyle: .alert
-        )
-        let confirmAction = UIAlertAction(
-            title: "Dismiss",
-            style: .default,
-            handler: nil
-        )
-        alertController.addAction(confirmAction)
-        self.present(
-            alertController,
-            animated: true,
-            completion: nil
-        )
-    }
-
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         self.returnToMainMenu(reason: nil)
     }
@@ -267,35 +247,6 @@ class SCPregameRoomViewController: SCViewController {
             SCMultipeerManager.instance.startAdvertiser(discoveryInfo: nil)
             SCMultipeerManager.instance.startBrowser()
         }
-    }
-
-    fileprivate func composeChecklist() -> String {
-        var message = ""
-
-        // Team size check
-        if Room.instance.teamSizesValid() {
-            message += SCStrings.completed + " "
-        } else {
-            message += SCStrings.incomplete + " "
-        }
-
-        if GameMode.instance.getMode() == .miniGame {
-            message += SCStrings.minigameTeamSizeInfo
-        } else {
-            message += SCStrings.regularGameTeamSizeInfo
-        }
-
-        message += "\n\n"
-        message += SCStrings.moreInfo
-        message += "\n\n"
-        message += SCStrings.selectLeaderInfo
-
-        if GameMode.instance.getMode() == .regularGame {
-            message += "\n\n"
-            message += SCStrings.minigameInfo
-        }
-
-        return message
     }
 }
 

@@ -13,7 +13,7 @@ class SCStrings {
     static let failStatus = "Failed to join room"
 
     static let minigameTeamSizeInfo = "Your team has 2-3 players."
-    static let regularGameTeamSizeInfo = "Both teams have 2-4 players."
+    static let regularGameTeamSizeInfo = "Each team has 2-4 players."
     static let minigameCluegiverInfo = "Your team has selected a leader."
     static let regularGameCluegiverInfo = "Both teams have selected leaders."
     static let moreInfo = "More Info:"

@@ -9,6 +9,7 @@ class SCPregameModalViewController: SCModalViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sections = [
+        "Start Game Checklist",
         "Statistics",
         "Game Settings",
         "Customize"
@@ -81,6 +82,25 @@ class SCPregameModalViewController: SCModalViewController {
             completion: nil
         )
     }
+
+    fileprivate func getChecklistMessage() -> String {
+        var message = ""
+
+        // Team size check
+        if Room.instance.teamSizesValid() {
+            message += SCStrings.completed + " "
+        } else {
+            message += SCStrings.incomplete + " "
+        }
+
+        if GameMode.instance.getMode() == .miniGame {
+            message += SCStrings.minigameTeamSizeInfo
+        } else {
+            message += SCStrings.regularGameTeamSizeInfo
+        }
+        
+        return message
+    }
 }
 
 //   _____      _                 _
@@ -98,7 +118,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 0:     // Statistics
+        case 1:     // Statistics
             return 50.0
         default:
             return 44.0
@@ -120,11 +140,13 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: // Statistics
+        case 0: // Pregame Checklist
             return 1
-        case 1: // Game Settings
+        case 1: // Statistics
+            return 1
+        case 2: // Game Settings
             return settingsLabels.count
-        case 2: // Customize
+        case 3: // Customize
             return customizeLabels.count
         default:
             return 0
@@ -134,7 +156,16 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0: // Statistics
+        case 0: // Pregame Checklist
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCConstants.identifier.descriptionViewCell.rawValue
+                ) as? SCDescriptionViewCell else {
+                    return UITableViewCell()
+            }
+
+            cell.leftLabel.text = self.getChecklistMessage()
+            return cell
+        case 1: // Statistics
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.statisticsViewCell.rawValue
                 ) as? SCStatisticsViewCell else {
@@ -153,7 +184,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             }
 
             return cell
-        case 1: // Game Settings
+        case 2: // Game Settings
             switch indexPath.row {
             case 0:
                 guard let cell = self.tableView.dequeueReusableCell(
@@ -182,7 +213,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             default:
                 return UITableViewCell()
             }
-        case 2: // Customize
+        case 3: // Customize
             switch indexPath.row {
             case 0:
                 guard let cell = self.tableView.dequeueReusableCell(
@@ -252,4 +283,3 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
         }
     }
 }
-
