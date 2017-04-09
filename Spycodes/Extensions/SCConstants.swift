@@ -47,6 +47,7 @@ class SCConstants {
         case pregameModal = "pregame-modal"
         case pregameRoom = "pregame-room"
         case pregameRoomViewCell = "pregame-room-view-cell"
+        case statisticsViewCell = "statistics-view-cell"
         case sectionHeaderCell = "section-header-view-cell"
         case settings = "settings"
         case timerToggleViewCell = "timer-toggle-view-cell"

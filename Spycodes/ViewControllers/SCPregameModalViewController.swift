@@ -8,12 +8,14 @@ class SCPregameModalViewController: SCModalViewController {
     weak var delegate: SCPregameModalViewControllerDelegate?
 
     fileprivate let sections = [
+        "Statistics",
         "Game Settings",
         "Customize"
     ]
-
-    fileprivate let settingsLabels = ["Minigame", "Timer"]
-
+    fileprivate let settingsLabels = [
+        "Minigame",
+        "Timer"
+    ]
     fileprivate let customizeLabels = ["Night Mode"]
 
     @IBOutlet weak var tableView: UITableView!
@@ -77,7 +79,12 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
 
     func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
-        return 44.0
+        switch section {
+        case 0:     // Statistics
+            return 50.0
+        default:
+            return 44.0
+        }
     }
 
     func tableView(_ tableView: UITableView,
@@ -95,9 +102,11 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: // Game Settings
+        case 0: // Statistics
+            return 1
+        case 1: // Game Settings
             return settingsLabels.count
-        case 1: // Customize
+        case 2: // Customize
             return customizeLabels.count
         default:
             return 0
@@ -107,7 +116,29 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0: // Game Settings
+        case 0: // Statistics
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCConstants.identifier.statisticsViewCell.rawValue
+                ) as? SCStatisticsViewCell else {
+                    return UITableViewCell()
+            }
+
+            if GameMode.instance.getMode() == .miniGame {
+                if let bestRecord = Statistics.instance.getBestRecord() {
+                    cell.statisticsLabel.text = "Best Record: " + String(bestRecord)
+                } else {
+                    cell.statisticsLabel.text = "Best Record: --"
+                }
+            } else {
+                let statistics = Statistics.instance.getStatistics()
+                if let red = statistics[.red],
+                    let blue = statistics[.blue] {
+                    cell.statisticsLabel.text = "Red " + String(red) + " : " + String(blue) + " Blue"
+                }
+            }
+
+            return cell
+        case 1: // Game Settings
             switch indexPath.row {
             case 0:
                 guard let cell = self.tableView.dequeueReusableCell(
@@ -134,7 +165,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             default:
                 return UITableViewCell()
             }
-        case 1: // Customize
+        case 2: // Customize
             switch indexPath.row {
             case 0:
                 guard let cell = self.tableView.dequeueReusableCell(
@@ -166,6 +197,10 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
                     GameMode.instance.setMode(mode: .miniGame)
                 } else {
                     GameMode.instance.setMode(mode: .regularGame)
+                }
+
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
                 }
 
                 Room.instance.resetPlayers()
