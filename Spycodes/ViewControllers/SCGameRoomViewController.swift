@@ -325,9 +325,21 @@ class SCGameRoomViewController: SCViewController {
     }
 
     fileprivate func updateDashboard() {
-        self.cardsRemainingLabel.text = String(
-            CardCollection.instance.getCardsRemainingForTeam(Player.instance.getTeam())
+        let opponentTeam = Team(rawValue: Player.instance.getTeam().rawValue ^ 1)
+        let attributedString = NSMutableAttributedString(
+            string: String(
+                CardCollection.instance.getCardsRemainingForTeam(Player.instance.getTeam())
+            ) + ":" + String(
+                CardCollection.instance.getCardsRemainingForTeam(opponentTeam!)
+            )
         )
+        attributedString.addAttribute(
+            NSFontAttributeName,
+            value: SCFonts.regularSizeFont(.Bold) ?? 0,
+            range: NSMakeRange(0, 1)
+        )
+
+        self.cardsRemainingLabel.attributedText = attributedString
 
         if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
             if self.cluegiverIsEditing {
