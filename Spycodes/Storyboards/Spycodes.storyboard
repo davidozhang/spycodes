@@ -737,20 +737,20 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wg9-oN-c0G" userLabel="Bottom View">
-                                <rect key="frame" x="452" y="1269" width="121" height="79"/>
+                                <rect key="frame" x="497.5" y="1269" width="30" height="79"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="084-kN-Fki" customClass="SCRoundedButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="38" width="121" height="41"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="084-kN-Fki" userLabel="Ready Button" customClass="SCRoundedButton" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="38" width="30" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <state key="normal" title="Start Game">
+                                        <state key="normal">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="onStartGame:" destination="VkA-D4-zlT" eventType="touchUpInside" id="YTM-QW-2fA"/>
+                                            <action selector="onReadyButtonTapped:" destination="VkA-D4-zlT" eventType="touchUpInside" id="WXi-0C-1M3"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRE-j4-AHm" userLabel="Swipe Up Button">
-                                        <rect key="frame" x="45.5" y="0.0" width="30" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="WyW-Vf-C65"/>
                                             <constraint firstAttribute="height" constant="30" id="ub8-vw-X4u"/>
@@ -798,7 +798,7 @@
                     <connections>
                         <outlet property="accessCodeLabel" destination="egW-vc-JOW" id="3T5-va-xgE"/>
                         <outlet property="accessCodeTypeLabel" destination="dZK-HZ-PAI" id="Jut-h2-AKp"/>
-                        <outlet property="startGame" destination="084-kN-Fki" id="ryC-Vh-gDH"/>
+                        <outlet property="readyButton" destination="084-kN-Fki" id="kMu-UQ-07b"/>
                         <outlet property="swipeUpButton" destination="cRE-j4-AHm" id="9cS-B8-vjm"/>
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
                         <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-room" id="pzx-vK-usD"/>

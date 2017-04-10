@@ -9,6 +9,7 @@ class Player: NSObject, NSCoding {
     fileprivate var cluegiver: Bool
     fileprivate var host: Bool
     fileprivate var uuid: String
+    fileprivate var ready: Bool
 
     // MARK: Constructor/Destructor
     override init() {
@@ -16,19 +17,22 @@ class Player: NSObject, NSCoding {
         self.team = .red
         self.cluegiver = false
         self.host = false
+        self.ready = false
     }
 
     convenience init(name: String,
                      uuid: String,
                      team: Team,
                      cluegiver: Bool,
-                     host: Bool) {
+                     host: Bool,
+                     ready: Bool) {
         self.init()
         self.name = name
         self.uuid = uuid
         self.team = team
         self.cluegiver = cluegiver
         self.host = host
+        self.ready = ready
     }
 
     // MARK: Coder
@@ -38,6 +42,7 @@ class Player: NSObject, NSCoding {
         aCoder.encode(self.team.rawValue, forKey: SCConstants.coding.team.rawValue)
         aCoder.encode(self.cluegiver, forKey: SCConstants.coding.cluegiver.rawValue)
         aCoder.encode(self.host, forKey: SCConstants.coding.host.rawValue)
+        aCoder.encode(self.ready, forKey: SCConstants.coding.ready.rawValue)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
@@ -54,13 +59,18 @@ class Player: NSObject, NSCoding {
             let host = aDecoder.decodeBool(
                 forKey: SCConstants.coding.host.rawValue
             )
+
+            let ready = aDecoder.decodeBool(
+                forKey: SCConstants.coding.ready.rawValue
+            )
     
             self.init(
                 name: name,
                 uuid: uuid,
                 team: Team(rawValue: team)!,
                 cluegiver: cluegiver,
-                host: host
+                host: host,
+                ready: ready
             )
         } else {
             self.init()
@@ -88,6 +98,10 @@ class Player: NSObject, NSCoding {
         return self.host
     }
 
+    func isReady() -> Bool {
+        return self.ready
+    }
+
     func setName(name: String) {
         self.name = name
     }
@@ -102,6 +116,10 @@ class Player: NSObject, NSCoding {
 
     func setIsHost(_ isHost: Bool) {
         self.host = isHost
+    }
+
+    func setIsReady(_ isReady: Bool) {
+        self.ready = isReady
     }
 
     func reset() {
