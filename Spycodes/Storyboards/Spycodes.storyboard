@@ -1188,7 +1188,6 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="3uZ-EC-qmK"/>
-                                                    <constraint firstAttribute="height" constant="20" id="ram-6M-6Wp"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5g-Ps-Ju2" userLabel="Timer Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
