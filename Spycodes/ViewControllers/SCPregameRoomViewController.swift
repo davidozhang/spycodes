@@ -5,14 +5,26 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var broadcastTimer: Foundation.Timer?
     fileprivate var refreshTimer: Foundation.Timer?
 
+    fileprivate var readyButtonState: ReadyButtonState = .notReady
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var accessCodeTypeLabel: SCNavigationBarLabel!
     @IBOutlet weak var accessCodeLabel: SCNavigationBarBoldLabel!
-    @IBOutlet weak var startGame: SCButton!
+    @IBOutlet weak var readyButton: SCButton!
     @IBOutlet weak var swipeUpButton: UIButton!
 
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         self.returnToMainMenu(reason: nil)
+    }
+
+    @IBAction func onReadyButtonTapped(_ sender: Any) {
+        if readyButtonState != .ready {
+            readyButtonState = .ready
+        } else {
+            readyButtonState = .notReady
+        }
+
+        self.updateReadyButton()
     }
 
     @IBAction func onSwipeUpTapped(_ sender: Any) {
@@ -21,17 +33,6 @@ class SCPregameRoomViewController: SCViewController {
 
     @IBAction func unwindToPregameRoom(_ segue: UIStoryboardSegue) {
         super.unwindedToSelf(segue)
-    }
-
-    @IBAction func onStartGame(_ sender: AnyObject) {
-        if Room.instance.canStartGame() {
-            // Instantiate next game's card collection and round
-            CardCollection.instance = CardCollection()
-            Round.instance = Round()
-            self.broadcastOptionalData(CardCollection.instance)
-            self.broadcastOptionalData(Round.instance)
-            self.goToGame()
-        }
     }
 
     deinit {
@@ -47,10 +48,6 @@ class SCPregameRoomViewController: SCViewController {
             SCMultipeerManager.instance.setPeerID(Room.instance.getUUID())
             SCMultipeerManager.instance.startSession()
         }
-
-        self.startGame.isHidden = false
-        self.startGame.alpha = 0.3
-        self.startGame.isEnabled = false
 
         self.accessCodeTypeLabel.text = "Access Code: "
         self.accessCodeLabel.text = Room.instance.getAccessCode()
@@ -98,6 +95,7 @@ class SCPregameRoomViewController: SCViewController {
         )
 
         self.animateSwipeUpButton()
+        self.resetReadyButton()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -134,6 +132,7 @@ class SCPregameRoomViewController: SCViewController {
 
     // MARK: Swipe Gesture Recognizer
     func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
+        self.resetReadyButton()
         self.swipeUp()
     }
 
@@ -163,6 +162,34 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate func broadcastOptionalData(_ object: NSObject) {
         let data = NSKeyedArchiver.archivedData(withRootObject: object)
         SCMultipeerManager.instance.broadcastData(data)
+    }
+
+    fileprivate func broadcastActionEvent(_ eventType: ActionEvent.EventType) {
+        let actionEvent = ActionEvent(
+            type: eventType,
+            parameters: [SCConstants.coding.uuid.rawValue: Player.instance.getUUID()]
+        )
+        self.broadcastOptionalData(actionEvent)
+    }
+
+    fileprivate func updateReadyButton() {
+        if self.readyButtonState == .notReady {
+            self.broadcastActionEvent(.cancel)
+            self.readyButton.setTitle("Ready", for: .normal)
+        } else {
+            self.broadcastActionEvent(.ready)
+            self.readyButton.setTitle("Cancel", for: .normal)
+        }
+
+        let isReady = self.readyButtonState == .ready
+
+        // Only set ready status locally
+        Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.setIsReady(isReady)
+    }
+
+    fileprivate func resetReadyButton() {
+        self.readyButtonState = .notReady
+        self.updateReadyButton()
     }
 
     fileprivate func swipeUp() {
@@ -223,18 +250,9 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     fileprivate func checkRoom() {
-        if Room.instance.canStartGame() {
-            self.startGame.alpha = 1.0
-            self.startGame.isEnabled = true
-        } else {
-            self.startGame.alpha = 0.3
-            self.startGame.isEnabled = false
-        }
-
         if !Player.instance.isHost() {
             return
         }
-
 
         let maxRoomSize = GameMode.instance.getMode() == .regularGame ?
             SCConstants.constant.roomMaxSize.rawValue :
@@ -246,6 +264,15 @@ class SCPregameRoomViewController: SCViewController {
         } else {
             SCMultipeerManager.instance.startAdvertiser(discoveryInfo: nil)
             SCMultipeerManager.instance.startBrowser()
+        }
+
+        if Room.instance.canStartGame() {
+            // Instantiate next game's card collection and round
+            CardCollection.instance = CardCollection()
+            Round.instance = Round()
+            self.broadcastOptionalData(CardCollection.instance)
+            self.broadcastOptionalData(Round.instance)
+            self.goToGame()
         }
     }
 }
@@ -296,6 +323,18 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
             Statistics.instance = synchronizedObject
         case let synchronizedObject as Timer:
             Timer.instance = synchronizedObject
+        case let synchronizedObject as ActionEvent:
+            if synchronizedObject.getType() == ActionEvent.EventType.ready {
+                if let parameters = synchronizedObject.getParameters(),
+                   let uuid = parameters[SCConstants.coding.uuid.rawValue] {
+                    Room.instance.getPlayerWithUUID(uuid)?.setIsReady(true)
+                }
+            } else if synchronizedObject.getType() == ActionEvent.EventType.cancel {
+                if let parameters = synchronizedObject.getParameters(),
+                   let uuid = parameters[SCConstants.coding.uuid.rawValue] {
+                    Room.instance.getPlayerWithUUID(uuid)?.setIsReady(false)
+                }
+            }
         default:
             break
         }

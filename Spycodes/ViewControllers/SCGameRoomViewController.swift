@@ -15,7 +15,6 @@ class SCGameRoomViewController: SCViewController {
     fileprivate var buttonAnimationStarted = false
     fileprivate var textFieldAnimationStarted = false
     fileprivate var cluegiverIsEditing = false
-    fileprivate var gameEnded = false
 
     fileprivate var broadcastTimer: Foundation.Timer?
     fileprivate var refreshTimer: Foundation.Timer?
@@ -104,6 +103,9 @@ class SCGameRoomViewController: SCViewController {
                 userInfo: nil,
                 repeats: true
             )
+
+            // Only cancel ready statuses locally
+            Room.instance.cancelReadyForAllPlayers()
         }
 
         self.actionButton.isHidden = false
@@ -502,7 +504,10 @@ class SCGameRoomViewController: SCViewController {
     }
 
     fileprivate func broadcastActionEvent(_ eventType: ActionEvent.EventType) {
-        let actionEvent = ActionEvent(type: eventType)
+        let actionEvent = ActionEvent(
+            type: eventType,
+            parameters: [SCConstants.coding.uuid.rawValue: Player.instance.getUUID()]
+        )
         self.broadcastOptionalData(actionEvent)
     }
 
@@ -521,12 +526,6 @@ class SCGameRoomViewController: SCViewController {
 
     fileprivate func didEndGame(_ title: String, reason: String) {
         DispatchQueue.main.async {
-            if self.gameEnded {
-                return
-            }
-
-            self.gameEnded = true
-
             Round.instance.endGame()
             Timer.instance.invalidate()
 
@@ -566,8 +565,7 @@ class SCGameRoomViewController: SCViewController {
 // MARK: SCMultipeerManagerDelegate
 extension SCGameRoomViewController: SCMultipeerManagerDelegate {
     func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
-        if self.cluegiverIsEditing ||
-           self.gameEnded {
+        if self.cluegiverIsEditing {
             return
         }
 
@@ -629,6 +627,20 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                 if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
                     SCAudioToolboxManager.vibrate()
                 }
+            } else if synchronizedObject.getType() == ActionEvent.EventType.ready {
+                if let parameters = synchronizedObject.getParameters(),
+                   let uuid = parameters[SCConstants.coding.uuid.rawValue] {
+                    Room.instance.getPlayerWithUUID(uuid)?.setIsReady(true)
+                }
+            } else if synchronizedObject.getType() == ActionEvent.EventType.cancel {
+                if let parameters = synchronizedObject.getParameters(),
+                   let uuid = parameters[SCConstants.coding.uuid.rawValue] {
+                    Room.instance.getPlayerWithUUID(uuid)?.setIsReady(false)
+                }
+            }
+
+            if Player.instance.isHost() {
+                self.broadcastOptionalData(Room.instance)
             }
         default:
             break

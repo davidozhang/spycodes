@@ -3,6 +3,11 @@ enum ActionButtonState: Int {
     case endRound = 1
 }
 
+enum ReadyButtonState: Int {
+    case notReady = 0
+    case ready = 1
+}
+
 enum TimerState: Int {
     case stopped = 0
     case willStart = 1

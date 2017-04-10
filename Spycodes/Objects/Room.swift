@@ -131,7 +131,8 @@ class Room: NSObject, NSCoding {
             uuid: Room.cpuUUID,
             team: .blue,
             cluegiver: true,
-            host: false
+            host: false,
+            ready: true
         )
         self.players.append(cpu)
     }
@@ -224,8 +225,16 @@ class Room: NSObject, NSCoding {
         }
     }
 
+    func allPlayersReady() -> Bool {
+        let readyPlayers = self.players.filter({
+            ($0 as Player).isReady()
+        }).count
+
+        return readyPlayers == Room.instance.players.count
+    }
+
     func canStartGame() -> Bool {
-        return teamSizesValid() && cluegiversSelected()
+        return teamSizesValid() && cluegiversSelected() && allPlayersReady()
     }
 
     func getCluegiverUUIDForTeam(_ team: Team) -> String? {
@@ -236,6 +245,15 @@ class Room: NSObject, NSCoding {
             return filtered[0].getUUID()
         } else {
             return nil
+        }
+    }
+
+    func cancelReadyForAllPlayers() {
+        for player in players {
+            if player.getUUID() == Room.cpuUUID {
+                continue
+            }
+            player.setIsReady(false)
         }
     }
 
