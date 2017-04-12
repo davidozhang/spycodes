@@ -40,7 +40,6 @@ class SCGameRoomViewController: SCViewController {
     // MARK: Actions
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         Round.instance.abortGame()
-        self.broadcastEssentialData()
 
         super.performUnwindSegue(false, completionHandler: nil)
     }
@@ -460,19 +459,19 @@ class SCGameRoomViewController: SCViewController {
     fileprivate func didConfirm() {
         self.cluegiverIsEditing = false
 
-        Round.instance.setClue(self.clueTextField.text)
-        Round.instance.setNumberOfWords(self.numberOfWordsTextField.text)
         self.clueTextField.isEnabled = false
         self.numberOfWordsTextField.isEnabled = false
         self.actionButtonState = .endRound
 
-        self.broadcastEssentialData()
+        Round.instance.setClue(self.clueTextField.text)
+        Round.instance.setNumberOfWords(self.numberOfWordsTextField.text)
+
         self.broadcastActionEvent(.confirm)
     }
 
     fileprivate func didEndRound(fromTimerExpiry: Bool) {
         Round.instance.endRound(Player.instance.getTeam())
-        self.broadcastEssentialData()
+        SCMultipeerManager.instance.broadcast(Round.instance)
 
         if GameMode.instance.getMode() == .miniGame {
             SCAudioToolboxManager.vibrate()
@@ -507,7 +506,7 @@ class SCGameRoomViewController: SCViewController {
     fileprivate func didEndGameWithNotification(_ notification: Notification) {
         DispatchQueue.main.async {
             Round.instance.setWinningTeam(.blue)
-            self.broadcastEssentialData()
+
             if let userInfo = notification.userInfo,
                let title = userInfo["title"] as? String,
                let reason = userInfo["reason"] as? String {
@@ -644,6 +643,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
            let player = Room.instance.getPlayerWithUUID(uuid) {
 
             Room.instance.removePlayerWithUUID(uuid)
+            Room.instance.removeConnectedPeer(peerID: peerID)
             SCMultipeerManager.instance.broadcast(Room.instance)
 
             if player.isHost() {
@@ -667,7 +667,6 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                 )
             } else {
                 Round.instance.abortGame()
-                self.broadcastEssentialData()
                 self.didEndGame(
                     SCStrings.returningToPregameRoomHeader,
                     reason: SCStrings.playerDisconnected
@@ -772,7 +771,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
         }
 
         CardCollection.instance.getCards()[indexPath.row].setSelected()
-        self.broadcastEssentialData()
+        SCMultipeerManager.instance.broadcast(CardCollection.instance)
 
         if cardAtIndexTeam == .neutral || cardAtIndexTeam == opponentTeam {
             self.didEndRound(fromTimerExpiry: false)
@@ -781,10 +780,8 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
         if cardAtIndexTeam == .assassin ||
            CardCollection.instance.getCardsRemainingForTeam(opponentTeam!) == 0 {
             Round.instance.setWinningTeam(opponentTeam)
-            self.broadcastEssentialData()
 
             Statistics.instance.recordWinForTeam(opponentTeam!)
-            SCMultipeerManager.instance.broadcast(Statistics.instance)
 
             self.didEndGame(
                 SCStrings.returningToPregameRoomHeader,
@@ -792,11 +789,9 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             )
         } else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
             Round.instance.setWinningTeam(playerTeam)
-            self.broadcastEssentialData()
 
             if GameMode.instance.getMode() == .regularGame {
                 Statistics.instance.recordWinForTeam(playerTeam)
-                SCMultipeerManager.instance.broadcast(Statistics.instance)
 
                 self.didEndGame(
                     SCStrings.returningToPregameRoomHeader,
@@ -813,7 +808,6 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
                 Statistics.instance.setBestRecord(
                     CardCollection.instance.getCardsRemainingForTeam(.blue)
                 )
-                SCMultipeerManager.instance.broadcast(Statistics.instance)
             }
         }
     }
@@ -914,9 +908,9 @@ extension SCGameRoomViewController: UITextFieldDelegate {
         if let characterCount = textField.text?.characters.count {
             if textField == self.clueTextField &&
                 characterCount >= 1 {
-                Round.instance.setClue(self.clueTextField.text)
-                self.broadcastEssentialData()
                 self.numberOfWordsTextField.becomeFirstResponder()
+
+                Round.instance.setClue(self.clueTextField.text)
             } else if textField == self.numberOfWordsTextField &&
                 characterCount >= 1 {
                 if Round.instance.isClueSet() {

@@ -109,18 +109,17 @@ class Round: NSObject, NSCoding {
 
     func setClue(_ clue: String?) {
         self.clue = clue
+        SCMultipeerManager.instance.broadcast(self)
     }
 
     func setNumberOfWords(_ numberOfWords: String?) {
         self.numberOfWords = numberOfWords
-    }
-
-    func setAborted() {
-        self.abort = true
+        SCMultipeerManager.instance.broadcast(self)
     }
 
     func setWinningTeam(_ winningTeam: Team?) {
         self.winningTeam = winningTeam
+        SCMultipeerManager.instance.broadcast(self)
     }
 
     func isClueSet() -> Bool {
@@ -167,6 +166,7 @@ class Round: NSObject, NSCoding {
 
     func abortGame() {
         self.abort = true
+        SCMultipeerManager.instance.broadcast(self)
     }
 
     func endGame() {

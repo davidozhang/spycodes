@@ -355,9 +355,8 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
         let playerAtIndex = Room.instance.getPlayers()[index]
 
         Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setTeam(team: newTeam)
-
         Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsCluegiver(false)
-        self.broadcastEssentialData()
+        SCMultipeerManager.instance.broadcast(Room.instance)
     }
 }
 
