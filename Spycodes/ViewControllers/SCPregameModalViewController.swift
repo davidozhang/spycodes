@@ -9,7 +9,7 @@ class SCPregameModalViewController: SCModalViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sections = [
-        "Start Game Checklist",
+        "Checklist",
         "Statistics",
         "Game Settings",
         "Customize"
