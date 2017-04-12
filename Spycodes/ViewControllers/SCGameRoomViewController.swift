@@ -263,16 +263,8 @@ class SCGameRoomViewController: SCViewController {
 
     @objc
     fileprivate func broadcastEssentialData() {
-        var data = NSKeyedArchiver.archivedData(withRootObject: CardCollection.instance)
-        SCMultipeerManager.instance.broadcastData(data)
-
-        data = NSKeyedArchiver.archivedData(withRootObject: Round.instance)
-        SCMultipeerManager.instance.broadcastData(data)
-    }
-
-    fileprivate func broadcastOptionalData(_ object: NSObject) {
-        let data = NSKeyedArchiver.archivedData(withRootObject: object)
-        SCMultipeerManager.instance.broadcastData(data)
+        SCMultipeerManager.instance.broadcast(CardCollection.instance)
+        SCMultipeerManager.instance.broadcast(Round.instance)
     }
 
     fileprivate func startButtonAnimations() {
@@ -508,7 +500,7 @@ class SCGameRoomViewController: SCViewController {
             type: eventType,
             parameters: [SCConstants.coding.uuid.rawValue: Player.instance.getUUID()]
         )
-        self.broadcastOptionalData(actionEvent)
+        SCMultipeerManager.instance.broadcast(actionEvent)
     }
 
     @objc
@@ -640,7 +632,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             }
 
             if Player.instance.isHost() {
-                self.broadcastOptionalData(Room.instance)
+                SCMultipeerManager.instance.broadcast(Room.instance)
             }
         default:
             break
@@ -652,7 +644,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
            let player = Room.instance.getPlayerWithUUID(uuid) {
 
             Room.instance.removePlayerWithUUID(uuid)
-            self.broadcastOptionalData(Room.instance)
+            SCMultipeerManager.instance.broadcast(Room.instance)
 
             if player.isHost() {
                 let alertController = UIAlertController(
@@ -792,7 +784,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             self.broadcastEssentialData()
 
             Statistics.instance.recordWinForTeam(opponentTeam!)
-            self.broadcastOptionalData(Statistics.instance)
+            SCMultipeerManager.instance.broadcast(Statistics.instance)
 
             self.didEndGame(
                 SCStrings.returningToPregameRoomHeader,
@@ -804,7 +796,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
             if GameMode.instance.getMode() == .regularGame {
                 Statistics.instance.recordWinForTeam(playerTeam)
-                self.broadcastOptionalData(Statistics.instance)
+                SCMultipeerManager.instance.broadcast(Statistics.instance)
 
                 self.didEndGame(
                     SCStrings.returningToPregameRoomHeader,
@@ -821,7 +813,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
                 Statistics.instance.setBestRecord(
                     CardCollection.instance.getCardsRemainingForTeam(.blue)
                 )
-                self.broadcastOptionalData(Statistics.instance)
+                SCMultipeerManager.instance.broadcast(Statistics.instance)
             }
         }
     }

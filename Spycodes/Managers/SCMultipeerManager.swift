@@ -118,20 +118,9 @@ class SCMultipeerManager: NSObject {
         )
     }
 
-    func broadcastData(_ data: Data) {
-        guard let _ = self.session else {
-            return
-        }
-
-        do {
-            if let connectedPeers = self.session?.connectedPeers, connectedPeers.count > 0 {
-                try self.session?.send(
-                    data,
-                    toPeers: connectedPeers,
-                    with: MCSessionSendDataMode.reliable
-                )
-            }
-        } catch {}
+    func broadcast(_ rootObject: Any) {
+        let data = NSKeyedArchiver.archivedData(withRootObject: rootObject)
+        self.broadcastData(data)
     }
 
     // MARK: Private
@@ -158,6 +147,22 @@ class SCMultipeerManager: NSObject {
             serviceType: self.serviceType
         )
         self.browser?.delegate = self
+    }
+
+    private func broadcastData(_ data: Data) {
+        guard let _ = self.session else {
+            return
+        }
+
+        do {
+            if let connectedPeers = self.session?.connectedPeers, connectedPeers.count > 0 {
+                try self.session?.send(
+                    data,
+                    toPeers: connectedPeers,
+                    with: MCSessionSendDataMode.reliable
+                )
+            }
+        } catch {}
     }
 }
 
