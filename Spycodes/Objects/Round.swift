@@ -152,10 +152,7 @@ class Round: NSObject, NSCoding {
                     NotificationCenter.default.post(
                         name: Notification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),
                         object: self,
-                        userInfo: [
-                            "title": "Minigame Game Over",
-                            "reason": "Your opponent team won!"
-                        ]
+                        userInfo: nil
                     )
                 })
             }

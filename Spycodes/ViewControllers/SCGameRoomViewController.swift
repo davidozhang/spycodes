@@ -72,7 +72,7 @@ class SCGameRoomViewController: SCViewController {
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(SCGameRoomViewController.didEndGameWithNotification),
+            selector: #selector(SCGameRoomViewController.didEndMinigameWithNotification),
             name: NSNotification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),
             object: nil
         )
@@ -503,15 +503,14 @@ class SCGameRoomViewController: SCViewController {
     }
 
     @objc
-    fileprivate func didEndGameWithNotification(_ notification: Notification) {
+    fileprivate func didEndMinigameWithNotification(_ notification: Notification) {
         DispatchQueue.main.async {
             Round.instance.setWinningTeam(.blue)
 
-            if let userInfo = notification.userInfo,
-               let title = userInfo["title"] as? String,
-               let reason = userInfo["reason"] as? String {
-                self.didEndGame(title, reason: reason)
-            }
+            self.didEndGame(
+                SCStrings.gameOverHeader,
+                reason: SCStrings.cpuWon
+            )
         }
     }
 
@@ -577,13 +576,13 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             } else if Round.instance.getWinningTeam() == Player.instance.getTeam() &&
                       GameMode.instance.getMode() == .regularGame {
                 self.didEndGame(
-                    SCStrings.returningToPregameRoomHeader,
+                    SCStrings.gameOverHeader,
                     reason: Round.defaultWinString
                 )
             } else if Round.instance.getWinningTeam() == Player.instance.getTeam() &&
                       GameMode.instance.getMode() == .miniGame {
                 self.didEndGame(
-                    SCStrings.returningToPregameRoomHeader,
+                    SCStrings.gameOverHeader,
                     reason: String(
                         format: SCStrings.teamWinString,
                         CardCollection.instance.getCardsRemainingForTeam(.blue)
@@ -595,7 +594,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                 )
             } else if Round.instance.getWinningTeam() == opponentTeam {
                 self.didEndGame(
-                    SCStrings.returningToPregameRoomHeader,
+                    SCStrings.gameOverHeader,
                     reason: Round.defaultLoseString
                 )
             }
@@ -784,7 +783,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             Statistics.instance.recordWinForTeam(opponentTeam!)
 
             self.didEndGame(
-                SCStrings.returningToPregameRoomHeader,
+                SCStrings.gameOverHeader,
                 reason: Round.defaultLoseString
             )
         } else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
@@ -794,12 +793,12 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
                 Statistics.instance.recordWinForTeam(playerTeam)
 
                 self.didEndGame(
-                    SCStrings.returningToPregameRoomHeader,
+                    SCStrings.gameOverHeader,
                     reason: Round.defaultWinString
                 )
             } else {
                 self.didEndGame(
-                    SCStrings.returningToPregameRoomHeader,
+                    SCStrings.gameOverHeader,
                     reason: String(
                         format: SCStrings.teamWinString,
                         CardCollection.instance.getCardsRemainingForTeam(.blue)
