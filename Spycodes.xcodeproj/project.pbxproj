@@ -13,7 +13,7 @@
 		6307AC121E989CDE00BC1B73 /* SCModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307AC111E989CDE00BC1B73 /* SCModalViewController.swift */; };
 		6307AC141E98AD6600BC1B73 /* SCPregameModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307AC131E98AD6600BC1B73 /* SCPregameModalViewController.swift */; };
 		630883681E80E56F006D2428 /* SCAppInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630883671E80E56F006D2428 /* SCAppInfoManager.swift */; };
-		6308836A1E80FBD9006D2428 /* SCUpdateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630883691E80FBD9006D2428 /* SCUpdateAppViewController.swift */; };
+		6308836A1E80FBD9006D2428 /* SCUpdateAppModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630883691E80FBD9006D2428 /* SCUpdateAppModalViewController.swift */; };
 		630D15581E99F1B3001C1D87 /* SCLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630D15571E99F1B3001C1D87 /* SCLabel.swift */; };
 		630D155C1E9AF976001C1D87 /* SCDescriptionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630D155B1E9AF976001C1D87 /* SCDescriptionViewCell.swift */; };
 		6329BEFD1E512ADF004E6151 /* SCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6329BEFC1E512ADF004E6151 /* SCViewController.swift */; };
@@ -78,7 +78,7 @@
 		6307AC111E989CDE00BC1B73 /* SCModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCModalViewController.swift; path = ViewControllers/SCModalViewController.swift; sourceTree = "<group>"; };
 		6307AC131E98AD6600BC1B73 /* SCPregameModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameModalViewController.swift; path = ViewControllers/SCPregameModalViewController.swift; sourceTree = "<group>"; };
 		630883671E80E56F006D2428 /* SCAppInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAppInfoManager.swift; path = Managers/SCAppInfoManager.swift; sourceTree = "<group>"; };
-		630883691E80FBD9006D2428 /* SCUpdateAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUpdateAppViewController.swift; path = ViewControllers/SCUpdateAppViewController.swift; sourceTree = "<group>"; };
+		630883691E80FBD9006D2428 /* SCUpdateAppModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUpdateAppModalViewController.swift; path = ViewControllers/SCUpdateAppModalViewController.swift; sourceTree = "<group>"; };
 		630D15571E99F1B3001C1D87 /* SCLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLabel.swift; path = Utilities/SCLabel.swift; sourceTree = "<group>"; };
 		630D155B1E9AF976001C1D87 /* SCDescriptionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDescriptionViewCell.swift; path = Views/SCDescriptionViewCell.swift; sourceTree = "<group>"; };
 		6329BEFC1E512ADF004E6151 /* SCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCViewController.swift; path = ViewControllers/SCViewController.swift; sourceTree = "<group>"; };
@@ -208,7 +208,7 @@
 				6307AC131E98AD6600BC1B73 /* SCPregameModalViewController.swift */,
 				63FDED3A1D265BAF00142780 /* SCPregameRoomViewController.swift */,
 				63AB64CC1D4880A600C4FF22 /* SCSettingsViewController.swift */,
-				630883691E80FBD9006D2428 /* SCUpdateAppViewController.swift */,
+				630883691E80FBD9006D2428 /* SCUpdateAppModalViewController.swift */,
 				6329BEFC1E512ADF004E6151 /* SCViewController.swift */,
 			);
 			name = "View Controllers";
@@ -405,7 +405,7 @@
 				6332922B1E7DE9EC0090B09D /* SCSettingsManager.swift in Sources */,
 				CF33BE2D1D6D04EA00D0E105 /* SCConstants.swift in Sources */,
 				633292211E7CD9E40090B09D /* SCNavigationBarBoldLabel.swift in Sources */,
-				6308836A1E80FBD9006D2428 /* SCUpdateAppViewController.swift in Sources */,
+				6308836A1E80FBD9006D2428 /* SCUpdateAppModalViewController.swift in Sources */,
 				63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */,
 				63F2B7A61E6BB8F600F602D1 /* SCStates.swift in Sources */,
 				63D256881E6BA6BA0061D80C /* SCRoundedButton.swift in Sources */,

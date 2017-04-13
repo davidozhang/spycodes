@@ -129,13 +129,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXB-hy-qQU" userLabel="Swipe Up Button">
+                                <rect key="frame" x="497" y="1312" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Mpy-1W-9V9"/>
+                                    <constraint firstAttribute="width" constant="30" id="vOp-g9-XZt"/>
+                                </constraints>
+                                <state key="normal" image="Chevron-Up"/>
+                                <connections>
+                                    <action selector="onSwipeUpTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PTg-ex-Jy7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="XXB-hy-qQU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="420-EW-iHc"/>
                             <constraint firstItem="9Jm-jD-vJs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="B1a-Nd-qJT"/>
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="F5G-fC-j66"/>
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GIg-cQ-q81"/>
                             <constraint firstItem="B8H-tV-b9A" firstAttribute="leading" secondItem="eVQ-XY-iCb" secondAttribute="trailing" constant="16" id="HcC-HB-xv6"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XXB-hy-qQU" secondAttribute="bottom" constant="24" id="JVe-aa-A9K"/>
                             <constraint firstItem="P7k-je-1Mo" firstAttribute="top" secondItem="eVQ-XY-iCb" secondAttribute="bottom" constant="8" id="JXk-nz-51t"/>
                             <constraint firstAttribute="trailing" secondItem="9Jm-jD-vJs" secondAttribute="trailing" constant="25" id="OKL-UC-Cyv"/>
                             <constraint firstItem="9Jm-jD-vJs" firstAttribute="centerY" secondItem="B8H-tV-b9A" secondAttribute="centerY" id="Tnr-xQ-paH"/>
@@ -147,6 +160,7 @@
                     <connections>
                         <outlet property="linkCopiedLabel" destination="P7k-je-1Mo" id="ro3-ep-BNa"/>
                         <outlet property="nightModeButton" destination="B8H-tV-b9A" id="a0W-1H-foh"/>
+                        <outlet property="swipeUpButton" destination="XXB-hy-qQU" id="hyb-6E-LeZ"/>
                         <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
                         <segue destination="E72-I9-0mo" kind="presentation" identifier="settings" modalTransitionStyle="flipHorizontal" id="jrJ-f8-x4U"/>
                         <segue destination="yZh-az-pDi" kind="presentation" identifier="update-app" modalPresentationStyle="overCurrentContext" id="Ju1-ha-rpA"/>
@@ -156,10 +170,10 @@
             </objects>
             <point key="canvasLocation" x="217.39130434782609" y="338.31521739130437"/>
         </scene>
-        <!--Update App View Controller-->
+        <!--Update App Modal View Controller-->
         <scene sceneID="kYe-nf-cBk">
             <objects>
-                <viewController id="yZh-az-pDi" customClass="SCUpdateAppViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yZh-az-pDi" customClass="SCUpdateAppModalViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jHh-Ja-1N0"/>
                         <viewControllerLayoutGuide type="bottom" id="zvW-ER-O8P"/>
