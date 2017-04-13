@@ -1,6 +1,6 @@
 import UIKit
 
-class SCUpdateAppViewController: SCModalViewController {
+class SCUpdateAppModalViewController: SCModalViewController {
     @IBOutlet weak var updatePromptLabel: SCLabel!
     @IBOutlet weak var swipeDownButton: UIButton!
 
