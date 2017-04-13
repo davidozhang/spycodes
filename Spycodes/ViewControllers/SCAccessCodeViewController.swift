@@ -226,7 +226,11 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
             Room.instance = room
 
             // Inform the room host of local player info
-            SCMultipeerManager.instance.broadcast(Player.instance)
+            SCMultipeerManager.instance.message(
+                Player.instance,
+                messageType: .targeted,
+                toPeers: [peerID]
+            )
 
             DispatchQueue.main.async(execute: {
                 self.restoreStatus()

@@ -105,6 +105,7 @@ class Round: NSObject, NSCoding {
 
     func setCurrentTeam(_ team: Team) {
         self.currentTeam = team
+        SCMultipeerManager.instance.broadcast(self)
     }
 
     func setClue(_ clue: String?) {
@@ -158,10 +159,11 @@ class Round: NSObject, NSCoding {
                     )
                 })
             }
-
-            return
+        } else {
+            self.currentTeam = Team(rawValue: endingTeam.rawValue ^ 1)
         }
-        self.currentTeam = Team(rawValue: endingTeam.rawValue ^ 1)
+
+        SCMultipeerManager.instance.broadcast(self)
     }
 
     func abortGame() {
