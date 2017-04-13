@@ -116,6 +116,10 @@ class SCPregameRoomViewController: SCViewController {
         self.tableView.delegate = nil
     }
 
+    override func applicationDidBecomeActive() {
+        self.animateSwipeUpButton()
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
