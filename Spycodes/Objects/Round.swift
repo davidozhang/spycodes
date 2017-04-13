@@ -3,13 +3,6 @@ import Foundation
 class Round: NSObject, NSCoding {
     static var instance = Round()
 
-    static let defaultCluegiverClue = "Enter Clue"
-    static let defaultNonTurnClue = "Not Your Turn"
-    static let defaultIsTurnClue = "Waiting for Clue"
-    static let defaultNumberOfWords = "#"
-    static let defaultLoseString = "Your team lost!"
-    static let defaultWinString = "Your team won!"
-
     fileprivate var currentTeam: Team?
     fileprivate var clue: String?
     fileprivate var numberOfWords: String?
@@ -152,10 +145,7 @@ class Round: NSObject, NSCoding {
                     NotificationCenter.default.post(
                         name: Notification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),
                         object: self,
-                        userInfo: [
-                            "title": "Minigame Game Over",
-                            "reason": "Your opponent team won!"
-                        ]
+                        userInfo: nil
                     )
                 })
             }

@@ -14,17 +14,18 @@ class SCStrings {
 
     static let minigameTeamSizeInfo = "Your team has 2-3 players."
     static let regularGameTeamSizeInfo = "Each team has 2-4 players."
-    static let minigameCluegiverInfo = "Your team has selected a leader."
-    static let regularGameCluegiverInfo = "Both teams have selected leaders."
-    static let moreInfo = "More Info:"
-    static let selectLeaderInfo = "> Tap yourself or a teammate to nominate as leader for your team."
-    static let minigameInfo = "> Not enough players? Try minigame from game settings!"
+
+    static let defaultCluegiverClue = "Enter Clue"
+    static let defaultNonTurnClue = "Not Your Turn"
+    static let defaultIsTurnClue = "Waiting for Clue"
+    static let defaultNumberOfWords = "#"
+    static let defaultLoseString = "Your team lost!"
+    static let defaultWinString = "Your team won!"
+    static let minigameWinString = "Your team won! There were %d opponent cards remaining. Great work!"
 
     static let hostDisconnected = "Host player has disconnected."
     static let playerAborted = "A player in the game has aborted."
     static let playerDisconnected = "A player in the game has disconnected."
-
-    static let teamWinString = "Your team won! There were %d opponent cards remaining. Great work!"
 
     // Help view header strings
     static let introHeader = "Introduction"
