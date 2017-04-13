@@ -12,9 +12,9 @@ class SCUnderlineTextField: SCTextField {
         let bottomBorder = CALayer()
         bottomBorder.frame = CGRect(
             x: 0.0,
-            y: self.frame.size.height - 2.0,
+            y: self.frame.size.height - 1.5,
             width: self.frame.size.width,
-            height: 2.0
+            height: 1.5
         )
         bottomBorder.backgroundColor = UIColor.spycodesGrayColor().cgColor
 
