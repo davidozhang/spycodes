@@ -349,8 +349,8 @@ class SCGameRoomViewController: SCViewController {
                 self.numberOfWordsTextField.isEnabled = false
             } else {
                 if Player.instance.isCluegiver() {
-                    self.clueTextField.text = Round.defaultCluegiverClue
-                    self.numberOfWordsTextField.text = Round.defaultNumberOfWords
+                    self.clueTextField.text = SCStrings.defaultCluegiverClue
+                    self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
 
                     self.startTextFieldAnimations()
 
@@ -358,13 +358,13 @@ class SCGameRoomViewController: SCViewController {
                     self.clueTextField.isEnabled = true
                     self.numberOfWordsTextField.isEnabled = true
                 } else {
-                    self.clueTextField.text = Round.defaultIsTurnClue
-                    self.numberOfWordsTextField.text = Round.defaultNumberOfWords
+                    self.clueTextField.text = SCStrings.defaultIsTurnClue
+                    self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
                 }
             }
         } else {
-            self.clueTextField.text = Round.defaultNonTurnClue
-            self.numberOfWordsTextField.text = Round.defaultNumberOfWords
+            self.clueTextField.text = SCStrings.defaultNonTurnClue
+            self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
         }
     }
 
@@ -427,9 +427,9 @@ class SCGameRoomViewController: SCViewController {
             if let clueTextFieldCharacterCount = self.clueTextField.text?.characters.count,
                let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.characters.count {
                 if clueTextFieldCharacterCount > 0 &&
-                   self.clueTextField.text != Round.defaultCluegiverClue &&
+                   self.clueTextField.text != SCStrings.defaultCluegiverClue &&
                    numberOfWordsTextFieldCharacterCount > 0 &&
-                   self.numberOfWordsTextField.text != Round.defaultNumberOfWords {
+                   self.numberOfWordsTextField.text != SCStrings.defaultNumberOfWords {
                     self.actionButton.isEnabled = true
                     self.startButtonAnimations()
                 } else {
@@ -509,7 +509,7 @@ class SCGameRoomViewController: SCViewController {
 
             self.didEndGame(
                 SCStrings.gameOverHeader,
-                reason: SCStrings.cpuWon
+                reason: SCStrings.defaultLoseString
             )
         }
     }
@@ -577,14 +577,14 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                       GameMode.instance.getMode() == .regularGame {
                 self.didEndGame(
                     SCStrings.gameOverHeader,
-                    reason: Round.defaultWinString
+                    reason: SCStrings.defaultWinString
                 )
             } else if Round.instance.getWinningTeam() == Player.instance.getTeam() &&
                       GameMode.instance.getMode() == .miniGame {
                 self.didEndGame(
                     SCStrings.gameOverHeader,
                     reason: String(
-                        format: SCStrings.teamWinString,
+                        format: SCStrings.minigameWinString,
                         CardCollection.instance.getCardsRemainingForTeam(.blue)
                     )
                 )
@@ -595,7 +595,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             } else if Round.instance.getWinningTeam() == opponentTeam {
                 self.didEndGame(
                     SCStrings.gameOverHeader,
-                    reason: Round.defaultLoseString
+                    reason: SCStrings.defaultLoseString
                 )
             }
         case let synchronizedObject as Room:
@@ -784,7 +784,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
             self.didEndGame(
                 SCStrings.gameOverHeader,
-                reason: Round.defaultLoseString
+                reason: SCStrings.defaultLoseString
             )
         } else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
             Round.instance.setWinningTeam(playerTeam)
@@ -794,13 +794,13 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
                 self.didEndGame(
                     SCStrings.gameOverHeader,
-                    reason: Round.defaultWinString
+                    reason: SCStrings.defaultWinString
                 )
             } else {
                 self.didEndGame(
                     SCStrings.gameOverHeader,
                     reason: String(
-                        format: SCStrings.teamWinString,
+                        format: SCStrings.minigameWinString,
                         CardCollection.instance.getCardsRemainingForTeam(.blue)
                     )
                 )
@@ -861,14 +861,14 @@ extension SCGameRoomViewController: UITextFieldDelegate {
         self.cluegiverIsEditing = true
 
         if textField == self.clueTextField {
-            if textField.text == Round.defaultCluegiverClue {
+            if textField.text == SCStrings.defaultCluegiverClue {
                 textField.text = ""
-                textField.placeholder = Round.defaultCluegiverClue
+                textField.placeholder = SCStrings.defaultCluegiverClue
             }
         } else if textField == self.numberOfWordsTextField {
-            if textField.text == Round.defaultNumberOfWords {
+            if textField.text == SCStrings.defaultNumberOfWords {
                 textField.text = ""
-                textField.placeholder = Round.defaultNumberOfWords
+                textField.placeholder = SCStrings.defaultNumberOfWords
             }
         }
     }
@@ -887,18 +887,18 @@ extension SCGameRoomViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text == "" {
             if textField == self.clueTextField {
-                self.clueTextField.text = Round.defaultCluegiverClue
+                self.clueTextField.text = SCStrings.defaultCluegiverClue
             } else if textField == self.numberOfWordsTextField {
-                self.numberOfWordsTextField.text = Round.defaultNumberOfWords
+                self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
             }
         }
     }
 
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField == self.clueTextField {
-            textField.placeholder = Round.defaultCluegiverClue
+            textField.placeholder = SCStrings.defaultCluegiverClue
         } else if textField == self.numberOfWordsTextField {
-            textField.placeholder = Round.defaultNumberOfWords
+            textField.placeholder = SCStrings.defaultNumberOfWords
         }
         return true
     }
