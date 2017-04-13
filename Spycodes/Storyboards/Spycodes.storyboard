@@ -434,7 +434,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bm-f0-0Jn" userLabel="Content View">
-                                <rect key="frame" x="404" y="659" width="216" height="48"/>
+                                <rect key="frame" x="404" y="634" width="216" height="98"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCC-FN-amc" userLabel="Text Fields View">
                                         <rect key="frame" x="0.0" y="0.0" width="216" height="48"/>
@@ -499,12 +499,25 @@
                                         <rect key="frame" x="0.0" y="0.0" width="216" height="48"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oge-X0-89i" userLabel="Cancel Button" customClass="SCTextButton" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="80" y="64" width="56" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="R9Q-Cm-zpW"/>
+                                        </constraints>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="onCancelTapped:" destination="RKo-Nr-UiC" eventType="touchUpInside" id="I71-DB-rBA"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="oCC-FN-amc" firstAttribute="leading" secondItem="8bm-f0-0Jn" secondAttribute="leading" id="8l4-U6-68G"/>
-                                    <constraint firstAttribute="bottom" secondItem="oCC-FN-amc" secondAttribute="bottom" id="OuF-eh-q7l"/>
+                                    <constraint firstAttribute="bottom" secondItem="Oge-X0-89i" secondAttribute="bottom" id="Bqz-E1-ukH"/>
+                                    <constraint firstItem="Oge-X0-89i" firstAttribute="centerX" secondItem="8bm-f0-0Jn" secondAttribute="centerX" id="GVC-lQ-cX1"/>
+                                    <constraint firstItem="Oge-X0-89i" firstAttribute="top" secondItem="rhf-Nl-0FI" secondAttribute="bottom" constant="16" id="PB5-WA-1Q3"/>
                                     <constraint firstItem="oCC-FN-amc" firstAttribute="leading" secondItem="rhf-Nl-0FI" secondAttribute="leading" id="PSQ-W7-WCh"/>
+                                    <constraint firstAttribute="bottom" secondItem="Oge-X0-89i" secondAttribute="bottom" id="PoZ-QJ-wWW"/>
                                     <constraint firstItem="oCC-FN-amc" firstAttribute="top" secondItem="rhf-Nl-0FI" secondAttribute="top" id="RLd-0s-NQ7"/>
                                     <constraint firstItem="oCC-FN-amc" firstAttribute="top" secondItem="8bm-f0-0Jn" secondAttribute="top" id="TAU-m6-7hw"/>
                                     <constraint firstItem="oCC-FN-amc" firstAttribute="bottom" secondItem="rhf-Nl-0FI" secondAttribute="bottom" id="Y72-Ed-oSz"/>
@@ -527,6 +540,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="Oge-X0-89i" id="Geh-eJ-iTz"/>
+                        <outlet property="cancelButtonHeightConstraint" destination="R9Q-Cm-zpW" id="pn0-Gk-dYf"/>
                         <outlet property="contentViewVerticalCenterConstraint" destination="vHl-l6-CkW" id="qfe-6c-P8R"/>
                         <outlet property="headerTopMarginConstraint" destination="Nzg-Tc-ti5" id="4lv-uj-zdY"/>
                         <outlet property="statusLabel" destination="Lxf-jD-guR" id="MYy-k5-4mw"/>
@@ -539,7 +554,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ll0-UV-VBC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="vJw-If-bFy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1011.5942028985507" y="1155.9782608695652"/>
+            <point key="canvasLocation" x="1011.3281249999999" y="1155.6368960468521"/>
         </scene>
         <!--Player Name View Controller-->
         <scene sceneID="1W7-Yu-MRm">
