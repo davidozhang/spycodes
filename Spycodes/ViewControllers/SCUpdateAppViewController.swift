@@ -28,6 +28,10 @@ class SCUpdateAppViewController: SCModalViewController {
         self.animateSwipeDownButton()
     }
 
+    override func applicationDidBecomeActive() {
+        self.animateSwipeDownButton()
+    }
+
     // MARK: Private
     fileprivate func animateSwipeDownButton() {
         self.swipeDownButton.alpha = 1.0

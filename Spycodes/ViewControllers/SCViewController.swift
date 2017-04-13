@@ -35,6 +35,12 @@ class SCViewController: UIViewController {
 
         NotificationCenter.default.addObserver(
             self,
+            selector: #selector(SCViewController.applicationDidBecomeActive),
+            name: NSNotification.Name.UIApplicationDidBecomeActive,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
             selector: #selector(SCViewController.keyboardWillShow),
             name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
@@ -50,6 +56,11 @@ class SCViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
+        NotificationCenter.default.removeObserver(
+            self,
+            name:NSNotification.Name.UIApplicationDidBecomeActive,
+            object: nil
+        )
         NotificationCenter.default.removeObserver(
             self,
             name: NSNotification.Name.UIKeyboardWillShow,
@@ -117,6 +128,9 @@ class SCViewController: UIViewController {
             view.removeFromSuperview()
         }
     }
+
+    @objc
+    func applicationDidBecomeActive() {}
 
     @objc
     func keyboardWillShow(_ notification: Notification) {}

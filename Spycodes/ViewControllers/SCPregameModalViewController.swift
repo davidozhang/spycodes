@@ -62,6 +62,10 @@ class SCPregameModalViewController: SCModalViewController {
         self.refreshTimer?.invalidate()
     }
 
+    override func applicationDidBecomeActive() {
+        self.animateSwipeDownButton()
+    }
+
     // MARK: Private
     @objc
     fileprivate func refreshView() {
