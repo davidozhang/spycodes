@@ -260,19 +260,13 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
                     Room.instance.removeCPUPlayer()
                 }
 
-                var data = NSKeyedArchiver.archivedData(withRootObject: GameMode.instance)
-                SCMultipeerManager.instance.broadcastData(data)
-
-                data = NSKeyedArchiver.archivedData(withRootObject: Room.instance)
-                SCMultipeerManager.instance.broadcastData(data)
-
-                data = NSKeyedArchiver.archivedData(withRootObject: Statistics.instance)
-                SCMultipeerManager.instance.broadcastData(data)
+                SCMultipeerManager.instance.broadcast(GameMode.instance)
+                SCMultipeerManager.instance.broadcast(Room.instance)
+                SCMultipeerManager.instance.broadcast(Statistics.instance)
             case SCConstants.identifier.timerToggleViewCell.rawValue:
                 Timer.instance.setEnabled(enabled)
 
-                let data = NSKeyedArchiver.archivedData(withRootObject: Timer.instance)
-                SCMultipeerManager.instance.broadcastData(data)
+                SCMultipeerManager.instance.broadcast(Timer.instance)
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
                 SCSettingsManager.instance.enableNightMode(enabled)
                 super.updateView()

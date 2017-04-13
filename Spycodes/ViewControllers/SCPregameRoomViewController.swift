@@ -149,19 +149,9 @@ class SCPregameRoomViewController: SCViewController {
 
     @objc
     fileprivate func broadcastEssentialData() {
-        var data = NSKeyedArchiver.archivedData(withRootObject: Room.instance)
-        SCMultipeerManager.instance.broadcastData(data)
-
-        data = NSKeyedArchiver.archivedData(withRootObject: GameMode.instance)
-        SCMultipeerManager.instance.broadcastData(data)
-
-        data = NSKeyedArchiver.archivedData(withRootObject: Timer.instance)
-        SCMultipeerManager.instance.broadcastData(data)
-    }
-
-    fileprivate func broadcastOptionalData(_ object: NSObject) {
-        let data = NSKeyedArchiver.archivedData(withRootObject: object)
-        SCMultipeerManager.instance.broadcastData(data)
+        SCMultipeerManager.instance.broadcast(Room.instance)
+        SCMultipeerManager.instance.broadcast(GameMode.instance)
+        SCMultipeerManager.instance.broadcast(Timer.instance)
     }
 
     fileprivate func broadcastActionEvent(_ eventType: ActionEvent.EventType) {
@@ -169,7 +159,8 @@ class SCPregameRoomViewController: SCViewController {
             type: eventType,
             parameters: [SCConstants.coding.uuid.rawValue: Player.instance.getUUID()]
         )
-        self.broadcastOptionalData(actionEvent)
+
+        SCMultipeerManager.instance.broadcast(actionEvent)
     }
 
     fileprivate func updateReadyButton() {
@@ -270,8 +261,9 @@ class SCPregameRoomViewController: SCViewController {
             // Instantiate next game's card collection and round
             CardCollection.instance = CardCollection()
             Round.instance = Round()
-            self.broadcastOptionalData(CardCollection.instance)
-            self.broadcastOptionalData(Round.instance)
+
+            SCMultipeerManager.instance.broadcast(CardCollection.instance)
+            SCMultipeerManager.instance.broadcast(Round.instance)
             self.goToGame()
         }
     }
@@ -363,9 +355,8 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
         let playerAtIndex = Room.instance.getPlayers()[index]
 
         Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setTeam(team: newTeam)
-
         Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsCluegiver(false)
-        self.broadcastEssentialData()
+        SCMultipeerManager.instance.broadcast(Room.instance)
     }
 }
 

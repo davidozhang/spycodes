@@ -22,6 +22,11 @@ class SCMultipeerManager: NSObject {
     fileprivate var advertiserOn = false
     fileprivate var browserOn = false
 
+    enum MessageType: Int {
+        case broadcast = 0
+        case targeted = 1
+    }
+
     // MARK: Public
 
     // IMPORTANT: This method must be called prior to all other method calls!
@@ -118,20 +123,13 @@ class SCMultipeerManager: NSObject {
         )
     }
 
-    func broadcastData(_ data: Data) {
-        guard let _ = self.session else {
-            return
-        }
+    func broadcast(_ rootObject: Any) {
+        self.message(rootObject, messageType: .broadcast, toPeers: nil)
+    }
 
-        do {
-            if let connectedPeers = self.session?.connectedPeers, connectedPeers.count > 0 {
-                try self.session?.send(
-                    data,
-                    toPeers: connectedPeers,
-                    with: MCSessionSendDataMode.reliable
-                )
-            }
-        } catch {}
+    func message(_ rootObject: Any, messageType: MessageType, toPeers: [MCPeerID]?) {
+        let data = NSKeyedArchiver.archivedData(withRootObject: rootObject)
+        self.sendData(data, messageType: messageType, toPeers: toPeers)
     }
 
     // MARK: Private
@@ -158,6 +156,32 @@ class SCMultipeerManager: NSObject {
             serviceType: self.serviceType
         )
         self.browser?.delegate = self
+    }
+
+    private func sendData(_ data: Data, messageType: MessageType, toPeers: [MCPeerID]?) {
+        guard let _ = self.session else {
+            return
+        }
+
+        do {
+            if messageType == .broadcast {
+                if let peers = self.session?.connectedPeers, peers.count > 0 {
+                    try self.session?.send(
+                        data,
+                        toPeers: peers,
+                        with: MCSessionSendDataMode.reliable
+                    )
+                }
+            } else {
+                if let peers = toPeers, peers.count > 0 {
+                    try self.session?.send(
+                        data,
+                        toPeers: peers,
+                        with: MCSessionSendDataMode.reliable
+                    )
+                }
+            }
+        } catch {}
     }
 }
 

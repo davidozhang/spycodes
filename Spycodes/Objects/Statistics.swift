@@ -39,6 +39,7 @@ class Statistics: NSObject, NSCoding {
     // MARK: Public
     func recordWinForTeam(_ winningTeam: Team) {
         self.score[winningTeam.rawValue] += 1
+        SCMultipeerManager.instance.broadcast(self)
     }
 
     func getScore() -> [Int] {
@@ -55,6 +56,8 @@ class Statistics: NSObject, NSCoding {
         } else if let bestRecord = bestRecord, record > bestRecord {
             self.bestRecord = record
         }
+
+        SCMultipeerManager.instance.broadcast(self)
     }
 
     func reset() {
