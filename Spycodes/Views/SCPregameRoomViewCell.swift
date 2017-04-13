@@ -16,6 +16,7 @@ class SCPregameRoomViewCell: SCTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        self.nameLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.regular)
         self.segmentedControl.tintColor = UIColor.spycodesGrayColor()
     }
 

@@ -386,6 +386,12 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
         let playerAtIndex = Room.instance.getPlayers()[indexPath.row]
 
+        if playerAtIndex.isReady() {
+            cell.nameLabel.font = SCFonts.intermediateSizeFont(.bold)
+        } else {
+            cell.nameLabel.font = SCFonts.intermediateSizeFont(.regular)
+        }
+
         cell.nameLabel.text = playerAtIndex.getName()
         cell.index = indexPath.row
         cell.delegate = self
@@ -397,14 +403,24 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         if Player.instance == playerAtIndex {
-            cell.nameLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.medium)
+            if let name = playerAtIndex.getName() {
+                // Use same font for triangle to avoid position shift
+                let attributedString = NSMutableAttributedString(string: "‣ " + name)
+                attributedString.addAttribute(
+                    NSFontAttributeName,
+                    value: SCFonts.intermediateSizeFont(.regular) ?? 0,
+                    range: NSMakeRange(0, 2)
+                )
+
+                cell.nameLabel.attributedText = attributedString
+            }
+
             cell.segmentedControl.isEnabled = true
 
             if GameMode.instance.getMode() == .miniGame {
                 cell.segmentedControl.isEnabled = false
             }
         } else {
-            cell.nameLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.regular)
             cell.segmentedControl.isEnabled = false
         }
 
