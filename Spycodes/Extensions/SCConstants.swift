@@ -8,6 +8,7 @@ class SCConstants {
         case clue = "clue"
         case cluegiver = "cluegiver"
         case connectedPeers = "connectedPeers"
+        case duration = "duration"
         case enabled = "enabled"
         case gameEnded = "gameEnded"
         case host = "host"
