@@ -478,7 +478,7 @@ class SCGameRoomViewController: SCViewController {
         SCMultipeerManager.instance.broadcast(Round.instance)
 
         if GameMode.instance.getMode() == .miniGame {
-            SCAudioToolboxManager.vibrate()
+            SCAudioManager.vibrate()
         }
 
         if Timer.instance.isEnabled() {
@@ -487,7 +487,7 @@ class SCGameRoomViewController: SCViewController {
 
         if fromTimerExpiry {
             if Player.instance.isHost() {
-                SCAudioToolboxManager.vibrate()
+                SCAudioManager.vibrate()
 
                 // Send 1 action event on timer expiry to avoid duplicate vibrations
                 self.broadcastActionEvent(.endRound)
@@ -609,7 +609,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
         case let synchronizedObject as ActionEvent:
             if synchronizedObject.getType() == ActionEvent.EventType.endRound {
                 if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
-                    SCAudioToolboxManager.vibrate()
+                    SCAudioManager.vibrate()
                 }
 
                 if GameMode.instance.getMode() == .miniGame {
@@ -619,7 +619,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                 }
             } else if synchronizedObject.getType() == ActionEvent.EventType.confirm {
                 if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
-                    SCAudioToolboxManager.vibrate()
+                    SCAudioManager.vibrate()
                 }
             } else if synchronizedObject.getType() == ActionEvent.EventType.ready {
                 if let parameters = synchronizedObject.getParameters(),

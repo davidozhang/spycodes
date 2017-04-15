@@ -1,14 +1,7 @@
 import UIKit
 
-class SCTextButton: UIButton {
+class SCImageButton: UIButton {
     var alreadyHighlighted = false
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-
-        self.titleLabel?.font = SCFonts.regularSizeFont(.medium)
-        self.titleLabel?.textColor = UIColor.spycodesGrayColor()
-    }
 
     override var isHighlighted: Bool {
         didSet {
