@@ -4,7 +4,7 @@ class SCStrings {
 
     static let updatePrompt = "A new version of Spycodes is available on the App Store. Download to get the latest features!"
 
-    static let minigameSecondaryText = "2-3 players play against the CPU."
+    static let minigameSecondaryText = "2-3 players play as a team against the CPU."
     static let timerSecondaryText = "Limit each round to 2 minutes."
 
     static let returningToMainMenuHeader = "Returning to Main Menu"

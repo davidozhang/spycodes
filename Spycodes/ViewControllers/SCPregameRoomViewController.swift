@@ -385,7 +385,7 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
 extension SCPregameRoomViewController: SCPregameModalViewControllerDelegate {
     func onNightModeToggleChanged() {
         DispatchQueue.main.async {
-            if SCSettingsManager.instance.isNightModeEnabled() {
+            if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
                 self.view.backgroundColor = UIColor.black
             } else {
                 self.view.backgroundColor = UIColor.white

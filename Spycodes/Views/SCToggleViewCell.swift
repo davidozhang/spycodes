@@ -36,7 +36,9 @@ class SCToggleViewCell: SCTableViewCell {
         if let reuseIdentifier = self.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
-                toggleSwitch.isOn = SCSettingsManager.instance.isNightModeEnabled()
+                toggleSwitch.isOn = SCSettingsManager.instance.isLocalSettingEnabled(.nightMode)
+            case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
+                toggleSwitch.isOn = SCSettingsManager.instance.isLocalSettingEnabled(.accessibility)
             case SCConstants.identifier.minigameToggleViewCell.rawValue:
                 toggleSwitch.isOn = GameMode.instance.getMode() == .miniGame
             case SCConstants.identifier.timerToggleViewCell.rawValue:

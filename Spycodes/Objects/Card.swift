@@ -71,4 +71,17 @@ class Card: NSObject {
     func setTeam(_ team: Team) {
         self.team = team
     }
+
+    func getAccessibilityLabel() -> String {
+        switch self.team {
+        case .assassin:
+            return "(A)"
+        case .blue:
+            return "(B)"
+        case .neutral:
+            return "(N)"
+        case .red:
+            return "(R)"
+        }
+    }
 }
