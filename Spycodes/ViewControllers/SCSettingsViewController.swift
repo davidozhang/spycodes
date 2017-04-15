@@ -73,7 +73,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return nil
         }
 
-        sectionHeader.header.text = sections[section]
+        sectionHeader.leftLabel.text = sections[section]
         return sectionHeader
     }
 
@@ -108,7 +108,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case 1: // About
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.versionViewCell.rawValue
-            ) as? SCVersionViewCell else {
+            ) as? SCTableViewCell else {
                 return UITableViewCell()
             }
 

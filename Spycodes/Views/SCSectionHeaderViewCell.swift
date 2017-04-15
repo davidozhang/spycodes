@@ -1,11 +1,9 @@
 import UIKit
 
 class SCSectionHeaderViewCell: SCTableViewCell {
-    @IBOutlet weak var header: SCLabel!
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.header.font = SCFonts.regularSizeFont(SCFonts.fontType.bold)
+        self.leftLabel.font = SCFonts.regularSizeFont(.bold)
     }
 }

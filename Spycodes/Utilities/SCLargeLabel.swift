@@ -3,6 +3,6 @@ import UIKit
 class SCLargeLabel: SCLabel {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.font = SCFonts.largeSizeFont(SCFonts.fontType.regular)
+        self.font = SCFonts.largeSizeFont(.regular)
     }
 }

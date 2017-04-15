@@ -7,14 +7,10 @@ protocol SCToggleViewCellDelegate: class {
 class SCToggleViewCell: SCTableViewCell {
     weak var delegate: SCToggleViewCellDelegate?
 
-    @IBOutlet weak var leftLabel: UILabel!
-
     let toggleSwitch = UISwitch()
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        self.leftLabel.font = SCFonts.intermediateSizeFont(SCFonts.fontType.regular)
 
         toggleSwitch.addTarget(
             self,
