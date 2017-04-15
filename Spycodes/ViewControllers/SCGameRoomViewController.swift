@@ -129,7 +129,7 @@ class SCGameRoomViewController: SCViewController {
 
         self.bottomBarView.layoutIfNeeded()
 
-        if SCSettingsManager.instance.isNightModeEnabled() {
+        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
             self.topBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
             self.bottomBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         } else {
@@ -717,7 +717,11 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
 
-            let attributedString = NSMutableAttributedString(string: cardAtIndex.getWord())
+            let attributedString = NSMutableAttributedString(
+                string: SCSettingsManager.instance.isLocalSettingEnabled(.accessibility) ?
+                    cardAtIndex.getWord() + " " + cardAtIndex.getAccessibilityLabel() :
+                    cardAtIndex.getWord()
+            )
 
             if cardAtIndex.isSelected() {
                 cell.alpha = 0.4
@@ -738,14 +742,18 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             if cardAtIndex.getTeam() == .neutral {
                 cell.wordLabel.textColor = UIColor.spycodesGrayColor()
 
-                let attributedString = NSMutableAttributedString(string: cardAtIndex.getWord())
-                if cardAtIndex.isSelected() {
-                    attributedString.addAttribute(
-                        NSStrikethroughStyleAttributeName,
-                        value: 2,
-                        range: NSMakeRange(0, attributedString.length)
-                    )
-                }
+                let attributedString = NSMutableAttributedString(
+                    string: SCSettingsManager.instance.isLocalSettingEnabled(.accessibility) ?
+                        cardAtIndex.getWord() + " " + cardAtIndex.getAccessibilityLabel() :
+                        cardAtIndex.getWord()
+                )
+
+                attributedString.addAttribute(
+                    NSStrikethroughStyleAttributeName,
+                    value: 2,
+                    range: NSMakeRange(0, attributedString.length)
+                )
+
                 cell.wordLabel.attributedText = attributedString
             }
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())

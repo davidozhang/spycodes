@@ -24,11 +24,11 @@ class SCMainMenuViewController: SCViewController {
 
     @IBAction func onNightModeButtonTapped(_ sender: AnyObject) {
         let oldSetting = SCSettingsManager.instance
-            .isNightModeEnabled()
-        SCSettingsManager.instance.enableNightMode(!oldSetting)
+            .isLocalSettingEnabled(.nightMode)
+        SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: !oldSetting)
 
         DispatchQueue.main.async {
-            if SCSettingsManager.instance.isNightModeEnabled() {
+            if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
                 self.view.backgroundColor = UIColor.black
             } else {
                 self.view.backgroundColor = UIColor.white
@@ -124,7 +124,7 @@ class SCMainMenuViewController: SCViewController {
 
     fileprivate func updateNightModeButton() {
         if SCSettingsManager.instance
-            .isNightModeEnabled() {
+            .isLocalSettingEnabled(.nightMode) {
             // Night Mode Enabled
             self.nightModeButton.imageView?.image = UIImage(named: "Sun")
         } else {

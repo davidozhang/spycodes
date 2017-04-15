@@ -25,7 +25,7 @@ class SCViewController: UIViewController {
         super.viewWillAppear(animated)
 
         let textFieldAppearance = UITextField.appearance()
-        if SCSettingsManager.instance.isNightModeEnabled() {
+        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
             textFieldAppearance.keyboardAppearance = .dark
             self.view.backgroundColor = UIColor.black
         } else {
@@ -74,7 +74,7 @@ class SCViewController: UIViewController {
     }
 
     override var preferredStatusBarStyle : UIStatusBarStyle {
-        if SCSettingsManager.instance.isNightModeEnabled() {
+        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
             return .lightContent
         } else {
             return .default

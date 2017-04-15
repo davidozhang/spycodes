@@ -6,7 +6,10 @@ class SCSettingsViewController: SCViewController {
         "About",
         "More"
     ]
-    fileprivate let customizeLabels = ["Night Mode"]
+    fileprivate let customizeLabels = [
+        "Night Mode",
+        "Accessibility"
+    ]
     fileprivate let disclosureLabels = [
         "Support",
         "Review App",
@@ -95,16 +98,33 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0: // Customize
-            guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
-            ) as? SCToggleViewCell else {
+            switch indexPath.row {
+            case 0:     // Minigame
+                guard let cell = self.tableView.dequeueReusableCell(
+                    withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
+                    ) as? SCToggleViewCell else {
+                        return UITableViewCell()
+                }
+
+                cell.primaryLabel.text = self.customizeLabels[indexPath.row]
+                cell.delegate = self
+                
+                return cell
+            case 1:     // Accessibility
+                guard let cell = self.tableView.dequeueReusableCell(
+                    withIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
+                    ) as? SCToggleViewCell else {
+                        return UITableViewCell()
+                }
+
+                cell.primaryLabel.text = self.customizeLabels[indexPath.row]
+                cell.delegate = self
+
+                return cell
+            default:
                 return UITableViewCell()
             }
 
-            cell.primaryLabel.text = self.customizeLabels[indexPath.row]
-            cell.delegate = self
-
-            return cell
         case 1: // About
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.versionViewCell.rawValue
@@ -167,17 +187,26 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: SCToggleViewCellDelegate
 extension SCSettingsViewController: SCToggleViewCellDelegate {
     func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
-        if cell.reuseIdentifier == SCConstants.identifier.nightModeToggleViewCell.rawValue {
-            DispatchQueue.main.async {
-                SCSettingsManager.instance.enableNightMode(enabled)
+        if let reuseIdentifier = cell.reuseIdentifier {
+            switch reuseIdentifier {
+            case SCConstants.identifier.nightModeToggleViewCell.rawValue:
+                DispatchQueue.main.async {
+                    SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
 
-                if SCSettingsManager.instance.isNightModeEnabled() {
-                    self.view.backgroundColor = UIColor.black
-                } else {
-                    self.view.backgroundColor = UIColor.white
+                    if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+                        self.view.backgroundColor = UIColor.black
+                    } else {
+                        self.view.backgroundColor = UIColor.white
+                    }
+
+                    self.setNeedsStatusBarAppearanceUpdate()
                 }
-
-                self.setNeedsStatusBarAppearanceUpdate()
+            case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
+                DispatchQueue.main.async {
+                    SCSettingsManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
+                }
+            default:
+                break
             }
         }
     }

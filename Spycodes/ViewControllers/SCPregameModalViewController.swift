@@ -18,7 +18,7 @@ class SCPregameModalViewController: SCModalViewController {
         "Minigame",
         "Timer"
     ]
-    fileprivate let customizeLabels = ["Night Mode"]
+    fileprivate let customizeLabels = ["Night Mode", "Accessibility"]
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
@@ -197,7 +197,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             return cell
         case 2: // Game Settings
             switch indexPath.row {
-            case 0:
+            case 0:     // Minigame
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.minigameToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
@@ -210,7 +210,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 cell.delegate = self
                 
                 return cell
-            case 1:
+            case 1:     // Timer
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.timerToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
@@ -228,9 +228,20 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             }
         case 3: // Customize
             switch indexPath.row {
-            case 0:
+            case 0:     // Night Mode
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
+                    ) as? SCToggleViewCell else {
+                        return UITableViewCell()
+                }
+
+                cell.primaryLabel.text = self.customizeLabels[indexPath.row]
+                cell.delegate = self
+
+                return cell
+            case 1:     // Accessibility
+                guard let cell = self.tableView.dequeueReusableCell(
+                    withIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
                         return UITableViewCell()
                 }
@@ -276,12 +287,14 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
                 SCMultipeerManager.instance.broadcast(GameMode.instance)
                 SCMultipeerManager.instance.broadcast(Room.instance)
                 SCMultipeerManager.instance.broadcast(Statistics.instance)
+            case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
+                SCSettingsManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
             case SCConstants.identifier.timerToggleViewCell.rawValue:
                 Timer.instance.setEnabled(enabled)
 
                 SCMultipeerManager.instance.broadcast(Timer.instance)
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
-                SCSettingsManager.instance.enableNightMode(enabled)
+                SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
                 super.updateView()
                 self.delegate?.onNightModeToggleChanged()
             default:
