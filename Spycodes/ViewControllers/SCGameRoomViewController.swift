@@ -739,23 +739,23 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
         }
 
         if cardAtIndex.isSelected() {
+            let attributedString = NSMutableAttributedString(
+                string: SCSettingsManager.instance.isLocalSettingEnabled(.accessibility) ?
+                    cardAtIndex.getWord() + " " + cardAtIndex.getAccessibilityLabel() :
+                    cardAtIndex.getWord()
+            )
+
             if cardAtIndex.getTeam() == .neutral {
                 cell.wordLabel.textColor = UIColor.spycodesGrayColor()
-
-                let attributedString = NSMutableAttributedString(
-                    string: SCSettingsManager.instance.isLocalSettingEnabled(.accessibility) ?
-                        cardAtIndex.getWord() + " " + cardAtIndex.getAccessibilityLabel() :
-                        cardAtIndex.getWord()
-                )
 
                 attributedString.addAttribute(
                     NSStrikethroughStyleAttributeName,
                     value: 2,
                     range: NSMakeRange(0, attributedString.length)
                 )
-
-                cell.wordLabel.attributedText = attributedString
             }
+
+            cell.wordLabel.attributedText = attributedString
             cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
         } else {
             cell.wordLabel.textColor = UIColor.spycodesGrayColor()
