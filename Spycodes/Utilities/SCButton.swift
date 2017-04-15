@@ -1,6 +1,8 @@
 import UIKit
 
 class SCButton: UIButton {
+    var alreadyHighlighted = false
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.contentEdgeInsets = UIEdgeInsetsMake(10, 30, 10, 30)
@@ -22,8 +24,13 @@ class SCButton: UIButton {
         didSet {
             if isHighlighted {
                 self.backgroundColor = UIColor.spycodesGrayColor()
+                if !self.alreadyHighlighted {
+                    SCAudioManager.playClickSound()
+                    self.alreadyHighlighted = true
+                }
             } else {
                 self.backgroundColor = UIColor.clear
+                self.alreadyHighlighted = false
             }
         }
     }
