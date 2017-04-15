@@ -38,7 +38,7 @@ class SCConstants {
 
     enum identifier: String {
         case accessCode = "access-code"
-        case descriptionViewCell = "description-view-cell"
+        case checklistViewCell = "checklist-view-cell"
         case disclosureViewCell = "disclosure-view-cell"
         case gameRoom = "game-room"
         case gameRoomViewCell = "game-room-view-cell"

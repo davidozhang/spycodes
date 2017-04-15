@@ -8,8 +8,7 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var readyButtonState: ReadyButtonState = .notReady
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var accessCodeTypeLabel: SCNavigationBarLabel!
-    @IBOutlet weak var accessCodeLabel: SCNavigationBarBoldLabel!
+    @IBOutlet weak var accessCodeLabel: SCNavigationBarLabel!
     @IBOutlet weak var readyButton: SCButton!
     @IBOutlet weak var swipeUpButton: UIButton!
 
@@ -49,10 +48,24 @@ class SCPregameRoomViewController: SCViewController {
             SCMultipeerManager.instance.startSession()
         }
 
-        self.accessCodeTypeLabel.text = "Access Code: "
-        self.accessCodeLabel.text = Room.instance.getAccessCode()
+        let attributedString = NSMutableAttributedString(
+            string: SCStrings.accessCodeHeader + Room.instance.getAccessCode()
+        )
+        attributedString.addAttribute(
+            NSFontAttributeName,
+            value: SCFonts.regularSizeFont(.bold) ?? 0,
+            range: NSMakeRange(
+                SCStrings.accessCodeHeader.characters.count,
+                SCConstants.constant.accessCodeLength.rawValue
+            )
+        )
 
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(SCPregameRoomViewController.respondToSwipeGesture(gesture:)))
+        self.accessCodeLabel.attributedText = attributedString
+
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(SCPregameRoomViewController.respondToSwipeGesture(gesture:))
+        )
         swipeGestureRecognizer.direction = .up
         self.view.addGestureRecognizer(swipeGestureRecognizer)
     }
@@ -396,12 +409,12 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         let playerAtIndex = Room.instance.getPlayers()[indexPath.row]
 
         if playerAtIndex.isReady() {
-            cell.nameLabel.font = SCFonts.intermediateSizeFont(.bold)
+            cell.leftLabel.font = SCFonts.intermediateSizeFont(.bold)
         } else {
-            cell.nameLabel.font = SCFonts.intermediateSizeFont(.regular)
+            cell.leftLabel.font = SCFonts.intermediateSizeFont(.regular)
         }
 
-        cell.nameLabel.text = playerAtIndex.getName()
+        cell.leftLabel.text = playerAtIndex.getName()
         cell.index = indexPath.row
         cell.delegate = self
 
@@ -421,7 +434,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                     range: NSMakeRange(0, 2)
                 )
 
-                cell.nameLabel.attributedText = attributedString
+                cell.leftLabel.attributedText = attributedString
             }
 
             cell.segmentedControl.isEnabled = true

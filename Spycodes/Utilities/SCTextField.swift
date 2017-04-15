@@ -6,7 +6,7 @@ class SCTextField: UITextField {
 
         self.autocorrectionType = UITextAutocorrectionType.no
         self.borderStyle = .none
-        self.font = SCFonts.regularSizeFont(SCFonts.fontType.other)
+        self.font = SCFonts.regularSizeFont(.other)
         self.textColor = UIColor.spycodesGrayColor()
         self.tintColor = UIColor.spycodesGrayColor()
     }

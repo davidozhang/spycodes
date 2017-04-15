@@ -137,7 +137,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 return nil
         }
 
-        sectionHeader.header.text = sections[section]
+        sectionHeader.leftLabel.text = sections[section]
         return sectionHeader
     }
 
@@ -162,29 +162,31 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
         switch indexPath.section {
         case 0: // Pregame Checklist
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.descriptionViewCell.rawValue
-                ) as? SCDescriptionViewCell else {
+                withIdentifier: SCConstants.identifier.checklistViewCell.rawValue
+                ) as? SCTableViewCell else {
                     return UITableViewCell()
             }
 
+            cell.leftLabel.font = SCFonts.regularSizeFont(.regular)
             cell.leftLabel.text = self.getChecklistMessage()
+
             return cell
         case 1: // Statistics
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.statisticsViewCell.rawValue
-                ) as? SCStatisticsViewCell else {
+                ) as? SCTableViewCell else {
                     return UITableViewCell()
             }
 
             if GameMode.instance.getMode() == .miniGame {
                 if let bestRecord = Statistics.instance.getBestRecord() {
-                    cell.statisticsLabel.text = "Best Record: " + String(bestRecord)
+                    cell.leftLabel.text = "Best Record: " + String(bestRecord)
                 } else {
-                    cell.statisticsLabel.text = "Best Record: --"
+                    cell.leftLabel.text = "Best Record: --"
                 }
             } else {
                 let score = Statistics.instance.getScore()
-                cell.statisticsLabel.text = "Red " + String(score[0]) + " : " + String(score[1]) + " Blue"
+                cell.leftLabel.text = "Red " + String(score[0]) + " : " + String(score[1]) + " Blue"
             }
 
             return cell

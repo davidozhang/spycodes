@@ -15,6 +15,8 @@ class SCStrings {
     static let minigameTeamSizeInfo = "Your team has 2-3 players."
     static let regularGameTeamSizeInfo = "Each team has 2-4 players."
 
+    static let accessCodeHeader = "Access Code: "
+
     static let defaultCluegiverClue = "Enter Clue"
     static let defaultNonTurnClue = "Not Your Turn"
     static let defaultIsTurnClue = "Waiting for Clue"
