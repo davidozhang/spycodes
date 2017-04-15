@@ -8,10 +8,15 @@ class Timer: NSObject, NSCoding {
     fileprivate var enabled = false
     fileprivate var timer: Foundation.Timer?
     fileprivate var startTime: Int?
-    fileprivate var duration: Int = 120
+    fileprivate var duration: Int?
 
     fileprivate var timerEndedCallback: (() -> Void)?
     fileprivate var timerInProgressCallback: ((_ remainingTime: Int) -> Void)?
+
+    override init() {
+        super.init()
+        self.setDuration(durationInMinutes: 2)
+    }
 
     deinit {
         self.timer?.invalidate()
@@ -19,7 +24,11 @@ class Timer: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(enabled, forKey: SCConstants.coding.enabled.rawValue)
+        aCoder.encode(self.enabled, forKey: SCConstants.coding.enabled.rawValue)
+
+        if let duration = self.duration {
+            aCoder.encode(duration, forKey: SCConstants.coding.duration.rawValue)
+        }
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
@@ -27,9 +36,27 @@ class Timer: NSObject, NSCoding {
         self.enabled = aDecoder.decodeBool(
             forKey: SCConstants.coding.enabled.rawValue
         )
+
+        if aDecoder.containsValue(forKey: SCConstants.coding.duration.rawValue) {
+            self.duration = aDecoder.decodeInteger(
+                forKey: SCConstants.coding.duration.rawValue
+            )
+        }
     }
 
     // MARK: Public
+    func setDuration(durationInMinutes: Int) {
+        self.duration = durationInMinutes * 60
+    }
+
+    func getDurationInMinutes() -> Int {
+        if let duration = self.duration {
+            return duration / 60
+        }
+
+        return 0
+    }
+
     func setEnabled(_ enabled: Bool) {
         self.enabled = enabled
     }
@@ -68,10 +95,11 @@ class Timer: NSObject, NSCoding {
             return
         }
 
-        guard let startTime = self.startTime else { return }
+        guard let startTime = self.startTime,
+              let duration = self.duration else { return }
 
         let currentTime = Int(Date.timeIntervalSinceReferenceDate)
-        let remainingTime = self.duration - (currentTime - startTime)
+        let remainingTime = duration - (currentTime - startTime)
 
         if remainingTime > 0 {
             if let timerInProgressCallback = self.timerInProgressCallback {
