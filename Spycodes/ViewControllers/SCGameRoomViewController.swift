@@ -417,7 +417,9 @@ class SCGameRoomViewController: SCViewController {
 
     fileprivate func updateActionButton() {
         if self.actionButtonState == .confirm {
-            self.actionButton.setTitle("Confirm", for: UIControlState())
+            UIView.performWithoutAnimation {
+                self.actionButton.setTitle("Confirm", for: UIControlState())
+            }
 
             if !Player.instance.isCluegiver() ||
                Round.instance.getCurrentTeam() != Player.instance.getTeam() {
@@ -438,7 +440,9 @@ class SCGameRoomViewController: SCViewController {
                 }
             }
         } else if self.actionButtonState == .endRound {
-            self.actionButton.setTitle("End Round", for: UIControlState())
+            UIView.performWithoutAnimation {
+                self.actionButton.setTitle("End Round", for: UIControlState())
+            }
             self.stopButtonAnimations()
 
             if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
