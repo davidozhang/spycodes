@@ -121,9 +121,14 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
 
     func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 1:     // Statistics
-            return 50.0
+        return 44.0
+    }
+
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 2:     // Game Settings
+            return 88.0
         default:
             return 44.0
         }
@@ -137,7 +142,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 return nil
         }
 
-        sectionHeader.leftLabel.text = sections[section]
+        sectionHeader.primaryLabel.text = sections[section]
         return sectionHeader
     }
 
@@ -167,8 +172,8 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                     return UITableViewCell()
             }
 
-            cell.leftLabel.font = SCFonts.regularSizeFont(.regular)
-            cell.leftLabel.text = self.getChecklistMessage()
+            cell.primaryLabel.font = SCFonts.regularSizeFont(.regular)
+            cell.primaryLabel.text = self.getChecklistMessage()
 
             return cell
         case 1: // Statistics
@@ -180,13 +185,13 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
 
             if GameMode.instance.getMode() == .miniGame {
                 if let bestRecord = Statistics.instance.getBestRecord() {
-                    cell.leftLabel.text = "Best Record: " + String(bestRecord)
+                    cell.primaryLabel.text = "Best Record: " + String(bestRecord)
                 } else {
-                    cell.leftLabel.text = "Best Record: --"
+                    cell.primaryLabel.text = "Best Record: --"
                 }
             } else {
                 let score = Statistics.instance.getScore()
-                cell.leftLabel.text = "Red " + String(score[0]) + " : " + String(score[1]) + " Blue"
+                cell.primaryLabel.text = "Red " + String(score[0]) + " : " + String(score[1]) + " Blue"
             }
 
             return cell
@@ -200,7 +205,8 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 }
 
                 cell.synchronizeToggle()
-                cell.leftLabel.text = self.settingsLabels[indexPath.row]
+                cell.primaryLabel.text = self.settingsLabels[indexPath.row]
+                cell.secondaryLabel.text = SCStrings.minigameSecondaryText
                 cell.delegate = self
                 
                 return cell
@@ -212,7 +218,8 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 }
 
                 cell.synchronizeToggle()
-                cell.leftLabel.text = self.settingsLabels[indexPath.row]
+                cell.primaryLabel.text = self.settingsLabels[indexPath.row]
+                cell.secondaryLabel.text = SCStrings.timerSecondaryText
                 cell.delegate = self
 
                 return cell
@@ -228,7 +235,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                         return UITableViewCell()
                 }
 
-                cell.leftLabel.text = self.customizeLabels[indexPath.row]
+                cell.primaryLabel.text = self.customizeLabels[indexPath.row]
                 cell.delegate = self
 
                 return cell

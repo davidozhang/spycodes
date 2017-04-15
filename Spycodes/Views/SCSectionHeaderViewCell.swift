@@ -4,6 +4,6 @@ class SCSectionHeaderViewCell: SCTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.leftLabel.font = SCFonts.regularSizeFont(.bold)
+        self.primaryLabel.font = SCFonts.regularSizeFont(.bold)
     }
 }

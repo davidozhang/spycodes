@@ -409,12 +409,12 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         let playerAtIndex = Room.instance.getPlayers()[indexPath.row]
 
         if playerAtIndex.isReady() {
-            cell.leftLabel.font = SCFonts.intermediateSizeFont(.bold)
+            cell.primaryLabel.font = SCFonts.intermediateSizeFont(.bold)
         } else {
-            cell.leftLabel.font = SCFonts.intermediateSizeFont(.regular)
+            cell.primaryLabel.font = SCFonts.intermediateSizeFont(.regular)
         }
 
-        cell.leftLabel.text = playerAtIndex.getName()
+        cell.primaryLabel.text = playerAtIndex.getName()
         cell.index = indexPath.row
         cell.delegate = self
 
@@ -434,7 +434,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                     range: NSMakeRange(0, 2)
                 )
 
-                cell.leftLabel.attributedText = attributedString
+                cell.primaryLabel.attributedText = attributedString
             }
 
             cell.segmentedControl.isEnabled = true
