@@ -73,7 +73,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return nil
         }
 
-        sectionHeader.leftLabel.text = sections[section]
+        sectionHeader.primaryLabel.text = sections[section]
         return sectionHeader
     }
 
@@ -101,7 +101,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
 
-            cell.leftLabel.text = self.customizeLabels[indexPath.row]
+            cell.primaryLabel.text = self.customizeLabels[indexPath.row]
             cell.delegate = self
 
             return cell
@@ -120,7 +120,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
 
-            cell.leftLabel.text = self.disclosureLabels[indexPath.row]
+            cell.primaryLabel.text = self.disclosureLabels[indexPath.row]
 
             return cell
         default:

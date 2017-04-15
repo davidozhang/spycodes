@@ -1,14 +1,20 @@
 import UIKit
 
 class SCTableViewCell: UITableViewCell {
-    @IBOutlet weak var leftLabel: SCLabel!
+    @IBOutlet weak var primaryLabel: SCLabel!
+    @IBOutlet weak var secondaryLabel: UILabel!
     @IBOutlet weak var rightLabel: SCLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        if let _ = self.leftLabel {
-            self.leftLabel.font = SCFonts.intermediateSizeFont(.regular)
+        if let _ = self.primaryLabel {
+            self.primaryLabel.font = SCFonts.intermediateSizeFont(.regular)
+        }
+
+        if let _ = self.secondaryLabel {
+            self.secondaryLabel.font = SCFonts.smallSizeFont(.regular)
+            self.secondaryLabel.numberOfLines = 2
         }
 
         if let _ = self.rightLabel {
