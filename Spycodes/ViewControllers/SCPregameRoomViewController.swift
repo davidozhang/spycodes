@@ -170,15 +170,20 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate func updateReadyButton() {
         if self.readyButtonState == .notReady {
             self.broadcastActionEvent(.cancel)
-            self.readyButton.setTitle("Ready", for: .normal)
+            UIView.performWithoutAnimation {
+                self.readyButton.setTitle("Ready", for: .normal)
+            }
         } else {
             self.broadcastActionEvent(.ready)
-            self.readyButton.setTitle("Cancel", for: .normal)
+            UIView.performWithoutAnimation {
+                self.readyButton.setTitle("Cancel", for: .normal)
+            }
         }
 
-        let isReady = self.readyButtonState == .ready
+        self.tableView.reloadData()
 
         // Only set ready status locally
+        let isReady = self.readyButtonState == .ready
         Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.setIsReady(isReady)
     }
 
