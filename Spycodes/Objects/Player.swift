@@ -6,7 +6,7 @@ class Player: NSObject, NSCoding {
 
     fileprivate var name: String?
     fileprivate var team: Team
-    fileprivate var cluegiver: Bool
+    fileprivate var leader: Bool
     fileprivate var host: Bool
     fileprivate var uuid: String
     fileprivate var ready: Bool
@@ -15,7 +15,7 @@ class Player: NSObject, NSCoding {
     override init() {
         self.uuid = UIDevice.current.identifierForVendor!.uuidString
         self.team = .red
-        self.cluegiver = false
+        self.leader = false
         self.host = false
         self.ready = false
     }
@@ -23,14 +23,14 @@ class Player: NSObject, NSCoding {
     convenience init(name: String,
                      uuid: String,
                      team: Team,
-                     cluegiver: Bool,
+                     leader: Bool,
                      host: Bool,
                      ready: Bool) {
         self.init()
         self.name = name
         self.uuid = uuid
         self.team = team
-        self.cluegiver = cluegiver
+        self.leader = leader
         self.host = host
         self.ready = ready
     }
@@ -40,7 +40,7 @@ class Player: NSObject, NSCoding {
         aCoder.encode(self.name, forKey: SCConstants.coding.name.rawValue)
         aCoder.encode(self.uuid, forKey: SCConstants.coding.uuid.rawValue)
         aCoder.encode(self.team.rawValue, forKey: SCConstants.coding.team.rawValue)
-        aCoder.encode(self.cluegiver, forKey: SCConstants.coding.cluegiver.rawValue)
+        aCoder.encode(self.leader, forKey: SCConstants.coding.leader.rawValue)
         aCoder.encode(self.host, forKey: SCConstants.coding.host.rawValue)
         aCoder.encode(self.ready, forKey: SCConstants.coding.ready.rawValue)
     }
@@ -52,8 +52,8 @@ class Player: NSObject, NSCoding {
                 forKey: SCConstants.coding.team.rawValue
             )
 
-            let cluegiver = aDecoder.decodeBool(
-                forKey: SCConstants.coding.cluegiver.rawValue
+            let leader = aDecoder.decodeBool(
+                forKey: SCConstants.coding.leader.rawValue
             )
 
             let host = aDecoder.decodeBool(
@@ -68,7 +68,7 @@ class Player: NSObject, NSCoding {
                 name: name,
                 uuid: uuid,
                 team: Team(rawValue: team)!,
-                cluegiver: cluegiver,
+                leader: leader,
                 host: host,
                 ready: ready
             )
@@ -90,8 +90,8 @@ class Player: NSObject, NSCoding {
         return self.team
     }
 
-    func isCluegiver() -> Bool {
-        return self.cluegiver
+    func isLeader() -> Bool {
+        return self.leader
     }
 
     func isHost() -> Bool {
@@ -110,8 +110,8 @@ class Player: NSObject, NSCoding {
         self.team = team
     }
 
-    func setIsCluegiver(_ isCluegiver: Bool) {
-        self.cluegiver = isCluegiver
+    func setIsLeader(_ isLeader: Bool) {
+        self.leader = isLeader
     }
 
     func setIsHost(_ isHost: Bool) {
@@ -125,7 +125,7 @@ class Player: NSObject, NSCoding {
     func reset() {
         self.team = .red
         self.host = false
-        self.cluegiver = false
+        self.leader = false
     }
 }
 

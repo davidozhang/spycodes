@@ -20,7 +20,7 @@ class SCStrings {
 
     static let accessCodeHeader = "Access Code: "
 
-    static let defaultCluegiverClue = "Enter Clue"
+    static let defaultLeaderClue = "Enter Clue"
     static let defaultNonTurnClue = "Not Your Turn"
     static let defaultIsTurnClue = "Waiting for Clue"
     static let defaultNumberOfWords = "#"

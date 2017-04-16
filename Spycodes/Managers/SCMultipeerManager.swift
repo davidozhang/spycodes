@@ -11,7 +11,7 @@ class SCMultipeerManager: NSObject {
     static let instance = SCMultipeerManager()
     weak var delegate: SCMultipeerManagerDelegate?
 
-    fileprivate let serviceType = "Spycodes"
+    fileprivate let serviceType = "SpycodesV2"
     fileprivate var discoveryInfo: [String: String]?
 
     fileprivate var peerID: MCPeerID?
