@@ -21,6 +21,7 @@ class SCSettingsViewController: SCViewController {
     fileprivate var scrolled = false
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
 
@@ -42,6 +43,7 @@ class SCSettingsViewController: SCViewController {
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableViewBottomSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
@@ -83,9 +85,9 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         sectionHeader.primaryLabel.text = sections[section]
 
         if self.tableView.contentOffset.y > 0 {
-            sectionHeader.showBlurBackground()
+            sectionHeader.showSolidBackground()
         } else {
-            sectionHeader.hideBlurBackground()
+            sectionHeader.hideSolidBackground()
         }
 
         return sectionHeader

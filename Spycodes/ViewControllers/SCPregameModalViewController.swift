@@ -23,6 +23,7 @@ class SCPregameModalViewController: SCModalViewController {
     fileprivate var scrolled = false
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var swipeDownButton: UIButton!
@@ -42,6 +43,7 @@ class SCPregameModalViewController: SCModalViewController {
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableViewBottomSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()

@@ -417,6 +417,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="mxy-b5-O5c" id="V0u-Kd-6YR"/>
+                        <outlet property="tableViewBottomSpaceConstraint" destination="QGU-TS-6ZY" id="dvp-jU-psG"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="sgh-gH-NhI" id="ShW-gH-MDM"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="mA5-ZE-JGV" id="eXo-fS-ZCb"/>
                         <segue destination="XK5-pZ-i5L" kind="unwind" identifier="main-menu" unwindAction="unwindToMainMenu:" id="I2d-Jd-G8R"/>
@@ -1097,6 +1098,7 @@
                     <connections>
                         <outlet property="swipeDownButton" destination="FjP-pl-Sjb" id="haf-vr-ysz"/>
                         <outlet property="tableView" destination="fla-Z8-sHI" id="kdG-h0-2fX"/>
+                        <outlet property="tableViewBottomSpaceConstraint" destination="SWn-Tk-HpF" id="N9n-E6-vel"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="kyE-Ob-Qov" id="gar-TI-Kyx"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="Sxy-LK-2FM" id="cR3-YB-TcZ"/>
                     </connections>

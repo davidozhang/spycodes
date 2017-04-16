@@ -9,12 +9,6 @@ class SCSectionHeaderViewCell: SCTableViewCell {
         self.primaryLabel.font = SCFonts.regularSizeFont(.bold)
     }
 
-    func hideBlurBackground() {
-        if let view = self.viewWithTag(1) {
-            view.removeFromSuperview()
-        }
-    }
-
     func showBlurBackground() {
         self.hideBlurBackground()
 
@@ -29,5 +23,25 @@ class SCSectionHeaderViewCell: SCTableViewCell {
         self.blurView?.tag = 1
         self.addSubview(self.blurView!)
         self.sendSubview(toBack: self.blurView!)
+    }
+
+    func showSolidBackground() {
+        self.hideSolidBackground()
+
+        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+            self.backgroundColor = UIColor.spycodesBlackColor()
+        } else {
+            self.backgroundColor = UIColor.white
+        }
+    }
+
+    func hideBlurBackground() {
+        if let view = self.viewWithTag(1) {
+            view.removeFromSuperview()
+        }
+    }
+
+    func hideSolidBackground() {
+        self.backgroundColor = UIColor.clear
     }
 }
