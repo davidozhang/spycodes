@@ -447,11 +447,6 @@ class SCGameRoomViewController: SCViewController {
     }
 
     fileprivate func didEndRound(fromTimerExpiry: Bool) {
-        if !fromTimerExpiry {
-            Round.instance.endRound(Player.instance.getTeam())
-            SCMultipeerManager.instance.broadcast(Round.instance)
-        }
-
         if GameMode.instance.getMode() == .miniGame {
             SCAudioManager.vibrate()
         }
@@ -461,16 +456,21 @@ class SCGameRoomViewController: SCViewController {
         }
 
         if fromTimerExpiry {
-            if Player.instance.isHost() {
-                Round.instance.endRound(Player.instance.getTeam())
-                SCMultipeerManager.instance.broadcast(Round.instance)
+            if GameMode.instance.getMode() == .miniGame {
+                if Player.instance.isHost() {
+                    Round.instance.endRound(Player.instance.getTeam())
+                    SCMultipeerManager.instance.broadcast(Round.instance)
 
-                // Send 1 action event on timer expiry to avoid duplicate vibrations
-                self.broadcastActionEvent(.endRound)
+                    // Send 1 action event on timer expiry to avoid duplicate vibrations
+                    self.broadcastActionEvent(.endRound)
+                }
+
+                return
             }
-
-            return
         }
+
+        Round.instance.endRound(Player.instance.getTeam())
+        SCMultipeerManager.instance.broadcast(Round.instance)
 
         self.broadcastActionEvent(.endRound)
     }
