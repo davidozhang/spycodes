@@ -270,7 +270,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mxy-b5-O5c">
-                                <rect key="frame" x="0.0" y="72.5" width="1024" height="1293.5"/>
+                                <rect key="frame" x="0.0" y="73" width="1024" height="1293"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -402,13 +402,22 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Up-Arrow-Circled" translatesAutoresizingMaskIntoConstraints="NO" id="yMi-hD-pKZ">
+                                <rect key="frame" x="499.5" y="1306" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="qvX-CY-Mg9"/>
+                                    <constraint firstAttribute="height" constant="25" id="z32-Pd-iMJ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="SnD-qp-ajy" firstAttribute="top" secondItem="yMi-hD-pKZ" secondAttribute="bottom" constant="35" id="1PK-pu-O2Y"/>
                             <constraint firstItem="gev-Gq-JtW" firstAttribute="centerX" secondItem="Vhf-dS-IgE" secondAttribute="centerX" id="Ec1-oK-yno"/>
                             <constraint firstItem="SnD-qp-ajy" firstAttribute="top" secondItem="mxy-b5-O5c" secondAttribute="bottom" id="QGU-TS-6ZY"/>
                             <constraint firstItem="eOI-Eo-Htd" firstAttribute="leading" secondItem="Vhf-dS-IgE" secondAttribute="leading" constant="15" id="RKf-bv-n4H"/>
                             <constraint firstItem="eOI-Eo-Htd" firstAttribute="top" secondItem="Ag9-NQ-eB2" secondAttribute="bottom" constant="4" id="Vb0-Lb-99A"/>
+                            <constraint firstItem="yMi-hD-pKZ" firstAttribute="centerX" secondItem="Vhf-dS-IgE" secondAttribute="centerX" id="h9e-Mm-ol5"/>
                             <constraint firstItem="mxy-b5-O5c" firstAttribute="top" secondItem="gev-Gq-JtW" secondAttribute="bottom" constant="20" id="j1s-Pn-dNl"/>
                             <constraint firstAttribute="trailing" secondItem="mxy-b5-O5c" secondAttribute="trailing" id="mA5-ZE-JGV"/>
                             <constraint firstItem="mxy-b5-O5c" firstAttribute="leading" secondItem="Vhf-dS-IgE" secondAttribute="leading" id="sgh-gH-NhI"/>
@@ -420,6 +429,7 @@
                         <outlet property="tableViewBottomSpaceConstraint" destination="QGU-TS-6ZY" id="dvp-jU-psG"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="sgh-gH-NhI" id="ShW-gH-MDM"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="mA5-ZE-JGV" id="eXo-fS-ZCb"/>
+                        <outlet property="upArrowView" destination="yMi-hD-pKZ" id="6ox-RA-IJJ"/>
                         <segue destination="XK5-pZ-i5L" kind="unwind" identifier="main-menu" unwindAction="unwindToMainMenu:" id="I2d-Jd-G8R"/>
                     </connections>
                 </viewController>

@@ -24,6 +24,7 @@ class SCSettingsViewController: SCViewController {
     @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var upArrowView: UIImageView!
 
     // MARK: Actions
     @IBAction func onBackTapped(_ sender: AnyObject) {
@@ -47,6 +48,10 @@ class SCSettingsViewController: SCViewController {
         self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
+
+        if self.tableView.contentSize.height < self.tableView.bounds.height - 1.0 {
+            self.upArrowView.isHidden = true
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -197,6 +202,12 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.tableView.contentOffset.y <= 0 {
+            self.upArrowView.isHidden = false
+        } else {
+            self.upArrowView.isHidden = true
+        }
+
         if self.tableView.contentOffset.y > 0 {
             if self.scrolled {
                 return
