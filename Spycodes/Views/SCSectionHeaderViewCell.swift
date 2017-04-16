@@ -29,7 +29,7 @@ class SCSectionHeaderViewCell: SCTableViewCell {
         self.hideSolidBackground()
 
         if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
-            self.backgroundColor = UIColor.spycodesBlackColor()
+            self.backgroundColor = UIColor.black
         } else {
             self.backgroundColor = UIColor.white
         }
