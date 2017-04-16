@@ -1,20 +1,20 @@
 class SCConstants {
     enum coding: String {
         case abort = "abort"
-        case accessCode = "accessCode"
-        case actionEventType = "actionEventType"
-        case bestRecord = "bestRecord"
+        case accessCode = "access-code"
+        case actionEventType = "action-event-type"
+        case bestRecord = "best-record"
         case cards = "cards"
         case clue = "clue"
-        case cluegiver = "cluegiver"
-        case connectedPeers = "connectedPeers"
+        case leader = "leader"
+        case connectedPeers = "connected-peers"
         case duration = "duration"
         case enabled = "enabled"
-        case gameEnded = "gameEnded"
+        case gameEnded = "game-ended"
         case host = "host"
         case mode = "mode"
         case name = "name"
-        case numberOfWords = "numberOfWords"
+        case numberOfWords = "number-of-words"
         case parameters = "parameters"
         case players = "players"
         case ready = "ready"
@@ -22,7 +22,7 @@ class SCConstants {
         case selected = "selected"
         case team = "team"
         case uuid = "uuid"
-        case winningTeam = "winningTeam"
+        case winningTeam = "winning-team"
         case word = "word"
     }
 
@@ -60,8 +60,8 @@ class SCConstants {
     }
 
     enum notificationKey: String {
-        case autoEliminate = "autoEliminate"
-        case minigameGameOver = "minigameGameOver"
+        case autoEliminate = "auto-eliminate"
+        case minigameGameOver = "minigame-game-over"
     }
 
     enum url: String {
@@ -76,6 +76,6 @@ class SCConstants {
 
     enum userDefaults: String {
         case accessibility = "accessibility"
-        case nightMode = "nightMode"
+        case nightMode = "night-mode"
     }
 }

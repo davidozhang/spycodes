@@ -93,18 +93,18 @@ class Room: NSObject, NSCoding {
             if player1.getTeam().rawValue < player2.getTeam().rawValue {
                 return true
             } else if player1.getTeam().rawValue == player2.getTeam().rawValue {
-                return player1.isCluegiver()
+                return player1.isLeader()
             } else {
                 return false
             }
         })
 
-        if self.getCluegiverUUIDForTeam(.red) == nil {
-            self.autoAssignCluegiverForTeam(.red)
+        if self.getLeaderUUIDForTeam(.red) == nil {
+            self.autoAssignLeaderForTeam(.red)
         }
 
-        if self.getCluegiverUUIDForTeam(.blue) == nil {
-            self.autoAssignCluegiverForTeam(.blue)
+        if self.getLeaderUUIDForTeam(.blue) == nil {
+            self.autoAssignLeaderForTeam(.blue)
         }
     }
 
@@ -130,7 +130,7 @@ class Room: NSObject, NSCoding {
             name: "CPU",
             uuid: Room.cpuUUID,
             team: .blue,
-            cluegiver: true,
+            leader: true,
             host: false,
             ready: true
         )
@@ -141,10 +141,10 @@ class Room: NSObject, NSCoding {
         self.removePlayerWithUUID(Room.cpuUUID)
     }
 
-    func autoAssignCluegiverForTeam(_ team: Team) {
+    func autoAssignLeaderForTeam(_ team: Team) {
         for player in self.players {
             if player.getTeam() == team {
-                player.setIsCluegiver(true)
+                player.setIsLeader(true)
                 return
             }
         }
@@ -207,17 +207,17 @@ class Room: NSObject, NSCoding {
         }
     }
 
-    func cluegiversSelected() -> Bool {
+    func leadersSelected() -> Bool {
         if GameMode.instance.getMode() == .regularGame {
-            if self.getCluegiverUUIDForTeam(.red) != nil &&
-               self.getCluegiverUUIDForTeam(.blue) != nil {
+            if self.getLeaderUUIDForTeam(.red) != nil &&
+               self.getLeaderUUIDForTeam(.blue) != nil {
                 return true
             }
 
             return false
         } else {    // Minigame
-            if self.getCluegiverUUIDForTeam(.red) != nil &&
-               self.getCluegiverUUIDForTeam(.blue) != nil {
+            if self.getLeaderUUIDForTeam(.red) != nil &&
+               self.getLeaderUUIDForTeam(.blue) != nil {
                 return true
             }
 
@@ -234,12 +234,12 @@ class Room: NSObject, NSCoding {
     }
 
     func canStartGame() -> Bool {
-        return teamSizesValid() && cluegiversSelected() && allPlayersReady()
+        return teamSizesValid() && leadersSelected() && allPlayersReady()
     }
 
-    func getCluegiverUUIDForTeam(_ team: Team) -> String? {
+    func getLeaderUUIDForTeam(_ team: Team) -> String? {
         let filtered = self.players.filter({
-            ($0 as Player).isCluegiver() && ($0 as Player).getTeam() == team
+            ($0 as Player).isLeader() && ($0 as Player).getTeam() == team
         })
         if filtered.count == 1 {
             return filtered[0].getUUID()
@@ -259,7 +259,7 @@ class Room: NSObject, NSCoding {
 
     func resetPlayers() {
         for player in players {
-            player.setIsCluegiver(false)
+            player.setIsLeader(false)
             player.setTeam(team: .red)
         }
     }

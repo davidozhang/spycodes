@@ -776,7 +776,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="cluegiverImage" destination="4mv-rH-4Dm" id="hLC-Ao-0eC"/>
+                                            <outlet property="leaderImage" destination="4mv-rH-4Dm" id="hLC-Ao-0eC"/>
                                             <outlet property="primaryLabel" destination="d84-Az-a9v" id="gOv-KW-UwS"/>
                                             <outlet property="segmentedControl" destination="i4n-ia-kgW" id="4JJ-I9-yCa"/>
                                         </connections>

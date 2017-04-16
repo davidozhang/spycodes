@@ -377,7 +377,7 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
         let playerAtIndex = Room.instance.getPlayers()[index]
 
         Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setTeam(team: newTeam)
-        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsCluegiver(false)
+        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsLeader(false)
         SCMultipeerManager.instance.broadcast(Room.instance)
     }
 }
@@ -446,11 +446,11 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             cell.segmentedControl.isEnabled = false
         }
 
-        if playerAtIndex.isCluegiver() {
-            cell.cluegiverImage.image = UIImage(named: "Crown-Filled")
-            cell.cluegiverImage.isHidden = false
+        if playerAtIndex.isLeader() {
+            cell.leaderImage.image = UIImage(named: "Crown-Filled")
+            cell.leaderImage.isHidden = false
         } else {
-            cell.cluegiverImage.isHidden = true
+            cell.leaderImage.isHidden = true
         }
 
         return cell
@@ -465,18 +465,18 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             return
         }
 
-        if let cluegiverUUID = Room.instance.getCluegiverUUIDForTeam(team) {
-            Room.instance.getPlayerWithUUID(cluegiverUUID)?.setIsCluegiver(false)
+        if let leaderUUID = Room.instance.getLeaderUUIDForTeam(team) {
+            Room.instance.getPlayerWithUUID(leaderUUID)?.setIsLeader(false)
 
-            if Player.instance.getUUID() == cluegiverUUID {
-                Player.instance.setIsCluegiver(false)
+            if Player.instance.getUUID() == leaderUUID {
+                Player.instance.setIsLeader(false)
             }
         }
 
-        Room.instance.getPlayers()[indexPath.row].setIsCluegiver(true)
+        Room.instance.getPlayers()[indexPath.row].setIsLeader(true)
 
         if Player.instance.getUUID() == playerAtIndex.getUUID() {
-            Player.instance.setIsCluegiver(true)
+            Player.instance.setIsLeader(true)
         }
 
         self.broadcastEssentialData()

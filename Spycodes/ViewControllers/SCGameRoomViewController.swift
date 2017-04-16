@@ -14,7 +14,7 @@ class SCGameRoomViewController: SCViewController {
 
     fileprivate var buttonAnimationStarted = false
     fileprivate var textFieldAnimationStarted = false
-    fileprivate var cluegiverIsEditing = false
+    fileprivate var leaderIsEditing = false
 
     fileprivate var broadcastTimer: Foundation.Timer?
     fileprivate var refreshTimer: Foundation.Timer?
@@ -335,8 +335,8 @@ class SCGameRoomViewController: SCViewController {
         self.cardsRemainingLabel.attributedText = attributedString
 
         if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
-            if self.cluegiverIsEditing {
-                return  // Cluegiver is editing the clue/number of words
+            if self.leaderIsEditing {
+                return  // Leader is editing the clue/number of words
             }
 
             if Round.instance.bothFieldsSet() {
@@ -348,8 +348,8 @@ class SCGameRoomViewController: SCViewController {
                 self.clueTextField.isEnabled = false
                 self.numberOfWordsTextField.isEnabled = false
             } else {
-                if Player.instance.isCluegiver() {
-                    self.clueTextField.text = SCStrings.defaultCluegiverClue
+                if Player.instance.isLeader() {
+                    self.clueTextField.text = SCStrings.defaultLeaderClue
                     self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
 
                     self.startTextFieldAnimations()
@@ -421,7 +421,7 @@ class SCGameRoomViewController: SCViewController {
                 self.actionButton.setTitle("Confirm", for: UIControlState())
             }
 
-            if !Player.instance.isCluegiver() ||
+            if !Player.instance.isLeader() ||
                Round.instance.getCurrentTeam() != Player.instance.getTeam() {
                 return
             }
@@ -429,7 +429,7 @@ class SCGameRoomViewController: SCViewController {
             if let clueTextFieldCharacterCount = self.clueTextField.text?.characters.count,
                let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.characters.count {
                 if clueTextFieldCharacterCount > 0 &&
-                   self.clueTextField.text != SCStrings.defaultCluegiverClue &&
+                   self.clueTextField.text != SCStrings.defaultLeaderClue &&
                    numberOfWordsTextFieldCharacterCount > 0 &&
                    self.numberOfWordsTextField.text != SCStrings.defaultNumberOfWords {
                     self.actionButton.isEnabled = true
@@ -461,7 +461,7 @@ class SCGameRoomViewController: SCViewController {
     }
 
     fileprivate func didConfirm() {
-        self.cluegiverIsEditing = false
+        self.leaderIsEditing = false
 
         self.clueTextField.isEnabled = false
         self.numberOfWordsTextField.isEnabled = false
@@ -559,7 +559,7 @@ class SCGameRoomViewController: SCViewController {
 // MARK: SCMultipeerManagerDelegate
 extension SCGameRoomViewController: SCMultipeerManagerDelegate {
     func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
-        if self.cluegiverIsEditing {
+        if self.leaderIsEditing {
             return
         }
 
@@ -710,7 +710,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
         cell.contentView.backgroundColor = UIColor.clear
 
-        if Player.instance.isCluegiver() {
+        if Player.instance.isLeader() {
             if cardAtIndex.getTeam() == .neutral {
                 cell.wordLabel.textColor = UIColor.spycodesGrayColor()
             }
@@ -766,7 +766,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        if Player.instance.isCluegiver() ||
+        if Player.instance.isLeader() ||
            Round.instance.getCurrentTeam() != Player.instance.getTeam() ||
            !Round.instance.bothFieldsSet() {
             return
@@ -858,7 +858,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 // MARK: UITextFieldDelegate
 extension SCGameRoomViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if Player.instance.isCluegiver() &&
+        if Player.instance.isLeader() &&
            Round.instance.getCurrentTeam() == Player.instance.getTeam() {
             return true
         } else {
@@ -870,12 +870,12 @@ extension SCGameRoomViewController: UITextFieldDelegate {
         self.stopTextFieldAnimations()
         textField.invalidateIntrinsicContentSize()
 
-        self.cluegiverIsEditing = true
+        self.leaderIsEditing = true
 
         if textField == self.clueTextField {
-            if textField.text == SCStrings.defaultCluegiverClue {
+            if textField.text == SCStrings.defaultLeaderClue {
                 textField.text = ""
-                textField.placeholder = SCStrings.defaultCluegiverClue
+                textField.placeholder = SCStrings.defaultLeaderClue
             }
         } else if textField == self.numberOfWordsTextField {
             if textField.text == SCStrings.defaultNumberOfWords {
@@ -899,7 +899,7 @@ extension SCGameRoomViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text == "" {
             if textField == self.clueTextField {
-                self.clueTextField.text = SCStrings.defaultCluegiverClue
+                self.clueTextField.text = SCStrings.defaultLeaderClue
             } else if textField == self.numberOfWordsTextField {
                 self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
             }
@@ -908,7 +908,7 @@ extension SCGameRoomViewController: UITextFieldDelegate {
 
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField == self.clueTextField {
-            textField.placeholder = SCStrings.defaultCluegiverClue
+            textField.placeholder = SCStrings.defaultLeaderClue
         } else if textField == self.numberOfWordsTextField {
             textField.placeholder = SCStrings.defaultNumberOfWords
         }

@@ -80,7 +80,7 @@ class SCHelpViewController: SCPopoverViewController {
         if GameMode.instance.getMode() == .miniGame {
             result += [SCStrings.minigameIntro]
 
-            if Player.instance.isCluegiver() {
+            if Player.instance.isLeader() {
                 result += SCHelpViewController.sharedLeaderStringSequence
             } else {
                 result += SCHelpViewController.sharedPlayerStringSequence
@@ -91,7 +91,7 @@ class SCHelpViewController: SCPopoverViewController {
         } else {
             result += [SCStrings.regularGameIntro]
 
-            if Player.instance.isCluegiver() {
+            if Player.instance.isLeader() {
                 result += SCHelpViewController.sharedLeaderStringSequence
             } else {
                 result += SCHelpViewController.sharedPlayerStringSequence
@@ -118,7 +118,7 @@ class SCHelpViewController: SCPopoverViewController {
                 self.rightButton.isHidden = false
             }
 
-            if Player.instance.isCluegiver() {
+            if Player.instance.isLeader() {
                 self.headerLabel.text = SCHelpViewController.leaderHeaders[self.currentIndex]
             } else {
                 self.headerLabel.text = SCHelpViewController.playerHeaders[self.currentIndex]

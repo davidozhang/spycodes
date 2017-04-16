@@ -9,7 +9,7 @@ class SCPregameRoomViewCell: SCTableViewCell {
 
     var index: Int?
 
-    @IBOutlet weak var cluegiverImage: UIImageView!
+    @IBOutlet weak var leaderImage: UIImageView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 
     override func awakeFromNib() {
