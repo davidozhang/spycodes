@@ -72,6 +72,14 @@ class SCPregameModalViewController: SCModalViewController {
         self.animateSwipeDownButton()
     }
 
+    override func onDismissal() {
+        if self.tableView.contentOffset.y > 0 {
+            return
+        }
+
+        super.onDismissal()
+    }
+
     // MARK: Private
     @objc
     fileprivate func refreshView() {
