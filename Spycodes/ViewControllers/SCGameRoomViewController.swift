@@ -89,14 +89,6 @@ class SCGameRoomViewController: SCViewController {
         Round.instance.setCurrentTeam(CardCollection.instance.getStartingTeam())
 
         if Player.instance.isHost() {
-            self.broadcastTimer = Foundation.Timer.scheduledTimer(
-                timeInterval: 2.0,
-                target: self,
-                selector: #selector(SCGameRoomViewController.broadcastEssentialData),
-                userInfo: nil,
-                repeats: true
-            )
-
             // Only cancel ready statuses locally
             Room.instance.cancelReadyForAllPlayers()
         }
@@ -247,11 +239,6 @@ class SCGameRoomViewController: SCViewController {
             self.updateActionButton()
             self.collectionView.reloadData()
         })
-    }
-
-    @objc
-    fileprivate func broadcastEssentialData() {
-        SCMultipeerManager.instance.broadcast(Round.instance)
     }
 
     fileprivate func startButtonAnimations() {
@@ -516,6 +503,12 @@ class SCGameRoomViewController: SCViewController {
             }
             self.refreshTimer?.invalidate()
 
+            if self.clueTextField.isFirstResponder {
+                self.clueTextField.resignFirstResponder()
+            } else if self.numberOfWordsTextField.isFirstResponder {
+                self.numberOfWordsTextField.resignFirstResponder()
+            }
+
             let alertController = UIAlertController(
                 title: title,
                 message: reason,
@@ -547,10 +540,6 @@ class SCGameRoomViewController: SCViewController {
 // MARK: SCMultipeerManagerDelegate
 extension SCGameRoomViewController: SCMultipeerManagerDelegate {
     func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
-        if self.leaderIsEditing {
-            return
-        }
-
         let synchronizedObject = NSKeyedUnarchiver.unarchiveObject(with: data)
         let opponentTeam = Team(rawValue: Player.instance.getTeam().rawValue ^ 1)
 
@@ -558,6 +547,17 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
         case let synchronizedObject as CardCollection:
             CardCollection.instance = synchronizedObject
         case let synchronizedObject as Round:
+            if self.leaderIsEditing {
+                if synchronizedObject.isAborted() {
+                    self.didEndGame(
+                        SCStrings.returningToPregameRoomHeader,
+                        reason: SCStrings.playerAborted
+                    )
+                }
+
+                return
+            }
+
             Round.instance = synchronizedObject
 
             if Round.instance.isAborted() {
