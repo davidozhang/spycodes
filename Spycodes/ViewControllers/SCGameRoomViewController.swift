@@ -86,8 +86,6 @@ class SCGameRoomViewController: SCViewController {
 
         SCMultipeerManager.instance.delegate = self
 
-        Round.instance.setCurrentTeam(CardCollection.instance.getStartingTeam())
-
         if Player.instance.isHost() {
             // Only cancel ready statuses locally
             Room.instance.cancelReadyForAllPlayers()

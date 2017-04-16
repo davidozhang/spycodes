@@ -284,8 +284,10 @@ class SCPregameRoomViewController: SCViewController {
             CardCollection.instance = CardCollection()
             Round.instance = Round()
 
-            SCMultipeerManager.instance.broadcast(CardCollection.instance)
+            Round.instance.setCurrentTeam(CardCollection.instance.getStartingTeam())
             SCMultipeerManager.instance.broadcast(Round.instance)
+
+            SCMultipeerManager.instance.broadcast(CardCollection.instance)
             self.goToGame()
         }
     }
