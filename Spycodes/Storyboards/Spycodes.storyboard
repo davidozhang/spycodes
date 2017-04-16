@@ -269,7 +269,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mxy-b5-O5c">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mxy-b5-O5c">
                                 <rect key="frame" x="0.0" y="72.5" width="1024" height="1293.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -282,14 +282,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoW-xI-FRC" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="35" y="0.0" width="56" height="44"/>
+                                                    <rect key="frame" x="3" y="0.0" width="56" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="BoW-xI-FRC" firstAttribute="leading" secondItem="dM7-bA-7gn" secondAttribute="leading" constant="35" id="T2f-Zv-Aka"/>
+                                                <constraint firstItem="BoW-xI-FRC" firstAttribute="leading" secondItem="dM7-bA-7gn" secondAttribute="leading" constant="3" id="T2f-Zv-Aka"/>
                                                 <constraint firstItem="BoW-xI-FRC" firstAttribute="top" secondItem="dM7-bA-7gn" secondAttribute="top" id="kcf-Bc-4uZ"/>
                                                 <constraint firstAttribute="bottom" secondItem="BoW-xI-FRC" secondAttribute="bottom" id="vlB-fH-qQU"/>
                                             </constraints>
@@ -306,24 +306,24 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMD-gn-KBX" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="35" y="0.0" width="57" height="44"/>
+                                                    <rect key="frame" x="4" y="0.0" width="57" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0 (160)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNU-WM-6B5" userLabel="Right Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="942" y="12" width="66" height="21"/>
+                                                    <rect key="frame" x="950" y="12" width="66" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="aNU-WM-6B5" secondAttribute="trailing" constant="8" id="0y3-iY-a8j"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="aNU-WM-6B5" secondAttribute="trailing" id="0y3-iY-a8j"/>
                                                 <constraint firstAttribute="bottom" secondItem="TMD-gn-KBX" secondAttribute="bottom" id="E7N-Gi-WaJ"/>
                                                 <constraint firstItem="TMD-gn-KBX" firstAttribute="top" secondItem="Sds-bd-CSc" secondAttribute="top" id="Ldr-Mz-JWL"/>
                                                 <constraint firstItem="aNU-WM-6B5" firstAttribute="centerY" secondItem="TMD-gn-KBX" secondAttribute="centerY" id="mrQ-Oq-GGn"/>
-                                                <constraint firstItem="TMD-gn-KBX" firstAttribute="leading" secondItem="Sds-bd-CSc" secondAttribute="leading" constant="35" id="q7Z-Qh-fTQ"/>
+                                                <constraint firstItem="TMD-gn-KBX" firstAttribute="leading" secondItem="Sds-bd-CSc" secondAttribute="leading" constant="4" id="q7Z-Qh-fTQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -339,7 +339,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Support" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1f-NH-Wrc" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="35" y="11" width="62" height="21"/>
+                                                    <rect key="frame" x="4" y="11" width="62" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -347,7 +347,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="y1f-NH-Wrc" firstAttribute="centerY" secondItem="oFt-WS-gtq" secondAttribute="centerY" id="70P-TX-MbX"/>
-                                                <constraint firstItem="y1f-NH-Wrc" firstAttribute="leading" secondItem="oFt-WS-gtq" secondAttribute="leading" constant="35" id="Sfw-3E-QEB"/>
+                                                <constraint firstItem="y1f-NH-Wrc" firstAttribute="leading" secondItem="oFt-WS-gtq" secondAttribute="leading" constant="4" id="Sfw-3E-QEB"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -358,11 +358,11 @@
                                         <rect key="frame" x="0.0" y="160" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RE9-Dm-AIJ" id="Ptw-wf-7DY">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16p-cx-Ih0" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="35" y="8" width="52" height="21"/>
+                                                    <rect key="frame" x="4" y="8" width="52" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -370,7 +370,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="16p-cx-Ih0" firstAttribute="top" secondItem="Ptw-wf-7DY" secondAttribute="topMargin" id="3qr-4n-CVN"/>
-                                                <constraint firstItem="16p-cx-Ih0" firstAttribute="leading" secondItem="Ptw-wf-7DY" secondAttribute="leading" constant="35" id="UTG-k3-Efq"/>
+                                                <constraint firstItem="16p-cx-Ih0" firstAttribute="leading" secondItem="Ptw-wf-7DY" secondAttribute="leading" constant="4" id="UTG-k3-Efq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -385,14 +385,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7M-zP-TRF" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="35" y="11.5" width="52" height="21"/>
+                                                    <rect key="frame" x="4" y="11.5" width="52" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="M7M-zP-TRF" firstAttribute="leading" secondItem="81l-Bn-qfb" secondAttribute="leading" constant="35" id="4zP-cg-0jg"/>
+                                                <constraint firstItem="M7M-zP-TRF" firstAttribute="leading" secondItem="81l-Bn-qfb" secondAttribute="leading" constant="4" id="4zP-cg-0jg"/>
                                                 <constraint firstItem="M7M-zP-TRF" firstAttribute="centerY" secondItem="81l-Bn-qfb" secondAttribute="centerY" id="pjL-Lb-M3j"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -417,6 +417,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="mxy-b5-O5c" id="V0u-Kd-6YR"/>
+                        <outlet property="tableViewLeadingSpaceConstraint" destination="sgh-gH-NhI" id="ShW-gH-MDM"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="mA5-ZE-JGV" id="eXo-fS-ZCb"/>
                         <segue destination="XK5-pZ-i5L" kind="unwind" identifier="main-menu" unwindAction="unwindToMainMenu:" id="I2d-Jd-G8R"/>
                     </connections>
@@ -868,7 +869,7 @@
                                     <action selector="onSwipeDownTapped:" destination="Bsc-BJ-zGX" eventType="touchUpInside" id="S2m-f8-d6V"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fla-Z8-sHI">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fla-Z8-sHI">
                                 <rect key="frame" x="0.0" y="54" width="1024" height="1312"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -880,14 +881,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eae-li-zsG" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="35" y="0.0" width="56" height="44"/>
+                                                    <rect key="frame" x="4" y="0.0" width="56" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Eae-li-zsG" firstAttribute="leading" secondItem="3pA-EZ-Pgk" secondAttribute="leading" constant="35" id="DnQ-3L-ysS"/>
+                                                <constraint firstItem="Eae-li-zsG" firstAttribute="leading" secondItem="3pA-EZ-Pgk" secondAttribute="leading" constant="4" id="DnQ-3L-ysS"/>
                                                 <constraint firstItem="Eae-li-zsG" firstAttribute="top" secondItem="3pA-EZ-Pgk" secondAttribute="top" id="Qmk-VC-qNU"/>
                                                 <constraint firstAttribute="bottom" secondItem="Eae-li-zsG" secondAttribute="bottom" id="uAM-sV-n24"/>
                                             </constraints>
@@ -904,7 +905,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zes-Gf-0qn" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="35" y="0.0" width="70.5" height="44"/>
+                                                    <rect key="frame" x="4" y="0.0" width="70.5" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -913,7 +914,7 @@
                                             <constraints>
                                                 <constraint firstItem="Zes-Gf-0qn" firstAttribute="top" secondItem="ufR-bE-BWq" secondAttribute="top" id="6dz-KU-EPS"/>
                                                 <constraint firstAttribute="bottom" secondItem="Zes-Gf-0qn" secondAttribute="bottom" id="Pd1-OX-sGr"/>
-                                                <constraint firstItem="Zes-Gf-0qn" firstAttribute="leading" secondItem="ufR-bE-BWq" secondAttribute="leading" constant="35" id="cRL-5B-g2Y"/>
+                                                <constraint firstItem="Zes-Gf-0qn" firstAttribute="leading" secondItem="ufR-bE-BWq" secondAttribute="leading" constant="4" id="cRL-5B-g2Y"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -928,7 +929,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checklist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwN-q6-e8C" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="35" y="0.0" width="71" height="44"/>
+                                                    <rect key="frame" x="4" y="0.0" width="71" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -936,7 +937,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="OwN-q6-e8C" secondAttribute="bottom" id="Sta-Sw-wlA"/>
-                                                <constraint firstItem="OwN-q6-e8C" firstAttribute="leading" secondItem="uX1-2W-ufn" secondAttribute="leading" constant="35" id="XpJ-a9-eGE"/>
+                                                <constraint firstItem="OwN-q6-e8C" firstAttribute="leading" secondItem="uX1-2W-ufn" secondAttribute="leading" constant="4" id="XpJ-a9-eGE"/>
                                                 <constraint firstItem="OwN-q6-e8C" firstAttribute="top" secondItem="uX1-2W-ufn" secondAttribute="top" id="gfQ-l0-igc"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -952,14 +953,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAy-EP-dm2" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="35" y="8" width="52" height="21"/>
+                                                    <rect key="frame" x="4" y="8" width="52" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="xAy-EP-dm2" firstAttribute="leading" secondItem="jRt-kP-iDY" secondAttribute="leading" constant="35" id="3w1-SD-daT"/>
+                                                <constraint firstItem="xAy-EP-dm2" firstAttribute="leading" secondItem="jRt-kP-iDY" secondAttribute="leading" constant="4" id="3w1-SD-daT"/>
                                                 <constraint firstItem="xAy-EP-dm2" firstAttribute="top" secondItem="jRt-kP-iDY" secondAttribute="topMargin" id="feF-am-GTi"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -975,7 +976,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Sf-a3-yqh">
-                                                    <rect key="frame" x="35" y="20.5" width="973" height="46"/>
+                                                    <rect key="frame" x="4" y="20.5" width="1004" height="46"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbM-XM-lcc" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="52" height="21"/>
@@ -984,7 +985,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secondary Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZN-JQ-tUk" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="25" width="973" height="21"/>
+                                                            <rect key="frame" x="0.0" y="25" width="1004" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1004,7 +1005,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="2Sf-a3-yqh" secondAttribute="trailing" constant="16" id="CiW-JP-kOF"/>
                                                 <constraint firstItem="2Sf-a3-yqh" firstAttribute="centerY" secondItem="jXh-xG-hjH" secondAttribute="centerY" id="mM9-Hu-a19"/>
-                                                <constraint firstItem="2Sf-a3-yqh" firstAttribute="leading" secondItem="jXh-xG-hjH" secondAttribute="leading" constant="35" id="rbv-BD-R3l"/>
+                                                <constraint firstItem="2Sf-a3-yqh" firstAttribute="leading" secondItem="jXh-xG-hjH" secondAttribute="leading" constant="4" id="rbv-BD-R3l"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1020,7 +1021,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E6D-7R-0vH">
-                                                    <rect key="frame" x="35" y="20.5" width="973" height="46"/>
+                                                    <rect key="frame" x="4" y="20.5" width="1004" height="46"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2s-RZ-GPa" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="52" height="21"/>
@@ -1029,7 +1030,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secondary Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7n-ua-HCb" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="25" width="973" height="21"/>
+                                                            <rect key="frame" x="0.0" y="25" width="1004" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1047,7 +1048,7 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="E6D-7R-0vH" firstAttribute="leading" secondItem="Bjf-5z-eSb" secondAttribute="leading" constant="35" id="fZk-XR-OTQ"/>
+                                                <constraint firstItem="E6D-7R-0vH" firstAttribute="leading" secondItem="Bjf-5z-eSb" secondAttribute="leading" constant="4" id="fZk-XR-OTQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="E6D-7R-0vH" secondAttribute="trailing" constant="16" id="lOr-sf-fGt"/>
                                                 <constraint firstItem="E6D-7R-0vH" firstAttribute="centerY" secondItem="Bjf-5z-eSb" secondAttribute="centerY" id="nDE-IC-V6C"/>
                                             </constraints>
@@ -1065,14 +1066,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAP-DT-fsv" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="35" y="8" width="52" height="21"/>
+                                                    <rect key="frame" x="4" y="8" width="52" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="wAP-DT-fsv" firstAttribute="leading" secondItem="cD3-s1-j63" secondAttribute="leading" constant="35" id="WXN-Bd-gpx"/>
+                                                <constraint firstItem="wAP-DT-fsv" firstAttribute="leading" secondItem="cD3-s1-j63" secondAttribute="leading" constant="4" id="WXN-Bd-gpx"/>
                                                 <constraint firstItem="wAP-DT-fsv" firstAttribute="top" secondItem="cD3-s1-j63" secondAttribute="topMargin" id="xqW-nU-cr5"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1096,6 +1097,7 @@
                     <connections>
                         <outlet property="swipeDownButton" destination="FjP-pl-Sjb" id="haf-vr-ysz"/>
                         <outlet property="tableView" destination="fla-Z8-sHI" id="kdG-h0-2fX"/>
+                        <outlet property="tableViewLeadingSpaceConstraint" destination="kyE-Ob-Qov" id="gar-TI-Kyx"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="Sxy-LK-2FM" id="cR3-YB-TcZ"/>
                     </connections>
                 </viewController>

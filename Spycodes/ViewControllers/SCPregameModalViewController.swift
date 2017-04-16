@@ -20,7 +20,10 @@ class SCPregameModalViewController: SCModalViewController {
     ]
     fileprivate let customizeLabels = ["Night Mode", "Accessibility"]
 
+    fileprivate var scrolled = false
+
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var swipeDownButton: UIButton!
 
@@ -39,7 +42,8 @@ class SCPregameModalViewController: SCModalViewController {
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableViewTrailingSpaceConstraint.constant = 30
+        self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
+        self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
 
         self.animateSwipeDownButton()
@@ -143,6 +147,13 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
         }
 
         sectionHeader.primaryLabel.text = sections[section]
+
+        if self.tableView.contentOffset.y > 0 {
+            sectionHeader.showBlurBackground()
+        } else {
+            sectionHeader.hideBlurBackground()
+        }
+
         return sectionHeader
     }
 
@@ -257,6 +268,23 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             return UITableViewCell()
         }
     }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.tableView.contentOffset.y > 0 {
+            if self.scrolled {
+                return
+            }
+            self.scrolled = true
+        } else {
+            if !self.scrolled {
+                return
+            }
+
+            self.scrolled = false
+        }
+
+        self.tableView.reloadData()
+    }
 }
 
 // MARK: SCToggleViewCellDelegate
@@ -271,9 +299,7 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
                     GameMode.instance.setMode(mode: .regularGame)
                 }
 
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                self.tableView.reloadData()
 
                 Room.instance.resetPlayers()
                 Statistics.instance.reset()
@@ -296,6 +322,7 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
                 SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
                 super.updateView()
+                self.tableView.reloadData()
                 self.delegate?.onNightModeToggleChanged()
             default:
                 break
