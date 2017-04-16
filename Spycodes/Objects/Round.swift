@@ -134,11 +134,7 @@ class Round: NSObject, NSCoding {
 
         if GameMode.instance.getMode() == .miniGame {
             CardCollection.instance.autoEliminateOpponentTeamCard(.blue)
-            NotificationCenter.default.post(
-                name: Notification.Name(rawValue: SCConstants.notificationKey.autoEliminate.rawValue),
-                object: self,
-                userInfo: nil
-            )
+            SCMultipeerManager.instance.broadcast(CardCollection.instance)
 
             if CardCollection.instance.getCardsRemainingForTeam(.blue) == 0 {
                 DispatchQueue.main.async(execute: {

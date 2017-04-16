@@ -60,7 +60,6 @@ class SCConstants {
     }
 
     enum notificationKey: String {
-        case autoEliminate = "auto-eliminate"
         case minigameGameOver = "minigame-game-over"
     }
 

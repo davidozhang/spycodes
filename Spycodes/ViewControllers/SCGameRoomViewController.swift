@@ -66,12 +66,6 @@ class SCGameRoomViewController: SCViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(SCGameRoomViewController.broadcastEssentialData),
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.autoEliminate.rawValue),
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
             selector: #selector(SCGameRoomViewController.didEndMinigameWithNotification),
             name: NSNotification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),
             object: nil
@@ -158,11 +152,6 @@ class SCGameRoomViewController: SCViewController {
 
         Timer.instance.invalidate()
 
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.autoEliminate.rawValue),
-            object: nil
-        )
         NotificationCenter.default.removeObserver(
             self,
             name: NSNotification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),
@@ -262,7 +251,6 @@ class SCGameRoomViewController: SCViewController {
 
     @objc
     fileprivate func broadcastEssentialData() {
-        SCMultipeerManager.instance.broadcast(CardCollection.instance)
         SCMultipeerManager.instance.broadcast(Round.instance)
     }
 
