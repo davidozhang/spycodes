@@ -27,6 +27,7 @@ class SCPregameModalViewController: SCModalViewController {
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var swipeDownButton: UIButton!
+    @IBOutlet weak var upArrowView: UIImageView!
 
     // MARK: Actions
     @IBAction func onSwipeDownTapped(_ sender: Any) {
@@ -57,6 +58,10 @@ class SCPregameModalViewController: SCModalViewController {
             userInfo: nil,
             repeats: true
         )
+
+        if self.tableView.contentSize.height < self.tableView.bounds.height {
+            self.upArrowView.isHidden = true
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -280,6 +285,12 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.tableView.contentOffset.y <= 0 {
+            self.upArrowView.isHidden = false
+        } else {
+            self.upArrowView.isHidden = true
+        }
+
         if self.tableView.contentOffset.y > 0 {
             if self.scrolled {
                 return
@@ -289,7 +300,6 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             if !self.scrolled {
                 return
             }
-
             self.scrolled = false
         }
 
