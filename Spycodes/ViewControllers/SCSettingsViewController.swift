@@ -18,7 +18,10 @@ class SCSettingsViewController: SCViewController {
         "Icons8"
     ]
 
+    fileprivate var scrolled = false
+
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
 
     // MARK: Actions
@@ -39,7 +42,8 @@ class SCSettingsViewController: SCViewController {
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableViewTrailingSpaceConstraint.constant = 30
+        self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
+        self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
     }
 
@@ -77,6 +81,13 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         sectionHeader.primaryLabel.text = sections[section]
+
+        if self.tableView.contentOffset.y > 0 {
+            sectionHeader.showBlurBackground()
+        } else {
+            sectionHeader.hideBlurBackground()
+        }
+
         return sectionHeader
     }
 
@@ -181,6 +192,23 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             return
         }
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.tableView.contentOffset.y > 0 {
+            if self.scrolled {
+                return
+            }
+            self.scrolled = true
+        } else {
+            if !self.scrolled {
+                return
+            }
+
+            self.scrolled = false
+        }
+
+        self.tableView.reloadData()
     }
 }
 

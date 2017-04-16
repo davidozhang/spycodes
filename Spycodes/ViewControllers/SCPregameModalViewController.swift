@@ -42,8 +42,8 @@ class SCPregameModalViewController: SCModalViewController {
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableViewLeadingSpaceConstraint.constant = 30
-        self.tableViewTrailingSpaceConstraint.constant = 30
+        self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
+        self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
 
         self.animateSwipeDownButton()
