@@ -279,15 +279,17 @@ class SCPregameRoomViewController: SCViewController {
             SCMultipeerManager.instance.startBrowser()
         }
 
+        // TODO: Move this logic to better location
         if Room.instance.canStartGame() {
             // Instantiate next game's card collection and round
             CardCollection.instance = CardCollection()
             Round.instance = Round()
 
+            SCMultipeerManager.instance.broadcast(CardCollection.instance)
+
             Round.instance.setCurrentTeam(CardCollection.instance.getStartingTeam())
             SCMultipeerManager.instance.broadcast(Round.instance)
 
-            SCMultipeerManager.instance.broadcast(CardCollection.instance)
             self.goToGame()
         }
     }
