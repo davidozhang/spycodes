@@ -81,6 +81,8 @@ class Timer: NSObject, NSCoding {
             userInfo: nil,
             repeats: true
         )
+
+        Foundation.RunLoop.main.add(self.timer!, forMode: .commonModes)
     }
 
     func invalidate() {
