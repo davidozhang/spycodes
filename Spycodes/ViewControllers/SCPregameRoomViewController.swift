@@ -157,10 +157,13 @@ class SCPregameRoomViewController: SCViewController {
     @objc
     fileprivate func refreshView() {
         DispatchQueue.main.async(execute: {
+            Room.instance.refresh()
             self.tableView.reloadData()
             self.checkRoom()
 
-            Room.instance.refresh()
+            if Player.instance.isHost() && Room.instance.canStartGame() {
+                self.startGame()
+            }
         })
     }
 
@@ -263,6 +266,10 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     fileprivate func checkRoom() {
+        if !Room.instance.hasHost() {
+            self.returnToMainMenu(reason: SCStrings.hostDisconnected)
+        }
+
         if !Player.instance.isHost() {
             return
         }
@@ -278,20 +285,19 @@ class SCPregameRoomViewController: SCViewController {
             SCMultipeerManager.instance.startAdvertiser(discoveryInfo: nil)
             SCMultipeerManager.instance.startBrowser()
         }
+    }
 
-        // TODO: Move this logic to better location
-        if Room.instance.canStartGame() {
-            // Instantiate next game's card collection and round
-            CardCollection.instance = CardCollection()
-            Round.instance = Round()
+    fileprivate func startGame() {
+        // Instantiate next game's card collection and round
+        CardCollection.instance = CardCollection()
+        Round.instance = Round()
 
-            SCMultipeerManager.instance.broadcast(CardCollection.instance)
+        SCMultipeerManager.instance.broadcast(CardCollection.instance)
 
-            Round.instance.setCurrentTeam(CardCollection.instance.getStartingTeam())
-            SCMultipeerManager.instance.broadcast(Round.instance)
+        Round.instance.setCurrentTeam(CardCollection.instance.getStartingTeam())
+        SCMultipeerManager.instance.broadcast(Round.instance)
 
-            self.goToGame()
-        }
+        self.goToGame()
     }
 }
 
@@ -360,15 +366,6 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
 
     func peerDisconnectedFromSession(_ peerID: MCPeerID) {
         if let playerUUID = Room.instance.getUUIDWithPeerID(peerID: peerID) {
-            if let player = Room.instance.getPlayerWithUUID(playerUUID) {
-                // Room has been terminated if host player is disconnected
-                if player.isHost() {
-                    Room.instance.removeAllPlayers()
-                    self.returnToMainMenu(reason: SCStrings.hostDisconnected)
-                    return
-                }
-            }
-
             Room.instance.removePlayerWithUUID(playerUUID)
             Room.instance.removeConnectedPeer(peerID: peerID)
         }
