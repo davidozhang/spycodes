@@ -161,16 +161,10 @@ class Room: NSObject, NSCoding {
         }
     }
 
-    func setNameOfPlayerAtIndex(_ index: Int, name: String) {
-        if index < self.players.count {
-            self.players[index].setName(name: name)
-        }
-    }
-
-    func removePlayerAtIndex(_ index: Int) {
-        if index < self.players.count {
-            self.players.remove(at: index)
-        }
+    func hasHost() -> Bool {
+        return self.players.filter({
+            ($0 as Player).isHost()
+        }).count == 1
     }
 
     func removePlayerWithUUID(_ uuid: String) {
