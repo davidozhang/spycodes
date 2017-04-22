@@ -1,21 +1,42 @@
 import UIKit
 
 class SCSettingsViewController: SCViewController {
-    fileprivate let sections = [
-        "Customize",
-        "About",
-        "More"
+    enum Section: Int {
+        case customize = 0
+        case about = 1
+        case more = 2
+    }
+
+    enum CustomSetting: Int {
+        case nightMode = 0
+        case accessibility = 1
+    }
+
+    enum Link: Int {
+        case support = 0
+        case reviewApp = 1
+        case website = 2
+        case github = 3
+        case icons8 = 4
+    }
+
+    fileprivate let sectionLabels: [Section: String] = [
+        .customize: SCStrings.customize,
+        .about: SCStrings.about,
+        .more: SCStrings.more,
     ]
-    fileprivate let customizeLabels = [
-        "Night Mode",
-        "Accessibility"
+
+    fileprivate let customizeLabels: [CustomSetting: String] = [
+        .nightMode: SCStrings.nightMode,
+        .accessibility: SCStrings.accessibility,
     ]
-    fileprivate let disclosureLabels = [
-        "Support",
-        "Review App",
-        "Website",
-        "Github",
-        "Icons8"
+
+    fileprivate let disclosureLabels: [Link: String] = [
+        .support: SCStrings.support,
+        .reviewApp: SCStrings.reviewApp,
+        .website: SCStrings.website,
+        .github: SCStrings.github,
+        .icons8: SCStrings.icons8,
     ]
 
     fileprivate var scrolled = false
@@ -71,7 +92,7 @@ class SCSettingsViewController: SCViewController {
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return sectionLabels.count
     }
 
     func tableView(_ tableView: UITableView,
@@ -87,7 +108,9 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return nil
         }
 
-        sectionHeader.primaryLabel.text = sections[section]
+        if let section = Section(rawValue: section) {
+            sectionHeader.primaryLabel.text = sectionLabels[section]
+        }
 
         if self.tableView.contentOffset.y > 0 {
             sectionHeader.showSolidBackground()
@@ -101,11 +124,11 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: // Customize
+        case Section.customize.rawValue:
             return customizeLabels.count
-        case 1: // About
+        case Section.about.rawValue:
             return 1
-        case 2: // More
+        case Section.more.rawValue:
             return disclosureLabels.count
         default:
             return 0
@@ -115,27 +138,27 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0: // Customize
+        case Section.customize.rawValue:
             switch indexPath.row {
-            case 0:     // Minigame
+            case CustomSetting.nightMode.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
                         return UITableViewCell()
                 }
 
-                cell.primaryLabel.text = self.customizeLabels[indexPath.row]
+                cell.primaryLabel.text = self.customizeLabels[.nightMode]
                 cell.delegate = self
                 
                 return cell
-            case 1:     // Accessibility
+            case CustomSetting.accessibility.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
                         return UITableViewCell()
                 }
 
-                cell.primaryLabel.text = self.customizeLabels[indexPath.row]
+                cell.primaryLabel.text = self.customizeLabels[.accessibility]
                 cell.delegate = self
 
                 return cell
@@ -143,7 +166,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
 
-        case 1: // About
+        case Section.about.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.versionViewCell.rawValue
             ) as? SCTableViewCell else {
@@ -151,14 +174,16 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
 
             return cell
-        case 2: // More
+        case Section.more.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.disclosureViewCell.rawValue
             ) as? SCDisclosureViewCell else {
                 return UITableViewCell()
             }
 
-            cell.primaryLabel.text = self.disclosureLabels[indexPath.row]
+            if let link = Link(rawValue: indexPath.row) {
+                cell.primaryLabel.text = self.disclosureLabels[link]
+            }
 
             return cell
         default:
@@ -171,25 +196,25 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         self.tableView.deselectRow(at: indexPath, animated: false)
 
         switch indexPath.section {
-        case 2:
+        case Section.more.rawValue:
             switch indexPath.row {
-            case 0:     // Support
+            case Link.support.rawValue:
                 if let supportURL = URL(string: SCConstants.url.support.rawValue) {
                     UIApplication.shared.openURL(supportURL)
                 }
-            case 1:     // Review App
+            case Link.reviewApp.rawValue:
                 if let appStoreURL = URL(string: SCConstants.url.appStore.rawValue) {
                     UIApplication.shared.openURL(appStoreURL)
                 }
-            case 2:     // Website
+            case Link.website.rawValue:
                 if let websiteURL = URL(string: SCConstants.url.website.rawValue) {
                     UIApplication.shared.openURL(websiteURL)
                 }
-            case 3:     // Github
+            case Link.github.rawValue:
                 if let githubURL = URL(string: SCConstants.url.github.rawValue) {
                     UIApplication.shared.openURL(githubURL)
                 }
-            case 4: // Icons8
+            case Link.icons8.rawValue:
                 if let icons8URL = URL(string: SCConstants.url.icons8.rawValue) {
                     UIApplication.shared.openURL(icons8URL)
                 }

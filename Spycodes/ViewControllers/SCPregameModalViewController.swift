@@ -8,17 +8,39 @@ class SCPregameModalViewController: SCModalViewController {
     weak var delegate: SCPregameModalViewControllerDelegate?
     fileprivate var refreshTimer: Foundation.Timer?
 
-    fileprivate let sections = [
-        "Checklist",
-        "Statistics",
-        "Game Settings",
-        "Customize"
+    enum Section: Int {
+        case checklist = 0
+        case statistics = 1
+        case gameSettings = 2
+        case customize = 3
+    }
+
+    enum GameSetting: Int {
+        case minigame = 0
+        case timer = 1
+    }
+
+    enum CustomSetting: Int {
+        case nightMode = 0
+        case accessibility = 1
+    }
+
+    fileprivate let sectionLabels: [Section: String] = [
+        .checklist: SCStrings.checklist,
+        .statistics: SCStrings.statistics,
+        .gameSettings: SCStrings.gameSettings,
+        .customize: SCStrings.customize,
     ]
-    fileprivate let settingsLabels = [
-        "Minigame",
-        "Timer"
+
+    fileprivate let settingsLabels: [GameSetting: String] = [
+        .minigame: SCStrings.minigame,
+        .timer: SCStrings.timer,
     ]
-    fileprivate let customizeLabels = ["Night Mode", "Accessibility"]
+
+    fileprivate let customizeLabels: [CustomSetting: String] = [
+        .nightMode: SCStrings.nightMode,
+        .accessibility: SCStrings.accessibility,
+    ]
 
     fileprivate var scrolled = false
 
@@ -135,7 +157,7 @@ class SCPregameModalViewController: SCModalViewController {
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return sectionLabels.count
     }
 
     func tableView(_ tableView: UITableView,
@@ -146,7 +168,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-        case 2:     // Game Settings
+        case Section.gameSettings.rawValue:
             return 88.0
         default:
             return 44.0
@@ -161,7 +183,9 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 return nil
         }
 
-        sectionHeader.primaryLabel.text = sections[section]
+        if let section = Section(rawValue: section) {
+            sectionHeader.primaryLabel.text = self.sectionLabels[section]
+        }
 
         if self.tableView.contentOffset.y > 0 {
             sectionHeader.showBlurBackground()
@@ -175,13 +199,13 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: // Pregame Checklist
+        case Section.checklist.rawValue:
             return 1
-        case 1: // Statistics
+        case Section.statistics.rawValue:
             return 1
-        case 2: // Game Settings
+        case Section.gameSettings.rawValue:
             return settingsLabels.count
-        case 3: // Customize
+        case Section.customize.rawValue:
             return customizeLabels.count
         default:
             return 0
@@ -191,7 +215,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0: // Pregame Checklist
+        case Section.checklist.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.checklistViewCell.rawValue
                 ) as? SCTableViewCell else {
@@ -202,7 +226,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             cell.primaryLabel.text = self.getChecklistMessage()
 
             return cell
-        case 1: // Statistics
+        case Section.statistics.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.statisticsViewCell.rawValue
                 ) as? SCTableViewCell else {
@@ -221,9 +245,9 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             }
 
             return cell
-        case 2: // Game Settings
+        case Section.gameSettings.rawValue:
             switch indexPath.row {
-            case 0:     // Minigame
+            case GameSetting.minigame.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.minigameToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
@@ -231,12 +255,12 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 }
 
                 cell.synchronizeToggle()
-                cell.primaryLabel.text = self.settingsLabels[indexPath.row]
+                cell.primaryLabel.text = self.settingsLabels[.minigame]
                 cell.secondaryLabel.text = SCStrings.minigameSecondaryText
                 cell.delegate = self
                 
                 return cell
-            case 1:     // Timer
+            case GameSetting.timer.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.timerToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
@@ -244,7 +268,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 }
 
                 cell.synchronizeToggle()
-                cell.primaryLabel.text = self.settingsLabels[indexPath.row]
+                cell.primaryLabel.text = self.settingsLabels[.timer]
                 cell.secondaryLabel.text = SCStrings.timerSecondaryText
                 cell.delegate = self
 
@@ -254,25 +278,25 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             }
         case 3: // Customize
             switch indexPath.row {
-            case 0:     // Night Mode
+            case CustomSetting.nightMode.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
                         return UITableViewCell()
                 }
 
-                cell.primaryLabel.text = self.customizeLabels[indexPath.row]
+                cell.primaryLabel.text = self.customizeLabels[.nightMode]
                 cell.delegate = self
 
                 return cell
-            case 1:     // Accessibility
+            case CustomSetting.accessibility.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
                         return UITableViewCell()
                 }
 
-                cell.primaryLabel.text = self.customizeLabels[indexPath.row]
+                cell.primaryLabel.text = self.customizeLabels[.accessibility]
                 cell.delegate = self
 
                 return cell
