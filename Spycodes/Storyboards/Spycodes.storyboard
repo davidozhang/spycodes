@@ -1127,6 +1127,49 @@
             </objects>
             <point key="canvasLocation" x="1825.7812499999998" y="1155.6368960468521"/>
         </scene>
+        <!--Timeline Modal View Controller-->
+        <scene sceneID="QbP-47-cxE">
+            <objects>
+                <viewController id="HuE-xd-fYV" customClass="SCTimelineModalViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Zcm-Dl-ICE"/>
+                        <viewControllerLayoutGuide type="bottom" id="htW-uQ-Xx7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Yv-eL-zb3">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jpi-zT-CKN" userLabel="Swipe Down Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="497" y="24" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="UfE-MD-k1x"/>
+                                    <constraint firstAttribute="width" constant="30" id="cE3-RK-Kwl"/>
+                                </constraints>
+                                <state key="normal" image="Chevron-Down"/>
+                                <connections>
+                                    <action selector="onSwipeDownTapped:" destination="Bsc-BJ-zGX" eventType="touchUpInside" id="mc9-rt-tbG"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dQz-dg-RRO">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="1312"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dQz-dg-RRO" firstAttribute="leading" secondItem="2Yv-eL-zb3" secondAttribute="leading" id="8FP-PB-AGq"/>
+                            <constraint firstItem="dQz-dg-RRO" firstAttribute="top" secondItem="Jpi-zT-CKN" secondAttribute="bottom" id="HGJ-pw-COM"/>
+                            <constraint firstItem="htW-uQ-Xx7" firstAttribute="top" secondItem="dQz-dg-RRO" secondAttribute="bottom" id="Y3v-81-Q3i"/>
+                            <constraint firstItem="Jpi-zT-CKN" firstAttribute="centerX" secondItem="2Yv-eL-zb3" secondAttribute="centerX" id="fje-Zx-iSi"/>
+                            <constraint firstAttribute="trailing" secondItem="dQz-dg-RRO" secondAttribute="trailing" id="qSc-el-1HD"/>
+                            <constraint firstItem="Jpi-zT-CKN" firstAttribute="top" secondItem="2Yv-eL-zb3" secondAttribute="top" constant="24" id="tqf-Ui-POY"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bjs-0r-qNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2642" y="1156"/>
+        </scene>
         <!--Game Room View Controller-->
         <scene sceneID="9GO-gD-g4A">
             <objects>
@@ -1215,30 +1258,30 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scv-CB-Z0e" userLabel="Dashboard View">
-                                        <rect key="frame" x="476" y="63" width="72" height="30"/>
+                                        <rect key="frame" x="472.5" y="63" width="79" height="30"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Team" translatesAutoresizingMaskIntoConstraints="NO" id="vkP-5T-eUP">
-                                                <rect key="frame" x="0.0" y="5" width="20" height="20"/>
+                                                <rect key="frame" x="0.0" y="4" width="22" height="22"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="20" id="HAt-Yx-OO8"/>
-                                                    <constraint firstAttribute="height" constant="20" id="zSK-8E-DA0"/>
+                                                    <constraint firstAttribute="width" constant="22" id="HAt-Yx-OO8"/>
+                                                    <constraint firstAttribute="height" constant="22" id="zSK-8E-DA0"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p06-Ae-1HJ" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                <rect key="frame" x="28" y="15" width="0.0" height="0.0"/>
+                                                <rect key="frame" x="30" y="15" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Stack" translatesAutoresizingMaskIntoConstraints="NO" id="KX5-WN-Z6i">
-                                                <rect key="frame" x="44" y="5" width="20" height="20"/>
+                                                <rect key="frame" x="46" y="2.5" width="25" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="20" id="d9G-lA-LUm"/>
-                                                    <constraint firstAttribute="height" constant="20" id="wzB-kL-7TQ"/>
+                                                    <constraint firstAttribute="width" constant="25" id="d9G-lA-LUm"/>
+                                                    <constraint firstAttribute="height" constant="25" id="wzB-kL-7TQ"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="647-e2-brJ" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                <rect key="frame" x="72" y="15" width="0.0" height="0.0"/>
+                                                <rect key="frame" x="79" y="15" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1287,6 +1330,17 @@
                                             <action selector="onHelpButtonTapped:" destination="yX4-d1-WHr" eventType="touchUpInside" id="eWY-A2-2E1"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxl-gd-SeO">
+                                        <rect key="frame" x="949" y="28" width="27" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="27" id="Bxb-Z0-LKP"/>
+                                            <constraint firstAttribute="width" constant="27" id="Yez-tm-hum"/>
+                                        </constraints>
+                                        <state key="normal" image="History"/>
+                                        <connections>
+                                            <action selector="onTimelineButtonTapped:" destination="yX4-d1-WHr" eventType="touchUpInside" id="6w4-TD-qKL"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1298,7 +1352,9 @@
                                     <constraint firstAttribute="height" constant="97" id="cP6-J4-cEl"/>
                                     <constraint firstItem="dUf-TJ-d5l" firstAttribute="top" secondItem="Vhy-Dr-vSM" secondAttribute="top" constant="24" id="ctG-Le-6na"/>
                                     <constraint firstItem="dUf-TJ-d5l" firstAttribute="leading" secondItem="Vhy-Dr-vSM" secondAttribute="leading" constant="15" id="g9s-yP-02L"/>
+                                    <constraint firstItem="8FH-JK-Uar" firstAttribute="centerY" secondItem="lxl-gd-SeO" secondAttribute="centerY" id="qgq-Re-OrZ"/>
                                     <constraint firstItem="XFn-Ic-8z8" firstAttribute="centerX" secondItem="Vhy-Dr-vSM" secondAttribute="centerX" id="r7u-l3-uVe"/>
+                                    <constraint firstItem="8FH-JK-Uar" firstAttribute="leading" secondItem="lxl-gd-SeO" secondAttribute="trailing" constant="8" id="ucp-vU-Qr1"/>
                                     <constraint firstItem="XFn-Ic-8z8" firstAttribute="centerY" secondItem="dUf-TJ-d5l" secondAttribute="centerY" id="wIq-Xa-AdX"/>
                                 </constraints>
                             </view>
@@ -1386,6 +1442,7 @@
                         <segue destination="e9C-iv-SDh" kind="popoverPresentation" identifier="help-view" popoverAnchorView="udo-t2-F4l" id="eZC-mV-Lzl">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
+                        <segue destination="HuE-xd-fYV" kind="presentation" identifier="timeline-modal" modalPresentationStyle="overCurrentContext" id="1wN-tv-5na"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfM-Nb-l9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1498,6 +1555,7 @@
         <image name="Chevron-Up" width="50" height="50"/>
         <image name="Crown-Filled" width="100" height="100"/>
         <image name="Exit" width="42" height="42"/>
+        <image name="History" width="50" height="50"/>
         <image name="Moon" width="50" height="50"/>
         <image name="Next" width="100" height="100"/>
         <image name="Question" width="100" height="100"/>

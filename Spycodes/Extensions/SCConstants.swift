@@ -54,6 +54,7 @@ class SCConstants {
         case statisticsViewCell = "statistics-view-cell"
         case sectionHeaderCell = "section-header-view-cell"
         case settings = "settings"
+        case timelineModal = "timeline-modal"
         case timerToggleViewCell = "timer-toggle-view-cell"
         case updateApp = "update-app"
         case versionViewCell = "version-view-cell"

@@ -52,6 +52,10 @@ class SCGameRoomViewController: SCViewController {
         }
     }
 
+    @IBAction func onTimelineButtonTapped(_ sender: Any) {
+        self.performSegue(withIdentifier: SCConstants.identifier.timelineModal.rawValue, sender: self)
+    }
+
     @IBAction func onHelpButtonTapped(_ sender: AnyObject) {
         self.performSegue(withIdentifier: SCConstants.identifier.helpView.rawValue, sender: self)
     }
