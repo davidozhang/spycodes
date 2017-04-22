@@ -1,6 +1,8 @@
 import UIKit
 
 class SCTimelineModalViewController: SCModalViewController {
+    fileprivate var refreshTimer: Foundation.Timer?
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
@@ -20,6 +22,23 @@ class SCTimelineModalViewController: SCModalViewController {
         self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
+
+        self.refreshTimer = Foundation.Timer.scheduledTimer(
+            timeInterval: 2.0,
+            target: self,
+            selector: #selector(SCTimelineModalViewController.refreshView),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.tableView.dataSource = nil
+        self.tableView.delegate = nil
+
+        self.refreshTimer?.invalidate()
     }
 
     override func onDismissal() {
@@ -28,6 +47,13 @@ class SCTimelineModalViewController: SCModalViewController {
         }
 
         super.onDismissal()
+    }
+
+    @objc
+    fileprivate func refreshView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -48,12 +74,48 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.timelineViewCell.rawValue
-        ) as? SCTimelineViewCell else {
-            return UITableViewCell()
-        }
+        let event = Timeline.instance.getEvents()[indexPath.row]
 
-        return cell
+        if event.getType() == .endRound {
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            ) as? SCSectionHeaderViewCell else {
+                return UITableViewCell()
+            }
+
+            if let parameters = event.getParameters(),
+               let teamAsInt = parameters[SCConstants.coding.team.rawValue] as? Int {
+                let team = Team(rawValue: teamAsInt)
+                if team == .red {
+                    cell.primaryLabel.text = "Team Red"
+                } else {
+                    cell.primaryLabel.text = "Team Blue"
+                }
+            }
+
+            return cell
+        } else {
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCConstants.identifier.timelineViewCell.rawValue
+                ) as? SCTimelineViewCell else {
+                    return UITableViewCell()
+            }
+
+            if let parameters = event.getParameters() {
+                if event.getType() == .confirm {
+                    if let clue = parameters[SCConstants.coding.clue.rawValue] as? String,
+                       let numberOfWords = parameters[SCConstants.coding.numberOfWords.rawValue] as? String {
+                        cell.primaryLabel.text = clue + " " + numberOfWords
+                    }
+                } else if event.getType() == .selectCard {
+                    if let name = parameters[SCConstants.coding.name.rawValue] as? String,
+                       let word = parameters[SCConstants.coding.word.rawValue] as? String {
+                        cell.primaryLabel.text = name + " selected " + word
+                    }
+                }
+            }
+
+            return cell
+        }
     }
 }

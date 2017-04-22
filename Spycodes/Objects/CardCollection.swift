@@ -78,6 +78,13 @@ class CardCollection: NSObject, NSCoding {
             for i in 0..<SCConstants.constant.cardCount.rawValue {
                 if self.cards[i].getWord() == eliminatedCard.getWord() {
                     self.cards[i].setSelected()
+                    SCViewController.broadcastEvent(
+                        .selectCard,
+                        optional: [
+                            SCConstants.coding.name.rawValue: "CPU",
+                            SCConstants.coding.word.rawValue: self.cards[i].getWord()
+                        ]
+                    )
                     return
                 }
             }

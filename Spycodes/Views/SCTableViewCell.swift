@@ -2,7 +2,7 @@ import UIKit
 
 class SCTableViewCell: UITableViewCell {
     @IBOutlet weak var primaryLabel: SCLabel!
-    @IBOutlet weak var secondaryLabel: UILabel!
+    @IBOutlet weak var secondaryLabel: SCLabel!
     @IBOutlet weak var rightLabel: SCLabel!
 
     override func awakeFromNib() {

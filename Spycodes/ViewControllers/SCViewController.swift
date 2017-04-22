@@ -83,6 +83,28 @@ class SCViewController: UIViewController {
     }
 
     // MARK: SCViewController-Only Functions
+    static func broadcastEvent(_ eventType: Event.EventType, optional: [String: Any]?) {
+        var parameters: [String: Any] = [
+            SCConstants.coding.uuid.rawValue: Player.instance.getUUID(),
+        ]
+
+        if let optional = optional {
+            for key in optional.keys {
+                parameters[key] = optional[key]
+            }
+        }
+
+        let event = Event(
+            type: eventType,
+            parameters: parameters
+        )
+        SCMultipeerManager.instance.broadcast(event)
+
+        if Timeline.observedEvents.contains(event.getType()!) {
+            Timeline.instance.addEventIfNeeded(event: event)
+        }
+    }
+
     func _prepareForSegue(_ segue: UIStoryboardSegue, sender: Any?) {
         if unwindingSegue {
             return

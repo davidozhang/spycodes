@@ -36,6 +36,7 @@ class SCGameRoomViewController: SCViewController {
     @IBOutlet weak var teamLabel: SCLabel!
     @IBOutlet weak var actionButton: SCRoundedButton!
     @IBOutlet weak var timerLabel: SCLabel!
+    @IBOutlet weak var notificationDot: UIImageView!
 
     // MARK: Actions
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
@@ -343,6 +344,9 @@ class SCGameRoomViewController: SCViewController {
             self.clueTextField.text = SCStrings.defaultNonTurnClue
             self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
         }
+
+        // Timeline notification logic
+        self.notificationDot.isHidden = true
     }
 
     fileprivate func updateTimer() {
@@ -447,7 +451,14 @@ class SCGameRoomViewController: SCViewController {
         Round.instance.setClue(self.clueTextField.text)
         Round.instance.setNumberOfWords(self.numberOfWordsTextField.text)
 
-        self.broadcastActionEvent(.confirm)
+        SCViewController.broadcastEvent(
+            .confirm,
+            optional: [
+                SCConstants.coding.name.rawValue: Player.instance.getName() ?? "",
+                SCConstants.coding.clue.rawValue: Round.instance.getClue() ?? "",
+                SCConstants.coding.numberOfWords.rawValue: Round.instance.getNumberOfWords() ?? "",
+            ]
+        )
     }
 
     fileprivate func didEndRound(fromTimerExpiry: Bool) {
@@ -466,7 +477,7 @@ class SCGameRoomViewController: SCViewController {
                     SCMultipeerManager.instance.broadcast(Round.instance)
 
                     // Send 1 action event on timer expiry to avoid duplicate vibrations
-                    self.broadcastActionEvent(.endRound)
+                    self.broadcastEvent(.endRound)
                 }
 
                 return
@@ -476,15 +487,18 @@ class SCGameRoomViewController: SCViewController {
         Round.instance.endRound(Player.instance.getTeam())
         SCMultipeerManager.instance.broadcast(Round.instance)
 
-        self.broadcastActionEvent(.endRound)
+        SCViewController.broadcastEvent(
+            .endRound,
+            optional: [
+                SCConstants.coding.team.rawValue: Team.red.rawValue,
+            ]
+        )
+
+        self.broadcastEvent(.endRound)
     }
 
-    fileprivate func broadcastActionEvent(_ eventType: ActionEvent.EventType) {
-        let actionEvent = ActionEvent(
-            type: eventType,
-            parameters: [SCConstants.coding.uuid.rawValue: Player.instance.getUUID()]
-        )
-        SCMultipeerManager.instance.broadcast(actionEvent)
+    fileprivate func broadcastEvent(_ eventType: Event.EventType) {
+        SCViewController.broadcastEvent(eventType, optional: nil)
     }
 
     @objc
@@ -600,8 +614,8 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             Room.instance = synchronizedObject
         case let synchronizedObject as Statistics:
             Statistics.instance = synchronizedObject
-        case let synchronizedObject as ActionEvent:
-            if synchronizedObject.getType() == ActionEvent.EventType.endRound {
+        case let synchronizedObject as Event:
+            if synchronizedObject.getType() == Event.EventType.endRound {
                 if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
                     SCAudioManager.vibrate()
                 }
@@ -611,20 +625,26 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                         Timer.instance.state = .stopped
                     }
                 }
-            } else if synchronizedObject.getType() == ActionEvent.EventType.confirm {
+
+                Timeline.instance.addEventIfNeeded(event: synchronizedObject)
+            } else if synchronizedObject.getType() == Event.EventType.confirm {
                 if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
                     SCAudioManager.vibrate()
                 }
-            } else if synchronizedObject.getType() == ActionEvent.EventType.ready {
+
+                Timeline.instance.addEventIfNeeded(event: synchronizedObject)
+            } else if synchronizedObject.getType() == Event.EventType.ready {
                 if let parameters = synchronizedObject.getParameters(),
-                   let uuid = parameters[SCConstants.coding.uuid.rawValue] {
+                   let uuid = parameters[SCConstants.coding.uuid.rawValue] as? String {
                     Room.instance.getPlayerWithUUID(uuid)?.setIsReady(true)
                 }
-            } else if synchronizedObject.getType() == ActionEvent.EventType.cancel {
+            } else if synchronizedObject.getType() == Event.EventType.cancel {
                 if let parameters = synchronizedObject.getParameters(),
-                   let uuid = parameters[SCConstants.coding.uuid.rawValue] {
+                   let uuid = parameters[SCConstants.coding.uuid.rawValue] as? String {
                     Room.instance.getPlayerWithUUID(uuid)?.setIsReady(false)
                 }
+            } else if synchronizedObject.getType() == Event.EventType.selectCard {
+                Timeline.instance.addEventIfNeeded(event: synchronizedObject)
             }
 
             if Player.instance.isHost() {
@@ -777,6 +797,13 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
         CardCollection.instance.getCards()[indexPath.row].setSelected()
         SCMultipeerManager.instance.broadcast(CardCollection.instance)
+        SCViewController.broadcastEvent(
+            .selectCard,
+            optional: [
+                SCConstants.coding.name.rawValue: Player.instance.getName() ?? "",
+                SCConstants.coding.word.rawValue: cardAtIndex.getWord()
+            ]
+        )
 
         if cardAtIndexTeam == .neutral || cardAtIndexTeam == opponentTeam {
             self.didEndRound(fromTimerExpiry: false)
