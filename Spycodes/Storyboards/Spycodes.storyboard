@@ -130,7 +130,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXB-hy-qQU" userLabel="Swipe Up Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="497" y="1312" width="30" height="30"/>
+                                <rect key="frame" x="497" y="1320" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Mpy-1W-9V9"/>
                                     <constraint firstAttribute="width" constant="30" id="vOp-g9-XZt"/>
@@ -148,7 +148,7 @@
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="F5G-fC-j66"/>
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GIg-cQ-q81"/>
                             <constraint firstItem="B8H-tV-b9A" firstAttribute="leading" secondItem="eVQ-XY-iCb" secondAttribute="trailing" constant="16" id="HcC-HB-xv6"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XXB-hy-qQU" secondAttribute="bottom" constant="24" id="JVe-aa-A9K"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XXB-hy-qQU" secondAttribute="bottom" constant="16" id="JVe-aa-A9K"/>
                             <constraint firstItem="P7k-je-1Mo" firstAttribute="top" secondItem="eVQ-XY-iCb" secondAttribute="bottom" constant="8" id="JXk-nz-51t"/>
                             <constraint firstAttribute="trailing" secondItem="9Jm-jD-vJs" secondAttribute="trailing" constant="25" id="OKL-UC-Cyv"/>
                             <constraint firstItem="9Jm-jD-vJs" firstAttribute="centerY" secondItem="B8H-tV-b9A" secondAttribute="centerY" id="Tnr-xQ-paH"/>
@@ -217,7 +217,7 @@
                                 </constraints>
                                 <state key="normal" image="Chevron-Down"/>
                                 <connections>
-                                    <action selector="onSwipeDownTapped:" destination="yZh-az-pDi" eventType="touchUpInside" id="ggS-G8-v5T"/>
+                                    <action selector="onSwipeDownTapped:" destination="yZh-az-pDi" eventType="touchUpInside" id="cvQ-yZ-fcy"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -232,7 +232,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="swipeDownButton" destination="DqK-2q-KUK" id="H8f-GX-RdO"/>
+                        <outlet property="swipeDownButton" destination="DqK-2q-KUK" id="zXY-OY-6Lf"/>
                         <outlet property="updatePromptLabel" destination="Zya-ud-6SF" id="vlD-c6-BH4"/>
                     </connections>
                 </viewController>
@@ -877,7 +877,7 @@
                                 </constraints>
                                 <state key="normal" image="Chevron-Down"/>
                                 <connections>
-                                    <action selector="onSwipeDownTapped:" destination="Bsc-BJ-zGX" eventType="touchUpInside" id="S2m-f8-d6V"/>
+                                    <action selector="onSwipeDownTapped:" destination="Bsc-BJ-zGX" eventType="touchUpInside" id="RzF-W5-SJv"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fla-Z8-sHI">
@@ -1115,7 +1115,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="swipeDownButton" destination="FjP-pl-Sjb" id="haf-vr-ysz"/>
+                        <outlet property="swipeDownButton" destination="FjP-pl-Sjb" id="KdE-8H-2wa"/>
                         <outlet property="tableView" destination="fla-Z8-sHI" id="kdG-h0-2fX"/>
                         <outlet property="tableViewBottomSpaceConstraint" destination="SWn-Tk-HpF" id="N9n-E6-vel"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="kyE-Ob-Qov" id="gar-TI-Kyx"/>
@@ -1147,7 +1147,7 @@
                                 </constraints>
                                 <state key="normal" image="Chevron-Down"/>
                                 <connections>
-                                    <action selector="onSwipeDownTapped:" destination="Bsc-BJ-zGX" eventType="touchUpInside" id="mc9-rt-tbG"/>
+                                    <action selector="onSwipeDownTapped:" destination="HuE-xd-fYV" eventType="touchUpInside" id="0m8-s2-L2q"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dQz-dg-RRO">
@@ -1165,10 +1165,13 @@
                             <constraint firstItem="Jpi-zT-CKN" firstAttribute="top" secondItem="2Yv-eL-zb3" secondAttribute="top" constant="24" id="tqf-Ui-POY"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="swipeDownButton" destination="Jpi-zT-CKN" id="2fQ-tO-JAV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bjs-0r-qNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2642" y="1156"/>
+            <point key="canvasLocation" x="2641.9921875" y="1155.6368960468521"/>
         </scene>
         <!--Game Room View Controller-->
         <scene sceneID="9GO-gD-g4A">
