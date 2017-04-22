@@ -345,8 +345,7 @@ class SCGameRoomViewController: SCViewController {
             self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
         }
 
-        // Timeline notification logic
-        self.notificationDot.isHidden = true
+        // TODO: Timeline notification dot logic
     }
 
     fileprivate func updateTimer() {
@@ -486,13 +485,6 @@ class SCGameRoomViewController: SCViewController {
 
         Round.instance.endRound(Player.instance.getTeam())
         SCMultipeerManager.instance.broadcast(Round.instance)
-
-        SCViewController.broadcastEvent(
-            .endRound,
-            optional: [
-                SCConstants.coding.team.rawValue: Team.red.rawValue,
-            ]
-        )
 
         self.broadcastEvent(.endRound)
     }

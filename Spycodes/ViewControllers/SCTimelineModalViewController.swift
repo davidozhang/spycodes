@@ -24,7 +24,7 @@ class SCTimelineModalViewController: SCModalViewController {
         self.tableView.layoutIfNeeded()
 
         self.refreshTimer = Foundation.Timer.scheduledTimer(
-            timeInterval: 2.0,
+            timeInterval: 1.0,
             target: self,
             selector: #selector(SCTimelineModalViewController.refreshView),
             userInfo: nil,
@@ -103,14 +103,37 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
 
             if let parameters = event.getParameters() {
                 if event.getType() == .confirm {
-                    if let clue = parameters[SCConstants.coding.clue.rawValue] as? String,
+                    if let name = parameters[SCConstants.coding.name.rawValue] as? String,
+                       let clue = parameters[SCConstants.coding.clue.rawValue] as? String,
                        let numberOfWords = parameters[SCConstants.coding.numberOfWords.rawValue] as? String {
-                        cell.primaryLabel.text = clue + " " + numberOfWords
+                        let attributedString = NSMutableAttributedString(
+                            string: name + " set clue '" + clue + " " + numberOfWords + "'"
+                        )
+                        attributedString.addAttribute(
+                            NSFontAttributeName,
+                            value: SCFonts.intermediateSizeFont(.bold) ?? 0,
+                            range: NSMakeRange(
+                                0,
+                                name.characters.count
+                            )
+                        )
+                        cell.primaryLabel.attributedText = attributedString
                     }
                 } else if event.getType() == .selectCard {
                     if let name = parameters[SCConstants.coding.name.rawValue] as? String,
                        let word = parameters[SCConstants.coding.word.rawValue] as? String {
-                        cell.primaryLabel.text = name + " selected " + word
+                        let attributedString = NSMutableAttributedString(
+                            string: name + " selected '" + word + "'"
+                        )
+                        attributedString.addAttribute(
+                            NSFontAttributeName,
+                            value: SCFonts.intermediateSizeFont(.bold) ?? 0,
+                            range: NSMakeRange(
+                                0,
+                                name.characters.count
+                            )
+                        )
+                        cell.primaryLabel.attributedText = attributedString
                     }
                 }
             }
