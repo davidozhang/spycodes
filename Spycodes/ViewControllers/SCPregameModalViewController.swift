@@ -346,7 +346,6 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
                 self.tableView.reloadData()
 
                 Room.instance.resetPlayers()
-                Statistics.instance.reset()
 
                 if GameMode.instance.getMode() == .miniGame {
                     Room.instance.addCPUPlayer()
@@ -356,7 +355,6 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
 
                 SCMultipeerManager.instance.broadcast(GameMode.instance)
                 SCMultipeerManager.instance.broadcast(Room.instance)
-                SCMultipeerManager.instance.broadcast(Statistics.instance)
             case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
                 SCSettingsManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
             case SCConstants.identifier.timerToggleViewCell.rawValue:
