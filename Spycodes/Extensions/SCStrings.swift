@@ -21,6 +21,11 @@ class SCStrings {
     static let website = "Website"
     static let github = "Github"
     static let icons8 = "Icons8"
+    static let checklist = "Checklist"
+    static let statistics = "Statistics"
+    static let gameSettings = "Game Settings"
+    static let minigame = "Minigame"
+    static let timer = "Timer"
 
     static let normalAccessCodeStatus = "Enter access code"
     static let pendingStatus = "Joining room..."
