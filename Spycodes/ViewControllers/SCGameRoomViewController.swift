@@ -567,25 +567,25 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                     SCStrings.returningToPregameRoomHeader,
                     reason: SCStrings.playerAborted
                 )
-            } else if Round.instance.getWinningTeam() == Player.instance.getTeam() &&
-                      GameMode.instance.getMode() == .regularGame {
-                self.didEndGame(
-                    SCStrings.gameOverHeader,
-                    reason: SCStrings.defaultWinString
-                )
-            } else if Round.instance.getWinningTeam() == Player.instance.getTeam() &&
-                      GameMode.instance.getMode() == .miniGame {
-                self.didEndGame(
-                    SCStrings.gameOverHeader,
-                    reason: String(
-                        format: SCStrings.minigameWinString,
+            } else if Round.instance.getWinningTeam() == Player.instance.getTeam() {
+                if GameMode.instance.getMode() == .regularGame {
+                    self.didEndGame(
+                        SCStrings.gameOverHeader,
+                        reason: SCStrings.defaultWinString
+                    )
+                } else {
+                    self.didEndGame(
+                        SCStrings.gameOverHeader,
+                        reason: String(
+                            format: SCStrings.minigameWinString,
+                            CardCollection.instance.getCardsRemainingForTeam(.blue)
+                        )
+                    )
+
+                    Statistics.instance.setBestRecord(
                         CardCollection.instance.getCardsRemainingForTeam(.blue)
                     )
-                )
-
-                Statistics.instance.setBestRecord(
-                    CardCollection.instance.getCardsRemainingForTeam(.blue)
-                )
+                }
             } else if Round.instance.getWinningTeam() == opponentTeam {
                 self.didEndGame(
                     SCStrings.gameOverHeader,
