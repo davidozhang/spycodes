@@ -1153,6 +1153,16 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dQz-dg-RRO">
                                 <rect key="frame" x="0.0" y="54" width="1024" height="1312"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timeline-view-cell" id="jKc-qz-lSA">
+                                        <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jKc-qz-lSA" id="AJM-1F-fph">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1167,6 +1177,10 @@
                     </view>
                     <connections>
                         <outlet property="swipeDownButton" destination="Jpi-zT-CKN" id="2fQ-tO-JAV"/>
+                        <outlet property="tableView" destination="dQz-dg-RRO" id="OIS-er-8nu"/>
+                        <outlet property="tableViewBottomSpaceConstraint" destination="Y3v-81-Q3i" id="Rik-j3-96y"/>
+                        <outlet property="tableViewLeadingSpaceConstraint" destination="8FP-PB-AGq" id="hPE-mb-YmO"/>
+                        <outlet property="tableViewTrailingSpaceConstraint" destination="qSc-el-1HD" id="FCB-Lg-yT8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bjs-0r-qNf" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -109,6 +109,8 @@ class SCPregameRoomViewController: SCViewController {
 
         self.animateSwipeUpButton()
         self.resetReadyButton()
+
+        Timeline.instance.reset()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

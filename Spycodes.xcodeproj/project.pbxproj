@@ -34,6 +34,7 @@
 		638350A41EA1E3CF003049EF /* SCImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638350A31EA1E3CF003049EF /* SCImageButton.swift */; };
 		638CE44B1EAB2EF300033480 /* SCTimelineModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CE44A1EAB2EF300033480 /* SCTimelineModalViewController.swift */; };
 		638CE44D1EAB3D4B00033480 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CE44C1EAB3D4B00033480 /* Timeline.swift */; };
+		638CE44F1EAB45A500033480 /* SCTimelineViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CE44E1EAB45A500033480 /* SCTimelineViewCell.swift */; };
 		63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */; };
 		639BA3161D38AFEF002F2A18 /* SCUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BA3151D38AFEF002F2A18 /* SCUIColor.swift */; };
 		639E17681E00EADB00640540 /* SCSectionHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */; };
@@ -96,6 +97,7 @@
 		638350A31EA1E3CF003049EF /* SCImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCImageButton.swift; path = Utilities/SCImageButton.swift; sourceTree = "<group>"; };
 		638CE44A1EAB2EF300033480 /* SCTimelineModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTimelineModalViewController.swift; path = ViewControllers/SCTimelineModalViewController.swift; sourceTree = "<group>"; };
 		638CE44C1EAB3D4B00033480 /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Objects/Timeline.swift; sourceTree = "<group>"; };
+		638CE44E1EAB45A500033480 /* SCTimelineViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTimelineViewCell.swift; path = Views/SCTimelineViewCell.swift; sourceTree = "<group>"; };
 		63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCMultipeerManager.swift; path = Managers/SCMultipeerManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		639BA3151D38AFEF002F2A18 /* SCUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUIColor.swift; path = Extensions/SCUIColor.swift; sourceTree = "<group>"; };
 		639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCSectionHeaderViewCell.swift; path = Views/SCSectionHeaderViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -278,6 +280,7 @@
 				63FDED451D28B47200142780 /* SCPregameRoomViewCell.swift */,
 				639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */,
 				633292261E7DE8B30090B09D /* SCTableViewCell.swift */,
+				638CE44E1EAB45A500033480 /* SCTimelineViewCell.swift */,
 				6363EB661E7E5A3900CC287B /* SCToggleViewCell.swift */,
 			);
 			name = Views;
@@ -364,6 +367,7 @@
 				636DC0CE1E67D90800DE5EC6 /* SCHelpViewController.swift in Sources */,
 				63FDED371D264CF300142780 /* Team.swift in Sources */,
 				637F195F1D46010E00FB4047 /* Statistics.swift in Sources */,
+				638CE44F1EAB45A500033480 /* SCTimelineViewCell.swift in Sources */,
 				63FDED3B1D265BAF00142780 /* SCPregameRoomViewController.swift in Sources */,
 				63EAF9A31D41D2E700BC554E /* Round.swift in Sources */,
 				63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */,
