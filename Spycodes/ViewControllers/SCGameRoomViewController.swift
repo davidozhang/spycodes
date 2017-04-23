@@ -54,6 +54,7 @@ class SCGameRoomViewController: SCViewController {
     }
 
     @IBAction func onTimelineButtonTapped(_ sender: Any) {
+        self.hideNotificationDot()
         self.performSegue(withIdentifier: SCConstants.identifier.timelineModal.rawValue, sender: self)
     }
 
@@ -75,6 +76,15 @@ class SCGameRoomViewController: SCViewController {
             name: NSNotification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),
             object: nil
         )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(SCGameRoomViewController.showNotificationDot),
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.timelineUpdated.rawValue),
+            object: nil
+        )
+
+        self.hideNotificationDot()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -152,6 +162,14 @@ class SCGameRoomViewController: SCViewController {
             name: NSNotification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),
             object: nil
         )
+
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.timelineUpdated.rawValue),
+            object: nil
+        )
+
+        self.hideNotificationDot()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -545,6 +563,15 @@ class SCGameRoomViewController: SCViewController {
                 completion: nil
             )
         }
+    }
+
+    @objc
+    fileprivate func showNotificationDot() {
+        self.notificationDot.isHidden = false
+    }
+
+    fileprivate func hideNotificationDot() {
+        self.notificationDot.isHidden = true
     }
 }
 

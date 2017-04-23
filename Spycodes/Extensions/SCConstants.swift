@@ -64,6 +64,7 @@ class SCConstants {
 
     enum notificationKey: String {
         case minigameGameOver = "minigame-game-over"
+        case timelineUpdated = "timeline-updated"
     }
 
     enum url: String {

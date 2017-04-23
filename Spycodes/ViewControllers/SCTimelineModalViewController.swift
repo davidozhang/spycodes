@@ -49,9 +49,7 @@ class SCTimelineModalViewController: SCModalViewController {
         self.emptyStateLabel?.numberOfLines = 0
         self.emptyStateLabel?.center = self.view.center
 
-        if self.tableView.contentSize.height < self.tableView.bounds.height {
-            self.upArrowView.isHidden = true
-        }
+        self.upArrowView.isHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,6 +78,12 @@ class SCTimelineModalViewController: SCModalViewController {
                 self.tableView.backgroundView = self.emptyStateLabel
             } else {
                 self.tableView.backgroundView = nil
+            }
+
+            if self.tableView.contentSize.height < self.tableView.bounds.height {
+                self.upArrowView.isHidden = true
+            }else {
+                self.upArrowView.isHidden = false
             }
         }
     }

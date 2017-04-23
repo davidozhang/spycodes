@@ -1,3 +1,5 @@
+import Foundation
+
 class Timeline {
     static let instance = Timeline()
     static var observedEvents: Set = [
@@ -23,6 +25,14 @@ class Timeline {
 
             // Sorted by reverse chronological order
             self.events.insert(event, at: 0)
+
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(
+                    name: Notification.Name(rawValue: SCConstants.notificationKey.timelineUpdated.rawValue),
+                    object: self,
+                    userInfo: nil
+                )
+            })
         }
     }
 
