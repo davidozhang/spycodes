@@ -426,7 +426,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                 let attributedString = NSMutableAttributedString(string: "‣ " + name)
                 attributedString.addAttribute(
                     NSFontAttributeName,
-                    value: SCFonts.intermediateSizeFont(.medium) ?? 0,
+                    value: SCFonts.intermediateSizeFont(.ultraLight) ?? 0,
                     range: NSMakeRange(0, 2)
                 )
 
