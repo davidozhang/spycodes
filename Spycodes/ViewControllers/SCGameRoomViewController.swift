@@ -262,6 +262,22 @@ class SCGameRoomViewController: SCViewController {
         })
     }
 
+    fileprivate func dismissPresentedViewIfNeeded(completion: (() -> Void)?) {
+        if let _ = self.presentedViewController {
+            self.presentedViewController?.dismiss(animated: true, completion: {
+                if let completion = completion {
+                    completion()
+                }
+            })
+
+            return
+        }
+
+        if let completion = completion {
+            completion()
+        }
+    }
+
     fileprivate func startButtonAnimations() {
         if !self.buttonAnimationStarted {
             self.actionButton.alpha = 1.0
@@ -519,10 +535,12 @@ class SCGameRoomViewController: SCViewController {
         DispatchQueue.main.async {
             Round.instance.setWinningTeam(.blue)
 
-            self.didEndGame(
-                SCStrings.gameOverHeader,
-                reason: SCStrings.defaultLoseString
-            )
+            self.dismissPresentedViewIfNeeded(completion: {
+                self.didEndGame(
+                    SCStrings.gameOverHeader,
+                    reason: SCStrings.defaultLoseString
+                )
+            })
         }
     }
 
@@ -591,10 +609,12 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
         case let synchronizedObject as Round:
             if self.leaderIsEditing {
                 if synchronizedObject.isAborted() {
-                    self.didEndGame(
-                        SCStrings.returningToPregameRoomHeader,
-                        reason: SCStrings.playerAborted
-                    )
+                    self.dismissPresentedViewIfNeeded(completion: {
+                        self.didEndGame(
+                            SCStrings.returningToPregameRoomHeader,
+                            reason: SCStrings.playerAborted
+                        )
+                    })
                 }
 
                 return
@@ -603,34 +623,40 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             Round.instance = synchronizedObject
 
             if Round.instance.isAborted() {
-                self.didEndGame(
-                    SCStrings.returningToPregameRoomHeader,
-                    reason: SCStrings.playerAborted
-                )
-            } else if Round.instance.getWinningTeam() == Player.instance.getTeam() {
-                if GameMode.instance.getMode() == .regularGame {
+                self.dismissPresentedViewIfNeeded(completion: {
                     self.didEndGame(
-                        SCStrings.gameOverHeader,
-                        reason: SCStrings.defaultWinString
+                        SCStrings.returningToPregameRoomHeader,
+                        reason: SCStrings.playerAborted
                     )
-                } else {
-                    self.didEndGame(
-                        SCStrings.gameOverHeader,
-                        reason: String(
-                            format: SCStrings.minigameWinString,
+                })
+            } else if Round.instance.getWinningTeam() == Player.instance.getTeam() {
+                self.dismissPresentedViewIfNeeded(completion: {
+                    if GameMode.instance.getMode() == .regularGame {
+                        self.didEndGame(
+                            SCStrings.gameOverHeader,
+                            reason: SCStrings.defaultWinString
+                        )
+                    } else {
+                        self.didEndGame(
+                            SCStrings.gameOverHeader,
+                            reason: String(
+                                format: SCStrings.minigameWinString,
+                                CardCollection.instance.getCardsRemainingForTeam(.blue)
+                            )
+                        )
+
+                        Statistics.instance.setBestRecord(
                             CardCollection.instance.getCardsRemainingForTeam(.blue)
                         )
-                    )
-
-                    Statistics.instance.setBestRecord(
-                        CardCollection.instance.getCardsRemainingForTeam(.blue)
-                    )
-                }
+                    }
+                })
             } else if Round.instance.getWinningTeam() == opponentTeam {
-                self.didEndGame(
-                    SCStrings.gameOverHeader,
-                    reason: SCStrings.defaultLoseString
-                )
+                self.dismissPresentedViewIfNeeded(completion: {
+                    self.didEndGame(
+                        SCStrings.gameOverHeader,
+                        reason: SCStrings.defaultLoseString
+                    )
+                })
             }
         case let synchronizedObject as Room:
             Room.instance = synchronizedObject
@@ -685,32 +711,34 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             Room.instance.removeConnectedPeer(peerID: peerID)
             SCMultipeerManager.instance.broadcast(Room.instance)
 
-            if player.isHost() {
-                let alertController = UIAlertController(
-                    title: SCStrings.returningToMainMenuHeader,
-                    message: SCStrings.hostDisconnected,
-                    preferredStyle: .alert
-                )
-                let confirmAction = UIAlertAction(
-                    title: "OK",
-                    style: .default,
-                    handler: { (action: UIAlertAction) in
-                        super.performUnwindSegue(true, completionHandler: nil)
+            self.dismissPresentedViewIfNeeded(completion: {
+                if player.isHost() {
+                    let alertController = UIAlertController(
+                        title: SCStrings.returningToMainMenuHeader,
+                        message: SCStrings.hostDisconnected,
+                        preferredStyle: .alert
+                    )
+                    let confirmAction = UIAlertAction(
+                        title: "OK",
+                        style: .default,
+                        handler: { (action: UIAlertAction) in
+                            super.performUnwindSegue(true, completionHandler: nil)
                     }
-                )
-                alertController.addAction(confirmAction)
-                self.present(
-                    alertController,
-                    animated: true,
-                    completion: nil
-                )
-            } else {
-                Round.instance.abortGame()
-                self.didEndGame(
-                    SCStrings.returningToPregameRoomHeader,
-                    reason: SCStrings.playerDisconnected
-                )
-            }
+                    )
+                    alertController.addAction(confirmAction)
+                    self.present(
+                        alertController,
+                        animated: true,
+                        completion: nil
+                    )
+                } else {
+                    Round.instance.abortGame()
+                    self.didEndGame(
+                        SCStrings.returningToPregameRoomHeader,
+                        reason: SCStrings.playerDisconnected
+                    )
+                }
+            })
         }
     }
 
@@ -837,32 +865,36 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
             Statistics.instance.recordWinForTeam(opponentTeam!)
 
-            self.didEndGame(
-                SCStrings.gameOverHeader,
-                reason: SCStrings.defaultLoseString
-            )
+            self.dismissPresentedViewIfNeeded(completion: {
+                self.didEndGame(
+                    SCStrings.gameOverHeader,
+                    reason: SCStrings.defaultLoseString
+                )
+            })
         } else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
             Round.instance.setWinningTeam(playerTeam)
 
-            if GameMode.instance.getMode() == .regularGame {
-                Statistics.instance.recordWinForTeam(playerTeam)
+            self.dismissPresentedViewIfNeeded(completion: {
+                if GameMode.instance.getMode() == .regularGame {
+                    Statistics.instance.recordWinForTeam(playerTeam)
 
-                self.didEndGame(
-                    SCStrings.gameOverHeader,
-                    reason: SCStrings.defaultWinString
-                )
-            } else {
-                self.didEndGame(
-                    SCStrings.gameOverHeader,
-                    reason: String(
-                        format: SCStrings.minigameWinString,
+                    self.didEndGame(
+                        SCStrings.gameOverHeader,
+                        reason: SCStrings.defaultWinString
+                    )
+                } else {
+                    self.didEndGame(
+                        SCStrings.gameOverHeader,
+                        reason: String(
+                            format: SCStrings.minigameWinString,
+                            CardCollection.instance.getCardsRemainingForTeam(.blue)
+                        )
+                    )
+                    Statistics.instance.setBestRecord(
                         CardCollection.instance.getCardsRemainingForTeam(.blue)
                     )
-                )
-                Statistics.instance.setBestRecord(
-                    CardCollection.instance.getCardsRemainingForTeam(.blue)
-                )
-            }
+                }
+            })
         }
     }
 
