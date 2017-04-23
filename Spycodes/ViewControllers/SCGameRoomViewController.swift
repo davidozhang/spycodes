@@ -41,7 +41,6 @@ class SCGameRoomViewController: SCViewController {
     // MARK: Actions
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         Round.instance.abortGame()
-
         super.performUnwindSegue(false, completionHandler: nil)
     }
 

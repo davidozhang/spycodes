@@ -38,7 +38,7 @@ class SCAccessCodeViewController: SCViewController {
     }
 
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
-        super.performUnwindSegue(false, completionHandler: nil)
+        self.swipeRight()
     }
 
     @IBAction func onCancelTapped(_ sender: Any) {
@@ -138,6 +138,11 @@ class SCAccessCodeViewController: SCViewController {
         self.keyboardDidShow = false
 
         self.contentViewVerticalCenterConstraint.constant = 0
+    }
+
+    // MARK: Swipe
+    override func swipeRight() {
+        super.performUnwindSegue(false, completionHandler: nil)
     }
 
     // MARK: Private

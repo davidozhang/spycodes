@@ -13,7 +13,7 @@ class SCPregameRoomViewController: SCViewController {
     @IBOutlet weak var swipeUpButton: UIButton!
 
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
-        self.returnToMainMenu(reason: nil)
+        self.swipeRight()
     }
 
     @IBAction func onReadyButtonTapped(_ sender: Any) {
@@ -149,10 +149,14 @@ class SCPregameRoomViewController: SCViewController {
         }
     }
 
-    // MARK: Swipe Gesture Recognizer
+    // MARK: Swipe
     func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
         self.resetReadyButton()
         self.swipeUp()
+    }
+
+    override func swipeRight() {
+        self.returnToMainMenu(reason: nil)
     }
 
     // MARK: Private

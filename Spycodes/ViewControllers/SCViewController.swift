@@ -27,6 +27,10 @@ class SCViewController: UIViewController {
 
         self.updateAppearance()
 
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(SCViewController.swipeRight))
+        swipeGestureRecognizer.direction = .right
+        self.view.addGestureRecognizer(swipeGestureRecognizer)
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(SCViewController.applicationDidBecomeActive),
@@ -162,6 +166,8 @@ class SCViewController: UIViewController {
             view.removeFromSuperview()
         }
     }
+
+    func swipeRight() {}
 
     @objc
     func applicationDidBecomeActive() {}

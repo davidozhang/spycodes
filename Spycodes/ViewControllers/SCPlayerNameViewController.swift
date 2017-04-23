@@ -11,7 +11,7 @@ class SCPlayerNameViewController: SCViewController {
     }
 
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
-        super.performUnwindSegue(true, completionHandler: nil)
+        self.swipeRight()
     }
 
     deinit {
@@ -64,6 +64,11 @@ class SCPlayerNameViewController: SCViewController {
                 rect.height/2 - self.headerLabelTopMarginConstraint.constant
             )
         }
+    }
+
+    // MARK: Swipe
+    override func swipeRight() {
+        super.performUnwindSegue(true, completionHandler: nil)
     }
 }
 

@@ -49,7 +49,7 @@ class SCSettingsViewController: SCViewController {
 
     // MARK: Actions
     @IBAction func onBackTapped(_ sender: AnyObject) {
-        super.performUnwindSegue(true, completionHandler: nil)
+        self.swipeRight()
     }
 
     deinit {
@@ -80,6 +80,11 @@ class SCSettingsViewController: SCViewController {
 
         self.tableView.dataSource = nil
         self.tableView.delegate = nil
+    }
+
+    // MARK: Swipe
+    override func swipeRight() {
+        super.performUnwindSegue(true, completionHandler: nil)
     }
 }
 
