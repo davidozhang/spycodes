@@ -68,4 +68,12 @@ class Event: NSObject, NSCoding {
     func getTimestamp() -> Int? {
         return self.timestamp
     }
+
+    func addParameter(key: String, value: Any) {
+        if self.parameters == nil {
+            self.parameters = [String: Any]()
+        }
+
+        self.parameters?[key] = value
+    }
 }

@@ -101,6 +101,10 @@ class SCViewController: UIViewController {
         SCMultipeerManager.instance.broadcast(event)
 
         if Timeline.observedEvents.contains(event.getType()!) {
+            event.addParameter(
+                key: SCConstants.coding.localPlayer.rawValue,
+                value: true
+            )
             Timeline.instance.addEventIfNeeded(event: event)
         }
     }

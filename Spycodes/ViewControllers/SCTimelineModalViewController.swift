@@ -145,46 +145,64 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 if let name = parameters[SCConstants.coding.name.rawValue] as? String,
                    let clue = parameters[SCConstants.coding.clue.rawValue] as? String,
                    let numberOfWords = parameters[SCConstants.coding.numberOfWords.rawValue] as? String {
+                    var baseString = name + " set the clue to '" + clue + " " + numberOfWords + "'."
+                    var length = name.characters.count
+
+                    if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
+                        baseString = "You set the clue to '" + clue + " " + numberOfWords + "'."
+                        length = 3
+                    }
+
                     let attributedString = NSMutableAttributedString(
-                        string: name + " set the clue '" + clue + " " + numberOfWords + "'"
+                        string: baseString
                     )
                     attributedString.addAttribute(
                         NSFontAttributeName,
                         value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                        range: NSMakeRange(
-                            0,
-                            name.characters.count
-                        )
+                        range: NSMakeRange(0, length)
                     )
                     cell.primaryLabel.attributedText = attributedString
                 }
             } else if event.getType() == .selectCard {
                 if let name = parameters[SCConstants.coding.name.rawValue] as? String,
                    let word = parameters[SCConstants.coding.word.rawValue] as? String {
+                    var baseString = name + " selected '" + word + "'."
+                    var length = name.characters.count
+
+                    if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
+                        baseString = "You selected '" + word + "'."
+                        length = 3
+                    }
+
                     let attributedString = NSMutableAttributedString(
-                        string: name + " selected '" + word + "'."
+                        string: baseString
                     )
                     attributedString.addAttribute(
                         NSFontAttributeName,
                         value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                        range: NSMakeRange(
-                            0,
-                            name.characters.count
-                        )
+                        range: NSMakeRange(0, length)
                     )
                     cell.primaryLabel.attributedText = attributedString
                 }
             } else if event.getType() == .endRound {
                 if let name = parameters[SCConstants.coding.name.rawValue] as? String {
+                    var baseString = name + " ended the round."
+                    var length = name.characters.count
+
+                    if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
+                        baseString = "You ended the round."
+                        length = 3
+                    }
+
                     let attributedString = NSMutableAttributedString(
-                        string: name + " ended the round."
+                        string: baseString
                     )
                     attributedString.addAttribute(
                         NSFontAttributeName,
                         value: SCFonts.intermediateSizeFont(.bold) ?? 0,
                         range: NSMakeRange(
                             0,
-                            name.characters.count
+                            length
                         )
                     )
                     cell.primaryLabel.attributedText = attributedString
