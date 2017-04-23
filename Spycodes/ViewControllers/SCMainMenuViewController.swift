@@ -63,9 +63,11 @@ class SCMainMenuViewController: SCViewController {
         self.hideSwipeUpButton()
 
         SCAppInfoManager.checkLatestAppVersion({
-            // If app is not on latest app version
-            self.showSwipeUpButton()
-            self.swipeUp()
+            DispatchQueue.main.async {
+                // If app is not on latest app version
+                self.showSwipeUpButton()
+                self.swipeUp()
+            }
         })
     }
     override func viewWillAppear(_ animated: Bool) {

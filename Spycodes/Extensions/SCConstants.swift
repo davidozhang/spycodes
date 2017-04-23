@@ -2,11 +2,13 @@ class SCConstants {
     enum coding: String {
         case abort = "abort"
         case accessCode = "access-code"
-        case actionEventType = "action-event-type"
         case bestRecord = "best-record"
         case cards = "cards"
         case clue = "clue"
+        case eventType = "event-type"
+        case hasRead = "has-read"       // Local coding only
         case leader = "leader"
+        case localPlayer = "local-player"   // Local coding only
         case connectedPeers = "connected-peers"
         case duration = "duration"
         case enabled = "enabled"
@@ -21,6 +23,7 @@ class SCConstants {
         case score = "score"
         case selected = "selected"
         case team = "team"
+        case timestamp = "timestamp"
         case uuid = "uuid"
         case winningTeam = "winning-team"
         case word = "word"
@@ -54,6 +57,8 @@ class SCConstants {
         case statisticsViewCell = "statistics-view-cell"
         case sectionHeaderCell = "section-header-view-cell"
         case settings = "settings"
+        case timelineModal = "timeline-modal"
+        case timelineViewCell = "timeline-view-cell"
         case timerToggleViewCell = "timer-toggle-view-cell"
         case updateApp = "update-app"
         case versionViewCell = "version-view-cell"
@@ -61,6 +66,7 @@ class SCConstants {
 
     enum notificationKey: String {
         case minigameGameOver = "minigame-game-over"
+        case timelineUpdated = "timeline-updated"
     }
 
     enum url: String {

@@ -48,13 +48,7 @@ class SCPregameModalViewController: SCModalViewController {
     @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet weak var swipeDownButton: UIButton!
     @IBOutlet weak var upArrowView: UIImageView!
-
-    // MARK: Actions
-    @IBAction func onSwipeDownTapped(_ sender: Any) {
-        super.onDismissal()
-    }
 
     deinit {
         print("[DEINIT] " + NSStringFromClass(type(of: self)))
@@ -70,8 +64,6 @@ class SCPregameModalViewController: SCModalViewController {
         self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
-
-        self.animateSwipeDownButton()
 
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 2.0,
@@ -95,10 +87,6 @@ class SCPregameModalViewController: SCModalViewController {
         self.refreshTimer?.invalidate()
     }
 
-    override func applicationDidBecomeActive() {
-        self.animateSwipeDownButton()
-    }
-
     override func onDismissal() {
         if self.tableView.contentOffset.y > 0 {
             return
@@ -113,19 +101,6 @@ class SCPregameModalViewController: SCModalViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-    }
-
-    fileprivate func animateSwipeDownButton() {
-        self.swipeDownButton.alpha = 1.0
-        UIView.animate(
-            withDuration: super.animationDuration,
-            delay: 0.0,
-            options: [.autoreverse, .repeat, .allowUserInteraction],
-            animations: {
-                self.swipeDownButton.alpha = super.animationAlpha
-        },
-            completion: nil
-        )
     }
 
     fileprivate func getChecklistMessage() -> String {

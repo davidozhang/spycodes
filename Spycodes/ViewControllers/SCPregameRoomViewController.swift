@@ -109,6 +109,8 @@ class SCPregameRoomViewController: SCViewController {
 
         self.animateSwipeUpButton()
         self.resetReadyButton()
+
+        Timeline.instance.reset()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -174,23 +176,18 @@ class SCPregameRoomViewController: SCViewController {
         SCMultipeerManager.instance.broadcast(Timer.instance)
     }
 
-    fileprivate func broadcastActionEvent(_ eventType: ActionEvent.EventType) {
-        let actionEvent = ActionEvent(
-            type: eventType,
-            parameters: [SCConstants.coding.uuid.rawValue: Player.instance.getUUID()]
-        )
-
-        SCMultipeerManager.instance.broadcast(actionEvent)
+    fileprivate func broadcastEvent(_ eventType: Event.EventType) {
+        SCViewController.broadcastEvent(eventType, optional: nil)
     }
 
     fileprivate func updateReadyButton() {
         if self.readyButtonState == .notReady {
-            self.broadcastActionEvent(.cancel)
+            self.broadcastEvent(.cancel)
             UIView.performWithoutAnimation {
                 self.readyButton.setTitle("Ready", for: .normal)
             }
         } else {
-            self.broadcastActionEvent(.ready)
+            self.broadcastEvent(.ready)
             UIView.performWithoutAnimation {
                 self.readyButton.setTitle("Cancel", for: .normal)
             }
@@ -347,15 +344,15 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
             Statistics.instance = synchronizedObject
         case let synchronizedObject as Timer:
             Timer.instance = synchronizedObject
-        case let synchronizedObject as ActionEvent:
-            if synchronizedObject.getType() == ActionEvent.EventType.ready {
+        case let synchronizedObject as Event:
+            if synchronizedObject.getType() == Event.EventType.ready {
                 if let parameters = synchronizedObject.getParameters(),
-                   let uuid = parameters[SCConstants.coding.uuid.rawValue] {
+                   let uuid = parameters[SCConstants.coding.uuid.rawValue] as? String {
                     Room.instance.getPlayerWithUUID(uuid)?.setIsReady(true)
                 }
-            } else if synchronizedObject.getType() == ActionEvent.EventType.cancel {
+            } else if synchronizedObject.getType() == Event.EventType.cancel {
                 if let parameters = synchronizedObject.getParameters(),
-                   let uuid = parameters[SCConstants.coding.uuid.rawValue] {
+                   let uuid = parameters[SCConstants.coding.uuid.rawValue] as? String {
                     Room.instance.getPlayerWithUUID(uuid)?.setIsReady(false)
                 }
             }
