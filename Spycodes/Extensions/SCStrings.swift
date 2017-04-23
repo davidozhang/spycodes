@@ -34,6 +34,7 @@ class SCStrings {
     static let selected = "%@ selected '%@'."
     static let roundEnded = "%@ ended the round."
     static let localPlayer = "You"
+    static let cpu = "CPU"
 
     static let normalAccessCodeStatus = "Enter access code"
     static let pendingStatus = "Joining room..."

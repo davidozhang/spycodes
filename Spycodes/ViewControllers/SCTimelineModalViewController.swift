@@ -171,7 +171,8 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                     var baseString = String(format: SCStrings.selected, name, word)
                     var length = name.characters.count
 
-                    if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
+                    if let _ = parameters[SCConstants.coding.localPlayer.rawValue],
+                       let name = parameters[SCConstants.coding.name.rawValue] as? String, name != SCStrings.cpu {
                         baseString = String(format: SCStrings.selected, SCStrings.localPlayer, word)
                         length = 3
                     }
