@@ -76,4 +76,12 @@ class Event: NSObject, NSCoding {
 
         self.parameters?[key] = value
     }
+
+    func setParameter(key: String, value: Any) {
+        guard let _ = self.parameters?[key] else {
+            return
+        }
+
+        self.parameters?[key] = value
+    }
 }

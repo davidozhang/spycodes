@@ -59,6 +59,8 @@ class SCTimelineModalViewController: SCModalViewController {
         self.tableView.delegate = nil
 
         self.refreshTimer?.invalidate()
+
+        Timeline.instance.markAllAsRead()
     }
 
     override func onDismissal() {
@@ -82,7 +84,7 @@ class SCTimelineModalViewController: SCModalViewController {
 
             if self.tableView.contentSize.height < self.tableView.bounds.height {
                 self.upArrowView.isHidden = true
-            }else {
+            } else {
                 self.upArrowView.isHidden = false
             }
         }
@@ -209,6 +211,12 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 } else {
                     cell.primaryLabel.text = "Round ended from timer expiry."
                 }
+            }
+
+            if let hasRead = parameters[SCConstants.coding.hasRead.rawValue] as? Bool, !hasRead {
+                cell.showNotificationDot()
+            } else {
+                cell.hideNotificationDot()
             }
 
             return cell

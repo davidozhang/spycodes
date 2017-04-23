@@ -23,6 +23,8 @@ class Timeline {
 
             self.lastTimestamp = timestamp
 
+            event.addParameter(key: SCConstants.coding.hasRead.rawValue, value: false)
+
             // Sorted by reverse chronological order
             self.events.insert(event, at: 0)
 
@@ -33,6 +35,12 @@ class Timeline {
                     userInfo: nil
                 )
             })
+        }
+    }
+
+    func markAllAsRead() {
+        for event in self.events {
+            event.setParameter(key: SCConstants.coding.hasRead.rawValue, value: true)
         }
     }
 

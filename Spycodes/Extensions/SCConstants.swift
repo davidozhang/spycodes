@@ -6,6 +6,7 @@ class SCConstants {
         case cards = "cards"
         case clue = "clue"
         case eventType = "event-type"
+        case hasRead = "has-read"       // Local coding only
         case leader = "leader"
         case localPlayer = "local-player"   // Local coding only
         case connectedPeers = "connected-peers"

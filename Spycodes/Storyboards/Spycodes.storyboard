@@ -1186,22 +1186,34 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player selected ..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D3W-OQ-wp9" userLabel="Event Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="8" width="1016" height="28"/>
+                                                    <rect key="frame" x="16" y="8" width="1004" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notification-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="eb8-RN-4El">
+                                                    <rect key="frame" x="0.0" y="18" width="8" height="8"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="8" id="GoK-Ao-JOK"/>
+                                                        <constraint firstAttribute="height" constant="8" id="ccN-bw-OQG"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="D3W-OQ-wp9" firstAttribute="leading" secondItem="AJM-1F-fph" secondAttribute="leading" constant="4" id="2Ld-Fb-uv8"/>
+                                                <constraint firstItem="eb8-RN-4El" firstAttribute="centerY" secondItem="AJM-1F-fph" secondAttribute="centerY" id="40B-l5-KHH"/>
+                                                <constraint firstItem="eb8-RN-4El" firstAttribute="leading" secondItem="AJM-1F-fph" secondAttribute="leading" id="Bln-jZ-PD0"/>
                                                 <constraint firstAttribute="trailing" secondItem="D3W-OQ-wp9" secondAttribute="trailing" constant="4" id="J7P-Wb-s7S"/>
                                                 <constraint firstAttribute="bottom" secondItem="D3W-OQ-wp9" secondAttribute="bottom" constant="8" id="O9H-dy-RHl"/>
+                                                <constraint firstItem="D3W-OQ-wp9" firstAttribute="leading" secondItem="eb8-RN-4El" secondAttribute="trailing" constant="8" id="WT4-Cm-gpp"/>
                                                 <constraint firstItem="D3W-OQ-wp9" firstAttribute="centerY" secondItem="AJM-1F-fph" secondAttribute="centerY" id="XOa-RA-m3a"/>
                                                 <constraint firstItem="D3W-OQ-wp9" firstAttribute="top" secondItem="AJM-1F-fph" secondAttribute="top" constant="8" id="v5y-3X-mGU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="notificationDot" destination="eb8-RN-4El" id="D5R-EI-ro7"/>
+                                            <outlet property="notificationDotWidthConstraint" destination="GoK-Ao-JOK" id="SxR-kc-Wx8"/>
                                             <outlet property="primaryLabel" destination="D3W-OQ-wp9" id="yhk-2f-7ua"/>
+                                            <outlet property="primaryLabelLeadingSpaceConstraint" destination="WT4-Cm-gpp" id="uFo-mb-yTa"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
