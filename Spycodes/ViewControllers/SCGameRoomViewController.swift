@@ -789,11 +789,14 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
             if cardAtIndex.isSelected() {
                 cell.alpha = 0.4
-                attributedString.addAttribute(
-                    NSStrikethroughStyleAttributeName,
-                    value: 2,
-                    range: NSMakeRange(0, attributedString.length)
-                )
+
+                if SCSettingsManager.instance.isLocalSettingEnabled(.accessibility) {
+                    attributedString.addAttribute(
+                        NSStrikethroughStyleAttributeName,
+                        value: 2,
+                        range: NSMakeRange(0, attributedString.length)
+                    )
+                }
             } else {
                 cell.alpha = 1.0
             }
