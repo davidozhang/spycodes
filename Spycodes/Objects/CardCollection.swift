@@ -78,13 +78,18 @@ class CardCollection: NSObject, NSCoding {
             for i in 0..<SCConstants.constant.cardCount.rawValue {
                 if self.cards[i].getWord() == eliminatedCard.getWord() {
                     self.cards[i].setSelected()
-                    SCViewController.broadcastEvent(
-                        .selectCard,
-                        optional: [
-                            SCConstants.coding.name.rawValue: "CPU",
-                            SCConstants.coding.word.rawValue: self.cards[i].getWord()
-                        ]
-                    )
+
+                    // TODO: Figure out how to send event without artificial delay
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                        SCViewController.broadcastEvent(
+                            .selectCard,
+                            optional: [
+                                SCConstants.coding.name.rawValue: "CPU",
+                                SCConstants.coding.word.rawValue: self.cards[i].getWord()
+                            ]
+                        )
+                    })
+
                     return
                 }
             }
