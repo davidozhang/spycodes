@@ -16,7 +16,7 @@ class SCButton: UIButton {
         )
         self.titleLabel?.font = SCFonts.regularSizeFont(.regular)
         self.layer.borderColor = UIColor.spycodesGrayColor().cgColor
-        self.layer.borderWidth = 1.0
+        self.layer.borderWidth = 1.5
         self.layer.cornerRadius = 5.0
     }
 

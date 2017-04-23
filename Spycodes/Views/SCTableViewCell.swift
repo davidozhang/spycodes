@@ -32,7 +32,7 @@ class SCTableViewCell: UITableViewCell {
                 )
                 attributedString.addAttribute(
                     NSFontAttributeName,
-                    value: SCFonts.intermediateSizeFont(.other) ?? 0,
+                    value: SCFonts.intermediateSizeFont(.medium) ?? 0,
                     range: NSMakeRange(
                         SCAppInfoManager.appVersion.characters.count + 1,
                         SCAppInfoManager.buildNumber.characters.count + 2
