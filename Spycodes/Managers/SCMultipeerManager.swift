@@ -13,6 +13,10 @@ class SCMultipeerManager: NSObject {
 
     fileprivate let serviceType = "SpycodesV2"
     fileprivate var discoveryInfo: [String: String]?
+    fileprivate var timer: Foundation.Timer?
+
+    // Asynchronous, lossless messaging architecture
+    fileprivate var outbox = SCQueue<Data>()
 
     fileprivate var peerID: MCPeerID?
     fileprivate var advertiser: MCNearbyServiceAdvertiser?
@@ -21,6 +25,7 @@ class SCMultipeerManager: NSObject {
 
     fileprivate var advertiserOn = false
     fileprivate var browserOn = false
+    fileprivate var outboxDelivering = false
 
     enum MessageType: Int {
         case broadcast = 0
@@ -158,30 +163,54 @@ class SCMultipeerManager: NSObject {
         self.browser?.delegate = self
     }
 
+    @objc
+    private func deliver() {
+        if let data = self.outbox.dequeue(),
+           let peers = self.session?.connectedPeers, peers.count > 0 {
+            do {
+                try self.session?.send(
+                    data,
+                    toPeers: peers,
+                    with: MCSessionSendDataMode.reliable
+                )
+            } catch {}
+        }
+
+        if self.outbox.isEmpty {
+            self.timer?.invalidate()
+            self.outboxDelivering = false
+        }
+    }
+
     private func sendData(_ data: Data, messageType: MessageType, toPeers: [MCPeerID]?) {
         guard let _ = self.session else {
             return
         }
 
-        do {
-            if messageType == .broadcast {
-                if let peers = self.session?.connectedPeers, peers.count > 0 {
-                    try self.session?.send(
-                        data,
-                        toPeers: peers,
-                        with: MCSessionSendDataMode.reliable
-                    )
-                }
-            } else {
-                if let peers = toPeers, peers.count > 0 {
-                    try self.session?.send(
-                        data,
-                        toPeers: peers,
-                        with: MCSessionSendDataMode.reliable
-                    )
-                }
+        if messageType == .broadcast {
+            self.outbox.enqueue(data)
+            if !self.outboxDelivering {
+                self.timer = Foundation.Timer.scheduledTimer(
+                    timeInterval: 0.1,
+                    target: self,
+                    selector: #selector(SCMultipeerManager.deliver),
+                    userInfo: nil,
+                    repeats: true
+                )
+
+                self.outboxDelivering = true
             }
-        } catch {}
+        } else {
+            if let peers = toPeers, peers.count > 0 {
+                do {
+                    try self.session?.send(
+                        data,
+                        toPeers: peers,
+                        with: MCSessionSendDataMode.reliable
+                    )
+                } catch {}
+            }
+        }
     }
 }
 

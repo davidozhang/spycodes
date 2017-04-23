@@ -32,6 +32,7 @@
 		637F195F1D46010E00FB4047 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F195E1D46010E00FB4047 /* Statistics.swift */; };
 		637FF00A1E0F0B620076DC25 /* SCAccessCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637FF0091E0F0B620076DC25 /* SCAccessCodeViewController.swift */; };
 		638350A41EA1E3CF003049EF /* SCImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638350A31EA1E3CF003049EF /* SCImageButton.swift */; };
+		638CE4511EAC29DD00033480 /* SCQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CE4501EAC29DD00033480 /* SCQueue.swift */; };
 		63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */; };
 		639BA3161D38AFEF002F2A18 /* SCUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BA3151D38AFEF002F2A18 /* SCUIColor.swift */; };
 		639E17681E00EADB00640540 /* SCSectionHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */; };
@@ -92,6 +93,7 @@
 		637F195E1D46010E00FB4047 /* Statistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Statistics.swift; path = Objects/Statistics.swift; sourceTree = "<group>"; };
 		637FF0091E0F0B620076DC25 /* SCAccessCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCAccessCodeViewController.swift; path = ViewControllers/SCAccessCodeViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		638350A31EA1E3CF003049EF /* SCImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCImageButton.swift; path = Utilities/SCImageButton.swift; sourceTree = "<group>"; };
+		638CE4501EAC29DD00033480 /* SCQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCQueue.swift; path = Extensions/SCQueue.swift; sourceTree = "<group>"; };
 		63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCMultipeerManager.swift; path = Managers/SCMultipeerManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		639BA3151D38AFEF002F2A18 /* SCUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUIColor.swift; path = Extensions/SCUIColor.swift; sourceTree = "<group>"; };
 		639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCSectionHeaderViewCell.swift; path = Views/SCSectionHeaderViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -210,6 +212,7 @@
 				63486DA41D3DDC9800795403 /* SCArray.swift */,
 				CF33BE2C1D6D04EA00D0E105 /* SCConstants.swift */,
 				6332921E1E7CD8320090B09D /* SCFonts.swift */,
+				638CE4501EAC29DD00033480 /* SCQueue.swift */,
 				63F2B7A51E6BB8F600F602D1 /* SCStates.swift */,
 				CF5A8DCB1D46D95F0032F581 /* SCStrings.swift */,
 				639BA3151D38AFEF002F2A18 /* SCUIColor.swift */,
@@ -394,6 +397,7 @@
 				6329BEFD1E512ADF004E6151 /* SCViewController.swift in Sources */,
 				6307AC121E989CDE00BC1B73 /* SCModalViewController.swift in Sources */,
 				63DEDEE81E88921200DE94A1 /* ActionEvent.swift in Sources */,
+				638CE4511EAC29DD00033480 /* SCQueue.swift in Sources */,
 				637FF00A1E0F0B620076DC25 /* SCAccessCodeViewController.swift in Sources */,
 				6363EB671E7E5A3900CC287B /* SCToggleViewCell.swift in Sources */,
 				63D2568A1E6BA6BA0061D80C /* SCStatusLabel.swift in Sources */,
