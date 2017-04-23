@@ -2,6 +2,7 @@ import UIKit
 
 class SCTimelineModalViewController: SCModalViewController {
     fileprivate var refreshTimer: Foundation.Timer?
+    fileprivate var emptyStateLabel: UILabel?
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
@@ -30,6 +31,14 @@ class SCTimelineModalViewController: SCModalViewController {
             userInfo: nil,
             repeats: true
         )
+
+        self.emptyStateLabel = UILabel(frame: self.tableView.frame)
+        self.emptyStateLabel?.text = SCStrings.timelineEmptyState
+        self.emptyStateLabel?.font = SCFonts.intermediateSizeFont(.regular)
+        self.emptyStateLabel?.textColor = UIColor.spycodesGrayColor()
+        self.emptyStateLabel?.textAlignment = .center
+        self.emptyStateLabel?.numberOfLines = 0
+        self.emptyStateLabel?.center = self.view.center
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,6 +62,12 @@ class SCTimelineModalViewController: SCModalViewController {
     fileprivate func refreshView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+
+            if Timeline.instance.getEvents().count == 0 {
+                self.tableView.backgroundView = self.emptyStateLabel
+            } else {
+                self.tableView.backgroundView = nil
+            }
         }
     }
 }
@@ -74,71 +89,53 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = self.tableView.dequeueReusableCell(
+            withIdentifier: SCConstants.identifier.timelineViewCell.rawValue
+            ) as? SCTimelineViewCell else {
+                return UITableViewCell()
+        }
+
         let event = Timeline.instance.getEvents()[indexPath.row]
 
-        if event.getType() == .endRound {
-            guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
-            ) as? SCSectionHeaderViewCell else {
-                return UITableViewCell()
-            }
-
-            if let parameters = event.getParameters(),
-               let teamAsInt = parameters[SCConstants.coding.team.rawValue] as? Int {
-                let team = Team(rawValue: teamAsInt)
-                if team == .red {
-                    cell.primaryLabel.text = "Team Red"
-                } else {
-                    cell.primaryLabel.text = "Team Blue"
+        if let parameters = event.getParameters() {
+            if event.getType() == .confirm {
+                if let name = parameters[SCConstants.coding.name.rawValue] as? String,
+                   let clue = parameters[SCConstants.coding.clue.rawValue] as? String,
+                   let numberOfWords = parameters[SCConstants.coding.numberOfWords.rawValue] as? String {
+                    let attributedString = NSMutableAttributedString(
+                        string: name + " set clue '" + clue + " " + numberOfWords + "'"
+                    )
+                    attributedString.addAttribute(
+                        NSFontAttributeName,
+                        value: SCFonts.intermediateSizeFont(.bold) ?? 0,
+                        range: NSMakeRange(
+                            0,
+                            name.characters.count
+                        )
+                    )
+                    cell.primaryLabel.attributedText = attributedString
                 }
-            }
-
-            return cell
-        } else {
-            guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.timelineViewCell.rawValue
-                ) as? SCTimelineViewCell else {
-                    return UITableViewCell()
-            }
-
-            if let parameters = event.getParameters() {
-                if event.getType() == .confirm {
-                    if let name = parameters[SCConstants.coding.name.rawValue] as? String,
-                       let clue = parameters[SCConstants.coding.clue.rawValue] as? String,
-                       let numberOfWords = parameters[SCConstants.coding.numberOfWords.rawValue] as? String {
-                        let attributedString = NSMutableAttributedString(
-                            string: name + " set clue '" + clue + " " + numberOfWords + "'"
+            } else if event.getType() == .selectCard {
+                if let name = parameters[SCConstants.coding.name.rawValue] as? String,
+                   let word = parameters[SCConstants.coding.word.rawValue] as? String {
+                    let attributedString = NSMutableAttributedString(
+                        string: name + " selected '" + word + "'"
+                    )
+                    attributedString.addAttribute(
+                        NSFontAttributeName,
+                        value: SCFonts.intermediateSizeFont(.bold) ?? 0,
+                        range: NSMakeRange(
+                            0,
+                            name.characters.count
                         )
-                        attributedString.addAttribute(
-                            NSFontAttributeName,
-                            value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                            range: NSMakeRange(
-                                0,
-                                name.characters.count
-                            )
-                        )
-                        cell.primaryLabel.attributedText = attributedString
-                    }
-                } else if event.getType() == .selectCard {
-                    if let name = parameters[SCConstants.coding.name.rawValue] as? String,
-                       let word = parameters[SCConstants.coding.word.rawValue] as? String {
-                        let attributedString = NSMutableAttributedString(
-                            string: name + " selected '" + word + "'"
-                        )
-                        attributedString.addAttribute(
-                            NSFontAttributeName,
-                            value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                            range: NSMakeRange(
-                                0,
-                                name.characters.count
-                            )
-                        )
-                        cell.primaryLabel.attributedText = attributedString
-                    }
+                    )
+                    cell.primaryLabel.attributedText = attributedString
                 }
             }
 
             return cell
         }
+
+        return UITableViewCell()
     }
 }
