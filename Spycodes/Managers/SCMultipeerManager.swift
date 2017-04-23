@@ -9,14 +9,19 @@ protocol SCMultipeerManagerDelegate: class {
 
 class SCMultipeerManager: NSObject {
     static let instance = SCMultipeerManager()
+    static let inboxProcessingFrequency = 0.1
+    static let outboxProcessingFrequency = 0.1
     weak var delegate: SCMultipeerManagerDelegate?
 
     fileprivate let serviceType = "SpycodesV2"
     fileprivate var discoveryInfo: [String: String]?
-    fileprivate var timer: Foundation.Timer?
 
-    // Asynchronous, lossless messaging architecture
+    fileprivate var dataInbox = SCQueue<Data>()
+    fileprivate var peerIDInbox = SCQueue<MCPeerID>()
     fileprivate var outbox = SCQueue<Data>()
+
+    fileprivate var inboxTimer: Foundation.Timer?
+    fileprivate var outboxTimer: Foundation.Timer?
 
     fileprivate var peerID: MCPeerID?
     fileprivate var advertiser: MCNearbyServiceAdvertiser?
@@ -25,6 +30,7 @@ class SCMultipeerManager: NSObject {
 
     fileprivate var advertiserOn = false
     fileprivate var browserOn = false
+    fileprivate var inboxProcessing = false
     fileprivate var outboxDelivering = false
 
     enum MessageType: Int {
@@ -109,6 +115,10 @@ class SCMultipeerManager: NSObject {
     }
 
     func terminate() {
+        self.inboxProcessing = false
+        self.outboxDelivering = false
+        self.inboxTimer?.invalidate()
+        self.outboxTimer?.invalidate()
         self.stopAdvertiser()
         self.stopBrowser()
         self.stopSession()
@@ -138,7 +148,7 @@ class SCMultipeerManager: NSObject {
     }
 
     // MARK: Private
-    private func initAdvertiser(discoveryInfo: [String: String]?) {
+    fileprivate func initAdvertiser(discoveryInfo: [String: String]?) {
         guard let peerID = self.peerID else {
             return
         }
@@ -151,7 +161,7 @@ class SCMultipeerManager: NSObject {
         self.advertiser?.delegate = self
     }
 
-    private func initBrowser() {
+    fileprivate func initBrowser() {
         guard let peerID = self.peerID else {
             return
         }
@@ -164,7 +174,20 @@ class SCMultipeerManager: NSObject {
     }
 
     @objc
-    private func deliver() {
+    fileprivate func process() {
+        if let data = self.dataInbox.dequeue(),
+           let peerID = self.peerIDInbox.dequeue() {
+            delegate?.didReceiveData(data, fromPeer: peerID)
+        }
+
+        if self.dataInbox.isEmpty {
+            self.inboxTimer?.invalidate()
+            self.inboxProcessing = false
+        }
+    }
+
+    @objc
+    fileprivate func deliver() {
         if let data = self.outbox.dequeue(),
            let peers = self.session?.connectedPeers, peers.count > 0 {
             do {
@@ -177,12 +200,12 @@ class SCMultipeerManager: NSObject {
         }
 
         if self.outbox.isEmpty {
-            self.timer?.invalidate()
+            self.outboxTimer?.invalidate()
             self.outboxDelivering = false
         }
     }
 
-    private func sendData(_ data: Data, messageType: MessageType, toPeers: [MCPeerID]?) {
+    fileprivate func sendData(_ data: Data, messageType: MessageType, toPeers: [MCPeerID]?) {
         guard let _ = self.session else {
             return
         }
@@ -190,8 +213,8 @@ class SCMultipeerManager: NSObject {
         if messageType == .broadcast {
             self.outbox.enqueue(data)
             if !self.outboxDelivering {
-                self.timer = Foundation.Timer.scheduledTimer(
-                    timeInterval: 0.1,
+                self.outboxTimer = Foundation.Timer.scheduledTimer(
+                    timeInterval: SCMultipeerManager.outboxProcessingFrequency,
                     target: self,
                     selector: #selector(SCMultipeerManager.deliver),
                     userInfo: nil,
@@ -253,7 +276,22 @@ extension SCMultipeerManager: MCSessionDelegate {
     func session(_ session: MCSession,
                  didReceive data: Data,
                  fromPeer peerID: MCPeerID) {
-        delegate?.didReceiveData(data, fromPeer: peerID)
+        self.dataInbox.enqueue(data)
+        self.peerIDInbox.enqueue(peerID)
+
+        if !self.inboxProcessing {
+            DispatchQueue.main.async {
+                self.inboxTimer = Foundation.Timer.scheduledTimer(
+                    timeInterval: SCMultipeerManager.inboxProcessingFrequency,
+                    target: self,
+                    selector: #selector(SCMultipeerManager.process),
+                    userInfo: nil,
+                    repeats: true
+                )
+
+                self.inboxProcessing = true
+            }
+        }
     }
 
     func session(_ session: MCSession,

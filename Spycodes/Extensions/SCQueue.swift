@@ -15,7 +15,7 @@ public struct SCQueue<T> {
     }
 
     public mutating func dequeue() -> T? {
-        guard let element = queue[head], head < queue.count else {
+        guard let element = queue[head], head < queue.count, !isEmpty else {
             return nil
         }
 
