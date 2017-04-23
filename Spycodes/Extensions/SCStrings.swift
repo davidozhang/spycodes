@@ -27,6 +27,7 @@ class SCStrings {
     static let minigame = "Minigame"
     static let timer = "Timer"
 
+    static let timeline = "Timeline"
     static let timelineEmptyState = "No events yet."
 
     static let normalAccessCodeStatus = "Enter access code"

@@ -1,5 +1,10 @@
 import UIKit
 
 class SCTimelineViewCell: SCTableViewCell {
-    @IBOutlet weak var notificationDot: UIImageView!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.primaryLabel.numberOfLines = 2
+        self.primaryLabel.lineBreakMode = .byTruncatingHead
+    }
 }

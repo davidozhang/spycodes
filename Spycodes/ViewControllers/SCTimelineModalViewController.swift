@@ -3,14 +3,23 @@ import UIKit
 class SCTimelineModalViewController: SCModalViewController {
     fileprivate var refreshTimer: Foundation.Timer?
     fileprivate var emptyStateLabel: UILabel?
+    fileprivate var scrolled = false
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var upArrowView: UIImageView!
 
     deinit {
         print("[DEINIT] " + NSStringFromClass(type(of: self)))
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 87.0
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +48,10 @@ class SCTimelineModalViewController: SCModalViewController {
         self.emptyStateLabel?.textAlignment = .center
         self.emptyStateLabel?.numberOfLines = 0
         self.emptyStateLabel?.center = self.view.center
+
+        if self.tableView.contentSize.height < self.tableView.bounds.height {
+            self.upArrowView.isHidden = true
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,6 +95,32 @@ class SCTimelineModalViewController: SCModalViewController {
 extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44.0
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if Timeline.instance.getEvents().count == 0 {
+            return nil
+        }
+
+        guard let sectionHeader = self.tableView.dequeueReusableCell(
+            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            ) as? SCSectionHeaderViewCell else {
+                return nil
+        }
+
+        sectionHeader.primaryLabel.text = SCStrings.timeline
+
+        if self.tableView.contentOffset.y > 0 {
+            sectionHeader.showBlurBackground()
+        } else {
+            sectionHeader.hideBlurBackground()
+        }
+
+        return sectionHeader
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -137,5 +176,27 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
         }
 
         return UITableViewCell()
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.tableView.contentOffset.y <= 0 {
+            self.upArrowView.isHidden = false
+        } else {
+            self.upArrowView.isHidden = true
+        }
+
+        if self.tableView.contentOffset.y > 0 {
+            if self.scrolled {
+                return
+            }
+            self.scrolled = true
+        } else {
+            if !self.scrolled {
+                return
+            }
+            self.scrolled = false
+        }
+
+        self.tableView.reloadData()
     }
 }
