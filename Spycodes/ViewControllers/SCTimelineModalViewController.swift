@@ -142,7 +142,7 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                    let clue = parameters[SCConstants.coding.clue.rawValue] as? String,
                    let numberOfWords = parameters[SCConstants.coding.numberOfWords.rawValue] as? String {
                     let attributedString = NSMutableAttributedString(
-                        string: name + " set clue '" + clue + " " + numberOfWords + "'"
+                        string: name + " set the clue '" + clue + " " + numberOfWords + "'"
                     )
                     attributedString.addAttribute(
                         NSFontAttributeName,
@@ -158,7 +158,7 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 if let name = parameters[SCConstants.coding.name.rawValue] as? String,
                    let word = parameters[SCConstants.coding.word.rawValue] as? String {
                     let attributedString = NSMutableAttributedString(
-                        string: name + " selected '" + word + "'"
+                        string: name + " selected '" + word + "'."
                     )
                     attributedString.addAttribute(
                         NSFontAttributeName,
@@ -169,6 +169,23 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                         )
                     )
                     cell.primaryLabel.attributedText = attributedString
+                }
+            } else if event.getType() == .endRound {
+                if let name = parameters[SCConstants.coding.name.rawValue] as? String {
+                    let attributedString = NSMutableAttributedString(
+                        string: name + " ended the round."
+                    )
+                    attributedString.addAttribute(
+                        NSFontAttributeName,
+                        value: SCFonts.intermediateSizeFont(.bold) ?? 0,
+                        range: NSMakeRange(
+                            0,
+                            name.characters.count
+                        )
+                    )
+                    cell.primaryLabel.attributedText = attributedString
+                } else {
+                    cell.primaryLabel.text = "Round ended from timer expiry."
                 }
             }
 

@@ -486,7 +486,12 @@ class SCGameRoomViewController: SCViewController {
         Round.instance.endRound(Player.instance.getTeam())
         SCMultipeerManager.instance.broadcast(Round.instance)
 
-        self.broadcastEvent(.endRound)
+        SCViewController.broadcastEvent(
+            .endRound,
+            optional: [
+                SCConstants.coding.name.rawValue: Player.instance.getName() ?? ""
+            ]
+        )
     }
 
     fileprivate func broadcastEvent(_ eventType: Event.EventType) {
