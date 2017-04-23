@@ -362,8 +362,6 @@ class SCGameRoomViewController: SCViewController {
             self.clueTextField.text = SCStrings.defaultNonTurnClue
             self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
         }
-
-        // TODO: Timeline notification dot logic
     }
 
     fileprivate func updateTimer() {

@@ -147,11 +147,11 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 if let name = parameters[SCConstants.coding.name.rawValue] as? String,
                    let clue = parameters[SCConstants.coding.clue.rawValue] as? String,
                    let numberOfWords = parameters[SCConstants.coding.numberOfWords.rawValue] as? String {
-                    var baseString = name + " set the clue to '" + clue + " " + numberOfWords + "'."
+                    var baseString = String(format: SCStrings.clueSetTo, name, clue, numberOfWords)
                     var length = name.characters.count
 
                     if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
-                        baseString = "You set the clue to '" + clue + " " + numberOfWords + "'."
+                        baseString = String(format: SCStrings.clueSetTo, SCStrings.localPlayer, clue, numberOfWords)
                         length = 3
                     }
 
@@ -168,11 +168,11 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
             } else if event.getType() == .selectCard {
                 if let name = parameters[SCConstants.coding.name.rawValue] as? String,
                    let word = parameters[SCConstants.coding.word.rawValue] as? String {
-                    var baseString = name + " selected '" + word + "'."
+                    var baseString = String(format: SCStrings.selected, name, word)
                     var length = name.characters.count
 
                     if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
-                        baseString = "You selected '" + word + "'."
+                        baseString = String(format: SCStrings.selected, SCStrings.localPlayer, word)
                         length = 3
                     }
 
@@ -188,11 +188,11 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 }
             } else if event.getType() == .endRound {
                 if let name = parameters[SCConstants.coding.name.rawValue] as? String {
-                    var baseString = name + " ended the round."
+                    var baseString = String(format: SCStrings.roundEnded, name)
                     var length = name.characters.count
 
                     if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
-                        baseString = "You ended the round."
+                        baseString = String(format: SCStrings.roundEnded, SCStrings.localPlayer)
                         length = 3
                     }
 
@@ -209,7 +209,7 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                     )
                     cell.primaryLabel.attributedText = attributedString
                 } else {
-                    cell.primaryLabel.text = "Round ended from timer expiry."
+                    cell.primaryLabel.text = SCStrings.timerExpiry
                 }
             }
 
