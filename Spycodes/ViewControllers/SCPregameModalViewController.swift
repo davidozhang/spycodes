@@ -338,7 +338,7 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
                 SCMultipeerManager.instance.broadcast(Timer.instance)
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
                 SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
-                super.updateView()
+                super.updateModalAppearance()
                 self.tableView.reloadData()
                 self.delegate?.onNightModeToggleChanged()
             default:

@@ -256,21 +256,12 @@ extension SCSettingsViewController: SCToggleViewCellDelegate {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
+                SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
                 DispatchQueue.main.async {
-                    SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
-
-                    if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
-                        self.view.backgroundColor = UIColor.black
-                    } else {
-                        self.view.backgroundColor = UIColor.white
-                    }
-
-                    self.setNeedsStatusBarAppearanceUpdate()
+                    super.updateAppearance()
                 }
             case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
-                DispatchQueue.main.async {
-                    SCSettingsManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
-                }
+                SCSettingsManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
             default:
                 break
             }

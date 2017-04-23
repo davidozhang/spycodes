@@ -15,7 +15,7 @@ class SCModalViewController: SCViewController {
 
         self.view.isOpaque = false
 
-        self.updateView()
+        self.updateModalAppearance()
 
         let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(SCModalViewController.respondToSwipeGesture(gesture:)))
         swipeGestureRecognizer.direction = .down
@@ -37,7 +37,7 @@ class SCModalViewController: SCViewController {
         }
     }
 
-    func updateView() {
+    func updateModalAppearance() {
         if let view = self.view.viewWithTag(1) {
             view.removeFromSuperview()
         }

@@ -25,14 +25,7 @@ class SCViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let textFieldAppearance = UITextField.appearance()
-        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
-            textFieldAppearance.keyboardAppearance = .dark
-            self.view.backgroundColor = UIColor.black
-        } else {
-            textFieldAppearance.keyboardAppearance = .light
-            self.view.backgroundColor = UIColor.white
-        }
+        self.updateAppearance()
 
         NotificationCenter.default.addObserver(
             self,
@@ -144,6 +137,20 @@ class SCViewController: UIViewController {
                 self.performUnwindSegue(true, completionHandler: nil)
             }
         }
+    }
+
+    func updateAppearance() {
+        let textFieldAppearance = UITextField.appearance()
+
+        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+            textFieldAppearance.keyboardAppearance = .dark
+            self.view.backgroundColor = UIColor.black
+        } else {
+            textFieldAppearance.keyboardAppearance = .light
+            self.view.backgroundColor = UIColor.white
+        }
+
+        self.setNeedsStatusBarAppearanceUpdate()
     }
 
     func showDimView() {
