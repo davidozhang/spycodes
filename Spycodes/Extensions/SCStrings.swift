@@ -1,6 +1,7 @@
 class SCStrings {
     static let completed = "✅"
     static let incomplete = "❌"
+    static let triangleIndicator = "‣"
 
     static let updatePrompt = "A new version of Spycodes is available on the App Store. Download to get the latest features!"
 
@@ -26,6 +27,9 @@ class SCStrings {
     static let gameSettings = "Game Settings"
     static let minigame = "Minigame"
     static let timer = "Timer"
+
+    static let teamRed = "Team Red"
+    static let teamBlue = "Team Blue"
 
     static let timeline = "Timeline"
     static let timelineEmptyState = "No events yet."

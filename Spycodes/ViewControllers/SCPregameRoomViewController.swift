@@ -6,8 +6,8 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sectionLabels = [
-        "Team Red",
-        "Team Blue"
+        SCStrings.teamRed,
+        SCStrings.teamBlue
     ]
 
     fileprivate var readyButtonState: ReadyButtonState = .notReady
@@ -395,6 +395,7 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
     }
 }
 
+// MARK: SCPregameModalViewControllerDelegate
 extension SCPregameRoomViewController: SCPregameModalViewControllerDelegate {
     func onNightModeToggleChanged() {
         DispatchQueue.main.async {
@@ -465,7 +466,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         if Player.instance == playerAtIndex {
             if let name = playerAtIndex.getName() {
                 // Use same font for triangle to avoid position shift
-                let attributedString = NSMutableAttributedString(string: "‣ " + name)
+                let attributedString = NSMutableAttributedString(string: SCStrings.triangleIndicator + " " + name)
                 attributedString.addAttribute(
                     NSFontAttributeName,
                     value: SCFonts.intermediateSizeFont(.ultraLight) ?? 0,
@@ -475,8 +476,13 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.primaryLabel.attributedText = attributedString
             }
 
-            if GameMode.instance.getMode() == .miniGame {}
-        } else {}
+            cell.changeTeamButton.isHidden = false
+            if GameMode.instance.getMode() == .miniGame {
+                cell.changeTeamButton.isHidden = true
+            }
+        } else {
+            cell.changeTeamButton.isHidden = true
+        }
 
         if playerAtIndex.isLeader() {
             cell.leaderImage.image = UIImage(named: "Crown-Filled")

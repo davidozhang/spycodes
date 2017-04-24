@@ -135,6 +135,7 @@ class Room: NSObject, NSCoding {
             return
         }
 
+        player.setTeam(team: team)
         self.players[team.rawValue].append(player)
     }
 
@@ -175,11 +176,8 @@ class Room: NSObject, NSCoding {
 
     // MARK: Modifiers
     func autoAssignLeaderForTeam(_ team: Team) {
-        for player in self.players[team.rawValue] {
-            if player.getTeam() == team {
-                player.setIsLeader(true)
-                return
-            }
+        if self.players[team.rawValue].count > 0 {
+            self.players[team.rawValue][0].setIsLeader(true)
         }
     }
 
@@ -199,6 +197,8 @@ class Room: NSObject, NSCoding {
             for player in players {
                 player.setIsLeader(false)
                 player.setTeam(team: .red)
+                self.removePlayerWithUUID(player.getUUID())
+                self.addPlayer(player, team: Team.red)
             }
         }
     }
