@@ -9,7 +9,6 @@ class SCTimelineModalViewController: SCModalViewController {
     @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet weak var upArrowView: UIImageView!
 
     deinit {
         print("[DEINIT] " + NSStringFromClass(type(of: self)))
@@ -48,8 +47,6 @@ class SCTimelineModalViewController: SCModalViewController {
         self.emptyStateLabel?.textAlignment = .center
         self.emptyStateLabel?.numberOfLines = 0
         self.emptyStateLabel?.center = self.view.center
-
-        self.upArrowView.isHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,12 +77,6 @@ class SCTimelineModalViewController: SCModalViewController {
                 self.tableView.backgroundView = self.emptyStateLabel
             } else {
                 self.tableView.backgroundView = nil
-            }
-
-            if self.tableView.contentSize.height < self.tableView.bounds.height {
-                self.upArrowView.isHidden = true
-            } else {
-                self.upArrowView.isHidden = false
             }
         }
     }
@@ -227,12 +218,6 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.tableView.contentOffset.y <= 0 {
-            self.upArrowView.isHidden = false
-        } else {
-            self.upArrowView.isHidden = true
-        }
-
         if self.tableView.contentOffset.y > 0 {
             if self.scrolled {
                 return
