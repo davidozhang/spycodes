@@ -148,6 +148,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
 
     func tableView(_ tableView: UITableView,
                    heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // TODO: Use UITableViewAutomaticDimension
         switch indexPath.section {
         case Section.help.rawValue:
             return 60.0

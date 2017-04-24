@@ -48,9 +48,9 @@ class SCStrings {
 
     static let leaderNominationInfo = "ℹ️ Tap on a teammate to nominate as leader."
     static let minigameTeamSizeUnsatisfiedInfo = "Your team should have 2-3 players."
-    static let minigameTeamSizeSatisfiedInfo = "Your team has 2-3 players."
+    static let minigameTeamSizeSatisfiedInfo = "Your team currently has 2-3 players."
     static let regularGameTeamSizeUnsatisfiedInfo = "Each team should have 2-4 players."
-    static let regularGameTeamSizeSatisfiedInfo = "Each team has 2-4 players."
+    static let regularGameTeamSizeSatisfiedInfo = "Each team currently has 2-4 players."
 
     static let accessCodeHeader = "Access Code: "
 
