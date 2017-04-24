@@ -78,7 +78,7 @@ class SCGameRoomViewController: SCViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(SCGameRoomViewController.showNotificationDot),
+            selector: #selector(SCGameRoomViewController.showNotificationDotIfNeeded),
             name: NSNotification.Name(rawValue: SCConstants.notificationKey.timelineUpdated.rawValue),
             object: nil
         )
@@ -581,7 +581,11 @@ class SCGameRoomViewController: SCViewController {
     }
 
     @objc
-    fileprivate func showNotificationDot() {
+    fileprivate func showNotificationDotIfNeeded() {
+        if let _ = self.presentedViewController {
+            return
+        }
+
         self.notificationDot.isHidden = false
     }
 
