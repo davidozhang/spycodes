@@ -30,6 +30,7 @@ class SCStrings {
 
     static let teamRed = "Team Red"
     static let teamBlue = "Team Blue"
+    static let teamEmptyState = "No players on the team."
 
     static let timeline = "Timeline"
     static let timelineEmptyState = "No events yet."

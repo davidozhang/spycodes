@@ -440,14 +440,36 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             return 0
         }
 
+        // 1 accounts for the team empty state cell
+        if Room.instance.getPlayers()[section].count == 0 {
+            return 1
+        }
+
         return Room.instance.getPlayers()[section].count
     }
 
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section > 1 {
+            return UITableViewCell()
+        }
+
+        // Team empty state cell
+        if Room.instance.getPlayers()[indexPath.section].count == 0 {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: SCConstants.identifier.pregameRoomTeamEmptyStateViewCell.rawValue
+                ) as? SCTableViewCell else {
+                    return UITableViewCell()
+            }
+
+            cell.primaryLabel.text = SCStrings.teamEmptyState
+
+            return cell
+        }
+
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: SCConstants.identifier.pregameRoomViewCell.rawValue
-        ) as? SCPregameRoomViewCell, indexPath.section <= 1 else {
+        ) as? SCPregameRoomViewCell else {
             return UITableViewCell()
         }
 

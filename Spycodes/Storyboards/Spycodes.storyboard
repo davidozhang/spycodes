@@ -804,6 +804,30 @@
                                             <outlet property="primaryLabel" destination="d84-Az-a9v" id="gOv-KW-UwS"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pregame-room-team-empty-state-view-cell" id="hij-HO-082" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="116" width="1024" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hij-HO-082" id="g1h-6L-mO9">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No players on the team yet. Add yourself?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xni-IZ-iQ2" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="0.0" width="319" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Xni-IZ-iQ2" firstAttribute="leading" secondItem="g1h-6L-mO9" secondAttribute="leading" constant="4" id="Qxk-O6-zs0"/>
+                                                <constraint firstItem="Xni-IZ-iQ2" firstAttribute="top" secondItem="g1h-6L-mO9" secondAttribute="top" id="eOI-Xe-hiw"/>
+                                                <constraint firstAttribute="bottom" secondItem="Xni-IZ-iQ2" secondAttribute="bottom" id="j8W-Ja-e4j"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="primaryLabel" destination="Xni-IZ-iQ2" id="WCE-dq-yUT"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wg9-oN-c0G" userLabel="Bottom View">
