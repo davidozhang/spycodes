@@ -5,9 +5,16 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var broadcastTimer: Foundation.Timer?
     fileprivate var refreshTimer: Foundation.Timer?
 
+    fileprivate let sectionLabels = [
+        SCStrings.teamRed,
+        SCStrings.teamBlue
+    ]
+
     fileprivate var readyButtonState: ReadyButtonState = .notReady
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var accessCodeLabel: SCNavigationBarLabel!
     @IBOutlet weak var readyButton: SCButton!
     @IBOutlet weak var swipeUpButton: UIButton!
@@ -78,6 +85,9 @@ class SCPregameRoomViewController: SCViewController {
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
+        self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
+        self.tableView.layoutIfNeeded()
 
         SCMultipeerManager.instance.delegate = self
 
@@ -163,7 +173,7 @@ class SCPregameRoomViewController: SCViewController {
     @objc
     fileprivate func refreshView() {
         DispatchQueue.main.async(execute: {
-            Room.instance.refresh()
+            Room.instance.applyRanking()
             self.tableView.reloadData()
             self.checkRoom()
 
@@ -279,7 +289,7 @@ class SCPregameRoomViewController: SCViewController {
             SCConstants.constant.roomMaxSize.rawValue :
             SCConstants.constant.roomMaxSize.rawValue + 1     // Account for additional CPU player in minigame
 
-        if Room.instance.getPlayers().count >= maxRoomSize {
+        if Room.instance.getPlayerCount() >= maxRoomSize {
             SCMultipeerManager.instance.stopAdvertiser()
             SCMultipeerManager.instance.stopBrowser()
         } else {
@@ -326,7 +336,7 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
         case let synchronizedObject as Player:
             Room.instance.addConnectedPeer(peerID: peerID, uuid: synchronizedObject.getUUID())
             if Player.instance.isHost() {
-                Room.instance.addPlayer(synchronizedObject)
+                Room.instance.addPlayer(synchronizedObject, team: Team.red)
             }
         case let synchronizedObject as Room:
             Room.instance = synchronizedObject
@@ -375,15 +385,17 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
 
 // MARK: SCPregameRoomViewCellDelegate
 extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
-    func teamUpdatedAtIndex(_ index: Int, newTeam: Team) {
-        let playerAtIndex = Room.instance.getPlayers()[index]
-
-        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setTeam(team: newTeam)
-        Room.instance.getPlayerWithUUID(playerAtIndex.getUUID())?.setIsLeader(false)
-        SCMultipeerManager.instance.broadcast(Room.instance)
+    func teamUpdatedForPlayerWithUUID(_ uuid: String, newTeam: Team) {
+        if let player = Room.instance.getPlayerWithUUID(uuid) {
+            player.setIsLeader(false)
+            Room.instance.removePlayerWithUUID(uuid)
+            Room.instance.addPlayer(player, team: newTeam)
+            SCMultipeerManager.instance.broadcast(Room.instance)
+        }
     }
 }
 
+// MARK: SCPregameModalViewControllerDelegate
 extension SCPregameRoomViewController: SCPregameModalViewControllerDelegate {
     func onNightModeToggleChanged() {
         DispatchQueue.main.async {
@@ -394,15 +406,74 @@ extension SCPregameRoomViewController: SCPregameModalViewControllerDelegate {
 
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
+    func tableView(_ tableView: UITableView,
+                   heightForHeaderInSection section: Int) -> CGFloat {
+        return 44.0
+    }
+
+    func tableView(_ tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
+        guard let sectionHeader = self.tableView.dequeueReusableCell(
+            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            ) as? SCSectionHeaderViewCell else {
+                return nil
+        }
+
+        sectionHeader.primaryLabel.text = self.sectionLabels[section]
+
+        if self.tableView.contentOffset.y > 0 {
+            sectionHeader.showBlurBackground()
+        } else {
+            sectionHeader.hideBlurBackground()
+        }
+
+        return sectionHeader
+    }
+
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        if section > 1 {
+            return 0
+        }
+
+        // 1 accounts for the team empty state cell
+        if Room.instance.getPlayers()[section].count == 0 {
+            return 1
+        }
+
+        return Room.instance.getPlayers()[section].count
+    }
+
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section > 1 {
+            return UITableViewCell()
+        }
+
+        // Team empty state cell
+        if Room.instance.getPlayers()[indexPath.section].count == 0 {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: SCConstants.identifier.pregameRoomTeamEmptyStateViewCell.rawValue
+                ) as? SCTableViewCell else {
+                    return UITableViewCell()
+            }
+
+            cell.primaryLabel.text = SCStrings.teamEmptyState
+
+            return cell
+        }
+
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: SCConstants.identifier.pregameRoomViewCell.rawValue
         ) as? SCPregameRoomViewCell else {
             return UITableViewCell()
         }
 
-        let playerAtIndex = Room.instance.getPlayers()[indexPath.row]
+        let playerAtIndex = Room.instance.getPlayers()[indexPath.section][indexPath.row]
 
         if playerAtIndex.isReady() {
             cell.primaryLabel.font = SCFonts.intermediateSizeFont(.bold)
@@ -411,19 +482,15 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         cell.primaryLabel.text = playerAtIndex.getName()
-        cell.index = indexPath.row
+        cell.uuid = playerAtIndex.getUUID()
         cell.delegate = self
-
-        if playerAtIndex.getTeam() == .red {
-            cell.segmentedControl.selectedSegmentIndex = 0
-        } else {
-            cell.segmentedControl.selectedSegmentIndex = 1
-        }
 
         if Player.instance == playerAtIndex {
             if let name = playerAtIndex.getName() {
                 // Use same font for triangle to avoid position shift
-                let attributedString = NSMutableAttributedString(string: "‣ " + name)
+                let attributedString = NSMutableAttributedString(
+                    string: String(format: SCStrings.localPlayerIndicator, name)
+                )
                 attributedString.addAttribute(
                     NSFontAttributeName,
                     value: SCFonts.intermediateSizeFont(.ultraLight) ?? 0,
@@ -433,20 +500,30 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.primaryLabel.attributedText = attributedString
             }
 
-            cell.segmentedControl.isEnabled = true
-
+            cell.changeTeamButton.isHidden = false
             if GameMode.instance.getMode() == .miniGame {
-                cell.segmentedControl.isEnabled = false
+                cell.changeTeamButton.isHidden = true
             }
         } else {
-            cell.segmentedControl.isEnabled = false
+            cell.changeTeamButton.isHidden = true
         }
 
         if playerAtIndex.isLeader() {
             cell.leaderImage.image = UIImage(named: "Crown-Filled")
             cell.leaderImage.isHidden = false
+            cell.leaderImageLeadingSpaceConstraint.constant =
+            min(
+                cell.frame.size.width - cell.changeTeamButton.frame.width - 24,
+                cell.primaryLabel.intrinsicContentSize.width + 4
+            )
+
+            // Rotate the leader image
+            let angle = CGFloat(45 * Double.pi / 180)
+            let transform = CGAffineTransform.identity.rotated(by: angle)
+            cell.leaderImage.transform = transform
         } else {
             cell.leaderImage.isHidden = true
+            cell.leaderImageLeadingSpaceConstraint.constant = 0
         }
 
         return cell
@@ -454,7 +531,11 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        let playerAtIndex = Room.instance.getPlayers()[indexPath.row]
+        if indexPath.section > 1 {
+            return
+        }
+
+        let playerAtIndex = Room.instance.getPlayers()[indexPath.section][indexPath.row]
         let team = playerAtIndex.getTeam()
 
         if Player.instance.getTeam() != team {
@@ -469,21 +550,12 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             }
         }
 
-        Room.instance.getPlayers()[indexPath.row].setIsLeader(true)
+        Room.instance.getPlayers()[indexPath.section][indexPath.row].setIsLeader(true)
 
         if Player.instance.getUUID() == playerAtIndex.getUUID() {
             Player.instance.setIsLeader(true)
         }
 
         self.broadcastEssentialData()
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
-        return Room.instance.getPlayers().count
     }
 }

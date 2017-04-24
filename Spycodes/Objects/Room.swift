@@ -6,8 +6,7 @@ class Room: NSObject, NSCoding {
     static let accessCodeAllowedCharacters: NSString = "abcdefghijklmnopqrstuvwxyz"
     fileprivate static let cpuUUID = SCStrings.cpu
 
-    fileprivate var name: String
-    fileprivate var players = [Player]()
+    fileprivate var players = [[Player](), [Player]()]
     fileprivate var connectedPeers = [MCPeerID: String]()
 
     fileprivate var uuid: String
@@ -17,16 +16,13 @@ class Room: NSObject, NSCoding {
     override init() {
         self.uuid = UUID().uuidString
         self.accessCode = Room.generateAccessCode()
-        self.name = self.accessCode
     }
 
-    convenience init(name: String,
-                     uuid: String,
+    convenience init(uuid: String,
                      accessCode: String,
-                     players: [Player],
+                     players: [[Player]],
                      connectedPeers: [MCPeerID: String]) {
         self.init()
-        self.name = name
         self.uuid = uuid
         self.accessCode = accessCode
         self.players = players
@@ -40,7 +36,6 @@ class Room: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.name, forKey: SCConstants.coding.name.rawValue)
         aCoder.encode(self.uuid, forKey: SCConstants.coding.uuid.rawValue)
         aCoder.encode(self.players, forKey: SCConstants.coding.players.rawValue)
         aCoder.encode(self.connectedPeers, forKey: SCConstants.coding.connectedPeers.rawValue)
@@ -48,14 +43,12 @@ class Room: NSObject, NSCoding {
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        guard let name = aDecoder.decodeObject(forKey: SCConstants.coding.name.rawValue) as? String,
-              let uuid = aDecoder.decodeObject(forKey: SCConstants.coding.uuid.rawValue) as? String,
-              let players = aDecoder.decodeObject(forKey: SCConstants.coding.players.rawValue) as? [Player],
+        guard let uuid = aDecoder.decodeObject(forKey: SCConstants.coding.uuid.rawValue) as? String,
+              let players = aDecoder.decodeObject(forKey: SCConstants.coding.players.rawValue) as? [[Player]],
               let connectedPeers = aDecoder.decodeObject(forKey: SCConstants.coding.connectedPeers.rawValue) as? [MCPeerID: String],
               let accessCode = aDecoder.decodeObject(forKey: SCConstants.coding.accessCode.rawValue) as? String else { return nil }
 
         self.init(
-            name: name,
             uuid: uuid,
             accessCode: accessCode,
             players: players,
@@ -64,41 +57,14 @@ class Room: NSObject, NSCoding {
     }
 
     // MARK: Public
-    func getName() -> String {
-        return self.name
+
+    // MARK: Generator
+    func generateNewAccessCode() {
+        self.accessCode = Room.generateAccessCode()
     }
 
-    func getPlayers() -> [Player] {
-        return self.players
-    }
-
-    func addConnectedPeer(peerID: MCPeerID, uuid: String) {
-        self.connectedPeers[peerID] = uuid
-    }
-
-    func getUUIDWithPeerID(peerID: MCPeerID) -> String? {
-        return self.connectedPeers[peerID]
-    }
-
-    func removeConnectedPeer(peerID: MCPeerID) {
-        self.connectedPeers.removeValue(forKey: peerID)
-    }
-
-    func removeAllPlayers() {
-        self.players.removeAll()
-    }
-
-    func refresh() {
-        self.players.sort(by: { player1, player2 in
-            if player1.getTeam().rawValue < player2.getTeam().rawValue {
-                return true
-            } else if player1.getTeam().rawValue == player2.getTeam().rawValue {
-                return player1.isLeader()
-            } else {
-                return false
-            }
-        })
-
+    // MARK: In-place Modification
+    func applyRanking() {
         if self.getLeaderUUIDForTeam(.red) == nil {
             self.autoAssignLeaderForTeam(.red)
         }
@@ -106,11 +72,24 @@ class Room: NSObject, NSCoding {
         if self.getLeaderUUIDForTeam(.blue) == nil {
             self.autoAssignLeaderForTeam(.blue)
         }
+
+        self.players[Team.red.rawValue].sort(by: { player1, player2 in
+            return player1.isLeader()
+        })
+
+        self.players[Team.blue.rawValue].sort(by: { player1, player2 in
+            return player1.isLeader()
+        })
     }
 
-    func generateNewAccessCode() {
-        self.accessCode = Room.generateAccessCode()
-        self.name = self.accessCode
+    // MARK: Getters
+    func getPlayers() -> [[Player]] {
+        return self.players
+    }
+
+    func getPlayerCount() -> Int {
+        return self.players[Team.red.rawValue].count +
+            self.players[Team.blue.rawValue].count
     }
 
     func getUUID() -> String {
@@ -121,8 +100,43 @@ class Room: NSObject, NSCoding {
         return self.accessCode
     }
 
-    func addPlayer(_ player: Player) {
-        self.players.append(player)
+    func getPlayerWithUUID(_ uuid: String) -> Player? {
+        for players in players {
+            let filtered = players.filter({
+                ($0 as Player).getUUID() == uuid
+            })
+
+            if filtered.count == 1 {
+                return filtered[0]
+            }
+        }
+
+        return nil
+    }
+
+    func getLeaderUUIDForTeam(_ team: Team) -> String? {
+        let filtered = self.players[team.rawValue].filter({
+            ($0 as Player).isLeader() && ($0 as Player).getTeam() == team
+        })
+        if filtered.count == 1 {
+            return filtered[0].getUUID()
+        } else {
+            return nil
+        }
+    }
+
+    func getUUIDWithPeerID(peerID: MCPeerID) -> String? {
+        return self.connectedPeers[peerID]
+    }
+
+    // MARK: Adders
+    func addPlayer(_ player: Player, team: Team) {
+        if let _ = self.getPlayerWithUUID(player.getUUID()) {
+            return
+        }
+
+        player.setTeam(team: team)
+        self.players[team.rawValue].append(player)
     }
 
     func addCPUPlayer() {
@@ -134,55 +148,82 @@ class Room: NSObject, NSCoding {
             host: false,
             ready: true
         )
-        self.players.append(cpu)
+        self.addPlayer(cpu, team: Team.blue)
+    }
+
+    func addConnectedPeer(peerID: MCPeerID, uuid: String) {
+        self.connectedPeers[peerID] = uuid
+    }
+
+    // MARK: Removers
+    func removeConnectedPeer(peerID: MCPeerID) {
+        self.connectedPeers.removeValue(forKey: peerID)
     }
 
     func removeCPUPlayer() {
         self.removePlayerWithUUID(Room.cpuUUID)
     }
 
-    func autoAssignLeaderForTeam(_ team: Team) {
-        for player in self.players {
-            if player.getTeam() == team {
-                player.setIsLeader(true)
-                return
-            }
-        }
-    }
-
-    func getPlayerWithUUID(_ uuid: String) -> Player? {
-        let filtered = self.players.filter({
-            ($0 as Player).getUUID() == uuid
-        })
-        if filtered.count == 1 {
-            return filtered[0]
-        } else {
-            return nil
-        }
-    }
-
-    func hasHost() -> Bool {
-        return self.players.filter({
-            ($0 as Player).isHost()
-        }).count == 1
-    }
-
     func removePlayerWithUUID(_ uuid: String) {
-        self.players = self.players.filter({
+        self.players[Team.red.rawValue] = self.players[Team.red.rawValue].filter({
+            ($0 as Player).getUUID() != uuid
+        })
+
+        self.players[Team.blue.rawValue] = self.players[Team.blue.rawValue].filter({
             ($0 as Player).getUUID() != uuid
         })
     }
 
-    func playerWithUUIDInRoom(_ uuid: String) -> Bool {
-        return self.getPlayerWithUUID(uuid) != nil
+    // MARK: Modifiers
+    func autoAssignLeaderForTeam(_ team: Team) {
+        if self.players[team.rawValue].count > 0 {
+            self.players[team.rawValue][0].setIsLeader(true)
+        }
+    }
+
+    func cancelReadyForAllPlayers() {
+        for players in self.players {
+            for player in players {
+                if player.getUUID() == Room.cpuUUID {
+                    continue
+                }
+                player.setIsReady(false)
+            }
+        }
+    }
+
+    func resetPlayers() {
+        for players in self.players {
+            for player in players {
+                player.setIsLeader(false)
+                player.setTeam(team: .red)
+                self.removePlayerWithUUID(player.getUUID())
+                self.addPlayer(player, team: Team.red)
+            }
+        }
+    }
+
+    func reset() {
+        self.players[Team.red.rawValue].removeAll()
+        self.players[Team.blue.rawValue].removeAll()
+        self.connectedPeers.removeAll()
+    }
+
+    // MARK: Querying
+    func hasHost() -> Bool {
+        return self.players[Team.red.rawValue].filter({
+            ($0 as Player).isHost()
+        }).count == 1 || self.players[Team.blue.rawValue].filter({
+            ($0 as Player).isHost()
+        }).count == 1
     }
 
     func teamSizesValid() -> Bool {
         if GameMode.instance.getMode() == .regularGame {
-            let redValid = self.players.filter({
+            let redValid = self.players[Team.red.rawValue].filter({
                 ($0 as Player).getTeam() == .red
             }).count >= 2
-            let blueValid = self.players.filter({
+            let blueValid = self.players[Team.blue.rawValue].filter({
                 ($0 as Player).getTeam() == .blue
             }).count >= 2
 
@@ -191,9 +232,9 @@ class Room: NSObject, NSCoding {
             }
 
             return false
-        } else {    // Minigame
-            if self.players.count == 3 ||
-               self.players.count == 4 {
+        } else {
+            if self.players[Team.red.rawValue].count == 2 ||
+               self.players[Team.red.rawValue].count == 3 {
                 return true
             }
 
@@ -220,47 +261,17 @@ class Room: NSObject, NSCoding {
     }
 
     func allPlayersReady() -> Bool {
-        let readyPlayers = self.players.filter({
+        let readyPlayers = self.players[Team.red.rawValue].filter({
+            ($0 as Player).isReady()
+        }).count + self.players[Team.blue.rawValue].filter({
             ($0 as Player).isReady()
         }).count
 
-        return readyPlayers == Room.instance.players.count
+        return readyPlayers == self.getPlayerCount()
     }
 
     func canStartGame() -> Bool {
         return teamSizesValid() && leadersSelected() && allPlayersReady()
-    }
-
-    func getLeaderUUIDForTeam(_ team: Team) -> String? {
-        let filtered = self.players.filter({
-            ($0 as Player).isLeader() && ($0 as Player).getTeam() == team
-        })
-        if filtered.count == 1 {
-            return filtered[0].getUUID()
-        } else {
-            return nil
-        }
-    }
-
-    func cancelReadyForAllPlayers() {
-        for player in players {
-            if player.getUUID() == Room.cpuUUID {
-                continue
-            }
-            player.setIsReady(false)
-        }
-    }
-
-    func resetPlayers() {
-        for player in players {
-            player.setIsLeader(false)
-            player.setTeam(team: .red)
-        }
-    }
-
-    func reset() {
-        self.players.removeAll()
-        self.connectedPeers.removeAll()
     }
 
     // MARK: Private

@@ -723,15 +723,39 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="pregame-room-view-cell" id="PVh-e3-TPn" customClass="SCPregameRoomViewCell" customModule="Spycodes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="E7U-cE-ebk" userLabel="section-header-view-cell" customClass="SCSectionHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E7U-cE-ebk" id="1IL-pn-CxA">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuz-gN-j21" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="0.0" width="56" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="kuz-gN-j21" firstAttribute="leading" secondItem="1IL-pn-CxA" secondAttribute="leading" constant="4" id="KFD-El-6Cv"/>
+                                                <constraint firstAttribute="bottom" secondItem="kuz-gN-j21" secondAttribute="bottom" id="VFD-Oc-gPG"/>
+                                                <constraint firstItem="kuz-gN-j21" firstAttribute="top" secondItem="1IL-pn-CxA" secondAttribute="top" id="g0i-Ok-lqN"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="primaryLabel" destination="kuz-gN-j21" id="NyP-Dl-55X"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="pregame-room-view-cell" id="PVh-e3-TPn" customClass="SCPregameRoomViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PVh-e3-TPn" id="rq2-uF-F29">
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d84-Az-a9v" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="35" y="16" width="809" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d84-Az-a9v" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="22" width="966" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="300" id="xaW-k5-dCT"/>
                                                     </constraints>
@@ -744,41 +768,64 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="i4n-ia-kgW" userLabel="Segmented Control">
-                                                    <rect key="frame" x="860" y="8.5" width="83" height="29"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="83" id="IZP-7P-XMJ"/>
-                                                    </constraints>
-                                                    <segments>
-                                                        <segment title="Red"/>
-                                                        <segment title="Blue"/>
-                                                    </segments>
-                                                    <connections>
-                                                        <action selector="segmentedControlToggled:" destination="PVh-e3-TPn" eventType="valueChanged" id="5OG-Ej-yJy"/>
-                                                    </connections>
-                                                </segmentedControl>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Crown-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="4mv-rH-4Dm">
-                                                    <rect key="frame" x="959" y="7.5" width="30" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.5" width="15" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="Qqy-dE-Ufe"/>
-                                                        <constraint firstAttribute="width" constant="30" id="pZq-43-xl3"/>
+                                                        <constraint firstAttribute="height" constant="15" id="Qqy-dE-Ufe"/>
+                                                        <constraint firstAttribute="width" constant="15" id="pZq-43-xl3"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qs7-lh-8Kt" userLabel="Change Team Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="990" y="7" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="Gem-Jv-lyJ"/>
+                                                        <constraint firstAttribute="width" constant="30" id="Zaf-8k-ZBc"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Change"/>
+                                                    <connections>
+                                                        <action selector="onChangeTeamButtonTapped:" destination="PVh-e3-TPn" eventType="touchUpInside" id="a6n-Vu-Y9d"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="d84-Az-a9v" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" constant="4" id="1oP-67-mY5"/>
-                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="leading" secondItem="d84-Az-a9v" secondAttribute="trailing" constant="115" id="CUV-93-cU6"/>
-                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="leading" secondItem="i4n-ia-kgW" secondAttribute="trailing" constant="16" id="RhZ-Rz-agz"/>
-                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="WM6-wm-3dj"/>
-                                                <constraint firstItem="i4n-ia-kgW" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="cmK-aY-UgQ"/>
-                                                <constraint firstAttribute="trailing" secondItem="4mv-rH-4Dm" secondAttribute="trailing" constant="35" id="dXH-vQ-s4Q"/>
-                                                <constraint firstItem="d84-Az-a9v" firstAttribute="leading" secondItem="rq2-uF-F29" secondAttribute="leading" constant="35" id="unX-kK-LLJ"/>
+                                                <constraint firstItem="Qs7-lh-8Kt" firstAttribute="leading" secondItem="d84-Az-a9v" secondAttribute="trailing" constant="20" id="0Qy-6P-HhS"/>
+                                                <constraint firstItem="d84-Az-a9v" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="1oP-67-mY5"/>
+                                                <constraint firstAttribute="trailing" secondItem="Qs7-lh-8Kt" secondAttribute="trailing" constant="4" id="8Aw-0c-kZJ"/>
+                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="leading" secondItem="rq2-uF-F29" secondAttribute="leading" id="CYx-uZ-C5h"/>
+                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" constant="-14" id="WM6-wm-3dj"/>
+                                                <constraint firstItem="Qs7-lh-8Kt" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="nu4-QX-sr0"/>
+                                                <constraint firstItem="d84-Az-a9v" firstAttribute="leading" secondItem="rq2-uF-F29" secondAttribute="leading" constant="4" id="unX-kK-LLJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="changeTeamButton" destination="Qs7-lh-8Kt" id="5hz-Kv-Pbq"/>
                                             <outlet property="leaderImage" destination="4mv-rH-4Dm" id="hLC-Ao-0eC"/>
+                                            <outlet property="leaderImageLeadingSpaceConstraint" destination="CYx-uZ-C5h" id="4p7-73-Ymg"/>
                                             <outlet property="primaryLabel" destination="d84-Az-a9v" id="gOv-KW-UwS"/>
-                                            <outlet property="segmentedControl" destination="i4n-ia-kgW" id="4JJ-I9-yCa"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pregame-room-team-empty-state-view-cell" id="hij-HO-082" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="116" width="1024" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hij-HO-082" id="g1h-6L-mO9">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No players on the team yet. Add yourself?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xni-IZ-iQ2" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="0.0" width="319" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Xni-IZ-iQ2" firstAttribute="leading" secondItem="g1h-6L-mO9" secondAttribute="leading" constant="4" id="Qxk-O6-zs0"/>
+                                                <constraint firstItem="Xni-IZ-iQ2" firstAttribute="top" secondItem="g1h-6L-mO9" secondAttribute="top" id="eOI-Xe-hiw"/>
+                                                <constraint firstAttribute="bottom" secondItem="Xni-IZ-iQ2" secondAttribute="bottom" id="j8W-Ja-e4j"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="primaryLabel" destination="Xni-IZ-iQ2" id="WCE-dq-yUT"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -846,6 +893,8 @@
                         <outlet property="readyButton" destination="084-kN-Fki" id="kMu-UQ-07b"/>
                         <outlet property="swipeUpButton" destination="cRE-j4-AHm" id="9cS-B8-vjm"/>
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
+                        <outlet property="tableViewLeadingSpaceConstraint" destination="JyP-Fd-tkk" id="fGm-hU-E9O"/>
+                        <outlet property="tableViewTrailingSpaceConstraint" destination="jKW-MX-l9L" id="Dhs-xX-o3L"/>
                         <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-room" id="pzx-vK-usD"/>
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="4eT-dC-kfX"/>
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="access-code" unwindAction="unwindToAccessCode:" id="v3W-bc-vVR"/>
@@ -1642,6 +1691,7 @@
     </scenes>
     <resources>
         <image name="Back" width="100" height="100"/>
+        <image name="Change" width="50" height="50"/>
         <image name="Chevron-Down" width="50" height="50"/>
         <image name="Chevron-Up" width="50" height="50"/>
         <image name="Crown-Filled" width="100" height="100"/>

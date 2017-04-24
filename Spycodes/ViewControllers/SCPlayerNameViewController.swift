@@ -90,11 +90,8 @@ extension SCPlayerNameViewController: UITextFieldDelegate {
         if let name = self.userNameTextField.text, name.characters.count >= 1 {
             Player.instance.setName(name: name)
 
-            if Room.instance.getPlayerWithUUID(Player.instance.getUUID()) == nil {
-                Room.instance.addPlayer(Player.instance)
-            }
-
             if Player.instance.isHost() {
+                Room.instance.addPlayer(Player.instance, team: Team.red)
                 self.performSegue(withIdentifier: SCConstants.identifier.pregameRoom.rawValue, sender: self)
             } else {
                 self.performSegue(withIdentifier: SCConstants.identifier.accessCode.rawValue, sender: self)
