@@ -11,6 +11,7 @@ class SCPregameRoomViewCell: SCTableViewCell {
 
     @IBOutlet weak var changeTeamButton: SCImageButton!
     @IBOutlet weak var leaderImage: UIImageView!
+    @IBOutlet weak var leaderImageLeadingSpaceConstraint: NSLayoutConstraint!
 
     @IBAction func onChangeTeamButtonTapped(_ sender: Any) {
         if let uuid = self.uuid,
