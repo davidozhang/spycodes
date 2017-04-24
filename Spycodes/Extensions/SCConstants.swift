@@ -42,11 +42,11 @@ class SCConstants {
     enum identifier: String {
         case accessCode = "access-code"
         case accessibilityToggleViewCell = "accessibility-toggle-view-cell"
-        case checklistViewCell = "checklist-view-cell"
         case disclosureViewCell = "disclosure-view-cell"
         case gameRoom = "game-room"
         case gameRoomViewCell = "game-room-view-cell"
         case helpView = "help-view"
+        case helpViewCell = "help-view-cell"
         case mainMenu = "main-menu"
         case minigameToggleViewCell = "minigame-toggle-view-cell"
         case nightModeToggleViewCell = "night-mode-toggle-view-cell"
