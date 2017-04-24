@@ -466,7 +466,9 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         if Player.instance == playerAtIndex {
             if let name = playerAtIndex.getName() {
                 // Use same font for triangle to avoid position shift
-                let attributedString = NSMutableAttributedString(string: SCStrings.triangleIndicator + " " + name)
+                let attributedString = NSMutableAttributedString(
+                    string: String(format: SCStrings.localPlayerIndicator, name)
+                )
                 attributedString.addAttribute(
                     NSFontAttributeName,
                     value: SCFonts.intermediateSizeFont(.ultraLight) ?? 0,
