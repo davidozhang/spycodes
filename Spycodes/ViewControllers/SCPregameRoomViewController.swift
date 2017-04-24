@@ -509,18 +509,12 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         if playerAtIndex.isLeader() {
-            cell.leaderImage.image = UIImage(named: "Crown-Filled")
             cell.leaderImage.isHidden = false
             cell.leaderImageLeadingSpaceConstraint.constant =
             min(
                 cell.frame.size.width - cell.changeTeamButton.frame.width - 24,
                 cell.primaryLabel.intrinsicContentSize.width + 4
             )
-
-            // Rotate the leader image
-            let angle = CGFloat(45 * Double.pi / 180)
-            let transform = CGAffineTransform.identity.rotated(by: angle)
-            cell.leaderImage.transform = transform
         } else {
             cell.leaderImage.isHidden = true
             cell.leaderImageLeadingSpaceConstraint.constant = 0

@@ -13,6 +13,16 @@ class SCPregameRoomViewCell: SCTableViewCell {
     @IBOutlet weak var leaderImage: UIImageView!
     @IBOutlet weak var leaderImageLeadingSpaceConstraint: NSLayoutConstraint!
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        self.leaderImage.image = UIImage(named: "Crown-Filled")
+
+        let angle = CGFloat(45 * Double.pi / 180)
+        let transform = CGAffineTransform.identity.rotated(by: angle)
+        self.leaderImage.transform = transform
+    }
+
     @IBAction func onChangeTeamButtonTapped(_ sender: Any) {
         if let uuid = self.uuid,
            let oldTeam = Room.instance.getPlayerWithUUID(uuid)?.getTeam(),
