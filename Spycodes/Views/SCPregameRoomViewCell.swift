@@ -1,29 +1,17 @@
 import UIKit
 
 protocol SCPregameRoomViewCellDelegate: class {
-    func teamUpdatedAtIndex(_ index: Int, newTeam: Team)
+    func teamUpdatedForPlayerWithUUID(_ uuid: String, newTeam: Team)
 }
 
 class SCPregameRoomViewCell: SCTableViewCell {
     weak var delegate: SCPregameRoomViewCellDelegate?
 
-    var index: Int?
+    var uuid: String?
 
     @IBOutlet weak var leaderImage: UIImageView!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        self.segmentedControl.tintColor = UIColor.spycodesGrayColor()
-    }
-
-    @IBAction func segmentedControlToggled(_ sender: UISegmentedControl) {
-        if let index = self.index {
-            delegate?.teamUpdatedAtIndex(
-                index,
-                newTeam: Team(rawValue: segmentedControl.selectedSegmentIndex)!
-            )
-        }
     }
 }
