@@ -535,6 +535,11 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             return
         }
 
+        if let cell = self.tableView.cellForRow(at: indexPath) as? SCTableViewCell,
+           cell.reuseIdentifier == SCConstants.identifier.pregameRoomTeamEmptyStateViewCell.rawValue {
+            return
+        }
+
         let playerAtIndex = Room.instance.getPlayers()[indexPath.section][indexPath.row]
         let team = playerAtIndex.getTeam()
 
