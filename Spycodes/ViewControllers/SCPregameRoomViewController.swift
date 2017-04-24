@@ -540,6 +540,10 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             return
         }
 
+        if indexPath.row >= Room.instance.getPlayers()[indexPath.section].count {
+            return
+        }
+
         let playerAtIndex = Room.instance.getPlayers()[indexPath.section][indexPath.row]
         let team = playerAtIndex.getTeam()
 
