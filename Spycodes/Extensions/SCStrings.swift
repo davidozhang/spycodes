@@ -22,7 +22,7 @@ class SCStrings {
     static let website = "Website"
     static let github = "Github"
     static let icons8 = "Icons8"
-    static let checklist = "Checklist"
+    static let guide = "Guide"
     static let statistics = "Statistics"
     static let gameSettings = "Game Settings"
     static let minigame = "Minigame"
@@ -45,8 +45,11 @@ class SCStrings {
     static let pendingStatus = "Joining room..."
     static let failStatus = "Failed to join room"
 
-    static let minigameTeamSizeInfo = "Your team has 2-3 players."
-    static let regularGameTeamSizeInfo = "Each team has 2-4 players."
+    static let leaderNominationInfo = "ℹ️ Tap on a teammate to nominate as leader."
+    static let minigameTeamSizeUnsatisfiedInfo = "Your team should have 2-3 players."
+    static let minigameTeamSizeSatisfiedInfo = "Your team currently has 2-3 players."
+    static let regularGameTeamSizeUnsatisfiedInfo = "Each team should have 2-4 players."
+    static let regularGameTeamSizeSatisfiedInfo = "Each team currently has 2-4 players."
 
     static let accessCodeHeader = "Access Code: "
 
