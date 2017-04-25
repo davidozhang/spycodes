@@ -965,15 +965,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zes-Gf-0qn" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="0.0" width="70.5" height="44"/>
+                                                    <rect key="frame" x="4" y="6" width="70.5" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Zes-Gf-0qn" firstAttribute="top" secondItem="ufR-bE-BWq" secondAttribute="top" id="6dz-KU-EPS"/>
-                                                <constraint firstAttribute="bottom" secondItem="Zes-Gf-0qn" secondAttribute="bottom" id="Pd1-OX-sGr"/>
+                                                <constraint firstItem="Zes-Gf-0qn" firstAttribute="top" secondItem="ufR-bE-BWq" secondAttribute="top" constant="6" id="6dz-KU-EPS"/>
+                                                <constraint firstAttribute="bottom" secondItem="Zes-Gf-0qn" secondAttribute="bottom" constant="6" id="Pd1-OX-sGr"/>
                                                 <constraint firstItem="Zes-Gf-0qn" firstAttribute="leading" secondItem="ufR-bE-BWq" secondAttribute="leading" constant="4" id="cRL-5B-g2Y"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -989,16 +989,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwN-q6-e8C" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="0.0" width="1016" height="44"/>
+                                                    <rect key="frame" x="4" y="8" width="1016" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="OwN-q6-e8C" secondAttribute="bottom" id="Sta-Sw-wlA"/>
+                                                <constraint firstAttribute="bottom" secondItem="OwN-q6-e8C" secondAttribute="bottom" constant="8" id="Sta-Sw-wlA"/>
                                                 <constraint firstItem="OwN-q6-e8C" firstAttribute="leading" secondItem="uX1-2W-ufn" secondAttribute="leading" constant="4" id="XpJ-a9-eGE"/>
-                                                <constraint firstItem="OwN-q6-e8C" firstAttribute="top" secondItem="uX1-2W-ufn" secondAttribute="top" id="gfQ-l0-igc"/>
+                                                <constraint firstItem="OwN-q6-e8C" firstAttribute="top" secondItem="uX1-2W-ufn" secondAttribute="top" constant="8" id="gfQ-l0-igc"/>
                                                 <constraint firstAttribute="trailing" secondItem="OwN-q6-e8C" secondAttribute="trailing" constant="4" id="yya-qx-FGR"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1029,15 +1029,15 @@
                                             <outlet property="primaryLabel" destination="xAy-EP-dm2" id="JeP-ha-g6E"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="minigame-toggle-view-cell" rowHeight="87" id="pbQ-OS-3S7" userLabel="minigame-toggle-view-cell" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="204" width="1024" height="87"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="minigame-toggle-view-cell" rowHeight="58" id="pbQ-OS-3S7" userLabel="minigame-toggle-view-cell" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="204" width="1024" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pbQ-OS-3S7" id="jXh-xG-hjH">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="58"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Sf-a3-yqh">
-                                                    <rect key="frame" x="4" y="20.5" width="1004" height="46"/>
+                                                    <rect key="frame" x="4" y="6" width="1004" height="46"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbM-XM-lcc" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="52" height="21"/>
@@ -1058,15 +1058,16 @@
                                                         <constraint firstItem="jZN-JQ-tUk" firstAttribute="leading" secondItem="2Sf-a3-yqh" secondAttribute="leading" id="H3V-QY-G5C"/>
                                                         <constraint firstItem="bbM-XM-lcc" firstAttribute="leading" secondItem="2Sf-a3-yqh" secondAttribute="leading" id="ZzY-Vw-4AY"/>
                                                         <constraint firstAttribute="trailing" secondItem="jZN-JQ-tUk" secondAttribute="trailing" id="aKI-6d-YEd"/>
-                                                        <constraint firstItem="jZN-JQ-tUk" firstAttribute="top" secondItem="bbM-XM-lcc" secondAttribute="bottom" constant="4" id="fp0-FN-qDL"/>
                                                         <constraint firstItem="bbM-XM-lcc" firstAttribute="top" secondItem="2Sf-a3-yqh" secondAttribute="top" id="rRm-2V-kbg"/>
+                                                        <constraint firstItem="jZN-JQ-tUk" firstAttribute="top" secondItem="bbM-XM-lcc" secondAttribute="bottom" constant="4" id="xxC-KM-U0E"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="2Sf-a3-yqh" firstAttribute="top" secondItem="jXh-xG-hjH" secondAttribute="top" constant="6" id="0oe-0f-94m"/>
                                                 <constraint firstAttribute="trailing" secondItem="2Sf-a3-yqh" secondAttribute="trailing" constant="16" id="CiW-JP-kOF"/>
-                                                <constraint firstItem="2Sf-a3-yqh" firstAttribute="centerY" secondItem="jXh-xG-hjH" secondAttribute="centerY" id="mM9-Hu-a19"/>
                                                 <constraint firstItem="2Sf-a3-yqh" firstAttribute="leading" secondItem="jXh-xG-hjH" secondAttribute="leading" constant="4" id="rbv-BD-R3l"/>
+                                                <constraint firstAttribute="bottom" secondItem="2Sf-a3-yqh" secondAttribute="bottom" constant="6" id="upw-od-NeZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1074,23 +1075,23 @@
                                             <outlet property="secondaryLabel" destination="jZN-JQ-tUk" id="AWM-7f-HLy"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-toggle-view-cell" rowHeight="87" id="GEe-Mx-bLe" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="291" width="1024" height="87"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-toggle-view-cell" rowHeight="58" id="jHU-a4-F06" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="262" width="1024" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GEe-Mx-bLe" id="Bjf-5z-eSb">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="87"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jHU-a4-F06" id="JLi-ky-n7C">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="58"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E6D-7R-0vH">
-                                                    <rect key="frame" x="4" y="20.5" width="1004" height="46"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uC7-Js-FWd">
+                                                    <rect key="frame" x="4" y="6" width="1004" height="46"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2s-RZ-GPa" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UwW-8T-81L" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="52" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secondary Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7n-ua-HCb" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secondary Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iix-rb-01C" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="25" width="1004" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -1099,28 +1100,29 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="D7n-ua-HCb" firstAttribute="top" secondItem="u2s-RZ-GPa" secondAttribute="bottom" constant="4" id="Az2-LK-JoP"/>
-                                                        <constraint firstAttribute="bottom" secondItem="D7n-ua-HCb" secondAttribute="bottom" id="LSt-Dq-eif"/>
-                                                        <constraint firstItem="D7n-ua-HCb" firstAttribute="leading" secondItem="E6D-7R-0vH" secondAttribute="leading" id="Ng9-eu-rhx"/>
-                                                        <constraint firstAttribute="trailing" secondItem="D7n-ua-HCb" secondAttribute="trailing" id="RXb-25-TjI"/>
-                                                        <constraint firstItem="u2s-RZ-GPa" firstAttribute="leading" secondItem="E6D-7R-0vH" secondAttribute="leading" id="byH-g5-rho"/>
-                                                        <constraint firstItem="u2s-RZ-GPa" firstAttribute="top" secondItem="E6D-7R-0vH" secondAttribute="top" id="qYn-NZ-Zww"/>
+                                                        <constraint firstItem="UwW-8T-81L" firstAttribute="top" secondItem="uC7-Js-FWd" secondAttribute="top" id="3ld-Lw-6qs"/>
+                                                        <constraint firstItem="Iix-rb-01C" firstAttribute="top" secondItem="UwW-8T-81L" secondAttribute="bottom" constant="4" id="6QY-g6-LUe"/>
+                                                        <constraint firstItem="Iix-rb-01C" firstAttribute="leading" secondItem="uC7-Js-FWd" secondAttribute="leading" id="OFT-oo-X6U"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Iix-rb-01C" secondAttribute="trailing" id="P0W-L6-1yR"/>
+                                                        <constraint firstItem="UwW-8T-81L" firstAttribute="leading" secondItem="uC7-Js-FWd" secondAttribute="leading" id="PJh-UO-iRT"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Iix-rb-01C" secondAttribute="bottom" id="aPo-Nh-Zb1"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="E6D-7R-0vH" firstAttribute="leading" secondItem="Bjf-5z-eSb" secondAttribute="leading" constant="4" id="fZk-XR-OTQ"/>
-                                                <constraint firstAttribute="trailing" secondItem="E6D-7R-0vH" secondAttribute="trailing" constant="16" id="lOr-sf-fGt"/>
-                                                <constraint firstItem="E6D-7R-0vH" firstAttribute="centerY" secondItem="Bjf-5z-eSb" secondAttribute="centerY" id="nDE-IC-V6C"/>
+                                                <constraint firstAttribute="trailing" secondItem="uC7-Js-FWd" secondAttribute="trailing" constant="16" id="4QI-eC-Qzf"/>
+                                                <constraint firstItem="uC7-Js-FWd" firstAttribute="top" secondItem="JLi-ky-n7C" secondAttribute="top" constant="6" id="6sf-ab-rMl"/>
+                                                <constraint firstAttribute="bottom" secondItem="uC7-Js-FWd" secondAttribute="bottom" constant="6" id="flw-YK-L06"/>
+                                                <constraint firstItem="uC7-Js-FWd" firstAttribute="leading" secondItem="JLi-ky-n7C" secondAttribute="leading" constant="4" id="vPy-TN-shX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="primaryLabel" destination="u2s-RZ-GPa" id="baO-a3-m6J"/>
-                                            <outlet property="secondaryLabel" destination="D7n-ua-HCb" id="j35-vB-Dbr"/>
+                                            <outlet property="primaryLabel" destination="UwW-8T-81L" id="1zf-xx-3R2"/>
+                                            <outlet property="secondaryLabel" destination="Iix-rb-01C" id="31f-ZC-EOk"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="accessibility-toggle-view-cell" id="DhJ-T3-P3P" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="378" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="320" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DhJ-T3-P3P" id="cD3-s1-j63">
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>

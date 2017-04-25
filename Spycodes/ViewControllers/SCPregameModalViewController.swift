@@ -55,6 +55,12 @@ class SCPregameModalViewController: SCModalViewController {
     }
 
     // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 87.0
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -144,19 +150,6 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
         return 44.0
-    }
-
-    func tableView(_ tableView: UITableView,
-                   heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // TODO: Use UITableViewAutomaticDimension
-        switch indexPath.section {
-        case Section.help.rawValue:
-            return 60.0
-        case Section.gameSettings.rawValue:
-            return 88.0
-        default:
-            return 44.0
-        }
     }
 
     func tableView(_ tableView: UITableView,
