@@ -25,6 +25,10 @@ class Event: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
+        if let uuid = self.uuid {
+            aCoder.encode(uuid, forKey: SCConstants.coding.uuid.rawValue)
+        }
+
         if let type = self.type?.rawValue {
             aCoder.encode(type, forKey: SCConstants.coding.eventType.rawValue)
         }
@@ -40,6 +44,12 @@ class Event: NSObject, NSCoding {
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
+        if aDecoder.containsValue(forKey: SCConstants.coding.uuid.rawValue) {
+            if let uuid = aDecoder.decodeObject(forKey: SCConstants.coding.uuid.rawValue) as? String {
+                self.uuid = uuid
+            }
+        }
+
         if aDecoder.containsValue(forKey: SCConstants.coding.eventType.rawValue) {
             let type = aDecoder.decodeInteger(
                 forKey: SCConstants.coding.eventType.rawValue
