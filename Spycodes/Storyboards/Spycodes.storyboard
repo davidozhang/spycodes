@@ -1338,7 +1338,7 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vhy-Dr-vSM" userLabel="Top Bar View">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="97"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="103"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUf-TJ-d5l" userLabel="Back Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="15" y="24" width="35" height="35"/>
@@ -1445,24 +1445,24 @@
                                             <constraint firstAttribute="width" constant="25" id="411-X8-hR0"/>
                                             <constraint firstAttribute="height" constant="25" id="piC-o6-DIJ"/>
                                         </constraints>
-                                        <state key="normal" title="Button" image="Question"/>
+                                        <state key="normal" image="Question"/>
                                         <connections>
                                             <action selector="onHelpButtonTapped:" destination="yX4-d1-WHr" eventType="touchUpInside" id="eWY-A2-2E1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxl-gd-SeO" userLabel="Timeline Button">
-                                        <rect key="frame" x="949" y="28" width="27" height="27"/>
+                                        <rect key="frame" x="953" y="30" width="23" height="23"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="Bxb-Z0-LKP"/>
-                                            <constraint firstAttribute="width" constant="27" id="Yez-tm-hum"/>
+                                            <constraint firstAttribute="height" constant="23" id="Bxb-Z0-LKP"/>
+                                            <constraint firstAttribute="width" constant="23" id="Yez-tm-hum"/>
                                         </constraints>
-                                        <state key="normal" image="History"/>
+                                        <state key="normal" image="Clock"/>
                                         <connections>
                                             <action selector="onTimelineButtonTapped:" destination="yX4-d1-WHr" eventType="touchUpInside" id="6w4-TD-qKL"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notification-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="FZ4-VG-vhc">
-                                        <rect key="frame" x="968" y="29" width="5" height="5"/>
+                                        <rect key="frame" x="970" y="29" width="5" height="5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="5" id="ggJ-b8-hgv"/>
                                             <constraint firstAttribute="width" constant="5" id="kfF-eI-Kf8"/>
@@ -1474,11 +1474,11 @@
                                     <constraint firstAttribute="trailing" secondItem="8FH-JK-Uar" secondAttribute="trailing" constant="15" id="6AM-uh-pfZ"/>
                                     <constraint firstItem="scv-CB-Z0e" firstAttribute="top" secondItem="dUf-TJ-d5l" secondAttribute="bottom" constant="4" id="7wU-RE-aJk"/>
                                     <constraint firstItem="scv-CB-Z0e" firstAttribute="centerX" secondItem="Vhy-Dr-vSM" secondAttribute="centerX" id="KDs-5b-v6M"/>
-                                    <constraint firstAttribute="bottom" secondItem="scv-CB-Z0e" secondAttribute="bottom" constant="4" id="Ve6-4I-Lo6"/>
+                                    <constraint firstAttribute="bottom" secondItem="scv-CB-Z0e" secondAttribute="bottom" constant="10" id="Ve6-4I-Lo6"/>
                                     <constraint firstItem="FZ4-VG-vhc" firstAttribute="centerX" secondItem="lxl-gd-SeO" secondAttribute="centerX" constant="8" id="WdI-9Q-cfA"/>
                                     <constraint firstItem="FZ4-VG-vhc" firstAttribute="centerY" secondItem="lxl-gd-SeO" secondAttribute="centerY" constant="-10" id="YZJ-bd-HwR"/>
                                     <constraint firstItem="8FH-JK-Uar" firstAttribute="centerY" secondItem="dUf-TJ-d5l" secondAttribute="centerY" id="bNo-a8-hlC"/>
-                                    <constraint firstAttribute="height" constant="97" id="cP6-J4-cEl"/>
+                                    <constraint firstAttribute="height" constant="103" id="cP6-J4-cEl"/>
                                     <constraint firstItem="dUf-TJ-d5l" firstAttribute="top" secondItem="Vhy-Dr-vSM" secondAttribute="top" constant="24" id="ctG-Le-6na"/>
                                     <constraint firstItem="dUf-TJ-d5l" firstAttribute="leading" secondItem="Vhy-Dr-vSM" secondAttribute="leading" constant="15" id="g9s-yP-02L"/>
                                     <constraint firstItem="8FH-JK-Uar" firstAttribute="centerY" secondItem="lxl-gd-SeO" secondAttribute="centerY" id="qgq-Re-OrZ"/>
@@ -1488,19 +1488,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWW-d1-JFl" userLabel="Bottom Bar View">
-                                <rect key="frame" x="0.0" y="1289" width="1024" height="77"/>
+                                <rect key="frame" x="0.0" y="1284" width="1024" height="82"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bw4-Gi-FS4" userLabel="Timer View">
-                                        <rect key="frame" x="498" y="18" width="28" height="20"/>
+                                        <rect key="frame" x="495.5" y="18" width="33" height="25"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer" translatesAutoresizingMaskIntoConstraints="NO" id="IwY-ey-aZE">
-                                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="20" id="3uZ-EC-qmK"/>
+                                                    <constraint firstAttribute="width" constant="25" id="3uZ-EC-qmK"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5g-Ps-Ju2" userLabel="Timer Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                <rect key="frame" x="28" y="10" width="0.0" height="0.0"/>
+                                                <rect key="frame" x="33" y="12.5" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1508,18 +1508,18 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="03J-1v-qHl"/>
-                                            <constraint firstItem="IwY-ey-aZE" firstAttribute="centerY" secondItem="bw4-Gi-FS4" secondAttribute="centerY" id="07N-LA-LaF"/>
+                                            <constraint firstAttribute="height" constant="25" id="03J-1v-qHl"/>
                                             <constraint firstItem="C5g-Ps-Ju2" firstAttribute="centerY" secondItem="IwY-ey-aZE" secondAttribute="centerY" id="2Rz-ma-Ce9"/>
                                             <constraint firstItem="IwY-ey-aZE" firstAttribute="leading" secondItem="bw4-Gi-FS4" secondAttribute="leading" id="6sl-id-2A0"/>
                                             <constraint firstAttribute="trailing" secondItem="C5g-Ps-Ju2" secondAttribute="trailing" id="Bcm-Q5-zzB"/>
+                                            <constraint firstItem="IwY-ey-aZE" firstAttribute="centerY" secondItem="bw4-Gi-FS4" secondAttribute="centerY" id="Nsr-oP-noK"/>
                                             <constraint firstAttribute="bottom" secondItem="IwY-ey-aZE" secondAttribute="bottom" id="R5l-fJ-NRX"/>
                                             <constraint firstItem="C5g-Ps-Ju2" firstAttribute="leading" secondItem="IwY-ey-aZE" secondAttribute="trailing" constant="8" id="VgV-3J-ttC"/>
                                             <constraint firstItem="IwY-ey-aZE" firstAttribute="top" secondItem="bw4-Gi-FS4" secondAttribute="top" id="noR-Sa-dXX"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-Ow-5JW" userLabel="Action Button" customClass="SCRoundedButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="497.5" y="25" width="30" height="34"/>
+                                        <rect key="frame" x="497.5" y="30" width="30" height="34"/>
                                         <state key="normal">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -1532,7 +1532,7 @@
                                 <constraints>
                                     <constraint firstItem="bw4-Gi-FS4" firstAttribute="top" secondItem="hWW-d1-JFl" secondAttribute="top" constant="18" id="5rj-Um-TLS"/>
                                     <constraint firstItem="PlM-Ow-5JW" firstAttribute="centerX" secondItem="hWW-d1-JFl" secondAttribute="centerX" id="K6b-md-OZQ"/>
-                                    <constraint firstAttribute="height" constant="77" id="Rze-jR-htc"/>
+                                    <constraint firstAttribute="height" constant="82" id="Rze-jR-htc"/>
                                     <constraint firstAttribute="bottom" secondItem="PlM-Ow-5JW" secondAttribute="bottom" constant="18" id="b0F-3S-fOV"/>
                                     <constraint firstItem="bw4-Gi-FS4" firstAttribute="centerX" secondItem="hWW-d1-JFl" secondAttribute="centerX" id="rEA-7N-jm4"/>
                                 </constraints>
@@ -1684,9 +1684,9 @@
         <image name="Change" width="50" height="50"/>
         <image name="Chevron-Down" width="50" height="50"/>
         <image name="Chevron-Up" width="50" height="50"/>
+        <image name="Clock" width="50" height="50"/>
         <image name="Crown-Filled" width="100" height="100"/>
         <image name="Exit" width="42" height="42"/>
-        <image name="History" width="50" height="50"/>
         <image name="Moon" width="50" height="50"/>
         <image name="Next" width="100" height="100"/>
         <image name="Notification-Dot" width="300" height="300"/>
@@ -1696,7 +1696,7 @@
         <image name="Spy" width="290" height="280"/>
         <image name="Stack" width="100" height="100"/>
         <image name="Team" width="100" height="100"/>
-        <image name="Timer" width="100" height="100"/>
+        <image name="Timer" width="50" height="50"/>
         <image name="Up-Arrow-Circled" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
