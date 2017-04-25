@@ -2,7 +2,7 @@ import UIKit
 
 class SCViewController: UIViewController {
     static let tableViewMargin: CGFloat = 30
-    let animationDuration: TimeInterval = 0.75
+    let animationDuration: TimeInterval = 0.6
     let animationAlpha: CGFloat = 0.4
 
     var unwindableIdentifier: String = ""
