@@ -9,7 +9,7 @@ class SCPregameModalViewController: SCModalViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     enum Section: Int {
-        case help = 0
+        case guide = 0
         case statistics = 1
         case gameSettings = 2
         case customize = 3
@@ -26,7 +26,7 @@ class SCPregameModalViewController: SCModalViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .help: SCStrings.help,
+        .guide: SCStrings.guide,
         .statistics: SCStrings.statistics,
         .gameSettings: SCStrings.gameSettings,
         .customize: SCStrings.customize,
@@ -176,7 +176,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case Section.help.rawValue:
+        case Section.guide.rawValue:
             return 2
         case Section.statistics.rawValue:
             return 1
@@ -192,9 +192,9 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case Section.help.rawValue:
+        case Section.guide.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.helpViewCell.rawValue
+                withIdentifier: SCConstants.identifier.guideViewCell.rawValue
                 ) as? SCTableViewCell else {
                     return UITableViewCell()
             }
