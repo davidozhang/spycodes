@@ -6,9 +6,9 @@ class SCGameRoomViewController: SCViewController {
     fileprivate let minCellSpacing: CGFloat = 12
     fileprivate let modalWidth = UIScreen.main.bounds.width - 60
     fileprivate let modalHeight = UIScreen.main.bounds.height/2
-    fileprivate let bottomBarViewDefaultHeight: CGFloat = 77
-    fileprivate let timerViewDefaultHeight: CGFloat = 20
-    fileprivate let bottomBarViewExtendedHeight: CGFloat = 117
+    fileprivate let bottomBarViewDefaultHeight: CGFloat = 82
+    fileprivate let timerViewDefaultHeight: CGFloat = 25
+    fileprivate let bottomBarViewExtendedHeight: CGFloat = 121
 
     fileprivate var actionButtonState: ActionButtonState = .endRound
 
