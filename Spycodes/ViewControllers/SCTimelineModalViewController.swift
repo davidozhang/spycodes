@@ -109,6 +109,7 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 return nil
         }
 
+        sectionHeader.primaryLabel.font = SCFonts.regularSizeFont(.regular)
         sectionHeader.primaryLabel.text = SCStrings.timeline
 
         if self.tableView.contentOffset.y > 0 {
