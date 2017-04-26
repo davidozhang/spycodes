@@ -755,7 +755,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d84-Az-a9v" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="22" width="966" height="0.0"/>
+                                                    <rect key="frame" x="17" y="22" width="953" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="300" id="xaW-k5-dCT"/>
                                                     </constraints>
@@ -768,13 +768,6 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Crown-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="4mv-rH-4Dm">
-                                                    <rect key="frame" x="0.0" y="0.5" width="15" height="15"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="15" id="Qqy-dE-Ufe"/>
-                                                        <constraint firstAttribute="width" constant="15" id="pZq-43-xl3"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qs7-lh-8Kt" userLabel="Change Team Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
                                                     <rect key="frame" x="990" y="7" width="30" height="30"/>
                                                     <constraints>
@@ -786,22 +779,40 @@
                                                         <action selector="onChangeTeamButtonTapped:" destination="PVh-e3-TPn" eventType="touchUpInside" id="a6n-Vu-Y9d"/>
                                                     </connections>
                                                 </button>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEo-bZ-gPM" userLabel="Team Indicator View">
+                                                    <rect key="frame" x="5" y="2" width="4" height="40"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="4" id="sH1-hQ-fHq"/>
+                                                    </constraints>
+                                                </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Crown-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="4mv-rH-4Dm">
+                                                    <rect key="frame" x="9" y="0.5" width="15" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="Qqy-dE-Ufe"/>
+                                                        <constraint firstAttribute="width" constant="15" id="pZq-43-xl3"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Qs7-lh-8Kt" firstAttribute="leading" secondItem="d84-Az-a9v" secondAttribute="trailing" constant="20" id="0Qy-6P-HhS"/>
                                                 <constraint firstItem="d84-Az-a9v" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="1oP-67-mY5"/>
                                                 <constraint firstAttribute="trailing" secondItem="Qs7-lh-8Kt" secondAttribute="trailing" constant="4" id="8Aw-0c-kZJ"/>
-                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="leading" secondItem="rq2-uF-F29" secondAttribute="leading" id="CYx-uZ-C5h"/>
                                                 <constraint firstItem="4mv-rH-4Dm" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" constant="-14" id="WM6-wm-3dj"/>
+                                                <constraint firstAttribute="bottom" secondItem="hEo-bZ-gPM" secondAttribute="bottom" constant="2" id="YrR-9n-kUq"/>
+                                                <constraint firstItem="hEo-bZ-gPM" firstAttribute="leading" secondItem="rq2-uF-F29" secondAttribute="leading" constant="5" id="dhJ-lF-W5C"/>
+                                                <constraint firstItem="hEo-bZ-gPM" firstAttribute="top" secondItem="rq2-uF-F29" secondAttribute="top" constant="2" id="ldl-S8-Ogj"/>
                                                 <constraint firstItem="Qs7-lh-8Kt" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="nu4-QX-sr0"/>
-                                                <constraint firstItem="d84-Az-a9v" firstAttribute="leading" secondItem="rq2-uF-F29" secondAttribute="leading" constant="4" id="unX-kK-LLJ"/>
+                                                <constraint firstItem="d84-Az-a9v" firstAttribute="leading" secondItem="hEo-bZ-gPM" secondAttribute="trailing" constant="8" id="oPj-00-Ub5"/>
+                                                <constraint firstItem="4mv-rH-4Dm" firstAttribute="leading" secondItem="hEo-bZ-gPM" secondAttribute="trailing" id="qrK-O4-094"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="changeTeamButton" destination="Qs7-lh-8Kt" id="5hz-Kv-Pbq"/>
                                             <outlet property="leaderImage" destination="4mv-rH-4Dm" id="hLC-Ao-0eC"/>
-                                            <outlet property="leaderImageLeadingSpaceConstraint" destination="CYx-uZ-C5h" id="4p7-73-Ymg"/>
+                                            <outlet property="leaderImageLeadingSpaceConstraint" destination="qrK-O4-094" id="wIb-yy-qFm"/>
                                             <outlet property="primaryLabel" destination="d84-Az-a9v" id="gOv-KW-UwS"/>
+                                            <outlet property="teamIndicatorView" destination="hEo-bZ-gPM" id="UrF-MV-IHb"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pregame-room-team-empty-state-view-cell" id="hij-HO-082" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">

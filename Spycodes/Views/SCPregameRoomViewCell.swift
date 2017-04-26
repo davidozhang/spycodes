@@ -11,6 +11,8 @@ class SCPregameRoomViewCell: SCTableViewCell {
 
     @IBOutlet weak var changeTeamButton: SCImageButton!
     @IBOutlet weak var leaderImage: UIImageView!
+    @IBOutlet weak var teamIndicatorView: UIView!
+
     @IBOutlet weak var leaderImageLeadingSpaceConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {

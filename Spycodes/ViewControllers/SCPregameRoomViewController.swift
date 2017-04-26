@@ -475,26 +475,21 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
         let playerAtIndex = Room.instance.getPlayers()[indexPath.section][indexPath.row]
 
-        if playerAtIndex.isReady() {
-            cell.primaryLabel.font = SCFonts.intermediateSizeFont(.bold)
-        } else {
-            cell.primaryLabel.font = SCFonts.intermediateSizeFont(.regular)
-        }
-
         cell.primaryLabel.text = playerAtIndex.getName()
         cell.uuid = playerAtIndex.getUUID()
         cell.delegate = self
 
-        if Player.instance == playerAtIndex {
+        cell.teamIndicatorView.backgroundColor = UIColor.colorForTeam(playerAtIndex.getTeam())
+
+        if playerAtIndex == Player.instance {
             if let name = playerAtIndex.getName() {
-                // Use same font for triangle to avoid position shift
                 let attributedString = NSMutableAttributedString(
-                    string: String(format: SCStrings.localPlayerIndicator, name)
+                    string: name
                 )
                 attributedString.addAttribute(
                     NSFontAttributeName,
-                    value: SCFonts.intermediateSizeFont(.ultraLight) ?? 0,
-                    range: NSMakeRange(0, 2)
+                    value: SCFonts.intermediateSizeFont(.bold) ?? 0,
+                    range: NSMakeRange(0, name.characters.count)
                 )
 
                 cell.primaryLabel.attributedText = attributedString
@@ -508,12 +503,20 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             cell.changeTeamButton.isHidden = true
         }
 
+        if playerAtIndex.isReady() {
+            // TODO: Ready
+        } else {
+            // TODO: Not Ready
+        }
+
         if playerAtIndex.isLeader() {
             cell.leaderImage.isHidden = false
+
+            // TODO: Use deterministic numbers
             cell.leaderImageLeadingSpaceConstraint.constant =
             min(
-                cell.frame.size.width - cell.changeTeamButton.frame.width - 24,
-                cell.primaryLabel.intrinsicContentSize.width + 4
+                cell.frame.size.width - cell.changeTeamButton.frame.width - 30,
+                cell.primaryLabel.intrinsicContentSize.width + 8
             )
         } else {
             cell.leaderImage.isHidden = true
