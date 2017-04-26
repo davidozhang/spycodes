@@ -409,7 +409,7 @@ extension SCPregameRoomViewController: SCPregameModalViewControllerDelegate {
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return Room.instance.getPlayers().count
     }
 
     func tableView(_ tableView: UITableView,
@@ -419,6 +419,10 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
+        guard section < Room.instance.getPlayers().count else {
+            return UIView()
+        }
+
         guard let sectionHeader = self.tableView.dequeueReusableCell(
             withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
             ) as? SCSectionHeaderViewCell else {
@@ -439,7 +443,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        if section > 1 {
+        guard section < Room.instance.getPlayers().count else {
             return 0
         }
 
@@ -453,7 +457,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section > 1 {
+        guard indexPath.section < Room.instance.getPlayers().count else {
             return UITableViewCell()
         }
 
@@ -468,6 +472,10 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             cell.primaryLabel.text = SCStrings.teamEmptyState
 
             return cell
+        }
+
+        guard indexPath.row < Room.instance.getPlayers()[indexPath.section].count else {
+            return UITableViewCell()
         }
 
         guard let cell = tableView.dequeueReusableCell(
@@ -531,16 +539,13 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section > 1 {
+        guard indexPath.section < Room.instance.getPlayers().count,
+              indexPath.row < Room.instance.getPlayers()[indexPath.section].count else {
             return
         }
 
         if let cell = self.tableView.cellForRow(at: indexPath) as? SCTableViewCell,
            cell.reuseIdentifier == SCConstants.identifier.pregameRoomTeamEmptyStateViewCell.rawValue {
-            return
-        }
-
-        if indexPath.row >= Room.instance.getPlayers()[indexPath.section].count {
             return
         }
 

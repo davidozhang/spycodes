@@ -73,6 +73,10 @@ class Room: NSObject, NSCoding {
             self.autoAssignLeaderForTeam(.blue)
         }
 
+        guard self.players.count == SCConstants.constant.numberOfTeams.rawValue else {
+            return
+        }
+
         self.players[Team.red.rawValue].sort(by: { player1, player2 in
             return player1.isLeader()
         })
@@ -88,6 +92,10 @@ class Room: NSObject, NSCoding {
     }
 
     func getPlayerCount() -> Int {
+        guard self.players.count == SCConstants.constant.numberOfTeams.rawValue else {
+            return 0
+        }
+
         return self.players[Team.red.rawValue].count +
             self.players[Team.blue.rawValue].count
     }
@@ -101,7 +109,7 @@ class Room: NSObject, NSCoding {
     }
 
     func getPlayerWithUUID(_ uuid: String) -> Player? {
-        for players in players {
+        for players in self.players {
             let filtered = players.filter({
                 ($0 as Player).getUUID() == uuid
             })
@@ -115,6 +123,10 @@ class Room: NSObject, NSCoding {
     }
 
     func getLeaderUUIDForTeam(_ team: Team) -> String? {
+        guard team.rawValue < self.players.count else {
+            return nil
+        }
+
         let filtered = self.players[team.rawValue].filter({
             ($0 as Player).isLeader() && ($0 as Player).getTeam() == team
         })
@@ -131,6 +143,11 @@ class Room: NSObject, NSCoding {
 
     // MARK: Adders
     func addPlayer(_ player: Player, team: Team) {
+        guard self.players.count == SCConstants.constant.numberOfTeams.rawValue,
+              team.rawValue < self.players.count else {
+            return
+        }
+
         if let _ = self.getPlayerWithUUID(player.getUUID()) {
             return
         }
@@ -165,6 +182,10 @@ class Room: NSObject, NSCoding {
     }
 
     func removePlayerWithUUID(_ uuid: String) {
+        guard self.players.count == SCConstants.constant.numberOfTeams.rawValue else {
+            return
+        }
+
         self.players[Team.red.rawValue] = self.players[Team.red.rawValue].filter({
             ($0 as Player).getUUID() != uuid
         })
@@ -176,6 +197,10 @@ class Room: NSObject, NSCoding {
 
     // MARK: Modifiers
     func autoAssignLeaderForTeam(_ team: Team) {
+        guard team.rawValue < self.players.count else {
+            return
+        }
+
         if self.players[team.rawValue].count > 0 {
             self.players[team.rawValue][0].setIsLeader(true)
         }
@@ -204,6 +229,10 @@ class Room: NSObject, NSCoding {
     }
 
     func reset() {
+        guard self.players.count == SCConstants.constant.numberOfTeams.rawValue else {
+            return
+        }
+
         self.players[Team.red.rawValue].removeAll()
         self.players[Team.blue.rawValue].removeAll()
         self.connectedPeers.removeAll()
@@ -211,6 +240,10 @@ class Room: NSObject, NSCoding {
 
     // MARK: Querying
     func hasHost() -> Bool {
+        guard self.players.count == SCConstants.constant.numberOfTeams.rawValue else {
+            return false
+        }
+
         return self.players[Team.red.rawValue].filter({
             ($0 as Player).isHost()
         }).count == 1 || self.players[Team.blue.rawValue].filter({
@@ -219,6 +252,10 @@ class Room: NSObject, NSCoding {
     }
 
     func teamSizesValid() -> Bool {
+        guard self.players.count == SCConstants.constant.numberOfTeams.rawValue else {
+            return false
+        }
+
         if GameMode.instance.getMode() == .regularGame {
             let redValid = self.players[Team.red.rawValue].filter({
                 ($0 as Player).getTeam() == .red
@@ -261,6 +298,10 @@ class Room: NSObject, NSCoding {
     }
 
     func allPlayersReady() -> Bool {
+        guard self.players.count == SCConstants.constant.numberOfTeams.rawValue else {
+            return false
+        }
+
         let readyPlayers = self.players[Team.red.rawValue].filter({
             ($0 as Player).isReady()
         }).count + self.players[Team.blue.rawValue].filter({
