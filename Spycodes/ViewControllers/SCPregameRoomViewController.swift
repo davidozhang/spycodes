@@ -279,6 +279,7 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate func checkRoom() {
         if !Room.instance.hasHost() {
             self.returnToMainMenu(reason: SCStrings.hostDisconnected)
+            self.refreshTimer?.invalidate()
         }
 
         if !Player.instance.isHost() {
