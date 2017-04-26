@@ -515,14 +515,17 @@ class SCGameRoomViewController: SCViewController {
         }
 
         Round.instance.endRound(Player.instance.getTeam())
-        SCMultipeerManager.instance.broadcast(Round.instance)
 
-        SCViewController.broadcastEvent(
-            .endRound,
-            optional: [
-                SCConstants.coding.name.rawValue: Player.instance.getName() ?? ""
-            ]
-        )
+        if !fromTimerExpiry {
+            SCViewController.broadcastEvent(
+                .endRound,
+                optional: [
+                    SCConstants.coding.name.rawValue: Player.instance.getName() ?? ""
+                ]
+            )
+        } else {
+            self.broadcastEvent(.endRound)
+        }
     }
 
     fileprivate func broadcastEvent(_ eventType: Event.EventType) {

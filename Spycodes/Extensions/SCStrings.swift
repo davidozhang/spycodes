@@ -33,7 +33,7 @@ class SCStrings {
 
     static let timeline = "Timeline"
     static let timelineEmptyState = "No events yet."
-    static let timerExpiry = "Round ended from timer expiry."
+    static let timerExpiry = "Round ended due to timer expiry."
     static let clueSetTo = "%@ set the clue to '%@ %@'."
     static let selected = "%@ selected '%@'."
     static let roundEnded = "%@ ended the round."
