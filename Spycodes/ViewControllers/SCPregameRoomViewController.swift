@@ -423,6 +423,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                 return nil
         }
 
+        sectionHeader.primaryLabel.font = SCFonts.regularSizeFont(.regular)
         sectionHeader.primaryLabel.text = self.sectionLabels[section]
 
         if self.tableView.contentOffset.y > 0 {
@@ -475,49 +476,52 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
         let playerAtIndex = Room.instance.getPlayers()[indexPath.section][indexPath.row]
 
-        if playerAtIndex.isReady() {
-            cell.primaryLabel.font = SCFonts.intermediateSizeFont(.bold)
-        } else {
-            cell.primaryLabel.font = SCFonts.intermediateSizeFont(.regular)
-        }
-
         cell.primaryLabel.text = playerAtIndex.getName()
         cell.uuid = playerAtIndex.getUUID()
         cell.delegate = self
 
-        if Player.instance == playerAtIndex {
+        cell.teamIndicatorView.backgroundColor = UIColor.colorForTeam(playerAtIndex.getTeam())
+
+        if playerAtIndex.isReady() {
+            cell.showReadyStatus()
+        } else {
+            cell.hideReadyStatus()
+        }
+
+        if playerAtIndex == Player.instance {
             if let name = playerAtIndex.getName() {
-                // Use same font for triangle to avoid position shift
                 let attributedString = NSMutableAttributedString(
-                    string: String(format: SCStrings.localPlayerIndicator, name)
+                    string: name
                 )
                 attributedString.addAttribute(
                     NSFontAttributeName,
-                    value: SCFonts.intermediateSizeFont(.ultraLight) ?? 0,
-                    range: NSMakeRange(0, 2)
+                    value: SCFonts.intermediateSizeFont(.bold) ?? 0,
+                    range: NSMakeRange(0, name.characters.count)
                 )
 
                 cell.primaryLabel.attributedText = attributedString
             }
 
-            cell.changeTeamButton.isHidden = false
+
             if GameMode.instance.getMode() == .miniGame {
-                cell.changeTeamButton.isHidden = true
+                cell.hideChangeTeamButton()
+            } else {
+                cell.showChangeTeamButtonIfAllowed()
             }
         } else {
-            cell.changeTeamButton.isHidden = true
+            cell.hideChangeTeamButton()
         }
 
         if playerAtIndex.isLeader() {
             cell.leaderImage.isHidden = false
+
             cell.leaderImageLeadingSpaceConstraint.constant =
             min(
-                cell.frame.size.width - cell.changeTeamButton.frame.width - 24,
-                cell.primaryLabel.intrinsicContentSize.width + 4
+                cell.frame.size.width - cell.readyStatusLabel.intrinsicContentSize.width - 40,
+                cell.primaryLabel.intrinsicContentSize.width + 12
             )
         } else {
             cell.leaderImage.isHidden = true
-            cell.leaderImageLeadingSpaceConstraint.constant = 0
         }
 
         return cell

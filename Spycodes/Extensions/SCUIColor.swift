@@ -10,7 +10,7 @@ extension UIColor {
     }
 
     static func spycodesBlackColor() -> UIColor {
-        return UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        return UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
     }
 
     static func spycodesGreenColor() -> UIColor {
