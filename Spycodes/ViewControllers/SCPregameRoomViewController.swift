@@ -423,6 +423,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                 return nil
         }
 
+        sectionHeader.primaryLabel.font = SCFonts.regularSizeFont(.regular)
         sectionHeader.primaryLabel.text = self.sectionLabels[section]
 
         if self.tableView.contentOffset.y > 0 {
@@ -481,6 +482,12 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
         cell.teamIndicatorView.backgroundColor = UIColor.colorForTeam(playerAtIndex.getTeam())
 
+        if playerAtIndex.isReady() {
+            cell.showReadyStatus()
+        } else {
+            cell.hideReadyStatus()
+        }
+
         if playerAtIndex == Player.instance {
             if let name = playerAtIndex.getName() {
                 let attributedString = NSMutableAttributedString(
@@ -495,32 +502,26 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.primaryLabel.attributedText = attributedString
             }
 
-            cell.changeTeamButton.isHidden = false
+
             if GameMode.instance.getMode() == .miniGame {
-                cell.changeTeamButton.isHidden = true
+                cell.hideChangeTeamButton()
+            } else {
+                cell.showChangeTeamButtonIfAllowed()
             }
         } else {
-            cell.changeTeamButton.isHidden = true
-        }
-
-        if playerAtIndex.isReady() {
-            // TODO: Ready
-        } else {
-            // TODO: Not Ready
+            cell.hideChangeTeamButton()
         }
 
         if playerAtIndex.isLeader() {
             cell.leaderImage.isHidden = false
 
-            // TODO: Use deterministic numbers
             cell.leaderImageLeadingSpaceConstraint.constant =
             min(
-                cell.frame.size.width - cell.changeTeamButton.frame.width - 30,
-                cell.primaryLabel.intrinsicContentSize.width + 8
+                cell.frame.size.width - cell.readyStatusLabel.intrinsicContentSize.width - 40,
+                cell.primaryLabel.intrinsicContentSize.width + 12
             )
         } else {
             cell.leaderImage.isHidden = true
-            cell.leaderImageLeadingSpaceConstraint.constant = 0
         }
 
         return cell

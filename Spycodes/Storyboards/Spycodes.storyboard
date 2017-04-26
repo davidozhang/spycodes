@@ -755,7 +755,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d84-Az-a9v" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="22" width="953" height="0.0"/>
+                                                    <rect key="frame" x="17" y="22" width="909" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="300" id="xaW-k5-dCT"/>
                                                     </constraints>
@@ -768,6 +768,13 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Crown-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="4mv-rH-4Dm">
+                                                    <rect key="frame" x="9" y="0.5" width="15" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="Qqy-dE-Ufe"/>
+                                                        <constraint firstAttribute="width" constant="15" id="pZq-43-xl3"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qs7-lh-8Kt" userLabel="Change Team Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
                                                     <rect key="frame" x="990" y="7" width="30" height="30"/>
                                                     <constraints>
@@ -786,25 +793,26 @@
                                                         <constraint firstAttribute="width" constant="4" id="sH1-hQ-fHq"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Crown-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="4mv-rH-4Dm">
-                                                    <rect key="frame" x="9" y="0.5" width="15" height="15"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="15" id="Qqy-dE-Ufe"/>
-                                                        <constraint firstAttribute="width" constant="15" id="pZq-43-xl3"/>
-                                                    </constraints>
-                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MK-qa-awl" userLabel="Ready Status Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="1020" y="22" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Qs7-lh-8Kt" firstAttribute="leading" secondItem="d84-Az-a9v" secondAttribute="trailing" constant="20" id="0Qy-6P-HhS"/>
+                                                <constraint firstItem="Qs7-lh-8Kt" firstAttribute="leading" secondItem="d84-Az-a9v" secondAttribute="trailing" constant="64" id="0Qy-6P-HhS"/>
                                                 <constraint firstItem="d84-Az-a9v" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="1oP-67-mY5"/>
                                                 <constraint firstAttribute="trailing" secondItem="Qs7-lh-8Kt" secondAttribute="trailing" constant="4" id="8Aw-0c-kZJ"/>
                                                 <constraint firstItem="4mv-rH-4Dm" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" constant="-14" id="WM6-wm-3dj"/>
                                                 <constraint firstAttribute="bottom" secondItem="hEo-bZ-gPM" secondAttribute="bottom" constant="2" id="YrR-9n-kUq"/>
                                                 <constraint firstItem="hEo-bZ-gPM" firstAttribute="leading" secondItem="rq2-uF-F29" secondAttribute="leading" constant="5" id="dhJ-lF-W5C"/>
+                                                <constraint firstItem="8MK-qa-awl" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="irA-RJ-0wD"/>
                                                 <constraint firstItem="hEo-bZ-gPM" firstAttribute="top" secondItem="rq2-uF-F29" secondAttribute="top" constant="2" id="ldl-S8-Ogj"/>
                                                 <constraint firstItem="Qs7-lh-8Kt" firstAttribute="centerY" secondItem="rq2-uF-F29" secondAttribute="centerY" id="nu4-QX-sr0"/>
                                                 <constraint firstItem="d84-Az-a9v" firstAttribute="leading" secondItem="hEo-bZ-gPM" secondAttribute="trailing" constant="8" id="oPj-00-Ub5"/>
                                                 <constraint firstItem="4mv-rH-4Dm" firstAttribute="leading" secondItem="hEo-bZ-gPM" secondAttribute="trailing" id="qrK-O4-094"/>
+                                                <constraint firstAttribute="trailing" secondItem="8MK-qa-awl" secondAttribute="trailing" constant="4" id="rpG-Mj-LPF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -812,6 +820,7 @@
                                             <outlet property="leaderImage" destination="4mv-rH-4Dm" id="hLC-Ao-0eC"/>
                                             <outlet property="leaderImageLeadingSpaceConstraint" destination="qrK-O4-094" id="wIb-yy-qFm"/>
                                             <outlet property="primaryLabel" destination="d84-Az-a9v" id="gOv-KW-UwS"/>
+                                            <outlet property="readyStatusLabel" destination="8MK-qa-awl" id="w8k-7b-8QS"/>
                                             <outlet property="teamIndicatorView" destination="hEo-bZ-gPM" id="UrF-MV-IHb"/>
                                         </connections>
                                     </tableViewCell>
