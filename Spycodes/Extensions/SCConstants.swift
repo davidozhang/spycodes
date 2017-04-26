@@ -33,6 +33,7 @@ class SCConstants {
         case accessCodeLength = 4
         case cardCount = 22
         case roomMaxSize = 8
+        case numberOfTeams = 2
     }
 
     enum discoveryInfo: String {
