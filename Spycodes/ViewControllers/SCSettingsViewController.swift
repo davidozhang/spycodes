@@ -149,7 +149,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
-                        return UITableViewCell()
+                        return SCTableViewCell()
                 }
 
                 cell.primaryLabel.text = self.customizeLabels[.nightMode]
@@ -160,7 +160,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
-                        return UITableViewCell()
+                        return SCTableViewCell()
                 }
 
                 cell.primaryLabel.text = self.customizeLabels[.accessibility]
@@ -168,14 +168,14 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
                 return cell
             default:
-                return UITableViewCell()
+                return SCTableViewCell()
             }
 
         case Section.about.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.versionViewCell.rawValue
             ) as? SCTableViewCell else {
-                return UITableViewCell()
+                return SCTableViewCell()
             }
 
             return cell
@@ -183,7 +183,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.disclosureViewCell.rawValue
             ) as? SCDisclosureViewCell else {
-                return UITableViewCell()
+                return SCTableViewCell()
             }
 
             if let link = Link(rawValue: indexPath.row) {
@@ -192,7 +192,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
             return cell
         default:
-            return UITableViewCell()
+            return SCTableViewCell()
         }
     }
 

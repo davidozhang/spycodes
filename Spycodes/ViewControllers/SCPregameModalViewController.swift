@@ -196,7 +196,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.guideViewCell.rawValue
                 ) as? SCTableViewCell else {
-                    return UITableViewCell()
+                    return SCTableViewCell()
             }
 
             cell.primaryLabel.font = SCFonts.regularSizeFont(.regular)
@@ -216,7 +216,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.statisticsViewCell.rawValue
                 ) as? SCTableViewCell else {
-                    return UITableViewCell()
+                    return SCTableViewCell()
             }
 
             if GameMode.instance.getMode() == .miniGame {
@@ -237,7 +237,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.minigameToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
-                        return UITableViewCell()
+                        return SCTableViewCell()
                 }
 
                 cell.synchronizeToggle()
@@ -250,7 +250,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.timerToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
-                        return UITableViewCell()
+                        return SCTableViewCell()
                 }
 
                 cell.synchronizeToggle()
@@ -260,7 +260,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
 
                 return cell
             default:
-                return UITableViewCell()
+                return SCTableViewCell()
             }
         case 3: // Customize
             switch indexPath.row {
@@ -268,7 +268,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
-                        return UITableViewCell()
+                        return SCTableViewCell()
                 }
 
                 cell.primaryLabel.text = self.customizeLabels[.nightMode]
@@ -279,7 +279,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
-                        return UITableViewCell()
+                        return SCTableViewCell()
                 }
 
                 cell.primaryLabel.text = self.customizeLabels[.accessibility]
@@ -287,10 +287,10 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
 
                 return cell
             default:
-                return UITableViewCell()
+                return SCTableViewCell()
             }
         default:
-            return UITableViewCell()
+            return SCTableViewCell()
         }
     }
 

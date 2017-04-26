@@ -129,7 +129,7 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
         guard let cell = self.tableView.dequeueReusableCell(
             withIdentifier: SCConstants.identifier.timelineViewCell.rawValue
             ) as? SCTimelineViewCell else {
-                return UITableViewCell()
+                return SCTableViewCell()
         }
 
         let event = Timeline.instance.getEvents()[indexPath.row]
@@ -215,7 +215,7 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
             return cell
         }
 
-        return UITableViewCell()
+        return SCTableViewCell()
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

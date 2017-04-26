@@ -458,7 +458,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard indexPath.section < Room.instance.getPlayers().count else {
-            return UITableViewCell()
+            return SCTableViewCell()
         }
 
         // Team empty state cell
@@ -466,7 +466,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.pregameRoomTeamEmptyStateViewCell.rawValue
                 ) as? SCTableViewCell else {
-                    return UITableViewCell()
+                    return SCTableViewCell()
             }
 
             cell.primaryLabel.text = SCStrings.teamEmptyState
@@ -475,13 +475,13 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         guard indexPath.row < Room.instance.getPlayers()[indexPath.section].count else {
-            return UITableViewCell()
+            return SCTableViewCell()
         }
 
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: SCConstants.identifier.pregameRoomViewCell.rawValue
         ) as? SCPregameRoomViewCell else {
-            return UITableViewCell()
+            return SCTableViewCell()
         }
 
         let playerAtIndex = Room.instance.getPlayers()[indexPath.section][indexPath.row]
