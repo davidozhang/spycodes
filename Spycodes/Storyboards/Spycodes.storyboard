@@ -1008,21 +1008,33 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guide" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwN-q6-e8C" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="8" width="1016" height="28"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwN-q6-e8C" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="36" y="8" width="984" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhr-w4-WCL" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="12" width="24" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="0Pp-6V-x3G"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="OwN-q6-e8C" firstAttribute="leading" secondItem="hhr-w4-WCL" secondAttribute="trailing" constant="8" id="ABV-XC-hMC"/>
+                                                <constraint firstItem="hhr-w4-WCL" firstAttribute="leading" secondItem="uX1-2W-ufn" secondAttribute="leading" constant="4" id="NiY-GO-OOb"/>
                                                 <constraint firstAttribute="bottom" secondItem="OwN-q6-e8C" secondAttribute="bottom" constant="8" id="Sta-Sw-wlA"/>
-                                                <constraint firstItem="OwN-q6-e8C" firstAttribute="leading" secondItem="uX1-2W-ufn" secondAttribute="leading" constant="4" id="XpJ-a9-eGE"/>
                                                 <constraint firstItem="OwN-q6-e8C" firstAttribute="top" secondItem="uX1-2W-ufn" secondAttribute="top" constant="8" id="gfQ-l0-igc"/>
+                                                <constraint firstItem="hhr-w4-WCL" firstAttribute="centerY" secondItem="uX1-2W-ufn" secondAttribute="centerY" id="kgG-7Q-kr7"/>
                                                 <constraint firstAttribute="trailing" secondItem="OwN-q6-e8C" secondAttribute="trailing" constant="4" id="yya-qx-FGR"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="leftLabel" destination="hhr-w4-WCL" id="Iuu-1v-D4U"/>
                                             <outlet property="primaryLabel" destination="OwN-q6-e8C" id="8Z6-dV-4LU"/>
                                         </connections>
                                     </tableViewCell>

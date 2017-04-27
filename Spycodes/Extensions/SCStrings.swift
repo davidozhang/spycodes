@@ -1,6 +1,7 @@
 class SCStrings {
     static let completed = "✅"
     static let incomplete = "❌"
+    static let infoEmoji = "ℹ️"
     static let ready = "READY"
 
     static let updatePrompt = "A new version of Spycodes is available on the App Store. Download to get the latest features!"
@@ -45,7 +46,7 @@ class SCStrings {
     static let pendingStatus = "Joining room..."
     static let failStatus = "Failed to join room"
 
-    static let leaderNominationInfo = "ℹ️ Tap on a teammate to nominate as leader."
+    static let leaderNominationInfo = "Tap on a teammate to nominate as leader."
     static let minigameTeamSizeUnsatisfiedInfo = "Your team should have 2-3 players."
     static let minigameTeamSizeSatisfiedInfo = "Your team currently has 2-3 players."
     static let regularGameTeamSizeUnsatisfiedInfo = "Each team should have 2-4 players."
