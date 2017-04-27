@@ -22,7 +22,7 @@ class SCStrings {
     static let website = "Website"
     static let github = "Github"
     static let icons8 = "Icons8"
-    static let guide = "Guide"
+    static let info = "Info"
     static let statistics = "Statistics"
     static let gameSettings = "Game Settings"
     static let minigame = "Minigame"
