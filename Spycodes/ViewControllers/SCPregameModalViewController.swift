@@ -109,29 +109,29 @@ class SCPregameModalViewController: SCModalViewController {
         }
     }
 
-    fileprivate func getChecklistMessage() -> String {
-        var message = ""
+    fileprivate func getChecklistItems() -> [String] {
+        var result = [String]()
 
         // Team size check
         if Room.instance.teamSizesValid() {
-            message += SCStrings.completed + " "
+            result.append(SCStrings.completed)
 
             if GameMode.instance.getMode() == .miniGame {
-                message += SCStrings.minigameTeamSizeSatisfiedInfo
+                result.append(SCStrings.minigameTeamSizeSatisfiedInfo)
             } else {
-                message += SCStrings.regularGameTeamSizeSatisfiedInfo
+                result.append(SCStrings.regularGameTeamSizeSatisfiedInfo)
             }
         } else {
-            message += SCStrings.incomplete + " "
+            result.append(SCStrings.incomplete)
 
             if GameMode.instance.getMode() == .miniGame {
-                message += SCStrings.minigameTeamSizeUnsatisfiedInfo
+                result.append(SCStrings.minigameTeamSizeUnsatisfiedInfo)
             } else {
-                message += SCStrings.regularGameTeamSizeUnsatisfiedInfo
+                result.append(SCStrings.regularGameTeamSizeUnsatisfiedInfo)
             }
         }
         
-        return message
+        return result
     }
 }
 
@@ -204,8 +204,11 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
 
             switch indexPath.row {
             case 0: // Start game checklist
-                cell.primaryLabel.text = self.getChecklistMessage()
+                let checkListItems = self.getChecklistItems()
+                cell.leftLabel.text = checkListItems[0]
+                cell.primaryLabel.text = checkListItems[1]
             case 1: // Leader nomination info
+                cell.leftLabel.text = SCStrings.infoEmoji
                 cell.primaryLabel.text = SCStrings.leaderNominationInfo
             default:
                 break

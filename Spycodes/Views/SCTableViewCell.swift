@@ -1,12 +1,18 @@
 import UIKit
 
 class SCTableViewCell: UITableViewCell {
+    @IBOutlet weak var leftLabel: SCLabel!
     @IBOutlet weak var primaryLabel: SCLabel!
     @IBOutlet weak var secondaryLabel: SCLabel!
     @IBOutlet weak var rightLabel: SCLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        if let _ = self.leftLabel {
+            // Pregame modal info view cell specific
+            self.leftLabel.font = SCFonts.regularSizeFont(.regular)
+        }
 
         if let _ = self.primaryLabel {
             self.primaryLabel.font = SCFonts.intermediateSizeFont(.regular)
