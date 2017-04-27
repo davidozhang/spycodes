@@ -54,6 +54,7 @@
 		63D256891E6BA6BA0061D80C /* SCSingleCharacterTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567E1E6BA6BA0061D80C /* SCSingleCharacterTextField.swift */; };
 		63D2568A1E6BA6BA0061D80C /* SCStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567F1E6BA6BA0061D80C /* SCStatusLabel.swift */; };
 		63D2568B1E6BA6BA0061D80C /* SCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256801E6BA6BA0061D80C /* SCTextField.swift */; };
+		63D7E73D1EB183EF00B2F536 /* SCReadyStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7E73C1EB183EF00B2F536 /* SCReadyStatusLabel.swift */; };
 		63DEDEE81E88921200DE94A1 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DEDEE71E88921200DE94A1 /* Event.swift */; };
 		63EAF9A31D41D2E700BC554E /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A21D41D2E700BC554E /* Round.swift */; };
 		63EAF9A51D41F1C400BC554E /* SCAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A41D41F1C400BC554E /* SCAudioManager.swift */; };
@@ -119,6 +120,7 @@
 		63D2567E1E6BA6BA0061D80C /* SCSingleCharacterTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCSingleCharacterTextField.swift; path = Utilities/SCSingleCharacterTextField.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63D2567F1E6BA6BA0061D80C /* SCStatusLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCStatusLabel.swift; path = Utilities/SCStatusLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63D256801E6BA6BA0061D80C /* SCTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCTextField.swift; path = Utilities/SCTextField.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63D7E73C1EB183EF00B2F536 /* SCReadyStatusLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCReadyStatusLabel.swift; path = Utilities/SCReadyStatusLabel.swift; sourceTree = "<group>"; };
 		63DEDEE71E88921200DE94A1 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Objects/Event.swift; sourceTree = "<group>"; };
 		63EAF9A21D41D2E700BC554E /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Round.swift; path = Objects/Round.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63EAF9A41D41F1C400BC554E /* SCAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAudioManager.swift; path = Managers/SCAudioManager.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				630D15571E99F1B3001C1D87 /* SCLabel.swift */,
 				63D256791E6BA6BA0061D80C /* SCLargeLabel.swift */,
 				63D2567C1E6BA6BA0061D80C /* SCNavigationBarLabel.swift */,
+				63D7E73C1EB183EF00B2F536 /* SCReadyStatusLabel.swift */,
 				63D2567D1E6BA6BA0061D80C /* SCRoundedButton.swift */,
 				63D2567E1E6BA6BA0061D80C /* SCSingleCharacterTextField.swift */,
 				63D2567F1E6BA6BA0061D80C /* SCStatusLabel.swift */,
@@ -419,6 +422,7 @@
 				63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */,
 				63AB64CD1D4880A600C4FF22 /* SCSettingsViewController.swift in Sources */,
 				633292251E7D0D950090B09D /* SCDisclosureViewCell.swift in Sources */,
+				63D7E73D1EB183EF00B2F536 /* SCReadyStatusLabel.swift in Sources */,
 				63FDED321D2648D600142780 /* SCPlayerNameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

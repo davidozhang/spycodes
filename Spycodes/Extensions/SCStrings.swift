@@ -1,6 +1,7 @@
 class SCStrings {
     static let completed = "✅"
     static let incomplete = "❌"
+    static let ready = "READY"
 
     static let updatePrompt = "A new version of Spycodes is available on the App Store. Download to get the latest features!"
 
