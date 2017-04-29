@@ -1,7 +1,6 @@
 import UIKit
 
 class SCTimelineModalViewController: SCModalViewController {
-    fileprivate var refreshTimer: Foundation.Timer?
     fileprivate var emptyStateLabel: UILabel?
     fileprivate var scrolled = false
 
@@ -14,6 +13,7 @@ class SCTimelineModalViewController: SCModalViewController {
         print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
 
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +24,8 @@ class SCTimelineModalViewController: SCModalViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.refreshView()
+
         self.tableView.dataSource = self
         self.tableView.delegate = self
 
@@ -32,14 +34,6 @@ class SCTimelineModalViewController: SCModalViewController {
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
 
-        self.refreshTimer = Foundation.Timer.scheduledTimer(
-            timeInterval: 1.0,
-            target: self,
-            selector: #selector(SCTimelineModalViewController.refreshView),
-            userInfo: nil,
-            repeats: true
-        )
-
         self.emptyStateLabel = UILabel(frame: self.tableView.frame)
         self.emptyStateLabel?.text = SCStrings.timeline.emptyState.rawValue
         self.emptyStateLabel?.font = SCFonts.intermediateSizeFont(.regular)
@@ -47,6 +41,15 @@ class SCTimelineModalViewController: SCModalViewController {
         self.emptyStateLabel?.textAlignment = .center
         self.emptyStateLabel?.numberOfLines = 0
         self.emptyStateLabel?.center = self.view.center
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(SCTimelineModalViewController.refreshView),
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
+            ),
+            object: nil
+        )
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -55,9 +58,15 @@ class SCTimelineModalViewController: SCModalViewController {
         self.tableView.dataSource = nil
         self.tableView.delegate = nil
 
-        self.refreshTimer?.invalidate()
-
         Timeline.instance.markAllAsRead()
+
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
+            ),
+            object: nil
+        )
     }
 
     override func onDismissal() {
@@ -68,16 +77,17 @@ class SCTimelineModalViewController: SCModalViewController {
         super.onDismissal()
     }
 
+    // MARK: Private
     @objc
     fileprivate func refreshView() {
         DispatchQueue.main.async {
-            self.tableView.reloadData()
-
             if Timeline.instance.getEvents().count == 0 {
                 self.tableView.backgroundView = self.emptyStateLabel
             } else {
                 self.tableView.backgroundView = nil
             }
+
+            self.tableView.reloadData()
         }
     }
 }
@@ -253,6 +263,6 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
             self.scrolled = false
         }
 
-        self.tableView.reloadData()
+        self.refreshView()
     }
 }
