@@ -60,6 +60,7 @@ class SCTimelineModalViewController: SCModalViewController {
         Timeline.instance.markAllAsRead()
     }
 
+    // MARK: SCModalViewController Overrides
     override func onDismissal() {
         if self.tableView.contentOffset.y > 0 {
             return
