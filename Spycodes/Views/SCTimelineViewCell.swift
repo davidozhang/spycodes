@@ -1,9 +1,9 @@
 import UIKit
 
 class SCTimelineViewCell: SCTableViewCell {
-    static let notificationDotWidth: CGFloat = 8
-    static let primaryLabelExtendedLeadingSpace: CGFloat = 8
-    static let primaryLabelDefaultLeadingSpace: CGFloat = 4
+    fileprivate static let notificationDotWidth: CGFloat = 8
+    fileprivate static let primaryLabelExtendedLeadingSpace: CGFloat = 8
+    fileprivate static let primaryLabelDefaultLeadingSpace: CGFloat = 4
 
     @IBOutlet weak var notificationDot: UIImageView!
     @IBOutlet weak var notificationDotWidthConstraint: NSLayoutConstraint!

@@ -7,7 +7,10 @@ class SCTextButton: UIButton {
         super.init(coder: aDecoder)
 
         self.titleLabel?.font = SCFonts.regularSizeFont(.medium)
-        self.setTitleColor(UIColor.spycodesGrayColor(), for: .normal)
+        self.setTitleColor(
+            .spycodesGrayColor(),
+            for: .normal
+        )
     }
 
     override var isHighlighted: Bool {

@@ -43,7 +43,7 @@ class SCTimelineModalViewController: SCModalViewController {
         self.emptyStateLabel = UILabel(frame: self.tableView.frame)
         self.emptyStateLabel?.text = SCStrings.timeline.emptyState.rawValue
         self.emptyStateLabel?.font = SCFonts.intermediateSizeFont(.regular)
-        self.emptyStateLabel?.textColor = UIColor.spycodesGrayColor()
+        self.emptyStateLabel?.textColor = .spycodesGrayColor()
         self.emptyStateLabel?.textAlignment = .center
         self.emptyStateLabel?.numberOfLines = 0
         self.emptyStateLabel?.center = self.view.center
@@ -139,11 +139,21 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 if let name = parameters[SCConstants.coding.name.rawValue] as? String,
                    let clue = parameters[SCConstants.coding.clue.rawValue] as? String,
                    let numberOfWords = parameters[SCConstants.coding.numberOfWords.rawValue] as? String {
-                    var baseString = String(format: SCStrings.timeline.clueSetTo.rawValue, name, clue, numberOfWords)
+                    var baseString = String(
+                        format: SCStrings.timeline.clueSetTo.rawValue,
+                        name,
+                        clue,
+                        numberOfWords
+                    )
                     var length = name.characters.count
 
                     if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
-                        baseString = String(format: SCStrings.timeline.clueSetTo.rawValue, SCStrings.player.localPlayer.rawValue, clue, numberOfWords)
+                        baseString = String(
+                            format: SCStrings.timeline.clueSetTo.rawValue,
+                            SCStrings.player.localPlayer.rawValue,
+                            clue,
+                            numberOfWords
+                        )
                         length = 3
                     }
 
@@ -164,8 +174,13 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                     var length = name.characters.count
 
                     if let _ = parameters[SCConstants.coding.localPlayer.rawValue],
-                       let name = parameters[SCConstants.coding.name.rawValue] as? String, name != SCStrings.player.cpu.rawValue {
-                        baseString = String(format: SCStrings.timeline.selected.rawValue, SCStrings.player.localPlayer.rawValue, word)
+                       let name = parameters[SCConstants.coding.name.rawValue] as? String,
+                       name != SCStrings.player.cpu.rawValue {
+                        baseString = String(
+                            format: SCStrings.timeline.selected.rawValue,
+                            SCStrings.player.localPlayer.rawValue,
+                            word
+                        )
                         length = 3
                     }
 
@@ -181,11 +196,17 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 }
             } else if event.getType() == .endRound {
                 if let name = parameters[SCConstants.coding.name.rawValue] as? String {
-                    var baseString = String(format: SCStrings.timeline.roundEnded.rawValue, name)
+                    var baseString = String(
+                        format: SCStrings.timeline.roundEnded.rawValue,
+                        name
+                    )
                     var length = name.characters.count
 
                     if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
-                        baseString = String(format: SCStrings.timeline.roundEnded.rawValue, SCStrings.player.localPlayer.rawValue)
+                        baseString = String(
+                            format: SCStrings.timeline.roundEnded.rawValue,
+                            SCStrings.player.localPlayer.rawValue
+                        )
                         length = 3
                     }
 
@@ -206,7 +227,8 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 }
             }
 
-            if let hasRead = parameters[SCConstants.coding.hasRead.rawValue] as? Bool, !hasRead {
+            if let hasRead = parameters[SCConstants.coding.hasRead.rawValue] as? Bool,
+               !hasRead {
                 cell.showNotificationDot()
             } else {
                 cell.hideNotificationDot()

@@ -24,10 +24,16 @@ class Timer: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.enabled, forKey: SCConstants.coding.enabled.rawValue)
+        aCoder.encode(
+            self.enabled,
+            forKey: SCConstants.coding.enabled.rawValue
+        )
 
         if let duration = self.duration {
-            aCoder.encode(duration, forKey: SCConstants.coding.duration.rawValue)
+            aCoder.encode(
+                duration,
+                forKey: SCConstants.coding.duration.rawValue
+            )
         }
     }
 

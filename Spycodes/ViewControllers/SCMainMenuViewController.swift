@@ -19,7 +19,13 @@ class SCMainMenuViewController: SCViewController {
     @IBAction func onShareTapped(_ sender: AnyObject) {
         UIPasteboard.general.string = SCConstants.url.appStoreWeb.rawValue
         self.linkCopiedLabel.isHidden = false
-        self.timer = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(SCMainMenuViewController.onTimeout), userInfo: nil, repeats: false)
+        self.timer = Foundation.Timer.scheduledTimer(
+            timeInterval: 2.0,
+            target: self,
+            selector: #selector(SCMainMenuViewController.onTimeout),
+            userInfo: nil,
+            repeats: false
+        )
     }
 
     @IBAction func onNightModeButtonTapped(_ sender: AnyObject) {
@@ -34,15 +40,24 @@ class SCMainMenuViewController: SCViewController {
 
     @IBAction func onCreateGame(_ sender: AnyObject) {
         Player.instance.setIsHost(true)
-        self.performSegue(withIdentifier: SCConstants.identifier.playerName.rawValue, sender: self)
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.playerName.rawValue,
+            sender: self
+        )
     }
 
     @IBAction func onJoinGame(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: SCConstants.identifier.playerName.rawValue, sender: self)
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.playerName.rawValue,
+            sender: self
+        )
     }
 
     @IBAction func onSettingsTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: SCConstants.identifier.settings.rawValue, sender: self)
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.settings.rawValue,
+            sender: self
+        )
     }
 
     deinit {
@@ -133,7 +148,8 @@ class SCMainMenuViewController: SCViewController {
 
         let swipeGestureRecognizer = UISwipeGestureRecognizer(
             target: self,
-            action: #selector(SCMainMenuViewController.respondToSwipeGesture(gesture:)))
+            action: #selector(SCMainMenuViewController.respondToSwipeGesture(gesture:))
+        )
         swipeGestureRecognizer.direction = .up
         self.view.addGestureRecognizer(swipeGestureRecognizer)
     }
@@ -143,7 +159,10 @@ class SCMainMenuViewController: SCViewController {
     }
 
     fileprivate func swipeUp() {
-        self.performSegue(withIdentifier: SCConstants.identifier.updateApp.rawValue, sender: self)
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.updateApp.rawValue,
+            sender: self
+        )
     }
 
     fileprivate func animateSwipeUpButton() {

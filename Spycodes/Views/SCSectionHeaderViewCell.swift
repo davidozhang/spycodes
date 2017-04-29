@@ -29,9 +29,9 @@ class SCSectionHeaderViewCell: SCTableViewCell {
         self.hideSolidBackground()
 
         if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
-            self.backgroundColor = UIColor.black
+            self.backgroundColor = .black
         } else {
-            self.backgroundColor = UIColor.white
+            self.backgroundColor = .white
         }
     }
 
@@ -42,6 +42,6 @@ class SCSectionHeaderViewCell: SCTableViewCell {
     }
 
     func hideSolidBackground() {
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = .clear
     }
 }

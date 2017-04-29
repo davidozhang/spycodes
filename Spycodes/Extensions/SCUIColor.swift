@@ -41,13 +41,13 @@ extension UIColor {
     static func colorForTeam(_ team: Team) -> UIColor {
         switch team {
         case .red:
-            return UIColor.spycodesRedColor()
+            return .spycodesRedColor()
         case .blue:
-            return UIColor.spycodesBlueColor()
+            return .spycodesBlueColor()
         case .neutral:
-            return UIColor.white
+            return .white
         default:
-            return UIColor.spycodesBlackColor()
+            return .spycodesBlackColor()
         }
     }
 }

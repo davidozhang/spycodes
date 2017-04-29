@@ -19,7 +19,7 @@ class SCViewController: UIViewController {
 
         self.dimView.tag = 1
         self.dimView.frame = UIScreen.main.bounds
-        self.dimView.backgroundColor = UIColor.dimBackgroundColor()
+        self.dimView.backgroundColor = .dimBackgroundColor()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -27,7 +27,10 @@ class SCViewController: UIViewController {
 
         self.updateAppearance()
 
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(SCViewController.swipeRight))
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(SCViewController.swipeRight)
+        )
         swipeGestureRecognizer.direction = .right
         self.view.addGestureRecognizer(swipeGestureRecognizer)
 
@@ -116,7 +119,8 @@ class SCViewController: UIViewController {
         }
     }
 
-    func performUnwindSegue(_ returnToRootViewController: Bool, completionHandler: ((Void) -> Void)?) {
+    func performUnwindSegue(_ returnToRootViewController: Bool,
+                            completionHandler: ((Void) -> Void)?) {
         if isRootViewController {
             return
         }
@@ -125,7 +129,10 @@ class SCViewController: UIViewController {
         self.returnToRootViewController = returnToRootViewController
 
         if let previousViewControllerIdentifier = self.previousViewControllerIdentifier {
-            self.performSegue(withIdentifier: previousViewControllerIdentifier, sender: self)
+            self.performSegue(
+                withIdentifier: previousViewControllerIdentifier,
+                sender: self
+            )
 
             if let completionHandler = completionHandler {
                 completionHandler()
@@ -148,10 +155,10 @@ class SCViewController: UIViewController {
 
         if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
             textFieldAppearance.keyboardAppearance = .dark
-            self.view.backgroundColor = UIColor.black
+            self.view.backgroundColor = .black
         } else {
             textFieldAppearance.keyboardAppearance = .light
-            self.view.backgroundColor = UIColor.white
+            self.view.backgroundColor = .white
         }
 
         self.setNeedsStatusBarAppearanceUpdate()

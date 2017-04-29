@@ -17,7 +17,10 @@ class GameMode: NSObject, NSCoding {
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
         if let mode = self.mode?.rawValue {
-            aCoder.encode(mode, forKey: SCConstants.coding.mode.rawValue)
+            aCoder.encode(
+                mode,
+                forKey: SCConstants.coding.mode.rawValue
+            )
         }
     }
 

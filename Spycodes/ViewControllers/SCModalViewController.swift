@@ -17,7 +17,10 @@ class SCModalViewController: SCViewController {
 
         self.updateModalAppearance()
 
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(SCModalViewController.respondToSwipeGesture(gesture:)))
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(SCModalViewController.respondToSwipeGesture(gesture:))
+        )
         swipeGestureRecognizer.direction = .down
         swipeGestureRecognizer.delegate = self
         self.view.addGestureRecognizer(swipeGestureRecognizer)
@@ -43,10 +46,10 @@ class SCModalViewController: SCViewController {
         }
 
         if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
-            self.view.backgroundColor = UIColor.darkTintColor()
+            self.view.backgroundColor = .darkTintColor()
             self.blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         } else {
-            self.view.backgroundColor = UIColor.lightTintColor()
+            self.view.backgroundColor = .lightTintColor()
             self.blurView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
         }
 
@@ -88,7 +91,8 @@ class SCModalViewController: SCViewController {
 
 // MARK: UIGestureRecognizerDelegate
 extension SCModalViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }

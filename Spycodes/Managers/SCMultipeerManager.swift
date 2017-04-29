@@ -127,7 +127,9 @@ class SCMultipeerManager: NSObject {
         self.message(rootObject, messageType: .broadcast, toPeers: nil)
     }
 
-    func message(_ rootObject: Any, messageType: MessageType, toPeers: [MCPeerID]?) {
+    func message(_ rootObject: Any,
+                 messageType: MessageType,
+                 toPeers: [MCPeerID]?) {
         let data = NSKeyedArchiver.archivedData(withRootObject: rootObject)
         self.sendData(data, messageType: messageType, toPeers: toPeers)
     }
@@ -158,7 +160,9 @@ class SCMultipeerManager: NSObject {
         self.browser?.delegate = self
     }
 
-    private func sendData(_ data: Data, messageType: MessageType, toPeers: [MCPeerID]?) {
+    private func sendData(_ data: Data,
+                          messageType: MessageType,
+                          toPeers: [MCPeerID]?) {
         guard let _ = self.session else {
             return
         }

@@ -4,6 +4,6 @@ class SCLabel: UILabel {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.font = SCFonts.regularSizeFont(.regular)
-        self.textColor = UIColor.spycodesGrayColor()
+        self.textColor = .spycodesGrayColor()
     }
 }

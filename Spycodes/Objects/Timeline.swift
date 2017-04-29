@@ -17,20 +17,26 @@ class Timeline {
 
     func addEventIfNeeded(event: Event) {
         if let timestamp = event.getTimestamp() {
-            if let lastTimestamp = self.lastTimestamp, timestamp <= lastTimestamp {
+            if let lastTimestamp = self.lastTimestamp,
+               timestamp <= lastTimestamp {
                 return
             }
 
             self.lastTimestamp = timestamp
 
-            event.addParameter(key: SCConstants.coding.hasRead.rawValue, value: false)
+            event.addParameter(
+                key: SCConstants.coding.hasRead.rawValue,
+                value: false
+            )
 
             // Sorted by reverse chronological order
             self.events.insert(event, at: 0)
 
             DispatchQueue.main.async(execute: {
                 NotificationCenter.default.post(
-                    name: Notification.Name(rawValue: SCConstants.notificationKey.timelineUpdated.rawValue),
+                    name: Notification.Name(
+                        rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
+                    ),
                     object: self,
                     userInfo: nil
                 )
@@ -40,7 +46,10 @@ class Timeline {
 
     func markAllAsRead() {
         for event in self.events {
-            event.setParameter(key: SCConstants.coding.hasRead.rawValue, value: true)
+            event.setParameter(
+                key: SCConstants.coding.hasRead.rawValue,
+                value: true
+            )
         }
     }
 

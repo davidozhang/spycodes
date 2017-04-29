@@ -13,23 +13,41 @@ class Round: NSObject, NSCoding {
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
         if let team = self.currentTeam?.rawValue {
-            aCoder.encode(team, forKey: SCConstants.coding.team.rawValue)
+            aCoder.encode(
+                team,
+                forKey: SCConstants.coding.team.rawValue
+            )
         }
 
         if let clue = self.clue {
-            aCoder.encode(clue, forKey: SCConstants.coding.clue.rawValue)
+            aCoder.encode(
+                clue,
+                forKey: SCConstants.coding.clue.rawValue
+            )
         }
 
         if let numberOfWords = self.numberOfWords {
-            aCoder.encode(numberOfWords, forKey: SCConstants.coding.numberOfWords.rawValue)
+            aCoder.encode(
+                numberOfWords,
+                forKey: SCConstants.coding.numberOfWords.rawValue
+            )
         }
 
         if let winningTeam = self.winningTeam?.rawValue {
-            aCoder.encode(winningTeam, forKey: SCConstants.coding.winningTeam.rawValue)
+            aCoder.encode(
+                winningTeam,
+                forKey: SCConstants.coding.winningTeam.rawValue
+            )
         }
 
-        aCoder.encode(self.abort, forKey: SCConstants.coding.abort.rawValue)
-        aCoder.encode(self.gameEnded, forKey: SCConstants.coding.gameEnded.rawValue)
+        aCoder.encode(
+            self.abort,
+            forKey: SCConstants.coding.abort.rawValue
+        )
+        aCoder.encode(
+            self.gameEnded,
+            forKey: SCConstants.coding.gameEnded.rawValue
+        )
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
@@ -44,12 +62,16 @@ class Round: NSObject, NSCoding {
         }
 
         if aDecoder.containsValue(forKey: SCConstants.coding.clue.rawValue),
-           let clue = aDecoder.decodeObject(forKey: SCConstants.coding.clue.rawValue) as? String {
+           let clue = aDecoder.decodeObject(
+               forKey: SCConstants.coding.clue.rawValue
+           ) as? String {
             self.clue = clue
         }
 
         if aDecoder.containsValue(forKey: SCConstants.coding.numberOfWords.rawValue),
-           let numberOfWords = aDecoder.decodeObject(forKey: SCConstants.coding.numberOfWords.rawValue) as? String {
+           let numberOfWords = aDecoder.decodeObject(
+               forKey: SCConstants.coding.numberOfWords.rawValue
+           ) as? String {
             self.numberOfWords = numberOfWords
         }
 
@@ -139,7 +161,9 @@ class Round: NSObject, NSCoding {
             if CardCollection.instance.getCardsRemainingForTeam(.blue) == 0 {
                 DispatchQueue.main.async(execute: {
                     NotificationCenter.default.post(
-                        name: Notification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),
+                        name: Notification.Name(
+                            rawValue: SCConstants.notificationKey.minigameGameOver.rawValue
+                        ),
                         object: self,
                         userInfo: nil
                     )

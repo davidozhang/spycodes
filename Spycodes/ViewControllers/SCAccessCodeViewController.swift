@@ -209,7 +209,7 @@ class SCAccessCodeViewController: SCViewController {
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? SCSingleCharacterTextField {
                 textField.isEnabled = true
-                textField.textColor = UIColor.spycodesGrayColor()
+                textField.textColor = .spycodesGrayColor()
 
                 if textField.tag == SCAccessCodeViewController.lastTag {
                     textField.becomeFirstResponder()
@@ -278,7 +278,7 @@ class SCAccessCodeViewController: SCViewController {
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? UITextField {
                 textField.isEnabled = false
-                textField.textColor = UIColor.lightGray
+                textField.textColor = .lightGray
 
                 if textField.tag == SCAccessCodeViewController.lastTag {
                     textField.resignFirstResponder()
@@ -310,7 +310,10 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
 
             DispatchQueue.main.async(execute: {
                 self.restoreStatus()
-                self.performSegue(withIdentifier: SCConstants.identifier.pregameRoom.rawValue, sender: self)
+                self.performSegue(
+                    withIdentifier: SCConstants.identifier.pregameRoom.rawValue,
+                    sender: self
+                )
             })
         }
     }
