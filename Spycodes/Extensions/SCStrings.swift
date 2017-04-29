@@ -64,6 +64,7 @@ class SCStrings {
         case github = "Github"
         case minigame = "Minigame"
         case nightMode = "Night Mode"
+        case releaseNotes = "Release Notes"
         case reviewApp = "Review App"
         case support = "Support"
         case teamEmptyState = "No players on the team."

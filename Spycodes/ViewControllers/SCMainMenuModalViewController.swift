@@ -22,8 +22,9 @@ class SCMainMenuModalViewController: SCModalViewController {
         case support = 0
         case reviewApp = 1
         case website = 2
-        case github = 3
-        case icons8 = 4
+        case releaseNotes = 3
+        case github = 4
+        case icons8 = 5
     }
 
     fileprivate let sectionLabels: [Section: String] = [
@@ -38,6 +39,7 @@ class SCMainMenuModalViewController: SCModalViewController {
     ]
 
     fileprivate let disclosureLabels: [Link: String] = [
+        .releaseNotes: SCStrings.primaryLabel.releaseNotes.rawValue,
         .support: SCStrings.primaryLabel.support.rawValue,
         .reviewApp: SCStrings.primaryLabel.reviewApp.rawValue,
         .website: SCStrings.primaryLabel.website.rawValue,
@@ -126,9 +128,9 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
         }
 
         if self.tableView.contentOffset.y > 0 {
-            sectionHeader.showSolidBackground()
+            sectionHeader.showBlurBackground()
         } else {
-            sectionHeader.hideSolidBackground()
+            sectionHeader.hideBlurBackground()
         }
 
         return sectionHeader
@@ -230,6 +232,10 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
             case Link.icons8.rawValue:
                 if let icons8URL = URL(string: SCConstants.url.icons8.rawValue) {
                     UIApplication.shared.openURL(icons8URL)
+                }
+            case Link.releaseNotes.rawValue:
+                if let supportURL = URL(string: SCConstants.url.releaseNotes.rawValue) {
+                    UIApplication.shared.openURL(supportURL)
                 }
             default:
                 return
