@@ -18,6 +18,6 @@ class SCUpdateAppModalViewController: SCModalViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.updatePromptLabel.text = SCStrings.updatePrompt
+        self.updatePromptLabel.text = SCStrings.message.updatePrompt.rawValue
     }
 }

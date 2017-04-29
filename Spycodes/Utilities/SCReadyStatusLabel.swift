@@ -8,7 +8,7 @@ class SCReadyStatusLabel: SCLabel {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.text = SCStrings.ready
+        self.text = SCStrings.status.ready.rawValue
         self.font = SCFonts.smallSizeFont(.bold)
 
         self.layer.borderColor = UIColor.spycodesGrayColor().cgColor

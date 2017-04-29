@@ -152,7 +152,7 @@ class SCAccessCodeViewController: SCViewController {
         self.timeoutTimer?.invalidate()
         SCMultipeerManager.instance.stopAdvertiser()
 
-        self.statusLabel.text = SCStrings.failStatus
+        self.statusLabel.text = SCStrings.status.fail.rawValue
 
         self.timeoutTimer = Foundation.Timer.scheduledTimer(
             timeInterval: SCAccessCodeViewController.shortTimeoutInterval,
@@ -220,7 +220,7 @@ class SCAccessCodeViewController: SCViewController {
 
     @objc
     fileprivate func restoreStatus() {
-        self.statusLabel.text = SCStrings.normalAccessCodeStatus
+        self.statusLabel.text = SCStrings.status.normal.rawValue
         self.hideCancelButton(true)
     }
 
@@ -273,7 +273,7 @@ class SCAccessCodeViewController: SCViewController {
         self.startTime = Int(Date.timeIntervalSinceReferenceDate)
         self.showCancelButton()
 
-        self.statusLabel.text = SCStrings.pendingStatus
+        self.statusLabel.text = SCStrings.status.pending.rawValue
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? UITextField {
