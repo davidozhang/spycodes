@@ -21,22 +21,22 @@ class SCSettingsViewController: SCViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .customize: SCStrings.customize,
-        .about: SCStrings.about,
-        .more: SCStrings.more,
+        .customize: SCStrings.section.customize.rawValue,
+        .about: SCStrings.section.about.rawValue,
+        .more: SCStrings.section.more.rawValue,
     ]
 
     fileprivate let customizeLabels: [CustomSetting: String] = [
-        .nightMode: SCStrings.nightMode,
-        .accessibility: SCStrings.accessibility,
+        .nightMode: SCStrings.primaryLabel.nightMode.rawValue,
+        .accessibility: SCStrings.primaryLabel.accessibility.rawValue,
     ]
 
     fileprivate let disclosureLabels: [Link: String] = [
-        .support: SCStrings.support,
-        .reviewApp: SCStrings.reviewApp,
-        .website: SCStrings.website,
-        .github: SCStrings.github,
-        .icons8: SCStrings.icons8,
+        .support: SCStrings.primaryLabel.support.rawValue,
+        .reviewApp: SCStrings.primaryLabel.reviewApp.rawValue,
+        .website: SCStrings.primaryLabel.website.rawValue,
+        .github: SCStrings.primaryLabel.github.rawValue,
+        .icons8: SCStrings.primaryLabel.icons8.rawValue,
     ]
 
     fileprivate var scrolled = false

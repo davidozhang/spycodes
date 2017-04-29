@@ -3,37 +3,37 @@ import UIKit
 class SCHelpViewController: SCPopoverViewController {
     fileprivate static let maxIndex = 6
     fileprivate static let sharedLeaderStringSequence = [
-        SCStrings.leaderGoal,
-        SCStrings.leaderEnterClue,
-        SCStrings.leaderConfirm,
-        SCStrings.leaderGuess
+        SCStrings.message.leaderGoal.rawValue,
+        SCStrings.message.leaderEnterClue.rawValue,
+        SCStrings.message.leaderConfirm.rawValue,
+        SCStrings.message.leaderGuess.rawValue
     ]
 
     fileprivate static let sharedPlayerStringSequence = [
-        SCStrings.playerGoal,
-        SCStrings.playerWait,
-        SCStrings.playerClue,
-        SCStrings.playerGuess
+        SCStrings.message.playerGoal.rawValue,
+        SCStrings.message.playerWait.rawValue,
+        SCStrings.message.playerClue.rawValue,
+        SCStrings.message.playerGuess.rawValue
     ]
 
     fileprivate static let leaderHeaders = [
-        SCStrings.introHeader,
-        SCStrings.goalHeader,
-        SCStrings.enterClueHeader,
-        SCStrings.confirmHeader,
-        SCStrings.guessHeader,
-        SCStrings.roundEndHeader,
-        SCStrings.endingHeader
+        SCStrings.header.introduction.rawValue,
+        SCStrings.header.goal.rawValue,
+        SCStrings.header.enterClue.rawValue,
+        SCStrings.header.confirm.rawValue,
+        SCStrings.header.guess.rawValue,
+        SCStrings.header.roundEnd.rawValue,
+        SCStrings.header.ending.rawValue
     ]
 
     fileprivate static let playerHeaders = [
-        SCStrings.introHeader,
-        SCStrings.goalHeader,
-        SCStrings.waitForClueHeader,
-        SCStrings.clueHeader,
-        SCStrings.guessHeader,
-        SCStrings.roundEndHeader,
-        SCStrings.endingHeader
+        SCStrings.header.introduction.rawValue,
+        SCStrings.header.goal.rawValue,
+        SCStrings.header.waitForClue.rawValue,
+        SCStrings.header.clue.rawValue,
+        SCStrings.header.guess.rawValue,
+        SCStrings.header.roundEnd.rawValue,
+        SCStrings.header.ending.rawValue
     ]
 
     fileprivate var stringSequence = [String]()
@@ -78,7 +78,7 @@ class SCHelpViewController: SCPopoverViewController {
     fileprivate func generateStringSequence() -> [String] {
         var result = [String]()
         if GameMode.instance.getMode() == .miniGame {
-            result += [SCStrings.minigameIntro]
+            result += [SCStrings.message.minigameIntro.rawValue]
 
             if Player.instance.isLeader() {
                 result += SCHelpViewController.sharedLeaderStringSequence
@@ -86,10 +86,10 @@ class SCHelpViewController: SCPopoverViewController {
                 result += SCHelpViewController.sharedPlayerStringSequence
             }
 
-            result += [SCStrings.minigameRoundEnd]
-            result += [SCStrings.minigameEndMessage]
+            result += [SCStrings.message.minigameRoundEnd.rawValue]
+            result += [SCStrings.message.minigameEnd.rawValue]
         } else {
-            result += [SCStrings.regularGameIntro]
+            result += [SCStrings.message.regularGameIntro.rawValue]
 
             if Player.instance.isLeader() {
                 result += SCHelpViewController.sharedLeaderStringSequence
@@ -97,8 +97,8 @@ class SCHelpViewController: SCPopoverViewController {
                 result += SCHelpViewController.sharedPlayerStringSequence
             }
 
-            result += [SCStrings.regularGameRoundEnd]
-            result += [SCStrings.regularGameEndMessage]
+            result += [SCStrings.message.regularGameRoundEnd.rawValue]
+            result += [SCStrings.message.regularGameEnd.rawValue]
         }
 
         return result

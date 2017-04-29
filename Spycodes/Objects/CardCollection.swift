@@ -84,7 +84,7 @@ class CardCollection: NSObject, NSCoding {
                         SCViewController.broadcastEvent(
                             .selectCard,
                             optional: [
-                                SCConstants.coding.name.rawValue: SCStrings.cpu,
+                                SCConstants.coding.name.rawValue: SCStrings.player.cpu.rawValue,
                                 SCConstants.coding.word.rawValue: self.cards[i].getWord()
                             ]
                         )

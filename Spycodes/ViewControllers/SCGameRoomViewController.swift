@@ -360,8 +360,8 @@ class SCGameRoomViewController: SCViewController {
                 self.numberOfWordsTextField.isEnabled = false
             } else {
                 if Player.instance.isLeader() {
-                    self.clueTextField.text = SCStrings.defaultLeaderClue
-                    self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
+                    self.clueTextField.text = SCStrings.round.defaultLeaderClue.rawValue
+                    self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue
 
                     self.startTextFieldAnimations()
 
@@ -369,13 +369,13 @@ class SCGameRoomViewController: SCViewController {
                     self.clueTextField.isEnabled = true
                     self.numberOfWordsTextField.isEnabled = true
                 } else {
-                    self.clueTextField.text = SCStrings.defaultIsTurnClue
-                    self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
+                    self.clueTextField.text = SCStrings.round.defaultIsTurnClue.rawValue
+                    self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue
                 }
             }
         } else {
-            self.clueTextField.text = SCStrings.defaultNonTurnClue
-            self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
+            self.clueTextField.text = SCStrings.round.defaultNonTurnClue.rawValue
+            self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue
         }
     }
 
@@ -440,9 +440,9 @@ class SCGameRoomViewController: SCViewController {
             if let clueTextFieldCharacterCount = self.clueTextField.text?.characters.count,
                let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.characters.count {
                 if clueTextFieldCharacterCount > 0 &&
-                   self.clueTextField.text != SCStrings.defaultLeaderClue &&
+                   self.clueTextField.text != SCStrings.round.defaultLeaderClue.rawValue &&
                    numberOfWordsTextFieldCharacterCount > 0 &&
-                   self.numberOfWordsTextField.text != SCStrings.defaultNumberOfWords {
+                   self.numberOfWordsTextField.text != SCStrings.round.defaultNumberOfWords.rawValue {
                     self.actionButton.isEnabled = true
                     self.startButtonAnimations()
                 } else {
@@ -539,8 +539,8 @@ class SCGameRoomViewController: SCViewController {
 
             self.dismissPresentedViewIfNeeded(completion: {
                 self.didEndGame(
-                    SCStrings.gameOverHeader,
-                    reason: SCStrings.defaultLoseString
+                    SCStrings.header.gameOver.rawValue,
+                    reason: SCStrings.message.defaultLoseString.rawValue
                 )
             })
         }
@@ -617,8 +617,8 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                 if synchronizedObject.isAborted() {
                     self.dismissPresentedViewIfNeeded(completion: {
                         self.didEndGame(
-                            SCStrings.returningToPregameRoomHeader,
-                            reason: SCStrings.playerAborted
+                            SCStrings.header.returningToPregameRoom.rawValue,
+                            reason: SCStrings.message.playerAborted.rawValue
                         )
                     })
                 }
@@ -631,22 +631,22 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             if Round.instance.isAborted() {
                 self.dismissPresentedViewIfNeeded(completion: {
                     self.didEndGame(
-                        SCStrings.returningToPregameRoomHeader,
-                        reason: SCStrings.playerAborted
+                        SCStrings.header.returningToPregameRoom.rawValue,
+                        reason: SCStrings.message.playerAborted.rawValue
                     )
                 })
             } else if Round.instance.getWinningTeam() == Player.instance.getTeam() {
                 self.dismissPresentedViewIfNeeded(completion: {
                     if GameMode.instance.getMode() == .regularGame {
                         self.didEndGame(
-                            SCStrings.gameOverHeader,
-                            reason: SCStrings.defaultWinString
+                            SCStrings.header.gameOver.rawValue,
+                            reason: SCStrings.message.defaultWinString.rawValue
                         )
                     } else {
                         self.didEndGame(
-                            SCStrings.gameOverHeader,
+                            SCStrings.header.gameOver.rawValue,
                             reason: String(
-                                format: SCStrings.minigameWinString,
+                                format: SCStrings.message.minigameWinString.rawValue,
                                 CardCollection.instance.getCardsRemainingForTeam(.blue)
                             )
                         )
@@ -659,8 +659,8 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             } else if Round.instance.getWinningTeam() == opponentTeam {
                 self.dismissPresentedViewIfNeeded(completion: {
                     self.didEndGame(
-                        SCStrings.gameOverHeader,
-                        reason: SCStrings.defaultLoseString
+                        SCStrings.header.gameOver.rawValue,
+                        reason: SCStrings.message.defaultLoseString.rawValue
                     )
                 })
             }
@@ -720,8 +720,8 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             self.dismissPresentedViewIfNeeded(completion: {
                 if player.isHost() {
                     let alertController = UIAlertController(
-                        title: SCStrings.returningToMainMenuHeader,
-                        message: SCStrings.hostDisconnected,
+                        title: SCStrings.header.returningToMainMenu.rawValue,
+                        message: SCStrings.message.hostDisconnected.rawValue,
                         preferredStyle: .alert
                     )
                     let confirmAction = UIAlertAction(
@@ -740,8 +740,8 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                 } else {
                     Round.instance.abortGame()
                     self.didEndGame(
-                        SCStrings.returningToPregameRoomHeader,
-                        reason: SCStrings.playerDisconnected
+                        SCStrings.header.returningToPregameRoom.rawValue,
+                        reason: SCStrings.message.playerDisconnected.rawValue
                     )
                 }
             })
@@ -876,8 +876,8 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
             self.dismissPresentedViewIfNeeded(completion: {
                 self.didEndGame(
-                    SCStrings.gameOverHeader,
-                    reason: SCStrings.defaultLoseString
+                    SCStrings.header.gameOver.rawValue,
+                    reason: SCStrings.message.defaultLoseString.rawValue
                 )
             })
         } else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
@@ -888,14 +888,14 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
                     Statistics.instance.recordWinForTeam(playerTeam)
 
                     self.didEndGame(
-                        SCStrings.gameOverHeader,
-                        reason: SCStrings.defaultWinString
+                        SCStrings.header.gameOver.rawValue,
+                        reason: SCStrings.message.defaultWinString.rawValue
                     )
                 } else {
                     self.didEndGame(
-                        SCStrings.gameOverHeader,
+                        SCStrings.header.gameOver.rawValue,
                         reason: String(
-                            format: SCStrings.minigameWinString,
+                            format: SCStrings.message.minigameWinString.rawValue,
                             CardCollection.instance.getCardsRemainingForTeam(.blue)
                         )
                     )
@@ -957,14 +957,14 @@ extension SCGameRoomViewController: UITextFieldDelegate {
         self.leaderIsEditing = true
 
         if textField == self.clueTextField {
-            if textField.text == SCStrings.defaultLeaderClue {
+            if textField.text == SCStrings.round.defaultLeaderClue.rawValue {
                 textField.text = ""
-                textField.placeholder = SCStrings.defaultLeaderClue
+                textField.placeholder = SCStrings.round.defaultLeaderClue.rawValue
             }
         } else if textField == self.numberOfWordsTextField {
-            if textField.text == SCStrings.defaultNumberOfWords {
+            if textField.text == SCStrings.round.defaultNumberOfWords.rawValue {
                 textField.text = ""
-                textField.placeholder = SCStrings.defaultNumberOfWords
+                textField.placeholder = SCStrings.round.defaultNumberOfWords.rawValue
             }
         }
     }
@@ -983,18 +983,18 @@ extension SCGameRoomViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text == "" {
             if textField == self.clueTextField {
-                self.clueTextField.text = SCStrings.defaultLeaderClue
+                self.clueTextField.text = SCStrings.round.defaultLeaderClue.rawValue
             } else if textField == self.numberOfWordsTextField {
-                self.numberOfWordsTextField.text = SCStrings.defaultNumberOfWords
+                self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue
             }
         }
     }
 
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField == self.clueTextField {
-            textField.placeholder = SCStrings.defaultLeaderClue
+            textField.placeholder = SCStrings.round.defaultLeaderClue.rawValue
         } else if textField == self.numberOfWordsTextField {
-            textField.placeholder = SCStrings.defaultNumberOfWords
+            textField.placeholder = SCStrings.round.defaultNumberOfWords.rawValue
         }
         return true
     }

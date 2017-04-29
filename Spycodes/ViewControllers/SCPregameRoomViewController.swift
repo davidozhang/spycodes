@@ -6,8 +6,8 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sectionLabels = [
-        SCStrings.teamRed,
-        SCStrings.teamBlue
+        SCStrings.section.teamRed.rawValue,
+        SCStrings.section.teamBlue.rawValue
     ]
 
     fileprivate var readyButtonState: ReadyButtonState = .notReady
@@ -56,13 +56,13 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         let attributedString = NSMutableAttributedString(
-            string: SCStrings.accessCodeHeader + Room.instance.getAccessCode()
+            string: SCStrings.header.accessCode.rawValue + Room.instance.getAccessCode()
         )
         attributedString.addAttribute(
             NSFontAttributeName,
             value: SCFonts.regularSizeFont(.bold) ?? 0,
             range: NSMakeRange(
-                SCStrings.accessCodeHeader.characters.count,
+                SCStrings.header.accessCode.rawValue.characters.count,
                 SCConstants.constant.accessCodeLength.rawValue
             )
         )
@@ -257,7 +257,7 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         let alertController = UIAlertController(
-            title: SCStrings.returningToMainMenuHeader,
+            title: SCStrings.header.returningToMainMenu.rawValue,
             message: reason,
             preferredStyle: .alert
         )
@@ -280,7 +280,7 @@ class SCPregameRoomViewController: SCViewController {
 
     fileprivate func checkRoom() {
         if !Room.instance.hasHost() {
-            self.returnToMainMenu(reason: SCStrings.hostDisconnected)
+            self.returnToMainMenu(reason: SCStrings.message.hostDisconnected.rawValue)
         }
 
         if !Player.instance.isHost() {
@@ -469,7 +469,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                     return SCTableViewCell()
             }
 
-            cell.primaryLabel.text = SCStrings.teamEmptyState
+            cell.primaryLabel.text = SCStrings.primaryLabel.teamEmptyState.rawValue
 
             return cell
         }

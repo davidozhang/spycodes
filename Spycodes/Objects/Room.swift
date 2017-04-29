@@ -4,7 +4,7 @@ import MultipeerConnectivity
 class Room: NSObject, NSCoding {
     static var instance = Room()
     static let accessCodeAllowedCharacters: NSString = "abcdefghijklmnopqrstuvwxyz"
-    fileprivate static let cpuUUID = SCStrings.cpu
+    fileprivate static let cpuUUID = SCStrings.player.cpu.rawValue
 
     fileprivate var players = [[Player](), [Player]()]
     fileprivate var connectedPeers = [MCPeerID: String]()
@@ -158,7 +158,7 @@ class Room: NSObject, NSCoding {
 
     func addCPUPlayer() {
         let cpu = Player(
-            name: SCStrings.cpu,
+            name: SCStrings.player.cpu.rawValue,
             uuid: Room.cpuUUID,
             team: .blue,
             leader: true,
