@@ -61,6 +61,7 @@ class SCPregameModalViewController: SCModalViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -265,7 +266,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             default:
                 return SCTableViewCell()
             }
-        case 3: // Customize
+        case Section.customize.rawValue:
             switch indexPath.row {
             case CustomSetting.nightMode.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
