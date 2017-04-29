@@ -68,15 +68,20 @@ class SCMainMenuViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.hideSwipeUpButton()
-
-        SCAppInfoManager.checkLatestAppVersion({
+        /**SCAppInfoManager.checkLatestAppVersion({
             DispatchQueue.main.async {
                 // If app is not on latest app version
                 self.showSwipeUpButton()
                 self.swipeUp()
             }
-        })
+        })**/
+
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(SCMainMenuViewController.respondToSwipeGesture(gesture:))
+        )
+        swipeGestureRecognizer.direction = .up
+        self.view.addGestureRecognizer(swipeGestureRecognizer)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -94,9 +99,7 @@ class SCMainMenuViewController: SCViewController {
         Statistics.instance.reset()
         Room.instance.reset()
 
-        if !self.swipeUpButton.isHidden {
-            self.animateSwipeUpButton()
-        }
+        self.animateSwipeUpButton()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -106,10 +109,6 @@ class SCMainMenuViewController: SCViewController {
     }
 
     override func applicationDidBecomeActive() {
-        if self.swipeUpButton.isHidden {
-            return
-        }
-
         self.animateSwipeUpButton()
     }
 
@@ -119,6 +118,11 @@ class SCMainMenuViewController: SCViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super._prepareForSegue(segue, sender: sender)
+
+        // All segues identified here should be forward direction only
+        if let vc = segue.destination as? SCMainMenuModalViewController {
+            vc.delegate = self
+        }
     }
 
     // MARK: Swipe Gesture Recognizer
@@ -142,25 +146,9 @@ class SCMainMenuViewController: SCViewController {
         }
     }
 
-    fileprivate func showSwipeUpButton() {
-        self.swipeUpButton.isHidden = false
-        self.animateSwipeUpButton()
-
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(
-            target: self,
-            action: #selector(SCMainMenuViewController.respondToSwipeGesture(gesture:))
-        )
-        swipeGestureRecognizer.direction = .up
-        self.view.addGestureRecognizer(swipeGestureRecognizer)
-    }
-
-    fileprivate func hideSwipeUpButton() {
-        self.swipeUpButton.isHidden = true
-    }
-
     fileprivate func swipeUp() {
         self.performSegue(
-            withIdentifier: SCConstants.identifier.updateApp.rawValue,
+            withIdentifier: SCConstants.identifier.mainMenuModal.rawValue,
             sender: self
         )
     }
@@ -176,5 +164,20 @@ class SCMainMenuViewController: SCViewController {
         },
             completion: nil
         )
+    }
+}
+
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
+
+// MARK: SCMainMenuModalViewControllerDelegate
+extension SCMainMenuViewController: SCMainMenuModalViewControllerDelegate {
+    func onNightModeToggleChanged() {
+        DispatchQueue.main.async {
+            super.updateAppearance()
+        }
     }
 }

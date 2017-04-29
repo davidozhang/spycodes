@@ -19,7 +19,9 @@ class SCModalViewController: SCViewController {
 
         let swipeGestureRecognizer = UISwipeGestureRecognizer(
             target: self,
-            action: #selector(SCModalViewController.respondToSwipeGesture(gesture:))
+            action: #selector(
+                SCModalViewController.respondToSwipeGesture(gesture:)
+            )
         )
         swipeGestureRecognizer.direction = .down
         swipeGestureRecognizer.delegate = self
@@ -47,10 +49,14 @@ class SCModalViewController: SCViewController {
 
         if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
             self.view.backgroundColor = .darkTintColor()
-            self.blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+            self.blurView = UIVisualEffectView(
+                effect: UIBlurEffect(style: .dark)
+            )
         } else {
             self.view.backgroundColor = .lightTintColor()
-            self.blurView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+            self.blurView = UIVisualEffectView(
+                effect: UIBlurEffect(style: .extraLight)
+            )
         }
 
         self.blurView?.frame = self.view.bounds

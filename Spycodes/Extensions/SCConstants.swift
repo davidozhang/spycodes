@@ -49,6 +49,7 @@ class SCConstants {
         case helpView = "help-view"
         case infoViewCell = "info-view-cell"
         case mainMenu = "main-menu"
+        case mainMenuModal = "main-menu-modal"
         case minigameToggleViewCell = "minigame-toggle-view-cell"
         case nightModeToggleViewCell = "night-mode-toggle-view-cell"
         case playerName = "player-name"
@@ -62,7 +63,6 @@ class SCConstants {
         case timelineModal = "timeline-modal"
         case timelineViewCell = "timeline-view-cell"
         case timerToggleViewCell = "timer-toggle-view-cell"
-        case updateApp = "update-app"
         case versionViewCell = "version-view-cell"
     }
 

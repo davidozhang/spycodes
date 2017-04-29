@@ -1,6 +1,12 @@
 import UIKit
 
-class SCSettingsViewController: SCViewController {
+protocol SCMainMenuModalViewControllerDelegate: class {
+    func onNightModeToggleChanged()
+}
+
+class SCMainMenuModalViewController: SCModalViewController {
+    weak var delegate: SCMainMenuModalViewControllerDelegate?
+
     enum Section: Int {
         case customize = 0
         case about = 1
@@ -47,21 +53,20 @@ class SCSettingsViewController: SCViewController {
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var upArrowView: UIImageView!
 
-    // MARK: Actions
-    @IBAction func onBackTapped(_ sender: AnyObject) {
-        self.swipeRight()
-    }
-
     deinit {
         print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
 
     // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44.0
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        // Unwindable view controller identifier
-        self.unwindableIdentifier = SCConstants.identifier.settings.rawValue
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -70,7 +75,7 @@ class SCSettingsViewController: SCViewController {
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
 
-        if self.tableView.contentSize.height < self.tableView.bounds.height - 1.0 {
+        if self.tableView.contentSize.height <= self.tableView.bounds.height {
             self.upArrowView.isHidden = true
         }
     }
@@ -82,9 +87,12 @@ class SCSettingsViewController: SCViewController {
         self.tableView.delegate = nil
     }
 
-    // MARK: Swipe
-    override func swipeRight() {
-        super.performUnwindSegue(true, completionHandler: nil)
+    override func onDismissal() {
+        if self.tableView.contentOffset.y > 0 {
+            return
+        }
+
+        super.onDismissal()
     }
 }
 
@@ -95,7 +103,7 @@ class SCSettingsViewController: SCViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
+extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionLabels.count
     }
@@ -109,8 +117,8 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
                    viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionHeader = self.tableView.dequeueReusableCell(
             withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
-        ) as? SCSectionHeaderViewCell else {
-            return nil
+            ) as? SCSectionHeaderViewCell else {
+                return nil
         }
 
         if let section = Section(rawValue: section) {
@@ -154,7 +162,7 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
                 cell.primaryLabel.text = self.customizeLabels[.nightMode]
                 cell.delegate = self
-                
+
                 return cell
             case CustomSetting.accessibility.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
@@ -174,16 +182,16 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case Section.about.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.versionViewCell.rawValue
-            ) as? SCTableViewCell else {
-                return SCTableViewCell()
+                ) as? SCTableViewCell else {
+                    return SCTableViewCell()
             }
 
             return cell
         case Section.more.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.disclosureViewCell.rawValue
-            ) as? SCDisclosureViewCell else {
-                return SCTableViewCell()
+                ) as? SCDisclosureViewCell else {
+                    return SCTableViewCell()
             }
 
             if let link = Link(rawValue: indexPath.row) {
@@ -256,15 +264,15 @@ extension SCSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 // MARK: SCToggleViewCellDelegate
-extension SCSettingsViewController: SCToggleViewCellDelegate {
+extension SCMainMenuModalViewController: SCToggleViewCellDelegate {
     func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
                 SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
-                DispatchQueue.main.async {
-                    super.updateAppearance()
-                }
+                super.updateModalAppearance()
+                self.tableView.reloadData()
+                self.delegate?.onNightModeToggleChanged()
             case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
                 SCSettingsManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
             default:
