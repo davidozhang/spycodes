@@ -54,11 +54,17 @@ class SCGameRoomViewController: SCViewController {
 
     @IBAction func onTimelineButtonTapped(_ sender: Any) {
         self.hideNotificationDot()
-        self.performSegue(withIdentifier: SCConstants.identifier.timelineModal.rawValue, sender: self)
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.timelineModal.rawValue,
+            sender: self
+        )
     }
 
     @IBAction func onHelpButtonTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: SCConstants.identifier.helpView.rawValue, sender: self)
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.helpView.rawValue,
+            sender: self
+        )
     }
 
     deinit {
@@ -72,14 +78,18 @@ class SCGameRoomViewController: SCViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(SCGameRoomViewController.didEndMinigameWithNotification),
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.minigameGameOver.rawValue
+            ),
             object: nil
         )
 
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(SCGameRoomViewController.showNotificationDotIfNeeded),
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.timelineUpdated.rawValue),
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
+            ),
             object: nil
         )
 
@@ -158,13 +168,17 @@ class SCGameRoomViewController: SCViewController {
 
         NotificationCenter.default.removeObserver(
             self,
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.minigameGameOver.rawValue),
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.minigameGameOver.rawValue
+            ),
             object: nil
         )
 
         NotificationCenter.default.removeObserver(
             self,
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.timelineUpdated.rawValue),
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
+            ),
             object: nil
         )
 
@@ -394,12 +408,12 @@ class SCGameRoomViewController: SCViewController {
 
         if Timer.instance.state == .stopped {
             Timer.instance.invalidate()
-            self.timerLabel.textColor = UIColor.spycodesGrayColor()
+            self.timerLabel.textColor = .spycodesGrayColor()
             self.timerLabel.text = "--:--"
         } else if Timer.instance.state == .willStart {
             Timer.instance.startTimer({
                 self.timerDidEnd()
-                }, timerInProgress: { (remainingTime) in
+            }, timerInProgress: { (remainingTime) in
                     self.timerInProgress(remainingTime)
             })
 
@@ -417,9 +431,9 @@ class SCGameRoomViewController: SCViewController {
             let seconds = remainingTime % 60
 
             if remainingTime > 10 {
-                self.timerLabel.textColor = UIColor.spycodesGrayColor()
+                self.timerLabel.textColor = .spycodesGrayColor()
             } else {
-                self.timerLabel.textColor = UIColor.spycodesRedColor()
+                self.timerLabel.textColor = .spycodesRedColor()
             }
 
             self.timerLabel.text = String(format: "%d:%02d", minutes, seconds)
@@ -775,17 +789,17 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
         let cardAtIndex = CardCollection.instance.getCards()[indexPath.row]
 
-        cell.wordLabel.textColor = UIColor.white
+        cell.wordLabel.textColor = .white
         cell.wordLabel.text = cardAtIndex.getWord()
 
-        cell.contentView.backgroundColor = UIColor.clear
+        cell.contentView.backgroundColor = .clear
 
         if Player.instance.isLeader() {
             if cardAtIndex.getTeam() == .neutral {
-                cell.wordLabel.textColor = UIColor.spycodesGrayColor()
+                cell.wordLabel.textColor = .spycodesGrayColor()
             }
 
-            cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
+            cell.contentView.backgroundColor = .colorForTeam(cardAtIndex.getTeam())
 
             let attributedString = NSMutableAttributedString(
                 string: SCSettingsManager.instance.isLocalSettingEnabled(.accessibility) ?
@@ -819,7 +833,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             )
 
             if cardAtIndex.getTeam() == .neutral {
-                cell.wordLabel.textColor = UIColor.spycodesGrayColor()
+                cell.wordLabel.textColor = .spycodesGrayColor()
 
                 attributedString.addAttribute(
                     NSStrikethroughStyleAttributeName,
@@ -829,9 +843,9 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             }
 
             cell.wordLabel.attributedText = attributedString
-            cell.contentView.backgroundColor = UIColor.colorForTeam(cardAtIndex.getTeam())
+            cell.contentView.backgroundColor = .colorForTeam(cardAtIndex.getTeam())
         } else {
-            cell.wordLabel.textColor = UIColor.spycodesGrayColor()
+            cell.wordLabel.textColor = .spycodesGrayColor()
         }
 
         return cell

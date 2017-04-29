@@ -4,11 +4,11 @@ class SCTextField: UITextField {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
-        self.autocorrectionType = UITextAutocorrectionType.no
+        self.autocorrectionType = .no
         self.borderStyle = .none
         self.font = SCFonts.regularSizeFont(.medium)
-        self.textColor = UIColor.spycodesGrayColor()
-        self.tintColor = UIColor.spycodesGrayColor()
+        self.textColor = .spycodesGrayColor()
+        self.tintColor = .spycodesGrayColor()
     }
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {

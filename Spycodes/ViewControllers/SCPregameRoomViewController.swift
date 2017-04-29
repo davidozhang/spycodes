@@ -220,7 +220,10 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     fileprivate func swipeUp() {
-        self.performSegue(withIdentifier: SCConstants.identifier.pregameModal.rawValue, sender: self)
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.pregameModal.rawValue,
+            sender: self
+        )
     }
 
     fileprivate func animateSwipeUpButton() {
@@ -238,7 +241,10 @@ class SCPregameRoomViewController: SCViewController {
 
     fileprivate func goToGame() {
         DispatchQueue.main.async(execute: {
-            self.performSegue(withIdentifier: SCConstants.identifier.gameRoom.rawValue, sender: self)
+            self.performSegue(
+                withIdentifier: SCConstants.identifier.gameRoom.rawValue,
+                sender: self
+            )
         })
     }
 
@@ -490,7 +496,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         cell.uuid = playerAtIndex.getUUID()
         cell.delegate = self
 
-        cell.teamIndicatorView.backgroundColor = UIColor.colorForTeam(playerAtIndex.getTeam())
+        cell.teamIndicatorView.backgroundColor = .colorForTeam(playerAtIndex.getTeam())
 
         if playerAtIndex.isReady() {
             cell.showReadyStatus()

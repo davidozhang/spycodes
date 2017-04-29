@@ -3,8 +3,12 @@ import Foundation
 class SCAppInfoManager {
     static let appID = 1141711201
     static let bundleID = "com.davidzhang.Spycodes"
-    static let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-    static let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+    static let appVersion = Bundle.main.object(
+        forInfoDictionaryKey: "CFBundleShortVersionString"
+    ) as! String
+    static let buildNumber = Bundle.main.object(
+        forInfoDictionaryKey: "CFBundleVersion"
+    ) as! String
 
     // MARK: Public
     static func checkLatestAppVersion(_ failure: @escaping ((Void) -> Void)) {
@@ -27,17 +31,19 @@ class SCAppInfoManager {
     fileprivate static func sendRequest(_ success: @escaping ((NSDictionary) -> Void)) {
         let requestURL = URL(string: SCConstants.url.version.rawValue)
         let task = URLSession(
-            configuration: URLSessionConfiguration.default).dataTask(
-                with: requestURL!, completionHandler: { (data, response, error) in
-            if let data = data,
-               let response = response as? HTTPURLResponse,
-               let dictionary = SCAppInfoManager.deserialize(data) {
-                if response.statusCode == 200 {
-                    success(dictionary)
+            configuration: .default
+        ).dataTask(
+            with: requestURL!,
+            completionHandler: { (data, response, error) in
+                if let data = data,
+                   let response = response as? HTTPURLResponse,
+                   let dictionary = SCAppInfoManager.deserialize(data) {
+                    if response.statusCode == 200 {
+                        success(dictionary)
+                    }
                 }
             }
-        }
-            ) 
+        )
 
         task.resume()
     }
