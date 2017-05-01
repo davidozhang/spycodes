@@ -144,110 +144,110 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
 
         let event = Timeline.instance.getEvents()[indexPath.row]
 
-        if let parameters = event.getParameters() {
-            if event.getType() == .confirm {
-                if let name = parameters[SCConstants.coding.name.rawValue] as? String,
-                   let clue = parameters[SCConstants.coding.clue.rawValue] as? String,
-                   let numberOfWords = parameters[SCConstants.coding.numberOfWords.rawValue] as? String {
-                    var baseString = String(
+        guard let parameters = event.getParameters() else {
+            return SCTableViewCell()
+        }
+
+        if event.getType() == .confirm {
+            if let name = parameters[SCConstants.coding.name.rawValue] as? String,
+               let clue = parameters[SCConstants.coding.clue.rawValue] as? String,
+               let numberOfWords = parameters[SCConstants.coding.numberOfWords.rawValue] as? String {
+                var baseString = String(
+                    format: SCStrings.timeline.clueSetTo.rawValue,
+                    name,
+                    clue,
+                    numberOfWords
+                )
+                var length = name.characters.count
+
+                if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
+                    baseString = String(
                         format: SCStrings.timeline.clueSetTo.rawValue,
-                        name,
+                        SCStrings.player.localPlayer.rawValue,
                         clue,
                         numberOfWords
                     )
-                    var length = name.characters.count
-
-                    if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
-                        baseString = String(
-                            format: SCStrings.timeline.clueSetTo.rawValue,
-                            SCStrings.player.localPlayer.rawValue,
-                            clue,
-                            numberOfWords
-                        )
-                        length = 3
-                    }
-
-                    let attributedString = NSMutableAttributedString(
-                        string: baseString
-                    )
-                    attributedString.addAttribute(
-                        NSFontAttributeName,
-                        value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                        range: NSMakeRange(0, length)
-                    )
-                    cell.primaryLabel.attributedText = attributedString
+                    length = 3
                 }
-            } else if event.getType() == .selectCard {
-                if let name = parameters[SCConstants.coding.name.rawValue] as? String,
-                   let word = parameters[SCConstants.coding.word.rawValue] as? String {
-                    var baseString = String(format: SCStrings.timeline.selected.rawValue, name, word)
-                    var length = name.characters.count
 
-                    if let _ = parameters[SCConstants.coding.localPlayer.rawValue],
-                       let name = parameters[SCConstants.coding.name.rawValue] as? String,
-                       name != SCStrings.player.cpu.rawValue {
-                        baseString = String(
-                            format: SCStrings.timeline.selected.rawValue,
-                            SCStrings.player.localPlayer.rawValue,
-                            word
-                        )
-                        length = 3
-                    }
+                let attributedString = NSMutableAttributedString(
+                    string: baseString
+                )
+                attributedString.addAttribute(
+                    NSFontAttributeName,
+                    value: SCFonts.intermediateSizeFont(.bold) ?? 0,
+                    range: NSMakeRange(0, length)
+                )
+                cell.primaryLabel.attributedText = attributedString
+            }
+        } else if event.getType() == .selectCard {
+            if let name = parameters[SCConstants.coding.name.rawValue] as? String,
+               let word = parameters[SCConstants.coding.word.rawValue] as? String {
+                var baseString = String(format: SCStrings.timeline.selected.rawValue, name, word)
+                var length = name.characters.count
 
-                    let attributedString = NSMutableAttributedString(
-                        string: baseString
+                if let _ = parameters[SCConstants.coding.localPlayer.rawValue],
+                   let name = parameters[SCConstants.coding.name.rawValue] as? String,
+                   name != SCStrings.player.cpu.rawValue {
+                    baseString = String(
+                        format: SCStrings.timeline.selected.rawValue,
+                        SCStrings.player.localPlayer.rawValue,
+                        word
                     )
-                    attributedString.addAttribute(
-                        NSFontAttributeName,
-                        value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                        range: NSMakeRange(0, length)
-                    )
-                    cell.primaryLabel.attributedText = attributedString
+                    length = 3
                 }
-            } else if event.getType() == .endRound {
-                if let name = parameters[SCConstants.coding.name.rawValue] as? String {
-                    var baseString = String(
+
+                let attributedString = NSMutableAttributedString(
+                    string: baseString
+                )
+                attributedString.addAttribute(
+                    NSFontAttributeName,
+                    value: SCFonts.intermediateSizeFont(.bold) ?? 0,
+                    range: NSMakeRange(0, length)
+                )
+                cell.primaryLabel.attributedText = attributedString
+            }
+        } else if event.getType() == .endRound {
+            if let name = parameters[SCConstants.coding.name.rawValue] as? String {
+                var baseString = String(
+                    format: SCStrings.timeline.roundEnded.rawValue,
+                    name
+                )
+                var length = name.characters.count
+
+                if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
+                    baseString = String(
                         format: SCStrings.timeline.roundEnded.rawValue,
-                        name
+                        SCStrings.player.localPlayer.rawValue
                     )
-                    var length = name.characters.count
-
-                    if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
-                        baseString = String(
-                            format: SCStrings.timeline.roundEnded.rawValue,
-                            SCStrings.player.localPlayer.rawValue
-                        )
-                        length = 3
-                    }
-
-                    let attributedString = NSMutableAttributedString(
-                        string: baseString
-                    )
-                    attributedString.addAttribute(
-                        NSFontAttributeName,
-                        value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                        range: NSMakeRange(
-                            0,
-                            length
-                        )
-                    )
-                    cell.primaryLabel.attributedText = attributedString
-                } else {
-                    cell.primaryLabel.text = SCStrings.timeline.timerExpiry.rawValue
+                    length = 3
                 }
-            }
 
-            if let hasRead = parameters[SCConstants.coding.hasRead.rawValue] as? Bool,
-               !hasRead {
-                cell.showNotificationDot()
+                let attributedString = NSMutableAttributedString(
+                    string: baseString
+                )
+                attributedString.addAttribute(
+                    NSFontAttributeName,
+                    value: SCFonts.intermediateSizeFont(.bold) ?? 0,
+                    range: NSMakeRange(
+                        0,
+                        length
+                    )
+                )
+                cell.primaryLabel.attributedText = attributedString
             } else {
-                cell.hideNotificationDot()
+                cell.primaryLabel.text = SCStrings.timeline.timerExpiry.rawValue
             }
-
-            return cell
         }
 
-        return SCTableViewCell()
+        if let hasRead = parameters[SCConstants.coding.hasRead.rawValue] as? Bool,
+           !hasRead {
+            cell.showNotificationDot()
+        } else {
+            cell.hideNotificationDot()
+        }
+
+        return cell
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
