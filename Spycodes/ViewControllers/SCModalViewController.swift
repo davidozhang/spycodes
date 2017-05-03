@@ -64,17 +64,3 @@ class SCModalViewController: SCViewController {
         self.view.sendSubview(toBack: self.blurView!)
     }
 }
-
-//   _____      _                 _
-//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
-//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
-//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
-//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
-
-// MARK: UIGestureRecognizerDelegate
-extension SCModalViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
-                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-}

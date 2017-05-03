@@ -32,10 +32,6 @@ class SCPregameRoomViewController: SCViewController {
         self.updateReadyButton()
     }
 
-    @IBAction func onSwipeUpTapped(_ sender: Any) {
-        self.swipeUp()
-    }
-
     @IBAction func unwindToPregameRoom(_ segue: UIStoryboardSegue) {
         super.unwindedToSelf(segue)
     }
@@ -67,13 +63,6 @@ class SCPregameRoomViewController: SCViewController {
         )
 
         self.accessCodeLabel.attributedText = attributedString
-
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(
-            target: self,
-            action: #selector(SCPregameRoomViewController.respondToSwipeGesture(gesture:))
-        )
-        swipeGestureRecognizer.direction = .up
-        self.view.addGestureRecognizer(swipeGestureRecognizer)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -153,10 +142,8 @@ class SCPregameRoomViewController: SCViewController {
         }
     }
 
-    // MARK: Swipe
-    func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
-        self.resetReadyButton()
-        self.swipeUp()
+    override func applicationDidBecomeActive() {
+        self.animateReadyButtonIfNeeded()
     }
 
     override func swipeRight() {
@@ -201,7 +188,7 @@ class SCPregameRoomViewController: SCViewController {
             UIView.performWithoutAnimation {
                 self.readyButton.setTitle("Ready", for: .normal)
             }
-            self.animateReadyButton()
+            self.animateReadyButtonIfNeeded()
         } else {
             self.broadcastEvent(.ready)
             UIView.performWithoutAnimation {
@@ -302,7 +289,11 @@ class SCPregameRoomViewController: SCViewController {
         self.goToGame()
     }
 
-    fileprivate func animateReadyButton() {
+    fileprivate func animateReadyButtonIfNeeded() {
+        if self.readyButtonState == .ready {
+            return
+        }
+
         self.readyButton.alpha = 1.0
         UIView.animate(
             withDuration: super.animationDuration,
