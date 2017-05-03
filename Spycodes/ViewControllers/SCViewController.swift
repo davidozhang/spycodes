@@ -36,11 +36,18 @@ class SCViewController: UIViewController {
             topBorder.backgroundColor = UIColor.spycodesBorderColor().cgColor
             self.modalPeekView.layer.addSublayer(topBorder)
 
+            let swipeGestureRecognizer = UISwipeGestureRecognizer(
+                target: self,
+                action: #selector(SCViewController.swipeUp)
+            )
+            swipeGestureRecognizer.direction = .up
+            swipeGestureRecognizer.delegate = self
+            self.view.addGestureRecognizer(swipeGestureRecognizer)
+
             let tapGestureRecognizer = UITapGestureRecognizer(
                 target: self,
                 action: #selector(SCViewController.swipeUp)
             )
-
             self.modalPeekView.addGestureRecognizer(tapGestureRecognizer)
         }
     }
@@ -254,5 +261,13 @@ extension SCViewController: UIPopoverPresentationControllerDelegate {
         _ popoverPresentationController: UIPopoverPresentationController) {
         self.hideDimView()
         popoverPresentationController.delegate = nil
+    }
+}
+
+// MARK: UIGestureRecognizerDelegate
+extension SCViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

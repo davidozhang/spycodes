@@ -6,10 +6,6 @@ class SCMainMenuViewController: SCViewController {
         super.unwindedToSelf(sender)
     }
 
-    @IBAction func onSwipeUpTapped(_ sender: Any) {
-        self.swipeUp()
-    }
-
     @IBAction func onCreateGame(_ sender: AnyObject) {
         Player.instance.setIsHost(true)
         self.performSegue(
@@ -25,13 +21,6 @@ class SCMainMenuViewController: SCViewController {
         )
     }
 
-    @IBAction func onSettingsTapped(_ sender: AnyObject) {
-        self.performSegue(
-            withIdentifier: SCConstants.identifier.settings.rawValue,
-            sender: self
-        )
-    }
-
     deinit {
         print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
@@ -41,17 +30,11 @@ class SCMainMenuViewController: SCViewController {
         super.viewDidLoad()
 
         SCAppInfoManager.checkLatestAppVersion({
+            // If not on latest app version
             DispatchQueue.main.async {
                 self.showUpdateAppAlert()
             }
         })
-
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(
-            target: self,
-            action: #selector(SCMainMenuViewController.respondToSwipeGesture(gesture:))
-        )
-        swipeGestureRecognizer.direction = .up
-        self.view.addGestureRecognizer(swipeGestureRecognizer)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -85,11 +68,6 @@ class SCMainMenuViewController: SCViewController {
             withIdentifier: SCConstants.identifier.mainMenuModal.rawValue,
             sender: self
         )
-    }
-
-    // MARK: Swipe Gesture Recognizer
-    func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
-        self.swipeUp()
     }
 
     // MARK: Private
