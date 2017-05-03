@@ -23,6 +23,19 @@ class SCViewController: UIViewController {
         self.dimView.tag = 1
         self.dimView.frame = UIScreen.main.bounds
         self.dimView.backgroundColor = .dimBackgroundColor()
+
+        if let _ = self.modalPeekView {
+            let topBorder = CALayer()
+            topBorder.frame = CGRect(
+                x: 0.0,
+                y: 1.0,
+                width: self.modalPeekView.frame.size.width,
+                height: 1.0
+            )
+
+            topBorder.backgroundColor = UIColor.spycodesBorderColor().cgColor
+            self.modalPeekView.layer.addSublayer(topBorder)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -188,17 +201,6 @@ class SCViewController: UIViewController {
             self.modalPeekBlurView?.tag = 2
             self.modalPeekView?.addSubview(self.modalPeekBlurView!)
             self.modalPeekView?.sendSubview(toBack: self.modalPeekBlurView!)
-
-            let topBorder = CALayer()
-            topBorder.frame = CGRect(
-                x: 0.0,
-                y: 1.0,
-                width: self.modalPeekView.frame.size.width,
-                height: 1.0
-            )
-
-            topBorder.backgroundColor = UIColor.spycodesBorderColor().cgColor
-            self.modalPeekView.layer.addSublayer(topBorder)
         }
 
         self.setNeedsStatusBarAppearanceUpdate()
