@@ -72,6 +72,15 @@ class SCConstants {
         case timelineUpdated = "timeline-updated"
     }
 
+    enum tag: Int {
+        case firstTextField = 0
+        case lastTextField = 3
+        case dimView = 4
+        case modalBlurView = 5
+        case modalPeekBlurView = 6
+        case sectionHeaderBlurView = 7
+    }
+
     enum url: String {
         case appStore = "itms-apps://itunes.apple.com/app/id1141711201"
         case appStoreWeb = "https://itunes.apple.com/app/spycodes/id1141711201?mt=8"

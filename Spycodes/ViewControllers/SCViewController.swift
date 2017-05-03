@@ -20,7 +20,7 @@ class SCViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.dimView.tag = 1
+        self.dimView.tag = SCConstants.tag.dimView.rawValue
         self.dimView.frame = UIScreen.main.bounds
         self.dimView.backgroundColor = .dimBackgroundColor()
 
@@ -169,7 +169,7 @@ class SCViewController: UIViewController {
     func updateAppearance() {
         let textFieldAppearance = UITextField.appearance()
 
-        if let view = self.view.viewWithTag(2) {
+        if let view = self.view.viewWithTag(SCConstants.tag.modalPeekBlurView.rawValue) {
             view.removeFromSuperview()
         }
 
@@ -198,7 +198,7 @@ class SCViewController: UIViewController {
         if let _ = self.modalPeekView {
             self.modalPeekBlurView?.frame = self.modalPeekView.bounds
             self.modalPeekBlurView?.clipsToBounds = true
-            self.modalPeekBlurView?.tag = 2
+            self.modalPeekBlurView?.tag = SCConstants.tag.modalPeekBlurView.rawValue
             self.modalPeekView?.addSubview(self.modalPeekBlurView!)
             self.modalPeekView?.sendSubview(toBack: self.modalPeekBlurView!)
         }
@@ -211,7 +211,7 @@ class SCViewController: UIViewController {
     }
 
     func hideDimView() {
-        if let view = self.view.viewWithTag(1) {
+        if let view = self.view.viewWithTag(SCConstants.tag.dimView.rawValue) {
             view.removeFromSuperview()
         }
     }

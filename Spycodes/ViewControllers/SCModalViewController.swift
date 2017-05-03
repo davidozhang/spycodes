@@ -41,7 +41,7 @@ class SCModalViewController: SCViewController {
     }
 
     func updateModalAppearance() {
-        if let view = self.view.viewWithTag(1) {
+        if let view = self.view.viewWithTag(SCConstants.tag.modalBlurView.rawValue) {
             view.removeFromSuperview()
         }
 
@@ -59,7 +59,7 @@ class SCModalViewController: SCViewController {
 
         self.blurView?.frame = self.view.bounds
         self.blurView?.clipsToBounds = true
-        self.blurView?.tag = 1
+        self.blurView?.tag = SCConstants.tag.modalBlurView.rawValue
         self.view.addSubview(self.blurView!)
         self.view.sendSubview(toBack: self.blurView!)
     }
