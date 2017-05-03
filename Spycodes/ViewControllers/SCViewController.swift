@@ -12,6 +12,9 @@ class SCViewController: UIViewController {
     var isRootViewController = false
 
     fileprivate let dimView = UIView()
+    fileprivate var modalPeekBlurView: UIVisualEffectView?
+
+    @IBOutlet weak var modalPeekView: UIView!
 
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -153,12 +156,49 @@ class SCViewController: UIViewController {
     func updateAppearance() {
         let textFieldAppearance = UITextField.appearance()
 
+        if let view = self.view.viewWithTag(2) {
+            view.removeFromSuperview()
+        }
+
         if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
             textFieldAppearance.keyboardAppearance = .dark
             self.view.backgroundColor = .black
+
+            if let _ = self.modalPeekView {
+                self.modalPeekView.backgroundColor = .darkTintColor()
+                self.modalPeekBlurView = UIVisualEffectView(
+                    effect: UIBlurEffect(style: .dark)
+                )
+            }
         } else {
             textFieldAppearance.keyboardAppearance = .light
             self.view.backgroundColor = .white
+
+            if let _ = self.modalPeekView {
+                self.modalPeekView.backgroundColor = .lightTintColor()
+                self.modalPeekBlurView = UIVisualEffectView(
+                    effect: UIBlurEffect(style: .extraLight)
+                )
+            }
+        }
+
+        if let _ = self.modalPeekView {
+            self.modalPeekBlurView?.frame = self.modalPeekView.bounds
+            self.modalPeekBlurView?.clipsToBounds = true
+            self.modalPeekBlurView?.tag = 2
+            self.modalPeekView?.addSubview(self.modalPeekBlurView!)
+            self.modalPeekView?.sendSubview(toBack: self.modalPeekBlurView!)
+
+            let topBorder = CALayer()
+            topBorder.frame = CGRect(
+                x: 0.0,
+                y: 1.0,
+                width: self.modalPeekView.frame.size.width,
+                height: 1.0
+            )
+
+            topBorder.backgroundColor = UIColor.spycodesBorderColor().cgColor
+            self.modalPeekView.layer.addSublayer(topBorder)
         }
 
         self.setNeedsStatusBarAppearanceUpdate()

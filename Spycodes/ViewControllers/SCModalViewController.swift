@@ -26,8 +26,6 @@ class SCModalViewController: SCViewController {
         swipeGestureRecognizer.direction = .down
         swipeGestureRecognizer.delegate = self
         self.view.addGestureRecognizer(swipeGestureRecognizer)
-
-        self.animateSwipeDownButton()
     }
 
     // MARK: Swipe Gesture Recognizer
@@ -64,28 +62,6 @@ class SCModalViewController: SCViewController {
         self.blurView?.tag = 1
         self.view.addSubview(self.blurView!)
         self.view.sendSubview(toBack: self.blurView!)
-    }
-
-    override func applicationDidBecomeActive() {
-        self.animateSwipeDownButton()
-    }
-
-    // MARK: Private
-    fileprivate func animateSwipeDownButton() {
-        guard let _ = self.swipeDownButton else {
-            return
-        }
-
-        self.swipeDownButton.alpha = 1.0
-        UIView.animate(
-            withDuration: super.animationDuration,
-            delay: 0.0,
-            options: [.autoreverse, .repeat, .allowUserInteraction],
-            animations: {
-                self.swipeDownButton.alpha = super.animationAlpha
-        },
-            completion: nil
-        )
     }
 }
 
