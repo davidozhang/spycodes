@@ -25,23 +25,9 @@ class SCSectionHeaderViewCell: SCTableViewCell {
         self.sendSubview(toBack: self.blurView!)
     }
 
-    func showSolidBackground() {
-        self.hideSolidBackground()
-
-        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
-            self.backgroundColor = .black
-        } else {
-            self.backgroundColor = .white
-        }
-    }
-
     func hideBlurBackground() {
         if let view = self.viewWithTag(1) {
             view.removeFromSuperview()
         }
-    }
-
-    func hideSolidBackground() {
-        self.backgroundColor = .clear
     }
 }

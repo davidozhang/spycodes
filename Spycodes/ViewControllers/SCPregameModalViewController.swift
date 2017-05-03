@@ -80,7 +80,7 @@ class SCPregameModalViewController: SCModalViewController {
             repeats: true
         )
 
-        if self.tableView.contentSize.height < self.tableView.bounds.height {
+        if self.tableView.contentSize.height <= self.tableView.bounds.height {
             self.upArrowView.isHidden = true
         }
     }
@@ -94,6 +94,7 @@ class SCPregameModalViewController: SCModalViewController {
         self.refreshTimer?.invalidate()
     }
 
+    // MARK: SCModalViewController Overrides
     override func onDismissal() {
         if self.tableView.contentOffset.y > 0 {
             return

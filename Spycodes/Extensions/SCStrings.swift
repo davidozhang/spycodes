@@ -18,6 +18,7 @@ class SCStrings {
         case returningToMainMenu = "Returning to Main Menu"
         case returningToPregameRoom = "Returning to Pregame Room"
         case roundEnd = "Round End"
+        case updateApp = "Update App"
         case waitForClue = "Waiting For Clue"
     }
 
@@ -50,7 +51,7 @@ class SCStrings {
         case regularGameEnd = "Your team's wins and losses are tracked after each game. Try to win as many games as possible!"
         case regularGameIntro = "You are currently playing a regular game with your teammates. There are 22 words in total, including 6 Neutral (white) and 1 Assassin (black). Your team may get 7 or 8 starting words."
         case regularGameRoundEnd = "The other team will now follow the same process. Once they are done guessing they will hand the round back to your team. The round exchanges until one team guesses all of its words."
-        case updatePrompt = "A new version of Spycodes is available on the App Store. Download to get the latest features!"
+        case updatePrompt = "Please download the latest version of Spycodes."
     }
 
     enum player: String {
@@ -64,6 +65,7 @@ class SCStrings {
         case github = "Github"
         case minigame = "Minigame"
         case nightMode = "Night Mode"
+        case releaseNotes = "Release Notes"
         case reviewApp = "Review App"
         case support = "Support"
         case teamEmptyState = "No players on the team."

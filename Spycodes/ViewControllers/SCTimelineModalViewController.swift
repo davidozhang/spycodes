@@ -69,6 +69,7 @@ class SCTimelineModalViewController: SCModalViewController {
         )
     }
 
+    // MARK: SCModalViewController Overrides
     override func onDismissal() {
         if self.tableView.contentOffset.y > 0 {
             return
