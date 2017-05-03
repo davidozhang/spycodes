@@ -119,7 +119,7 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
                    viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionHeader = self.tableView.dequeueReusableCell(
             withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
-            ) as? SCSectionHeaderViewCell else {
+        ) as? SCSectionHeaderViewCell else {
                 return nil
         }
 
@@ -158,8 +158,8 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
             case CustomSetting.nightMode.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
-                    ) as? SCToggleViewCell else {
-                        return SCTableViewCell()
+                ) as? SCToggleViewCell else {
+                    return SCTableViewCell()
                 }
 
                 cell.primaryLabel.text = self.customizeLabels[.nightMode]
@@ -169,8 +169,8 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
             case CustomSetting.accessibility.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
-                    ) as? SCToggleViewCell else {
-                        return SCTableViewCell()
+                ) as? SCToggleViewCell else {
+                    return SCTableViewCell()
                 }
 
                 cell.primaryLabel.text = self.customizeLabels[.accessibility]
@@ -184,16 +184,16 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
         case Section.about.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.versionViewCell.rawValue
-                ) as? SCTableViewCell else {
-                    return SCTableViewCell()
+            ) as? SCTableViewCell else {
+                return SCTableViewCell()
             }
 
             return cell
         case Section.more.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.disclosureViewCell.rawValue
-                ) as? SCDisclosureViewCell else {
-                    return SCTableViewCell()
+            ) as? SCDisclosureViewCell else {
+                return SCTableViewCell()
             }
 
             if let link = Link(rawValue: indexPath.row) {

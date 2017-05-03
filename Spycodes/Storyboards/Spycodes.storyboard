@@ -90,34 +90,6 @@
                                     <constraint firstItem="CBi-9c-KRm" firstAttribute="trailing" secondItem="Mdj-Hd-5OI" secondAttribute="trailing" id="uxI-GP-k70"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVQ-XY-iCb" userLabel="Share Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="932" y="31" width="23" height="23"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="23" id="ObR-YH-jjb"/>
-                                    <constraint firstAttribute="height" constant="23" id="ZfG-qu-xYL"/>
-                                </constraints>
-                                <state key="normal" image="Share"/>
-                                <connections>
-                                    <action selector="onShareTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6zQ-WB-64A"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8H-tV-b9A" userLabel="Night Mode Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="971" y="28" width="28" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="4K1-ob-WXy"/>
-                                    <constraint firstAttribute="width" constant="28" id="RdS-Js-x21"/>
-                                </constraints>
-                                <state key="normal" image="Moon"/>
-                                <connections>
-                                    <action selector="onNightModeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kbi-vz-Qg8"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link copied!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7k-je-1Mo" customClass="SCStatusLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="897" y="62" width="93" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXB-hy-qQU" userLabel="Swipe Up Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
                                 <rect key="frame" x="497" y="1320" width="30" height="30"/>
                                 <constraints>
@@ -135,18 +107,10 @@
                             <constraint firstItem="XXB-hy-qQU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="420-EW-iHc"/>
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="F5G-fC-j66"/>
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GIg-cQ-q81"/>
-                            <constraint firstItem="B8H-tV-b9A" firstAttribute="leading" secondItem="eVQ-XY-iCb" secondAttribute="trailing" constant="16" id="HcC-HB-xv6"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XXB-hy-qQU" secondAttribute="bottom" constant="16" id="JVe-aa-A9K"/>
-                            <constraint firstItem="P7k-je-1Mo" firstAttribute="top" secondItem="eVQ-XY-iCb" secondAttribute="bottom" constant="8" id="JXk-nz-51t"/>
-                            <constraint firstItem="B8H-tV-b9A" firstAttribute="centerY" secondItem="eVQ-XY-iCb" secondAttribute="centerY" id="jBI-Qh-D6W"/>
-                            <constraint firstItem="eVQ-XY-iCb" firstAttribute="centerX" secondItem="P7k-je-1Mo" secondAttribute="centerX" id="lPY-od-mxM"/>
-                            <constraint firstItem="B8H-tV-b9A" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="n82-9v-O8l"/>
-                            <constraint firstAttribute="trailing" secondItem="B8H-tV-b9A" secondAttribute="trailing" constant="25" id="ui5-Nm-gaE"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="linkCopiedLabel" destination="P7k-je-1Mo" id="ro3-ep-BNa"/>
-                        <outlet property="nightModeButton" destination="B8H-tV-b9A" id="a0W-1H-foh"/>
                         <outlet property="swipeUpButton" destination="XXB-hy-qQU" id="hyb-6E-LeZ"/>
                         <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
                         <segue destination="oCs-d3-UDI" kind="presentation" identifier="main-menu-modal" modalPresentationStyle="overCurrentContext" id="cpV-DQ-cDx"/>
@@ -1627,11 +1591,9 @@
         <image name="Clock" width="50" height="50"/>
         <image name="Crown-Filled" width="100" height="100"/>
         <image name="Exit" width="42" height="42"/>
-        <image name="Moon" width="50" height="50"/>
         <image name="Next" width="100" height="100"/>
         <image name="Notification-Dot" width="300" height="300"/>
         <image name="Question" width="100" height="100"/>
-        <image name="Share" width="100" height="100"/>
         <image name="Spy" width="290" height="280"/>
         <image name="Stack" width="100" height="100"/>
         <image name="Team" width="100" height="100"/>
