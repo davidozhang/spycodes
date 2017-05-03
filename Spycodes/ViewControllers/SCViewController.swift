@@ -3,7 +3,7 @@ import UIKit
 class SCViewController: UIViewController {
     static let tableViewMargin: CGFloat = 30
     let animationDuration: TimeInterval = 0.6
-    let animationAlpha: CGFloat = 0.4
+    let animationAlpha: CGFloat = 0.5
 
     var unwindableIdentifier: String = ""
     var previousViewControllerIdentifier: String?

@@ -201,11 +201,13 @@ class SCPregameRoomViewController: SCViewController {
             UIView.performWithoutAnimation {
                 self.readyButton.setTitle("Ready", for: .normal)
             }
+            self.animateReadyButton()
         } else {
             self.broadcastEvent(.ready)
             UIView.performWithoutAnimation {
                 self.readyButton.setTitle("Cancel", for: .normal)
             }
+            self.stopReadyButtonAnimation()
         }
 
         self.tableView.reloadData()
@@ -298,6 +300,24 @@ class SCPregameRoomViewController: SCViewController {
         SCMultipeerManager.instance.broadcast(Round.instance)
 
         self.goToGame()
+    }
+
+    fileprivate func animateReadyButton() {
+        self.readyButton.alpha = 1.0
+        UIView.animate(
+            withDuration: super.animationDuration,
+            delay: 0.0,
+            options: [.autoreverse, .repeat, .allowUserInteraction],
+            animations: {
+                self.readyButton.alpha = super.animationAlpha
+        },
+            completion: nil
+        )
+    }
+
+    fileprivate func stopReadyButtonAnimation() {
+        self.readyButton.layer.removeAllAnimations()
+        self.readyButton.alpha = 1.0
     }
 }
 
