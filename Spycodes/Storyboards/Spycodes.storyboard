@@ -90,27 +90,40 @@
                                     <constraint firstItem="CBi-9c-KRm" firstAttribute="trailing" secondItem="Mdj-Hd-5OI" secondAttribute="trailing" id="uxI-GP-k70"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXB-hy-qQU" userLabel="Swipe Up Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="497" y="1320" width="30" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nVj-tx-bo9" userLabel="Modal Peek View">
+                                <rect key="frame" x="0.0" y="1312" width="1024" height="54"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXB-hy-qQU" userLabel="Swipe Up Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="497" y="8" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Mpy-1W-9V9"/>
+                                            <constraint firstAttribute="width" constant="30" id="vOp-g9-XZt"/>
+                                        </constraints>
+                                        <state key="normal" image="Chevron-Up"/>
+                                        <connections>
+                                            <action selector="onSwipeUpTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PTg-ex-Jy7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Mpy-1W-9V9"/>
-                                    <constraint firstAttribute="width" constant="30" id="vOp-g9-XZt"/>
+                                    <constraint firstItem="XXB-hy-qQU" firstAttribute="top" secondItem="nVj-tx-bo9" secondAttribute="top" constant="8" id="Ewk-TY-UPy"/>
+                                    <constraint firstAttribute="bottom" secondItem="XXB-hy-qQU" secondAttribute="bottom" constant="16" id="F4K-KB-idL"/>
+                                    <constraint firstItem="XXB-hy-qQU" firstAttribute="centerX" secondItem="nVj-tx-bo9" secondAttribute="centerX" id="Rbw-bZ-LAY"/>
                                 </constraints>
-                                <state key="normal" image="Chevron-Up"/>
-                                <connections>
-                                    <action selector="onSwipeUpTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PTg-ex-Jy7"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="XXB-hy-qQU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="420-EW-iHc"/>
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="F5G-fC-j66"/>
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GIg-cQ-q81"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XXB-hy-qQU" secondAttribute="bottom" constant="16" id="JVe-aa-A9K"/>
+                            <constraint firstAttribute="bottom" secondItem="nVj-tx-bo9" secondAttribute="bottom" id="JZc-eJ-DFM"/>
+                            <constraint firstAttribute="trailing" secondItem="nVj-tx-bo9" secondAttribute="trailing" id="SJn-EZ-UDl"/>
+                            <constraint firstItem="nVj-tx-bo9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WJS-72-luN"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="modalPeekView" destination="nVj-tx-bo9" id="qlw-TL-Mg7"/>
                         <outlet property="swipeUpButton" destination="XXB-hy-qQU" id="hyb-6E-LeZ"/>
                         <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
                         <segue destination="oCs-d3-UDI" kind="presentation" identifier="main-menu-modal" modalPresentationStyle="overCurrentContext" id="cpV-DQ-cDx"/>
@@ -118,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="217.39130434782609" y="338.31521739130437"/>
+            <point key="canvasLocation" x="217.3828125" y="338.21376281112737"/>
         </scene>
         <!--Main Menu Modal View Controller-->
         <scene sceneID="cV3-jj-Kon">
@@ -144,7 +157,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U45-QB-oub">
-                                <rect key="frame" x="0.0" y="54" width="1024" height="1312"/>
+                                <rect key="frame" x="0.0" y="62" width="1024" height="1304"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="cV2-Q2-yFg" userLabel="section-header-view-cell" customClass="SCSectionHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
@@ -287,7 +300,7 @@
                             <constraint firstItem="47I-wx-ACz" firstAttribute="centerX" secondItem="KNG-kX-5el" secondAttribute="centerX" id="02v-eA-EfX"/>
                             <constraint firstItem="o82-JI-MmW" firstAttribute="top" secondItem="47I-wx-ACz" secondAttribute="bottom" constant="35" id="0Ca-lf-KxH"/>
                             <constraint firstAttribute="bottom" secondItem="U45-QB-oub" secondAttribute="bottom" id="4dv-YU-1hY"/>
-                            <constraint firstItem="U45-QB-oub" firstAttribute="top" secondItem="Bct-GX-0L1" secondAttribute="bottom" id="O4j-iH-9Mx"/>
+                            <constraint firstItem="U45-QB-oub" firstAttribute="top" secondItem="Bct-GX-0L1" secondAttribute="bottom" constant="8" id="O4j-iH-9Mx"/>
                             <constraint firstItem="U45-QB-oub" firstAttribute="leading" secondItem="KNG-kX-5el" secondAttribute="leading" id="Pfa-Vn-mFp"/>
                             <constraint firstItem="Bct-GX-0L1" firstAttribute="centerX" secondItem="KNG-kX-5el" secondAttribute="centerX" id="TWh-8j-Qsf"/>
                             <constraint firstAttribute="trailing" secondItem="U45-QB-oub" secondAttribute="trailing" id="lt6-Z6-3D9"/>
@@ -588,7 +601,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5W3-A0-VGs">
-                                <rect key="frame" x="0.0" y="75" width="1024" height="1183"/>
+                                <rect key="frame" x="0.0" y="75" width="1024" height="1171"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -719,20 +732,11 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wg9-oN-c0G" userLabel="Bottom View">
-                                <rect key="frame" x="497.5" y="1276" width="30" height="72"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qn1-V1-kty" userLabel="Modal Peek View">
+                                <rect key="frame" x="0.0" y="1312" width="1024" height="54"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="084-kN-Fki" userLabel="Ready Button" customClass="SCRoundedButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="38" width="30" height="34"/>
-                                        <state key="normal">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onReadyButtonTapped:" destination="VkA-D4-zlT" eventType="touchUpInside" id="WXi-0C-1M3"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRE-j4-AHm" userLabel="Swipe Up Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <rect key="frame" x="497" y="8" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="WyW-Vf-C65"/>
                                             <constraint firstAttribute="height" constant="30" id="ub8-vw-X4u"/>
@@ -743,32 +747,41 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="084-kN-Fki" secondAttribute="bottom" id="AKF-ll-0rf"/>
-                                    <constraint firstAttribute="trailing" secondItem="084-kN-Fki" secondAttribute="trailing" id="Cb2-np-Lij"/>
-                                    <constraint firstItem="cRE-j4-AHm" firstAttribute="centerX" secondItem="wg9-oN-c0G" secondAttribute="centerX" id="NbU-ae-bbx"/>
-                                    <constraint firstItem="cRE-j4-AHm" firstAttribute="top" secondItem="wg9-oN-c0G" secondAttribute="top" id="TDu-xN-dfc"/>
-                                    <constraint firstItem="084-kN-Fki" firstAttribute="leading" secondItem="wg9-oN-c0G" secondAttribute="leading" id="YdZ-vb-dAf"/>
-                                    <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="cRE-j4-AHm" secondAttribute="bottom" constant="8" id="gYa-YG-b0Y"/>
+                                    <constraint firstAttribute="bottom" secondItem="cRE-j4-AHm" secondAttribute="bottom" constant="16" id="FyC-TE-PBu"/>
+                                    <constraint firstItem="cRE-j4-AHm" firstAttribute="centerX" secondItem="qn1-V1-kty" secondAttribute="centerX" id="JzW-jV-c8d"/>
+                                    <constraint firstItem="cRE-j4-AHm" firstAttribute="top" secondItem="qn1-V1-kty" secondAttribute="top" constant="8" id="vgH-zt-l9S"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="084-kN-Fki" userLabel="Ready Button" customClass="SCRoundedButton" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="497.5" y="1262" width="30" height="34"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onReadyButtonTapped:" destination="VkA-D4-zlT" eventType="touchUpInside" id="WXi-0C-1M3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wg9-oN-c0G" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="3gU-lc-IfX"/>
-                            <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="wg9-oN-c0G" secondAttribute="bottom" constant="18" id="5jB-E0-FnI"/>
                             <constraint firstItem="Zpa-v1-yiA" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="4" id="8dz-30-dLK"/>
+                            <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="16" id="8jq-eb-kLL"/>
                             <constraint firstItem="2Qg-Lg-n4v" firstAttribute="centerY" secondItem="Zpa-v1-yiA" secondAttribute="centerY" id="9Ek-xP-CnH"/>
+                            <constraint firstItem="qn1-V1-kty" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" id="G5r-dA-6OU"/>
                             <constraint firstItem="2Qg-Lg-n4v" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="Gll-fD-nwq"/>
+                            <constraint firstItem="084-kN-Fki" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="JYY-yq-p6M"/>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" id="JyP-Fd-tkk"/>
                             <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="50" id="XBE-ff-nvo"/>
                             <constraint firstItem="Zpa-v1-yiA" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="20" id="Yg8-eX-EZE"/>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="top" secondItem="Zpa-v1-yiA" secondAttribute="bottom" constant="16" id="dJQ-a4-9Pw"/>
+                            <constraint firstAttribute="bottom" secondItem="qn1-V1-kty" secondAttribute="bottom" id="iEp-SJ-OZ6"/>
                             <constraint firstAttribute="trailing" secondItem="5W3-A0-VGs" secondAttribute="trailing" id="jKW-MX-l9L"/>
                             <constraint firstItem="Zpa-v1-yiA" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" constant="15" id="ks2-G4-0fn"/>
-                            <constraint firstItem="wg9-oN-c0G" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="18" id="ur5-3e-gon"/>
+                            <constraint firstAttribute="trailing" secondItem="qn1-V1-kty" secondAttribute="trailing" id="pZJ-G4-EGl"/>
                             <constraint firstItem="2Qg-Lg-n4v" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="8" id="x3O-jC-Q5S"/>
+                            <constraint firstItem="qn1-V1-kty" firstAttribute="top" secondItem="084-kN-Fki" secondAttribute="bottom" constant="16" id="yAM-OL-D3l"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -779,6 +792,7 @@
                     </view>
                     <connections>
                         <outlet property="accessCodeLabel" destination="dZK-HZ-PAI" id="ChC-Yo-r67"/>
+                        <outlet property="modalPeekView" destination="qn1-V1-kty" id="R3b-Yb-Qjd"/>
                         <outlet property="readyButton" destination="084-kN-Fki" id="kMu-UQ-07b"/>
                         <outlet property="swipeUpButton" destination="cRE-j4-AHm" id="9cS-B8-vjm"/>
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
@@ -819,7 +833,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fla-Z8-sHI">
-                                <rect key="frame" x="0.0" y="54" width="1024" height="1312"/>
+                                <rect key="frame" x="0.0" y="62" width="1024" height="1304"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="jcT-II-rZw" userLabel="section-header-view-cell" customClass="SCSectionHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
@@ -1058,7 +1072,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FjP-pl-Sjb" firstAttribute="centerX" secondItem="lxN-QK-ytI" secondAttribute="centerX" id="0Ap-xU-CO1"/>
-                            <constraint firstItem="fla-Z8-sHI" firstAttribute="top" secondItem="FjP-pl-Sjb" secondAttribute="bottom" id="1Dl-fq-TiZ"/>
+                            <constraint firstItem="fla-Z8-sHI" firstAttribute="top" secondItem="FjP-pl-Sjb" secondAttribute="bottom" constant="8" id="1Dl-fq-TiZ"/>
                             <constraint firstItem="hl0-i0-9Wy" firstAttribute="centerX" secondItem="lxN-QK-ytI" secondAttribute="centerX" id="Jhv-hv-vOG"/>
                             <constraint firstItem="MLa-iE-UmV" firstAttribute="top" secondItem="fla-Z8-sHI" secondAttribute="bottom" id="SWn-Tk-HpF"/>
                             <constraint firstAttribute="trailing" secondItem="fla-Z8-sHI" secondAttribute="trailing" id="Sxy-LK-2FM"/>
@@ -1104,7 +1118,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dQz-dg-RRO">
-                                <rect key="frame" x="0.0" y="54" width="1024" height="1312"/>
+                                <rect key="frame" x="0.0" y="62" width="1024" height="1304"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="U0P-fS-6xk" userLabel="section-header-view-cell" customClass="SCSectionHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
@@ -1175,7 +1189,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dQz-dg-RRO" firstAttribute="leading" secondItem="2Yv-eL-zb3" secondAttribute="leading" id="8FP-PB-AGq"/>
-                            <constraint firstItem="dQz-dg-RRO" firstAttribute="top" secondItem="Jpi-zT-CKN" secondAttribute="bottom" id="HGJ-pw-COM"/>
+                            <constraint firstItem="dQz-dg-RRO" firstAttribute="top" secondItem="Jpi-zT-CKN" secondAttribute="bottom" constant="8" id="HGJ-pw-COM"/>
                             <constraint firstItem="htW-uQ-Xx7" firstAttribute="top" secondItem="dQz-dg-RRO" secondAttribute="bottom" id="Y3v-81-Q3i"/>
                             <constraint firstItem="Jpi-zT-CKN" firstAttribute="centerX" secondItem="2Yv-eL-zb3" secondAttribute="centerX" id="fje-Zx-iSi"/>
                             <constraint firstAttribute="trailing" secondItem="dQz-dg-RRO" secondAttribute="trailing" id="qSc-el-1HD"/>

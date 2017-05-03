@@ -117,7 +117,6 @@ class SCPregameRoomViewController: SCViewController {
             repeats: true
         )
 
-        self.animateSwipeUpButton()
         self.resetReadyButton()
 
         Timeline.instance.reset()
@@ -139,10 +138,6 @@ class SCPregameRoomViewController: SCViewController {
 
         self.tableView.dataSource = nil
         self.tableView.delegate = nil
-    }
-
-    override func applicationDidBecomeActive() {
-        self.animateSwipeUpButton()
     }
 
     override func didReceiveMemoryWarning() {
@@ -223,19 +218,6 @@ class SCPregameRoomViewController: SCViewController {
         self.performSegue(
             withIdentifier: SCConstants.identifier.pregameModal.rawValue,
             sender: self
-        )
-    }
-
-    fileprivate func animateSwipeUpButton() {
-        self.swipeUpButton.alpha = 1.0
-        UIView.animate(
-            withDuration: super.animationDuration,
-            delay: 0.0,
-            options: [.autoreverse, .repeat, .allowUserInteraction],
-            animations: {
-                self.swipeUpButton.alpha = super.animationAlpha
-        },
-            completion: nil
         )
     }
 

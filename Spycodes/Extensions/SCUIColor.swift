@@ -26,6 +26,10 @@ extension UIColor {
         return UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 1.0)
     }
 
+    static func spycodesBorderColor() -> UIColor {
+        return UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 0.1)
+    }
+
     static func dimBackgroundColor() -> UIColor {
         return UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
     }
