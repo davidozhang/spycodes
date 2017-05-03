@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYZ-sL-kCY">
-                                <rect key="frame" x="438.5" y="537.5" width="147" height="291"/>
+                                <rect key="frame" x="438.5" y="510.5" width="147" height="291"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spy" translatesAutoresizingMaskIntoConstraints="NO" id="4mz-Ms-1Ld">
                                         <rect key="frame" x="9.5" y="0.0" width="128" height="128"/>
@@ -112,7 +112,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="F5G-fC-j66"/>
-                            <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GIg-cQ-q81"/>
+                            <constraint firstItem="pYZ-sL-kCY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-27" id="GIg-cQ-q81"/>
                             <constraint firstAttribute="bottom" secondItem="nVj-tx-bo9" secondAttribute="bottom" id="JZc-eJ-DFM"/>
                             <constraint firstAttribute="trailing" secondItem="nVj-tx-bo9" secondAttribute="trailing" id="SJn-EZ-UDl"/>
                             <constraint firstItem="nVj-tx-bo9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WJS-72-luN"/>
