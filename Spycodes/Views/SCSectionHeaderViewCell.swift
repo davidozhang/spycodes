@@ -20,13 +20,13 @@ class SCSectionHeaderViewCell: SCTableViewCell {
 
         self.blurView?.frame = self.bounds
         self.blurView?.clipsToBounds = true
-        self.blurView?.tag = 1
+        self.blurView?.tag = SCConstants.tag.sectionHeaderBlurView.rawValue
         self.addSubview(self.blurView!)
         self.sendSubview(toBack: self.blurView!)
     }
 
     func hideBlurBackground() {
-        if let view = self.viewWithTag(1) {
+        if let view = self.viewWithTag(SCConstants.tag.sectionHeaderBlurView.rawValue) {
             view.removeFromSuperview()
         }
     }
