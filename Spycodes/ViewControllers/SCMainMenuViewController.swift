@@ -1,8 +1,6 @@
 import UIKit
 
 class SCMainMenuViewController: SCViewController {
-    @IBOutlet weak var swipeUpButton: UIButton!
-
     // MARK: Actions
     @IBAction func unwindToMainMenu(_ sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
@@ -82,6 +80,13 @@ class SCMainMenuViewController: SCViewController {
         }
     }
 
+    override func swipeUp() {
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.mainMenuModal.rawValue,
+            sender: self
+        )
+    }
+
     // MARK: Swipe Gesture Recognizer
     func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
         self.swipeUp()
@@ -108,13 +113,6 @@ class SCMainMenuViewController: SCViewController {
             alertController,
             animated: true,
             completion: nil
-        )
-    }
-
-    fileprivate func swipeUp() {
-        self.performSegue(
-            withIdentifier: SCConstants.identifier.mainMenuModal.rawValue,
-            sender: self
         )
     }
 }

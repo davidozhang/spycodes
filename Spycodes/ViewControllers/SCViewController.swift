@@ -35,6 +35,13 @@ class SCViewController: UIViewController {
 
             topBorder.backgroundColor = UIColor.spycodesBorderColor().cgColor
             self.modalPeekView.layer.addSublayer(topBorder)
+
+            let tapGestureRecognizer = UITapGestureRecognizer(
+                target: self,
+                action: #selector(SCViewController.swipeUp)
+            )
+
+            self.modalPeekView.addGestureRecognizer(tapGestureRecognizer)
         }
     }
 
@@ -217,6 +224,8 @@ class SCViewController: UIViewController {
     }
 
     func swipeRight() {}
+
+    func swipeUp() {}
 
     @objc
     func applicationDidBecomeActive() {}

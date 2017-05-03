@@ -17,7 +17,6 @@ class SCPregameRoomViewController: SCViewController {
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var accessCodeLabel: SCNavigationBarLabel!
     @IBOutlet weak var readyButton: SCButton!
-    @IBOutlet weak var swipeUpButton: UIButton!
 
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         self.swipeRight()
@@ -164,6 +163,13 @@ class SCPregameRoomViewController: SCViewController {
         self.returnToMainMenu(reason: nil)
     }
 
+    override func swipeUp() {
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.pregameModal.rawValue,
+            sender: self
+        )
+    }
+
     // MARK: Private
     @objc
     fileprivate func refreshView() {
@@ -212,13 +218,6 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate func resetReadyButton() {
         self.readyButtonState = .notReady
         self.updateReadyButton()
-    }
-
-    fileprivate func swipeUp() {
-        self.performSegue(
-            withIdentifier: SCConstants.identifier.pregameModal.rawValue,
-            sender: self
-        )
     }
 
     fileprivate func goToGame() {
