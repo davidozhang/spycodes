@@ -146,6 +146,10 @@ class SCPregameRoomViewController: SCViewController {
         self.animateReadyButtonIfNeeded()
     }
 
+    override func applicationWillResignActive() {
+        self.resetReadyButton()
+    }
+
     override func swipeRight() {
         self.returnToMainMenu(reason: nil)
     }

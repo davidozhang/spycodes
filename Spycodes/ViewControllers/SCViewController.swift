@@ -72,6 +72,12 @@ class SCViewController: UIViewController {
         )
         NotificationCenter.default.addObserver(
             self,
+            selector: #selector(SCViewController.applicationWillResignActive),
+            name: NSNotification.Name.UIApplicationWillResignActive,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
             selector: #selector(SCViewController.keyboardWillShow),
             name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
@@ -90,6 +96,11 @@ class SCViewController: UIViewController {
         NotificationCenter.default.removeObserver(
             self,
             name:NSNotification.Name.UIApplicationDidBecomeActive,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name:NSNotification.Name.UIApplicationWillResignActive,
             object: nil
         )
         NotificationCenter.default.removeObserver(
@@ -236,6 +247,9 @@ class SCViewController: UIViewController {
 
     @objc
     func applicationDidBecomeActive() {}
+
+    @objc
+    func applicationWillResignActive() {}
 
     @objc
     func keyboardWillShow(_ notification: Notification) {}
