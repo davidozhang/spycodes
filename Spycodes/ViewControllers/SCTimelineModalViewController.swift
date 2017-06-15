@@ -183,17 +183,30 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
             }
         } else if event.getType() == .selectCard {
             if let name = parameters[SCConstants.coding.name.rawValue] as? String,
-               let word = parameters[SCConstants.coding.word.rawValue] as? String {
-                var baseString = String(format: SCStrings.timeline.selected.rawValue, name, word)
+               let word = parameters[SCConstants.coding.word.rawValue] as? String,
+               let correct = parameters[SCConstants.coding.correct.rawValue] as? Bool {
+                var baseString = String(
+                    format: SCStrings.timeline.selected.rawValue,
+                    name,
+                    word,
+                    correct ? SCStrings.timeline.correct.rawValue : SCStrings.timeline.incorrect.rawValue
+                )
                 var length = name.characters.count
+
+                // CPU player
+                if name == SCStrings.player.cpu.rawValue {
+                    baseString = String(format: SCStrings.timeline.cpuSelected.rawValue, word)
+                }
 
                 if let _ = parameters[SCConstants.coding.localPlayer.rawValue],
                    let name = parameters[SCConstants.coding.name.rawValue] as? String,
                    name != SCStrings.player.cpu.rawValue {
+                    // Local player (You)
                     baseString = String(
                         format: SCStrings.timeline.selected.rawValue,
                         SCStrings.player.localPlayer.rawValue,
-                        word
+                        word,
+                        correct ? SCStrings.timeline.correct.rawValue : SCStrings.timeline.incorrect.rawValue
                     )
                     length = 3
                 }

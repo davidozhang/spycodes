@@ -5,6 +5,7 @@ class SCConstants {
         case bestRecord = "best-record"
         case cards = "cards"
         case clue = "clue"
+        case correct = "correct"
         case eventType = "event-type"
         case hasRead = "has-read"       // Local coding only
         case leader = "leader"

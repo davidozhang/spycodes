@@ -75,7 +75,7 @@ class Event: NSObject, NSCoding {
         if aDecoder.containsValue(forKey: SCConstants.coding.parameters.rawValue) {
             if let parameters = aDecoder.decodeObject(
                 forKey: SCConstants.coding.parameters.rawValue
-            ) as? [String: String] {
+            ) as? [String: Any] {
                 self.parameters = parameters
             }
         }

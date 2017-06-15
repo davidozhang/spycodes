@@ -105,10 +105,13 @@ class SCStrings {
     }
 
     enum timeline: String {
+        case correct = "correct"
         case clueSetTo = "%@ set the clue to '%@ %@'."
+        case cpuSelected = "CPU selected '%@'."
         case emptyState = "No events yet."
+        case incorrect = "incorrect"
         case roundEnded = "%@ ended the round."
-        case selected = "%@ selected '%@'."
+        case selected = "%@ selected '%@' and was %@."
         case timerExpiry = "Round ended due to timer expiry."
     }
 }
