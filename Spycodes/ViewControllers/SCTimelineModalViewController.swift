@@ -201,58 +201,53 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
             }
         case .selectCard:
             if let name = parameters[SCConstants.coding.name.rawValue] as? String,
-               let word = parameters[SCConstants.coding.word.rawValue] as? String,
-               let correct = parameters[SCConstants.coding.correct.rawValue] as? Bool,
-               let cardType = parameters[SCConstants.coding.cardType.rawValue] as? Int {
+               let card = parameters[SCConstants.coding.card.rawValue] as? Card {
                 if name == SCStrings.player.cpu.rawValue {
                     // CPU player
-                    baseString = String(format: SCStrings.timeline.cpuSelected.rawValue, word)
+                    baseString = String(format: SCStrings.timeline.cpuSelected.rawValue, card.getWord())
                     attributedLength = SCStrings.player.cpu.rawValue.characters.count
                     break
                 }
 
                 if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
                     // Local player (You)
-                    if correct {
+                    if card.getTeam() == Player.instance.getTeam() {
                         baseString = String(
                             format: SCStrings.timeline.correctlySelected.rawValue,
                             SCStrings.player.localPlayer.rawValue,
-                            word
+                            card.getWord()
                         )
                     } else {
                         baseString = String(
                             format: SCStrings.timeline.selected.rawValue,
                             SCStrings.player.localPlayer.rawValue,
-                            Team(rawValue: cardType) == Team.neutral ?
+                            card.getTeam() == Team.neutral ?
                                 SCStrings.timeline.bystander.rawValue :
                                 SCStrings.timeline.enemy.rawValue,
-                            word
+                            card.getWord()
                         )
                     }
-
                     attributedLength = SCStrings.player.localPlayer.rawValue.characters.count
                 } else {
-                    if correct {
+                    if card.getTeam() == Player.instance.getTeam() {
+                        // Local player (You)
                         baseString = String(
                             format: SCStrings.timeline.correctlySelected.rawValue,
                             name,
-                            word
+                            card.getWord()
                         )
                     } else {
                         baseString = String(
                             format: SCStrings.timeline.selected.rawValue,
                             name,
-                            Team(rawValue: cardType) == Team.neutral ?
+                            card.getTeam() == Team.neutral ?
                                 SCStrings.timeline.bystander.rawValue :
                                 SCStrings.timeline.enemy.rawValue,
-                            word
+                            card.getWord()
                         )
                     }
-
                     attributedLength = name.characters.count
                 }
-
-
             }
         default:
             break

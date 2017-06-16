@@ -3,10 +3,9 @@ class SCConstants {
         case abort = "abort"
         case accessCode = "access-code"
         case bestRecord = "best-record"
+        case card = "card"
         case cards = "cards"
-        case cardType = "card-type"
         case clue = "clue"
-        case correct = "correct"
         case eventType = "event-type"
         case hasRead = "has-read"       // Local coding only
         case leader = "leader"
