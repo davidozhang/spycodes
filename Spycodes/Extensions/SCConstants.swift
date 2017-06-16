@@ -3,6 +3,7 @@ class SCConstants {
         case abort = "abort"
         case accessCode = "access-code"
         case bestRecord = "best-record"
+        case card = "card"
         case cards = "cards"
         case clue = "clue"
         case eventType = "event-type"
