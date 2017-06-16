@@ -108,3 +108,12 @@ class CardCollection: NSObject, NSCoding {
         }
     }
 }
+
+// MARK: Operator
+func == (left: CardCollection, right: CardCollection) -> Bool {
+    return left.cards == right.cards
+}
+
+func != (left: CardCollection, right: CardCollection) -> Bool {
+    return left.cards != right.cards
+}

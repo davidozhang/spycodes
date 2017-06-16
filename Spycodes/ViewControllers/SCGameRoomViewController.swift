@@ -16,6 +16,8 @@ class SCGameRoomViewController: SCViewController {
     fileprivate var textFieldAnimationStarted = false
     fileprivate var leaderIsEditing = false
 
+    fileprivate var shouldUpdateCollectionView = false
+
     fileprivate var broadcastTimer: Foundation.Timer?
     fileprivate var refreshTimer: Foundation.Timer?
 
@@ -93,6 +95,15 @@ class SCGameRoomViewController: SCViewController {
             object: nil
         )
 
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(SCGameRoomViewController.updateCollectionView),
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.updateCollectionView.rawValue
+            ),
+            object: nil
+        )
+
         self.hideNotificationDot()
     }
 
@@ -120,7 +131,7 @@ class SCGameRoomViewController: SCViewController {
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 1.0,
             target: self,
-            selector: #selector(SCGameRoomViewController.refreshView),
+            selector: #selector(SCGameRoomViewController.refresh),
             userInfo: nil,
             repeats: true
         )
@@ -178,6 +189,14 @@ class SCGameRoomViewController: SCViewController {
             self,
             name: NSNotification.Name(
                 rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
+            ),
+            object: nil
+        )
+
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.updateCollectionView.rawValue
             ),
             object: nil
         )
@@ -266,12 +285,20 @@ class SCGameRoomViewController: SCViewController {
 
     // MARK: Private
     @objc
-    fileprivate func refreshView() {
+    fileprivate func updateCollectionView() {
+        self.collectionView.reloadData()
+        self.shouldUpdateCollectionView = false
+    }
+
+    @objc
+    fileprivate func refresh() {
         DispatchQueue.main.async(execute: {
             self.updateDashboard()
             self.updateTimer()
             self.updateActionButton()
-            self.collectionView.reloadData()
+            if self.shouldUpdateCollectionView {
+                self.updateCollectionView()
+            }
         })
     }
 
@@ -625,7 +652,10 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
 
         switch synchronizedObject {
         case let synchronizedObject as CardCollection:
-            CardCollection.instance = synchronizedObject
+            if (CardCollection.instance != synchronizedObject) {
+                CardCollection.instance = synchronizedObject
+                self.shouldUpdateCollectionView = true  // Update on next refresh cycle
+            }
         case let synchronizedObject as Round:
             if self.leaderIsEditing {
                 if synchronizedObject.isAborted() {

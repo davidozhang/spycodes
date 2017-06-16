@@ -69,6 +69,7 @@ class SCConstants {
     }
 
     enum notificationKey: String {
+        case updateCollectionView = "update-collection-view"
         case minigameGameOver = "minigame-game-over"
         case timelineUpdated = "timeline-updated"
     }
