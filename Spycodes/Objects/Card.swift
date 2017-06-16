@@ -77,6 +77,12 @@ class Card: NSObject {
 
     func setSelected() {
         self.selected = true
+
+        NotificationCenter.default.post(
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.updateCollectionView.rawValue),
+            object: self,
+            userInfo: nil
+        )
     }
 
     func isSelected() -> Bool {
@@ -103,4 +109,13 @@ class Card: NSObject {
             return "(R)"
         }
     }
+}
+
+// MARK: Operator
+func == (left: Card, right: Card) -> Bool {
+    return left.word == right.word && left.selected == right.selected && left.team == right.team
+}
+
+func != (left: Card, right: Card) -> Bool {
+    return left.word != right.word || left.selected != right.selected || left.team != right.team
 }
