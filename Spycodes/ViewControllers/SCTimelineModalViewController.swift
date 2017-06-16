@@ -153,112 +153,122 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
             return SCTableViewCell()
         }
 
+        var baseString: String?
+        var attributedLength = 0
+
         switch type {
         case .confirm:
             if let name = parameters[SCConstants.coding.name.rawValue] as? String,
                let clue = parameters[SCConstants.coding.clue.rawValue] as? String,
                let numberOfWords = parameters[SCConstants.coding.numberOfWords.rawValue] as? String {
-                var baseString = String(
-                    format: SCStrings.timeline.clueSetTo.rawValue,
-                    name,
-                    clue,
-                    numberOfWords
-                )
-                var length = name.characters.count
-
                 if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
+                    // Local player (You)
                     baseString = String(
                         format: SCStrings.timeline.clueSetTo.rawValue,
                         SCStrings.player.localPlayer.rawValue,
                         clue,
                         numberOfWords
                     )
-                    length = SCStrings.player.localPlayer.rawValue.characters.count
+                    attributedLength = SCStrings.player.localPlayer.rawValue.characters.count
+                } else {
+                    baseString = String(
+                        format: SCStrings.timeline.clueSetTo.rawValue,
+                        name,
+                        clue,
+                        numberOfWords
+                    )
+                    attributedLength = name.characters.count
                 }
-
-                let attributedString = NSMutableAttributedString(
-                    string: baseString
-                )
-                attributedString.addAttribute(
-                    NSFontAttributeName,
-                    value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                    range: NSMakeRange(0, length)
-                )
-                cell.primaryLabel.attributedText = attributedString
             }
         case .endRound:
             if let name = parameters[SCConstants.coding.name.rawValue] as? String {
-                var baseString = String(
-                    format: SCStrings.timeline.roundEnded.rawValue,
-                    name
-                )
-                var length = name.characters.count
-
                 if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
+                    // Local player (You)
                     baseString = String(
                         format: SCStrings.timeline.roundEnded.rawValue,
                         SCStrings.player.localPlayer.rawValue
                     )
-                    length = SCStrings.player.localPlayer.rawValue.characters.count
-                }
-
-                let attributedString = NSMutableAttributedString(
-                    string: baseString
-                )
-                attributedString.addAttribute(
-                    NSFontAttributeName,
-                    value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                    range: NSMakeRange(
-                        0,
-                        length
+                    attributedLength = SCStrings.player.localPlayer.rawValue.characters.count
+                } else {
+                    baseString = String(
+                        format: SCStrings.timeline.roundEnded.rawValue,
+                        name
                     )
-                )
-                cell.primaryLabel.attributedText = attributedString
+                    attributedLength = name.characters.count
+                }
             } else {
                 cell.primaryLabel.text = SCStrings.timeline.timerExpiry.rawValue
             }
         case .selectCard:
             if let name = parameters[SCConstants.coding.name.rawValue] as? String,
                let word = parameters[SCConstants.coding.word.rawValue] as? String,
-               let correct = parameters[SCConstants.coding.correct.rawValue] as? Bool {
-                var baseString = String(
-                    format: SCStrings.timeline.selected.rawValue,
-                    name,
-                    word,
-                    correct ? SCStrings.timeline.correct.rawValue : SCStrings.timeline.incorrect.rawValue
-                )
-                var length = name.characters.count
-
-                // CPU player
+               let correct = parameters[SCConstants.coding.correct.rawValue] as? Bool,
+               let cardType = parameters[SCConstants.coding.cardType.rawValue] as? Int {
                 if name == SCStrings.player.cpu.rawValue {
+                    // CPU player
                     baseString = String(format: SCStrings.timeline.cpuSelected.rawValue, word)
+                    attributedLength = SCStrings.player.cpu.rawValue.characters.count
+                    break
                 }
 
-                if let _ = parameters[SCConstants.coding.localPlayer.rawValue],
-                    let name = parameters[SCConstants.coding.name.rawValue] as? String,
-                    name != SCStrings.player.cpu.rawValue {
+                if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
                     // Local player (You)
-                    baseString = String(
-                        format: SCStrings.timeline.selected.rawValue,
-                        SCStrings.player.localPlayer.rawValue,
-                        word,
-                        correct ? SCStrings.timeline.correct.rawValue : SCStrings.timeline.incorrect.rawValue
-                    )
-                    length = SCStrings.player.localPlayer.rawValue.characters.count
+                    if correct {
+                        baseString = String(
+                            format: SCStrings.timeline.correctlySelected.rawValue,
+                            SCStrings.player.localPlayer.rawValue,
+                            word
+                        )
+                    } else {
+                        baseString = String(
+                            format: SCStrings.timeline.selected.rawValue,
+                            SCStrings.player.localPlayer.rawValue,
+                            Team(rawValue: cardType) == Team.neutral ?
+                                SCStrings.timeline.bystander.rawValue :
+                                SCStrings.timeline.enemy.rawValue,
+                            word
+                        )
+                    }
+
+                    attributedLength = SCStrings.player.localPlayer.rawValue.characters.count
+                } else {
+                    if correct {
+                        baseString = String(
+                            format: SCStrings.timeline.correctlySelected.rawValue,
+                            name,
+                            word
+                        )
+                    } else {
+                        baseString = String(
+                            format: SCStrings.timeline.selected.rawValue,
+                            name,
+                            Team(rawValue: cardType) == Team.neutral ?
+                                SCStrings.timeline.bystander.rawValue :
+                                SCStrings.timeline.enemy.rawValue,
+                            word
+                        )
+                    }
+
+                    attributedLength = name.characters.count
                 }
 
-                let attributedString = NSMutableAttributedString(
-                    string: baseString
-                )
-                attributedString.addAttribute(
-                    NSFontAttributeName,
-                    value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                    range: NSMakeRange(0, length)
-                )
-                cell.primaryLabel.attributedText = attributedString
+
             }
         default:
             break
+        }
+
+        // Apply attributed string decoration
+        if let baseString = baseString {
+            let attributedString = NSMutableAttributedString(
+                string: baseString
+            )
+            attributedString.addAttribute(
+                NSFontAttributeName,
+                value: SCFonts.intermediateSizeFont(.bold) ?? 0,
+                range: NSMakeRange(0, attributedLength)
+            )
+            cell.primaryLabel.attributedText = attributedString
         }
 
         if let hasRead = parameters[SCConstants.coding.hasRead.rawValue] as? Bool,

@@ -4,6 +4,7 @@ class SCConstants {
         case accessCode = "access-code"
         case bestRecord = "best-record"
         case cards = "cards"
+        case cardType = "card-type"
         case clue = "clue"
         case correct = "correct"
         case eventType = "event-type"

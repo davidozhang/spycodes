@@ -875,7 +875,8 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             optional: [
                 SCConstants.coding.name.rawValue: Player.instance.getName() ?? "",
                 SCConstants.coding.word.rawValue: cardAtIndex.getWord(),
-                SCConstants.coding.correct.rawValue: cardAtIndexTeam == playerTeam
+                SCConstants.coding.correct.rawValue: cardAtIndexTeam == playerTeam,
+                SCConstants.coding.cardType.rawValue: cardAtIndexTeam.rawValue
             ]
         )
 
