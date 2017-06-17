@@ -222,8 +222,11 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                             format: SCStrings.timeline.selected.rawValue,
                             SCStrings.player.localPlayer.rawValue,
                             card.getTeam() == Team.neutral ?
-                                SCStrings.timeline.bystander.rawValue :
-                                SCStrings.timeline.enemy.rawValue,
+                            SCStrings.timeline.bystander.rawValue :
+                            (card.getTeam() == Team.assassin ?
+                                SCStrings.timeline.assassin.rawValue :
+                                SCStrings.timeline.enemy.rawValue
+                            ),
                             card.getWord()
                         )
                     }
@@ -241,8 +244,11 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                             format: SCStrings.timeline.selected.rawValue,
                             name,
                             card.getTeam() == Team.neutral ?
-                                SCStrings.timeline.bystander.rawValue :
-                                SCStrings.timeline.enemy.rawValue,
+                            SCStrings.timeline.bystander.rawValue :
+                            (card.getTeam() == Team.assassin ?
+                                SCStrings.timeline.assassin.rawValue :
+                                SCStrings.timeline.enemy.rawValue
+                            ),
                             card.getWord()
                         )
                     }

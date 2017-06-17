@@ -105,6 +105,7 @@ class SCStrings {
     }
 
     enum timeline: String {
+        case assassin = "the assassin"
         case bystander = "a bystander"
         case correctlySelected = "%@ correctly selected '%@'."
         case clueSetTo = "%@ set the clue to '%@ %@'."
