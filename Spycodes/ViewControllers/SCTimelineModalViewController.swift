@@ -249,6 +249,13 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                     attributedLength = name.characters.count
                 }
             }
+        case .gameOver:
+            baseString = String(
+                format: SCStrings.timeline.gameOver.rawValue,
+                Round.instance.getWinningTeam() == Player.instance.getTeam() ?
+                SCStrings.timeline.won.rawValue :
+                SCStrings.timeline.lost.rawValue
+            )
         default:
             break
         }

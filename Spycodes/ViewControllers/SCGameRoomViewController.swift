@@ -625,7 +625,11 @@ class SCGameRoomViewController: SCViewController {
             let confirmAction = UIAlertAction(
                 title: "OK",
                 style: .default,
-                handler: nil
+                handler: { (action: UIAlertAction) in
+                    Timeline.instance.addEventIfNeeded(
+                        event: Event(type: .gameOver, parameters: nil)
+                    )
+                }
             )
             alertController.addAction(confirmAction)
             self.present(
@@ -876,7 +880,9 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
             if cardAtIndex.getTeam() == .neutral {
                 cell.wordLabel.textColor = .spycodesGrayColor()
+            }
 
+            if cardAtIndex.getTeam() == .neutral || cardAtIndex.getTeam() == .assassin {
                 attributedString.addAttribute(
                     NSStrikethroughStyleAttributeName,
                     value: 2,

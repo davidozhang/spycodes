@@ -111,8 +111,11 @@ class SCStrings {
         case cpuSelected = "CPU selected '%@'."
         case emptyState = "No events yet."
         case enemy = "an enemy card"
+        case gameOver = "Game over. Your team %@."
+        case lost = "lost"
         case roundEnded = "%@ ended the round."
         case selected = "%@ selected %@ '%@'."
         case timerExpiry = "Round ended due to timer expiry."
+        case won = "won"
     }
 }

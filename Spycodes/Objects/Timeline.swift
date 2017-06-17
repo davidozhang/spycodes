@@ -6,6 +6,7 @@ class Timeline {
         Event.EventType.confirm,
         Event.EventType.endRound,
         Event.EventType.selectCard,
+        Event.EventType.gameOver,
     ]
 
     fileprivate var events = [Event]()
