@@ -468,22 +468,23 @@ class SCGameRoomViewController: SCViewController {
     }
 
     fileprivate func updateActionButton() {
-        if self.actionButtonState == .confirm {
+        switch self.actionButtonState {
+        case .confirm:
             UIView.performWithoutAnimation {
                 self.actionButton.setTitle("Confirm", for: UIControlState())
             }
 
             if !Player.instance.isLeader() ||
-               Round.instance.getCurrentTeam() != Player.instance.getTeam() {
+                Round.instance.getCurrentTeam() != Player.instance.getTeam() {
                 return
             }
 
             if let clueTextFieldCharacterCount = self.clueTextField.text?.characters.count,
                let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.characters.count {
                 if clueTextFieldCharacterCount > 0 &&
-                   self.clueTextField.text != SCStrings.round.defaultLeaderClue.rawValue &&
-                   numberOfWordsTextFieldCharacterCount > 0 &&
-                   self.numberOfWordsTextField.text != SCStrings.round.defaultNumberOfWords.rawValue {
+                    self.clueTextField.text != SCStrings.round.defaultLeaderClue.rawValue &&
+                    numberOfWordsTextFieldCharacterCount > 0 &&
+                    self.numberOfWordsTextField.text != SCStrings.round.defaultNumberOfWords.rawValue {
                     self.actionButton.isEnabled = true
                     self.startButtonAnimations()
                 } else {
@@ -491,7 +492,7 @@ class SCGameRoomViewController: SCViewController {
                     self.actionButton.isEnabled = false
                 }
             }
-        } else if self.actionButtonState == .endRound {
+        case .endRound:
             UIView.performWithoutAnimation {
                 self.actionButton.setTitle("End Round", for: UIControlState())
             }
@@ -499,17 +500,30 @@ class SCGameRoomViewController: SCViewController {
 
             if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
                 if Round.instance.bothFieldsSet() {
-                    self.actionButton.alpha = 1.0
-                    self.actionButton.isEnabled = true
+                    self.enableActionButton()
                 } else {
-                    self.actionButton.alpha = 0.4
-                    self.actionButton.isEnabled = false
+                    self.disableActionButton()
                 }
             } else {
-                self.actionButton.alpha = 0.4
-                self.actionButton.isEnabled = false
+                self.disableActionButton()
             }
+        case .gameOver:
+            UIView.performWithoutAnimation {
+                self.actionButton.setTitle("Game Over", for: UIControlState())
+            }
+            self.stopButtonAnimations()
+            self.disableActionButton()
         }
+    }
+
+    fileprivate func enableActionButton() {
+        self.actionButton.alpha = 1.0
+        self.actionButton.isEnabled = true
+    }
+
+    fileprivate func disableActionButton() {
+        self.actionButton.alpha = 0.4
+        self.actionButton.isEnabled = false
     }
 
     fileprivate func didConfirm() {
@@ -589,13 +603,13 @@ class SCGameRoomViewController: SCViewController {
 
     fileprivate func didEndGame(_ title: String, reason: String) {
         DispatchQueue.main.async {
+            self.actionButtonState = .gameOver
             Round.instance.endGame()
             Timer.instance.invalidate()
 
             if Player.instance.isHost() {
                 self.broadcastTimer?.invalidate()
             }
-            self.refreshTimer?.invalidate()
 
             if self.clueTextField.isFirstResponder {
                 self.clueTextField.resignFirstResponder()
@@ -611,9 +625,7 @@ class SCGameRoomViewController: SCViewController {
             let confirmAction = UIAlertAction(
                 title: "OK",
                 style: .default,
-                handler: { (action: UIAlertAction) in
-                    super.performUnwindSegue(false, completionHandler: nil)
-                }
+                handler: nil
             )
             alertController.addAction(confirmAction)
             self.present(
@@ -885,7 +897,8 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
                         didSelectItemAt indexPath: IndexPath) {
         if Player.instance.isLeader() ||
            Round.instance.getCurrentTeam() != Player.instance.getTeam() ||
-           !Round.instance.bothFieldsSet() {
+           !Round.instance.bothFieldsSet() ||
+           Round.instance.hasGameEnded() {
             return
         }
 
@@ -987,7 +1000,8 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 extension SCGameRoomViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if Player.instance.isLeader() &&
-           Round.instance.getCurrentTeam() == Player.instance.getTeam() {
+           Round.instance.getCurrentTeam() == Player.instance.getTeam() ||
+           !Round.instance.hasGameEnded() {
             return true
         } else {
             return false
