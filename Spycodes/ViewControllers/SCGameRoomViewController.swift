@@ -370,6 +370,10 @@ class SCGameRoomViewController: SCViewController {
     }
 
     fileprivate func updateDashboard() {
+        if Round.instance.hasGameEnded() || Round.instance.isAborted() {
+            return
+        }
+
         let opponentTeam = Team(rawValue: Player.instance.getTeam().rawValue ^ 1)
         let attributedString = NSMutableAttributedString(
             string: String(
@@ -475,16 +479,16 @@ class SCGameRoomViewController: SCViewController {
             }
 
             if !Player.instance.isLeader() ||
-                Round.instance.getCurrentTeam() != Player.instance.getTeam() {
+               Round.instance.getCurrentTeam() != Player.instance.getTeam() {
                 return
             }
 
             if let clueTextFieldCharacterCount = self.clueTextField.text?.characters.count,
                let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.characters.count {
                 if clueTextFieldCharacterCount > 0 &&
-                    self.clueTextField.text != SCStrings.round.defaultLeaderClue.rawValue &&
-                    numberOfWordsTextFieldCharacterCount > 0 &&
-                    self.numberOfWordsTextField.text != SCStrings.round.defaultNumberOfWords.rawValue {
+                   self.clueTextField.text != SCStrings.round.defaultLeaderClue.rawValue &&
+                   numberOfWordsTextFieldCharacterCount > 0 &&
+                   self.numberOfWordsTextField.text != SCStrings.round.defaultNumberOfWords.rawValue {
                     self.actionButton.isEnabled = true
                     self.startButtonAnimations()
                 } else {
@@ -510,6 +514,12 @@ class SCGameRoomViewController: SCViewController {
         case .gameOver:
             UIView.performWithoutAnimation {
                 self.actionButton.setTitle("Game Over", for: UIControlState())
+            }
+            self.stopButtonAnimations()
+            self.disableActionButton()
+        case .gameAborted:
+            UIView.performWithoutAnimation {
+                self.actionButton.setTitle("Game Aborted", for: UIControlState())
             }
             self.stopButtonAnimations()
             self.disableActionButton()
@@ -595,15 +605,15 @@ class SCGameRoomViewController: SCViewController {
             self.dismissPresentedViewIfNeeded(completion: {
                 self.didEndGame(
                     SCStrings.header.gameOver.rawValue,
-                    reason: SCStrings.message.defaultLoseString.rawValue
+                    reason: SCStrings.message.defaultLoseString.rawValue,
+                    onDismissal: self.onGameOverDismissal
                 )
             })
         }
     }
 
-    fileprivate func didEndGame(_ title: String, reason: String) {
+    fileprivate func didEndGame(_ title: String, reason: String, onDismissal: @escaping ((Void) -> Void)) {
         DispatchQueue.main.async {
-            self.actionButtonState = .gameOver
             Round.instance.endGame()
             Timer.instance.invalidate()
 
@@ -617,35 +627,53 @@ class SCGameRoomViewController: SCViewController {
                 self.numberOfWordsTextField.resignFirstResponder()
             }
 
-            let alertController = UIAlertController(
-                title: title,
-                message: reason,
-                preferredStyle: .alert
-            )
-            let returnAction = UIAlertAction(
-                title: "Go back",
-                style: .default,
-                handler: { (action: UIAlertAction) in
-                    super.performUnwindSegue(false, completionHandler: nil)
-                }
-            )
-            let dismissAction = UIAlertAction(
-                title: "Dismiss",
-                style: .default,
-                handler: { (action: UIAlertAction) in
-                    Timeline.instance.addEventIfNeeded(
-                        event: Event(type: .gameOver, parameters: nil)
-                    )
-                }
-            )
-            alertController.addAction(returnAction)
-            alertController.addAction(dismissAction)
-            self.present(
-                alertController,
-                animated: true,
-                completion: nil
-            )
+            self.displayAlert(title: title, reason: reason, onDismissal: onDismissal)
         }
+    }
+
+    func displayAlert(title: String, reason: String, onDismissal: ((Void) -> Void)?) {
+        let alertController = UIAlertController(
+            title: title,
+            message: reason,
+            preferredStyle: .alert
+        )
+        let returnAction = UIAlertAction(
+            title: "Go Back",
+            style: .default,
+            handler: { (action: UIAlertAction) in
+                super.performUnwindSegue(false, completionHandler: nil)
+        }
+        )
+        let dismissAction = UIAlertAction(
+            title: "Dismiss",
+            style: .default,
+            handler: { (action: UIAlertAction) in
+                if let onDismissal = onDismissal {
+                    onDismissal()
+                }
+            }
+        )
+        alertController.addAction(returnAction)
+        alertController.addAction(dismissAction)
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil
+        )
+    }
+
+    func onAbortDismissal() {
+        self.actionButtonState = .gameAborted
+        Timeline.instance.addEventIfNeeded(
+            event: Event(type: .gameAborted, parameters: nil)
+        )
+    }
+
+    func onGameOverDismissal() {
+        self.actionButtonState = .gameOver
+        Timeline.instance.addEventIfNeeded(
+            event: Event(type: .gameOver, parameters: nil)
+        )
     }
 
     @objc
@@ -686,7 +714,8 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                     self.dismissPresentedViewIfNeeded(completion: {
                         self.didEndGame(
                             SCStrings.header.returningToPregameRoom.rawValue,
-                            reason: SCStrings.message.playerAborted.rawValue
+                            reason: SCStrings.message.playerAborted.rawValue,
+                            onDismissal: self.onAbortDismissal
                         )
                     })
                 }
@@ -700,7 +729,8 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                 self.dismissPresentedViewIfNeeded(completion: {
                     self.didEndGame(
                         SCStrings.header.returningToPregameRoom.rawValue,
-                        reason: SCStrings.message.playerAborted.rawValue
+                        reason: SCStrings.message.playerAborted.rawValue,
+                        onDismissal: self.onAbortDismissal
                     )
                 })
             } else if Round.instance.getWinningTeam() == Player.instance.getTeam() {
@@ -708,7 +738,8 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                     if GameMode.instance.getMode() == .regularGame {
                         self.didEndGame(
                             SCStrings.header.gameOver.rawValue,
-                            reason: SCStrings.message.defaultWinString.rawValue
+                            reason: SCStrings.message.defaultWinString.rawValue,
+                            onDismissal: self.onGameOverDismissal
                         )
                     } else {
                         self.didEndGame(
@@ -716,7 +747,8 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                             reason: String(
                                 format: SCStrings.message.minigameWinString.rawValue,
                                 CardCollection.instance.getCardsRemainingForTeam(.blue)
-                            )
+                            ),
+                            onDismissal: self.onGameOverDismissal
                         )
 
                         Statistics.instance.setBestRecord(
@@ -728,7 +760,8 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                 self.dismissPresentedViewIfNeeded(completion: {
                     self.didEndGame(
                         SCStrings.header.gameOver.rawValue,
-                        reason: SCStrings.message.defaultLoseString.rawValue
+                        reason: SCStrings.message.defaultLoseString.rawValue,
+                        onDismissal: self.onGameOverDismissal
                     )
                 })
             }
@@ -809,7 +842,8 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                     Round.instance.abortGame()
                     self.didEndGame(
                         SCStrings.header.returningToPregameRoom.rawValue,
-                        reason: SCStrings.message.playerDisconnected.rawValue
+                        reason: SCStrings.message.playerDisconnected.rawValue,
+                        onDismissal: self.onAbortDismissal
                     )
                 }
             })
@@ -948,7 +982,8 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             self.dismissPresentedViewIfNeeded(completion: {
                 self.didEndGame(
                     SCStrings.header.gameOver.rawValue,
-                    reason: SCStrings.message.defaultLoseString.rawValue
+                    reason: SCStrings.message.defaultLoseString.rawValue,
+                    onDismissal: self.onGameOverDismissal
                 )
             })
         } else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
@@ -960,7 +995,8 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
                     self.didEndGame(
                         SCStrings.header.gameOver.rawValue,
-                        reason: SCStrings.message.defaultWinString.rawValue
+                        reason: SCStrings.message.defaultWinString.rawValue,
+                        onDismissal: self.onGameOverDismissal
                     )
                 } else {
                     self.didEndGame(
@@ -968,7 +1004,8 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
                         reason: String(
                             format: SCStrings.message.minigameWinString.rawValue,
                             CardCollection.instance.getCardsRemainingForTeam(.blue)
-                        )
+                        ),
+                        onDismissal: self.onGameOverDismissal
                     )
                     Statistics.instance.setBestRecord(
                         CardCollection.instance.getCardsRemainingForTeam(.blue)
@@ -1015,7 +1052,8 @@ extension SCGameRoomViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if Player.instance.isLeader() &&
            Round.instance.getCurrentTeam() == Player.instance.getTeam() &&
-           !Round.instance.hasGameEnded() {
+           !Round.instance.hasGameEnded() &&
+           !Round.instance.isAborted() {
             return true
         } else {
             return false

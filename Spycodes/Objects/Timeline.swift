@@ -5,8 +5,7 @@ class Timeline {
     static var observedEvents: Set = [
         Event.EventType.confirm,
         Event.EventType.endRound,
-        Event.EventType.selectCard,
-        Event.EventType.gameOver,
+        Event.EventType.selectCard
     ]
 
     fileprivate var events = [Event]()

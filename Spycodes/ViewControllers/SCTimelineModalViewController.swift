@@ -262,6 +262,8 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 SCStrings.timeline.won.rawValue :
                 SCStrings.timeline.lost.rawValue
             )
+        case .gameAborted:
+            baseString = SCStrings.timeline.gameAborted.rawValue
         default:
             break
         }

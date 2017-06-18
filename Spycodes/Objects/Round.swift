@@ -177,6 +177,10 @@ class Round: NSObject, NSCoding {
     }
 
     func abortGame() {
+        if self.abort {
+            return
+        }
+
         self.abort = true
         SCMultipeerManager.instance.broadcast(self)
     }
