@@ -7,6 +7,8 @@ class Event: NSObject, NSCoding {
         case ready = 2
         case cancel = 3
         case selectCard = 4
+        case gameOver = 5
+        case gameAborted = 6
     }
 
     fileprivate var uuid: String?

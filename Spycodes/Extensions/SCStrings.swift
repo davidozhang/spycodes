@@ -12,11 +12,11 @@ class SCStrings {
         case enterClue = "Enter Clue"
         case ending = "Final Note"
         case introduction = "Introduction"
+        case gameAborted = "Game Aborted"
         case gameOver = "Game Over"
         case goal = "Goal"
         case guess = "Guessing Time"
         case returningToMainMenu = "Returning to Main Menu"
-        case returningToPregameRoom = "Returning to Pregame Room"
         case roundEnd = "Round End"
         case updateApp = "Update App"
         case waitForClue = "Waiting For Clue"
@@ -105,14 +105,19 @@ class SCStrings {
     }
 
     enum timeline: String {
+        case assassin = "the assassin"
         case bystander = "a bystander"
         case correctlySelected = "%@ correctly selected '%@'."
         case clueSetTo = "%@ set the clue to '%@ %@'."
         case cpuSelected = "CPU selected '%@'."
         case emptyState = "No events yet."
         case enemy = "an enemy card"
+        case gameAborted = "Game aborted."
+        case gameOver = "Game over. Your team %@."
+        case lost = "lost"
         case roundEnded = "%@ ended the round."
         case selected = "%@ selected %@ '%@'."
         case timerExpiry = "Round ended due to timer expiry."
+        case won = "won"
     }
 }

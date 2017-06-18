@@ -1,6 +1,8 @@
 enum ActionButtonState: Int {
     case confirm = 0
     case endRound = 1
+    case gameOver = 2
+    case gameAborted = 3
 }
 
 enum ReadyButtonState: Int {
