@@ -139,7 +139,7 @@ class SCGameRoomViewController: SCViewController {
             repeats: true
         )
 
-        self.teamLabel.text = Player.instance.getTeam() == .red ? "Red" : "Blue"
+        self.teamLabel.text = Player.instance.getTeam() == .red ? SCStrings.status.red.rawValue : SCStrings.status.blue.rawValue
 
         if !Timer.instance.isEnabled() {
             self.bottomBarViewHeightConstraint.constant = self.bottomBarViewDefaultHeight
@@ -444,7 +444,7 @@ class SCGameRoomViewController: SCViewController {
         if Timer.instance.state == .stopped {
             Timer.instance.invalidate()
             self.timerLabel.textColor = .spycodesGrayColor()
-            self.timerLabel.text = "--:--"
+            self.timerLabel.text = SCStrings.timer.stopped.rawValue
         } else if Timer.instance.state == .willStart {
             Timer.instance.startTimer({
                 self.timerDidEnd()
@@ -471,7 +471,7 @@ class SCGameRoomViewController: SCViewController {
                 self.timerLabel.textColor = .spycodesRedColor()
             }
 
-            self.timerLabel.text = String(format: "%d:%02d", minutes, seconds)
+            self.timerLabel.text = String(format: SCStrings.timer.format.rawValue, minutes, seconds)
         })
     }
 
@@ -479,7 +479,7 @@ class SCGameRoomViewController: SCViewController {
         switch self.actionButtonState {
         case .confirm:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle("Confirm", for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.confirm.rawValue, for: UIControlState())
             }
 
             if !Player.instance.isLeader() ||
@@ -502,7 +502,7 @@ class SCGameRoomViewController: SCViewController {
             }
         case .endRound:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle("End Round", for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.endRound.rawValue, for: UIControlState())
             }
             self.stopButtonAnimations()
 
@@ -517,13 +517,13 @@ class SCGameRoomViewController: SCViewController {
             }
         case .gameOver:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle("Game Over", for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.gameOver.rawValue, for: UIControlState())
             }
             self.stopButtonAnimations()
             self.disableActionButton()
         case .gameAborted:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle("Aborted", for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.gameAborted.rawValue, for: UIControlState())
             }
             self.stopButtonAnimations()
             self.disableActionButton()
@@ -642,14 +642,14 @@ class SCGameRoomViewController: SCViewController {
             preferredStyle: .alert
         )
         let returnAction = UIAlertAction(
-            title: "Go Back",
+            title: SCStrings.button.goBack.rawValue,
             style: .default,
             handler: { (action: UIAlertAction) in
                 super.performUnwindSegue(false, completionHandler: nil)
         }
         )
         let dismissAction = UIAlertAction(
-            title: "Dismiss",
+            title: SCStrings.button.dismiss.rawValue,
             style: .default,
             handler: { (action: UIAlertAction) in
                 if let onDismissal = onDismissal {
@@ -824,7 +824,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                         preferredStyle: .alert
                     )
                     let confirmAction = UIAlertAction(
-                        title: "OK",
+                        title: SCStrings.button.ok.rawValue,
                         style: .default,
                         handler: { (action: UIAlertAction) in
                             super.performUnwindSegue(true, completionHandler: nil)

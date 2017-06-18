@@ -1,4 +1,14 @@
 class SCStrings {
+    enum button: String {
+        case confirm = "Confirm"
+        case dismiss = "Dismiss"
+        case endRound = "End Round"
+        case gameAborted = "Aborted"
+        case gameOver = "Game Over"
+        case goBack = "Go Back"
+        case ok = "OK"
+    }
+
     enum emoji: String {
         case completed = "✅"
         case incomplete = "❌"
@@ -98,10 +108,12 @@ class SCStrings {
     }
 
     enum status: String {
+        case blue = "Blue"
         case fail = "Failed to join room"
         case normal = "Enter access code"
         case pending = "Joining room..."
         case ready = "READY"
+        case red = "Red"
     }
 
     enum timeline: String {
@@ -119,5 +131,10 @@ class SCStrings {
         case selected = "%@ selected %@ '%@'."
         case timerExpiry = "Round ended due to timer expiry."
         case won = "won"
+    }
+
+    enum timer: String {
+        case format = "%d:%02d"
+        case stopped = "--:--"
     }
 }
