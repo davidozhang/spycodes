@@ -42,7 +42,10 @@ class SCGameRoomViewController: SCViewController {
 
     // MARK: Actions
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
-        Round.instance.abortGame()
+        if !Round.instance.hasGameEnded() {
+            Round.instance.abortGame()
+        }
+
         super.performUnwindSegue(false, completionHandler: nil)
     }
 
@@ -429,7 +432,7 @@ class SCGameRoomViewController: SCViewController {
             return
         }
 
-        if Round.instance.getCurrentTeam() == Player.instance.getTeam() {
+        if Round.instance.getCurrentTeam() == Player.instance.getTeam() && !Round.instance.hasGameEnded() {
             if Timer.instance.state == .stopped {
                 Timer.instance.state = .willStart
             }
@@ -713,7 +716,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                 if synchronizedObject.isAborted() {
                     self.dismissPresentedViewIfNeeded(completion: {
                         self.didEndGame(
-                            SCStrings.header.returningToPregameRoom.rawValue,
+                            SCStrings.header.gameAborted.rawValue,
                             reason: SCStrings.message.playerAborted.rawValue,
                             onDismissal: self.onAbortDismissal
                         )
@@ -728,7 +731,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             if Round.instance.isAborted() {
                 self.dismissPresentedViewIfNeeded(completion: {
                     self.didEndGame(
-                        SCStrings.header.returningToPregameRoom.rawValue,
+                        SCStrings.header.gameAborted.rawValue,
                         reason: SCStrings.message.playerAborted.rawValue,
                         onDismissal: self.onAbortDismissal
                     )
@@ -841,7 +844,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                 } else {
                     Round.instance.abortGame()
                     self.didEndGame(
-                        SCStrings.header.returningToPregameRoom.rawValue,
+                        SCStrings.header.gameAborted.rawValue,
                         reason: SCStrings.message.playerDisconnected.rawValue,
                         onDismissal: self.onAbortDismissal
                     )
