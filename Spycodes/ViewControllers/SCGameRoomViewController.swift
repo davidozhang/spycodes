@@ -309,6 +309,7 @@ class SCGameRoomViewController: SCViewController {
         if let _ = self.presentedViewController {
             self.presentedViewController?.dismiss(animated: true, completion: {
                 if let completion = completion {
+                    super.hideDimView()
                     completion()
                 }
             })
@@ -605,32 +606,32 @@ class SCGameRoomViewController: SCViewController {
         DispatchQueue.main.async {
             Round.instance.setWinningTeam(.blue)
 
-            self.dismissPresentedViewIfNeeded(completion: {
-                self.didEndGame(
-                    SCStrings.header.gameOver.rawValue,
-                    reason: SCStrings.message.defaultLoseString.rawValue,
-                    onDismissal: self.onGameOverDismissal
-                )
-            })
+            self.didEndGame(
+                SCStrings.header.gameOver.rawValue,
+                reason: SCStrings.message.defaultLoseString.rawValue,
+                onDismissal: self.onGameOverDismissal
+            )
         }
     }
 
     fileprivate func didEndGame(_ title: String, reason: String, onDismissal: @escaping ((Void) -> Void)) {
         DispatchQueue.main.async {
-            Round.instance.endGame()
-            Timer.instance.invalidate()
+            self.dismissPresentedViewIfNeeded(completion: {
+                Round.instance.endGame()
+                Timer.instance.invalidate()
 
-            if Player.instance.isHost() {
-                self.broadcastTimer?.invalidate()
-            }
+                if Player.instance.isHost() {
+                    self.broadcastTimer?.invalidate()
+                }
 
-            if self.clueTextField.isFirstResponder {
-                self.clueTextField.resignFirstResponder()
-            } else if self.numberOfWordsTextField.isFirstResponder {
-                self.numberOfWordsTextField.resignFirstResponder()
-            }
+                if self.clueTextField.isFirstResponder {
+                    self.clueTextField.resignFirstResponder()
+                } else if self.numberOfWordsTextField.isFirstResponder {
+                    self.numberOfWordsTextField.resignFirstResponder()
+                }
 
-            self.displayAlert(title: title, reason: reason, onDismissal: onDismissal)
+                self.displayAlert(title: title, reason: reason, onDismissal: onDismissal)
+            })
         }
     }
 
@@ -714,13 +715,11 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
         case let synchronizedObject as Round:
             if self.leaderIsEditing {
                 if synchronizedObject.isAborted() {
-                    self.dismissPresentedViewIfNeeded(completion: {
-                        self.didEndGame(
-                            SCStrings.header.gameAborted.rawValue,
-                            reason: SCStrings.message.playerAborted.rawValue,
-                            onDismissal: self.onAbortDismissal
-                        )
-                    })
+                    self.didEndGame(
+                        SCStrings.header.gameAborted.rawValue,
+                        reason: SCStrings.message.playerAborted.rawValue,
+                        onDismissal: self.onAbortDismissal
+                    )
                 }
 
                 return
@@ -729,13 +728,11 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             Round.instance = synchronizedObject
 
             if Round.instance.isAborted() {
-                self.dismissPresentedViewIfNeeded(completion: {
-                    self.didEndGame(
-                        SCStrings.header.gameAborted.rawValue,
-                        reason: SCStrings.message.playerAborted.rawValue,
-                        onDismissal: self.onAbortDismissal
-                    )
-                })
+                self.didEndGame(
+                    SCStrings.header.gameAborted.rawValue,
+                    reason: SCStrings.message.playerAborted.rawValue,
+                    onDismissal: self.onAbortDismissal
+                )
             } else if Round.instance.getWinningTeam() == Player.instance.getTeam() {
                 self.dismissPresentedViewIfNeeded(completion: {
                     if GameMode.instance.getMode() == .regularGame {
@@ -760,13 +757,11 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                     }
                 })
             } else if Round.instance.getWinningTeam() == opponentTeam {
-                self.dismissPresentedViewIfNeeded(completion: {
-                    self.didEndGame(
-                        SCStrings.header.gameOver.rawValue,
-                        reason: SCStrings.message.defaultLoseString.rawValue,
-                        onDismissal: self.onGameOverDismissal
-                    )
-                })
+                self.didEndGame(
+                    SCStrings.header.gameOver.rawValue,
+                    reason: SCStrings.message.defaultLoseString.rawValue,
+                    onDismissal: self.onGameOverDismissal
+                )
             }
         case let synchronizedObject as Room:
             Room.instance = synchronizedObject
@@ -982,13 +977,11 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
             Statistics.instance.recordWinForTeam(opponentTeam!)
 
-            self.dismissPresentedViewIfNeeded(completion: {
-                self.didEndGame(
-                    SCStrings.header.gameOver.rawValue,
-                    reason: SCStrings.message.defaultLoseString.rawValue,
-                    onDismissal: self.onGameOverDismissal
-                )
-            })
+            self.didEndGame(
+                SCStrings.header.gameOver.rawValue,
+                reason: SCStrings.message.defaultLoseString.rawValue,
+                onDismissal: self.onGameOverDismissal
+            )
         } else if CardCollection.instance.getCardsRemainingForTeam(playerTeam) == 0 {
             Round.instance.setWinningTeam(playerTeam)
 
