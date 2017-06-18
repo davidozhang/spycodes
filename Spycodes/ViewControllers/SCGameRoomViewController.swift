@@ -522,7 +522,7 @@ class SCGameRoomViewController: SCViewController {
             self.disableActionButton()
         case .gameAborted:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle("Game Aborted", for: UIControlState())
+                self.actionButton.setTitle("Aborted", for: UIControlState())
             }
             self.stopButtonAnimations()
             self.disableActionButton()
