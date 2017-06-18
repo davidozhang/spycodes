@@ -622,8 +622,15 @@ class SCGameRoomViewController: SCViewController {
                 message: reason,
                 preferredStyle: .alert
             )
-            let confirmAction = UIAlertAction(
-                title: "OK",
+            let returnAction = UIAlertAction(
+                title: "Go back",
+                style: .default,
+                handler: { (action: UIAlertAction) in
+                    super.performUnwindSegue(false, completionHandler: nil)
+                }
+            )
+            let dismissAction = UIAlertAction(
+                title: "Dismiss",
                 style: .default,
                 handler: { (action: UIAlertAction) in
                     Timeline.instance.addEventIfNeeded(
@@ -631,7 +638,8 @@ class SCGameRoomViewController: SCViewController {
                     )
                 }
             )
-            alertController.addAction(confirmAction)
+            alertController.addAction(returnAction)
+            alertController.addAction(dismissAction)
             self.present(
                 alertController,
                 animated: true,
@@ -1006,7 +1014,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 extension SCGameRoomViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if Player.instance.isLeader() &&
-           Round.instance.getCurrentTeam() == Player.instance.getTeam() ||
+           Round.instance.getCurrentTeam() == Player.instance.getTeam() &&
            !Round.instance.hasGameEnded() {
             return true
         } else {
