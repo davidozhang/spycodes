@@ -8,8 +8,8 @@ class SCMainMenuModalViewController: SCModalViewController {
     weak var delegate: SCMainMenuModalViewControllerDelegate?
 
     enum Section: Int {
-        case customize = 0
-        case about = 1
+        case about = 0
+        case customize = 1
         case more = 2
     }
 
