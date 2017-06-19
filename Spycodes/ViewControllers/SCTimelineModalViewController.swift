@@ -154,7 +154,6 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
         }
 
         var baseString: String?
-        var attributedLength = 0
 
         switch type {
         case .confirm:
@@ -169,7 +168,6 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                         clue,
                         numberOfWords
                     )
-                    attributedLength = SCStrings.player.localPlayer.rawValue.characters.count
                 } else {
                     baseString = String(
                         format: SCStrings.timeline.clueSetTo.rawValue,
@@ -177,7 +175,6 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                         clue,
                         numberOfWords
                     )
-                    attributedLength = name.characters.count
                 }
             }
         case .endRound:
@@ -188,13 +185,11 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                         format: SCStrings.timeline.roundEnded.rawValue,
                         SCStrings.player.localPlayer.rawValue
                     )
-                    attributedLength = SCStrings.player.localPlayer.rawValue.characters.count
                 } else {
                     baseString = String(
                         format: SCStrings.timeline.roundEnded.rawValue,
                         name
                     )
-                    attributedLength = name.characters.count
                 }
             } else {
                 cell.primaryLabel.text = SCStrings.timeline.timerExpiry.rawValue
@@ -205,7 +200,6 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 if name == SCStrings.player.cpu.rawValue {
                     // CPU player
                     baseString = String(format: SCStrings.timeline.cpuSelected.rawValue, card.getWord())
-                    attributedLength = SCStrings.player.cpu.rawValue.characters.count
                     break
                 }
 
@@ -230,7 +224,6 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                             card.getWord()
                         )
                     }
-                    attributedLength = SCStrings.player.localPlayer.rawValue.characters.count
                 } else {
                     if let correct = parameters[SCConstants.coding.correct.rawValue] as? Bool, correct {
                         // Local player (You)
@@ -252,7 +245,6 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                             card.getWord()
                         )
                     }
-                    attributedLength = name.characters.count
                 }
             }
         case .gameOver:
@@ -268,16 +260,21 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
             break
         }
 
-        // Apply attributed string decoration
+        // Apply attributed string decorations here if applicable
         if let baseString = baseString {
             let attributedString = NSMutableAttributedString(
                 string: baseString
             )
-            attributedString.addAttribute(
-                NSFontAttributeName,
-                value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                range: NSMakeRange(0, attributedLength)
-            )
+
+            if let hasRead = parameters[SCConstants.coding.hasRead.rawValue] as? Bool,
+                !hasRead {
+                attributedString.addAttribute(
+                    NSFontAttributeName,
+                    value: SCFonts.intermediateSizeFont(.bold) ?? 0,
+                    range: NSMakeRange(0, baseString.characters.count - 1)
+                )
+            }
+
             cell.primaryLabel.attributedText = attributedString
         }
 
@@ -286,13 +283,6 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
             cell.teamIndicatorView.backgroundColor = .colorForTeam(team)
         } else {
             cell.teamIndicatorView.backgroundColor = .spycodesGrayColor()
-        }
-
-        if let hasRead = parameters[SCConstants.coding.hasRead.rawValue] as? Bool,
-           !hasRead {
-            // Not read
-        } else {
-            // Read
         }
 
         return cell
