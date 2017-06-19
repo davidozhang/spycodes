@@ -140,6 +140,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xkZ-ZW-TrC" userLabel="Top Bar View">
+                                <rect key="frame" x="0.0" y="20" width="1024" height="34"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bct-GX-0L1" userLabel="Swipe Down Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
                                 <rect key="frame" x="497" y="24" width="30" height="30"/>
                                 <constraints>
@@ -295,10 +299,14 @@
                             <constraint firstItem="47I-wx-ACz" firstAttribute="centerX" secondItem="KNG-kX-5el" secondAttribute="centerX" id="02v-eA-EfX"/>
                             <constraint firstItem="o82-JI-MmW" firstAttribute="top" secondItem="47I-wx-ACz" secondAttribute="bottom" constant="35" id="0Ca-lf-KxH"/>
                             <constraint firstAttribute="bottom" secondItem="U45-QB-oub" secondAttribute="bottom" id="4dv-YU-1hY"/>
+                            <constraint firstItem="U45-QB-oub" firstAttribute="top" secondItem="xkZ-ZW-TrC" secondAttribute="bottom" constant="8" id="MqV-je-sGn"/>
                             <constraint firstItem="U45-QB-oub" firstAttribute="top" secondItem="Bct-GX-0L1" secondAttribute="bottom" constant="8" id="O4j-iH-9Mx"/>
                             <constraint firstItem="U45-QB-oub" firstAttribute="leading" secondItem="KNG-kX-5el" secondAttribute="leading" id="Pfa-Vn-mFp"/>
                             <constraint firstItem="Bct-GX-0L1" firstAttribute="centerX" secondItem="KNG-kX-5el" secondAttribute="centerX" id="TWh-8j-Qsf"/>
+                            <constraint firstItem="xkZ-ZW-TrC" firstAttribute="top" secondItem="KNG-kX-5el" secondAttribute="top" constant="20" id="chD-lB-ZvN"/>
                             <constraint firstAttribute="trailing" secondItem="U45-QB-oub" secondAttribute="trailing" id="lt6-Z6-3D9"/>
+                            <constraint firstItem="xkZ-ZW-TrC" firstAttribute="leading" secondItem="KNG-kX-5el" secondAttribute="leading" id="o2Q-cP-XHs"/>
+                            <constraint firstAttribute="trailing" secondItem="xkZ-ZW-TrC" secondAttribute="trailing" id="t9W-gk-rS4"/>
                             <constraint firstItem="Bct-GX-0L1" firstAttribute="top" secondItem="KNG-kX-5el" secondAttribute="top" constant="24" id="wR2-YL-qdh"/>
                         </constraints>
                     </view>
@@ -308,6 +316,7 @@
                         <outlet property="tableViewBottomSpaceConstraint" destination="4dv-YU-1hY" id="PHu-BW-0ed"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="Pfa-Vn-mFp" id="3h8-8Q-SlI"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="lt6-Z6-3D9" id="MbR-gZ-LUP"/>
+                        <outlet property="topBarView" destination="xkZ-ZW-TrC" id="95G-h8-Lza"/>
                         <outlet property="upArrowView" destination="47I-wx-ACz" id="fbY-cg-eBr"/>
                     </connections>
                 </viewController>
@@ -811,6 +820,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Q7-RG-wBr" userLabel="Top Bar View">
+                                <rect key="frame" x="0.0" y="20" width="1024" height="34"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FjP-pl-Sjb" userLabel="Swipe Down Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
                                 <rect key="frame" x="497" y="24" width="30" height="30"/>
                                 <constraints>
@@ -1063,12 +1076,16 @@
                         <constraints>
                             <constraint firstItem="FjP-pl-Sjb" firstAttribute="centerX" secondItem="lxN-QK-ytI" secondAttribute="centerX" id="0Ap-xU-CO1"/>
                             <constraint firstItem="fla-Z8-sHI" firstAttribute="top" secondItem="FjP-pl-Sjb" secondAttribute="bottom" constant="8" id="1Dl-fq-TiZ"/>
+                            <constraint firstItem="9Q7-RG-wBr" firstAttribute="top" secondItem="lxN-QK-ytI" secondAttribute="top" constant="20" id="Gva-SO-KcV"/>
                             <constraint firstItem="hl0-i0-9Wy" firstAttribute="centerX" secondItem="lxN-QK-ytI" secondAttribute="centerX" id="Jhv-hv-vOG"/>
+                            <constraint firstItem="fla-Z8-sHI" firstAttribute="top" secondItem="9Q7-RG-wBr" secondAttribute="bottom" constant="8" id="ORA-Wn-J2d"/>
+                            <constraint firstAttribute="trailing" secondItem="9Q7-RG-wBr" secondAttribute="trailing" id="RcY-gP-jRM"/>
                             <constraint firstItem="MLa-iE-UmV" firstAttribute="top" secondItem="fla-Z8-sHI" secondAttribute="bottom" id="SWn-Tk-HpF"/>
                             <constraint firstAttribute="trailing" secondItem="fla-Z8-sHI" secondAttribute="trailing" id="Sxy-LK-2FM"/>
                             <constraint firstItem="MLa-iE-UmV" firstAttribute="top" secondItem="hl0-i0-9Wy" secondAttribute="bottom" constant="35" id="Y4F-9I-OKK"/>
                             <constraint firstItem="FjP-pl-Sjb" firstAttribute="top" secondItem="lxN-QK-ytI" secondAttribute="top" constant="24" id="fFl-S5-QCV"/>
                             <constraint firstItem="fla-Z8-sHI" firstAttribute="leading" secondItem="lxN-QK-ytI" secondAttribute="leading" id="kyE-Ob-Qov"/>
+                            <constraint firstItem="9Q7-RG-wBr" firstAttribute="leading" secondItem="lxN-QK-ytI" secondAttribute="leading" id="vhB-rC-6Kb"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1077,6 +1094,7 @@
                         <outlet property="tableViewBottomSpaceConstraint" destination="SWn-Tk-HpF" id="N9n-E6-vel"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="kyE-Ob-Qov" id="gar-TI-Kyx"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="Sxy-LK-2FM" id="cR3-YB-TcZ"/>
+                        <outlet property="topBarView" destination="9Q7-RG-wBr" id="5dy-fY-WRM"/>
                         <outlet property="upArrowView" destination="hl0-i0-9Wy" id="DsQ-eW-AXm"/>
                     </connections>
                 </viewController>
@@ -1096,6 +1114,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Pa-JQ-tRa" userLabel="Top Bar View">
+                                <rect key="frame" x="0.0" y="20" width="1024" height="34"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jpi-zT-CKN" userLabel="Swipe Down Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
                                 <rect key="frame" x="497" y="24" width="30" height="30"/>
                                 <constraints>
@@ -1190,8 +1212,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dQz-dg-RRO" firstAttribute="top" secondItem="6Pa-JQ-tRa" secondAttribute="bottom" constant="8" id="3ys-7y-7lB"/>
+                            <constraint firstItem="6Pa-JQ-tRa" firstAttribute="top" secondItem="2Yv-eL-zb3" secondAttribute="top" constant="20" id="5b3-aM-LZM"/>
                             <constraint firstItem="dQz-dg-RRO" firstAttribute="leading" secondItem="2Yv-eL-zb3" secondAttribute="leading" id="8FP-PB-AGq"/>
+                            <constraint firstAttribute="trailing" secondItem="6Pa-JQ-tRa" secondAttribute="trailing" id="Fn5-bC-sEV"/>
                             <constraint firstItem="dQz-dg-RRO" firstAttribute="top" secondItem="Jpi-zT-CKN" secondAttribute="bottom" constant="8" id="HGJ-pw-COM"/>
+                            <constraint firstItem="6Pa-JQ-tRa" firstAttribute="leading" secondItem="2Yv-eL-zb3" secondAttribute="leading" id="RpX-VP-tAJ"/>
                             <constraint firstItem="htW-uQ-Xx7" firstAttribute="top" secondItem="dQz-dg-RRO" secondAttribute="bottom" id="Y3v-81-Q3i"/>
                             <constraint firstItem="Jpi-zT-CKN" firstAttribute="centerX" secondItem="2Yv-eL-zb3" secondAttribute="centerX" id="fje-Zx-iSi"/>
                             <constraint firstAttribute="trailing" secondItem="dQz-dg-RRO" secondAttribute="trailing" id="qSc-el-1HD"/>
@@ -1204,6 +1230,7 @@
                         <outlet property="tableViewBottomSpaceConstraint" destination="Y3v-81-Q3i" id="Rik-j3-96y"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="8FP-PB-AGq" id="hPE-mb-YmO"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="qSc-el-1HD" id="FCB-Lg-yT8"/>
+                        <outlet property="topBarView" destination="6Pa-JQ-tRa" id="mEA-9x-9Ab"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bjs-0r-qNf" userLabel="First Responder" sceneMemberID="firstResponder"/>

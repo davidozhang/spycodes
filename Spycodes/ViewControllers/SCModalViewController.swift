@@ -4,6 +4,7 @@ class SCModalViewController: SCViewController {
     fileprivate var blurView: UIVisualEffectView?
 
     @IBOutlet weak var swipeDownButton: SCImageButton!
+    @IBOutlet weak var topBarView: UIView!
 
     @IBAction func onSwipeDownTapped(_ sender: Any) {
         self.onDismissal()
@@ -26,6 +27,14 @@ class SCModalViewController: SCViewController {
         swipeGestureRecognizer.direction = .down
         swipeGestureRecognizer.delegate = self
         self.view.addGestureRecognizer(swipeGestureRecognizer)
+
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(
+                SCModalViewController.onDismissal
+            )
+        )
+        self.topBarView.addGestureRecognizer(tapGestureRecognizer)
     }
 
     // MARK: Swipe Gesture Recognizer
