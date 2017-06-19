@@ -135,6 +135,14 @@ class SCViewController: UIViewController {
             }
         }
 
+        // Encode team information by default
+        if let name = parameters[SCConstants.coding.name.rawValue] as? String, name == SCStrings.player.cpu.rawValue {
+            // CPU player
+            parameters[SCConstants.coding.team.rawValue] = Team.blue.rawValue
+        } else {
+            parameters[SCConstants.coding.team.rawValue] = Player.instance.getTeam().rawValue
+        }
+
         let event = Event(
             type: eventType,
             parameters: parameters

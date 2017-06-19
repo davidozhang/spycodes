@@ -281,11 +281,18 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
             cell.primaryLabel.attributedText = attributedString
         }
 
+        if let teamCoded = parameters[SCConstants.coding.team.rawValue] as? Int,
+           let team = Team(rawValue: teamCoded) {
+            cell.teamIndicatorView.backgroundColor = .colorForTeam(team)
+        } else {
+            cell.teamIndicatorView.backgroundColor = .spycodesGrayColor()
+        }
+
         if let hasRead = parameters[SCConstants.coding.hasRead.rawValue] as? Bool,
            !hasRead {
-            cell.showNotificationDot()
+            // Not read
         } else {
-            cell.hideNotificationDot()
+            // Read
         }
 
         return cell
