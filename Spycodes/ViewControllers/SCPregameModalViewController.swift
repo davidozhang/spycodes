@@ -10,9 +10,7 @@ class SCPregameModalViewController: SCModalViewController {
 
     enum Section: Int {
         case info = 0
-        case statistics = 1
-        case gameSettings = 2
-        case customize = 3
+        case gameSettings = 1
     }
 
     enum GameSetting: Int {
@@ -20,26 +18,14 @@ class SCPregameModalViewController: SCModalViewController {
         case timer = 1
     }
 
-    enum CustomSetting: Int {
-        case nightMode = 0
-        case accessibility = 1
-    }
-
     fileprivate let sectionLabels: [Section: String] = [
         .info: SCStrings.section.info.rawValue,
-        .statistics: SCStrings.section.statistics.rawValue,
         .gameSettings: SCStrings.section.gameSettings.rawValue,
-        .customize: SCStrings.section.customize.rawValue,
     ]
 
     fileprivate let settingsLabels: [GameSetting: String] = [
         .minigame: SCStrings.primaryLabel.minigame.rawValue,
         .timer: SCStrings.primaryLabel.timer.rawValue,
-    ]
-
-    fileprivate let customizeLabels: [CustomSetting: String] = [
-        .nightMode: SCStrings.primaryLabel.nightMode.rawValue,
-        .accessibility: SCStrings.primaryLabel.accessibility.rawValue,
     ]
 
     fileprivate var scrolled = false
@@ -180,12 +166,8 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
         switch section {
         case Section.info.rawValue:
             return 2
-        case Section.statistics.rawValue:
-            return 1
         case Section.gameSettings.rawValue:
             return settingsLabels.count
-        case Section.customize.rawValue:
-            return customizeLabels.count
         default:
             return 0
         }
@@ -217,25 +199,6 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             }
 
             return cell
-        case Section.statistics.rawValue:
-            guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.statisticsViewCell.rawValue
-                ) as? SCTableViewCell else {
-                    return SCTableViewCell()
-            }
-
-            if GameMode.instance.getMode() == .miniGame {
-                if let bestRecord = Statistics.instance.getBestRecord() {
-                    cell.primaryLabel.text = "Best Record: " + String(bestRecord)
-                } else {
-                    cell.primaryLabel.text = "Best Record: --"
-                }
-            } else {
-                let score = Statistics.instance.getScore()
-                cell.primaryLabel.text = "Red " + String(score[0]) + " : " + String(score[1]) + " Blue"
-            }
-
-            return cell
         case Section.gameSettings.rawValue:
             switch indexPath.row {
             case GameSetting.minigame.rawValue:
@@ -261,33 +224,6 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 cell.synchronizeToggle()
                 cell.primaryLabel.text = self.settingsLabels[.timer]
                 cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawValue
-                cell.delegate = self
-
-                return cell
-            default:
-                return SCTableViewCell()
-            }
-        case Section.customize.rawValue:
-            switch indexPath.row {
-            case CustomSetting.nightMode.rawValue:
-                guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
-                    ) as? SCToggleViewCell else {
-                        return SCTableViewCell()
-                }
-
-                cell.primaryLabel.text = self.customizeLabels[.nightMode]
-                cell.delegate = self
-
-                return cell
-            case CustomSetting.accessibility.rawValue:
-                guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
-                    ) as? SCToggleViewCell else {
-                        return SCTableViewCell()
-                }
-
-                cell.primaryLabel.text = self.customizeLabels[.accessibility]
                 cell.delegate = self
 
                 return cell
