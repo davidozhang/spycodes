@@ -1124,10 +1124,23 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQf-fA-0fm" userLabel="Mark As Read Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="1000" y="10" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="WJO-bo-aue"/>
+                                                        <constraint firstAttribute="height" constant="20" id="aw5-et-U8O"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Mark-As-Read"/>
+                                                    <connections>
+                                                        <action selector="onMarkAsReadButtonTapped:" destination="HuE-xd-fYV" eventType="touchUpInside" id="eJL-ct-lPe"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="LS9-Xw-Bdc" firstAttribute="top" secondItem="SI5-rg-eRp" secondAttribute="top" id="3Y1-Hu-0IB"/>
+                                                <constraint firstAttribute="trailing" secondItem="TQf-fA-0fm" secondAttribute="trailing" constant="4" id="5uQ-eR-sLb"/>
                                                 <constraint firstItem="LS9-Xw-Bdc" firstAttribute="leading" secondItem="SI5-rg-eRp" secondAttribute="leading" constant="4" id="e0q-lh-jrt"/>
+                                                <constraint firstItem="TQf-fA-0fm" firstAttribute="centerY" secondItem="LS9-Xw-Bdc" secondAttribute="centerY" constant="-2" id="qHT-Go-b5X"/>
                                                 <constraint firstAttribute="bottom" secondItem="LS9-Xw-Bdc" secondAttribute="bottom" id="rDS-Cc-GPg"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1594,6 +1607,7 @@
         <image name="Clock" width="50" height="50"/>
         <image name="Crown-Filled" width="100" height="100"/>
         <image name="Exit" width="42" height="42"/>
+        <image name="Mark-As-Read" width="50" height="50"/>
         <image name="Next" width="100" height="100"/>
         <image name="Notification-Dot" width="300" height="300"/>
         <image name="Question" width="100" height="100"/>

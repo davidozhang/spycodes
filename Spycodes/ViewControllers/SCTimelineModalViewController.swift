@@ -9,6 +9,11 @@ class SCTimelineModalViewController: SCModalViewController {
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
 
+    @IBAction func onMarkAsReadButtonTapped(_ sender: Any) {
+        Timeline.instance.markAllAsRead()
+        self.tableView.reloadData()
+    }
+
     deinit {
         print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
