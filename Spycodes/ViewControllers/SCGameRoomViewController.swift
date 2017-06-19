@@ -837,6 +837,10 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                         completion: nil
                     )
                 } else {
+                    if Round.instance.hasGameEnded() || Round.instance.isAborted() {
+                        return
+                    }
+
                     Round.instance.abortGame()
                     self.didEndGame(
                         SCStrings.header.gameAborted.rawValue,
