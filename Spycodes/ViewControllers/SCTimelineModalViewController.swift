@@ -211,7 +211,7 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
 
                 if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
                     // Local player (You)
-                    if card.getTeam() == Player.instance.getTeam() {
+                    if let correct = parameters[SCConstants.coding.correct.rawValue] as? Bool, correct {
                         baseString = String(
                             format: SCStrings.timeline.correctlySelected.rawValue,
                             SCStrings.player.localPlayer.rawValue,
@@ -232,7 +232,7 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                     }
                     attributedLength = SCStrings.player.localPlayer.rawValue.characters.count
                 } else {
-                    if card.getTeam() == Player.instance.getTeam() {
+                    if let correct = parameters[SCConstants.coding.correct.rawValue] as? Bool, correct {
                         // Local player (You)
                         baseString = String(
                             format: SCStrings.timeline.correctlySelected.rawValue,

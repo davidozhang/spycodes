@@ -98,7 +98,8 @@ class CardCollection: NSObject, NSCoding {
                         .selectCard,
                         optional: [
                             SCConstants.coding.name.rawValue: SCStrings.player.cpu.rawValue,
-                            SCConstants.coding.card.rawValue: self.cards[i]
+                            SCConstants.coding.card.rawValue: self.cards[i],
+                            SCConstants.coding.correct.rawValue: true
                         ]
                     )
                 })
