@@ -226,7 +226,11 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                                 SCStrings.timeline.assassin.rawValue :
                                 SCStrings.timeline.enemy.rawValue
                             ),
-                            card.getWord()
+                            card.getWord(),
+                            (card.getTeam() == Team.assassin ?
+                                SCStrings.timeline.game.rawValue :
+                                SCStrings.timeline.round.rawValue
+                            )
                         )
                     }
                 } else {
@@ -247,7 +251,11 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                                 SCStrings.timeline.assassin.rawValue :
                                 SCStrings.timeline.enemy.rawValue
                             ),
-                            card.getWord()
+                            card.getWord(),
+                            (card.getTeam() == Team.assassin ?
+                                SCStrings.timeline.game.rawValue :
+                                SCStrings.timeline.round.rawValue
+                            )
                         )
                     }
                 }
