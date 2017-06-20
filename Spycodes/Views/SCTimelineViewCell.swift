@@ -11,5 +11,6 @@ class SCTimelineViewCell: SCTableViewCell {
         
         self.primaryLabel.numberOfLines = 2
         self.primaryLabel.lineBreakMode = .byTruncatingHead
+        self.primaryLabel.adjustsFontSizeToFitWidth = true
     }
 }

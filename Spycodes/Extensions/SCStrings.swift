@@ -117,19 +117,21 @@ class SCStrings {
     }
 
     enum timeline: String {
-        case assassin = "the assassin"
+        case assassin = "the assassin card"
         case bystander = "a bystander"
         case correctlySelected = "%@ correctly selected '%@'."
         case clueSetTo = "%@ set the clue to '%@ %@'."
-        case cpuSelected = "CPU selected '%@'."
+        case cpuSelected = "CPU selected '%@' & ended the round."
         case emptyState = "No events yet."
         case enemy = "an enemy card"
-        case gameAborted = "Game aborted."
+        case game = "game"
+        case gameAborted = "Game has been aborted."
         case gameOver = "Game over. Your team %@."
         case lost = "lost"
+        case round = "round"
         case roundEnded = "%@ ended the round."
-        case selected = "%@ selected %@ '%@'."
-        case timerExpiry = "Round ended due to timer expiry."
+        case selected = "%@ selected %@ '%@' & ended the %@."
+        case timerExpiry = "Round has ended due to timer expiry."
         case won = "won"
     }
 
