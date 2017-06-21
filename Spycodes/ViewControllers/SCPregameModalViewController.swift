@@ -10,7 +10,8 @@ class SCPregameModalViewController: SCModalViewController {
 
     enum Section: Int {
         case info = 0
-        case gameSettings = 1
+        case statistics = 1
+        case gameSettings = 2
     }
 
     enum GameSetting: Int {
@@ -20,6 +21,7 @@ class SCPregameModalViewController: SCModalViewController {
 
     fileprivate let sectionLabels: [Section: String] = [
         .info: SCStrings.section.info.rawValue,
+        .statistics: SCStrings.section.statistics.rawValue,
         .gameSettings: SCStrings.section.gameSettings.rawValue,
     ]
 
@@ -166,6 +168,8 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
         switch section {
         case Section.info.rawValue:
             return 2
+        case Section.statistics.rawValue:
+            return 1
         case Section.gameSettings.rawValue:
             return settingsLabels.count
         default:
@@ -196,6 +200,25 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 cell.primaryLabel.text = SCStrings.info.leaderNomination.rawValue
             default:
                 break
+            }
+
+            return cell
+        case Section.statistics.rawValue:
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCConstants.identifier.statisticsViewCell.rawValue
+                ) as? SCTableViewCell else {
+                    return SCTableViewCell()
+            }
+
+            if GameMode.instance.getMode() == .miniGame {
+                if let bestRecord = Statistics.instance.getBestRecord() {
+                    cell.primaryLabel.text = "Best Record: " + String(bestRecord)
+                } else {
+                    cell.primaryLabel.text = "Best Record: --"
+                }
+            } else {
+                let score = Statistics.instance.getScore()
+                cell.primaryLabel.text = "Red " + String(score[0]) + " : " + String(score[1]) + " Blue"
             }
 
             return cell
