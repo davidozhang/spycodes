@@ -120,7 +120,7 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
         guard let sectionHeader = self.tableView.dequeueReusableCell(
             withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
         ) as? SCSectionHeaderViewCell else {
-                return nil
+            return nil
         }
 
         if let section = Section(rawValue: section) {
