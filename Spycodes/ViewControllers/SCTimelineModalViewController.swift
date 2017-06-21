@@ -208,7 +208,7 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                     )
                 }
             } else {
-                cell.primaryLabel.text = SCStrings.timeline.timerExpiry.rawValue
+                baseString = SCStrings.timeline.timerExpiry.rawValue
             }
         case .selectCard:
             if let name = parameters[SCConstants.coding.name.rawValue] as? String,
