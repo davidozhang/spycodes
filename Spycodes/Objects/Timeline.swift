@@ -11,8 +11,14 @@ class Timeline {
     fileprivate var events = [Event]()
     fileprivate var lastTimestamp: Int?
 
+    fileprivate var hasUnread = false
+
     func getEvents() -> [Event] {
         return self.events
+    }
+
+    func hasUnreadEvents() -> Bool {
+        return hasUnread
     }
 
     func addEventIfNeeded(event: Event) {
@@ -31,6 +37,7 @@ class Timeline {
 
             // Sorted by reverse chronological order
             self.events.insert(event, at: 0)
+            self.hasUnread = true
 
             DispatchQueue.main.async(execute: {
                 NotificationCenter.default.post(
@@ -51,6 +58,8 @@ class Timeline {
                 value: true
             )
         }
+
+        self.hasUnread = false
     }
 
     func reset() {

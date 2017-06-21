@@ -23,6 +23,7 @@
 		6332922B1E7DE9EC0090B09D /* SCSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332922A1E7DE9EC0090B09D /* SCSettingsManager.swift */; };
 		63486DA51D3DDC9800795403 /* SCArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA41D3DDC9800795403 /* SCArray.swift */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
+		635464791EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */; };
 		6363EB651E7E4D5600CC287B /* SCUnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6363EB641E7E4D5600CC287B /* SCUnderlineTextField.swift */; };
 		6363EB671E7E5A3900CC287B /* SCToggleViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6363EB661E7E5A3900CC287B /* SCToggleViewCell.swift */; };
 		636CFB9C1EB45284008A0AE7 /* SCMainMenuModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636CFB9B1EB45284008A0AE7 /* SCMainMenuModalViewController.swift */; };
@@ -86,6 +87,7 @@
 		6332922A1E7DE9EC0090B09D /* SCSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCSettingsManager.swift; path = Managers/SCSettingsManager.swift; sourceTree = "<group>"; };
 		63486DA41D3DDC9800795403 /* SCArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCArray.swift; path = Extensions/SCArray.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
+		635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTimelineHeaderViewCell.swift; path = Views/SCTimelineHeaderViewCell.swift; sourceTree = "<group>"; };
 		6363EB641E7E4D5600CC287B /* SCUnderlineTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUnderlineTextField.swift; path = Utilities/SCUnderlineTextField.swift; sourceTree = "<group>"; };
 		6363EB661E7E5A3900CC287B /* SCToggleViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCToggleViewCell.swift; path = Views/SCToggleViewCell.swift; sourceTree = "<group>"; };
 		636CFB9B1EB45284008A0AE7 /* SCMainMenuModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCMainMenuModalViewController.swift; path = ViewControllers/SCMainMenuModalViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				63FDED451D28B47200142780 /* SCPregameRoomViewCell.swift */,
 				639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */,
 				633292261E7DE8B30090B09D /* SCTableViewCell.swift */,
+				635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */,
 				638CE44E1EAB45A500033480 /* SCTimelineViewCell.swift */,
 				6363EB661E7E5A3900CC287B /* SCToggleViewCell.swift */,
 			);
@@ -370,6 +373,7 @@
 				638CE44F1EAB45A500033480 /* SCTimelineViewCell.swift in Sources */,
 				63FDED3B1D265BAF00142780 /* SCPregameRoomViewController.swift in Sources */,
 				63EAF9A31D41D2E700BC554E /* Round.swift in Sources */,
+				635464791EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift in Sources */,
 				63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */,
 				630D15581E99F1B3001C1D87 /* SCLabel.swift in Sources */,
 				63A04D1F1D1A7F3E005A2914 /* SCMainMenuViewController.swift in Sources */,
