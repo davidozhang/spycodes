@@ -9,11 +9,6 @@ class SCTimelineModalViewController: SCModalViewController {
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
 
-    @IBAction func onMarkAsReadButtonTapped(_ sender: Any) {
-        Timeline.instance.markAllAsRead()
-        self.tableView.reloadData()
-    }
-
     deinit {
         print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
@@ -104,6 +99,14 @@ class SCTimelineModalViewController: SCModalViewController {
 //  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
+// MARK: SCTimelineHeaderViewCellDelegate
+extension SCTimelineModalViewController: SCTimelineHeaderViewCellDelegate {
+    func onMarkAsReadButtonTapped() {
+        Timeline.instance.markAllAsRead()
+        self.tableView.reloadData()
+    }
+}
+
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -119,22 +122,30 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
             return nil
         }
 
-        guard let sectionHeader = self.tableView.dequeueReusableCell(
+        guard let timelineHeader = self.tableView.dequeueReusableCell(
             withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
-            ) as? SCSectionHeaderViewCell else {
+            ) as? SCTimelineHeaderViewCell else {
                 return nil
         }
 
-        sectionHeader.primaryLabel.font = SCFonts.regularSizeFont(.regular)
-        sectionHeader.primaryLabel.text = SCStrings.section.timeline.rawValue
+        timelineHeader.delegate = self
 
-        if self.tableView.contentOffset.y > 0 {
-            sectionHeader.showBlurBackground()
+        if Timeline.instance.hasUnreadEvents() {
+            timelineHeader.showNotificationDot()
         } else {
-            sectionHeader.hideBlurBackground()
+            timelineHeader.hideNotificationDot()
         }
 
-        return sectionHeader
+        timelineHeader.primaryLabel.font = SCFonts.regularSizeFont(.regular)
+        timelineHeader.primaryLabel.text = SCStrings.section.timeline.rawValue
+
+        if self.tableView.contentOffset.y > 0 {
+            timelineHeader.showBlurBackground()
+        } else {
+            timelineHeader.hideBlurBackground()
+        }
+
+        return timelineHeader
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
