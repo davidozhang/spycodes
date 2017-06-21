@@ -26,6 +26,10 @@ extension UIColor {
         return UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 1.0)
     }
 
+    static func spycodesBorderColor() -> UIColor {
+        return UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 0.1)
+    }
+
     static func dimBackgroundColor() -> UIColor {
         return UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
     }
@@ -41,13 +45,13 @@ extension UIColor {
     static func colorForTeam(_ team: Team) -> UIColor {
         switch team {
         case .red:
-            return UIColor.spycodesRedColor()
+            return .spycodesRedColor()
         case .blue:
-            return UIColor.spycodesBlueColor()
+            return .spycodesBlueColor()
         case .neutral:
-            return UIColor.white
+            return .white
         default:
-            return UIColor.spycodesBlackColor()
+            return .spycodesBlackColor()
         }
     }
 }

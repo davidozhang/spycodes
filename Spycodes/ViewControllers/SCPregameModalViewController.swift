@@ -12,7 +12,6 @@ class SCPregameModalViewController: SCModalViewController {
         case info = 0
         case statistics = 1
         case gameSettings = 2
-        case customize = 3
     }
 
     enum GameSetting: Int {
@@ -20,26 +19,15 @@ class SCPregameModalViewController: SCModalViewController {
         case timer = 1
     }
 
-    enum CustomSetting: Int {
-        case nightMode = 0
-        case accessibility = 1
-    }
-
     fileprivate let sectionLabels: [Section: String] = [
-        .info: SCStrings.info,
-        .statistics: SCStrings.statistics,
-        .gameSettings: SCStrings.gameSettings,
-        .customize: SCStrings.customize,
+        .info: SCStrings.section.info.rawValue,
+        .statistics: SCStrings.section.statistics.rawValue,
+        .gameSettings: SCStrings.section.gameSettings.rawValue,
     ]
 
     fileprivate let settingsLabels: [GameSetting: String] = [
-        .minigame: SCStrings.minigame,
-        .timer: SCStrings.timer,
-    ]
-
-    fileprivate let customizeLabels: [CustomSetting: String] = [
-        .nightMode: SCStrings.nightMode,
-        .accessibility: SCStrings.accessibility,
+        .minigame: SCStrings.primaryLabel.minigame.rawValue,
+        .timer: SCStrings.primaryLabel.timer.rawValue,
     ]
 
     fileprivate var scrolled = false
@@ -61,6 +49,7 @@ class SCPregameModalViewController: SCModalViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -79,7 +68,7 @@ class SCPregameModalViewController: SCModalViewController {
             repeats: true
         )
 
-        if self.tableView.contentSize.height < self.tableView.bounds.height {
+        if self.tableView.contentSize.height <= self.tableView.bounds.height {
             self.upArrowView.isHidden = true
         }
     }
@@ -93,6 +82,7 @@ class SCPregameModalViewController: SCModalViewController {
         self.refreshTimer?.invalidate()
     }
 
+    // MARK: SCModalViewController Overrides
     override func onDismissal() {
         if self.tableView.contentOffset.y > 0 {
             return
@@ -114,20 +104,20 @@ class SCPregameModalViewController: SCModalViewController {
 
         // Team size check
         if Room.instance.teamSizesValid() {
-            result.append(SCStrings.completed)
+            result.append(SCStrings.emoji.completed.rawValue)
 
             if GameMode.instance.getMode() == .miniGame {
-                result.append(SCStrings.minigameTeamSizeSatisfiedInfo)
+                result.append(SCStrings.info.minigameTeamSizeSatisfied.rawValue)
             } else {
-                result.append(SCStrings.regularGameTeamSizeSatisfiedInfo)
+                result.append(SCStrings.info.regularGameTeamSizeSatisfied.rawValue)
             }
         } else {
-            result.append(SCStrings.incomplete)
+            result.append(SCStrings.emoji.incomplete.rawValue)
 
             if GameMode.instance.getMode() == .miniGame {
-                result.append(SCStrings.minigameTeamSizeUnsatisfiedInfo)
+                result.append(SCStrings.info.minigameTeamSizeUnsatisfied.rawValue)
             } else {
-                result.append(SCStrings.regularGameTeamSizeUnsatisfiedInfo)
+                result.append(SCStrings.info.regularGameTeamSizeUnsatisfied.rawValue)
             }
         }
         
@@ -182,8 +172,6 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             return 1
         case Section.gameSettings.rawValue:
             return settingsLabels.count
-        case Section.customize.rawValue:
-            return customizeLabels.count
         default:
             return 0
         }
@@ -208,8 +196,8 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 cell.leftLabel.text = checkListItems[0]
                 cell.primaryLabel.text = checkListItems[1]
             case 1: // Leader nomination info
-                cell.leftLabel.text = SCStrings.infoEmoji
-                cell.primaryLabel.text = SCStrings.leaderNominationInfo
+                cell.leftLabel.text = SCStrings.emoji.info.rawValue
+                cell.primaryLabel.text = SCStrings.info.leaderNomination.rawValue
             default:
                 break
             }
@@ -245,7 +233,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
 
                 cell.synchronizeToggle()
                 cell.primaryLabel.text = self.settingsLabels[.minigame]
-                cell.secondaryLabel.text = SCStrings.minigameSecondaryText
+                cell.secondaryLabel.text = SCStrings.secondaryLabel.minigame.rawValue
                 cell.delegate = self
                 
                 return cell
@@ -258,34 +246,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
 
                 cell.synchronizeToggle()
                 cell.primaryLabel.text = self.settingsLabels[.timer]
-                cell.secondaryLabel.text = SCStrings.timerSecondaryText
-                cell.delegate = self
-
-                return cell
-            default:
-                return SCTableViewCell()
-            }
-        case 3: // Customize
-            switch indexPath.row {
-            case CustomSetting.nightMode.rawValue:
-                guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
-                    ) as? SCToggleViewCell else {
-                        return SCTableViewCell()
-                }
-
-                cell.primaryLabel.text = self.customizeLabels[.nightMode]
-                cell.delegate = self
-
-                return cell
-            case CustomSetting.accessibility.rawValue:
-                guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
-                    ) as? SCToggleViewCell else {
-                        return SCTableViewCell()
-                }
-
-                cell.primaryLabel.text = self.customizeLabels[.accessibility]
+                cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawValue
                 cell.delegate = self
 
                 return cell

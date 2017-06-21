@@ -10,9 +10,6 @@ class SCAccessCodeViewController: SCViewController {
     fileprivate static let shortTimeoutInterval: TimeInterval = 3.0
     fileprivate static let allowCancelInterval: TimeInterval = 3.0
 
-    fileprivate static let firstTag = 0
-    fileprivate static let lastTag = 3
-
     fileprivate var timeoutTimer: Foundation.Timer?
     fileprivate var ticker: Foundation.Timer?
     fileprivate var startTime: Int?
@@ -75,7 +72,7 @@ class SCAccessCodeViewController: SCViewController {
                 )
 
                 // Tags are assigned in the Storyboard
-                if textField.tag == SCAccessCodeViewController.firstTag {
+                if textField.tag == SCConstants.tag.firstTextField.rawValue {
                     textField.becomeFirstResponder()
                 }
             }
@@ -152,7 +149,7 @@ class SCAccessCodeViewController: SCViewController {
         self.timeoutTimer?.invalidate()
         SCMultipeerManager.instance.stopAdvertiser()
 
-        self.statusLabel.text = SCStrings.failStatus
+        self.statusLabel.text = SCStrings.status.fail.rawValue
 
         self.timeoutTimer = Foundation.Timer.scheduledTimer(
             timeInterval: SCAccessCodeViewController.shortTimeoutInterval,
@@ -209,9 +206,9 @@ class SCAccessCodeViewController: SCViewController {
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? SCSingleCharacterTextField {
                 textField.isEnabled = true
-                textField.textColor = UIColor.spycodesGrayColor()
+                textField.textColor = .spycodesGrayColor()
 
-                if textField.tag == SCAccessCodeViewController.lastTag {
+                if textField.tag == SCConstants.tag.lastTextField.rawValue {
                     textField.becomeFirstResponder()
                 }
             }
@@ -220,7 +217,7 @@ class SCAccessCodeViewController: SCViewController {
 
     @objc
     fileprivate func restoreStatus() {
-        self.statusLabel.text = SCStrings.normalAccessCodeStatus
+        self.statusLabel.text = SCStrings.status.normal.rawValue
         self.hideCancelButton(true)
     }
 
@@ -231,7 +228,7 @@ class SCAccessCodeViewController: SCViewController {
         if let character = textField.text, character.characters.count == 1 {
             self.accessCodeCharacters[currentTag] = character
 
-            if currentTag == SCAccessCodeViewController.lastTag {
+            if currentTag == SCConstants.tag.lastTextField.rawValue {
                 let accessCode = self.accessCodeCharacters.componentsJoined(by: "")
                 self.joinRoomWithAccessCode(accessCode)
                 return
@@ -273,14 +270,14 @@ class SCAccessCodeViewController: SCViewController {
         self.startTime = Int(Date.timeIntervalSinceReferenceDate)
         self.showCancelButton()
 
-        self.statusLabel.text = SCStrings.pendingStatus
+        self.statusLabel.text = SCStrings.status.pending.rawValue
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? UITextField {
                 textField.isEnabled = false
-                textField.textColor = UIColor.lightGray
+                textField.textColor = .lightGray
 
-                if textField.tag == SCAccessCodeViewController.lastTag {
+                if textField.tag == SCConstants.tag.lastTextField.rawValue {
                     textField.resignFirstResponder()
                 }
             }
@@ -310,7 +307,10 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
 
             DispatchQueue.main.async(execute: {
                 self.restoreStatus()
-                self.performSegue(withIdentifier: SCConstants.identifier.pregameRoom.rawValue, sender: self)
+                self.performSegue(
+                    withIdentifier: SCConstants.identifier.pregameRoom.rawValue,
+                    sender: self
+                )
             })
         }
     }
@@ -333,7 +333,7 @@ extension SCAccessCodeViewController: SCSingleCharacterTextFieldBackspaceDelegat
             return
         }
 
-        if currentTag == SCAccessCodeViewController.firstTag {
+        if currentTag == SCConstants.tag.firstTextField.rawValue {
             return
         }
 
@@ -351,7 +351,7 @@ extension SCAccessCodeViewController: UITextFieldDelegate {
         let currentTag = textField.tag
 
         // Allow return key if cursor is on last text field and it is filled
-        if currentTag == SCAccessCodeViewController.lastTag &&
+        if currentTag == SCConstants.tag.lastTextField.rawValue &&
            textField.text?.characters.count == 1 {
             let accessCode = self.accessCodeCharacters.componentsJoined(by: "")
             self.joinRoomWithAccessCode(accessCode)

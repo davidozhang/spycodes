@@ -3,8 +3,10 @@ class SCConstants {
         case abort = "abort"
         case accessCode = "access-code"
         case bestRecord = "best-record"
+        case card = "card"
         case cards = "cards"
         case clue = "clue"
+        case correct = "correct"
         case eventType = "event-type"
         case hasRead = "has-read"       // Local coding only
         case leader = "leader"
@@ -49,6 +51,7 @@ class SCConstants {
         case helpView = "help-view"
         case infoViewCell = "info-view-cell"
         case mainMenu = "main-menu"
+        case mainMenuModal = "main-menu-modal"
         case minigameToggleViewCell = "minigame-toggle-view-cell"
         case nightModeToggleViewCell = "night-mode-toggle-view-cell"
         case playerName = "player-name"
@@ -56,19 +59,29 @@ class SCConstants {
         case pregameRoom = "pregame-room"
         case pregameRoomTeamEmptyStateViewCell = "pregame-room-team-empty-state-view-cell"
         case pregameRoomViewCell = "pregame-room-view-cell"
+        case releaseNotesViewCell = "release-notes-view-cell"
         case statisticsViewCell = "statistics-view-cell"
         case sectionHeaderCell = "section-header-view-cell"
         case settings = "settings"
         case timelineModal = "timeline-modal"
         case timelineViewCell = "timeline-view-cell"
         case timerToggleViewCell = "timer-toggle-view-cell"
-        case updateApp = "update-app"
         case versionViewCell = "version-view-cell"
     }
 
     enum notificationKey: String {
+        case updateCollectionView = "update-collection-view"
         case minigameGameOver = "minigame-game-over"
         case timelineUpdated = "timeline-updated"
+    }
+
+    enum tag: Int {
+        case firstTextField = 0
+        case lastTextField = 3
+        case dimView = 4
+        case modalBlurView = 5
+        case modalPeekBlurView = 6
+        case sectionHeaderBlurView = 7
     }
 
     enum url: String {
@@ -76,6 +89,7 @@ class SCConstants {
         case appStoreWeb = "https://itunes.apple.com/app/spycodes/id1141711201?mt=8"
         case github = "https://github.com/davidozhang/spycodes"
         case icons8 = "https://icons8.com/"
+        case releaseNotes = "https://github.com/davidozhang/spycodes/releases"
         case support = "https://www.spycodes.net/support/"
         case version = "https://itunes.apple.com/lookup?bundleId=com.davidzhang.Spycodes"
         case website = "https://www.spycodes.net/"

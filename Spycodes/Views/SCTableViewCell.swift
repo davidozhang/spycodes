@@ -27,7 +27,7 @@ class SCTableViewCell: UITableViewCell {
             self.rightLabel.font = SCFonts.intermediateSizeFont(.regular)
         }
 
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = .clear
         self.selectionStyle = .none
 
         if let reuseIdentifier = self.reuseIdentifier {

@@ -3,7 +3,7 @@ import UIKit
 class SCViewController: UIViewController {
     static let tableViewMargin: CGFloat = 30
     let animationDuration: TimeInterval = 0.6
-    let animationAlpha: CGFloat = 0.4
+    let animationAlpha: CGFloat = 0.5
 
     var unwindableIdentifier: String = ""
     var previousViewControllerIdentifier: String?
@@ -12,14 +12,44 @@ class SCViewController: UIViewController {
     var isRootViewController = false
 
     fileprivate let dimView = UIView()
+    fileprivate var modalPeekBlurView: UIVisualEffectView?
+
+    @IBOutlet weak var modalPeekView: UIView!
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.dimView.tag = 1
+        self.dimView.tag = SCConstants.tag.dimView.rawValue
         self.dimView.frame = UIScreen.main.bounds
-        self.dimView.backgroundColor = UIColor.dimBackgroundColor()
+        self.dimView.backgroundColor = .dimBackgroundColor()
+
+        if let _ = self.modalPeekView {
+            let topBorder = CALayer()
+            topBorder.frame = CGRect(
+                x: 0.0,
+                y: 1.0,
+                width: self.modalPeekView.frame.size.width,
+                height: 1.0
+            )
+
+            topBorder.backgroundColor = UIColor.spycodesBorderColor().cgColor
+            self.modalPeekView.layer.addSublayer(topBorder)
+
+            let swipeGestureRecognizer = UISwipeGestureRecognizer(
+                target: self,
+                action: #selector(SCViewController.swipeUp)
+            )
+            swipeGestureRecognizer.direction = .up
+            swipeGestureRecognizer.delegate = self
+            self.view.addGestureRecognizer(swipeGestureRecognizer)
+
+            let tapGestureRecognizer = UITapGestureRecognizer(
+                target: self,
+                action: #selector(SCViewController.swipeUp)
+            )
+            self.modalPeekView.addGestureRecognizer(tapGestureRecognizer)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -27,7 +57,10 @@ class SCViewController: UIViewController {
 
         self.updateAppearance()
 
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(SCViewController.swipeRight))
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(SCViewController.swipeRight)
+        )
         swipeGestureRecognizer.direction = .right
         self.view.addGestureRecognizer(swipeGestureRecognizer)
 
@@ -35,6 +68,12 @@ class SCViewController: UIViewController {
             self,
             selector: #selector(SCViewController.applicationDidBecomeActive),
             name: NSNotification.Name.UIApplicationDidBecomeActive,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(SCViewController.applicationWillResignActive),
+            name: NSNotification.Name.UIApplicationWillResignActive,
             object: nil
         )
         NotificationCenter.default.addObserver(
@@ -57,6 +96,11 @@ class SCViewController: UIViewController {
         NotificationCenter.default.removeObserver(
             self,
             name:NSNotification.Name.UIApplicationDidBecomeActive,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name:NSNotification.Name.UIApplicationWillResignActive,
             object: nil
         )
         NotificationCenter.default.removeObserver(
@@ -91,6 +135,14 @@ class SCViewController: UIViewController {
             }
         }
 
+        // Encode team information by default
+        if let name = parameters[SCConstants.coding.name.rawValue] as? String, name == SCStrings.player.cpu.rawValue {
+            // CPU player
+            parameters[SCConstants.coding.team.rawValue] = Team.blue.rawValue
+        } else {
+            parameters[SCConstants.coding.team.rawValue] = Player.instance.getTeam().rawValue
+        }
+
         let event = Event(
             type: eventType,
             parameters: parameters
@@ -116,7 +168,8 @@ class SCViewController: UIViewController {
         }
     }
 
-    func performUnwindSegue(_ returnToRootViewController: Bool, completionHandler: ((Void) -> Void)?) {
+    func performUnwindSegue(_ returnToRootViewController: Bool,
+                            completionHandler: ((Void) -> Void)?) {
         if isRootViewController {
             return
         }
@@ -125,7 +178,10 @@ class SCViewController: UIViewController {
         self.returnToRootViewController = returnToRootViewController
 
         if let previousViewControllerIdentifier = self.previousViewControllerIdentifier {
-            self.performSegue(withIdentifier: previousViewControllerIdentifier, sender: self)
+            self.performSegue(
+                withIdentifier: previousViewControllerIdentifier,
+                sender: self
+            )
 
             if let completionHandler = completionHandler {
                 completionHandler()
@@ -146,12 +202,38 @@ class SCViewController: UIViewController {
     func updateAppearance() {
         let textFieldAppearance = UITextField.appearance()
 
+        if let view = self.view.viewWithTag(SCConstants.tag.modalPeekBlurView.rawValue) {
+            view.removeFromSuperview()
+        }
+
         if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
             textFieldAppearance.keyboardAppearance = .dark
-            self.view.backgroundColor = UIColor.black
+            self.view.backgroundColor = .black
+
+            if let _ = self.modalPeekView {
+                self.modalPeekView.backgroundColor = .darkTintColor()
+                self.modalPeekBlurView = UIVisualEffectView(
+                    effect: UIBlurEffect(style: .dark)
+                )
+            }
         } else {
             textFieldAppearance.keyboardAppearance = .light
-            self.view.backgroundColor = UIColor.white
+            self.view.backgroundColor = .white
+
+            if let _ = self.modalPeekView {
+                self.modalPeekView.backgroundColor = .lightTintColor()
+                self.modalPeekBlurView = UIVisualEffectView(
+                    effect: UIBlurEffect(style: .extraLight)
+                )
+            }
+        }
+
+        if let _ = self.modalPeekView {
+            self.modalPeekBlurView?.frame = self.modalPeekView.bounds
+            self.modalPeekBlurView?.clipsToBounds = true
+            self.modalPeekBlurView?.tag = SCConstants.tag.modalPeekBlurView.rawValue
+            self.modalPeekView?.addSubview(self.modalPeekBlurView!)
+            self.modalPeekView?.sendSubview(toBack: self.modalPeekBlurView!)
         }
 
         self.setNeedsStatusBarAppearanceUpdate()
@@ -162,15 +244,20 @@ class SCViewController: UIViewController {
     }
 
     func hideDimView() {
-        if let view = self.view.viewWithTag(1) {
+        if let view = self.view.viewWithTag(SCConstants.tag.dimView.rawValue) {
             view.removeFromSuperview()
         }
     }
 
     func swipeRight() {}
 
+    func swipeUp() {}
+
     @objc
     func applicationDidBecomeActive() {}
+
+    @objc
+    func applicationWillResignActive() {}
 
     @objc
     func keyboardWillShow(_ notification: Notification) {}
@@ -196,5 +283,13 @@ extension SCViewController: UIPopoverPresentationControllerDelegate {
         _ popoverPresentationController: UIPopoverPresentationController) {
         self.hideDimView()
         popoverPresentationController.delegate = nil
+    }
+}
+
+// MARK: UIGestureRecognizerDelegate
+extension SCViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

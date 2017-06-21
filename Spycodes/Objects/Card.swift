@@ -12,14 +12,18 @@ class Card: NSObject {
         self.team = .red
     }
 
-    convenience init(word: String, selected: Bool, team: Team) {
+    convenience init(word: String,
+                     selected: Bool,
+                     team: Team) {
         self.init()
         self.word = word
         self.selected = selected
         self.team = team
     }
 
-    convenience init(word: String, selected: Bool, team: Int) {
+    convenience init(word: String,
+                     selected: Bool,
+                     team: Int) {
         self.init()
         self.word = word
         self.selected = selected
@@ -30,13 +34,24 @@ class Card: NSObject {
 
     // MARK: Coder
     func encodeWithCoder(_ aCoder: NSCoder) {
-        aCoder.encode(self.word, forKey: SCConstants.coding.word.rawValue)
-        aCoder.encode(self.selected, forKey: SCConstants.coding.selected.rawValue)
-        aCoder.encode(self.team.rawValue, forKey: SCConstants.coding.team.rawValue)
+        aCoder.encode(
+            self.word,
+            forKey: SCConstants.coding.word.rawValue
+        )
+        aCoder.encode(
+            self.selected,
+            forKey: SCConstants.coding.selected.rawValue
+        )
+        aCoder.encode(
+            self.team.rawValue,
+            forKey: SCConstants.coding.team.rawValue
+        )
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        if let word = aDecoder.decodeObject(forKey: SCConstants.coding.word.rawValue) as? String {
+        if let word = aDecoder.decodeObject(
+            forKey: SCConstants.coding.word.rawValue
+        ) as? String {
             let team = aDecoder.decodeInteger(
                 forKey: SCConstants.coding.team.rawValue
             )
@@ -45,7 +60,11 @@ class Card: NSObject {
                 forKey: SCConstants.coding.selected.rawValue
             )
 
-            self.init(word: word, selected: selected, team: team)
+            self.init(
+                word: word,
+                selected: selected,
+                team: team
+            )
         } else {
             self.init()
         }
@@ -58,6 +77,12 @@ class Card: NSObject {
 
     func setSelected() {
         self.selected = true
+
+        NotificationCenter.default.post(
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.updateCollectionView.rawValue),
+            object: self,
+            userInfo: nil
+        )
     }
 
     func isSelected() -> Bool {
@@ -84,4 +109,13 @@ class Card: NSObject {
             return "(R)"
         }
     }
+}
+
+// MARK: Operator
+func == (left: Card, right: Card) -> Bool {
+    return left.word == right.word && left.selected == right.selected && left.team == right.team
+}
+
+func != (left: Card, right: Card) -> Bool {
+    return left.word != right.word || left.selected != right.selected || left.team != right.team
 }

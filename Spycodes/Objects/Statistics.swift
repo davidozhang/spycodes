@@ -12,10 +12,16 @@ class Statistics: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.score, forKey: SCConstants.coding.score.rawValue)
+        aCoder.encode(
+            self.score,
+            forKey: SCConstants.coding.score.rawValue
+        )
         
         if let bestRecord = self.bestRecord {
-            aCoder.encode(bestRecord, forKey: SCConstants.coding.bestRecord.rawValue)
+            aCoder.encode(
+                bestRecord,
+                forKey: SCConstants.coding.bestRecord.rawValue
+            )
         }
     }
 
@@ -23,7 +29,9 @@ class Statistics: NSObject, NSCoding {
         self.init()
 
         if aDecoder.containsValue(forKey: SCConstants.coding.score.rawValue),
-            let score = aDecoder.decodeObject(forKey: SCConstants.coding.score.rawValue) as? [Int] {
+            let score = aDecoder.decodeObject(
+                forKey: SCConstants.coding.score.rawValue
+            ) as? [Int] {
             self.score = score
         }
 
@@ -53,7 +61,8 @@ class Statistics: NSObject, NSCoding {
     func setBestRecord(_ record: Int) {
         if self.bestRecord == nil {
             self.bestRecord = record
-        } else if let bestRecord = bestRecord, record > bestRecord {
+        } else if let bestRecord = bestRecord,
+                  record > bestRecord {
             self.bestRecord = record
         }
 

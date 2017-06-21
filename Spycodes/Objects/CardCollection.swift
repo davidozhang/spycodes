@@ -22,7 +22,11 @@ class CardCollection: NSObject, NSCoding {
         }
         for i in 0..<SCConstants.constant.cardCount.rawValue {
             self.cards.append(
-                Card(word: words[i], selected: false, team: self.key[i])
+                Card(
+                    word: words[i],
+                    selected: false,
+                    team: self.key[i]
+                )
             )
         }
     }
@@ -39,7 +43,10 @@ class CardCollection: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.cards, forKey: SCConstants.coding.cards.rawValue)
+        aCoder.encode(
+            self.cards,
+            forKey: SCConstants.coding.cards.rawValue
+        )
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
@@ -74,25 +81,40 @@ class CardCollection: NSObject, NSCoding {
         })
         opponentRemainingCards = opponentRemainingCards.shuffled
         if opponentRemainingCards.count > 0 {
-            let eliminatedCard = opponentRemainingCards[0]
-            for i in 0..<SCConstants.constant.cardCount.rawValue {
-                if self.cards[i].getWord() == eliminatedCard.getWord() {
-                    self.cards[i].setSelected()
+            let card = opponentRemainingCards[0]
+            self.eliminateCard(card: card)
+        }
+    }
 
-                    // TODO: Figure out how to send event without artificial delay
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-                        SCViewController.broadcastEvent(
-                            .selectCard,
-                            optional: [
-                                SCConstants.coding.name.rawValue: SCStrings.cpu,
-                                SCConstants.coding.word.rawValue: self.cards[i].getWord()
-                            ]
-                        )
-                    })
+    // MARK: Private
+    fileprivate func eliminateCard(card: Card) {
+        for i in 0..<SCConstants.constant.cardCount.rawValue {
+            if self.cards[i].getWord() == card.getWord() {
+                self.cards[i].setSelected()
 
-                    return
-                }
+                // TODO: Figure out how to send event without artificial delay
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                    SCViewController.broadcastEvent(
+                        .selectCard,
+                        optional: [
+                            SCConstants.coding.name.rawValue: SCStrings.player.cpu.rawValue,
+                            SCConstants.coding.card.rawValue: self.cards[i],
+                            SCConstants.coding.correct.rawValue: true
+                        ]
+                    )
+                })
+
+                return
             }
         }
     }
+}
+
+// MARK: Operator
+func == (left: CardCollection, right: CardCollection) -> Bool {
+    return left.cards == right.cards
+}
+
+func != (left: CardCollection, right: CardCollection) -> Bool {
+    return left.cards != right.cards
 }

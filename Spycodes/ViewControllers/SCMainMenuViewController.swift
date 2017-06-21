@@ -1,48 +1,24 @@
 import UIKit
 
 class SCMainMenuViewController: SCViewController {
-    fileprivate var timer: Foundation.Timer?
-
-    @IBOutlet weak var nightModeButton: UIButton!
-    @IBOutlet weak var linkCopiedLabel: SCStatusLabel!
-    @IBOutlet weak var swipeUpButton: UIButton!
-
     // MARK: Actions
     @IBAction func unwindToMainMenu(_ sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
     }
 
-    @IBAction func onSwipeUpTapped(_ sender: Any) {
-        self.swipeUp()
-    }
-
-    @IBAction func onShareTapped(_ sender: AnyObject) {
-        UIPasteboard.general.string = SCConstants.url.appStoreWeb.rawValue
-        self.linkCopiedLabel.isHidden = false
-        self.timer = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(SCMainMenuViewController.onTimeout), userInfo: nil, repeats: false)
-    }
-
-    @IBAction func onNightModeButtonTapped(_ sender: AnyObject) {
-        let oldSetting = SCSettingsManager.instance.isLocalSettingEnabled(.nightMode)
-        SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: !oldSetting)
-
-        DispatchQueue.main.async {
-            self.updateNightModeButton()
-            super.updateAppearance()
-        }
-    }
-
     @IBAction func onCreateGame(_ sender: AnyObject) {
         Player.instance.setIsHost(true)
-        self.performSegue(withIdentifier: SCConstants.identifier.playerName.rawValue, sender: self)
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.playerName.rawValue,
+            sender: self
+        )
     }
 
     @IBAction func onJoinGame(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: SCConstants.identifier.playerName.rawValue, sender: self)
-    }
-
-    @IBAction func onSettingsTapped(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: SCConstants.identifier.settings.rawValue, sender: self)
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.playerName.rawValue,
+            sender: self
+        )
     }
 
     deinit {
@@ -53,16 +29,14 @@ class SCMainMenuViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.hideSwipeUpButton()
-
         SCAppInfoManager.checkLatestAppVersion({
+            // If not on latest app version
             DispatchQueue.main.async {
-                // If app is not on latest app version
-                self.showSwipeUpButton()
-                self.swipeUp()
+                self.showUpdateAppAlert()
             }
         })
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -70,32 +44,10 @@ class SCMainMenuViewController: SCViewController {
         self.unwindableIdentifier = SCConstants.identifier.mainMenu.rawValue
         self.isRootViewController = true
 
-        self.linkCopiedLabel.isHidden = true
-
-        self.updateNightModeButton()
-
         Player.instance.reset()
         GameMode.instance.reset()
         Statistics.instance.reset()
         Room.instance.reset()
-
-        if !self.swipeUpButton.isHidden {
-            self.animateSwipeUpButton()
-        }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        self.timer?.invalidate()
-    }
-
-    override func applicationDidBecomeActive() {
-        if self.swipeUpButton.isHidden {
-            return
-        }
-
-        self.animateSwipeUpButton()
     }
 
     override func didReceiveMemoryWarning() {
@@ -104,58 +56,56 @@ class SCMainMenuViewController: SCViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super._prepareForSegue(segue, sender: sender)
-    }
 
-    // MARK: Swipe Gesture Recognizer
-    func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
-        self.swipeUp()
-    }
-
-    // MARK: Private
-    @objc
-    fileprivate func onTimeout() {
-        self.linkCopiedLabel.isHidden = true
-    }
-
-    fileprivate func updateNightModeButton() {
-        if SCSettingsManager.instance
-            .isLocalSettingEnabled(.nightMode) {
-            // Night Mode Enabled
-            self.nightModeButton.imageView?.image = UIImage(named: "Sun")
-        } else {
-            self.nightModeButton.imageView?.image = UIImage(named: "Moon")
+        // All segues identified here should be forward direction only
+        if let vc = segue.destination as? SCMainMenuModalViewController {
+            vc.delegate = self
         }
     }
 
-    fileprivate func showSwipeUpButton() {
-        self.swipeUpButton.isHidden = false
-        self.animateSwipeUpButton()
-
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(
-            target: self,
-            action: #selector(SCMainMenuViewController.respondToSwipeGesture(gesture:)))
-        swipeGestureRecognizer.direction = .up
-        self.view.addGestureRecognizer(swipeGestureRecognizer)
+    override func swipeUp() {
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.mainMenuModal.rawValue,
+            sender: self
+        )
     }
 
-    fileprivate func hideSwipeUpButton() {
-        self.swipeUpButton.isHidden = true
-    }
-
-    fileprivate func swipeUp() {
-        self.performSegue(withIdentifier: SCConstants.identifier.updateApp.rawValue, sender: self)
-    }
-
-    fileprivate func animateSwipeUpButton() {
-        self.swipeUpButton.alpha = 1.0
-        UIView.animate(
-            withDuration: super.animationDuration,
-            delay: 0.0,
-            options: [.autoreverse, .repeat, .allowUserInteraction],
-            animations: {
-                self.swipeUpButton.alpha = super.animationAlpha
-        },
+    // MARK: Private
+    fileprivate func showUpdateAppAlert() {
+        let alertController = UIAlertController(
+            title: SCStrings.header.updateApp.rawValue,
+            message: SCStrings.message.updatePrompt.rawValue,
+            preferredStyle: .alert
+        )
+        let confirmAction = UIAlertAction(
+            title: "Download",
+            style: .default,
+            handler: { (action: UIAlertAction) in
+                if let appStoreURL = URL(string: SCConstants.url.appStore.rawValue) {
+                    UIApplication.shared.openURL(appStoreURL)
+                }
+            }
+        )
+        alertController.addAction(confirmAction)
+        self.present(
+            alertController,
+            animated: true,
             completion: nil
         )
+    }
+}
+
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
+
+// MARK: SCMainMenuModalViewControllerDelegate
+extension SCMainMenuViewController: SCMainMenuModalViewControllerDelegate {
+    func onNightModeToggleChanged() {
+        DispatchQueue.main.async {
+            super.updateAppearance()
+        }
     }
 }

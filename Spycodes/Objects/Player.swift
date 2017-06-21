@@ -37,17 +37,39 @@ class Player: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.name, forKey: SCConstants.coding.name.rawValue)
-        aCoder.encode(self.uuid, forKey: SCConstants.coding.uuid.rawValue)
-        aCoder.encode(self.team.rawValue, forKey: SCConstants.coding.team.rawValue)
-        aCoder.encode(self.leader, forKey: SCConstants.coding.leader.rawValue)
-        aCoder.encode(self.host, forKey: SCConstants.coding.host.rawValue)
-        aCoder.encode(self.ready, forKey: SCConstants.coding.ready.rawValue)
+        aCoder.encode(
+            self.name,
+            forKey: SCConstants.coding.name.rawValue
+        )
+        aCoder.encode(
+            self.uuid,
+            forKey: SCConstants.coding.uuid.rawValue
+        )
+        aCoder.encode(
+            self.team.rawValue,
+            forKey: SCConstants.coding.team.rawValue
+        )
+        aCoder.encode(
+            self.leader,
+            forKey: SCConstants.coding.leader.rawValue
+        )
+        aCoder.encode(
+            self.host,
+            forKey: SCConstants.coding.host.rawValue
+        )
+        aCoder.encode(
+            self.ready,
+            forKey: SCConstants.coding.ready.rawValue
+        )
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        if let name = aDecoder.decodeObject(forKey: SCConstants.coding.name.rawValue) as? String,
-           let uuid = aDecoder.decodeObject(forKey: SCConstants.coding.uuid.rawValue) as? String {
+        if let name = aDecoder.decodeObject(
+               forKey: SCConstants.coding.name.rawValue
+           ) as? String,
+           let uuid = aDecoder.decodeObject(
+               forKey: SCConstants.coding.uuid.rawValue
+           ) as? String {
             let team = aDecoder.decodeInteger(
                 forKey: SCConstants.coding.team.rawValue
             )

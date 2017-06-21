@@ -4,7 +4,7 @@ import MultipeerConnectivity
 class Room: NSObject, NSCoding {
     static var instance = Room()
     static let accessCodeAllowedCharacters: NSString = "abcdefghijklmnopqrstuvwxyz"
-    fileprivate static let cpuUUID = SCStrings.cpu
+    fileprivate static let cpuUUID = SCStrings.player.cpu.rawValue
 
     fileprivate var players = [[Player](), [Player]()]
     fileprivate var connectedPeers = [MCPeerID: String]()
@@ -36,17 +36,39 @@ class Room: NSObject, NSCoding {
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.uuid, forKey: SCConstants.coding.uuid.rawValue)
-        aCoder.encode(self.players, forKey: SCConstants.coding.players.rawValue)
-        aCoder.encode(self.connectedPeers, forKey: SCConstants.coding.connectedPeers.rawValue)
-        aCoder.encode(self.accessCode, forKey: SCConstants.coding.accessCode.rawValue)
+        aCoder.encode(
+            self.uuid,
+            forKey: SCConstants.coding.uuid.rawValue
+        )
+        aCoder.encode(
+            self.players,
+            forKey: SCConstants.coding.players.rawValue
+        )
+        aCoder.encode(
+            self.connectedPeers,
+            forKey: SCConstants.coding.connectedPeers.rawValue
+        )
+        aCoder.encode(
+            self.accessCode,
+            forKey: SCConstants.coding.accessCode.rawValue
+        )
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        guard let uuid = aDecoder.decodeObject(forKey: SCConstants.coding.uuid.rawValue) as? String,
-              let players = aDecoder.decodeObject(forKey: SCConstants.coding.players.rawValue) as? [[Player]],
-              let connectedPeers = aDecoder.decodeObject(forKey: SCConstants.coding.connectedPeers.rawValue) as? [MCPeerID: String],
-              let accessCode = aDecoder.decodeObject(forKey: SCConstants.coding.accessCode.rawValue) as? String else { return nil }
+        guard let uuid = aDecoder.decodeObject(
+                  forKey: SCConstants.coding.uuid.rawValue
+              ) as? String,
+              let players = aDecoder.decodeObject(
+                  forKey: SCConstants.coding.players.rawValue
+              ) as? [[Player]],
+              let connectedPeers = aDecoder.decodeObject(
+                  forKey: SCConstants.coding.connectedPeers.rawValue
+              ) as? [MCPeerID: String],
+              let accessCode = aDecoder.decodeObject(
+                  forKey: SCConstants.coding.accessCode.rawValue
+              ) as? String else {
+            return nil
+        }
 
         self.init(
             uuid: uuid,
@@ -158,7 +180,7 @@ class Room: NSObject, NSCoding {
 
     func addCPUPlayer() {
         let cpu = Player(
-            name: SCStrings.cpu,
+            name: SCStrings.player.cpu.rawValue,
             uuid: Room.cpuUUID,
             team: .blue,
             leader: true,

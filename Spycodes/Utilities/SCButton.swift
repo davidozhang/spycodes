@@ -7,11 +7,11 @@ class SCButton: UIButton {
         super.init(coder: aDecoder)
         self.contentEdgeInsets = UIEdgeInsetsMake(10, 30, 10, 30)
         self.setTitleColor(
-            UIColor.spycodesGrayColor(),
+            .spycodesGrayColor(),
             for: UIControlState()
         )
         self.setTitleColor(
-            UIColor.white,
+            .white,
             for: .highlighted
         )
         self.titleLabel?.font = SCFonts.regularSizeFont(.regular)
@@ -23,13 +23,13 @@ class SCButton: UIButton {
     override var isHighlighted: Bool {
         didSet {
             if isHighlighted {
-                self.backgroundColor = UIColor.spycodesGrayColor()
+                self.backgroundColor = .spycodesGrayColor()
                 if !self.alreadyHighlighted {
                     SCAudioManager.playClickSound()
                     self.alreadyHighlighted = true
                 }
             } else {
-                self.backgroundColor = UIColor.clear
+                self.backgroundColor = .clear
                 self.alreadyHighlighted = false
             }
         }

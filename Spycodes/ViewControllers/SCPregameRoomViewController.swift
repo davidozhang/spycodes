@@ -6,8 +6,8 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sectionLabels = [
-        SCStrings.teamRed,
-        SCStrings.teamBlue
+        SCStrings.section.teamRed.rawValue,
+        SCStrings.section.teamBlue.rawValue
     ]
 
     fileprivate var readyButtonState: ReadyButtonState = .notReady
@@ -17,7 +17,6 @@ class SCPregameRoomViewController: SCViewController {
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var accessCodeLabel: SCNavigationBarLabel!
     @IBOutlet weak var readyButton: SCButton!
-    @IBOutlet weak var swipeUpButton: UIButton!
 
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         self.swipeRight()
@@ -31,10 +30,6 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         self.updateReadyButton()
-    }
-
-    @IBAction func onSwipeUpTapped(_ sender: Any) {
-        self.swipeUp()
     }
 
     @IBAction func unwindToPregameRoom(_ segue: UIStoryboardSegue) {
@@ -56,25 +51,18 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         let attributedString = NSMutableAttributedString(
-            string: SCStrings.accessCodeHeader + Room.instance.getAccessCode()
+            string: SCStrings.header.accessCode.rawValue + Room.instance.getAccessCode()
         )
         attributedString.addAttribute(
             NSFontAttributeName,
             value: SCFonts.regularSizeFont(.bold) ?? 0,
             range: NSMakeRange(
-                SCStrings.accessCodeHeader.characters.count,
+                SCStrings.header.accessCode.rawValue.characters.count,
                 SCConstants.constant.accessCodeLength.rawValue
             )
         )
 
         self.accessCodeLabel.attributedText = attributedString
-
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(
-            target: self,
-            action: #selector(SCPregameRoomViewController.respondToSwipeGesture(gesture:))
-        )
-        swipeGestureRecognizer.direction = .up
-        self.view.addGestureRecognizer(swipeGestureRecognizer)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -117,7 +105,6 @@ class SCPregameRoomViewController: SCViewController {
             repeats: true
         )
 
-        self.animateSwipeUpButton()
         self.resetReadyButton()
 
         Timeline.instance.reset()
@@ -141,10 +128,6 @@ class SCPregameRoomViewController: SCViewController {
         self.tableView.delegate = nil
     }
 
-    override func applicationDidBecomeActive() {
-        self.animateSwipeUpButton()
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -159,14 +142,24 @@ class SCPregameRoomViewController: SCViewController {
         }
     }
 
-    // MARK: Swipe
-    func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
+    override func applicationDidBecomeActive() {
+        self.animateReadyButtonIfNeeded()
+    }
+
+    override func applicationWillResignActive() {
         self.resetReadyButton()
-        self.swipeUp()
     }
 
     override func swipeRight() {
         self.returnToMainMenu(reason: nil)
+    }
+
+    override func swipeUp() {
+        self.resetReadyButton()
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.pregameModal.rawValue,
+            sender: self
+        )
     }
 
     // MARK: Private
@@ -200,11 +193,13 @@ class SCPregameRoomViewController: SCViewController {
             UIView.performWithoutAnimation {
                 self.readyButton.setTitle("Ready", for: .normal)
             }
+            self.animateReadyButtonIfNeeded()
         } else {
             self.broadcastEvent(.ready)
             UIView.performWithoutAnimation {
                 self.readyButton.setTitle("Cancel", for: .normal)
             }
+            self.stopReadyButtonAnimation()
         }
 
         self.tableView.reloadData()
@@ -219,26 +214,12 @@ class SCPregameRoomViewController: SCViewController {
         self.updateReadyButton()
     }
 
-    fileprivate func swipeUp() {
-        self.performSegue(withIdentifier: SCConstants.identifier.pregameModal.rawValue, sender: self)
-    }
-
-    fileprivate func animateSwipeUpButton() {
-        self.swipeUpButton.alpha = 1.0
-        UIView.animate(
-            withDuration: super.animationDuration,
-            delay: 0.0,
-            options: [.autoreverse, .repeat, .allowUserInteraction],
-            animations: {
-                self.swipeUpButton.alpha = super.animationAlpha
-        },
-            completion: nil
-        )
-    }
-
     fileprivate func goToGame() {
         DispatchQueue.main.async(execute: {
-            self.performSegue(withIdentifier: SCConstants.identifier.gameRoom.rawValue, sender: self)
+            self.performSegue(
+                withIdentifier: SCConstants.identifier.gameRoom.rawValue,
+                sender: self
+            )
         })
     }
 
@@ -257,7 +238,7 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         let alertController = UIAlertController(
-            title: SCStrings.returningToMainMenuHeader,
+            title: SCStrings.header.returningToMainMenu.rawValue,
             message: reason,
             preferredStyle: .alert
         )
@@ -280,7 +261,7 @@ class SCPregameRoomViewController: SCViewController {
 
     fileprivate func checkRoom() {
         if !Room.instance.hasHost() {
-            self.returnToMainMenu(reason: SCStrings.hostDisconnected)
+            self.returnToMainMenu(reason: SCStrings.message.hostDisconnected.rawValue)
         }
 
         if !Player.instance.isHost() {
@@ -311,6 +292,28 @@ class SCPregameRoomViewController: SCViewController {
         SCMultipeerManager.instance.broadcast(Round.instance)
 
         self.goToGame()
+    }
+
+    fileprivate func animateReadyButtonIfNeeded() {
+        if self.readyButtonState == .ready {
+            return
+        }
+
+        self.readyButton.alpha = 1.0
+        UIView.animate(
+            withDuration: super.animationDuration,
+            delay: 0.0,
+            options: [.autoreverse, .repeat, .allowUserInteraction],
+            animations: {
+                self.readyButton.alpha = super.animationAlpha
+        },
+            completion: nil
+        )
+    }
+
+    fileprivate func stopReadyButtonAnimation() {
+        self.readyButton.layer.removeAllAnimations()
+        self.readyButton.alpha = 1.0
     }
 }
 
@@ -469,7 +472,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                     return SCTableViewCell()
             }
 
-            cell.primaryLabel.text = SCStrings.teamEmptyState
+            cell.primaryLabel.text = SCStrings.primaryLabel.teamEmptyState.rawValue
 
             return cell
         }
@@ -490,7 +493,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         cell.uuid = playerAtIndex.getUUID()
         cell.delegate = self
 
-        cell.teamIndicatorView.backgroundColor = UIColor.colorForTeam(playerAtIndex.getTeam())
+        cell.teamIndicatorView.backgroundColor = .colorForTeam(playerAtIndex.getTeam())
 
         if playerAtIndex.isReady() {
             cell.showReadyStatus()
