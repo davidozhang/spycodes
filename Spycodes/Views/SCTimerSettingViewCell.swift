@@ -19,17 +19,6 @@ class SCTimerSettingViewCell: SCTableViewCell {
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
 
-        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
-            self.pickerView.backgroundColor = .darkTintColor()
-            self.toolBar.barStyle = .blackTranslucent
-        } else {
-            self.pickerView.backgroundColor = .lightTintColor()
-            self.toolBar.barStyle = .default
-        }
-
-        self.toolBar.isTranslucent = true
-        self.toolBar.sizeToFit()
-
         let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(
             title: SCStrings.button.cancel.rawValue,
@@ -43,6 +32,17 @@ class SCTimerSettingViewCell: SCTableViewCell {
             target: self,
             action: #selector(SCTimerSettingViewCell.onTimerDurationDone)
         )
+
+        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+            self.pickerView.backgroundColor = .darkTintColor()
+            self.toolBar.barStyle = .blackTranslucent
+        } else {
+            self.pickerView.backgroundColor = .lightTintColor()
+            self.toolBar.barStyle = .default
+        }
+
+        self.toolBar.isTranslucent = true
+        self.toolBar.sizeToFit()
 
         toolBar.setItems(
             [cancelButton, flexButton, doneButton],
