@@ -44,6 +44,9 @@ class SCTimerSettingViewCell: SCTableViewCell {
         )
         toolBar.isUserInteractionEnabled = true
 
+        self.timerDurationTextField.font = SCFonts.intermediateSizeFont(.medium)
+        self.timerDurationTextField.sizeToFit()
+
         self.timerDurationTextField.delegate = self
         self.timerDurationTextField.tintColor = .clear
         self.timerDurationTextField.inputView = self.pickerView
