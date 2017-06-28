@@ -106,12 +106,18 @@ extension SCTimerSettingViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
         }
     }
 
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        var baseString: String?
+
         if row == SCTimerSettingViewCell.disabledOptionRow {
-            return SCStrings.timer.disabled.rawValue
+            baseString = SCStrings.timer.disabled.rawValue
+        } else {
+            baseString = String(format: SCStrings.timer.minutes.rawValue, row)
         }
 
-        return String(format: SCStrings.timer.minutes.rawValue, row)
+        return SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) ?
+               NSAttributedString(string: baseString!, attributes: [NSForegroundColorAttributeName: UIColor.white]) :
+               NSAttributedString(string: baseString!, attributes: nil)
     }
 }
 
