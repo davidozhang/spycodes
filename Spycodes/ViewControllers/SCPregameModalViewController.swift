@@ -84,11 +84,13 @@ class SCPregameModalViewController: SCModalViewController {
             let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let rect = frame.cgRectValue
             self.tableViewBottomSpaceConstraint.constant += rect.height
+            super.showDimView()
         }
     }
 
     override func keyboardWillHide(_ notification: Notification) {
         self.tableViewBottomSpaceConstraint.constant = SCViewController.tableViewMargin
+        super.hideDimView()
     }
 
     // MARK: SCModalViewController Overrides
