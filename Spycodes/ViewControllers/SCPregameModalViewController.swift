@@ -261,6 +261,8 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawValue
                 cell.delegate = self
 
+                cell.synchronizeSetting()
+
                 return cell
             default:
                 return SCTableViewCell()

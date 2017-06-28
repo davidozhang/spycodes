@@ -50,6 +50,10 @@ class SCTimerSettingViewCell: SCTableViewCell {
         self.timerDurationTextField.inputAccessoryView = toolBar
         self.accessoryView = self.timerDurationTextField
 
+        self.synchronizeSetting()
+    }
+
+    func synchronizeSetting() {
         if Timer.instance.isEnabled() {
             let minutes = Timer.instance.getDurationInMinutes()
             self.timerDurationTextField.text = String(format: SCStrings.timer.minutes.rawValue, minutes)
@@ -68,6 +72,8 @@ class SCTimerSettingViewCell: SCTableViewCell {
         } else {
             Timer.instance.setDuration(durationInMinutes: selectedRow)
         }
+
+        SCMultipeerManager.instance.broadcast(Timer.instance)
 
         self.delegate?.onTimerDurationDismissed()
     }
