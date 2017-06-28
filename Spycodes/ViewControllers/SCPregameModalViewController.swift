@@ -31,12 +31,12 @@ class SCPregameModalViewController: SCModalViewController {
     ]
 
     fileprivate var scrolled = false
+    fileprivate var inputMode = false
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet weak var upArrowView: UIImageView!
 
     deinit {
         print("[DEINIT] " + NSStringFromClass(type(of: self)))
@@ -67,10 +67,6 @@ class SCPregameModalViewController: SCModalViewController {
             userInfo: nil,
             repeats: true
         )
-
-        if self.tableView.contentSize.height <= self.tableView.bounds.height {
-            self.upArrowView.isHidden = true
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,6 +76,15 @@ class SCPregameModalViewController: SCModalViewController {
         self.tableView.delegate = nil
 
         self.refreshTimer?.invalidate()
+    }
+
+    // MARK: SCViewController Overrides
+    override func keyboardWillShow(_ notification: Notification) {
+        super.showDimView()
+    }
+
+    override func keyboardWillHide(_ notification: Notification) {
+        super.hideDimView()
     }
 
     // MARK: SCModalViewController Overrides
@@ -95,6 +100,10 @@ class SCPregameModalViewController: SCModalViewController {
     @objc
     fileprivate func refreshView() {
         DispatchQueue.main.async {
+            if self.inputMode {
+                return
+            }
+
             self.tableView.reloadData()
         }
     }
@@ -239,15 +248,16 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 return cell
             case GameSetting.timer.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.timerToggleViewCell.rawValue
-                    ) as? SCToggleViewCell else {
+                    withIdentifier: SCConstants.identifier.timerSettingViewCell.rawValue
+                    ) as? SCTimerSettingViewCell else {
                         return SCTableViewCell()
                 }
 
-                cell.synchronizeToggle()
                 cell.primaryLabel.text = self.settingsLabels[.timer]
                 cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawValue
                 cell.delegate = self
+
+                cell.synchronizeSetting()
 
                 return cell
             default:
@@ -259,12 +269,6 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.tableView.contentOffset.y <= 0 {
-            self.upArrowView.isHidden = false
-        } else {
-            self.upArrowView.isHidden = true
-        }
-
         if self.tableView.contentOffset.y > 0 {
             if self.scrolled {
                 return
@@ -277,7 +281,9 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             self.scrolled = false
         }
 
-        self.tableView.reloadData()
+        if !self.inputMode {
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -305,20 +311,19 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
 
                 SCMultipeerManager.instance.broadcast(GameMode.instance)
                 SCMultipeerManager.instance.broadcast(Room.instance)
-            case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
-                SCSettingsManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
-            case SCConstants.identifier.timerToggleViewCell.rawValue:
-                Timer.instance.setEnabled(enabled)
-
-                SCMultipeerManager.instance.broadcast(Timer.instance)
-            case SCConstants.identifier.nightModeToggleViewCell.rawValue:
-                SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
-                super.updateModalAppearance()
-                self.tableView.reloadData()
-                self.delegate?.onNightModeToggleChanged()
             default:
                 break
             }
         }
+    }
+}
+
+extension SCPregameModalViewController: SCTimerSettingViewCellDelegate {
+    func onTimerDurationTapped() {
+        self.inputMode = true
+    }
+
+    func onTimerDurationDismissed() {
+        self.inputMode = false
     }
 }

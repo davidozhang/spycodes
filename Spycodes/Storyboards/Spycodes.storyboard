@@ -993,7 +993,7 @@
                                             <outlet property="secondaryLabel" destination="jZN-JQ-tUk" id="AWM-7f-HLy"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-toggle-view-cell" rowHeight="58" id="jHU-a4-F06" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-setting-view-cell" rowHeight="58" id="jHU-a4-F06" userLabel="timer-setting-view-cell" customClass="SCTimerSettingViewCell" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="262" width="1024" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jHU-a4-F06" id="JLi-ky-n7C">
@@ -1015,6 +1015,13 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2 min" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ldI-iC-tGr" userLabel="Timer Duration" customClass="SCTextField" customModule="Spycodes" customModuleProvider="target">
+                                                            <rect key="frame" x="936" y="14.5" width="68" height="17"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -1037,6 +1044,7 @@
                                         <connections>
                                             <outlet property="primaryLabel" destination="UwW-8T-81L" id="1zf-xx-3R2"/>
                                             <outlet property="secondaryLabel" destination="Iix-rb-01C" id="31f-ZC-EOk"/>
+                                            <outlet property="timerDurationTextField" destination="ldI-iC-tGr" id="x0K-u8-HfO"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="accessibility-toggle-view-cell" id="DhJ-T3-P3P" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
@@ -1064,25 +1072,16 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Up-Arrow-Circled" translatesAutoresizingMaskIntoConstraints="NO" id="hl0-i0-9Wy">
-                                <rect key="frame" x="499.5" y="1306" width="25" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="Bqd-Af-C62"/>
-                                    <constraint firstAttribute="height" constant="25" id="YpT-Mc-WG2"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FjP-pl-Sjb" firstAttribute="centerX" secondItem="lxN-QK-ytI" secondAttribute="centerX" id="0Ap-xU-CO1"/>
                             <constraint firstItem="fla-Z8-sHI" firstAttribute="top" secondItem="FjP-pl-Sjb" secondAttribute="bottom" constant="8" id="1Dl-fq-TiZ"/>
                             <constraint firstItem="9Q7-RG-wBr" firstAttribute="top" secondItem="lxN-QK-ytI" secondAttribute="top" constant="20" id="Gva-SO-KcV"/>
-                            <constraint firstItem="hl0-i0-9Wy" firstAttribute="centerX" secondItem="lxN-QK-ytI" secondAttribute="centerX" id="Jhv-hv-vOG"/>
                             <constraint firstItem="fla-Z8-sHI" firstAttribute="top" secondItem="9Q7-RG-wBr" secondAttribute="bottom" constant="8" id="ORA-Wn-J2d"/>
                             <constraint firstAttribute="trailing" secondItem="9Q7-RG-wBr" secondAttribute="trailing" id="RcY-gP-jRM"/>
                             <constraint firstItem="MLa-iE-UmV" firstAttribute="top" secondItem="fla-Z8-sHI" secondAttribute="bottom" id="SWn-Tk-HpF"/>
                             <constraint firstAttribute="trailing" secondItem="fla-Z8-sHI" secondAttribute="trailing" id="Sxy-LK-2FM"/>
-                            <constraint firstItem="MLa-iE-UmV" firstAttribute="top" secondItem="hl0-i0-9Wy" secondAttribute="bottom" constant="35" id="Y4F-9I-OKK"/>
                             <constraint firstItem="FjP-pl-Sjb" firstAttribute="top" secondItem="lxN-QK-ytI" secondAttribute="top" constant="24" id="fFl-S5-QCV"/>
                             <constraint firstItem="fla-Z8-sHI" firstAttribute="leading" secondItem="lxN-QK-ytI" secondAttribute="leading" id="kyE-Ob-Qov"/>
                             <constraint firstItem="9Q7-RG-wBr" firstAttribute="leading" secondItem="lxN-QK-ytI" secondAttribute="leading" id="vhB-rC-6Kb"/>
@@ -1095,7 +1094,6 @@
                         <outlet property="tableViewLeadingSpaceConstraint" destination="kyE-Ob-Qov" id="gar-TI-Kyx"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="Sxy-LK-2FM" id="cR3-YB-TcZ"/>
                         <outlet property="topBarView" destination="9Q7-RG-wBr" id="5dy-fY-WRM"/>
-                        <outlet property="upArrowView" destination="hl0-i0-9Wy" id="DsQ-eW-AXm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tSP-Yz-KGi" userLabel="First Responder" sceneMemberID="firstResponder"/>

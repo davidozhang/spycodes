@@ -1,7 +1,9 @@
 class SCStrings {
     enum button: String {
+        case cancel = "Cancel"
         case confirm = "Confirm"
         case dismiss = "Dismiss"
+        case done = "Done"
         case endRound = "End Round"
         case gameAborted = "Aborted"
         case gameOver = "Game Over"
@@ -92,7 +94,7 @@ class SCStrings {
 
     enum secondaryLabel: String {
         case minigame = "2-3 players play as a team against the CPU."
-        case timer = "Limit each round to 2 minutes."
+        case timer = "Set a time duration for each round."
     }
 
     enum section: String {
@@ -136,7 +138,9 @@ class SCStrings {
     }
 
     enum timer: String {
+        case disabled = "None"
         case format = "%d:%02d"
+        case minutes = "%d min"
         case stopped = "--:--"
     }
 }

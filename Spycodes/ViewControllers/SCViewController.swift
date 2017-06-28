@@ -201,6 +201,7 @@ class SCViewController: UIViewController {
 
     func updateAppearance() {
         let textFieldAppearance = UITextField.appearance()
+        let toolBarAppearance = UIToolbar.appearance()
 
         if let view = self.view.viewWithTag(SCConstants.tag.modalPeekBlurView.rawValue) {
             view.removeFromSuperview()
@@ -208,6 +209,7 @@ class SCViewController: UIViewController {
 
         if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
             textFieldAppearance.keyboardAppearance = .dark
+            toolBarAppearance.tintColor = .white
             self.view.backgroundColor = .black
 
             if let _ = self.modalPeekView {
@@ -218,6 +220,7 @@ class SCViewController: UIViewController {
             }
         } else {
             textFieldAppearance.keyboardAppearance = .light
+            toolBarAppearance.tintColor = .black
             self.view.backgroundColor = .white
 
             if let _ = self.modalPeekView {
