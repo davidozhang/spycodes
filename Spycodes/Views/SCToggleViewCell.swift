@@ -41,8 +41,6 @@ class SCToggleViewCell: SCTableViewCell {
                 toggleSwitch.isOn = SCSettingsManager.instance.isLocalSettingEnabled(.accessibility)
             case SCConstants.identifier.minigameToggleViewCell.rawValue:
                 toggleSwitch.isOn = GameMode.instance.getMode() == .miniGame
-            case SCConstants.identifier.timerSettingViewCell.rawValue:
-                toggleSwitch.isOn = Timer.instance.isEnabled()
             default:
                 break
             }

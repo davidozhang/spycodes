@@ -80,16 +80,10 @@ class SCPregameModalViewController: SCModalViewController {
 
     // MARK: SCViewController Overrides
     override func keyboardWillShow(_ notification: Notification) {
-        if let userInfo = notification.userInfo,
-            let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            let rect = frame.cgRectValue
-            self.tableViewBottomSpaceConstraint.constant += rect.height
-            super.showDimView()
-        }
+        super.showDimView()
     }
 
     override func keyboardWillHide(_ notification: Notification) {
-        self.tableViewBottomSpaceConstraint.constant = SCViewController.tableViewMargin
         super.hideDimView()
     }
 
@@ -317,17 +311,6 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
 
                 SCMultipeerManager.instance.broadcast(GameMode.instance)
                 SCMultipeerManager.instance.broadcast(Room.instance)
-            case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
-                SCSettingsManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
-            case SCConstants.identifier.timerSettingViewCell.rawValue:
-                Timer.instance.setEnabled(enabled)
-
-                SCMultipeerManager.instance.broadcast(Timer.instance)
-            case SCConstants.identifier.nightModeToggleViewCell.rawValue:
-                SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
-                super.updateModalAppearance()
-                self.tableView.reloadData()
-                self.delegate?.onNightModeToggleChanged()
             default:
                 break
             }

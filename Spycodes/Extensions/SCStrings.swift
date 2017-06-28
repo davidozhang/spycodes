@@ -94,7 +94,7 @@ class SCStrings {
 
     enum secondaryLabel: String {
         case minigame = "2-3 players play as a team against the CPU."
-        case timer = "Set time duration for each round."
+        case timer = "Set a time duration for each round."
     }
 
     enum section: String {
