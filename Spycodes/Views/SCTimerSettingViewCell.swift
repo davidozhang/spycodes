@@ -11,6 +11,7 @@ class SCTimerSettingViewCell: SCTableViewCell {
 
     static let disabledOptionRow = 0
     let pickerView = UIPickerView()
+    let toolBar = UIToolbar()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,10 +19,16 @@ class SCTimerSettingViewCell: SCTableViewCell {
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
 
-        let toolBar = UIToolbar()
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.sizeToFit()
+        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+            self.pickerView.backgroundColor = .darkTintColor()
+            self.toolBar.barStyle = .blackTranslucent
+        } else {
+            self.pickerView.backgroundColor = .lightTintColor()
+            self.toolBar.barStyle = .default
+        }
+
+        self.toolBar.isTranslucent = true
+        self.toolBar.sizeToFit()
 
         let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(
