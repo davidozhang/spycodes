@@ -31,6 +31,7 @@ class SCPregameModalViewController: SCModalViewController {
     ]
 
     fileprivate var scrolled = false
+    fileprivate var inputMode = false
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
@@ -82,6 +83,19 @@ class SCPregameModalViewController: SCModalViewController {
         self.refreshTimer?.invalidate()
     }
 
+    // MARK: SCViewController Overrides
+    override func keyboardWillShow(_ notification: Notification) {
+        if let userInfo = notification.userInfo,
+            let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let rect = frame.cgRectValue
+            self.tableViewBottomSpaceConstraint.constant += rect.height
+        }
+    }
+
+    override func keyboardWillHide(_ notification: Notification) {
+        self.tableViewBottomSpaceConstraint.constant = SCViewController.tableViewMargin
+    }
+
     // MARK: SCModalViewController Overrides
     override func onDismissal() {
         if self.tableView.contentOffset.y > 0 {
@@ -95,6 +109,10 @@ class SCPregameModalViewController: SCModalViewController {
     @objc
     fileprivate func refreshView() {
         DispatchQueue.main.async {
+            if self.inputMode {
+                return
+            }
+
             self.tableView.reloadData()
         }
     }
@@ -239,12 +257,11 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 return cell
             case GameSetting.timer.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.timerToggleViewCell.rawValue
-                    ) as? SCToggleViewCell else {
+                    withIdentifier: SCConstants.identifier.timerSettingViewCell.rawValue
+                    ) as? SCTimerSettingViewCell else {
                         return SCTableViewCell()
                 }
 
-                cell.synchronizeToggle()
                 cell.primaryLabel.text = self.settingsLabels[.timer]
                 cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawValue
                 cell.delegate = self
@@ -277,7 +294,9 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             self.scrolled = false
         }
 
-        self.tableView.reloadData()
+        if !self.inputMode {
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -307,7 +326,7 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
                 SCMultipeerManager.instance.broadcast(Room.instance)
             case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
                 SCSettingsManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
-            case SCConstants.identifier.timerToggleViewCell.rawValue:
+            case SCConstants.identifier.timerSettingViewCell.rawValue:
                 Timer.instance.setEnabled(enabled)
 
                 SCMultipeerManager.instance.broadcast(Timer.instance)
@@ -320,5 +339,15 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
                 break
             }
         }
+    }
+}
+
+extension SCPregameModalViewController: SCTimerSettingViewCellDelegate {
+    func onTimerDurationTapped() {
+        self.inputMode = true
+    }
+
+    func onTimerDurationDismissed() {
+        self.inputMode = false
     }
 }

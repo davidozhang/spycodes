@@ -993,7 +993,7 @@
                                             <outlet property="secondaryLabel" destination="jZN-JQ-tUk" id="AWM-7f-HLy"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-toggle-view-cell" rowHeight="58" id="jHU-a4-F06" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-setting-view-cell" rowHeight="58" id="jHU-a4-F06" userLabel="timer-setting-view-cell" customClass="SCTimerSettingViewCell" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="262" width="1024" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jHU-a4-F06" id="JLi-ky-n7C">
@@ -1015,6 +1015,13 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2 min" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ldI-iC-tGr" userLabel="Timer Duration" customClass="SCTextField" customModule="Spycodes" customModuleProvider="target">
+                                                            <rect key="frame" x="936" y="14.5" width="68" height="17"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -1037,6 +1044,7 @@
                                         <connections>
                                             <outlet property="primaryLabel" destination="UwW-8T-81L" id="1zf-xx-3R2"/>
                                             <outlet property="secondaryLabel" destination="Iix-rb-01C" id="31f-ZC-EOk"/>
+                                            <outlet property="timerDurationTextField" destination="ldI-iC-tGr" id="x0K-u8-HfO"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="accessibility-toggle-view-cell" id="DhJ-T3-P3P" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
