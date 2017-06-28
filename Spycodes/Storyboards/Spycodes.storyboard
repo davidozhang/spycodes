@@ -1072,25 +1072,16 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Up-Arrow-Circled" translatesAutoresizingMaskIntoConstraints="NO" id="hl0-i0-9Wy">
-                                <rect key="frame" x="499.5" y="1306" width="25" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="Bqd-Af-C62"/>
-                                    <constraint firstAttribute="height" constant="25" id="YpT-Mc-WG2"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FjP-pl-Sjb" firstAttribute="centerX" secondItem="lxN-QK-ytI" secondAttribute="centerX" id="0Ap-xU-CO1"/>
                             <constraint firstItem="fla-Z8-sHI" firstAttribute="top" secondItem="FjP-pl-Sjb" secondAttribute="bottom" constant="8" id="1Dl-fq-TiZ"/>
                             <constraint firstItem="9Q7-RG-wBr" firstAttribute="top" secondItem="lxN-QK-ytI" secondAttribute="top" constant="20" id="Gva-SO-KcV"/>
-                            <constraint firstItem="hl0-i0-9Wy" firstAttribute="centerX" secondItem="lxN-QK-ytI" secondAttribute="centerX" id="Jhv-hv-vOG"/>
                             <constraint firstItem="fla-Z8-sHI" firstAttribute="top" secondItem="9Q7-RG-wBr" secondAttribute="bottom" constant="8" id="ORA-Wn-J2d"/>
                             <constraint firstAttribute="trailing" secondItem="9Q7-RG-wBr" secondAttribute="trailing" id="RcY-gP-jRM"/>
                             <constraint firstItem="MLa-iE-UmV" firstAttribute="top" secondItem="fla-Z8-sHI" secondAttribute="bottom" id="SWn-Tk-HpF"/>
                             <constraint firstAttribute="trailing" secondItem="fla-Z8-sHI" secondAttribute="trailing" id="Sxy-LK-2FM"/>
-                            <constraint firstItem="MLa-iE-UmV" firstAttribute="top" secondItem="hl0-i0-9Wy" secondAttribute="bottom" constant="35" id="Y4F-9I-OKK"/>
                             <constraint firstItem="FjP-pl-Sjb" firstAttribute="top" secondItem="lxN-QK-ytI" secondAttribute="top" constant="24" id="fFl-S5-QCV"/>
                             <constraint firstItem="fla-Z8-sHI" firstAttribute="leading" secondItem="lxN-QK-ytI" secondAttribute="leading" id="kyE-Ob-Qov"/>
                             <constraint firstItem="9Q7-RG-wBr" firstAttribute="leading" secondItem="lxN-QK-ytI" secondAttribute="leading" id="vhB-rC-6Kb"/>
@@ -1103,7 +1094,6 @@
                         <outlet property="tableViewLeadingSpaceConstraint" destination="kyE-Ob-Qov" id="gar-TI-Kyx"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="Sxy-LK-2FM" id="cR3-YB-TcZ"/>
                         <outlet property="topBarView" destination="9Q7-RG-wBr" id="5dy-fY-WRM"/>
-                        <outlet property="upArrowView" destination="hl0-i0-9Wy" id="DsQ-eW-AXm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tSP-Yz-KGi" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -18,12 +18,37 @@ class SCTimerSettingViewCell: SCTableViewCell {
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
 
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.sizeToFit()
+
+        let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(
+            title: SCStrings.button.done.rawValue,
+            style: .done,
+            target: self,
+            action: #selector(SCTimerSettingViewCell.onTimerDurationDone)
+        )
+
+        toolBar.setItems(
+            [flexButton, doneButton],
+            animated: false
+        )
+        toolBar.isUserInteractionEnabled = true
+
         self.timerDurationTextField.delegate = self
         self.timerDurationTextField.tintColor = .clear
         self.timerDurationTextField.inputView = self.pickerView
+        self.timerDurationTextField.inputAccessoryView = toolBar
         self.accessoryView = self.timerDurationTextField
 
         // TODO: Synchronize with Timer instance
+    }
+
+    @objc
+    fileprivate func onTimerDurationDone() {
+        self.delegate?.onTimerDurationDismissed()
     }
 }
 
