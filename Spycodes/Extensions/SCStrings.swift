@@ -1,5 +1,6 @@
 class SCStrings {
     enum button: String {
+        case cancel = "Cancel"
         case confirm = "Confirm"
         case dismiss = "Dismiss"
         case done = "Done"

@@ -31,6 +31,12 @@ class SCTimerSettingViewCell: SCTableViewCell {
         self.toolBar.sizeToFit()
 
         let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(
+            title: SCStrings.button.cancel.rawValue,
+            style: .plain,
+            target: self,
+            action: #selector(SCTimerSettingViewCell.onTimerDurationCancelled)
+        )
         let doneButton = UIBarButtonItem(
             title: SCStrings.button.done.rawValue,
             style: .done,
@@ -39,7 +45,7 @@ class SCTimerSettingViewCell: SCTableViewCell {
         )
 
         toolBar.setItems(
-            [flexButton, doneButton],
+            [cancelButton, flexButton, doneButton],
             animated: false
         )
         toolBar.isUserInteractionEnabled = true
@@ -68,6 +74,11 @@ class SCTimerSettingViewCell: SCTableViewCell {
     }
 
     @objc
+    fileprivate func onTimerDurationCancelled() {
+        self.resignTextField()
+    }
+
+    @objc
     fileprivate func onTimerDurationDone() {
         let selectedRow = self.pickerView.selectedRow(inComponent: 0)
         if selectedRow == SCTimerSettingViewCell.disabledOptionRow {
@@ -77,7 +88,12 @@ class SCTimerSettingViewCell: SCTableViewCell {
         }
 
         SCMultipeerManager.instance.broadcast(Timer.instance)
+        self.resignTextField()
+    }
 
+    fileprivate func resignTextField() {
+        self.synchronizeSetting()
+        self.timerDurationTextField.resignFirstResponder()
         self.delegate?.onTimerDurationDismissed()
     }
 }
