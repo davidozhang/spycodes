@@ -13,11 +13,6 @@ class Timer: NSObject, NSCoding {
     fileprivate var timerEndedCallback: (() -> Void)?
     fileprivate var timerInProgressCallback: ((_ remainingTime: Int) -> Void)?
 
-    override init() {
-        super.init()
-        self.setDuration(durationInMinutes: 2)
-    }
-
     deinit {
         self.timer?.invalidate()
     }
@@ -52,6 +47,7 @@ class Timer: NSObject, NSCoding {
 
     // MARK: Public
     func setDuration(durationInMinutes: Int) {
+        self.enabled = true
         self.duration = durationInMinutes * 60
     }
 
