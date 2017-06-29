@@ -1,5 +1,6 @@
 class SCStrings {
     enum button: String {
+        case showAnswer = "Show Answer"
         case cancel = "Cancel"
         case confirm = "Confirm"
         case dismiss = "Continue"
@@ -7,6 +8,7 @@ class SCStrings {
         case endRound = "End Round"
         case gameAborted = "Aborted"
         case gameOver = "Game Over"
+        case hideAnswer = "Hide Answer"
         case returnToPregameRoom = "Return to Pregame Room"
         case ok = "OK"
     }
