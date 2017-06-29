@@ -17,6 +17,7 @@ class SCGameRoomViewController: SCViewController {
     fileprivate var leaderIsEditing = false
 
     fileprivate var shouldUpdateCollectionView = false
+    fileprivate var showAnswer = false
 
     fileprivate var broadcastTimer: Foundation.Timer?
     fileprivate var refreshTimer: Foundation.Timer?
@@ -50,10 +51,18 @@ class SCGameRoomViewController: SCViewController {
     }
 
     @IBAction func onActionButtonTapped(_ sender: AnyObject) {
-        if actionButtonState == .confirm {
+        if self.actionButtonState == .confirm {
             self.didConfirm()
-        } else if actionButtonState == .endRound {
+        } else if self.actionButtonState == .endRound {
             self.didEndRound(fromTimerExpiry: false)
+        } else if self.actionButtonState == .showAnswer {
+            self.showAnswer = true
+            self.updateActionButtonStateTo(state: .hideAnswer)
+            self.collectionView.reloadData()
+        } else if self.actionButtonState == .hideAnswer {
+            self.showAnswer = false
+            self.updateActionButtonStateTo(state: .showAnswer)
+            self.collectionView.reloadData()
         }
     }
 
@@ -475,6 +484,11 @@ class SCGameRoomViewController: SCViewController {
         })
     }
 
+    fileprivate func updateActionButtonStateTo(state: ActionButtonState) {
+        self.actionButtonState = state
+        self.updateActionButton()
+    }
+
     fileprivate func updateActionButton() {
         switch self.actionButtonState {
         case .confirm:
@@ -527,6 +541,18 @@ class SCGameRoomViewController: SCViewController {
             }
             self.stopButtonAnimations()
             self.disableActionButton()
+        case .showAnswer:
+            UIView.performWithoutAnimation {
+                self.actionButton.setTitle(SCStrings.button.showAnswer.rawValue, for: UIControlState())
+            }
+            self.stopButtonAnimations()
+            self.enableActionButton()
+        case .hideAnswer:
+            UIView.performWithoutAnimation {
+                self.actionButton.setTitle(SCStrings.button.hideAnswer.rawValue, for: UIControlState())
+            }
+            self.stopButtonAnimations()
+            self.enableActionButton()
         }
     }
 
@@ -674,7 +700,12 @@ class SCGameRoomViewController: SCViewController {
     }
 
     func onGameOverDismissal() {
-        self.actionButtonState = .gameOver
+        if Player.instance.isLeader() {
+            self.actionButtonState = .gameOver
+        } else {
+            self.actionButtonState = .showAnswer
+        }
+
         Timeline.instance.addEventIfNeeded(
             event: Event(type: .gameOver, parameters: nil)
         )
@@ -884,7 +915,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
         cell.contentView.backgroundColor = .clear
 
-        if Player.instance.isLeader() {
+        if Player.instance.isLeader() || self.showAnswer {
             if cardAtIndex.getTeam() == .neutral {
                 cell.wordLabel.textColor = .spycodesGrayColor()
             }
