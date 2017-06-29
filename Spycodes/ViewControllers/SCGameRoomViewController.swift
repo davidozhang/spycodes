@@ -630,23 +630,23 @@ class SCGameRoomViewController: SCViewController {
                     self.numberOfWordsTextField.resignFirstResponder()
                 }
 
-                self.displayAlert(title: title, reason: reason, onDismissal: onDismissal)
+                self.displayEndGameAlert(title: title, reason: reason, onDismissal: onDismissal)
             })
         }
     }
 
-    func displayAlert(title: String, reason: String, onDismissal: ((Void) -> Void)?) {
+    func displayEndGameAlert(title: String, reason: String, onDismissal: ((Void) -> Void)?) {
         let alertController = UIAlertController(
             title: title,
             message: reason,
             preferredStyle: .alert
         )
         let returnAction = UIAlertAction(
-            title: SCStrings.button.goBack.rawValue,
+            title: SCStrings.button.returnToPregameRoom.rawValue,
             style: .default,
             handler: { (action: UIAlertAction) in
                 super.performUnwindSegue(false, completionHandler: nil)
-        }
+            }
         )
         let dismissAction = UIAlertAction(
             title: SCStrings.button.dismiss.rawValue,
