@@ -73,15 +73,6 @@ class SCPregameModalMainViewController: SCViewController {
         self.refreshTimer?.invalidate()
     }
 
-    // MARK: SCViewController Overrides
-    override func keyboardWillShow(_ notification: Notification) {
-        super.showDimView()
-    }
-
-    override func keyboardWillHide(_ notification: Notification) {
-        super.hideDimView()
-    }
-
     // MARK: Private
     @objc
     fileprivate func refreshView() {

@@ -17,4 +17,13 @@ class SCPregameModalContainerViewController: SCModalViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
+
+    // MARK: SCViewController Overrides
+    override func keyboardWillShow(_ notification: Notification) {
+        super.showDimView()
+    }
+
+    override func keyboardWillHide(_ notification: Notification) {
+        super.hideDimView()
+    }
 }

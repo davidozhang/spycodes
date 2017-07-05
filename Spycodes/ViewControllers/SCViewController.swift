@@ -202,14 +202,18 @@ class SCViewController: UIViewController {
     func updateAppearance() {
         let textFieldAppearance = UITextField.appearance()
         let toolBarAppearance = UIToolbar.appearance()
+        let pageControlAppearance = UIPageControl.appearance()
 
         if let view = self.view.viewWithTag(SCConstants.tag.modalPeekBlurView.rawValue) {
             view.removeFromSuperview()
         }
 
+        // Night mode related appearance customizations
         if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
             textFieldAppearance.keyboardAppearance = .dark
             toolBarAppearance.tintColor = .white
+            pageControlAppearance.pageIndicatorTintColor = .spycodesGrayColor()
+            pageControlAppearance.currentPageIndicatorTintColor = .white
             self.view.backgroundColor = .black
 
             if let _ = self.modalPeekView {
@@ -221,6 +225,8 @@ class SCViewController: UIViewController {
         } else {
             textFieldAppearance.keyboardAppearance = .light
             toolBarAppearance.tintColor = .black
+            pageControlAppearance.pageIndicatorTintColor = .spycodesLightGrayColor()
+            pageControlAppearance.currentPageIndicatorTintColor = .spycodesGrayColor()
             self.view.backgroundColor = .white
 
             if let _ = self.modalPeekView {

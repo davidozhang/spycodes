@@ -54,7 +54,7 @@ class SCConstants {
         case mainMenuModal = "main-menu-modal"
         case minigameToggleViewCell = "minigame-toggle-view-cell"
         case nightModeToggleViewCell = "night-mode-toggle-view-cell"
-        case pregameContainerModal = "pregame-container-modal"
+        case pregameModalContainer = "pregame-modal-container"
         case pregameModalMainView = "pregame-modal-main-view"
         case pregamePageViewController = "pregame-page-view-controller"
         case playerName = "player-name"
