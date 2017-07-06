@@ -13,6 +13,25 @@ class SCStrings {
         case ok = "OK"
     }
 
+    enum category: String {
+        case animals = "Animals"
+        case architecture = "Architecture"
+        case arts = "Arts"
+        case body = "Body"
+        case clothing = "Clothing"
+        case foodAndDrinks = "Food & Drinks"
+        case game = "Game"
+        case garden = "Garden"
+        case items = "Items"
+        case nature = "Nature"
+        case people = "People"
+        case places = "Places"
+        case space = "Space"
+        case sports = "Sports"
+        case transportation = "Transportation"
+        case misc = "Miscellaneous"
+    }
+
     enum emoji: String {
         case completed = "✅"
         case incomplete = "❌"
@@ -97,10 +116,12 @@ class SCStrings {
     enum secondaryLabel: String {
         case minigame = "2-3 players play as a team against the CPU."
         case timer = "Set a time duration for each round."
+        case numberOfWords = "%d words"
     }
 
     enum section: String {
         case about = "About"
+        case categories = "Categories"
         case customize = "Customize"
         case gameSettings = "Game Settings"
         case info = "Info"

@@ -18,9 +18,19 @@ class SCWordBank {
         case sports = 13
         case transportation = 14
         case misc = 15
+
+        static var count: Int {
+            var count = 0
+            while let _ = Category(rawValue: count) { count+=1 }
+            return count
+        }
+
+        static var allValues: [Category] {
+            return (0..<count).flatMap({ Category(rawValue: $0) })
+        }
     }
 
-    fileprivate static let bank: [Category: [String]] = [
+    static let bank: [Category: [String]] = [
         .animals: [
             "Alligator", "Bark", "Bear", "Beaver", "Bee", "Bird", "Buffalo", "Bug", "Bunny", "Cat", "Chick", "Chicken", "Cow", "Crow", "Dinosaur", "Dog", "Dragon", "Duck", "Eagle", "Elephant", "Fish", "Flock", "Fly", "Frog", "Gallop", "Goose", "Hawk", "Horse", "Ivory", "Kangaroo", "Koala", "Ladybug", "Lion", "Lizard", "Mammoth", "Mate", "Monster", "Moose", "Moth", "Mouse", "Nest", "Octopus", "Penguin", "Platypus", "Puppy", "Rabbit", "Salmon", "Scorpion", "Seal", "Shark", "Sheep", "Spider", "Tail", "Tiger", "Unicorn", "Wasp", "Whale", "Wolf", "Wool", "Worm", "Zoo"
         ],
@@ -86,5 +96,42 @@ class SCWordBank {
         }
 
         return list.choose(SCConstants.constant.cardCount.rawValue)
+    }
+
+    static func getCategoryString(category: Category) -> String {
+        switch category {
+        case .animals:
+            return SCStrings.category.animals.rawValue
+        case .architecture:
+            return SCStrings.category.architecture.rawValue
+        case .arts:
+            return SCStrings.category.arts.rawValue
+        case .body:
+            return SCStrings.category.body.rawValue
+        case .clothing:
+            return SCStrings.category.clothing.rawValue
+        case .foodAndDrinks:
+            return SCStrings.category.foodAndDrinks.rawValue
+        case .game:
+            return SCStrings.category.game.rawValue
+        case .garden:
+            return SCStrings.category.garden.rawValue
+        case .items:
+            return SCStrings.category.items.rawValue
+        case .nature:
+            return SCStrings.category.nature.rawValue
+        case .people:
+            return SCStrings.category.people.rawValue
+        case .places:
+            return SCStrings.category.places.rawValue
+        case .space:
+            return SCStrings.category.space.rawValue
+        case .sports:
+            return SCStrings.category.sports.rawValue
+        case .transportation:
+            return SCStrings.category.transportation.rawValue
+        case .misc:
+            return SCStrings.category.misc.rawValue
+        }
     }
 }

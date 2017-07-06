@@ -153,7 +153,7 @@ class SCPregameRoomViewController: SCViewController {
     override func swipeUp() {
         self.resetReadyButton()
         self.performSegue(
-            withIdentifier: SCConstants.identifier.pregameModalContainer.rawValue,
+            withIdentifier: SCConstants.identifier.pregameModalContainerView.rawValue,
             sender: self
         )
     }

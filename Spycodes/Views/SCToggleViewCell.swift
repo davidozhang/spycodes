@@ -8,6 +8,7 @@ class SCToggleViewCell: SCTableViewCell {
     weak var delegate: SCToggleViewCellDelegate?
 
     let toggleSwitch = UISwitch()
+    var identifier: Int?
 
     override func awakeFromNib() {
         super.awakeFromNib()

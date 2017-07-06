@@ -127,7 +127,7 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
             sectionHeader.primaryLabel.text = sectionLabels[section]
         }
 
-        if self.tableView.contentOffset.y > 0 {
+        if self.scrolled {
             sectionHeader.showBlurBackground()
         } else {
             sectionHeader.hideBlurBackground()

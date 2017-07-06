@@ -237,6 +237,9 @@ class SCViewController: UIViewController {
             }
         }
 
+        pageControlAppearance.hidesForSinglePage = true
+        pageControlAppearance.defersCurrentPageDisplay = true
+
         if let _ = self.modalPeekView {
             self.modalPeekBlurView?.frame = self.modalPeekView.bounds
             self.modalPeekBlurView?.clipsToBounds = true
