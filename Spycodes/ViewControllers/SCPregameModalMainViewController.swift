@@ -1,11 +1,6 @@
 import UIKit
 
-protocol SCPregameModalViewControllerDelegate: class {
-    func onNightModeToggleChanged()
-}
-
-class SCPregameModalViewController: SCModalViewController {
-    weak var delegate: SCPregameModalViewControllerDelegate?
+class SCPregameModalMainViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     enum Section: Int {
@@ -23,12 +18,12 @@ class SCPregameModalViewController: SCModalViewController {
         .info: SCStrings.section.info.rawValue,
         .statistics: SCStrings.section.statistics.rawValue,
         .gameSettings: SCStrings.section.gameSettings.rawValue,
-    ]
+        ]
 
     fileprivate let settingsLabels: [GameSetting: String] = [
         .minigame: SCStrings.primaryLabel.minigame.rawValue,
         .timer: SCStrings.primaryLabel.timer.rawValue,
-    ]
+        ]
 
     fileprivate var scrolled = false
     fileprivate var inputMode = false
@@ -53,9 +48,11 @@ class SCPregameModalViewController: SCModalViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.view.isOpaque = false
+        self.view.backgroundColor = .clear
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableViewBottomSpaceConstraint.constant = SCViewController.tableViewMargin
+        self.tableViewBottomSpaceConstraint.constant = 0
         self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
@@ -63,7 +60,7 @@ class SCPregameModalViewController: SCModalViewController {
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 2.0,
             target: self,
-            selector: #selector(SCPregameModalViewController.refreshView),
+            selector: #selector(SCPregameModalMainViewController.refreshView),
             userInfo: nil,
             repeats: true
         )
@@ -76,24 +73,6 @@ class SCPregameModalViewController: SCModalViewController {
         self.tableView.delegate = nil
 
         self.refreshTimer?.invalidate()
-    }
-
-    // MARK: SCViewController Overrides
-    override func keyboardWillShow(_ notification: Notification) {
-        super.showDimView()
-    }
-
-    override func keyboardWillHide(_ notification: Notification) {
-        super.hideDimView()
-    }
-
-    // MARK: SCModalViewController Overrides
-    override func onDismissal() {
-        if self.tableView.contentOffset.y > 0 {
-            return
-        }
-
-        super.onDismissal()
     }
 
     // MARK: Private
@@ -129,7 +108,7 @@ class SCPregameModalViewController: SCModalViewController {
                 result.append(SCStrings.info.regularGameTeamSizeUnsatisfied.rawValue)
             }
         }
-        
+
         return result
     }
 }
@@ -141,7 +120,7 @@ class SCPregameModalViewController: SCModalViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionLabels.count
     }
@@ -244,7 +223,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 cell.primaryLabel.text = self.settingsLabels[.minigame]
                 cell.secondaryLabel.text = SCStrings.secondaryLabel.minigame.rawValue
                 cell.delegate = self
-                
+
                 return cell
             case GameSetting.timer.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
@@ -288,7 +267,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
 }
 
 // MARK: SCToggleViewCellDelegate
-extension SCPregameModalViewController: SCToggleViewCellDelegate {
+extension SCPregameModalMainViewController: SCToggleViewCellDelegate {
     func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
@@ -318,11 +297,11 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
     }
 }
 
-extension SCPregameModalViewController: SCTimerSettingViewCellDelegate {
+extension SCPregameModalMainViewController: SCTimerSettingViewCellDelegate {
     func onTimerDurationTapped() {
         self.inputMode = true
     }
-
+    
     func onTimerDurationDismissed() {
         self.inputMode = false
     }
