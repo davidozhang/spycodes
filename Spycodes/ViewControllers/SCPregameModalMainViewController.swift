@@ -48,9 +48,11 @@ class SCPregameModalMainViewController: SCViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.view.isOpaque = false
+        self.view.backgroundColor = .clear
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableViewBottomSpaceConstraint.constant = SCViewController.tableViewMargin
+        self.tableViewBottomSpaceConstraint.constant = 0
         self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
