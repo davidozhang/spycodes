@@ -67,6 +67,14 @@ class SCPregameModalMainViewController: SCViewController {
             userInfo: nil,
             repeats: true
         )
+
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue),
+                object: self,
+                userInfo: nil
+            )
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {

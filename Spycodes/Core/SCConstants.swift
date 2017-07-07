@@ -79,9 +79,11 @@ class SCConstants {
     }
 
     enum notificationKey: String {
-        case updateCollectionView = "update-collection-view"
+        case disableSwipeGestureRecognizer = "disable-swipe-gesture-recognizer"
+        case enableSwipeGestureRecognizer = "enable-swipe-gesture-recognizer"
         case minigameGameOver = "minigame-game-over"
         case timelineUpdated = "timeline-updated"
+        case updateCollectionView = "update-collection-view"
     }
 
     enum storyboards: String {

@@ -171,11 +171,27 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                 return
             }
             self.scrolled = true
+
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(
+                    name: NSNotification.Name(rawValue: SCConstants.notificationKey.disableSwipeGestureRecognizer.rawValue),
+                    object: self,
+                    userInfo: nil
+                )
+            }
         } else {
             if !self.scrolled {
                 return
             }
             self.scrolled = false
+
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(
+                    name: NSNotification.Name(rawValue: SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue),
+                    object: self,
+                    userInfo: nil
+                )
+            }
         }
 
         self.tableView.reloadData()
