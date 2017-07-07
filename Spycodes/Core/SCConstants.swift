@@ -74,6 +74,10 @@ class SCConstants {
         case versionViewCell = "version-view-cell"
     }
 
+    enum nibs: String {
+        case multilineToggle = "SCMultilineToggleViewCell"
+    }
+
     enum notificationKey: String {
         case updateCollectionView = "update-collection-view"
         case minigameGameOver = "minigame-game-over"

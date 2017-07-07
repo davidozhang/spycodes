@@ -31,6 +31,14 @@ class SCPregameModalSecondaryViewController: SCViewController {
         self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
+
+        let nib = UINib(nibName: SCConstants.nibs.multilineToggle.rawValue, bundle: nil)
+        for category in SCWordBank.Category.all {
+            self.tableView.register(
+                nib,
+                forCellReuseIdentifier: SCWordBank.getCategoryString(category: category)
+            )
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -103,24 +111,22 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case Section.categories.rawValue:
-            guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.multilineToggleViewCell.rawValue
-            ) as? SCToggleViewCell else {
-                    return SCTableViewCell()
+            guard let category = SCWordBank.Category(rawValue: indexPath.row),
+                  let cell = self.tableView.dequeueReusableCell(
+                      withIdentifier: SCWordBank.getCategoryString(category: category)
+                  ) as? SCToggleViewCell else {
+                return SCTableViewCell()
             }
 
-            if let category = SCWordBank.Category(rawValue: indexPath.row) {
-                cell.primaryLabel.text = SCWordBank.getCategoryString(category: category)
-                if let wordList = SCWordBank.bank[category] {
-                    cell.secondaryLabel.text = String(
-                        format: SCStrings.secondaryLabel.numberOfWords.rawValue,
-                        wordList.count
-                    )
-                }
+            cell.primaryLabel.text = SCWordBank.getCategoryString(category: category)
+            if let wordList = SCWordBank.bank[category] {
+                cell.secondaryLabel.text = String(
+                    format: SCStrings.secondaryLabel.numberOfWords.rawValue,
+                    wordList.count
+                )
             }
 
             cell.delegate = self
-            cell.identifier = indexPath.row
 
             return cell
         default:

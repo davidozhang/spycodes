@@ -25,7 +25,7 @@ class SCWordBank {
             return count
         }
 
-        static var allValues: [Category] {
+        static var all: [Category] {
             return (0..<count).flatMap({ Category(rawValue: $0) })
         }
     }

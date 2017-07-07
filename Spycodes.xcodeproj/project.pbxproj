@@ -47,6 +47,7 @@
 		639F88F61F06201B0082D813 /* SCPregameModalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88F51F06201B0082D813 /* SCPregameModalPageViewController.swift */; };
 		639F88F91F0CA1670082D813 /* SCPregameModalMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88F71F0CA1670082D813 /* SCPregameModalMainViewController.swift */; };
 		639F88FC1F0EB6850082D813 /* SCPregameModalSecondaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88FB1F0EB6850082D813 /* SCPregameModalSecondaryViewController.swift */; };
+		639F89011F0F2B730082D813 /* SCMultilineToggleViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639F89001F0F2B730082D813 /* SCMultilineToggleViewCell.xib */; };
 		63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* SCAppDelegate.swift */; };
 		63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D0D1D1A5713005A2914 /* Assets.xcassets */; };
 		63A04D1F1D1A7F3E005A2914 /* SCMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1E1D1A7F3E005A2914 /* SCMainMenuViewController.swift */; };
@@ -115,6 +116,7 @@
 		639F88F51F06201B0082D813 /* SCPregameModalPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameModalPageViewController.swift; path = ViewControllers/SCPregameModalPageViewController.swift; sourceTree = "<group>"; };
 		639F88F71F0CA1670082D813 /* SCPregameModalMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameModalMainViewController.swift; path = ViewControllers/SCPregameModalMainViewController.swift; sourceTree = "<group>"; };
 		639F88FB1F0EB6850082D813 /* SCPregameModalSecondaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameModalSecondaryViewController.swift; path = ViewControllers/SCPregameModalSecondaryViewController.swift; sourceTree = "<group>"; };
+		639F89001F0F2B730082D813 /* SCMultilineToggleViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCMultilineToggleViewCell.xib; path = Nibs/SCMultilineToggleViewCell.xib; sourceTree = "<group>"; };
 		63A04D001D1A5713005A2914 /* Spycodes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spycodes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63A04D031D1A5713005A2914 /* SCAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SCAppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63A04D0D1D1A5713005A2914 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -167,6 +169,14 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
+		639F88FF1F0F25660082D813 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				639F89001F0F2B730082D813 /* SCMultilineToggleViewCell.xib */,
+			);
+			name = Nibs;
+			sourceTree = "<group>";
+		};
 		63A04CF71D1A5713005A2914 = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +202,7 @@
 				63A04D121D1A5713005A2914 /* Info.plist */,
 				63A04D1B1D1A7F2B005A2914 /* Core */,
 				63920A351D3090BC0073E7F7 /* Managers */,
+				639F88FF1F0F25660082D813 /* Nibs */,
 				63FDED331D264BD800142780 /* Objects */,
 				63FA54E31D1BCFA6004515DA /* Storyboards */,
 				63D256751E6BA6600061D80C /* Utilities */,
@@ -366,6 +377,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				639F89011F0F2B730082D813 /* SCMultilineToggleViewCell.xib in Resources */,
 				630681A51D62FD6900539773 /* Spycodes.storyboard in Resources */,
 				63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */,
 				630681A31D62FD6300539773 /* LaunchScreen.storyboard in Resources */,
