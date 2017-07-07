@@ -51,6 +51,7 @@ class SCStrings {
         case guess = "Guessing Time"
         case returningToMainMenu = "Returning to Main Menu"
         case roundEnd = "Round End"
+        case minimumWords = "Too Few Words"
         case updateApp = "Update App"
         case waitForClue = "Waiting For Clue"
     }
@@ -75,6 +76,7 @@ class SCStrings {
         case minigameIntro = "You are currently playing a Minigame with your teammates on Team Red versus a CPU player on Team Blue. There are 22 words in total: 8 Red, 7 Blue, 6 Neutral (white) and 1 Assassin (black)."
         case minigameRoundEnd = "After each round ends, the CPU automatically eliminates one of its words and hands the round back to your team. Your teammates must try to guess all of your team's words before the CPU finishes all of its words."
         case minigameWinString = "Your team won! There were %d opponent cards remaining. Great work!"
+        case minimumWords = "There must be a minimum of %d words."
         case playerAborted = "A player in the game has aborted."
         case playerClue = "A 1-word clue and number will show at the top once your leader is done coming up with it. The number represents the amount of words corresponding to that clue. You cannot talk or make eye contact with your leader!"
         case playerDisconnected = "A player in the game has disconnected."

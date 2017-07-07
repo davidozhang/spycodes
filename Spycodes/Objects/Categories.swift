@@ -31,6 +31,17 @@ class Categories: NSObject, NSCoding {
         return Array(self.categories)
     }
 
+    func getTotalWords() -> Int {
+        var result = 0
+        for category in self.categories {
+            if let wordList = SCWordBank.bank[category] {
+                result += wordList.count
+            }
+        }
+
+        return result
+    }
+
     func isCategorySelected(category: SCWordBank.Category) -> Bool {
         return self.categories.contains(category)
     }

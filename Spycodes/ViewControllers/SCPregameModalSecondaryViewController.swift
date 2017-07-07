@@ -57,6 +57,29 @@ class SCPregameModalSecondaryViewController: SCViewController {
         self.tableView.dataSource = nil
         self.tableView.delegate = nil
     }
+
+    fileprivate func showAlert(title: String, reason: String, completionHandler: @escaping ((Void) -> Void)) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(
+                title: title,
+                message: reason,
+                preferredStyle: .alert
+            )
+            let confirmAction = UIAlertAction(
+                title: SCStrings.button.ok.rawValue,
+                style: .default,
+                handler: { (action: UIAlertAction) in
+                    super.performUnwindSegue(false, completionHandler: nil)
+                }
+            )
+            alertController.addAction(confirmAction)
+            self.present(
+                alertController,
+                animated: true,
+                completion: completionHandler
+            )
+        }
+    }
 }
 
 //   _____      _                 _
@@ -162,6 +185,18 @@ extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
                 Categories.instance.addCategory(category: category)
             } else {
                 Categories.instance.removeCategory(category: category)
+            }
+
+            if Categories.instance.getTotalWords() < SCConstants.constant.cardCount.rawValue {
+                self.showAlert(
+                    title: SCStrings.header.minimumWords.rawValue,
+                    reason: String(format: SCStrings.message.minimumWords.rawValue, SCConstants.constant.cardCount.rawValue),
+                    completionHandler: {
+                        // Revert setting if total word count is less than minimum allowed
+                        cell.toggleSwitch.isOn = !enabled
+                        Categories.instance.addCategory(category: category)
+                    }
+                )
             }
         }
     }
