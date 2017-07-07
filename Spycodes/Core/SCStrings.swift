@@ -14,22 +14,22 @@ class SCStrings {
     }
 
     enum category: String {
-        case animals = "Animals"
-        case architecture = "Architecture"
-        case arts = "Arts"
-        case body = "Body"
-        case clothing = "Clothing"
-        case foodAndDrinks = "Food & Drinks"
-        case game = "Game"
-        case garden = "Garden"
-        case items = "Items"
-        case nature = "Nature"
-        case people = "People"
-        case places = "Places"
-        case space = "Space"
-        case sports = "Sports"
-        case transportation = "Transportation"
-        case misc = "Miscellaneous"
+        case animals = "Animals 🐘"
+        case architecture = "Architecture ⛪️"
+        case arts = "Arts 🖼"
+        case body = "Body 👀"
+        case clothing = "Clothing 👕"
+        case foodAndDrinks = "Food & Drinks 🍹"
+        case game = "Game 🎲"
+        case garden = "Garden 🌻"
+        case items = "Items 🎈"
+        case nature = "Nature 🌲"
+        case people = "People 🚶"
+        case places = "Places 🗼"
+        case space = "Space 🌎"
+        case sports = "Sports ⚽️"
+        case transportation = "Transportation ✈️"
+        case misc = "Miscellaneous ❓"
     }
 
     enum emoji: String {
