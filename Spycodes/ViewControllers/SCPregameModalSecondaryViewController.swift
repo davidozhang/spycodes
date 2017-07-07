@@ -118,6 +118,8 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                 return SCTableViewCell()
             }
 
+            cell.synchronizeToggle()
+
             cell.primaryLabel.text = SCWordBank.getCategoryString(category: category)
             if let wordList = SCWordBank.bank[category] {
                 cell.secondaryLabel.text = String(
@@ -153,5 +155,14 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
 
 // MARK: SCToggleViewCellDelegate
 extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
-    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {}
+    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
+        if let reuseIdentifier = cell.reuseIdentifier,
+           let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {
+            if enabled {
+                Categories.instance.addCategory(category: category)
+            } else {
+                Categories.instance.removeCategory(category: category)
+            }
+        }
+    }
 }

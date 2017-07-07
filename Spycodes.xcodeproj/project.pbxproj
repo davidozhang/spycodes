@@ -48,6 +48,7 @@
 		639F88F91F0CA1670082D813 /* SCPregameModalMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88F71F0CA1670082D813 /* SCPregameModalMainViewController.swift */; };
 		639F88FC1F0EB6850082D813 /* SCPregameModalSecondaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88FB1F0EB6850082D813 /* SCPregameModalSecondaryViewController.swift */; };
 		639F89011F0F2B730082D813 /* SCMultilineToggleViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639F89001F0F2B730082D813 /* SCMultilineToggleViewCell.xib */; };
+		639F89031F0F36120082D813 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F89021F0F36120082D813 /* Categories.swift */; };
 		63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* SCAppDelegate.swift */; };
 		63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D0D1D1A5713005A2914 /* Assets.xcassets */; };
 		63A04D1F1D1A7F3E005A2914 /* SCMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D1E1D1A7F3E005A2914 /* SCMainMenuViewController.swift */; };
@@ -117,6 +118,7 @@
 		639F88F71F0CA1670082D813 /* SCPregameModalMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameModalMainViewController.swift; path = ViewControllers/SCPregameModalMainViewController.swift; sourceTree = "<group>"; };
 		639F88FB1F0EB6850082D813 /* SCPregameModalSecondaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameModalSecondaryViewController.swift; path = ViewControllers/SCPregameModalSecondaryViewController.swift; sourceTree = "<group>"; };
 		639F89001F0F2B730082D813 /* SCMultilineToggleViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCMultilineToggleViewCell.xib; path = Nibs/SCMultilineToggleViewCell.xib; sourceTree = "<group>"; };
+		639F89021F0F36120082D813 /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Categories.swift; path = Objects/Categories.swift; sourceTree = "<group>"; };
 		63A04D001D1A5713005A2914 /* Spycodes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spycodes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63A04D031D1A5713005A2914 /* SCAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SCAppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63A04D0D1D1A5713005A2914 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 			children = (
 				63CB4F091D3CB88D00211D3A /* Card.swift */,
 				63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */,
+				639F89021F0F36120082D813 /* Categories.swift */,
 				63DEDEE71E88921200DE94A1 /* Event.swift */,
 				6378C6501D4C6F46009BD0CA /* GameMode.swift */,
 				63486DA81D3DE29C00795403 /* Key.swift */,
@@ -410,6 +413,7 @@
 				632E4E461E6A91C8004E7180 /* SCPopoverViewController.swift in Sources */,
 				63486DA91D3DE29C00795403 /* Key.swift in Sources */,
 				63D256811E6BA6BA0061D80C /* SCButton.swift in Sources */,
+				639F89031F0F36120082D813 /* Categories.swift in Sources */,
 				639F88F31F0615540082D813 /* SCUIColor.swift in Sources */,
 				630883681E80E56F006D2428 /* SCAppInfoManager.swift in Sources */,
 				637310CB1D3B292F00EA5D7A /* SCGameRoomViewController.swift in Sources */,

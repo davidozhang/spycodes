@@ -42,6 +42,10 @@ class SCToggleViewCell: SCTableViewCell {
             case SCConstants.identifier.minigameToggleViewCell.rawValue:
                 toggleSwitch.isOn = GameMode.instance.getMode() == .miniGame
             default:
+                if let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {
+                    toggleSwitch.isOn = Categories.instance.isCategorySelected(category: category)
+                }
+
                 break
             }
         }
