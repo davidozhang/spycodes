@@ -143,6 +143,43 @@ class SCWordBank {
         }
     }
 
+    static func getCategoryEmoji(category: Category) -> String {
+        switch category {
+        case .animals:
+            return SCStrings.emoji.animals.rawValue
+        case .architecture:
+            return SCStrings.emoji.architecture.rawValue
+        case .arts:
+            return SCStrings.emoji.arts.rawValue
+        case .body:
+            return SCStrings.emoji.body.rawValue
+        case .clothing:
+            return SCStrings.emoji.clothing.rawValue
+        case .foodAndDrinks:
+            return SCStrings.emoji.foodAndDrinks.rawValue
+        case .game:
+            return SCStrings.emoji.game.rawValue
+        case .garden:
+            return SCStrings.emoji.garden.rawValue
+        case .items:
+            return SCStrings.emoji.items.rawValue
+        case .nature:
+            return SCStrings.emoji.nature.rawValue
+        case .people:
+            return SCStrings.emoji.people.rawValue
+        case .places:
+            return SCStrings.emoji.places.rawValue
+        case .space:
+            return SCStrings.emoji.space.rawValue
+        case .sports:
+            return SCStrings.emoji.sports.rawValue
+        case .transportation:
+            return SCStrings.emoji.transportation.rawValue
+        case .misc:
+            return SCStrings.emoji.misc.rawValue
+        }
+    }
+
     // Mapping from reuse identifiers to categories
     static func getCategoryFromString(string: String) -> Category? {
         switch string {

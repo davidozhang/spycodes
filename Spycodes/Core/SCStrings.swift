@@ -14,28 +14,44 @@ class SCStrings {
     }
 
     enum category: String {
-        case animals = "Animals 🐘"
-        case architecture = "Architecture ⛪️"
-        case arts = "Arts 🖼"
-        case body = "Body 👀"
-        case clothing = "Clothing 👕"
-        case foodAndDrinks = "Food & Drinks 🍹"
-        case game = "Game 🎲"
-        case garden = "Garden 🌻"
-        case items = "Items 🎈"
-        case nature = "Nature 🌲"
-        case people = "People 🚶"
-        case places = "Places 🗼"
-        case space = "Space 🌎"
-        case sports = "Sports ⚽️"
-        case transportation = "Transportation ✈️"
-        case misc = "Miscellaneous ❓"
+        case animals = "Animals"
+        case architecture = "Architecture"
+        case arts = "Arts"
+        case body = "Body"
+        case clothing = "Clothing"
+        case foodAndDrinks = "Food & Drinks"
+        case game = "Game"
+        case garden = "Garden"
+        case items = "Items"
+        case nature = "Nature"
+        case people = "People"
+        case places = "Places"
+        case space = "Space"
+        case sports = "Sports"
+        case transportation = "Transportation"
+        case misc = "Miscellaneous"
     }
 
     enum emoji: String {
+        case animals = "🐘"
+        case architecture = "⛪️"
+        case arts = "🖼"
+        case body = "👀"
+        case clothing = "👕"
         case completed = "✅"
+        case foodAndDrinks = "🍹"
+        case game = "🎲"
+        case garden = "🌻"
         case incomplete = "❌"
+        case items = "🎈"
         case info = "ℹ️"
+        case nature = "🌲"
+        case people = "🚶"
+        case places = "🗼"
+        case space = "🌎"
+        case sports = "⚽️"
+        case transportation = "✈️"
+        case misc = "❓"
     }
 
     enum header: String {
@@ -96,6 +112,7 @@ class SCStrings {
 
     enum primaryLabel: String {
         case accessibility = "Accessibility"
+        case category = "%@ %@"
         case icons8 = "Icons8"
         case github = "Github"
         case minigame = "Minigame"

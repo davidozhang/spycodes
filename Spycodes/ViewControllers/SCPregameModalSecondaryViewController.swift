@@ -143,7 +143,11 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
 
             cell.synchronizeToggle()
 
-            cell.primaryLabel.text = SCWordBank.getCategoryString(category: category)
+            cell.primaryLabel.text = String(
+                format: SCStrings.primaryLabel.category.rawValue,
+                SCWordBank.getCategoryString(category: category),
+                SCWordBank.getCategoryEmoji(category: category)
+            )
             if let wordList = SCWordBank.bank[category] {
                 cell.secondaryLabel.text = String(
                     format: SCStrings.secondaryLabel.numberOfWords.rawValue,
