@@ -153,6 +153,12 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
 
             cell.delegate = self
 
+            if Player.instance.isHost() {
+                cell.setEnabled(enabled: true)
+            } else {
+                cell.setEnabled(enabled: false)
+            }
+
             return cell
         default:
             return SCTableViewCell()

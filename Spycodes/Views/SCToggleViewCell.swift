@@ -51,6 +51,15 @@ class SCToggleViewCell: SCTableViewCell {
         }
     }
 
+    func setEnabled(enabled: Bool) {
+        toggleSwitch.isEnabled = enabled
+        if enabled {
+            self.alpha = 1.0
+        } else {
+            self.alpha = 0.4
+        }
+    }
+
     @objc
     fileprivate func onToggleChanged(_ toggleSwitch: UISwitch) {
         let enabled = toggleSwitch.isOn
