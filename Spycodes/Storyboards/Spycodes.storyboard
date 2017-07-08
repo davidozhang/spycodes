@@ -623,10 +623,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ck7-zh-cKq" userLabel="Shuffle Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="999" y="12" width="25" height="20"/>
+                                                    <rect key="frame" x="990" y="9.5" width="30" height="25"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="25" id="LJ6-bD-zsm"/>
-                                                        <constraint firstAttribute="height" constant="20" id="iMK-ub-2xW"/>
+                                                        <constraint firstAttribute="width" constant="30" id="LJ6-bD-zsm"/>
+                                                        <constraint firstAttribute="height" constant="25" id="iMK-ub-2xW"/>
                                                     </constraints>
                                                     <state key="normal" image="Shuffle"/>
                                                     <connections>
@@ -635,7 +635,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="ck7-zh-cKq" secondAttribute="trailing" id="5MP-77-tXT"/>
+                                                <constraint firstAttribute="trailing" secondItem="ck7-zh-cKq" secondAttribute="trailing" constant="4" id="5MP-77-tXT"/>
                                                 <constraint firstItem="ck7-zh-cKq" firstAttribute="centerY" secondItem="1IL-pn-CxA" secondAttribute="centerY" id="EN1-yO-KzV"/>
                                                 <constraint firstItem="kuz-gN-j21" firstAttribute="leading" secondItem="1IL-pn-CxA" secondAttribute="leading" constant="4" id="KFD-El-6Cv"/>
                                                 <constraint firstAttribute="bottom" secondItem="kuz-gN-j21" secondAttribute="bottom" id="VFD-Oc-gPG"/>
@@ -662,7 +662,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d84-Az-a9v" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="24" width="914" height="0.0"/>
+                                                    <rect key="frame" x="17" y="24" width="909" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="300" id="xaW-k5-dCT"/>
                                                     </constraints>
@@ -683,10 +683,10 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qs7-lh-8Kt" userLabel="Change Team Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="995" y="9.5" width="25" height="25"/>
+                                                    <rect key="frame" x="990" y="7" width="30" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="Gem-Jv-lyJ"/>
-                                                        <constraint firstAttribute="width" constant="25" id="Zaf-8k-ZBc"/>
+                                                        <constraint firstAttribute="height" constant="30" id="Gem-Jv-lyJ"/>
+                                                        <constraint firstAttribute="width" constant="30" id="Zaf-8k-ZBc"/>
                                                     </constraints>
                                                     <state key="normal" image="Change"/>
                                                     <connections>
