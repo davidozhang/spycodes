@@ -89,7 +89,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
         }
     }
 
-    fileprivate func showAlert(title: String, reason: String, completionHandler: @escaping ((Void) -> Void)) {
+    fileprivate func showAlert(title: String, reason: String, completionHandler: ((Void) -> Void)?) {
         DispatchQueue.main.async {
             let alertController = UIAlertController(
                 title: title,
@@ -178,7 +178,7 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                     return SCTableViewCell()
                 }
 
-                // Retrieve locally
+                // Retrieve from local data
                 cell.primaryLabel.text = String(
                     format: SCStrings.primaryLabel.category.rawValue,
                     SCWordBank.getCategoryString(category: category),
@@ -229,6 +229,16 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
             }
         default:
             return SCTableViewCell()
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !Player.instance.isHost() {
+            self.showAlert(
+                title: SCStrings.header.hostOnly.rawValue,
+                reason: SCStrings.message.categorySetting.rawValue,
+                completionHandler: nil
+            )
         }
     }
 

@@ -60,6 +60,7 @@ class SCStrings {
         case confirm = "Confirm"
         case enterClue = "Enter Clue"
         case ending = "Final Note"
+        case hostOnly = "Host Only Feature"
         case introduction = "Introduction"
         case gameAborted = "Game Aborted"
         case gameOver = "Game Over"
@@ -81,6 +82,7 @@ class SCStrings {
     }
 
     enum message: String {
+        case categorySetting = "Only the host can toggle the category settings."
         case defaultLoseString = "Your team lost!"
         case defaultWinString = "Your team won!"
         case hostDisconnected = "Host player has disconnected."
