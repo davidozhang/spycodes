@@ -31,14 +31,6 @@ class SCPregameModalSecondaryViewController: SCViewController {
         self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
-
-        let multilineToggleNib = UINib(nibName: SCConstants.nibs.multilineToggle.rawValue, bundle: nil)
-        for category in SCWordBank.Category.all {
-            self.tableView.register(
-                multilineToggleNib,
-                forCellReuseIdentifier: SCWordBank.getCategoryString(category: category)
-            )
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +41,25 @@ class SCPregameModalSecondaryViewController: SCViewController {
 
         self.view.isOpaque = false
         self.view.backgroundColor = .clear
+
+        let multilineToggleNib = UINib(nibName: SCConstants.nibs.multilineToggle.rawValue, bundle: nil)
+
+        // TODO: Move cell registration into viewDidLoad
+        if Player.instance.isHost() {
+            for category in SCWordBank.Category.all {
+                self.tableView.register(
+                    multilineToggleNib,
+                    forCellReuseIdentifier: SCWordBank.getCategoryString(category: category)
+                )
+            }
+        } else {
+            for categoryString in Categories.instance.getSynchronizedCategories() {
+                self.tableView.register(
+                    multilineToggleNib,
+                    forCellReuseIdentifier: categoryString
+                )
+            }
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -124,7 +135,11 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
         case Section.categories.rawValue:
-            return SCWordBank.Category.count
+            if Player.instance.isHost() {
+                return SCWordBank.Category.count
+            } else {
+                return Categories.instance.getSynchronizedCategories().count
+            }
         default:
             return 0
         }
@@ -134,35 +149,64 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case Section.categories.rawValue:
-            guard let category = SCWordBank.Category(rawValue: indexPath.row),
-                  let cell = self.tableView.dequeueReusableCell(
-                      withIdentifier: SCWordBank.getCategoryString(category: category)
-                  ) as? SCToggleViewCell else {
-                return SCTableViewCell()
-            }
-
-            cell.synchronizeToggle()
-
-            cell.primaryLabel.text = String(
-                format: SCStrings.primaryLabel.category.rawValue,
-                SCWordBank.getCategoryString(category: category),
-                SCWordBank.getCategoryEmoji(category: category)
-            )
-
-            cell.secondaryLabel.text = String(
-                format: SCStrings.secondaryLabel.numberOfWords.rawValue,
-                SCWordBank.getWordCount(category: category)
-            )
-
-            cell.delegate = self
-
             if Player.instance.isHost() {
-                cell.setEnabled(enabled: true)
-            } else {
-                cell.setEnabled(enabled: false)
-            }
+                // Host
+                guard let category = SCWordBank.Category(rawValue: indexPath.row),
+                      let cell = self.tableView.dequeueReusableCell(
+                          withIdentifier: SCWordBank.getCategoryString(category: category)
+                      ) as? SCToggleViewCell else {
+                    return SCTableViewCell()
+                }
 
-            return cell
+                // Retrieve locally
+                cell.primaryLabel.text = String(
+                    format: SCStrings.primaryLabel.category.rawValue,
+                    SCWordBank.getCategoryString(category: category),
+                    SCWordBank.getCategoryEmoji(category: category)
+                )
+
+                cell.secondaryLabel.text = String(
+                    format: SCStrings.secondaryLabel.numberOfWords.rawValue,
+                    SCWordBank.getWordCount(category: category)
+                )
+
+                cell.setEnabled(enabled: true)
+
+                cell.synchronizeToggle()
+                cell.delegate = self
+
+                return cell
+            } else {
+                // Non-host
+                let categoryString = Categories.instance.getSynchronizedCategories()[indexPath.row]
+
+                guard let cell = self.tableView.dequeueReusableCell(
+                    withIdentifier: categoryString
+                ) as? SCToggleViewCell else {
+                    return SCTableViewCell()
+                }
+
+                // Retrieve from synchronized data
+                if let emoji = Categories.instance.getSynchronizedEmojiForCategoryString(string: categoryString) {
+                    cell.primaryLabel.text = String(
+                        format: SCStrings.primaryLabel.category.rawValue,
+                        categoryString,
+                        emoji
+                    )
+                }
+
+                cell.secondaryLabel.text = String(
+                    format: SCStrings.secondaryLabel.numberOfWords.rawValue,
+                    Categories.instance.getSynchronizedWordCountForCategoryString(string: categoryString)
+                )
+
+                cell.setEnabled(enabled: false)
+
+                cell.synchronizeToggle()
+                cell.delegate = self
+
+                return cell
+            }
         default:
             return SCTableViewCell()
         }

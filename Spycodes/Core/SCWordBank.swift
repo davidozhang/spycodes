@@ -11,18 +11,18 @@ class SCWordBank {
         case game = 6
         case garden = 7
         case items = 8
-        case nature = 9
-        case people = 10
-        case places = 11
-        case space = 12
-        case sports = 13
-        case transportation = 14
-        case misc = 15
+        case misc = 9
+        case nature = 10
+        case people = 11
+        case places = 12
+        case space = 13
+        case sports = 14
+        case transportation = 15
 
         static var count: Int {
             var count = 0
             while let _ = Category(rawValue: count) {
-                count+=1
+                count += 1
             }
             return count
         }

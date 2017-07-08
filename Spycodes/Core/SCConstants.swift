@@ -5,8 +5,10 @@ class SCConstants {
         case bestRecord = "best-record"
         case card = "card"
         case cards = "cards"
+        case categories = "categories"
         case clue = "clue"
         case correct = "correct"
+        case emojis = "emojis"
         case eventType = "event-type"
         case hasRead = "has-read"       // Local coding only
         case leader = "leader"
@@ -29,6 +31,7 @@ class SCConstants {
         case uuid = "uuid"
         case winningTeam = "winning-team"
         case word = "word"
+        case wordCounts = "word-counts"
     }
 
     enum constant: Int {

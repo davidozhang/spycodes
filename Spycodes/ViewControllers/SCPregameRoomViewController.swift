@@ -177,6 +177,7 @@ class SCPregameRoomViewController: SCViewController {
         SCMultipeerManager.instance.broadcast(Room.instance)
         SCMultipeerManager.instance.broadcast(GameMode.instance)
         SCMultipeerManager.instance.broadcast(Timer.instance)
+        SCMultipeerManager.instance.broadcast(Categories.instance)
     }
 
     fileprivate func broadcastEvent(_ eventType: Event.EventType) {
@@ -371,6 +372,8 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
                     Room.instance.getPlayerWithUUID(uuid)?.setIsReady(false)
                 }
             }
+        case let synchronizedObject as Categories:
+            Categories.instance = synchronizedObject
         default:
             break
         }

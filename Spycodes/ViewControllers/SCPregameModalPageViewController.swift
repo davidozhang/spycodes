@@ -16,6 +16,11 @@ class SCPregameModalPageViewController: UIPageViewController {
         ]
     }()
 
+    deinit {
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
+    }
+
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,6 +37,7 @@ class SCPregameModalPageViewController: UIPageViewController {
 
         self.dataSource = nil
         self.delegate = nil
+        self.orderedViewControllers.removeAll()
     }
 }
 
