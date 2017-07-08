@@ -6,8 +6,8 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sectionLabels = [
-        SCStrings.section.teamRed.rawValue,
-        SCStrings.section.teamBlue.rawValue
+        Team.red: SCStrings.section.teamRed.rawValue,
+        Team.blue: SCStrings.section.teamBlue.rawValue
     ]
 
     fileprivate var readyButtonState: ReadyButtonState = .notReady
@@ -435,7 +435,16 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         sectionHeader.delegate = self
 
         sectionHeader.primaryLabel.font = SCFonts.regularSizeFont(.regular)
-        sectionHeader.primaryLabel.text = self.sectionLabels[section]
+
+        if let team = Team(rawValue: section) {
+            sectionHeader.primaryLabel.text = self.sectionLabels[team]
+
+            if team == Player.instance.getTeam() {
+                sectionHeader.showShuffleButton()
+            } else {
+                sectionHeader.hideShuffleButton()
+            }
+        }
 
         if self.tableView.contentOffset.y > 0 {
             sectionHeader.showBlurBackground()
