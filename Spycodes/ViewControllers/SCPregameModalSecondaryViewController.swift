@@ -1,6 +1,8 @@
 import UIKit
 
 class SCPregameModalSecondaryViewController: SCViewController {
+    fileprivate var refreshTimer: Foundation.Timer?
+
     enum Section: Int {
         case categories = 0
     }
@@ -42,6 +44,14 @@ class SCPregameModalSecondaryViewController: SCViewController {
         self.view.isOpaque = false
         self.view.backgroundColor = .clear
 
+        self.refreshTimer = Foundation.Timer.scheduledTimer(
+            timeInterval: 2.0,
+            target: self,
+            selector: #selector(SCPregameModalSecondaryViewController.refreshView),
+            userInfo: nil,
+            repeats: true
+        )
+
         let multilineToggleNib = UINib(nibName: SCConstants.nibs.multilineToggle.rawValue, bundle: nil)
 
         // TODO: Move cell registration into viewDidLoad
@@ -67,6 +77,16 @@ class SCPregameModalSecondaryViewController: SCViewController {
 
         self.tableView.dataSource = nil
         self.tableView.delegate = nil
+
+        self.refreshTimer?.invalidate()
+    }
+
+    // MARK: Private
+    @objc
+    fileprivate func refreshView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 
     fileprivate func showAlert(title: String, reason: String, completionHandler: @escaping ((Void) -> Void)) {
