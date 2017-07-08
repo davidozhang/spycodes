@@ -6,8 +6,8 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sectionLabels = [
-        SCStrings.section.teamRed.rawValue,
-        SCStrings.section.teamBlue.rawValue
+        Team.red: SCStrings.section.teamRed.rawValue,
+        Team.blue: SCStrings.section.teamBlue.rawValue
     ]
 
     fileprivate var readyButtonState: ReadyButtonState = .notReady
@@ -399,6 +399,16 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
     }
 }
 
+// MARK: SCPregameRoomHeaderViewCellDelegate
+extension SCPregameRoomViewController: SCPregameRoomHeaderViewCellDelegate {
+    func onShuffleButtonTapped() {
+        Room.instance.autoAssignLeaderForTeam(
+            Player.instance.getTeam(),
+            shuffle: true
+        )
+    }
+}
+
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -418,12 +428,23 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
         guard let sectionHeader = self.tableView.dequeueReusableCell(
             withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
-            ) as? SCSectionHeaderViewCell else {
+            ) as? SCPregameRoomHeaderViewCell else {
                 return nil
         }
 
+        sectionHeader.delegate = self
+
         sectionHeader.primaryLabel.font = SCFonts.regularSizeFont(.regular)
-        sectionHeader.primaryLabel.text = self.sectionLabels[section]
+
+        if let team = Team(rawValue: section) {
+            sectionHeader.primaryLabel.text = self.sectionLabels[team]
+
+            if team == Player.instance.getTeam() {
+                sectionHeader.showShuffleButton()
+            } else {
+                sectionHeader.hideShuffleButton()
+            }
+        }
 
         if self.tableView.contentOffset.y > 0 {
             sectionHeader.showBlurBackground()

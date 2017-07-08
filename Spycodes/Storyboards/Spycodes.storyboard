@@ -609,7 +609,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="E7U-cE-ebk" userLabel="section-header-view-cell" customClass="SCSectionHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="E7U-cE-ebk" customClass="SCPregameRoomHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E7U-cE-ebk" id="1IL-pn-CxA">
@@ -622,8 +622,21 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ck7-zh-cKq" userLabel="Shuffle Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="990" y="9.5" width="30" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="LJ6-bD-zsm"/>
+                                                        <constraint firstAttribute="height" constant="25" id="iMK-ub-2xW"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Shuffle"/>
+                                                    <connections>
+                                                        <action selector="onShuffleButtonTapped:" destination="E7U-cE-ebk" eventType="touchUpInside" id="4Nn-kg-EZm"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="ck7-zh-cKq" secondAttribute="trailing" constant="4" id="5MP-77-tXT"/>
+                                                <constraint firstItem="ck7-zh-cKq" firstAttribute="centerY" secondItem="1IL-pn-CxA" secondAttribute="centerY" id="EN1-yO-KzV"/>
                                                 <constraint firstItem="kuz-gN-j21" firstAttribute="leading" secondItem="1IL-pn-CxA" secondAttribute="leading" constant="4" id="KFD-El-6Cv"/>
                                                 <constraint firstAttribute="bottom" secondItem="kuz-gN-j21" secondAttribute="bottom" id="VFD-Oc-gPG"/>
                                                 <constraint firstItem="kuz-gN-j21" firstAttribute="top" secondItem="1IL-pn-CxA" secondAttribute="top" id="g0i-Ok-lqN"/>
@@ -631,6 +644,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="primaryLabel" destination="kuz-gN-j21" id="NyP-Dl-55X"/>
+                                            <outlet property="shuffleButton" destination="ck7-zh-cKq" id="bcf-Mr-EXz"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="pregame-room-view-cell" id="PVh-e3-TPn" customClass="SCPregameRoomViewCell" customModule="Spycodes" customModuleProvider="target">
@@ -717,8 +731,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No players on the team yet. Add yourself?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xni-IZ-iQ2" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="0.0" width="319" height="44"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No players on the team yet." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xni-IZ-iQ2" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="0.0" width="209.5" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1751,6 +1765,7 @@
         <image name="Next" width="100" height="100"/>
         <image name="Notification-Dot" width="300" height="300"/>
         <image name="Question" width="100" height="100"/>
+        <image name="Shuffle" width="50" height="50"/>
         <image name="Spy" width="290" height="280"/>
         <image name="Stack" width="100" height="100"/>
         <image name="Team" width="100" height="100"/>
