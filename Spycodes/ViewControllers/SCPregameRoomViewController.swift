@@ -399,6 +399,16 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
     }
 }
 
+// MARK: SCPregameRoomHeaderViewCellDelegate
+extension SCPregameRoomViewController: SCPregameRoomHeaderViewCellDelegate {
+    func onShuffleButtonTapped() {
+        Room.instance.autoAssignLeaderForTeam(
+            Player.instance.getTeam(),
+            shuffle: true
+        )
+    }
+}
+
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -418,9 +428,11 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
         guard let sectionHeader = self.tableView.dequeueReusableCell(
             withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
-            ) as? SCSectionHeaderViewCell else {
+            ) as? SCPregameRoomHeaderViewCell else {
                 return nil
         }
+
+        sectionHeader.delegate = self
 
         sectionHeader.primaryLabel.font = SCFonts.regularSizeFont(.regular)
         sectionHeader.primaryLabel.text = self.sectionLabels[section]
