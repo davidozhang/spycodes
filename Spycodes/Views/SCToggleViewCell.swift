@@ -42,8 +42,28 @@ class SCToggleViewCell: SCTableViewCell {
             case SCConstants.identifier.minigameToggleViewCell.rawValue:
                 toggleSwitch.isOn = GameMode.instance.getMode() == .miniGame
             default:
+                if Player.instance.isHost() {
+                    // Retrieve from local data
+                    if let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {
+                        toggleSwitch.isOn = Categories.instance.isCategorySelected(category: category)
+                    }
+                } else {
+                    // Retrieve from synchronized data
+                    let categoryString = reuseIdentifier
+                    toggleSwitch.isOn = Categories.instance.isSynchronizedCategoryStringSelected(string: categoryString)
+                }
+
                 break
             }
+        }
+    }
+
+    func setEnabled(enabled: Bool) {
+        toggleSwitch.isEnabled = enabled
+        if enabled {
+            self.alpha = 1.0
+        } else {
+            self.alpha = 0.4
         }
     }
 

@@ -2,6 +2,7 @@ import UIKit
 
 class SCModalViewController: SCViewController {
     fileprivate var blurView: UIVisualEffectView?
+    fileprivate var swipeGestureRecognizer: UISwipeGestureRecognizer?
 
     @IBOutlet weak var swipeDownButton: SCImageButton!
     @IBOutlet weak var topBarView: UIView!
@@ -18,15 +19,15 @@ class SCModalViewController: SCViewController {
 
         self.updateModalAppearance()
 
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(
+        self.swipeGestureRecognizer = UISwipeGestureRecognizer(
             target: self,
             action: #selector(
                 SCModalViewController.respondToSwipeGesture(gesture:)
             )
         )
-        swipeGestureRecognizer.direction = .down
-        swipeGestureRecognizer.delegate = self
-        self.view.addGestureRecognizer(swipeGestureRecognizer)
+        self.swipeGestureRecognizer?.direction = .down
+        self.swipeGestureRecognizer?.delegate = self
+        self.view.addGestureRecognizer(self.swipeGestureRecognizer!)
 
         let tapGestureRecognizer = UITapGestureRecognizer(
             target: self,
@@ -35,6 +36,34 @@ class SCModalViewController: SCViewController {
             )
         )
         self.topBarView.addGestureRecognizer(tapGestureRecognizer)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(SCModalViewController.enableSwipeGestureRecognizer),
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue),
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(SCModalViewController.disableSwipeGestureRecognizer),
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.disableSwipeGestureRecognizer.rawValue),
+            object: nil
+        )
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue),
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.disableSwipeGestureRecognizer.rawValue),
+            object: nil
+        )
     }
 
     // MARK: Swipe Gesture Recognizer
@@ -71,5 +100,13 @@ class SCModalViewController: SCViewController {
         self.blurView?.tag = SCConstants.tag.modalBlurView.rawValue
         self.view.addSubview(self.blurView!)
         self.view.sendSubview(toBack: self.blurView!)
+    }
+
+    func enableSwipeGestureRecognizer() {
+        self.swipeGestureRecognizer?.isEnabled = true
+    }
+
+    func disableSwipeGestureRecognizer() {
+        self.swipeGestureRecognizer?.isEnabled = false
     }
 }

@@ -5,8 +5,10 @@ class SCConstants {
         case bestRecord = "best-record"
         case card = "card"
         case cards = "cards"
+        case categories = "categories"
         case clue = "clue"
         case correct = "correct"
+        case emojis = "emojis"
         case eventType = "event-type"
         case hasRead = "has-read"       // Local coding only
         case leader = "leader"
@@ -29,6 +31,7 @@ class SCConstants {
         case uuid = "uuid"
         case winningTeam = "winning-team"
         case word = "word"
+        case wordCounts = "word-counts"
     }
 
     enum constant: Int {
@@ -53,28 +56,41 @@ class SCConstants {
         case mainMenu = "main-menu"
         case mainMenuModal = "main-menu-modal"
         case minigameToggleViewCell = "minigame-toggle-view-cell"
+        case multilineToggleViewCell = "multi-line-toggle-view-cell"
         case nightModeToggleViewCell = "night-mode-toggle-view-cell"
-        case pregameModalContainer = "pregame-modal-container"
+        case pregameModalContainerView = "pregame-modal-container-view"
         case pregameModalMainView = "pregame-modal-main-view"
-        case pregamePageViewController = "pregame-page-view-controller"
+        case pregameModalSecondaryView = "pregame-modal-secondary-view"
+        case pregameModalPageViewController = "pregame-modal-page-view-controller"
         case playerName = "player-name"
         case pregameRoom = "pregame-room"
         case pregameRoomTeamEmptyStateViewCell = "pregame-room-team-empty-state-view-cell"
         case pregameRoomViewCell = "pregame-room-view-cell"
         case releaseNotesViewCell = "release-notes-view-cell"
-        case statisticsViewCell = "statistics-view-cell"
         case sectionHeaderCell = "section-header-view-cell"
         case settings = "settings"
+        case singleLineToggleViewCell = "single-line-toggle-view-cell"
+        case statisticsViewCell = "statistics-view-cell"
         case timelineModal = "timeline-modal"
         case timelineViewCell = "timeline-view-cell"
         case timerSettingViewCell = "timer-setting-view-cell"
         case versionViewCell = "version-view-cell"
     }
 
+    enum nibs: String {
+        case multilineToggle = "SCMultilineToggleViewCell"
+    }
+
     enum notificationKey: String {
-        case updateCollectionView = "update-collection-view"
+        case disableSwipeGestureRecognizer = "disable-swipe-gesture-recognizer"
+        case enableSwipeGestureRecognizer = "enable-swipe-gesture-recognizer"
         case minigameGameOver = "minigame-game-over"
         case timelineUpdated = "timeline-updated"
+        case updateCollectionView = "update-collection-view"
+    }
+
+    enum storyboards: String {
+        case main = "Spycodes"
     }
 
     enum tag: Int {

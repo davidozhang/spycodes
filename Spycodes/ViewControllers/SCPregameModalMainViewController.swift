@@ -43,19 +43,22 @@ class SCPregameModalMainViewController: SCViewController {
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
+
+        self.tableViewBottomSpaceConstraint.constant = 0
+        self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
+        self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
+        self.tableView.layoutIfNeeded()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.view.isOpaque = false
-        self.view.backgroundColor = .clear
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableViewBottomSpaceConstraint.constant = 0
-        self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
-        self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
-        self.tableView.layoutIfNeeded()
+
+        self.view.isOpaque = false
+        self.view.backgroundColor = .clear
 
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 2.0,
@@ -64,6 +67,14 @@ class SCPregameModalMainViewController: SCViewController {
             userInfo: nil,
             repeats: true
         )
+
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue),
+                object: self,
+                userInfo: nil
+            )
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -142,7 +153,7 @@ extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDe
             sectionHeader.primaryLabel.text = self.sectionLabels[section]
         }
 
-        if self.tableView.contentOffset.y > 0 {
+        if self.scrolled {
             sectionHeader.showBlurBackground()
         } else {
             sectionHeader.hideBlurBackground()

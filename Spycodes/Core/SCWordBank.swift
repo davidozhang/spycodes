@@ -11,13 +11,27 @@ class SCWordBank {
         case game = 6
         case garden = 7
         case items = 8
-        case nature = 9
-        case people = 10
-        case places = 11
-        case space = 12
-        case sports = 13
-        case transportation = 14
-        case misc = 15
+        case misc = 9
+        case nature = 10
+        case people = 11
+        case places = 12
+        case space = 13
+        case sports = 14
+        case transportation = 15
+
+        static var count: Int {
+            var count = 0
+            while let _ = Category(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
+
+        static var all: [Category] {
+            return (0..<count).flatMap({
+                Category(rawValue: $0)
+            })
+        }
     }
 
     fileprivate static let bank: [Category: [String]] = [
@@ -79,12 +93,128 @@ class SCWordBank {
     }
 
     static func getShuffledWords() -> [String] {
-        var list = [String]()
-        // TODO: Allow custom categories to be added to shuffling list
-        for (_, value) in SCWordBank.bank {
-            list += value
+        var result = [String]()
+
+        for category in Categories.instance.getSelectedCategories() {
+            if let wordList = SCWordBank.bank[category] {
+                result += wordList
+            }
         }
 
-        return list.choose(SCConstants.constant.cardCount.rawValue)
+        return result.choose(SCConstants.constant.cardCount.rawValue)
+    }
+
+    static func getCategoryString(category: Category) -> String {
+        switch category {
+        case .animals:
+            return SCStrings.category.animals.rawValue
+        case .architecture:
+            return SCStrings.category.architecture.rawValue
+        case .arts:
+            return SCStrings.category.arts.rawValue
+        case .body:
+            return SCStrings.category.body.rawValue
+        case .clothing:
+            return SCStrings.category.clothing.rawValue
+        case .foodAndDrinks:
+            return SCStrings.category.foodAndDrinks.rawValue
+        case .game:
+            return SCStrings.category.game.rawValue
+        case .garden:
+            return SCStrings.category.garden.rawValue
+        case .items:
+            return SCStrings.category.items.rawValue
+        case .nature:
+            return SCStrings.category.nature.rawValue
+        case .people:
+            return SCStrings.category.people.rawValue
+        case .places:
+            return SCStrings.category.places.rawValue
+        case .space:
+            return SCStrings.category.space.rawValue
+        case .sports:
+            return SCStrings.category.sports.rawValue
+        case .transportation:
+            return SCStrings.category.transportation.rawValue
+        case .misc:
+            return SCStrings.category.misc.rawValue
+        }
+    }
+
+    static func getCategoryEmoji(category: Category) -> String {
+        switch category {
+        case .animals:
+            return SCStrings.emoji.animals.rawValue
+        case .architecture:
+            return SCStrings.emoji.architecture.rawValue
+        case .arts:
+            return SCStrings.emoji.arts.rawValue
+        case .body:
+            return SCStrings.emoji.body.rawValue
+        case .clothing:
+            return SCStrings.emoji.clothing.rawValue
+        case .foodAndDrinks:
+            return SCStrings.emoji.foodAndDrinks.rawValue
+        case .game:
+            return SCStrings.emoji.game.rawValue
+        case .garden:
+            return SCStrings.emoji.garden.rawValue
+        case .items:
+            return SCStrings.emoji.items.rawValue
+        case .nature:
+            return SCStrings.emoji.nature.rawValue
+        case .people:
+            return SCStrings.emoji.people.rawValue
+        case .places:
+            return SCStrings.emoji.places.rawValue
+        case .space:
+            return SCStrings.emoji.space.rawValue
+        case .sports:
+            return SCStrings.emoji.sports.rawValue
+        case .transportation:
+            return SCStrings.emoji.transportation.rawValue
+        case .misc:
+            return SCStrings.emoji.misc.rawValue
+        }
+    }
+
+    // Mapping from reuse identifiers to categories
+    static func getCategoryFromString(string: String) -> Category? {
+        switch string {
+        case SCStrings.category.animals.rawValue:
+            return .animals
+        case SCStrings.category.architecture.rawValue:
+            return .architecture
+        case SCStrings.category.arts.rawValue:
+            return .arts
+        case SCStrings.category.body.rawValue:
+            return .body
+        case SCStrings.category.clothing.rawValue:
+            return .clothing
+        case SCStrings.category.foodAndDrinks.rawValue:
+            return .foodAndDrinks
+        case SCStrings.category.game.rawValue:
+            return .game
+        case SCStrings.category.garden.rawValue:
+            return .garden
+        case SCStrings.category.items.rawValue:
+            return .items
+        case SCStrings.category.nature.rawValue:
+            return .nature
+        case SCStrings.category.places.rawValue:
+            return .places
+        case SCStrings.category.people.rawValue:
+            return .people
+        case SCStrings.category.space.rawValue:
+            return .space
+        case SCStrings.category.sports.rawValue:
+            return .sports
+        case SCStrings.category.transportation.rawValue:
+            return .transportation
+        case SCStrings.category.misc.rawValue:
+            return .misc
+        default:
+            return nil
+        }
     }
 }

@@ -44,6 +44,7 @@ class SCMainMenuViewController: SCViewController {
         self.unwindableIdentifier = SCConstants.identifier.mainMenu.rawValue
         self.isRootViewController = true
 
+        Categories.instance.reset()
         Player.instance.reset()
         GameMode.instance.reset()
         Statistics.instance.reset()

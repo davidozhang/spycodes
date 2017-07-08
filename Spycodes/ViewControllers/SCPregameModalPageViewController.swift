@@ -1,20 +1,43 @@
 import UIKit
 
 class SCPregameModalPageViewController: UIPageViewController {
-    static let storyboard = UIStoryboard(name: "Spycodes", bundle: nil)
-    private(set) lazy var orderedViewControllers: [UIViewController] = {
+    static let storyboard = UIStoryboard(name: SCConstants.storyboards.main.rawValue, bundle: nil)
+    static let mainViewController = storyboard.instantiateViewController(
+        withIdentifier: SCConstants.identifier.pregameModalMainView.rawValue
+    )
+    static let secondaryViewController = storyboard.instantiateViewController(
+        withIdentifier: SCConstants.identifier.pregameModalSecondaryView.rawValue
+    )
+
+    fileprivate(set) lazy var orderedViewControllers: [UIViewController] = {
         return [
-            storyboard.instantiateViewController(
-                withIdentifier: SCConstants.identifier.pregameModalMainView.rawValue
-            )
+            SCPregameModalPageViewController.mainViewController,
+            SCPregameModalPageViewController.secondaryViewController
         ]
     }()
 
+    deinit {
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
+    }
+
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.dataSource = self
-        self.setViewControllers(self.orderedViewControllers, direction: .forward, animated: true, completion: nil)
+        self.delegate = self
+
+        if let first = self.orderedViewControllers.first {
+            self.setViewControllers([first], direction: .forward, animated: false, completion: nil)
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.dataSource = nil
+        self.delegate = nil
+        self.orderedViewControllers.removeAll()
     }
 }
 
@@ -63,11 +86,6 @@ extension SCPregameModalPageViewController: UIPageViewControllerDataSource, UIPa
     }
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        guard let firstViewController = viewControllers?.first,
-              let firstViewControllerIndex = self.orderedViewControllers.index(of: firstViewController) else {
-                return 0
-        }
-
-        return firstViewControllerIndex
+        return 0
     }
 }
