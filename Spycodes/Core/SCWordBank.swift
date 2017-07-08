@@ -34,9 +34,7 @@ class SCWordBank {
         }
     }
 
-    static let allCategories = Set(Category.all)
-
-    static let bank: [Category: [String]] = [
+    fileprivate static let bank: [Category: [String]] = [
         .animals: [
             "Alligator", "Bark", "Bear", "Beaver", "Bee", "Bird", "Buffalo", "Bug", "Bunny", "Cat", "Chick", "Chicken", "Cow", "Crow", "Dinosaur", "Dog", "Dragon", "Duck", "Eagle", "Elephant", "Fish", "Flock", "Fly", "Frog", "Gallop", "Goose", "Hawk", "Horse", "Ivory", "Kangaroo", "Koala", "Ladybug", "Lion", "Lizard", "Mammoth", "Mate", "Monster", "Moose", "Moth", "Mouse", "Nest", "Octopus", "Penguin", "Platypus", "Puppy", "Rabbit", "Salmon", "Scorpion", "Seal", "Shark", "Sheep", "Spider", "Tail", "Tiger", "Unicorn", "Wasp", "Whale", "Wolf", "Wool", "Worm", "Zoo"
         ],

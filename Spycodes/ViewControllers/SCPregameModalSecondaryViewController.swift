@@ -32,10 +32,10 @@ class SCPregameModalSecondaryViewController: SCViewController {
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
 
-        let nib = UINib(nibName: SCConstants.nibs.multilineToggle.rawValue, bundle: nil)
+        let multilineToggleNib = UINib(nibName: SCConstants.nibs.multilineToggle.rawValue, bundle: nil)
         for category in SCWordBank.Category.all {
             self.tableView.register(
-                nib,
+                multilineToggleNib,
                 forCellReuseIdentifier: SCWordBank.getCategoryString(category: category)
             )
         }
@@ -148,12 +148,11 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                 SCWordBank.getCategoryString(category: category),
                 SCWordBank.getCategoryEmoji(category: category)
             )
-            if let wordList = SCWordBank.bank[category] {
-                cell.secondaryLabel.text = String(
-                    format: SCStrings.secondaryLabel.numberOfWords.rawValue,
-                    wordList.count
-                )
-            }
+
+            cell.secondaryLabel.text = String(
+                format: SCStrings.secondaryLabel.numberOfWords.rawValue,
+                SCWordBank.getWordCount(category: category)
+            )
 
             cell.delegate = self
 

@@ -34,9 +34,7 @@ class Categories: NSObject, NSCoding {
     func getTotalWords() -> Int {
         var result = 0
         for category in self.categories {
-            if let wordList = SCWordBank.bank[category] {
-                result += wordList.count
-            }
+            result += SCWordBank.getWordCount(category: category)
         }
 
         return result
