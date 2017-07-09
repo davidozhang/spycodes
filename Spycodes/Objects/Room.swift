@@ -232,8 +232,8 @@ class Room: NSObject, NSCoding {
                 // Assign first player as leader
                 self.players[team.rawValue][0].setIsLeader(true)
             } else {
-                // Assign random player index as leader between 0 to team size + 1
-                let randomNumber = arc4random_uniform(UInt32(self.players[team.rawValue].count))
+                // Assign random player index as leader between 1 to team size - 1
+                let randomNumber = arc4random_uniform(UInt32(self.players[team.rawValue].count - 1)) + 1
                 self.players[team.rawValue][Int(randomNumber)].setIsLeader(true)
             }
         }
