@@ -119,6 +119,37 @@ class SCPregameModalSecondaryViewController: SCViewController {
 //  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
+// MARK: SCSectionHeaderViewCellDelegate
+extension SCPregameModalSecondaryViewController: SCSectionHeaderViewCellDelegate {
+    func onSectionHeaderButtonTapped() {}
+}
+
+// MARK: SCToggleViewCellDelegate
+extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
+    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
+        if let reuseIdentifier = cell.reuseIdentifier,
+            let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {
+            if enabled {
+                Categories.instance.addCategory(category: category)
+            } else {
+                Categories.instance.removeCategory(category: category)
+            }
+
+            if Categories.instance.getTotalWords() < SCConstants.constant.cardCount.rawValue {
+                self.showAlert(
+                    title: SCStrings.header.minimumWords.rawValue,
+                    reason: String(format: SCStrings.message.minimumWords.rawValue, SCConstants.constant.cardCount.rawValue),
+                    completionHandler: {
+                        // Revert setting if total word count is less than minimum allowed
+                        cell.toggleSwitch.isOn = !enabled
+                        Categories.instance.addCategory(category: category)
+                }
+                )
+            }
+        }
+    }
+}
+
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -137,6 +168,8 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
         ) as? SCSectionHeaderViewCell else {
                 return nil
         }
+
+        sectionHeader.delegate = self
 
         if let section = Section(rawValue: section) {
             sectionHeader.primaryLabel.text = self.sectionLabels[section]
@@ -272,31 +305,5 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
         }
 
         self.tableView.reloadData()
-    }
-}
-
-// MARK: SCToggleViewCellDelegate
-extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
-    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
-        if let reuseIdentifier = cell.reuseIdentifier,
-           let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {
-            if enabled {
-                Categories.instance.addCategory(category: category)
-            } else {
-                Categories.instance.removeCategory(category: category)
-            }
-
-            if Categories.instance.getTotalWords() < SCConstants.constant.cardCount.rawValue {
-                self.showAlert(
-                    title: SCStrings.header.minimumWords.rawValue,
-                    reason: String(format: SCStrings.message.minimumWords.rawValue, SCConstants.constant.cardCount.rawValue),
-                    completionHandler: {
-                        // Revert setting if total word count is less than minimum allowed
-                        cell.toggleSwitch.isOn = !enabled
-                        Categories.instance.addCategory(category: category)
-                    }
-                )
-            }
-        }
     }
 }
