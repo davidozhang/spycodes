@@ -327,6 +327,8 @@ class SCGameRoomViewController: SCViewController {
                         completion()
                     }
                 })
+
+                return
             }
         }
 
