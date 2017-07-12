@@ -181,6 +181,10 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
 
         sectionHeader.delegate = self
 
+        if !Player.instance.isHost() {
+            sectionHeader.hideButton()
+        }
+
         if let section = Section(rawValue: section) {
             sectionHeader.primaryLabel.text = self.sectionLabels[section]
         }
