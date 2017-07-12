@@ -20,6 +20,22 @@ class SCPregameModalPageViewController: UIPageViewController {
         self.dataSource = self
         self.delegate = self
 
+        switch SCStates.pregameModalPageState {
+        case .main:
+            self.showMainViewController()
+        case .secondary:
+            self.showSecondaryViewController()
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.dataSource = nil
+        self.delegate = nil
+    }
+
+    fileprivate func showMainViewController() {
         self.setViewControllers(
             [SCPregameModalPageViewController.mainViewController],
             direction: .forward,
@@ -28,11 +44,13 @@ class SCPregameModalPageViewController: UIPageViewController {
         )
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        self.dataSource = nil
-        self.delegate = nil
+    fileprivate func showSecondaryViewController() {
+        self.setViewControllers(
+            [SCPregameModalPageViewController.secondaryViewController],
+            direction: .forward,
+            animated: false,
+            completion: nil
+        )
     }
 }
 
@@ -65,6 +83,6 @@ extension SCPregameModalPageViewController: UIPageViewControllerDataSource, UIPa
     }
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return 0
+        return SCStates.pregameModalPageState.rawValue
     }
 }

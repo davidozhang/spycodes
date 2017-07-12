@@ -54,6 +54,8 @@ class SCPregameModalMainViewController: SCViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        SCStates.pregameModalPageState = .main
+
         self.tableView.dataSource = self
         self.tableView.delegate = self
 

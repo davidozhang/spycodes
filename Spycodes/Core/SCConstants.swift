@@ -95,6 +95,7 @@ class SCConstants {
         case enableSwipeGestureRecognizer = "enable-swipe-gesture-recognizer"
         case intent = "intent"
         case minigameGameOver = "minigame-game-over"
+        case pregameModal = "pregame-modal"
         case timelineUpdated = "timeline-updated"
         case updateCollectionView = "update-collection-view"
     }

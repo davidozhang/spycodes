@@ -49,6 +49,7 @@ class SCMainMenuViewController: SCViewController {
         GameMode.instance.reset()
         Statistics.instance.reset()
         Room.instance.reset()
+        SCStates.reset()
     }
 
     override func didReceiveMemoryWarning() {

@@ -117,6 +117,15 @@ class SCPregameRoomViewController: SCViewController {
             ),
             object: nil
         )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(SCPregameRoomViewController.showPregameModalView),
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.pregameModal.rawValue
+            ),
+            object: nil
+        )
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -133,6 +142,14 @@ class SCPregameRoomViewController: SCViewController {
             self,
             name: NSNotification.Name(
                 rawValue: SCConstants.notificationKey.customCategory.rawValue
+            ),
+            object: nil
+        )
+
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.pregameModal.rawValue
             ),
             object: nil
         )
@@ -162,6 +179,13 @@ class SCPregameRoomViewController: SCViewController {
         )
     }
 
+    func showPregameModalView() {
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.pregameModalContainerView.rawValue,
+            sender: self
+        )
+    }
+
     // MARK: SCViewController Overrides
     override func applicationDidBecomeActive() {
         self.animateReadyButtonIfNeeded()
@@ -176,10 +200,7 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     override func swipeUp() {
-        self.performSegue(
-            withIdentifier: SCConstants.identifier.pregameModalContainerView.rawValue,
-            sender: self
-        )
+        self.showPregameModalView()
     }
 
     // MARK: Private

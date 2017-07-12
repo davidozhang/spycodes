@@ -2,11 +2,11 @@ import UIKit
 
 class SCCustomCategoryModalViewController: SCModalViewController {
     @IBAction func onCancelButtonTapped(_ sender: Any) {
-        super.onDismissal()
+        self.dismissView()
     }
 
     @IBAction func onDoneButtonTapped(_ sender: Any) {
-        super.onDismissal()
+        self.dismissView()
     }
 
     deinit {
@@ -18,5 +18,15 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         super.viewWillAppear(animated)
 
         super.disableSwipeGestureRecognizer()
+    }
+
+    fileprivate func dismissView() {
+        super.onDismissalWithCompletion {
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: SCConstants.notificationKey.pregameModal.rawValue),
+                object: self,
+                userInfo: nil
+            )
+        }
     }
 }
