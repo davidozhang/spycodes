@@ -77,6 +77,11 @@ class SCConstants {
         case versionViewCell = "version-view-cell"
     }
 
+    enum images: String {
+        case shuffle = "Shuffle"
+        case markAsRead = "Mark-As-Read"
+    }
+
     enum nibs: String {
         case multilineToggle = "SCMultilineToggleViewCell"
     }

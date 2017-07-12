@@ -387,6 +387,16 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
     }
 }
 
+// MARK: SCSectionHeaderViewCellDelegate
+extension SCPregameRoomViewController: SCSectionHeaderViewCellDelegate {
+    func onSectionHeaderButtonTapped() {
+        Room.instance.autoAssignLeaderForTeam(
+            Player.instance.getTeam(),
+            shuffle: true
+        )
+    }
+}
+
 // MARK: SCPregameRoomViewCellDelegate
 extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
     func teamUpdatedForPlayerWithUUID(_ uuid: String, newTeam: Team) {
@@ -396,16 +406,6 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
             Room.instance.addPlayer(player, team: newTeam)
             SCMultipeerManager.instance.broadcast(Room.instance)
         }
-    }
-}
-
-// MARK: SCPregameRoomHeaderViewCellDelegate
-extension SCPregameRoomViewController: SCPregameRoomHeaderViewCellDelegate {
-    func onShuffleButtonTapped() {
-        Room.instance.autoAssignLeaderForTeam(
-            Player.instance.getTeam(),
-            shuffle: true
-        )
     }
 }
 
@@ -428,11 +428,12 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
 
         guard let sectionHeader = self.tableView.dequeueReusableCell(
             withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
-            ) as? SCPregameRoomHeaderViewCell else {
+            ) as? SCSectionHeaderViewCell else {
                 return nil
         }
 
         sectionHeader.delegate = self
+        sectionHeader.setButtonImage(name: SCConstants.images.shuffle.rawValue)
 
         sectionHeader.primaryLabel.font = SCFonts.regularSizeFont(.regular)
 
@@ -440,9 +441,9 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             sectionHeader.primaryLabel.text = self.sectionLabels[team]
 
             if team == Player.instance.getTeam() {
-                sectionHeader.showShuffleButton()
+                sectionHeader.showButton()
             } else {
-                sectionHeader.hideShuffleButton()
+                sectionHeader.hideButton()
             }
         }
 

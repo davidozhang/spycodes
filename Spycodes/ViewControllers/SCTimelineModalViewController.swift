@@ -99,9 +99,9 @@ class SCTimelineModalViewController: SCModalViewController {
 //  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
-// MARK: SCTimelineHeaderViewCellDelegate
-extension SCTimelineModalViewController: SCTimelineHeaderViewCellDelegate {
-    func onMarkAsReadButtonTapped() {
+// MARK: SCSectionHeaderViewCellDelegate
+extension SCTimelineModalViewController: SCSectionHeaderViewCellDelegate {
+    func onSectionHeaderButtonTapped() {
         Timeline.instance.markAllAsRead()
         self.tableView.reloadData()
     }
@@ -129,6 +129,7 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
         }
 
         timelineHeader.delegate = self
+        timelineHeader.setButtonImage(name: SCConstants.images.markAsRead.rawValue)
 
         if Timeline.instance.hasUnreadEvents() {
             timelineHeader.showNotificationDot()
@@ -139,7 +140,7 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
         timelineHeader.primaryLabel.font = SCFonts.regularSizeFont(.regular)
         timelineHeader.primaryLabel.text = SCStrings.section.timeline.rawValue
 
-        if self.tableView.contentOffset.y > 0 {
+        if self.scrolled {
             timelineHeader.showBlurBackground()
         } else {
             timelineHeader.hideBlurBackground()
