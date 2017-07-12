@@ -611,6 +611,10 @@
                             <constraint firstAttribute="trailing" secondItem="xdd-Y8-ggn" secondAttribute="trailing" id="bNd-Z6-Ebj"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="nBT-hy-n0v" id="Loi-jN-BVT"/>
+                        <outlet property="doneButton" destination="AV7-5B-oBI" id="Hwn-Y1-4l8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R6t-IT-bKz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

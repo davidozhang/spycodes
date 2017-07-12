@@ -1,6 +1,9 @@
 import UIKit
 
 class SCCustomCategoryModalViewController: SCModalViewController {
+    @IBOutlet weak var cancelButton: SCTextButton!
+    @IBOutlet weak var doneButton: SCTextButton!
+
     @IBAction func onCancelButtonTapped(_ sender: Any) {
         self.dismissView()
     }
@@ -17,6 +20,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.doneButton.setBoldTitleFont()
         super.disableSwipeGestureRecognizer()
     }
 
