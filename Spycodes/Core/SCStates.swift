@@ -26,13 +26,11 @@ enum PregameModalPageState: Int {
 class SCStates {
     static var actionButtonState: ActionButtonState = .endRound
     static var readyButtonState: ReadyButtonState = .notReady
-    static var timerState: TimerState = .stopped
     static var pregameModalPageState: PregameModalPageState = .main
 
     static func reset() {
         SCStates.actionButtonState = .endRound
         SCStates.readyButtonState = .notReady
-        SCStates.timerState = .stopped
         SCStates.pregameModalPageState = .main
     }
 }
