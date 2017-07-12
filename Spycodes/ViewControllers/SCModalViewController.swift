@@ -29,13 +29,16 @@ class SCModalViewController: SCViewController {
         self.swipeGestureRecognizer?.delegate = self
         self.view.addGestureRecognizer(self.swipeGestureRecognizer!)
 
-        let tapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(
-                SCModalViewController.onDismissal
+        if let _ = self.topBarView {
+            let tapGestureRecognizer = UITapGestureRecognizer(
+                target: self,
+                action: #selector(
+                    SCModalViewController.onDismissal
+                )
             )
-        )
-        self.topBarView.addGestureRecognizer(tapGestureRecognizer)
+
+            self.topBarView.addGestureRecognizer(tapGestureRecognizer)
+        }
 
         NotificationCenter.default.addObserver(
             self,
@@ -68,13 +71,19 @@ class SCModalViewController: SCViewController {
 
     // MARK: Swipe Gesture Recognizer
     func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
-        self.onDismissal()
+        if let recognizer = self.swipeGestureRecognizer, recognizer.isEnabled {
+            self.onDismissalWithCompletion(completion: nil)
+        }
     }
 
     // MARK: SCModalViewController-Only Functions
     func onDismissal() {
+        self.onDismissalWithCompletion(completion: nil)
+    }
+
+    func onDismissalWithCompletion(completion: ((Void) -> Void)?) {
         DispatchQueue.main.async {
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: completion)
         }
     }
 

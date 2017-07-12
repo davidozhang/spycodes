@@ -253,6 +253,8 @@ class SCGameRoomViewController: SCViewController {
                     height: 0
                 )
             }
+        } else {
+            super._prepareForSegue(segue, sender: self)
         }
     }
 

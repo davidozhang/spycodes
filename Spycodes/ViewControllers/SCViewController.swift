@@ -163,6 +163,12 @@ class SCViewController: UIViewController {
             return
         }
 
+        // By default, present modal view controllers over current context
+        if let destination = segue.destination as? SCModalViewController {
+            destination.modalPresentationStyle = .overCurrentContext
+            return
+        }
+
         if let destination = segue.destination as? SCViewController {
             destination.previousViewControllerIdentifier = self.unwindableIdentifier
         }

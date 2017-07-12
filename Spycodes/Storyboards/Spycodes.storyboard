@@ -121,7 +121,7 @@
                     <connections>
                         <outlet property="modalPeekView" destination="nVj-tx-bo9" id="qlw-TL-Mg7"/>
                         <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
-                        <segue destination="oCs-d3-UDI" kind="presentation" identifier="main-menu-modal" modalPresentationStyle="overCurrentContext" id="cpV-DQ-cDx"/>
+                        <segue destination="oCs-d3-UDI" kind="presentation" identifier="main-menu-modal" id="cpV-DQ-cDx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -563,6 +563,59 @@
             </objects>
             <point key="canvasLocation" x="1013" y="338"/>
         </scene>
+        <!--Custom Category Modal View Controller-->
+        <scene sceneID="dnD-uW-8F5">
+            <objects>
+                <viewController storyboardIdentifier="custom-category-view-controller" id="gDu-LU-Che" customClass="SCCustomCategoryModalViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gab-Hm-sVu"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yk6-ov-0Jb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="p3l-BQ-RCd">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdd-Y8-ggn" userLabel="Top Bar View">
+                                <rect key="frame" x="0.0" y="28" width="1024" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nBT-hy-n0v" customClass="SCTextButton" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="30" y="0.0" width="48" height="30"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="onCancelButtonTapped:" destination="gDu-LU-Che" eventType="touchUpInside" id="8YY-u5-WZa"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AV7-5B-oBI" customClass="SCTextButton" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="957" y="0.0" width="37" height="30"/>
+                                        <state key="normal" title="Done"/>
+                                        <connections>
+                                            <action selector="onDoneButtonTapped:" destination="gDu-LU-Che" eventType="touchUpInside" id="6uK-Sd-hXA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="nBT-hy-n0v" secondAttribute="bottom" id="Aen-il-RCG"/>
+                                    <constraint firstItem="nBT-hy-n0v" firstAttribute="top" secondItem="xdd-Y8-ggn" secondAttribute="top" id="CCd-70-SZz"/>
+                                    <constraint firstItem="nBT-hy-n0v" firstAttribute="leading" secondItem="xdd-Y8-ggn" secondAttribute="leading" constant="30" id="ULh-ue-dv3"/>
+                                    <constraint firstItem="AV7-5B-oBI" firstAttribute="top" secondItem="xdd-Y8-ggn" secondAttribute="top" id="cKl-Wf-722"/>
+                                    <constraint firstAttribute="bottom" secondItem="AV7-5B-oBI" secondAttribute="bottom" id="h9Y-c7-OBE"/>
+                                    <constraint firstAttribute="trailing" secondItem="AV7-5B-oBI" secondAttribute="trailing" constant="30" id="zse-wM-yPX"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xdd-Y8-ggn" firstAttribute="leading" secondItem="p3l-BQ-RCd" secondAttribute="leading" id="ClX-Kb-GZT"/>
+                            <constraint firstItem="xdd-Y8-ggn" firstAttribute="top" secondItem="gab-Hm-sVu" secondAttribute="bottom" constant="8" id="Y0F-yG-pUU"/>
+                            <constraint firstAttribute="trailing" secondItem="xdd-Y8-ggn" secondAttribute="trailing" id="bNd-Z6-Ebj"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R6t-IT-bKz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1826" y="-508"/>
+        </scene>
         <!--Pregame Room View Controller-->
         <scene sceneID="xkD-W1-Ufh">
             <objects>
@@ -814,7 +867,8 @@
                         <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-room" id="pzx-vK-usD"/>
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="4eT-dC-kfX"/>
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="access-code" unwindAction="unwindToAccessCode:" id="v3W-bc-vVR"/>
-                        <segue destination="Bsc-BJ-zGX" kind="presentation" identifier="pregame-modal-container-view" modalPresentationStyle="overCurrentContext" id="CKf-j2-Ls6"/>
+                        <segue destination="Bsc-BJ-zGX" kind="presentation" identifier="pregame-modal-container-view" id="CKf-j2-Ls6"/>
+                        <segue destination="gDu-LU-Che" kind="presentation" identifier="custom-category" id="NwO-x4-uMo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lDc-cz-jrN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1661,7 +1715,7 @@
                         <segue destination="e9C-iv-SDh" kind="popoverPresentation" identifier="help-view" popoverAnchorView="udo-t2-F4l" id="eZC-mV-Lzl">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
-                        <segue destination="HuE-xd-fYV" kind="presentation" identifier="timeline-modal" modalPresentationStyle="overCurrentContext" id="1wN-tv-5na"/>
+                        <segue destination="HuE-xd-fYV" kind="presentation" identifier="timeline-modal" id="1wN-tv-5na"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfM-Nb-l9K" userLabel="First Responder" sceneMemberID="firstResponder"/>

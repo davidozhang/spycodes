@@ -48,6 +48,8 @@ class SCConstants {
     enum identifier: String {
         case accessCode = "access-code"
         case accessibilityToggleViewCell = "accessibility-toggle-view-cell"
+        case customCategory = "custom-category"
+        case customCategoryViewController = "custom-category-view-controller"
         case disclosureViewCell = "disclosure-view-cell"
         case gameRoom = "game-room"
         case gameRoomViewCell = "game-room-view-cell"
@@ -87,8 +89,11 @@ class SCConstants {
     }
 
     enum notificationKey: String {
+        case customCategory = "custom-category-view"
         case disableSwipeGestureRecognizer = "disable-swipe-gesture-recognizer"
+        case dismissModal = "dismiss-modal"
         case enableSwipeGestureRecognizer = "enable-swipe-gesture-recognizer"
+        case intent = "intent"
         case minigameGameOver = "minigame-game-over"
         case timelineUpdated = "timeline-updated"
         case updateCollectionView = "update-collection-view"

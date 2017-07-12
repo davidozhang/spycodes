@@ -108,6 +108,15 @@ class SCPregameRoomViewController: SCViewController {
         self.resetReadyButton()
 
         Timeline.instance.reset()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(SCPregameRoomViewController.showCustomCategoryView),
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.customCategory.rawValue
+            ),
+            object: nil
+        )
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -119,6 +128,14 @@ class SCPregameRoomViewController: SCViewController {
             self.broadcastTimer?.invalidate()
         }
         self.refreshTimer?.invalidate()
+
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.customCategory.rawValue
+            ),
+            object: nil
+        )
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -135,6 +152,14 @@ class SCPregameRoomViewController: SCViewController {
     // MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super._prepareForSegue(segue, sender: sender)
+        self.resetReadyButton()
+    }
+
+    func showCustomCategoryView() {
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.customCategory.rawValue,
+            sender: self
+        )
     }
 
     // MARK: SCViewController Overrides
@@ -151,7 +176,6 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     override func swipeUp() {
-        self.resetReadyButton()
         self.performSegue(
             withIdentifier: SCConstants.identifier.pregameModalContainerView.rawValue,
             sender: self

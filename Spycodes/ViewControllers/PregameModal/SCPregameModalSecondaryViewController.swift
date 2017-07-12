@@ -121,7 +121,15 @@ class SCPregameModalSecondaryViewController: SCViewController {
 
 // MARK: SCSectionHeaderViewCellDelegate
 extension SCPregameModalSecondaryViewController: SCSectionHeaderViewCellDelegate {
-    func onSectionHeaderButtonTapped() {}
+    func onSectionHeaderButtonTapped() {
+        NotificationCenter.default.post(
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.dismissModal.rawValue),
+            object: self,
+            userInfo: [
+                SCConstants.notificationKey.intent.rawValue: SCConstants.notificationKey.customCategory.rawValue
+            ]
+        )
+    }
 }
 
 // MARK: SCToggleViewCellDelegate
