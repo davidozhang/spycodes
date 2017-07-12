@@ -239,6 +239,7 @@ class Room: NSObject, NSCoding {
 
                 let randomNumber = arc4random_uniform(UInt32(self.players[team.rawValue].count - 1)) + 1
                 self.players[team.rawValue][Int(randomNumber)].setIsLeader(true)
+                SCMultipeerManager.instance.broadcast(self)
             }
         }
     }
