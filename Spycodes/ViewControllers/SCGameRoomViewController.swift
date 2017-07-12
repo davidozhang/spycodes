@@ -315,15 +315,19 @@ class SCGameRoomViewController: SCViewController {
     }
 
     fileprivate func dismissPresentedViewIfNeeded(completion: (() -> Void)?) {
-        if let _ = self.presentedViewController {
-            self.presentedViewController?.dismiss(animated: true, completion: {
-                if let completion = completion {
-                    super.hideDimView()
-                    completion()
-                }
-            })
-
-            return
+        if let presentedViewController = self.presentedViewController {
+            switch presentedViewController {
+            case _ as UIAlertController:
+                // Don't dismiss already presented alert controller
+                return
+            default:
+                self.presentedViewController?.dismiss(animated: true, completion: {
+                    if let completion = completion {
+                        super.hideDimView()
+                        completion()
+                    }
+                })
+            }
         }
 
         if let completion = completion {
