@@ -115,9 +115,11 @@ class SCStrings {
     enum primaryLabel: String {
         case accessibility = "Accessibility"
         case category = "%@ %@"
+        case emoji = "Emoji"
         case icons8 = "Icons8"
         case github = "Github"
         case minigame = "Minigame"
+        case name = "Name"
         case nightMode = "Night Mode"
         case releaseNotes = "Release Notes"
         case reviewApp = "Review App"
@@ -147,10 +149,12 @@ class SCStrings {
         case gameSettings = "Game Settings"
         case info = "Info"
         case more = "More"
+        case settings = "Category Settings"
         case statistics = "Statistics"
         case teamRed = "Team Red"
         case teamBlue = "Team Blue"
         case timeline = "Timeline"
+        case wordList = "Word List"
     }
 
     enum status: String {
