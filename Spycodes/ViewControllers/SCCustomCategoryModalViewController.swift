@@ -8,7 +8,6 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     enum Setting: Int {
         case name = 0
-        case emoji = 1
     }
 
     fileprivate let sectionLabels: [Section: String] = [
@@ -18,7 +17,6 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     fileprivate let settingsLabels: [Setting: String] = [
         .name: SCStrings.primaryLabel.minigame.rawValue,
-        .emoji: SCStrings.primaryLabel.emoji.rawValue,
     ]
 
     fileprivate var scrolled = false
@@ -121,7 +119,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
         case Section.settings.rawValue:
-            return 2
+            return settingsLabels.count
         case Section.words.rawValue:
             return 0
         default:
@@ -142,15 +140,6 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                 }
 
                 cell.primaryLabel.text = SCStrings.primaryLabel.name.rawValue
-                return cell
-            case Setting.emoji.rawValue:
-                guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.emojiSettingViewCell.rawValue
-                    ) as? SCPickerViewCell else {
-                        return SCTableViewCell()
-                }
-
-                cell.primaryLabel.text = SCStrings.primaryLabel.emoji.rawValue
                 return cell
             default:
                 return SCTableViewCell()

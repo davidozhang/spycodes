@@ -51,7 +51,6 @@ class SCConstants {
         case customCategory = "custom-category"
         case customCategoryViewController = "custom-category-view-controller"
         case disclosureViewCell = "disclosure-view-cell"
-        case emojiSettingViewCell = "emoji-setting-view-cell"
         case gameRoom = "game-room"
         case gameRoomViewCell = "game-room-view-cell"
         case helpView = "help-view"

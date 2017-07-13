@@ -77,9 +77,6 @@ class SCPickerViewCell: SCTableViewCell {
                 self.textField.text = SCStrings.timer.disabled.rawValue
                 self.pickerView.selectRow(SCPickerViewCell.disabledOptionRow, inComponent: 0, animated: false)
             }
-        case SCConstants.identifier.emojiSettingViewCell.rawValue:
-            self.textField.text = SCStrings.emoji.disabled.rawValue
-            self.pickerView.selectRow(SCPickerViewCell.disabledOptionRow, inComponent: 0, animated: false)
         default:
             break
         }
@@ -108,9 +105,6 @@ class SCPickerViewCell: SCTableViewCell {
             }
 
             SCMultipeerManager.instance.broadcast(Timer.instance)
-        case SCConstants.identifier.emojiSettingViewCell.rawValue:
-            // TODO: Insert logic for synchronizing emoji setting
-            break
         default:
             break
         }
@@ -145,8 +139,6 @@ extension SCPickerViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
         switch reuseIdentifier {
         case SCConstants.identifier.timerSettingViewCell.rawValue:
             return 11
-        case SCConstants.identifier.emojiSettingViewCell.rawValue:
-            return 1
         default:
             return 0
         }
@@ -164,10 +156,6 @@ extension SCPickerViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
                 self.textField.text = SCStrings.timer.disabled.rawValue
             } else {
                 self.textField.text = String(format: SCStrings.timer.minutes.rawValue, row)
-            }
-        case SCConstants.identifier.emojiSettingViewCell.rawValue:
-            if row == SCPickerViewCell.disabledOptionRow {
-                self.textField.text = SCStrings.emoji.disabled.rawValue
             }
         default:
             return
@@ -187,10 +175,6 @@ extension SCPickerViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
                 baseString = SCStrings.timer.disabled.rawValue
             } else {
                 baseString = String(format: SCStrings.timer.minutes.rawValue, row)
-            }
-        case SCConstants.identifier.emojiSettingViewCell.rawValue:
-            if row == SCPickerViewCell.disabledOptionRow {
-                baseString = SCStrings.emoji.disabled.rawValue
             }
         default:
             break
