@@ -136,7 +136,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
             switch indexPath.row {
             case Setting.name.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.nameViewCell.rawValue
+                    withIdentifier: SCConstants.identifier.nameSettingViewCell.rawValue
                     ) as? SCTableViewCell else {
                         return SCTableViewCell()
                 }
@@ -145,8 +145,8 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                 return cell
             case Setting.emoji.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.emojiViewCell.rawValue
-                    ) as? SCTableViewCell else {
+                    withIdentifier: SCConstants.identifier.emojiSettingViewCell.rawValue
+                    ) as? SCPickerViewCell else {
                         return SCTableViewCell()
                 }
 

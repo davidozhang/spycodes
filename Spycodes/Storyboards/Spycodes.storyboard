@@ -631,11 +631,11 @@
                                             <outlet property="primaryLabel" destination="x7Q-B5-aBL" id="T6n-6h-1oR"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="name-view-cell" id="PpO-Qg-y8F" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="name-setting-view-cell" id="PpO-Qg-y8F" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PpO-Qg-y8F" id="LB6-1G-eDA">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xe-JU-OVw" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
@@ -654,7 +654,7 @@
                                             <outlet property="primaryLabel" destination="0xe-JU-OVw" id="iFM-Lm-cbd"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="emoji-view-cell" id="5Oc-0B-fCL" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="emoji-setting-view-cell" id="5Oc-0B-fCL" customClass="SCPickerViewCell" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Oc-0B-fCL" id="KWt-PG-39c">
@@ -667,6 +667,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="None" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZiC-oA-Imq" customClass="SCTextField" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="985" y="13.5" width="39" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="g3i-KP-9J0" firstAttribute="leading" secondItem="KWt-PG-39c" secondAttribute="leading" constant="4" id="Kte-yq-1mK"/>
@@ -675,6 +682,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="primaryLabel" destination="g3i-KP-9J0" id="faY-1g-osC"/>
+                                            <outlet property="textField" destination="ZiC-oA-Imq" id="zH4-7i-qwp"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1200,7 +1208,7 @@
                                             <outlet property="secondaryLabel" destination="9Uq-rt-f0n" id="LxK-1d-tqj"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-setting-view-cell" rowHeight="58" id="l3e-qQ-33L" userLabel="timer-setting-view-cell" customClass="SCTimerSettingViewCell" customModule="Spycodes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-setting-view-cell" rowHeight="58" id="l3e-qQ-33L" userLabel="timer-setting-view-cell" customClass="SCPickerViewCell" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="262" width="1024" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l3e-qQ-33L" id="Ncp-AL-EVA">
@@ -1251,7 +1259,7 @@
                                         <connections>
                                             <outlet property="primaryLabel" destination="YZG-zH-Psm" id="caY-mx-AP8"/>
                                             <outlet property="secondaryLabel" destination="p2M-vo-mDP" id="oKN-w2-gqy"/>
-                                            <outlet property="timerDurationTextField" destination="bGU-cV-qD6" id="p4R-4u-Q7Y"/>
+                                            <outlet property="textField" destination="bGU-cV-qD6" id="bFL-Dx-Ihg"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="accessibility-toggle-view-cell" id="ckn-v3-Ye3" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
@@ -1297,7 +1305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xf9-Nj-Ho2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1826" y="2749"/>
+            <point key="canvasLocation" x="1825.7812499999998" y="2748.7554904831622"/>
         </scene>
         <!--Pregame Modal Secondary View Controller-->
         <scene sceneID="jkV-qk-FcC">

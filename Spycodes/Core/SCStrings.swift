@@ -52,6 +52,7 @@ class SCStrings {
         case sports = "⚽️"
         case transportation = "✈️"
         case misc = "❓"
+        case disabled = "None"
     }
 
     enum header: String {

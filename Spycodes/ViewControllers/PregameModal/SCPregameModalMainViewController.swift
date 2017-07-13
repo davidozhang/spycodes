@@ -241,7 +241,7 @@ extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDe
             case GameSetting.timer.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.timerSettingViewCell.rawValue
-                    ) as? SCTimerSettingViewCell else {
+                    ) as? SCPickerViewCell else {
                         return SCTableViewCell()
                 }
 
@@ -310,12 +310,12 @@ extension SCPregameModalMainViewController: SCToggleViewCellDelegate {
     }
 }
 
-extension SCPregameModalMainViewController: SCTimerSettingViewCellDelegate {
-    func onTimerDurationTapped() {
+extension SCPregameModalMainViewController: SCPickerViewCellDelegate {
+    func onPickerTapped() {
         self.inputMode = true
     }
     
-    func onTimerDurationDismissed() {
+    func onPickerDismissed() {
         self.inputMode = false
     }
 }
