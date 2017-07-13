@@ -108,6 +108,10 @@ class SCStrings {
         case updatePrompt = "Please download the latest version of Spycodes."
     }
 
+    enum navigationItem: String {
+        case newCategory = "New Category"
+    }
+
     enum player: String {
         case cpu = "CPU"
         case localPlayer = "You"

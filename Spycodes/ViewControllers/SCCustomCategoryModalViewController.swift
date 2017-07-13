@@ -22,13 +22,12 @@ class SCCustomCategoryModalViewController: SCModalViewController {
     fileprivate var scrolled = false
     fileprivate var inputMode = false
 
+    fileprivate var blurView: UIVisualEffectView?
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
-
-    @IBOutlet weak var cancelButton: SCTextButton!
-    @IBOutlet weak var doneButton: SCTextButton!
 
     @IBAction func onCancelButtonTapped(_ sender: Any) {
         self.dismissView()
@@ -46,13 +45,31 @@ class SCCustomCategoryModalViewController: SCModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.automaticallyAdjustsScrollViewInsets = false
+
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
 
         self.tableViewBottomSpaceConstraint.constant = 0
-        self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
-        self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
+        self.tableViewLeadingSpaceConstraint.constant = 8
+        self.tableViewTrailingSpaceConstraint.constant = 8
         self.tableView.layoutIfNeeded()
+
+        // Navigation bar customization
+        if let bounds = self.navigationController?.navigationBar.bounds {
+            if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+                self.navigationController?.navigationBar.barStyle = .blackTranslucent
+                return
+            }
+
+            self.blurView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+            self.navigationController?.navigationBar.isTranslucent = true
+            self.navigationController?.navigationBar.backgroundColor = .clear
+            self.blurView?.frame = CGRect(x: 0, y: -20, width: bounds.width, height: bounds.height + 20)
+            self.blurView?.tag = SCConstants.tag.navigationBarBlurView.rawValue
+            self.navigationController?.navigationBar.addSubview(self.blurView!)
+            self.navigationController?.navigationBar.sendSubview(toBack: self.blurView!)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,7 +78,6 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
 
-        self.doneButton.setBoldTitleFont()
         super.disableSwipeGestureRecognizer()
     }
 

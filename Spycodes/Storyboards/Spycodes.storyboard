@@ -563,10 +563,10 @@
             </objects>
             <point key="canvasLocation" x="1013" y="338"/>
         </scene>
-        <!--Custom Category Modal View Controller-->
+        <!--Custom Category-->
         <scene sceneID="dnD-uW-8F5">
             <objects>
-                <viewController storyboardIdentifier="custom-category-view-controller" id="gDu-LU-Che" customClass="SCCustomCategoryModalViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="custom-category-view-controller" automaticallyAdjustsScrollViewInsets="NO" id="gDu-LU-Che" customClass="SCCustomCategoryModalViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gab-Hm-sVu"/>
                         <viewControllerLayoutGuide type="bottom" id="Yk6-ov-0Jb"/>
@@ -575,36 +575,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdd-Y8-ggn" userLabel="Top Bar View">
-                                <rect key="frame" x="0.0" y="28" width="1024" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nBT-hy-n0v" customClass="SCTextButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="30" y="0.0" width="48" height="30"/>
-                                        <state key="normal" title="Cancel"/>
-                                        <connections>
-                                            <action selector="onCancelButtonTapped:" destination="gDu-LU-Che" eventType="touchUpInside" id="8YY-u5-WZa"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AV7-5B-oBI" customClass="SCTextButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="957" y="0.0" width="37" height="30"/>
-                                        <state key="normal" title="Done"/>
-                                        <connections>
-                                            <action selector="onDoneButtonTapped:" destination="gDu-LU-Che" eventType="touchUpInside" id="6uK-Sd-hXA"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="nBT-hy-n0v" secondAttribute="bottom" id="Aen-il-RCG"/>
-                                    <constraint firstItem="nBT-hy-n0v" firstAttribute="top" secondItem="xdd-Y8-ggn" secondAttribute="top" id="CCd-70-SZz"/>
-                                    <constraint firstItem="nBT-hy-n0v" firstAttribute="leading" secondItem="xdd-Y8-ggn" secondAttribute="leading" constant="30" id="ULh-ue-dv3"/>
-                                    <constraint firstItem="AV7-5B-oBI" firstAttribute="top" secondItem="xdd-Y8-ggn" secondAttribute="top" id="cKl-Wf-722"/>
-                                    <constraint firstAttribute="bottom" secondItem="AV7-5B-oBI" secondAttribute="bottom" id="h9Y-c7-OBE"/>
-                                    <constraint firstAttribute="trailing" secondItem="AV7-5B-oBI" secondAttribute="trailing" constant="30" id="zse-wM-yPX"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BSL-jj-YPR">
-                                <rect key="frame" x="0.0" y="58" width="1024" height="1308"/>
+                                <rect key="frame" x="0.0" y="72" width="1024" height="1294"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="5TT-Lb-ozq" userLabel="section-header-view-cell" customClass="SCSectionHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
@@ -660,17 +632,24 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="BSL-jj-YPR" secondAttribute="trailing" id="CYe-gF-wiR"/>
-                            <constraint firstItem="xdd-Y8-ggn" firstAttribute="leading" secondItem="p3l-BQ-RCd" secondAttribute="leading" id="ClX-Kb-GZT"/>
-                            <constraint firstItem="BSL-jj-YPR" firstAttribute="top" secondItem="xdd-Y8-ggn" secondAttribute="bottom" id="EoH-Ks-0XP"/>
-                            <constraint firstItem="xdd-Y8-ggn" firstAttribute="top" secondItem="gab-Hm-sVu" secondAttribute="bottom" constant="8" id="Y0F-yG-pUU"/>
-                            <constraint firstAttribute="trailing" secondItem="xdd-Y8-ggn" secondAttribute="trailing" id="bNd-Z6-Ebj"/>
                             <constraint firstItem="BSL-jj-YPR" firstAttribute="leading" secondItem="p3l-BQ-RCd" secondAttribute="leading" id="jCB-7D-wcA"/>
                             <constraint firstAttribute="bottom" secondItem="BSL-jj-YPR" secondAttribute="bottom" id="wbL-76-M7X"/>
+                            <constraint firstItem="BSL-jj-YPR" firstAttribute="top" secondItem="gab-Hm-sVu" secondAttribute="bottom" constant="8" id="xne-ix-uja"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Custom Category" id="pLN-IC-lgQ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="A9e-Gd-I8I">
+                            <connections>
+                                <action selector="onCancelButtonTapped:" destination="gDu-LU-Che" id="2Pu-qz-mY4"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="6OX-21-pxB">
+                            <connections>
+                                <action selector="onDoneButtonTapped:" destination="gDu-LU-Che" id="rJo-xC-uem"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="cancelButton" destination="nBT-hy-n0v" id="Loi-jN-BVT"/>
-                        <outlet property="doneButton" destination="AV7-5B-oBI" id="Hwn-Y1-4l8"/>
                         <outlet property="tableView" destination="BSL-jj-YPR" id="zup-DC-Hkc"/>
                         <outlet property="tableViewBottomSpaceConstraint" destination="wbL-76-M7X" id="MwE-zL-8pX"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="jCB-7D-wcA" id="972-eh-thC"/>
@@ -679,7 +658,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R6t-IT-bKz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1825.7812499999998" y="-508.19912152269399"/>
+            <point key="canvasLocation" x="2641.9921875" y="-508.19912152269399"/>
         </scene>
         <!--Pregame Room View Controller-->
         <scene sceneID="xkD-W1-Ufh">
@@ -933,7 +912,7 @@
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="4eT-dC-kfX"/>
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="access-code" unwindAction="unwindToAccessCode:" id="v3W-bc-vVR"/>
                         <segue destination="Bsc-BJ-zGX" kind="presentation" identifier="pregame-modal-container-view" id="CKf-j2-Ls6"/>
-                        <segue destination="gDu-LU-Che" kind="presentation" identifier="custom-category" id="NwO-x4-uMo"/>
+                        <segue destination="HKy-Oo-bc1" kind="presentation" identifier="custom-category" modalPresentationStyle="overCurrentContext" id="NwO-x4-uMo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lDc-cz-jrN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1885,6 +1864,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HJ3-MJ-N3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3534.7826086956525" y="336.68478260869568"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4qB-N6-aTh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HKy-Oo-bc1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="c6Y-hs-NXb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gDu-LU-Che" kind="relationship" relationship="rootViewController" id="mX1-Eg-SE5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mtb-eR-JdW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1825.7812499999998" y="-508.19912152269399"/>
         </scene>
     </scenes>
     <resources>

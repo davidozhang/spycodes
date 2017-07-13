@@ -112,6 +112,7 @@ class SCConstants {
         case modalBlurView = 5
         case modalPeekBlurView = 6
         case sectionHeaderBlurView = 7
+        case navigationBarBlurView = 8
     }
 
     enum url: String {
