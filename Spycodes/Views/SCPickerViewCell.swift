@@ -50,7 +50,7 @@ class SCPickerViewCell: SCTableViewCell {
         )
         toolBar.isUserInteractionEnabled = true
 
-        self.textField.font = SCFonts.intermediateSizeFont(.medium)
+        self.textField.font = SCFonts.intermediateSizeFont(.bold)
         self.textField.sizeToFit()
 
         self.textField.delegate = self

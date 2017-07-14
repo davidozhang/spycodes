@@ -57,6 +57,7 @@ class SCStrings {
 
     enum header: String {
         case accessCode = "Access Code: "
+        case categoryName = "Category Name"
         case clue = "Clue"
         case confirm = "Confirm"
         case enterClue = "Enter Clue"
@@ -70,6 +71,7 @@ class SCStrings {
         case returningToMainMenu = "Returning to Main Menu"
         case roundEnd = "Round End"
         case minimumWords = "Too Few Words"
+        case emptyCategory = "Empty Category"
         case updateApp = "Update App"
         case waitForClue = "Waiting For Clue"
     }
@@ -86,6 +88,8 @@ class SCStrings {
         case categorySetting = "Only the host can toggle the category settings."
         case defaultLoseString = "Your team lost!"
         case defaultWinString = "Your team won!"
+        case emptyCategoryName = "Category name cannot be empty."
+        case enterCategoryName = "Enter a category name"
         case hostDisconnected = "Host player has disconnected."
         case leaderConfirm = "Once you are comfortable with your clue and number, tap Confirm to allow your teammates to see the clue and number. The clue and number cannot be modified until the round ends. You cannot talk or make eye contact with your teammates!"
         case leaderEnterClue = "Look over the words belonging to your team carefully and enter a 1-word clue followed by a number. The number represents the amount of words corresponding to your clue. Your clue cannot be a word already in the game!"

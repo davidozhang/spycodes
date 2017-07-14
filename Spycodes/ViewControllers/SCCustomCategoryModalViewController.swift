@@ -10,6 +10,8 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         case name = 0
     }
 
+    fileprivate static let margin: CGFloat = 16
+
     fileprivate let sectionLabels: [Section: String] = [
         .settings: SCStrings.section.settings.rawValue,
         .words: SCStrings.section.wordList.rawValue,
@@ -21,6 +23,8 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     fileprivate var scrolled = false
     fileprivate var inputMode = false
+
+    fileprivate var customCategory = CustomCategory()
 
     fileprivate var blurView: UIVisualEffectView?
 
@@ -51,8 +55,8 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.tableView.estimatedRowHeight = 87.0
 
         self.tableViewBottomSpaceConstraint.constant = 0
-        self.tableViewLeadingSpaceConstraint.constant = 8
-        self.tableViewTrailingSpaceConstraint.constant = 8
+        self.tableViewLeadingSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
+        self.tableViewTrailingSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
         self.tableView.layoutIfNeeded()
 
         // Navigation bar customization
@@ -96,6 +100,77 @@ class SCCustomCategoryModalViewController: SCModalViewController {
                 userInfo: nil
             )
         }
+    }
+
+    fileprivate func confirmHandler(alertController: UIAlertController, successHandler: ((String) -> Void)?) {
+        if let text = alertController.textFields?[0].text {
+            // TODO: Add text validation
+            if text.characters.count == 0 {
+                self.presentAlert(
+                    title: SCStrings.header.emptyCategory.rawValue,
+                    message: SCStrings.message.emptyCategoryName.rawValue
+                )
+            } else {
+                if let successHandler = successHandler {
+                    successHandler(text)
+                }
+            }
+        }
+
+        alertController.dismiss(animated: false, completion: nil)
+    }
+
+    fileprivate func presentAlert(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        let confirmAction = UIAlertAction(
+            title: SCStrings.button.ok.rawValue,
+            style: .default,
+            handler: { (action: UIAlertAction) in
+                alertController.dismiss(animated: false, completion: nil)
+            }
+        )
+        alertController.addAction(confirmAction)
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil
+        )
+    }
+
+    fileprivate func presentTextFieldAlert(title: String, message: String, textFieldHandler: ((UITextField) -> Void)?, successHandler: ((String) -> Void)?) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        alertController.addTextField(configurationHandler: textFieldHandler)
+
+        let cancelAction = UIAlertAction(
+            title: SCStrings.button.cancel.rawValue,
+            style: .cancel,
+            handler: { (action: UIAlertAction) in
+                alertController.dismiss(animated: false, completion: nil)
+            }
+        )
+        let confirmAction = UIAlertAction(
+            title: SCStrings.button.ok.rawValue,
+            style: .default,
+            handler: { (action: UIAlertAction) in
+                self.confirmHandler(alertController: alertController, successHandler: successHandler)
+            }
+        )
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil
+        )
     }
 }
 
@@ -151,17 +226,53 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
             case Setting.name.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.nameSettingViewCell.rawValue
-                    ) as? SCTableViewCell else {
-                        return SCTableViewCell()
+                ) as? SCTableViewCell else {
+                    return SCTableViewCell()
                 }
 
                 cell.primaryLabel.text = SCStrings.primaryLabel.name.rawValue
+
+                if let name = customCategory.getName() {
+                    cell.rightLabel.text = name
+                    cell.rightLabel.isHidden = false
+                    cell.rightImage.isHidden = true
+                } else {
+                    cell.rightImage.isHidden = false
+                    cell.rightLabel.isHidden = true
+                }
+
                 return cell
             default:
                 return SCTableViewCell()
             }
         default:
             return SCTableViewCell()
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case Section.settings.rawValue:
+            switch indexPath.row {
+            case Setting.name.rawValue:
+                self.presentTextFieldAlert(
+                    title: SCStrings.header.categoryName.rawValue,
+                    message: SCStrings.message.enterCategoryName.rawValue,
+                    textFieldHandler: { (textField) in
+                        if let name = self.customCategory.getName() {
+                            textField.text = name
+                        }
+                    },
+                    successHandler: { (name) in
+                        self.customCategory.setName(name: name)
+                        self.tableView.reloadData()
+                    }
+                )
+            default:
+                break
+            }
+        default:
+            break
         }
     }
 

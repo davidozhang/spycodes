@@ -5,6 +5,7 @@ class SCTableViewCell: UITableViewCell {
     @IBOutlet weak var primaryLabel: SCLabel!
     @IBOutlet weak var secondaryLabel: SCLabel!
     @IBOutlet weak var rightLabel: SCLabel!
+    @IBOutlet weak var rightImage: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +25,7 @@ class SCTableViewCell: UITableViewCell {
         }
 
         if let _ = self.rightLabel {
-            self.rightLabel.font = SCFonts.intermediateSizeFont(.regular)
+            self.rightLabel.font = SCFonts.intermediateSizeFont(.bold)
         }
 
         self.backgroundColor = .clear
