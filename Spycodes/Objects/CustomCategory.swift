@@ -9,4 +9,8 @@ class CustomCategory {
     func getName() -> String? {
         return self.name
     }
+
+    func getWordList() -> [String] {
+        return self.wordList
+    }
 }

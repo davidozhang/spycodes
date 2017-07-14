@@ -23,14 +23,21 @@ enum PregameModalPageState: Int {
     case secondary = 1
 }
 
+enum CustomCategoryWordListState: Int {
+    case nonEditing = 0
+    case editing = 1
+}
+
 class SCStates {
     static var actionButtonState: ActionButtonState = .endRound
     static var readyButtonState: ReadyButtonState = .notReady
     static var pregameModalPageState: PregameModalPageState = .main
+    static var customCategoryWordListState: CustomCategoryWordListState = .nonEditing
 
     static func reset() {
         SCStates.actionButtonState = .endRound
         SCStates.readyButtonState = .notReady
         SCStates.pregameModalPageState = .main
+        SCStates.customCategoryWordListState = .nonEditing
     }
 }

@@ -3,18 +3,22 @@ import UIKit
 class SCCustomCategoryModalViewController: SCModalViewController {
     enum Section: Int {
         case settings = 0
-        case words = 1
+        case wordList = 1
     }
 
     enum Setting: Int {
         case name = 0
     }
 
+    enum WordList: Int {
+        case topCell = 0
+    }
+
     fileprivate static let margin: CGFloat = 16
 
     fileprivate let sectionLabels: [Section: String] = [
         .settings: SCStrings.section.settings.rawValue,
-        .words: SCStrings.section.wordList.rawValue,
+        .wordList: SCStrings.section.wordList.rawValue,
     ]
 
     fileprivate let settingsLabels: [Setting: String] = [
@@ -174,6 +178,12 @@ class SCCustomCategoryModalViewController: SCModalViewController {
     }
 }
 
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
+
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -211,8 +221,8 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         switch section {
         case Section.settings.rawValue:
             return settingsLabels.count
-        case Section.words.rawValue:
-            return 0
+        case Section.wordList.rawValue:
+            return 1
         default:
             return 0
         }
@@ -245,6 +255,35 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
             default:
                 return SCTableViewCell()
             }
+        case Section.wordList.rawValue:
+            switch indexPath.row {
+            case WordList.topCell.rawValue:
+                // Top Cell Customization
+                switch SCStates.customCategoryWordListState {
+                case .nonEditing:
+                    guard let cell = self.tableView.dequeueReusableCell(
+                        withIdentifier: SCConstants.identifier.addWordViewCell.rawValue
+                        ) as? SCTableViewCell else {
+                            return SCTableViewCell()
+                    }
+
+                    cell.primaryLabel.text = SCStrings.primaryLabel.addWord.rawValue
+                    
+                    return cell
+                case .editing:
+                    // Custom top view cell with text field as first responder
+                    guard let cell = self.tableView.dequeueReusableCell(
+                        withIdentifier: SCConstants.identifier.addWordViewCell.rawValue
+                        ) as? SCTextFieldViewCell else {
+                            return SCTableViewCell()
+                    }
+
+                    return cell
+                }
+
+            default:
+                return SCTableViewCell()
+            }
         default:
             return SCTableViewCell()
         }
@@ -268,6 +307,13 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                         self.tableView.reloadData()
                     }
                 )
+            default:
+                break
+            }
+        case Section.wordList.rawValue:
+            switch indexPath.row {
+            case WordList.topCell.rawValue:
+                break
             default:
                 break
             }
@@ -295,3 +341,13 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
     }
 }
 
+// MARK: UITextFieldDelegate
+extension SCCustomCategoryModalViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        SCStates.customCategoryWordListState = .editing
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
+    }
+}

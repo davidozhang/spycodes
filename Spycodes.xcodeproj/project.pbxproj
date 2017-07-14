@@ -66,6 +66,8 @@
 		63D7E73D1EB183EF00B2F536 /* SCReadyStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7E73C1EB183EF00B2F536 /* SCReadyStatusLabel.swift */; };
 		63D949DA1F16FABE00697779 /* SCPickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D949D91F16FABE00697779 /* SCPickerViewCell.swift */; };
 		63D949E21F17F68900697779 /* CustomCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D949E11F17F68900697779 /* CustomCategory.swift */; };
+		63D949E61F18534F00697779 /* SCTextFieldViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63D949E51F18534F00697779 /* SCTextFieldViewCell.xib */; };
+		63D949E81F18553000697779 /* SCTextFieldViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D949E71F18553000697779 /* SCTextFieldViewCell.swift */; };
 		63DEDEE81E88921200DE94A1 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DEDEE71E88921200DE94A1 /* Event.swift */; };
 		63EAF9A31D41D2E700BC554E /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A21D41D2E700BC554E /* Round.swift */; };
 		63EAF9A51D41F1C400BC554E /* SCAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A41D41F1C400BC554E /* SCAudioManager.swift */; };
@@ -140,6 +142,8 @@
 		63D7E73C1EB183EF00B2F536 /* SCReadyStatusLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCReadyStatusLabel.swift; path = Utilities/SCReadyStatusLabel.swift; sourceTree = "<group>"; };
 		63D949D91F16FABE00697779 /* SCPickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPickerViewCell.swift; path = Views/SCPickerViewCell.swift; sourceTree = "<group>"; };
 		63D949E11F17F68900697779 /* CustomCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCategory.swift; path = Objects/CustomCategory.swift; sourceTree = "<group>"; };
+		63D949E51F18534F00697779 /* SCTextFieldViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCTextFieldViewCell.xib; path = Nibs/SCTextFieldViewCell.xib; sourceTree = "<group>"; };
+		63D949E71F18553000697779 /* SCTextFieldViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTextFieldViewCell.swift; path = Views/SCTextFieldViewCell.swift; sourceTree = "<group>"; };
 		63DEDEE71E88921200DE94A1 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Objects/Event.swift; sourceTree = "<group>"; };
 		63EAF9A21D41D2E700BC554E /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Round.swift; path = Objects/Round.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63EAF9A41D41F1C400BC554E /* SCAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAudioManager.swift; path = Managers/SCAudioManager.swift; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				639F89001F0F2B730082D813 /* SCMultilineToggleViewCell.xib */,
+				63D949E51F18534F00697779 /* SCTextFieldViewCell.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 				635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */,
 				638CE44E1EAB45A500033480 /* SCTimelineViewCell.swift */,
 				6363EB661E7E5A3900CC287B /* SCToggleViewCell.swift */,
+				63D949E71F18553000697779 /* SCTextFieldViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -394,6 +400,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63D949E61F18534F00697779 /* SCTextFieldViewCell.xib in Resources */,
 				639F89011F0F2B730082D813 /* SCMultilineToggleViewCell.xib in Resources */,
 				630681A51D62FD6900539773 /* Spycodes.storyboard in Resources */,
 				63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */,
@@ -429,6 +436,7 @@
 				63D256811E6BA6BA0061D80C /* SCButton.swift in Sources */,
 				639F89031F0F36120082D813 /* Categories.swift in Sources */,
 				639F88F31F0615540082D813 /* SCUIColor.swift in Sources */,
+				63D949E81F18553000697779 /* SCTextFieldViewCell.swift in Sources */,
 				630883681E80E56F006D2428 /* SCAppInfoManager.swift in Sources */,
 				63A3E1EF1F3450D900657243 /* SCPregameModalSecondaryViewController.swift in Sources */,
 				637310CB1D3B292F00EA5D7A /* SCGameRoomViewController.swift in Sources */,

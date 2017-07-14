@@ -48,6 +48,7 @@ class SCConstants {
     enum identifier: String {
         case accessCode = "access-code"
         case accessibilityToggleViewCell = "accessibility-toggle-view-cell"
+        case addWordViewCell = "add-word-view-cell"
         case customCategory = "custom-category"
         case customCategoryViewController = "custom-category-view-controller"
         case disclosureViewCell = "disclosure-view-cell"
