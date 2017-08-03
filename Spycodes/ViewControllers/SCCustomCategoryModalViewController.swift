@@ -63,6 +63,15 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.tableViewTrailingSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
         self.tableView.layoutIfNeeded()
 
+        let textFieldViewCellNib = UINib(
+            nibName: SCConstants.nibs.textFieldViewCell.rawValue,
+            bundle: nil
+        )
+        self.tableView.register(
+            textFieldViewCellNib,
+            forCellReuseIdentifier: SCConstants.identifier.wordViewCell.rawValue
+        )
+
         // Navigation bar customization
         if let bounds = self.navigationController?.navigationBar.bounds {
             if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
@@ -184,6 +193,18 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 //  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
+// MARK: UITextFieldDelegate
+extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
+    func onButtonTapped() {
+        SCStates.customCategoryWordListState = .nonEditing
+        self.tableView.reloadData()
+    }
+
+    func shouldReturn(textField: UITextField) -> Bool {
+        return textField.text?.characters.count == 0
+    }
+}
+
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -263,7 +284,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                 case .nonEditing:
                     guard let cell = self.tableView.dequeueReusableCell(
                         withIdentifier: SCConstants.identifier.addWordViewCell.rawValue
-                        ) as? SCTableViewCell else {
+                    ) as? SCTableViewCell else {
                             return SCTableViewCell()
                     }
 
@@ -273,10 +294,17 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                 case .editing:
                     // Custom top view cell with text field as first responder
                     guard let cell = self.tableView.dequeueReusableCell(
-                        withIdentifier: SCConstants.identifier.addWordViewCell.rawValue
-                        ) as? SCTextFieldViewCell else {
-                            return SCTableViewCell()
+                        withIdentifier: SCConstants.identifier.wordViewCell.rawValue
+                    ) as? SCTextFieldViewCell else {
+                        return SCTableViewCell()
                     }
+
+                    cell.delegate = self
+
+                    // TODO: Figure out how to assign first responder
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                        cell.textField.becomeFirstResponder()
+                    })
 
                     return cell
                 }
@@ -313,7 +341,13 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         case Section.wordList.rawValue:
             switch indexPath.row {
             case WordList.topCell.rawValue:
-                break
+                switch SCStates.customCategoryWordListState {
+                case .nonEditing:
+                    SCStates.customCategoryWordListState = .editing
+                    self.tableView.reloadData()
+                default:
+                    break
+                }
             default:
                 break
             }
@@ -338,16 +372,5 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         if !self.inputMode {
             self.tableView.reloadData()
         }
-    }
-}
-
-// MARK: UITextFieldDelegate
-extension SCCustomCategoryModalViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        SCStates.customCategoryWordListState = .editing
-    }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return true
     }
 }

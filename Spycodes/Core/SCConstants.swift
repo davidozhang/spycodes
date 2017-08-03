@@ -79,6 +79,7 @@ class SCConstants {
         case timelineViewCell = "timeline-view-cell"
         case timerSettingViewCell = "timer-setting-view-cell"
         case versionViewCell = "version-view-cell"
+        case wordViewCell = "word-view-cell"
     }
 
     enum images: String {
@@ -88,6 +89,7 @@ class SCConstants {
 
     enum nibs: String {
         case multilineToggle = "SCMultilineToggleViewCell"
+        case textFieldViewCell = "SCTextFieldViewCell"
     }
 
     enum notificationKey: String {
