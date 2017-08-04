@@ -9,13 +9,6 @@ class SCPregameModalPageViewController: UIPageViewController {
         withIdentifier: SCConstants.identifier.pregameModalSecondaryView.rawValue
     )
 
-    fileprivate(set) lazy var orderedViewControllers: [UIViewController] = {
-        return [
-            SCPregameModalPageViewController.mainViewController,
-            SCPregameModalPageViewController.secondaryViewController
-        ]
-    }()
-
     deinit {
         print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
@@ -27,9 +20,12 @@ class SCPregameModalPageViewController: UIPageViewController {
         self.dataSource = self
         self.delegate = self
 
-        if let first = self.orderedViewControllers.first {
-            self.setViewControllers([first], direction: .forward, animated: false, completion: nil)
-        }
+        self.setViewControllers(
+            [SCPregameModalPageViewController.mainViewController],
+            direction: .forward,
+            animated: false,
+            completion: nil
+        )
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -37,7 +33,6 @@ class SCPregameModalPageViewController: UIPageViewController {
 
         self.dataSource = nil
         self.delegate = nil
-        self.orderedViewControllers.removeAll()
     }
 }
 
@@ -50,39 +45,23 @@ class SCPregameModalPageViewController: UIPageViewController {
 // MARK: UIPageViewControllerDataSource, UIPageViewControllerDelegate
 extension SCPregameModalPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = self.orderedViewControllers.index(of: viewController) else {
-            return nil
+        if let _ = viewController as? SCPregameModalSecondaryViewController {
+            return SCPregameModalPageViewController.mainViewController
         }
 
-        let previousIndex = index - 1
-
-        guard previousIndex >= 0 else {
-            return nil
-        }
-
-        guard self.orderedViewControllers.count > previousIndex else {
-            return nil
-        }
-
-        return self.orderedViewControllers[previousIndex]
+        return nil
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = self.orderedViewControllers.index(of: viewController) else {
-            return nil
+        if let _ = viewController as? SCPregameModalMainViewController {
+            return SCPregameModalPageViewController.secondaryViewController
         }
 
-        let nextIndex = index + 1
-
-        guard self.orderedViewControllers.count != nextIndex, self.orderedViewControllers.count > nextIndex else {
-            return nil
-        }
-
-        return self.orderedViewControllers[nextIndex]
+        return nil
     }
 
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return self.orderedViewControllers.count
+        return 2
     }
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
