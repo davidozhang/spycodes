@@ -213,6 +213,11 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
 
     func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
+        // Hide section header for settings
+        if section == Section.settings.rawValue {
+            return 0.0
+        }
+
         return 44.0
     }
 
