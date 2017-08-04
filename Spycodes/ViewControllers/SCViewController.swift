@@ -163,6 +163,12 @@ class SCViewController: UIViewController {
             return
         }
 
+        // By default, present modal view controllers over current context
+        if let destination = segue.destination as? SCModalViewController {
+            destination.modalPresentationStyle = .overCurrentContext
+            return
+        }
+
         if let destination = segue.destination as? SCViewController {
             destination.previousViewControllerIdentifier = self.unwindableIdentifier
         }
@@ -203,6 +209,8 @@ class SCViewController: UIViewController {
         let textFieldAppearance = UITextField.appearance()
         let toolBarAppearance = UIToolbar.appearance()
         let pageControlAppearance = UIPageControl.appearance()
+        let barButtonItemAppearance = UIBarButtonItem.appearance()
+        let navigationBarAppearance = UINavigationBar.appearance()
 
         if let view = self.view.viewWithTag(SCConstants.tag.modalPeekBlurView.rawValue) {
             view.removeFromSuperview()
@@ -235,6 +243,13 @@ class SCViewController: UIViewController {
                     effect: UIBlurEffect(style: .extraLight)
                 )
             }
+        }
+
+        barButtonItemAppearance.tintColor = .spycodesGrayColor()
+
+        if let font = SCFonts.regularSizeFont(.medium) {
+            barButtonItemAppearance.setTitleTextAttributes([NSFontAttributeName: font], for: UIControlState())
+            navigationBarAppearance.titleTextAttributes = [NSFontAttributeName: font]
         }
 
         pageControlAppearance.hidesForSinglePage = true

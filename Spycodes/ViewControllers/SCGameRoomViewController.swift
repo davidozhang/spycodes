@@ -10,8 +10,6 @@ class SCGameRoomViewController: SCViewController {
     fileprivate let timerViewDefaultHeight: CGFloat = 25
     fileprivate let bottomBarViewExtendedHeight: CGFloat = 121
 
-    fileprivate var actionButtonState: ActionButtonState = .endRound
-
     fileprivate var buttonAnimationStarted = false
     fileprivate var textFieldAnimationStarted = false
     fileprivate var leaderIsEditing = false
@@ -51,18 +49,21 @@ class SCGameRoomViewController: SCViewController {
     }
 
     @IBAction func onActionButtonTapped(_ sender: AnyObject) {
-        if self.actionButtonState == .confirm {
+        switch SCStates.actionButtonState {
+        case .confirm:
             self.didConfirm()
-        } else if self.actionButtonState == .endRound {
+        case .endRound:
             self.didEndRound(fromTimerExpiry: false)
-        } else if self.actionButtonState == .showAnswer {
+        case .showAnswer:
             self.showAnswer = true
             self.updateActionButtonStateTo(state: .hideAnswer)
             self.collectionView.reloadData()
-        } else if self.actionButtonState == .hideAnswer {
+        case .hideAnswer:
             self.showAnswer = false
             self.updateActionButtonStateTo(state: .showAnswer)
             self.collectionView.reloadData()
+        default:
+            break
         }
     }
 
@@ -253,6 +254,8 @@ class SCGameRoomViewController: SCViewController {
                     height: 0
                 )
             }
+        } else {
+            super._prepareForSegue(segue, sender: self)
         }
     }
 
@@ -429,7 +432,7 @@ class SCGameRoomViewController: SCViewController {
 
                     self.startTextFieldAnimations()
 
-                    self.actionButtonState = .confirm
+                    SCStates.actionButtonState = .confirm
                     self.clueTextField.isEnabled = true
                     self.numberOfWordsTextField.isEnabled = true
                 } else {
@@ -491,12 +494,12 @@ class SCGameRoomViewController: SCViewController {
     }
 
     fileprivate func updateActionButtonStateTo(state: ActionButtonState) {
-        self.actionButtonState = state
+        SCStates.actionButtonState = state
         self.updateActionButton()
     }
 
     fileprivate func updateActionButton() {
-        switch self.actionButtonState {
+        switch SCStates.actionButtonState {
         case .confirm:
             UIView.performWithoutAnimation {
                 self.actionButton.setTitle(SCStrings.button.confirm.rawValue, for: UIControlState())
@@ -577,7 +580,7 @@ class SCGameRoomViewController: SCViewController {
 
         self.clueTextField.isEnabled = false
         self.numberOfWordsTextField.isEnabled = false
-        self.actionButtonState = .endRound
+        SCStates.actionButtonState = .endRound
 
         Round.instance.setClue(self.clueTextField.text)
         Round.instance.setNumberOfWords(self.numberOfWordsTextField.text)
@@ -699,7 +702,7 @@ class SCGameRoomViewController: SCViewController {
     }
 
     func onAbortDismissal() {
-        self.actionButtonState = .gameAborted
+        SCStates.actionButtonState = .gameAborted
         Timeline.instance.addEventIfNeeded(
             event: Event(type: .gameAborted, parameters: nil)
         )
@@ -707,9 +710,9 @@ class SCGameRoomViewController: SCViewController {
 
     func onGameOverDismissal() {
         if Player.instance.isLeader() {
-            self.actionButtonState = .gameOver
+            SCStates.actionButtonState = .gameOver
         } else {
-            self.actionButtonState = .showAnswer
+            SCStates.actionButtonState = .showAnswer
         }
 
         Timeline.instance.addEventIfNeeded(

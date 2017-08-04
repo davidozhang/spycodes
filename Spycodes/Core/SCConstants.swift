@@ -48,6 +48,9 @@ class SCConstants {
     enum identifier: String {
         case accessCode = "access-code"
         case accessibilityToggleViewCell = "accessibility-toggle-view-cell"
+        case addWordViewCell = "add-word-view-cell"
+        case customCategory = "custom-category"
+        case customCategoryViewController = "custom-category-view-controller"
         case disclosureViewCell = "disclosure-view-cell"
         case gameRoom = "game-room"
         case gameRoomViewCell = "game-room-view-cell"
@@ -57,6 +60,7 @@ class SCConstants {
         case mainMenuModal = "main-menu-modal"
         case minigameToggleViewCell = "minigame-toggle-view-cell"
         case multilineToggleViewCell = "multi-line-toggle-view-cell"
+        case nameSettingViewCell = "name-setting-view-cell"
         case nightModeToggleViewCell = "night-mode-toggle-view-cell"
         case pregameModalContainerView = "pregame-modal-container-view"
         case pregameModalMainView = "pregame-modal-main-view"
@@ -75,16 +79,27 @@ class SCConstants {
         case timelineViewCell = "timeline-view-cell"
         case timerSettingViewCell = "timer-setting-view-cell"
         case versionViewCell = "version-view-cell"
+        case wordViewCell = "word-view-cell"
+    }
+
+    enum images: String {
+        case shuffle = "Shuffle"
+        case markAsRead = "Mark-As-Read"
     }
 
     enum nibs: String {
         case multilineToggle = "SCMultilineToggleViewCell"
+        case textFieldViewCell = "SCTextFieldViewCell"
     }
 
     enum notificationKey: String {
+        case customCategory = "custom-category-view"
         case disableSwipeGestureRecognizer = "disable-swipe-gesture-recognizer"
+        case dismissModal = "dismiss-modal"
         case enableSwipeGestureRecognizer = "enable-swipe-gesture-recognizer"
+        case intent = "intent"
         case minigameGameOver = "minigame-game-over"
+        case pregameModal = "pregame-modal"
         case timelineUpdated = "timeline-updated"
         case updateCollectionView = "update-collection-view"
     }
@@ -100,6 +115,7 @@ class SCConstants {
         case modalBlurView = 5
         case modalPeekBlurView = 6
         case sectionHeaderBlurView = 7
+        case navigationBarBlurView = 8
     }
 
     enum url: String {

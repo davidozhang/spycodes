@@ -52,10 +52,12 @@ class SCStrings {
         case sports = "⚽️"
         case transportation = "✈️"
         case misc = "❓"
+        case disabled = "None"
     }
 
     enum header: String {
         case accessCode = "Access Code: "
+        case categoryName = "Category Name"
         case clue = "Clue"
         case confirm = "Confirm"
         case enterClue = "Enter Clue"
@@ -69,6 +71,7 @@ class SCStrings {
         case returningToMainMenu = "Returning to Main Menu"
         case roundEnd = "Round End"
         case minimumWords = "Too Few Words"
+        case emptyCategory = "Empty Category"
         case updateApp = "Update App"
         case waitForClue = "Waiting For Clue"
     }
@@ -85,6 +88,8 @@ class SCStrings {
         case categorySetting = "Only the host can toggle the category settings."
         case defaultLoseString = "Your team lost!"
         case defaultWinString = "Your team won!"
+        case emptyCategoryName = "Category name cannot be empty."
+        case enterCategoryName = "Enter a category name"
         case hostDisconnected = "Host player has disconnected."
         case leaderConfirm = "Once you are comfortable with your clue and number, tap Confirm to allow your teammates to see the clue and number. The clue and number cannot be modified until the round ends. You cannot talk or make eye contact with your teammates!"
         case leaderEnterClue = "Look over the words belonging to your team carefully and enter a 1-word clue followed by a number. The number represents the amount of words corresponding to your clue. Your clue cannot be a word already in the game!"
@@ -107,6 +112,10 @@ class SCStrings {
         case updatePrompt = "Please download the latest version of Spycodes."
     }
 
+    enum navigationItem: String {
+        case newCategory = "New Category"
+    }
+
     enum player: String {
         case cpu = "CPU"
         case localPlayer = "You"
@@ -114,10 +123,12 @@ class SCStrings {
 
     enum primaryLabel: String {
         case accessibility = "Accessibility"
+        case addWord = "Add Word"
         case category = "%@ %@"
         case icons8 = "Icons8"
         case github = "Github"
         case minigame = "Minigame"
+        case name = "Name"
         case nightMode = "Night Mode"
         case releaseNotes = "Release Notes"
         case reviewApp = "Review App"
@@ -147,10 +158,12 @@ class SCStrings {
         case gameSettings = "Game Settings"
         case info = "Info"
         case more = "More"
+        case settings = "Settings"
         case statistics = "Statistics"
         case teamRed = "Team Red"
         case teamBlue = "Team Blue"
         case timeline = "Timeline"
+        case wordList = "Word List"
     }
 
     enum status: String {

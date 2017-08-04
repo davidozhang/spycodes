@@ -19,9 +19,8 @@
 		633292251E7D0D950090B09D /* SCDisclosureViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633292241E7D0D950090B09D /* SCDisclosureViewCell.swift */; };
 		633292271E7DE8B30090B09D /* SCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633292261E7DE8B30090B09D /* SCTableViewCell.swift */; };
 		6332922B1E7DE9EC0090B09D /* SCSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332922A1E7DE9EC0090B09D /* SCSettingsManager.swift */; };
-		63348F791F117DF600659E4C /* SCPregameRoomHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63348F781F117DF600659E4C /* SCPregameRoomHeaderViewCell.swift */; };
-		6344FD321F03681500CEBB58 /* SCTimerSettingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6344FD311F03681500CEBB58 /* SCTimerSettingViewCell.swift */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
+		63540EAF1F15D40E000A8A7A /* SCCustomCategoryModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63540EAE1F15D40E000A8A7A /* SCCustomCategoryModalViewController.swift */; };
 		635464791EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */; };
 		6363EB651E7E4D5600CC287B /* SCUnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6363EB641E7E4D5600CC287B /* SCUnderlineTextField.swift */; };
 		6363EB671E7E5A3900CC287B /* SCToggleViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6363EB661E7E5A3900CC287B /* SCToggleViewCell.swift */; };
@@ -65,6 +64,10 @@
 		63D2568A1E6BA6BA0061D80C /* SCStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567F1E6BA6BA0061D80C /* SCStatusLabel.swift */; };
 		63D2568B1E6BA6BA0061D80C /* SCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256801E6BA6BA0061D80C /* SCTextField.swift */; };
 		63D7E73D1EB183EF00B2F536 /* SCReadyStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7E73C1EB183EF00B2F536 /* SCReadyStatusLabel.swift */; };
+		63D949DA1F16FABE00697779 /* SCPickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D949D91F16FABE00697779 /* SCPickerViewCell.swift */; };
+		63D949E21F17F68900697779 /* CustomCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D949E11F17F68900697779 /* CustomCategory.swift */; };
+		63D949E61F18534F00697779 /* SCTextFieldViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63D949E51F18534F00697779 /* SCTextFieldViewCell.xib */; };
+		63D949E81F18553000697779 /* SCTextFieldViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D949E71F18553000697779 /* SCTextFieldViewCell.swift */; };
 		63DEDEE81E88921200DE94A1 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DEDEE71E88921200DE94A1 /* Event.swift */; };
 		63EAF9A31D41D2E700BC554E /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A21D41D2E700BC554E /* Round.swift */; };
 		63EAF9A51D41F1C400BC554E /* SCAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAF9A41D41F1C400BC554E /* SCAudioManager.swift */; };
@@ -90,9 +93,8 @@
 		633292241E7D0D950090B09D /* SCDisclosureViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDisclosureViewCell.swift; path = Views/SCDisclosureViewCell.swift; sourceTree = "<group>"; };
 		633292261E7DE8B30090B09D /* SCTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTableViewCell.swift; path = Views/SCTableViewCell.swift; sourceTree = "<group>"; };
 		6332922A1E7DE9EC0090B09D /* SCSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCSettingsManager.swift; path = Managers/SCSettingsManager.swift; sourceTree = "<group>"; };
-		63348F781F117DF600659E4C /* SCPregameRoomHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameRoomHeaderViewCell.swift; path = Views/SCPregameRoomHeaderViewCell.swift; sourceTree = "<group>"; };
-		6344FD311F03681500CEBB58 /* SCTimerSettingViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTimerSettingViewCell.swift; path = Views/SCTimerSettingViewCell.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
+		63540EAE1F15D40E000A8A7A /* SCCustomCategoryModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCCustomCategoryModalViewController.swift; path = ViewControllers/SCCustomCategoryModalViewController.swift; sourceTree = "<group>"; };
 		635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTimelineHeaderViewCell.swift; path = Views/SCTimelineHeaderViewCell.swift; sourceTree = "<group>"; };
 		6363EB641E7E4D5600CC287B /* SCUnderlineTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUnderlineTextField.swift; path = Utilities/SCUnderlineTextField.swift; sourceTree = "<group>"; };
 		6363EB661E7E5A3900CC287B /* SCToggleViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCToggleViewCell.swift; path = Views/SCToggleViewCell.swift; sourceTree = "<group>"; };
@@ -138,6 +140,10 @@
 		63D2567F1E6BA6BA0061D80C /* SCStatusLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCStatusLabel.swift; path = Utilities/SCStatusLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63D256801E6BA6BA0061D80C /* SCTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCTextField.swift; path = Utilities/SCTextField.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63D7E73C1EB183EF00B2F536 /* SCReadyStatusLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCReadyStatusLabel.swift; path = Utilities/SCReadyStatusLabel.swift; sourceTree = "<group>"; };
+		63D949D91F16FABE00697779 /* SCPickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPickerViewCell.swift; path = Views/SCPickerViewCell.swift; sourceTree = "<group>"; };
+		63D949E11F17F68900697779 /* CustomCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCategory.swift; path = Objects/CustomCategory.swift; sourceTree = "<group>"; };
+		63D949E51F18534F00697779 /* SCTextFieldViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCTextFieldViewCell.xib; path = Nibs/SCTextFieldViewCell.xib; sourceTree = "<group>"; };
+		63D949E71F18553000697779 /* SCTextFieldViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTextFieldViewCell.swift; path = Views/SCTextFieldViewCell.swift; sourceTree = "<group>"; };
 		63DEDEE71E88921200DE94A1 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Objects/Event.swift; sourceTree = "<group>"; };
 		63EAF9A21D41D2E700BC554E /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Round.swift; path = Objects/Round.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63EAF9A41D41F1C400BC554E /* SCAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAudioManager.swift; path = Managers/SCAudioManager.swift; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				639F89001F0F2B730082D813 /* SCMultilineToggleViewCell.xib */,
+				63D949E51F18534F00697779 /* SCTextFieldViewCell.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -221,6 +228,7 @@
 			children = (
 				63A3E1E71F3450CD00657243 /* Pregame Modal */,
 				637FF0091E0F0B620076DC25 /* SCAccessCodeViewController.swift */,
+				63540EAE1F15D40E000A8A7A /* SCCustomCategoryModalViewController.swift */,
 				637310CA1D3B292F00EA5D7A /* SCGameRoomViewController.swift */,
 				636DC0CD1E67D90800DE5EC6 /* SCHelpViewController.swift */,
 				63A04D1E1D1A7F3E005A2914 /* SCMainMenuViewController.swift */,
@@ -295,6 +303,7 @@
 				63CB4F091D3CB88D00211D3A /* Card.swift */,
 				63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */,
 				639F89021F0F36120082D813 /* Categories.swift */,
+				63D949E11F17F68900697779 /* CustomCategory.swift */,
 				63DEDEE71E88921200DE94A1 /* Event.swift */,
 				6378C6501D4C6F46009BD0CA /* GameMode.swift */,
 				63486DA81D3DE29C00795403 /* Key.swift */,
@@ -314,14 +323,14 @@
 			children = (
 				633292241E7D0D950090B09D /* SCDisclosureViewCell.swift */,
 				63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */,
-				63348F781F117DF600659E4C /* SCPregameRoomHeaderViewCell.swift */,
+				63D949D91F16FABE00697779 /* SCPickerViewCell.swift */,
 				63FDED451D28B47200142780 /* SCPregameRoomViewCell.swift */,
 				639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */,
 				633292261E7DE8B30090B09D /* SCTableViewCell.swift */,
 				635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */,
 				638CE44E1EAB45A500033480 /* SCTimelineViewCell.swift */,
-				6344FD311F03681500CEBB58 /* SCTimerSettingViewCell.swift */,
 				6363EB661E7E5A3900CC287B /* SCToggleViewCell.swift */,
+				63D949E71F18553000697779 /* SCTextFieldViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -391,6 +400,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63D949E61F18534F00697779 /* SCTextFieldViewCell.xib in Resources */,
 				639F89011F0F2B730082D813 /* SCMultilineToggleViewCell.xib in Resources */,
 				630681A51D62FD6900539773 /* Spycodes.storyboard in Resources */,
 				63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */,
@@ -405,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63D949DA1F16FABE00697779 /* SCPickerViewCell.swift in Sources */,
 				636DC0CE1E67D90800DE5EC6 /* SCHelpViewController.swift in Sources */,
 				63FDED371D264CF300142780 /* Team.swift in Sources */,
 				637F195F1D46010E00FB4047 /* Statistics.swift in Sources */,
@@ -413,7 +424,6 @@
 				63EAF9A31D41D2E700BC554E /* Round.swift in Sources */,
 				635464791EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift in Sources */,
 				63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */,
-				63348F791F117DF600659E4C /* SCPregameRoomHeaderViewCell.swift in Sources */,
 				630D15581E99F1B3001C1D87 /* SCLabel.swift in Sources */,
 				63A04D1F1D1A7F3E005A2914 /* SCMainMenuViewController.swift in Sources */,
 				6363EB651E7E4D5600CC287B /* SCUnderlineTextField.swift in Sources */,
@@ -426,6 +436,7 @@
 				63D256811E6BA6BA0061D80C /* SCButton.swift in Sources */,
 				639F89031F0F36120082D813 /* Categories.swift in Sources */,
 				639F88F31F0615540082D813 /* SCUIColor.swift in Sources */,
+				63D949E81F18553000697779 /* SCTextFieldViewCell.swift in Sources */,
 				630883681E80E56F006D2428 /* SCAppInfoManager.swift in Sources */,
 				63A3E1EF1F3450D900657243 /* SCPregameModalSecondaryViewController.swift in Sources */,
 				637310CB1D3B292F00EA5D7A /* SCGameRoomViewController.swift in Sources */,
@@ -446,6 +457,7 @@
 				63A3E1EE1F3450D900657243 /* SCPregameModalPageViewController.swift in Sources */,
 				63A3E1ED1F3450D900657243 /* SCPregameModalMainViewController.swift in Sources */,
 				63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */,
+				63D949E21F17F68900697779 /* CustomCategory.swift in Sources */,
 				6329BEFD1E512ADF004E6151 /* SCViewController.swift in Sources */,
 				6307AC121E989CDE00BC1B73 /* SCModalViewController.swift in Sources */,
 				63DEDEE81E88921200DE94A1 /* Event.swift in Sources */,
@@ -453,7 +465,6 @@
 				637FF00A1E0F0B620076DC25 /* SCAccessCodeViewController.swift in Sources */,
 				6363EB671E7E5A3900CC287B /* SCToggleViewCell.swift in Sources */,
 				63D2568A1E6BA6BA0061D80C /* SCStatusLabel.swift in Sources */,
-				6344FD321F03681500CEBB58 /* SCTimerSettingViewCell.swift in Sources */,
 				638CE44D1EAB3D4B00033480 /* Timeline.swift in Sources */,
 				63FDED391D26557200142780 /* Room.swift in Sources */,
 				63D256821E6BA6BA0061D80C /* SCHelpDescriptionLabel.swift in Sources */,
@@ -467,6 +478,7 @@
 				639F88F11F0615540082D813 /* SCStates.swift in Sources */,
 				633292251E7D0D950090B09D /* SCDisclosureViewCell.swift in Sources */,
 				63D7E73D1EB183EF00B2F536 /* SCReadyStatusLabel.swift in Sources */,
+				63540EAF1F15D40E000A8A7A /* SCCustomCategoryModalViewController.swift in Sources */,
 				63FDED321D2648D600142780 /* SCPlayerNameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
