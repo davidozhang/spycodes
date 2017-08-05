@@ -95,10 +95,16 @@ class SCWordBank {
     static func getShuffledWords() -> [String] {
         var result = [String]()
 
+        // Default categories
         for category in ConsolidatedCategories.instance.getSelectedCategories() {
             if let wordList = SCWordBank.bank[category] {
                 result += wordList
             }
+        }
+
+        // Custom categories
+        for category in ConsolidatedCategories.instance.getSelectedCustomCategories() {
+            result += category.getWordList()
         }
 
         return result.choose(SCConstants.constant.cardCount.rawValue)

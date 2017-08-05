@@ -60,7 +60,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
             for categoryTuple in ConsolidatedCategories.instance.getConsolidatedCategoryInfo() {
                 self.tableView.register(
                     multilineToggleNib,
-                    forCellReuseIdentifier: ConsolidatedCategories.split(tuple: categoryTuple).name
+                    forCellReuseIdentifier: categoryTuple.name
                 )
             }
         } else {
@@ -241,9 +241,7 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
         switch indexPath.section {
         case Section.categories.rawValue:
             if Player.instance.isHost() {
-                let categoryTuple = ConsolidatedCategories.split(
-                    tuple: ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[indexPath.row]
-                )
+                let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[indexPath.row]
 
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: categoryTuple.name

@@ -2,6 +2,12 @@ import Foundation
 
 class ConsolidatedCategories: NSObject, NSCoding {
     static var instance = ConsolidatedCategories()
+
+    enum CategoryType: Int {
+        case defaultCategory = 0
+        case customCategory = 1
+    }
+
     fileprivate var selectedCategories = Set<SCWordBank.Category>()     // Default categories selected for curated word list
     fileprivate var selectedCustomCategories = Set<CustomCategory>()    // Custom categories selected for curated word list
 
@@ -52,11 +58,6 @@ class ConsolidatedCategories: NSObject, NSCoding {
         }
     }
 
-    // MARK: Static
-    static func split(tuple: (String, Int, String?)) -> (name: String, wordCount: Int, emoji: String?) {
-        return (tuple.0, tuple.1, tuple.2)
-    }
-
     // MARK: Public
     func addCategory(category: SCWordBank.Category) {
         self.selectedCategories.insert(category)
@@ -76,8 +77,8 @@ class ConsolidatedCategories: NSObject, NSCoding {
     }
 
     // Host-side consolidation of category name, word count and emoji information in a tuple array
-    func getConsolidatedCategoryInfo() -> [(String, Int, String?)] {
-        var result = [(String, Int, String?)]()
+    func getConsolidatedCategoryInfo() -> [(type: CategoryType, name: String, wordCount: Int, emoji: String?)] {
+        var result = [(CategoryType, String, Int, String?)]()
 
         // Default category names
         for category in SCWordBank.Category.all {
@@ -86,7 +87,7 @@ class ConsolidatedCategories: NSObject, NSCoding {
             let emoji = SCWordBank.getCategoryEmoji(category: category)
 
             result.append(
-                (name, wordCount, emoji)
+                ConsolidatedCategories.split(tuple: (.defaultCategory, name, wordCount, emoji))
             )
         }
 
@@ -96,7 +97,7 @@ class ConsolidatedCategories: NSObject, NSCoding {
                 let wordCount = category.getWordCount()
 
                 result.append(
-                    (name, wordCount, nil)
+                    ConsolidatedCategories.split(tuple: (.customCategory, name, wordCount, nil))
                 )
             }
         }
@@ -220,5 +221,9 @@ class ConsolidatedCategories: NSObject, NSCoding {
     fileprivate func getAllCustomCategories() -> Array<CustomCategory> {
         // TODO: Retrieve all custom categories from local storage
         return self.getSelectedCustomCategories()
+    }
+
+    fileprivate static func split(tuple: (CategoryType, String, Int, String?)) -> (type: CategoryType, name: String, wordCount: Int, emoji: String?) {
+        return (tuple.0, tuple.1, tuple.2, tuple.3)
     }
 }
