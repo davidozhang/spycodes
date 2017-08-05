@@ -1,6 +1,8 @@
 import UIKit
 
 class SCTableViewCell: UITableViewCell {
+    var indexPath: IndexPath?
+
     @IBOutlet weak var leftLabel: SCLabel!
     @IBOutlet weak var primaryLabel: SCLabel!
     @IBOutlet weak var secondaryLabel: SCLabel!

@@ -25,7 +25,8 @@ enum PregameModalPageState: Int {
 
 enum CustomCategoryWordListState: Int {
     case nonEditing = 0
-    case editing = 1
+    case addingNewWord = 1
+    case editingExistingWord = 2
 }
 
 class SCStates {

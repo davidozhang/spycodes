@@ -1,8 +1,9 @@
 import UIKit
 
 protocol SCTextFieldViewCellDelegate: class {
-    func onButtonTapped()
-    func shouldReturn(textField: UITextField) -> Bool
+    func onButtonTapped(textField: UITextField, indexPath: IndexPath)
+    func shouldBeginEditing(textField: UITextField, indexPath: IndexPath) -> Bool
+    func shouldReturn(textField: UITextField, indexPath: IndexPath) -> Bool
 }
 
 class SCTextFieldViewCell: SCTableViewCell {
@@ -11,7 +12,9 @@ class SCTextFieldViewCell: SCTableViewCell {
     @IBOutlet weak var textField: SCTextField!
 
     @IBAction func onButtonTapped(_ sender: Any) {
-        self.delegate?.onButtonTapped()
+        if let indexPath = self.indexPath {
+            self.delegate?.onButtonTapped(textField: textField, indexPath: indexPath)
+        }
     }
 
     override func awakeFromNib() {
@@ -37,10 +40,20 @@ class SCTextFieldViewCell: SCTableViewCell {
 // MARK: UITextFieldDelegate
 extension SCTextFieldViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let shouldReturn = self.delegate?.shouldReturn(textField: textField) {
+        if let indexPath = self.indexPath,
+           let shouldReturn = self.delegate?.shouldReturn(textField: textField, indexPath: indexPath) {
             return shouldReturn
         }
 
         return false
+    }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if let indexPath = self.indexPath,
+           let shouldBeginEditing = self.delegate?.shouldBeginEditing(textField: textField, indexPath: indexPath) {
+            return shouldBeginEditing
+        }
+
+        return true
     }
 }
