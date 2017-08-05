@@ -43,7 +43,11 @@ class SCCustomCategoryModalViewController: SCModalViewController {
     }
 
     @IBAction func onDoneButtonTapped(_ sender: Any) {
+        // TODO: Add validation on custom category
+        // TODO: Save custom category to local storage
         self.dismissView()
+
+        ConsolidatedCategories.instance.addCustomCategory(category: self.customCategory)
     }
 
     deinit {

@@ -127,6 +127,7 @@ class SCStrings {
         case accessibility = "Accessibility"
         case addWord = "Add Word"
         case category = "%@ %@"
+        case custom = "(Custom)"
         case icons8 = "Icons8"
         case github = "Github"
         case minigame = "Minigame"
