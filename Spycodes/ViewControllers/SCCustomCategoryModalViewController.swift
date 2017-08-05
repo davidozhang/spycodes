@@ -188,6 +188,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
             title: SCStrings.button.ok.rawValue,
             style: .default,
             handler: { (action: UIAlertAction) in
+                self.changeStateTo(state: .nonEditing, reload: false)
                 self.confirmHandler(alertController: alertController, successHandler: successHandler)
             }
         )
