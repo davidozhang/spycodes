@@ -18,6 +18,10 @@ class CustomCategory {
         return self.wordList.count
     }
 
+    func wordExists(word: String) -> Bool {
+        return wordList.contains(word)
+    }
+
     func addWord(word: String) {
         self.wordList.insert(word, at: 0)
     }

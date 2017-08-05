@@ -204,6 +204,32 @@ class SCCustomCategoryModalViewController: SCModalViewController {
     fileprivate func indexWithOffset(index: Int) -> Int {
         return index == 0 ? index : index - 1    // Account for top cell
     }
+
+    fileprivate func showDuplicateWordAlert() {
+        self.changeStateTo(state: .nonEditing, reload: true)
+        self.presentAlert(
+            title: SCStrings.header.duplicateWord.rawValue,
+            message: SCStrings.message.duplicateWord.rawValue
+        )
+    }
+
+    fileprivate func processWord(word: String, indexPath: IndexPath) {
+        if indexPath.row == WordList.topCell.rawValue {
+            if self.customCategory.wordExists(word: word) {
+                self.showDuplicateWordAlert()
+            } else {
+                self.customCategory.addWord(word: word)
+            }
+        } else {
+            let index = self.indexWithOffset(index: indexPath.row)
+
+            if self.customCategory.getWordList()[index] != word && self.customCategory.wordExists(word: word) {
+                self.showDuplicateWordAlert()
+            } else {
+                self.customCategory.editWord(word: word, index: index)
+            }
+        }
+    }
 }
 
 //   _____      _                 _
@@ -246,12 +272,7 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
             self.hasFirstResponder = false
 
             if let word = textField.text {
-                if indexPath.row == WordList.topCell.rawValue {
-                    self.customCategory.addWord(word: word)
-                } else {
-                    let index = self.indexWithOffset(index: indexPath.row)
-                    self.customCategory.editWord(word: word, index: index)
-                }
+                self.processWord(word: word, indexPath: indexPath)
             }
 
             self.reloadView()
