@@ -60,6 +60,7 @@ class SCStrings {
         case categoryName = "Category Name"
         case clue = "Clue"
         case confirm = "Confirm"
+        case duplicateWord = "Duplicate Word"
         case enterClue = "Enter Clue"
         case ending = "Final Note"
         case hostOnly = "Host Only Feature"
@@ -88,6 +89,7 @@ class SCStrings {
         case categorySetting = "Only the host can toggle the category settings."
         case defaultLoseString = "Your team lost!"
         case defaultWinString = "Your team won!"
+        case duplicateWord = "The word is already in the list."
         case emptyCategoryName = "Category name cannot be empty."
         case enterCategoryName = "Enter a category name"
         case hostDisconnected = "Host player has disconnected."
@@ -163,7 +165,8 @@ class SCStrings {
         case teamRed = "Team Red"
         case teamBlue = "Team Blue"
         case timeline = "Timeline"
-        case wordList = "Word List"
+        case wordList = "Word List (%d %@)"
+        case wordListDefault = "Word List"
     }
 
     enum status: String {

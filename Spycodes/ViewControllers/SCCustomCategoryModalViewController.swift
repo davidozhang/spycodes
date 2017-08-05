@@ -27,6 +27,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     fileprivate var scrolled = false
     fileprivate var inputMode = false
+    fileprivate var hasFirstResponder = false       // Only detects if add word text field is first responder
 
     fileprivate var customCategory = CustomCategory()
 
@@ -105,6 +106,19 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.tableView.delegate = nil
     }
 
+    fileprivate func reloadView() {
+        self.tableView.reloadData()
+    }
+
+    fileprivate func changeStateTo(state: CustomCategoryWordListState, reload: Bool) {
+        SCStates.customCategoryWordListState = state
+
+        if reload {
+            self.reloadView()
+        }
+
+    }
+
     fileprivate func dismissView() {
         super.onDismissalWithCompletion {
             NotificationCenter.default.post(
@@ -166,6 +180,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
             title: SCStrings.button.cancel.rawValue,
             style: .cancel,
             handler: { (action: UIAlertAction) in
+                self.changeStateTo(state: .nonEditing, reload: false)
                 alertController.dismiss(animated: false, completion: nil)
             }
         )
@@ -173,6 +188,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
             title: SCStrings.button.ok.rawValue,
             style: .default,
             handler: { (action: UIAlertAction) in
+                self.changeStateTo(state: .nonEditing, reload: false)
                 self.confirmHandler(alertController: alertController, successHandler: successHandler)
             }
         )
@@ -185,6 +201,36 @@ class SCCustomCategoryModalViewController: SCModalViewController {
             completion: nil
         )
     }
+
+    fileprivate func indexWithOffset(index: Int) -> Int {
+        return index == 0 ? index : index - 1    // Account for top cell
+    }
+
+    fileprivate func showDuplicateWordAlert() {
+        self.changeStateTo(state: .nonEditing, reload: true)
+        self.presentAlert(
+            title: SCStrings.header.duplicateWord.rawValue,
+            message: SCStrings.message.duplicateWord.rawValue
+        )
+    }
+
+    fileprivate func processWord(word: String, indexPath: IndexPath) {
+        if indexPath.row == WordList.topCell.rawValue {
+            if self.customCategory.wordExists(word: word) {
+                self.showDuplicateWordAlert()
+            } else {
+                self.customCategory.addWord(word: word)
+            }
+        } else {
+            let index = self.indexWithOffset(index: indexPath.row)
+
+            if self.customCategory.getWordList()[index] != word && self.customCategory.wordExists(word: word) {
+                self.showDuplicateWordAlert()
+            } else {
+                self.customCategory.editWord(word: word, index: index)
+            }
+        }
+    }
 }
 
 //   _____      _                 _
@@ -195,13 +241,46 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
 // MARK: UITextFieldDelegate
 extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
-    func onButtonTapped() {
-        SCStates.customCategoryWordListState = .nonEditing
-        self.tableView.reloadData()
+    func onButtonTapped(textField: UITextField, indexPath: IndexPath) {
+        // When X button is tapped for cells
+        switch indexPath.row {
+        case WordList.topCell.rawValue:
+            // Top cell
+            break
+        default:
+            // Word cell
+            let index = self.indexWithOffset(index: indexPath.row)
+            self.customCategory.removeWordAtIndex(index: index)
+        }
+
+        self.changeStateTo(state: .nonEditing, reload: false)
+        self.hasFirstResponder = false
+        self.reloadView()
     }
 
-    func shouldReturn(textField: UITextField) -> Bool {
-        return textField.text?.characters.count == 0
+    func didEndEditing(textField: UITextField, indexPath: IndexPath) {
+        self.hasFirstResponder = false
+    }
+
+    func shouldBeginEditing(textField: UITextField, indexPath: IndexPath) -> Bool {
+        // Should prevent other text fields from becoming first responder if there is already a first responder
+        return !self.hasFirstResponder
+    }
+
+    func shouldReturn(textField: UITextField, indexPath: IndexPath) -> Bool {
+        if textField.text?.characters.count != 0 {
+            textField.resignFirstResponder()
+            self.hasFirstResponder = false
+
+            if let word = textField.text {
+                self.processWord(word: word, indexPath: indexPath)
+            }
+
+            self.reloadView()
+            return true
+        }
+
+        return false
     }
 }
 
@@ -230,7 +309,20 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         }
 
         if let section = Section(rawValue: section) {
-            sectionHeader.primaryLabel.text = self.sectionLabels[section]
+            if section == .wordList, let sectionLabel = self.sectionLabels[section] {
+                let wordCount = self.customCategory.getWordCount()
+                if wordCount == 0 {
+                    sectionHeader.primaryLabel.text = SCStrings.section.wordListDefault.rawValue
+                } else {
+                    sectionHeader.primaryLabel.text = String(
+                        format: sectionLabel,
+                        wordCount,
+                        wordCount == 1 ? "Word" : "Words"
+                    )
+                }
+            } else {
+                sectionHeader.primaryLabel.text = self.sectionLabels[section]
+            }
         }
 
         if self.scrolled {
@@ -248,7 +340,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         case Section.settings.rawValue:
             return settingsLabels.count
         case Section.wordList.rawValue:
-            return 1
+            return 1 + self.customCategory.getWordCount()
         default:
             return 0
         }
@@ -268,7 +360,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
 
                 cell.primaryLabel.text = SCStrings.primaryLabel.name.rawValue
 
-                if let name = customCategory.getName() {
+                if let name = self.customCategory.getName() {
                     cell.rightLabel.text = name
                     cell.rightLabel.isHidden = false
                     cell.rightImage.isHidden = true
@@ -286,17 +378,18 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
             case WordList.topCell.rawValue:
                 // Top Cell Customization
                 switch SCStates.customCategoryWordListState {
-                case .nonEditing:
+                case .nonEditing, .editingExistingWord, .editingCategoryName:
                     guard let cell = self.tableView.dequeueReusableCell(
                         withIdentifier: SCConstants.identifier.addWordViewCell.rawValue
                     ) as? SCTableViewCell else {
-                            return SCTableViewCell()
+                        return SCTableViewCell()
                     }
 
                     cell.primaryLabel.text = SCStrings.primaryLabel.addWord.rawValue
+                    cell.indexPath = indexPath
                     
                     return cell
-                case .editing:
+                case .addingNewWord:
                     // Custom top view cell with text field as first responder
                     guard let cell = self.tableView.dequeueReusableCell(
                         withIdentifier: SCConstants.identifier.wordViewCell.rawValue
@@ -305,17 +398,37 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     }
 
                     cell.delegate = self
+                    cell.indexPath = indexPath
 
-                    // TODO: Figure out how to assign first responder
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                         cell.textField.becomeFirstResponder()
+                        self.hasFirstResponder = true
                     })
 
                     return cell
                 }
-
             default:
-                return SCTableViewCell()
+                // Display words in the list
+                guard let cell = self.tableView.dequeueReusableCell(
+                    withIdentifier: SCConstants.identifier.wordViewCell.rawValue
+                    ) as? SCTextFieldViewCell else {
+                        return SCTableViewCell()
+                }
+
+                cell.delegate = self
+                cell.indexPath = indexPath
+
+                // Hide remove button when adding new words
+                if SCStates.customCategoryWordListState == .addingNewWord {
+                    cell.hideButton()
+                } else {
+                    cell.showButton()
+                }
+
+                let index = self.indexWithOffset(index: indexPath.row)
+                cell.textField.text = self.customCategory.getWordList()[index]
+
+                return cell
             }
         default:
             return SCTableViewCell()
@@ -327,6 +440,8 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         case Section.settings.rawValue:
             switch indexPath.row {
             case Setting.name.rawValue:
+                self.changeStateTo(state: .editingCategoryName, reload: true)
+
                 self.presentTextFieldAlert(
                     title: SCStrings.header.categoryName.rawValue,
                     message: SCStrings.message.enterCategoryName.rawValue,
@@ -337,7 +452,8 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     },
                     successHandler: { (name) in
                         self.customCategory.setName(name: name)
-                        self.tableView.reloadData()
+
+                        self.changeStateTo(state: .nonEditing, reload: true)
                     }
                 )
             default:
@@ -348,8 +464,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
             case WordList.topCell.rawValue:
                 switch SCStates.customCategoryWordListState {
                 case .nonEditing:
-                    SCStates.customCategoryWordListState = .editing
-                    self.tableView.reloadData()
+                    self.changeStateTo(state: .addingNewWord, reload: true)
                 default:
                     break
                 }
@@ -375,7 +490,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         }
         
         if !self.inputMode {
-            self.tableView.reloadData()
+            self.reloadView()
         }
     }
 }
