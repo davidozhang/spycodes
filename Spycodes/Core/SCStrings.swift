@@ -165,7 +165,8 @@ class SCStrings {
         case teamRed = "Team Red"
         case teamBlue = "Team Blue"
         case timeline = "Timeline"
-        case wordList = "Word List"
+        case wordList = "Word List (%d %@)"
+        case wordListDefault = "Word List"
     }
 
     enum status: String {

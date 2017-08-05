@@ -14,7 +14,7 @@ class CustomCategory {
         return self.wordList
     }
 
-    func getWordListCount() -> Int {
+    func getWordCount() -> Int {
         return self.wordList.count
     }
 

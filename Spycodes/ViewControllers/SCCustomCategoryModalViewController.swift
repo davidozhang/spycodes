@@ -308,7 +308,20 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         }
 
         if let section = Section(rawValue: section) {
-            sectionHeader.primaryLabel.text = self.sectionLabels[section]
+            if section == .wordList, let sectionLabel = self.sectionLabels[section] {
+                let wordCount = self.customCategory.getWordCount()
+                if wordCount == 0 {
+                    sectionHeader.primaryLabel.text = SCStrings.section.wordListDefault.rawValue
+                } else {
+                    sectionHeader.primaryLabel.text = String(
+                        format: sectionLabel,
+                        wordCount,
+                        wordCount == 1 ? "Word" : "Words"
+                    )
+                }
+            } else {
+                sectionHeader.primaryLabel.text = self.sectionLabels[section]
+            }
         }
 
         if self.scrolled {
@@ -326,7 +339,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         case Section.settings.rawValue:
             return settingsLabels.count
         case Section.wordList.rawValue:
-            return 1 + self.customCategory.getWordListCount()
+            return 1 + self.customCategory.getWordCount()
         default:
             return 0
         }
