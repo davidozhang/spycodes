@@ -264,9 +264,13 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                     )
                 }
 
+                let wordCount = categoryTuple.wordCount
                 cell.secondaryLabel.text = String(
                     format: SCStrings.secondaryLabel.numberOfWords.rawValue,
-                    categoryTuple.wordCount
+                    wordCount,
+                    wordCount == 1 ?
+                        SCStrings.secondaryLabel.word.rawValue :
+                        SCStrings.secondaryLabel.words.rawValue
                 )
 
                 cell.setEnabled(enabled: true)
@@ -300,9 +304,13 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                     )
                 }
 
+                let wordCount = ConsolidatedCategories.instance.getSynchronizedWordCountForCategoryString(string: categoryString)
                 cell.secondaryLabel.text = String(
                     format: SCStrings.secondaryLabel.numberOfWords.rawValue,
-                    ConsolidatedCategories.instance.getSynchronizedWordCountForCategoryString(string: categoryString)
+                    wordCount,
+                    wordCount == 1 ?
+                        SCStrings.secondaryLabel.word.rawValue :
+                        SCStrings.secondaryLabel.words.rawValue
                 )
 
                 cell.setEnabled(enabled: false)
