@@ -45,12 +45,14 @@ class SCToggleViewCell: SCTableViewCell {
                 if Player.instance.isHost() {
                     // Retrieve from local data
                     if let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {
-                        toggleSwitch.isOn = Categories.instance.isCategorySelected(category: category)
+                        toggleSwitch.isOn = ConsolidatedCategories.instance.isCategorySelected(category: category)
+                    } else if let category = ConsolidatedCategories.instance.getCustomCategoryFromString(string: reuseIdentifier) {
+                        toggleSwitch.isOn = ConsolidatedCategories.instance.isCustomCategorySelected(category: category)
                     }
                 } else {
                     // Retrieve from synchronized data
                     let categoryString = reuseIdentifier
-                    toggleSwitch.isOn = Categories.instance.isSynchronizedCategoryStringSelected(string: categoryString)
+                    toggleSwitch.isOn = ConsolidatedCategories.instance.isSynchronizedCategoryStringSelected(string: categoryString)
                 }
 
                 break

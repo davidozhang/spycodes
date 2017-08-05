@@ -56,16 +56,15 @@ class SCPregameModalSecondaryViewController: SCViewController {
 
         let multilineToggleNib = UINib(nibName: SCConstants.nibs.multilineToggle.rawValue, bundle: nil)
 
-        // TODO: Move cell registration into viewDidLoad
         if Player.instance.isHost() {
-            for category in SCWordBank.Category.all {
+            for categoryTuple in ConsolidatedCategories.instance.getConsolidatedCategoryInfo() {
                 self.tableView.register(
                     multilineToggleNib,
-                    forCellReuseIdentifier: SCWordBank.getCategoryString(category: category)
+                    forCellReuseIdentifier: ConsolidatedCategories.split(tuple: categoryTuple).name
                 )
             }
         } else {
-            for categoryString in Categories.instance.getSynchronizedCategories() {
+            for categoryString in ConsolidatedCategories.instance.getSynchronizedCategories() {
                 self.tableView.register(
                     multilineToggleNib,
                     forCellReuseIdentifier: categoryString
@@ -101,15 +100,27 @@ class SCPregameModalSecondaryViewController: SCViewController {
             let confirmAction = UIAlertAction(
                 title: SCStrings.button.ok.rawValue,
                 style: .default,
-                handler: { (action: UIAlertAction) in
-                    super.performUnwindSegue(false, completionHandler: nil)
-                }
+                handler: nil
             )
             alertController.addAction(confirmAction)
             self.present(
                 alertController,
                 animated: true,
                 completion: completionHandler
+            )
+        }
+    }
+
+    fileprivate func checkWordCount(failureHandler: ((Void) -> Void)?) {
+        if ConsolidatedCategories.instance.getTotalWords() < SCConstants.constant.cardCount.rawValue {
+            self.showAlert(
+                title: SCStrings.header.minimumWords.rawValue,
+                reason: String(format: SCStrings.message.minimumWords.rawValue, SCConstants.constant.cardCount.rawValue),
+                completionHandler: {
+                    if let failureHandler = failureHandler {
+                        failureHandler()
+                    }
+                }
             )
         }
     }
@@ -137,25 +148,38 @@ extension SCPregameModalSecondaryViewController: SCSectionHeaderViewCellDelegate
 // MARK: SCToggleViewCellDelegate
 extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
     func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
-        if let reuseIdentifier = cell.reuseIdentifier,
-            let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {
+        guard let reuseIdentifier = cell.reuseIdentifier else {
+            return
+        }
+
+        if let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {       // Default categories
             if enabled {
-                Categories.instance.addCategory(category: category)
+                ConsolidatedCategories.instance.addCategory(category: category)
             } else {
-                Categories.instance.removeCategory(category: category)
+                ConsolidatedCategories.instance.removeCategory(category: category)
             }
 
-            if Categories.instance.getTotalWords() < SCConstants.constant.cardCount.rawValue {
-                self.showAlert(
-                    title: SCStrings.header.minimumWords.rawValue,
-                    reason: String(format: SCStrings.message.minimumWords.rawValue, SCConstants.constant.cardCount.rawValue),
-                    completionHandler: {
-                        // Revert setting if total word count is less than minimum allowed
-                        cell.toggleSwitch.isOn = !enabled
-                        Categories.instance.addCategory(category: category)
+            self.checkWordCount(
+                failureHandler: {
+                    // Revert setting if total word count is less than minimum allowed
+                    cell.toggleSwitch.isOn = !enabled
+                    ConsolidatedCategories.instance.addCategory(category: category)
                 }
-                )
+            )
+        } else if let category = ConsolidatedCategories.instance.getCustomCategoryFromString(string: reuseIdentifier) {     // Custom categories
+            if enabled {
+                ConsolidatedCategories.instance.addCustomCategory(category: category)
+            } else {
+                ConsolidatedCategories.instance.removeCustomCategory(category: category)
             }
+
+            self.checkWordCount(
+                failureHandler: {
+                    // Revert setting if total word count is less than minimum allowed
+                    cell.toggleSwitch.isOn = !enabled
+                    ConsolidatedCategories.instance.addCustomCategory(category: category)
+                }
+            )
         }
     }
 }
@@ -203,9 +227,9 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
         switch section {
         case Section.categories.rawValue:
             if Player.instance.isHost() {
-                return SCWordBank.Category.count
+                return ConsolidatedCategories.instance.getConsolidatedCategoriesCount()
             } else {
-                return Categories.instance.getSynchronizedCategories().count
+                return ConsolidatedCategories.instance.getSynchronizedCategoriesCount()
             }
         default:
             return 0
@@ -217,24 +241,34 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
         switch indexPath.section {
         case Section.categories.rawValue:
             if Player.instance.isHost() {
-                // Host
-                guard let category = SCWordBank.Category(rawValue: indexPath.row),
-                      let cell = self.tableView.dequeueReusableCell(
-                          withIdentifier: SCWordBank.getCategoryString(category: category)
-                      ) as? SCToggleViewCell else {
+                let categoryTuple = ConsolidatedCategories.split(
+                    tuple: ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[indexPath.row]
+                )
+
+                guard let cell = self.tableView.dequeueReusableCell(
+                    withIdentifier: categoryTuple.name
+                ) as? SCToggleViewCell else {
                     return SCTableViewCell()
                 }
 
-                // Retrieve from local data
-                cell.primaryLabel.text = String(
-                    format: SCStrings.primaryLabel.category.rawValue,
-                    SCWordBank.getCategoryString(category: category),
-                    SCWordBank.getCategoryEmoji(category: category)
-                )
+                if let emoji = categoryTuple.emoji {
+                    cell.primaryLabel.text = String(
+                        format: SCStrings.primaryLabel.category.rawValue,
+                        categoryTuple.name,
+                        emoji
+                    )
+                } else {
+                    // Custom label in place of emoji
+                    cell.primaryLabel.text = String(
+                        format: SCStrings.primaryLabel.category.rawValue,
+                        categoryTuple.name,
+                        SCStrings.primaryLabel.custom.rawValue
+                    )
+                }
 
                 cell.secondaryLabel.text = String(
                     format: SCStrings.secondaryLabel.numberOfWords.rawValue,
-                    SCWordBank.getWordCount(category: category)
+                    categoryTuple.wordCount
                 )
 
                 cell.setEnabled(enabled: true)
@@ -245,7 +279,7 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                 return cell
             } else {
                 // Non-host
-                let categoryString = Categories.instance.getSynchronizedCategories()[indexPath.row]
+                let categoryString = ConsolidatedCategories.instance.getSynchronizedCategories()[indexPath.row]
 
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: categoryString
@@ -254,17 +288,23 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                 }
 
                 // Retrieve from synchronized data
-                if let emoji = Categories.instance.getSynchronizedEmojiForCategoryString(string: categoryString) {
+                if let emoji = ConsolidatedCategories.instance.getSynchronizedEmojiForCategoryString(string: categoryString) {
                     cell.primaryLabel.text = String(
                         format: SCStrings.primaryLabel.category.rawValue,
                         categoryString,
                         emoji
                     )
+                } else {
+                    cell.primaryLabel.text = String(
+                        format: SCStrings.primaryLabel.category.rawValue,
+                        categoryString,
+                        SCStrings.primaryLabel.custom.rawValue
+                    )
                 }
 
                 cell.secondaryLabel.text = String(
                     format: SCStrings.secondaryLabel.numberOfWords.rawValue,
-                    Categories.instance.getSynchronizedWordCountForCategoryString(string: categoryString)
+                    ConsolidatedCategories.instance.getSynchronizedWordCountForCategoryString(string: categoryString)
                 )
 
                 cell.setEnabled(enabled: false)

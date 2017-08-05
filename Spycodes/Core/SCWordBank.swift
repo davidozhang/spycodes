@@ -95,7 +95,7 @@ class SCWordBank {
     static func getShuffledWords() -> [String] {
         var result = [String]()
 
-        for category in Categories.instance.getSelectedCategories() {
+        for category in ConsolidatedCategories.instance.getSelectedCategories() {
             if let wordList = SCWordBank.bank[category] {
                 result += wordList
             }

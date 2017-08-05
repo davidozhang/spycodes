@@ -42,3 +42,21 @@ class CustomCategory {
         self.wordList.remove(at: index)
     }
 }
+
+extension CustomCategory: Hashable {
+    var hashValue: Int {
+        if let nameHashValue = self.name?.hashValue {
+            return nameHashValue
+        }
+
+        return 0
+    }
+
+    static func == (left: CustomCategory, right: CustomCategory) -> Bool {
+        return left.name == right.name
+    }
+
+    static func != (left: CustomCategory, right: CustomCategory) -> Bool {
+        return left.name != right.name
+    }
+}
