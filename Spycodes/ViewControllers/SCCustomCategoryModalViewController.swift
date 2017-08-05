@@ -171,6 +171,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
             title: SCStrings.button.cancel.rawValue,
             style: .cancel,
             handler: { (action: UIAlertAction) in
+                SCStates.customCategoryWordListState = .nonEditing
                 alertController.dismiss(animated: false, completion: nil)
             }
         )
@@ -220,6 +221,10 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
 
         self.hasFirstResponder = false
         self.reloadView()
+    }
+
+    func didEndEditing(textField: UITextField, indexPath: IndexPath) {
+        self.hasFirstResponder = false
     }
 
     func shouldBeginEditing(textField: UITextField, indexPath: IndexPath) -> Bool {
@@ -330,7 +335,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
             case WordList.topCell.rawValue:
                 // Top Cell Customization
                 switch SCStates.customCategoryWordListState {
-                case .nonEditing, .editingExistingWord:
+                case .nonEditing, .editingExistingWord, .editingCategoryName:
                     guard let cell = self.tableView.dequeueReusableCell(
                         withIdentifier: SCConstants.identifier.addWordViewCell.rawValue
                     ) as? SCTableViewCell else {
@@ -370,6 +375,13 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                 cell.delegate = self
                 cell.indexPath = indexPath
 
+                // Hide remove button when adding new words
+                if SCStates.customCategoryWordListState == .addingNewWord {
+                    cell.hideButton()
+                } else {
+                    cell.showButton()
+                }
+
                 let index = self.indexWithOffset(index: indexPath.row)
                 cell.textField.text = self.customCategory.getWordList()[index]
 
@@ -385,6 +397,9 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         case Section.settings.rawValue:
             switch indexPath.row {
             case Setting.name.rawValue:
+                SCStates.customCategoryWordListState = .editingCategoryName
+                self.reloadView()
+
                 self.presentTextFieldAlert(
                     title: SCStrings.header.categoryName.rawValue,
                     message: SCStrings.message.enterCategoryName.rawValue,
@@ -395,6 +410,8 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     },
                     successHandler: { (name) in
                         self.customCategory.setName(name: name)
+
+                        SCStates.customCategoryWordListState = .nonEditing
                         self.reloadView()
                     }
                 )

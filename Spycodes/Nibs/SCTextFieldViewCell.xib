@@ -19,16 +19,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4wg-Pq-rfS" customClass="SCTextField" customModule="Spycodes" customModuleProvider="target">
-                        <rect key="frame" x="4" y="13.5" width="330" height="17"/>
+                        <rect key="frame" x="4" y="13.5" width="333" height="17"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGt-T2-Yha">
-                        <rect key="frame" x="350" y="10" width="25" height="25"/>
+                        <rect key="frame" x="353" y="11.5" width="22" height="22"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="gmO-Wq-Q6g"/>
-                            <constraint firstAttribute="width" constant="25" id="ueh-Rx-lmt"/>
+                            <constraint firstAttribute="height" constant="22" id="gmO-Wq-Q6g"/>
+                            <constraint firstAttribute="width" constant="22" id="ueh-Rx-lmt"/>
                         </constraints>
                         <state key="normal" image="Delete"/>
                         <connections>
@@ -45,6 +45,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="button" destination="bGt-T2-Yha" id="dsb-N5-JFy"/>
                 <outlet property="textField" destination="4wg-Pq-rfS" id="MyJ-Be-gLU"/>
             </connections>
             <point key="canvasLocation" x="-10" y="14"/>

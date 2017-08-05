@@ -2,6 +2,7 @@ import UIKit
 
 protocol SCTextFieldViewCellDelegate: class {
     func onButtonTapped(textField: UITextField, indexPath: IndexPath)
+    func didEndEditing(textField: UITextField, indexPath: IndexPath)
     func shouldBeginEditing(textField: UITextField, indexPath: IndexPath) -> Bool
     func shouldReturn(textField: UITextField, indexPath: IndexPath) -> Bool
 }
@@ -9,6 +10,7 @@ protocol SCTextFieldViewCellDelegate: class {
 class SCTextFieldViewCell: SCTableViewCell {
     weak var delegate: SCTextFieldViewCellDelegate?
 
+    @IBOutlet weak var button: UIButton!
     @IBOutlet weak var textField: SCTextField!
 
     @IBAction func onButtonTapped(_ sender: Any) {
@@ -28,6 +30,14 @@ class SCTextFieldViewCell: SCTableViewCell {
         super.prepareForReuse()
 
         self.textField.text = nil
+    }
+
+    func hideButton() {
+        self.button.isHidden = true
+    }
+
+    func showButton() {
+        self.button.isHidden = false
     }
 }
 
@@ -55,5 +65,11 @@ extension SCTextFieldViewCell: UITextFieldDelegate {
         }
 
         return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let indexPath = self.indexPath {
+            self.delegate?.didEndEditing(textField: textField, indexPath: indexPath)
+        }
     }
 }
