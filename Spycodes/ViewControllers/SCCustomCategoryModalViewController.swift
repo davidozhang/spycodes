@@ -110,6 +110,15 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.tableView.reloadData()
     }
 
+    fileprivate func changeStateTo(state: CustomCategoryWordListState, reload: Bool) {
+        SCStates.customCategoryWordListState = state
+
+        if reload {
+            self.reloadView()
+        }
+
+    }
+
     fileprivate func dismissView() {
         super.onDismissalWithCompletion {
             NotificationCenter.default.post(
@@ -171,7 +180,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
             title: SCStrings.button.cancel.rawValue,
             style: .cancel,
             handler: { (action: UIAlertAction) in
-                SCStates.customCategoryWordListState = .nonEditing
+                self.changeStateTo(state: .nonEditing, reload: false)
                 alertController.dismiss(animated: false, completion: nil)
             }
         )
@@ -210,15 +219,14 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
         switch indexPath.row {
         case WordList.topCell.rawValue:
             // Top cell
-            SCStates.customCategoryWordListState = .nonEditing
+            break
         default:
             // Word cell
-            SCStates.customCategoryWordListState = .nonEditing
-
             let index = self.indexWithOffset(index: indexPath.row)
             self.customCategory.removeWordAtIndex(index: index)
         }
 
+        self.changeStateTo(state: .nonEditing, reload: false)
         self.hasFirstResponder = false
         self.reloadView()
     }
@@ -397,8 +405,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         case Section.settings.rawValue:
             switch indexPath.row {
             case Setting.name.rawValue:
-                SCStates.customCategoryWordListState = .editingCategoryName
-                self.reloadView()
+                self.changeStateTo(state: .editingCategoryName, reload: true)
 
                 self.presentTextFieldAlert(
                     title: SCStrings.header.categoryName.rawValue,
@@ -411,8 +418,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     successHandler: { (name) in
                         self.customCategory.setName(name: name)
 
-                        SCStates.customCategoryWordListState = .nonEditing
-                        self.reloadView()
+                        self.changeStateTo(state: .nonEditing, reload: true)
                     }
                 )
             default:
@@ -423,8 +429,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
             case WordList.topCell.rawValue:
                 switch SCStates.customCategoryWordListState {
                 case .nonEditing:
-                    SCStates.customCategoryWordListState = .addingNewWord
-                    self.reloadView()
+                    self.changeStateTo(state: .addingNewWord, reload: true)
                 default:
                     break
                 }
