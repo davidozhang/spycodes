@@ -255,7 +255,9 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                         categoryTuple.name,
                         emoji
                     )
-                } else {
+                }
+
+                if categoryTuple.type == .customCategory {
                     // Custom label in place of emoji
                     cell.primaryLabel.text = String(
                         format: SCStrings.primaryLabel.category.rawValue,
@@ -289,14 +291,16 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                     return SCTableViewCell()
                 }
 
-                // Retrieve from synchronized data
                 if let emoji = ConsolidatedCategories.instance.getSynchronizedEmojiForCategoryString(string: categoryString) {
                     cell.primaryLabel.text = String(
                         format: SCStrings.primaryLabel.category.rawValue,
                         categoryString,
                         emoji
                     )
-                } else {
+                }
+
+                if let type = ConsolidatedCategories.instance.getSynchronizedCategoryTypeForCategoryString(string: categoryString),
+                   type == ConsolidatedCategories.CategoryType.customCategory {
                     cell.primaryLabel.text = String(
                         format: SCStrings.primaryLabel.category.rawValue,
                         categoryString,

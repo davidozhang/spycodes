@@ -13,6 +13,7 @@ class ConsolidatedCategories: NSObject, NSCoding {
 
     // Non-host player synchronization data
     fileprivate var synchronizedCategories = [String: Bool]()         // Mapping from string category to selected boolean
+    fileprivate var synchronizedCategoryTypes = [String: Int]()     // Mapping from string category to category type
     fileprivate var synchronizedWordCounts = [String: Int]()     // Mapping from string category to word count
     fileprivate var synchronizedEmojis = [String: String]()     // Mapping from string category to emoji
 
@@ -34,6 +35,10 @@ class ConsolidatedCategories: NSObject, NSCoding {
             forKey: SCConstants.coding.wordCounts.rawValue
         )
         aCoder.encode(
+            self.synchronizedCategoryTypes,
+            forKey: SCConstants.coding.categoryTypes.rawValue
+        )
+        aCoder.encode(
             self.synchronizedEmojis,
             forKey: SCConstants.coding.emojis.rawValue
         )
@@ -50,6 +55,11 @@ class ConsolidatedCategories: NSObject, NSCoding {
         if aDecoder.containsValue(forKey: SCConstants.coding.wordCounts.rawValue),
             let wordCounts = aDecoder.decodeObject(forKey: SCConstants.coding.wordCounts.rawValue) as? [String: Int] {
             self.synchronizedWordCounts = wordCounts
+        }
+
+        if aDecoder.containsValue(forKey: SCConstants.coding.categoryTypes.rawValue),
+            let categoryTypes = aDecoder.decodeObject(forKey: SCConstants.coding.categoryTypes.rawValue) as? [String: Int] {
+            self.synchronizedCategoryTypes = categoryTypes
         }
 
         if aDecoder.containsValue(forKey: SCConstants.coding.emojis.rawValue),
@@ -82,7 +92,7 @@ class ConsolidatedCategories: NSObject, NSCoding {
 
         // Default category names
         for category in SCWordBank.Category.all {
-            let name = SCWordBank.getCategoryString(category: category)
+            let name = SCWordBank.getCategoryName(category: category)
             let wordCount = SCWordBank.getWordCount(category: category)
             let emoji = SCWordBank.getCategoryEmoji(category: category)
 
@@ -148,10 +158,11 @@ class ConsolidatedCategories: NSObject, NSCoding {
     func generateSynchronizedCategories() {
         // Default categories
         for category in SCWordBank.Category.all {
-            let string = SCWordBank.getCategoryString(category: category)
-            self.synchronizedCategories[string] = self.selectedCategories.contains(category)
-            self.synchronizedWordCounts[string] = SCWordBank.getWordCount(category: category)
-            self.synchronizedEmojis[string] = SCWordBank.getCategoryEmoji(category: category)
+            let name = SCWordBank.getCategoryName(category: category)
+            self.synchronizedCategories[name] = self.selectedCategories.contains(category)
+            self.synchronizedWordCounts[name] = SCWordBank.getWordCount(category: category)
+            self.synchronizedEmojis[name] = SCWordBank.getCategoryEmoji(category: category)
+            self.synchronizedCategoryTypes[name] = CategoryType.defaultCategory.rawValue
         }
 
         // Custom categories
@@ -159,6 +170,7 @@ class ConsolidatedCategories: NSObject, NSCoding {
             if let name = category.getName() {
                 self.synchronizedCategories[name] = self.selectedCustomCategories.contains(category)
                 self.synchronizedWordCounts[name] = category.getWordCount()
+                self.synchronizedCategoryTypes[name] = CategoryType.customCategory.rawValue
             }
         }
     }
@@ -209,6 +221,14 @@ class ConsolidatedCategories: NSObject, NSCoding {
         }
 
         return result
+    }
+
+    func getSynchronizedCategoryTypeForCategoryString(string: String) -> CategoryType? {
+        guard let result = self.synchronizedCategoryTypes[string] else {
+            return nil
+        }
+
+        return CategoryType(rawValue: result)
     }
 
     func getSynchronizedWordCountForCategoryString(string: String) -> Int {
