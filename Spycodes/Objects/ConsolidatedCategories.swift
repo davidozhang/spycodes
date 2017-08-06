@@ -285,7 +285,7 @@ class ConsolidatedCategories: NSObject, NSCoding {
         }
 
         let retrievedCustomCategories = SCLocalStorageManager.instance.retrieveCustomCategoriesFromLocalStorage()
-        self.allCachedCustomCategories = SCLocalStorageManager.instance.retrieveCustomCategoriesFromLocalStorage()
+        self.allCachedCustomCategories = retrievedCustomCategories
         return retrievedCustomCategories
     }
 
