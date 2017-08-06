@@ -6,7 +6,9 @@ class SCConstants {
         case card = "card"
         case cards = "cards"
         case categories = "categories"
+        case categoryName = "category-name"
         case categoryTypes = "category-types"
+        case categoryWordList = "category-word-list"
         case clue = "clue"
         case correct = "correct"
         case emojis = "emojis"
@@ -132,6 +134,7 @@ class SCConstants {
 
     enum userDefaults: String {
         case accessibility = "accessibility"
+        case customCategories = "custom-categories"
         case nightMode = "night-mode"
     }
 }

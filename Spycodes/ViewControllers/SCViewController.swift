@@ -116,7 +116,7 @@ class SCViewController: UIViewController {
     }
 
     override var preferredStatusBarStyle : UIStatusBarStyle {
-        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+        if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             return .lightContent
         } else {
             return .default
@@ -217,7 +217,7 @@ class SCViewController: UIViewController {
         }
 
         // Night mode related appearance customizations
-        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+        if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             textFieldAppearance.keyboardAppearance = .dark
             toolBarAppearance.tintColor = .white
             pageControlAppearance.pageIndicatorTintColor = .spycodesGrayColor()

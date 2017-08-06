@@ -92,7 +92,7 @@ class SCModalViewController: SCViewController {
             view.removeFromSuperview()
         }
 
-        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+        if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             self.view.backgroundColor = .darkTintColor()
             self.blurView = UIVisualEffectView(
                 effect: UIBlurEffect(style: .dark)
