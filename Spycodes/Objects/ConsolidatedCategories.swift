@@ -87,9 +87,9 @@ class ConsolidatedCategories: NSObject, NSCoding {
         self.allCachedCustomCategories?.append(category)
     }
 
-    func updateCustomCategory(category: CustomCategory) {
-        self.removeCustomCategory(category: category)
-        self.addCustomCategory(category: category)
+    func updateCustomCategory(originalCategory: CustomCategory, updatedCategory: CustomCategory) {
+        self.removeCustomCategory(category: originalCategory)
+        self.addCustomCategory(category: updatedCategory)
     }
 
     func removeCustomCategory(category: CustomCategory) {

@@ -30,7 +30,8 @@ class SCCustomCategoryModalViewController: SCModalViewController {
     fileprivate var hasFirstResponder = false       // Only detects if add word text field is first responder
     fileprivate var existingCustomCategory = false
 
-    fileprivate var customCategory = CustomCategory()
+    fileprivate var nonMutableCustomCategory: CustomCategory?
+    fileprivate var mutableCustomCategory = CustomCategory()
 
     fileprivate var blurView: UIVisualEffectView?
 
@@ -102,8 +103,12 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     // MARK: Public
     func setCustomCategoryFromString(category: String) {
-        if let customCategory = ConsolidatedCategories.instance.getCustomCategoryFromString(string: category) {
-            self.customCategory = customCategory
+        if let customCategory = ConsolidatedCategories.instance.getCustomCategoryFromString(string: category),
+           let nonMutableCopy = customCategory.copy() as? CustomCategory,
+           let mutableCopy = customCategory.copy() as? CustomCategory {
+            // Use copies of custom category object in the event that user cancels
+            self.nonMutableCustomCategory = nonMutableCopy
+            self.mutableCustomCategory = mutableCopy
             self.existingCustomCategory = true
         }
     }
@@ -137,13 +142,18 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.validateCustomCategory(successHandler: {
             if !self.existingCustomCategory {
                 // New custom category
-                ConsolidatedCategories.instance.addCustomCategory(category: self.customCategory)
-                ConsolidatedCategories.instance.selectCustomCategory(category: self.customCategory)
+                ConsolidatedCategories.instance.addCustomCategory(category: self.mutableCustomCategory)
             } else {
                 // Existing custom category
-                ConsolidatedCategories.instance.updateCustomCategory(category: self.customCategory)
+                if let originalCustomCategory = self.nonMutableCustomCategory {
+                    ConsolidatedCategories.instance.updateCustomCategory(
+                        originalCategory: originalCustomCategory,
+                        updatedCategory: self.mutableCustomCategory
+                    )
+                }
             }
 
+            ConsolidatedCategories.instance.selectCustomCategory(category: self.mutableCustomCategory)
             self.dismissView()
         })
     }
@@ -158,17 +168,17 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         }
 
         // Validate for empty new category name, empty word list and whether or not the new category name already exists
-        if self.customCategory.getName() == nil {
+        if self.mutableCustomCategory.getName() == nil {
             self.presentAlert(
                 title: SCStrings.header.emptyCategory.rawValue,
                 message: SCStrings.message.emptyCategoryName.rawValue
             )
-        } else if ConsolidatedCategories.instance.categoryExists(category: self.customCategory.getName()) {
+        } else if ConsolidatedCategories.instance.categoryExists(category: self.mutableCustomCategory.getName()) {
             self.presentAlert(
                 title: SCStrings.header.categoryExists.rawValue,
                 message: SCStrings.message.categoryExists.rawValue
             )
-        } else if self.customCategory.getWordCount() == 0 {
+        } else if self.mutableCustomCategory.getWordCount() == 0 {
             self.presentAlert(
                 title: SCStrings.header.categoryWordList.rawValue,
                 message: SCStrings.message.categoryWordList.rawValue
@@ -281,18 +291,18 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     fileprivate func processWord(word: String, indexPath: IndexPath) {
         if indexPath.row == WordList.topCell.rawValue {
-            if self.customCategory.wordExists(word: word) {
+            if self.mutableCustomCategory.wordExists(word: word) {
                 self.showDuplicateWordAlert()
             } else {
-                self.customCategory.addWord(word: word)
+                self.mutableCustomCategory.addWord(word: word)
             }
         } else {
             let index = self.indexWithOffset(index: indexPath.row)
 
-            if self.customCategory.getWordList()[index] != word && self.customCategory.wordExists(word: word) {
+            if self.mutableCustomCategory.getWordList()[index] != word && self.mutableCustomCategory.wordExists(word: word) {
                 self.showDuplicateWordAlert()
             } else {
-                self.customCategory.editWord(word: word, index: index)
+                self.mutableCustomCategory.editWord(word: word, index: index)
             }
         }
     }
@@ -315,7 +325,7 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
         default:
             // Word cell
             let index = self.indexWithOffset(index: indexPath.row)
-            self.customCategory.removeWordAtIndex(index: index)
+            self.mutableCustomCategory.removeWordAtIndex(index: index)
         }
 
         self.changeStateTo(state: .nonEditing, reload: false)
@@ -375,7 +385,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
 
         if let section = Section(rawValue: section) {
             if section == .wordList, let sectionLabel = self.sectionLabels[section] {
-                let wordCount = self.customCategory.getWordCount()
+                let wordCount = self.mutableCustomCategory.getWordCount()
                 if wordCount == 0 {
                     sectionHeader.primaryLabel.text = SCStrings.section.wordListDefault.rawValue
                 } else {
@@ -405,7 +415,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         case Section.settings.rawValue:
             return settingsLabels.count
         case Section.wordList.rawValue:
-            return 1 + self.customCategory.getWordCount()
+            return 1 + self.mutableCustomCategory.getWordCount()
         default:
             return 0
         }
@@ -425,7 +435,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
 
                 cell.primaryLabel.text = SCStrings.primaryLabel.name.rawValue
 
-                if let name = self.customCategory.getName() {
+                if let name = self.mutableCustomCategory.getName() {
                     cell.rightLabel.text = name
                     cell.rightLabel.isHidden = false
                     cell.rightImage.isHidden = true
@@ -491,7 +501,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                 }
 
                 let index = self.indexWithOffset(index: indexPath.row)
-                cell.textField.text = self.customCategory.getWordList()[index]
+                cell.textField.text = self.mutableCustomCategory.getWordList()[index]
 
                 return cell
             }
@@ -511,12 +521,12 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     title: SCStrings.header.categoryName.rawValue,
                     message: SCStrings.message.enterCategoryName.rawValue,
                     textFieldHandler: { (textField) in
-                        if let name = self.customCategory.getName() {
+                        if let name = self.mutableCustomCategory.getName() {
                             textField.text = name
                         }
                     },
                     successHandler: { (name) in
-                        self.customCategory.setName(name: name)
+                        self.mutableCustomCategory.setName(name: name)
 
                         self.changeStateTo(state: .nonEditing, reload: true)
                     }
