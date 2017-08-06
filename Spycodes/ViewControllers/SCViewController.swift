@@ -11,6 +11,8 @@ class SCViewController: UIViewController {
     var unwindingSegue = false
     var isRootViewController = false
 
+    var userInfo: [AnyHashable: Any]?
+
     fileprivate let dimView = UIView()
     fileprivate var modalPeekBlurView: UIVisualEffectView?
 

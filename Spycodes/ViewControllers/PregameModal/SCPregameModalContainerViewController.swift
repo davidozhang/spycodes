@@ -52,7 +52,7 @@ class SCPregameModalContainerViewController: SCModalViewController {
                 NotificationCenter.default.post(
                     name: NSNotification.Name(rawValue: intent),
                     object: nil,
-                    userInfo: nil
+                    userInfo: userInfo
                 )
             }
         }

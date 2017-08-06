@@ -28,6 +28,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
     fileprivate var scrolled = false
     fileprivate var inputMode = false
     fileprivate var hasFirstResponder = false       // Only detects if add word text field is first responder
+    fileprivate var existingCustomCategory = false
 
     fileprivate var customCategory = CustomCategory()
 
@@ -64,14 +65,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.tableViewTrailingSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
         self.tableView.layoutIfNeeded()
 
-        let textFieldViewCellNib = UINib(
-            nibName: SCConstants.nibs.textFieldViewCell.rawValue,
-            bundle: nil
-        )
-        self.tableView.register(
-            textFieldViewCellNib,
-            forCellReuseIdentifier: SCConstants.identifier.wordViewCell.rawValue
-        )
+        self.registerTableViewCells()
 
         // Navigation bar customization
         if let bounds = self.navigationController?.navigationBar.bounds {
@@ -106,6 +100,15 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.tableView.delegate = nil
     }
 
+    // MARK: Public
+    func setCustomCategoryFromString(category: String) {
+        if let customCategory = ConsolidatedCategories.instance.getCustomCategoryFromString(string: category) {
+            self.customCategory = customCategory
+            self.existingCustomCategory = true
+        }
+    }
+
+    // MARK: Private
     fileprivate func reloadView() {
         self.tableView.reloadData()
     }
@@ -118,16 +121,43 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         }
     }
 
+    fileprivate func registerTableViewCells() {
+        let textFieldViewCellNib = UINib(
+            nibName: SCConstants.nibs.textFieldViewCell.rawValue,
+            bundle: nil
+        )
+
+        self.tableView.register(
+            textFieldViewCellNib,
+            forCellReuseIdentifier: SCConstants.identifier.wordViewCell.rawValue
+        )
+    }
+
     fileprivate func onDone() {
         self.validateCustomCategory(successHandler: {
-            ConsolidatedCategories.instance.addCustomCategory(category: self.customCategory)
-            ConsolidatedCategories.instance.selectCustomCategory(category: self.customCategory)
+            if !self.existingCustomCategory {
+                // New custom category
+                ConsolidatedCategories.instance.addCustomCategory(category: self.customCategory)
+                ConsolidatedCategories.instance.selectCustomCategory(category: self.customCategory)
+            } else {
+                // Existing custom category
+                ConsolidatedCategories.instance.updateCustomCategory(category: self.customCategory)
+            }
+
             self.dismissView()
         })
     }
 
     fileprivate func validateCustomCategory(successHandler: ((Void) -> Void)?) {
-        // Validate for empty category name, empty word list and whether or not the category name already exists
+        if self.existingCustomCategory {
+            if let successHandler = successHandler {
+                successHandler()
+            }
+
+            return
+        }
+
+        // Validate for empty new category name, empty word list and whether or not the new category name already exists
         if self.customCategory.getName() == nil {
             self.presentAlert(
                 title: SCStrings.header.emptyCategory.rawValue,

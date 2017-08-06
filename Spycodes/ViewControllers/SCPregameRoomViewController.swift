@@ -168,9 +168,24 @@ class SCPregameRoomViewController: SCViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super._prepareForSegue(segue, sender: sender)
         self.resetReadyButton()
+
+        if let userInfo = self.userInfo {
+            if let nvc = segue.destination as? UINavigationController,
+               let vc = nvc.topViewController as? SCCustomCategoryModalViewController {
+                if let customCategoryName = userInfo[SCConstants.notificationKey.customCategoryName.rawValue] as? String {
+                    vc.setCustomCategoryFromString(category: customCategoryName)
+                }
+            }
+
+            self.userInfo = nil
+        }
     }
 
-    func showCustomCategoryView() {
+    func showCustomCategoryView(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            self.userInfo = userInfo
+        }
+
         self.performSegue(
             withIdentifier: SCConstants.identifier.customCategory.rawValue,
             sender: self
