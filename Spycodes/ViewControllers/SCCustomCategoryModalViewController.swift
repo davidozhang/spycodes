@@ -120,7 +120,6 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     fileprivate func onDone() {
         self.validateCustomCategory(successHandler: {
-            // TODO: Save custom category to local storage
             ConsolidatedCategories.instance.addCustomCategory(category: self.customCategory)
             ConsolidatedCategories.instance.selectCustomCategory(category: self.customCategory)
             self.dismissView()
@@ -163,7 +162,6 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     fileprivate func confirmHandler(alertController: UIAlertController, successHandler: ((String) -> Void)?) {
         if let categoryName = alertController.textFields?[0].text {
-            // TODO: Add text validation
             if categoryName.characters.count == 0 {
                 self.presentAlert(
                     title: SCStrings.header.emptyCategory.rawValue,
