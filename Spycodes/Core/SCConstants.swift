@@ -6,6 +6,7 @@ class SCConstants {
         case card = "card"
         case cards = "cards"
         case categories = "categories"
+        case categoryTypes = "category-types"
         case clue = "clue"
         case correct = "correct"
         case emojis = "emojis"
