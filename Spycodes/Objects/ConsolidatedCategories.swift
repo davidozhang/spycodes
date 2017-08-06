@@ -78,7 +78,7 @@ class ConsolidatedCategories: NSObject, NSCoding {
 
     // Host-side consolidation of category name, word count and emoji information in a tuple array
     func getConsolidatedCategoryInfo() -> [(type: CategoryType, name: String, wordCount: Int, emoji: String?)] {
-        var result = [(CategoryType, String, Int, String?)]()
+        var result = [(type: CategoryType, name: String, wordCount: Int, emoji: String?)]()
 
         // Default category names
         for category in SCWordBank.Category.all {
@@ -102,7 +102,9 @@ class ConsolidatedCategories: NSObject, NSCoding {
             }
         }
 
-        return result
+        return result.sorted(by: { t1, t2 in
+            return t1.name.lowercased() < t2.name.lowercased()
+        })
     }
 
     func getConsolidatedCategoriesCount() -> Int {
