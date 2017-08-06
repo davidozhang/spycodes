@@ -54,23 +54,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
             repeats: true
         )
 
-        let multilineToggleNib = UINib(nibName: SCConstants.nibs.multilineToggle.rawValue, bundle: nil)
-
-        if Player.instance.isHost() {
-            for categoryTuple in ConsolidatedCategories.instance.getConsolidatedCategoryInfo() {
-                self.tableView.register(
-                    multilineToggleNib,
-                    forCellReuseIdentifier: categoryTuple.name
-                )
-            }
-        } else {
-            for categoryString in ConsolidatedCategories.instance.getSynchronizedCategories() {
-                self.tableView.register(
-                    multilineToggleNib,
-                    forCellReuseIdentifier: categoryString
-                )
-            }
-        }
+        self.registerTableViewCells()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -87,6 +71,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
     fileprivate func refreshView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.registerTableViewCells()
         }
     }
 
@@ -122,6 +107,26 @@ class SCPregameModalSecondaryViewController: SCViewController {
                     }
                 }
             )
+        }
+    }
+
+    fileprivate func registerTableViewCells() {
+        let multilineToggleNib = UINib(nibName: SCConstants.nibs.multilineToggle.rawValue, bundle: nil)
+
+        if Player.instance.isHost() {
+            for categoryTuple in ConsolidatedCategories.instance.getConsolidatedCategoryInfo() {
+                self.tableView.register(
+                    multilineToggleNib,
+                    forCellReuseIdentifier: categoryTuple.name
+                )
+            }
+        } else {
+            for categoryString in ConsolidatedCategories.instance.getSynchronizedCategories() {
+                self.tableView.register(
+                    multilineToggleNib,
+                    forCellReuseIdentifier: categoryString
+                )
+            }
         }
     }
 }

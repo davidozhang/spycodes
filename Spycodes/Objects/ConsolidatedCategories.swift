@@ -209,7 +209,11 @@ class ConsolidatedCategories: NSObject, NSCoding {
 
     // Non-host methods for synchronized categories
     func getSynchronizedCategories() -> [String] {
-        return Array(self.synchronizedCategories.keys.sorted())
+        return Array(self.synchronizedCategories.keys.sorted(
+            by: { s1, s2 in
+                s1.lowercased() < s2.lowercased()
+            }
+        ))
     }
 
     func getSynchronizedCategoriesCount() -> Int {
