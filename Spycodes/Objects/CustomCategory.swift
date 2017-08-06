@@ -1,8 +1,15 @@
 import Foundation
 
-class CustomCategory: NSObject, NSCoding {
+class CustomCategory: NSObject, NSCoding, NSCopying {
     fileprivate var name: String?
     fileprivate var wordList = [String]()
+
+    convenience init(name: String?, wordList: [String]) {
+        self.init()
+
+        self.name = name
+        self.wordList = wordList
+    }
 
     // MARK: Coder
     func encode(with aCoder: NSCoder) {
@@ -35,6 +42,12 @@ class CustomCategory: NSObject, NSCoding {
             ) as? [String] {
             self.wordList = wordList
         }
+    }
+
+    // MARK: Copying
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = CustomCategory(name: self.name, wordList: self.wordList)
+        return copy
     }
 
     // MARK: Public

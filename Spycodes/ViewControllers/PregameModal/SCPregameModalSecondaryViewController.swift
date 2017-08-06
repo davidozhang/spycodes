@@ -129,6 +129,22 @@ class SCPregameModalSecondaryViewController: SCViewController {
             }
         }
     }
+
+    fileprivate func presentCustomCategoryView(existingCategory: Bool, category: String?) {
+        var userInfo = [
+            SCConstants.notificationKey.intent.rawValue: SCConstants.notificationKey.customCategory.rawValue
+        ]
+
+        if existingCategory, let category = category {
+            userInfo[SCConstants.notificationKey.customCategoryName.rawValue] = category
+        }
+
+        NotificationCenter.default.post(
+            name: NSNotification.Name(rawValue: SCConstants.notificationKey.dismissModal.rawValue),
+            object: self,
+            userInfo: userInfo
+        )
+    }
 }
 
 //   _____      _                 _
@@ -140,13 +156,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
 // MARK: SCSectionHeaderViewCellDelegate
 extension SCPregameModalSecondaryViewController: SCSectionHeaderViewCellDelegate {
     func onSectionHeaderButtonTapped() {
-        NotificationCenter.default.post(
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.dismissModal.rawValue),
-            object: self,
-            userInfo: [
-                SCConstants.notificationKey.intent.rawValue: SCConstants.notificationKey.customCategory.rawValue
-            ]
-        )
+        self.presentCustomCategoryView(existingCategory: false, category: nil)
     }
 }
 
@@ -341,6 +351,12 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                 reason: SCStrings.message.categorySetting.rawValue,
                 completionHandler: nil
             )
+        } else {
+            let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[indexPath.row]
+
+            if categoryTuple.type == .customCategory {
+                self.presentCustomCategoryView(existingCategory: true, category: categoryTuple.name)
+            }
         }
     }
 

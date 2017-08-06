@@ -97,6 +97,7 @@ class SCConstants {
 
     enum notificationKey: String {
         case customCategory = "custom-category-view"
+        case customCategoryName = "custom-category-name"
         case disableSwipeGestureRecognizer = "disable-swipe-gesture-recognizer"
         case dismissModal = "dismiss-modal"
         case enableSwipeGestureRecognizer = "enable-swipe-gesture-recognizer"
