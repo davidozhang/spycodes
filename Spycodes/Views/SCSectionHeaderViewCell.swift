@@ -41,7 +41,7 @@ class SCSectionHeaderViewCell: SCTableViewCell {
     func showBlurBackground() {
         self.hideBlurBackground()
 
-        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+        if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             self.blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         } else {
             self.blurView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))

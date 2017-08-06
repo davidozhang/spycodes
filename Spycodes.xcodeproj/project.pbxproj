@@ -18,7 +18,7 @@
 		632E4E461E6A91C8004E7180 /* SCPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E4E451E6A91C8004E7180 /* SCPopoverViewController.swift */; };
 		633292251E7D0D950090B09D /* SCDisclosureViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633292241E7D0D950090B09D /* SCDisclosureViewCell.swift */; };
 		633292271E7DE8B30090B09D /* SCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633292261E7DE8B30090B09D /* SCTableViewCell.swift */; };
-		6332922B1E7DE9EC0090B09D /* SCSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332922A1E7DE9EC0090B09D /* SCSettingsManager.swift */; };
+		6332922B1E7DE9EC0090B09D /* SCLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
 		63540EAF1F15D40E000A8A7A /* SCCustomCategoryModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63540EAE1F15D40E000A8A7A /* SCCustomCategoryModalViewController.swift */; };
 		635464791EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */; };
@@ -92,7 +92,7 @@
 		632E4E451E6A91C8004E7180 /* SCPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPopoverViewController.swift; path = ViewControllers/SCPopoverViewController.swift; sourceTree = "<group>"; };
 		633292241E7D0D950090B09D /* SCDisclosureViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDisclosureViewCell.swift; path = Views/SCDisclosureViewCell.swift; sourceTree = "<group>"; };
 		633292261E7DE8B30090B09D /* SCTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTableViewCell.swift; path = Views/SCTableViewCell.swift; sourceTree = "<group>"; };
-		6332922A1E7DE9EC0090B09D /* SCSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCSettingsManager.swift; path = Managers/SCSettingsManager.swift; sourceTree = "<group>"; };
+		6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLocalStorageManager.swift; path = Managers/SCLocalStorageManager.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
 		63540EAE1F15D40E000A8A7A /* SCCustomCategoryModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCCustomCategoryModalViewController.swift; path = ViewControllers/SCCustomCategoryModalViewController.swift; sourceTree = "<group>"; };
 		635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTimelineHeaderViewCell.swift; path = Views/SCTimelineHeaderViewCell.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 				630883671E80E56F006D2428 /* SCAppInfoManager.swift */,
 				63EAF9A41D41F1C400BC554E /* SCAudioManager.swift */,
 				63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */,
-				6332922A1E7DE9EC0090B09D /* SCSettingsManager.swift */,
+				6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -447,7 +447,7 @@
 				63CB4F081D3CB3C300211D3A /* SCGameRoomViewCell.swift in Sources */,
 				639F88F41F0615540082D813 /* SCWordBank.swift in Sources */,
 				639F88F21F0615540082D813 /* SCStrings.swift in Sources */,
-				6332922B1E7DE9EC0090B09D /* SCSettingsManager.swift in Sources */,
+				6332922B1E7DE9EC0090B09D /* SCLocalStorageManager.swift in Sources */,
 				63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */,
 				636CFB9C1EB45284008A0AE7 /* SCMainMenuModalViewController.swift in Sources */,
 				638350A41EA1E3CF003049EF /* SCImageButton.swift in Sources */,

@@ -75,7 +75,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
         // Navigation bar customization
         if let bounds = self.navigationController?.navigationBar.bounds {
-            if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+            if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
                 self.navigationController?.navigationBar.barStyle = .blackTranslucent
                 return
             }
@@ -122,6 +122,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.validateCustomCategory(successHandler: {
             // TODO: Save custom category to local storage
             ConsolidatedCategories.instance.addCustomCategory(category: self.customCategory)
+            ConsolidatedCategories.instance.selectCustomCategory(category: self.customCategory)
             self.dismissView()
         })
     }

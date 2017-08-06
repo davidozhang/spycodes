@@ -33,7 +33,7 @@ class SCPickerViewCell: SCTableViewCell {
             action: #selector(SCPickerViewCell.onDone)
         )
 
-        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+        if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             self.pickerView.backgroundColor = .darkTintColor()
             self.toolBar.barStyle = .blackTranslucent
         } else {
@@ -180,7 +180,7 @@ extension SCPickerViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
             break
         }
 
-        return SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) ?
+        return SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) ?
             NSAttributedString(string: baseString!, attributes: [NSForegroundColorAttributeName: UIColor.white]) :
             NSAttributedString(string: baseString!, attributes: nil)
     }

@@ -1,7 +1,7 @@
 import Foundation
 
-class SCSettingsManager {
-    static let instance = SCSettingsManager()
+class SCLocalStorageManager {
+    static let instance = SCLocalStorageManager()
 
     enum LocalSettingType: Int {
         case nightMode = 0
@@ -24,6 +24,28 @@ class SCSettingsManager {
         return false
     }
 
+    func saveCustomCategoriesToLocalStorage(customCategories: [CustomCategory]) {
+        let data = NSKeyedArchiver.archivedData(withRootObject: customCategories)
+        UserDefaults.standard.set(
+            data,
+            forKey: SCConstants.userDefaults.customCategories.rawValue
+        )
+
+        UserDefaults.standard.synchronize()
+        print("[SCLocalStorageManager] Custom Categories Saved.")
+    }
+
+    func retrieveCustomCategoriesFromLocalStorage() -> [CustomCategory] {
+        if let data = UserDefaults.standard.object(forKey: SCConstants.userDefaults.customCategories.rawValue) as? NSData {
+            if let customCategories = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [CustomCategory] {
+                print ("[SCLocalStorageManager] Custom Categories Retrieved.")
+                return customCategories
+            }
+        }
+
+        return [CustomCategory]()
+    }
+
     // MARK: Private
     private func saveLocalSetting(_ type: LocalSettingType) {
         switch type {
@@ -40,7 +62,7 @@ class SCSettingsManager {
         }
 
         UserDefaults.standard.synchronize()
-        print("[SCSettingsManager] Local Settings Saved.")
+        print("[SCLocalStorageManager] Local Settings Saved.")
     }
 
     func retrieveLocalSettings() {
@@ -56,6 +78,6 @@ class SCSettingsManager {
 
         self.localSettings[.accessibility] = storedAccessibility
 
-        print ("[SCSettingsManager] Local Settings Retrieved.")
+        print ("[SCLocalStorageManager] Local Settings Retrieved.")
     }
 }

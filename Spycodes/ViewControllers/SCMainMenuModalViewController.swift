@@ -275,12 +275,12 @@ extension SCMainMenuModalViewController: SCToggleViewCellDelegate {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
-                SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
+                SCLocalStorageManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
                 super.updateModalAppearance()
                 self.tableView.reloadData()
                 self.delegate?.onNightModeToggleChanged()
             case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
-                SCSettingsManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
+                SCLocalStorageManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
             default:
                 break
             }

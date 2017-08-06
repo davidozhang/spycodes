@@ -161,7 +161,7 @@ class SCGameRoomViewController: SCViewController {
 
         self.bottomBarView.layoutIfNeeded()
 
-        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+        if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             self.topBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
             self.bottomBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         } else {
@@ -932,7 +932,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             cell.contentView.backgroundColor = .colorForTeam(cardAtIndex.getTeam())
 
             let attributedString = NSMutableAttributedString(
-                string: SCSettingsManager.instance.isLocalSettingEnabled(.accessibility) ?
+                string: SCLocalStorageManager.instance.isLocalSettingEnabled(.accessibility) ?
                     cardAtIndex.getWord() + " " + cardAtIndex.getAccessibilityLabel() :
                     cardAtIndex.getWord()
             )
@@ -940,7 +940,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             if cardAtIndex.isSelected() {
                 cell.alpha = 0.4
 
-                if SCSettingsManager.instance.isLocalSettingEnabled(.accessibility) {
+                if SCLocalStorageManager.instance.isLocalSettingEnabled(.accessibility) {
                     attributedString.addAttribute(
                         NSStrikethroughStyleAttributeName,
                         value: 2,
@@ -957,7 +957,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
         if cardAtIndex.isSelected() {
             let attributedString = NSMutableAttributedString(
-                string: SCSettingsManager.instance.isLocalSettingEnabled(.accessibility) ?
+                string: SCLocalStorageManager.instance.isLocalSettingEnabled(.accessibility) ?
                     cardAtIndex.getWord() + " " + cardAtIndex.getAccessibilityLabel() :
                     cardAtIndex.getWord()
             )

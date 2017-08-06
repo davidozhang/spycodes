@@ -36,9 +36,9 @@ class SCToggleViewCell: SCTableViewCell {
         if let reuseIdentifier = self.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
-                toggleSwitch.isOn = SCSettingsManager.instance.isLocalSettingEnabled(.nightMode)
+                toggleSwitch.isOn = SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode)
             case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
-                toggleSwitch.isOn = SCSettingsManager.instance.isLocalSettingEnabled(.accessibility)
+                toggleSwitch.isOn = SCLocalStorageManager.instance.isLocalSettingEnabled(.accessibility)
             case SCConstants.identifier.minigameToggleViewCell.rawValue:
                 toggleSwitch.isOn = GameMode.instance.getMode() == .miniGame
             default:

@@ -1,7 +1,43 @@
-class CustomCategory {
+import Foundation
+
+class CustomCategory: NSObject, NSCoding {
     fileprivate var name: String?
     fileprivate var wordList = [String]()
 
+    // MARK: Coder
+    func encode(with aCoder: NSCoder) {
+        if let name = self.name {
+            aCoder.encode(
+                name,
+                forKey: SCConstants.coding.categoryName.rawValue
+            )
+        }
+
+        aCoder.encode(
+            self.wordList,
+            forKey: SCConstants.coding.categoryWordList.rawValue
+        )
+    }
+
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+
+        if aDecoder.containsValue(forKey: SCConstants.coding.categoryName.rawValue) {
+            if let name = aDecoder.decodeObject(
+                forKey: SCConstants.coding.categoryName.rawValue
+            ) as? String {
+                self.name = name
+            }
+        }
+
+        if let wordList = aDecoder.decodeObject(
+            forKey: SCConstants.coding.categoryWordList.rawValue
+            ) as? [String] {
+            self.wordList = wordList
+        }
+    }
+
+    // MARK: Public
     func setName(name: String) {
         self.name = name.uppercasedFirst
     }
@@ -43,8 +79,8 @@ class CustomCategory {
     }
 }
 
-extension CustomCategory: Hashable {
-    var hashValue: Int {
+extension CustomCategory {
+    override var hashValue: Int {
         if let nameHashValue = self.name?.hashValue {
             return nameHashValue
         }

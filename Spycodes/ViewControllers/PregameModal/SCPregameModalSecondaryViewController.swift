@@ -159,30 +159,30 @@ extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
 
         if let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {       // Default categories
             if enabled {
-                ConsolidatedCategories.instance.addCategory(category: category)
+                ConsolidatedCategories.instance.selectCategory(category: category)
             } else {
-                ConsolidatedCategories.instance.removeCategory(category: category)
+                ConsolidatedCategories.instance.unselectCategory(category: category)
             }
 
             self.checkWordCount(
                 failureHandler: {
                     // Revert setting if total word count is less than minimum allowed
                     cell.toggleSwitch.isOn = !enabled
-                    ConsolidatedCategories.instance.addCategory(category: category)
+                    ConsolidatedCategories.instance.selectCategory(category: category)
                 }
             )
         } else if let category = ConsolidatedCategories.instance.getCustomCategoryFromString(string: reuseIdentifier) {     // Custom categories
             if enabled {
-                ConsolidatedCategories.instance.addCustomCategory(category: category)
+                ConsolidatedCategories.instance.selectCustomCategory(category: category)
             } else {
-                ConsolidatedCategories.instance.removeCustomCategory(category: category)
+                ConsolidatedCategories.instance.unselectCustomCategory(category: category)
             }
 
             self.checkWordCount(
                 failureHandler: {
                     // Revert setting if total word count is less than minimum allowed
                     cell.toggleSwitch.isOn = !enabled
-                    ConsolidatedCategories.instance.addCustomCategory(category: category)
+                    ConsolidatedCategories.instance.selectCustomCategory(category: category)
                 }
             )
         }
