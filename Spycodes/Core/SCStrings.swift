@@ -57,7 +57,9 @@ class SCStrings {
 
     enum header: String {
         case accessCode = "Access Code: "
+        case categoryExists = "Existing Category"
         case categoryName = "Category Name"
+        case categoryWordList = "Category Word List"
         case clue = "Clue"
         case confirm = "Confirm"
         case duplicateWord = "Duplicate Word"
@@ -86,7 +88,9 @@ class SCStrings {
     }
 
     enum message: String {
+        case categoryExists = "The category name already exists."
         case categorySetting = "Only the host can toggle the category settings."
+        case categoryWordList = "The word list should contain at least 1 word."
         case defaultLoseString = "Your team lost!"
         case defaultWinString = "Your team won!"
         case duplicateWord = "The word is already in the list."

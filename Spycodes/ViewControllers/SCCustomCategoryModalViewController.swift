@@ -43,11 +43,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
     }
 
     @IBAction func onDoneButtonTapped(_ sender: Any) {
-        // TODO: Add validation on custom category
-        // TODO: Save custom category to local storage
-        self.dismissView()
-
-        ConsolidatedCategories.instance.addCustomCategory(category: self.customCategory)
+        self.onDone()
     }
 
     deinit {
@@ -120,7 +116,39 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         if reload {
             self.reloadView()
         }
+    }
 
+    fileprivate func onDone() {
+        self.validateCustomCategory(successHandler: {
+            // TODO: Save custom category to local storage
+            ConsolidatedCategories.instance.addCustomCategory(category: self.customCategory)
+            self.dismissView()
+        })
+    }
+
+    fileprivate func validateCustomCategory(successHandler: ((Void) -> Void)?) {
+        // Validate for empty category name, empty word list and whether or not the category name already exists
+        // TOOO: Validation of name should be case-insensitive
+        if self.customCategory.getName() == nil {
+            self.presentAlert(
+                title: SCStrings.header.emptyCategory.rawValue,
+                message: SCStrings.message.emptyCategoryName.rawValue
+            )
+        } else if ConsolidatedCategories.instance.categoryExists(category: self.customCategory.getName()) {
+            self.presentAlert(
+                title: SCStrings.header.categoryExists.rawValue,
+                message: SCStrings.message.categoryExists.rawValue
+            )
+        } else if self.customCategory.getWordCount() == 0 {
+            self.presentAlert(
+                title: SCStrings.header.categoryWordList.rawValue,
+                message: SCStrings.message.categoryWordList.rawValue
+            )
+        } else {
+            if let successHandler = successHandler {
+                successHandler()
+            }
+        }
     }
 
     fileprivate func dismissView() {
@@ -134,16 +162,21 @@ class SCCustomCategoryModalViewController: SCModalViewController {
     }
 
     fileprivate func confirmHandler(alertController: UIAlertController, successHandler: ((String) -> Void)?) {
-        if let text = alertController.textFields?[0].text {
+        if let categoryName = alertController.textFields?[0].text {
             // TODO: Add text validation
-            if text.characters.count == 0 {
+            if categoryName.characters.count == 0 {
                 self.presentAlert(
                     title: SCStrings.header.emptyCategory.rawValue,
                     message: SCStrings.message.emptyCategoryName.rawValue
                 )
+            } else if ConsolidatedCategories.instance.categoryExists(category: categoryName) {
+                self.presentAlert(
+                    title: SCStrings.header.categoryExists.rawValue,
+                    message: SCStrings.message.categoryExists.rawValue
+                )
             } else {
                 if let successHandler = successHandler {
-                    successHandler(text)
+                    successHandler(categoryName)
                 }
             }
         }

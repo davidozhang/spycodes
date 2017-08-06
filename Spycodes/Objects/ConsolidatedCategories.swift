@@ -175,6 +175,15 @@ class ConsolidatedCategories: NSObject, NSCoding {
         }
     }
 
+    func categoryExists(category: String?) -> Bool {
+        // Null category cannot be valid
+        guard let category = category else {
+            return true
+        }
+
+        return SCWordBank.getCategoryFromString(string: category) != nil || self.getCustomCategoryFromString(string: category) != nil
+    }
+
     func isCategorySelected(category: SCWordBank.Category) -> Bool {
         return self.selectedCategories.contains(category)
     }
