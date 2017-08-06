@@ -99,6 +99,9 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
         self.tableView.dataSource = nil
         self.tableView.delegate = nil
+
+        self.changeStateTo(state: .nonEditing, reload: false)
+        self.view.endEditing(true)
     }
 
     // MARK: Public
