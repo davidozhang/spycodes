@@ -137,7 +137,7 @@ class ConsolidatedCategories: NSObject, NSCoding {
     // Mirrors the mapping function for default categories in SCWordBank
     func getCustomCategoryFromString(string: String?) -> CustomCategory? {
         let filtered = self.getAllCustomCategories().filter({
-            $0.getName() == string
+            $0.getName()?.lowercased() == string?.lowercased()
         })
 
         if filtered.count == 1 {

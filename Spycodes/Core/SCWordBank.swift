@@ -184,40 +184,39 @@ class SCWordBank {
         }
     }
 
-    // Mapping from reuse identifiers to categories
     static func getCategoryFromString(string: String) -> Category? {
-        switch string {
-        case SCStrings.category.animals.rawValue:
+        switch string.lowercased() {
+        case SCStrings.category.animals.rawValue.lowercased():
             return .animals
-        case SCStrings.category.architecture.rawValue:
+        case SCStrings.category.architecture.rawValue.lowercased():
             return .architecture
-        case SCStrings.category.arts.rawValue:
+        case SCStrings.category.arts.rawValue.lowercased():
             return .arts
-        case SCStrings.category.body.rawValue:
+        case SCStrings.category.body.rawValue.lowercased():
             return .body
-        case SCStrings.category.clothing.rawValue:
+        case SCStrings.category.clothing.rawValue.lowercased():
             return .clothing
-        case SCStrings.category.foodAndDrinks.rawValue:
+        case SCStrings.category.foodAndDrinks.rawValue.lowercased():
             return .foodAndDrinks
-        case SCStrings.category.game.rawValue:
+        case SCStrings.category.game.rawValue.lowercased():
             return .game
-        case SCStrings.category.garden.rawValue:
+        case SCStrings.category.garden.rawValue.lowercased():
             return .garden
-        case SCStrings.category.items.rawValue:
+        case SCStrings.category.items.rawValue.lowercased():
             return .items
-        case SCStrings.category.nature.rawValue:
+        case SCStrings.category.nature.rawValue.lowercased():
             return .nature
-        case SCStrings.category.places.rawValue:
+        case SCStrings.category.places.rawValue.lowercased():
             return .places
-        case SCStrings.category.people.rawValue:
+        case SCStrings.category.people.rawValue.lowercased():
             return .people
-        case SCStrings.category.space.rawValue:
+        case SCStrings.category.space.rawValue.lowercased():
             return .space
-        case SCStrings.category.sports.rawValue:
+        case SCStrings.category.sports.rawValue.lowercased():
             return .sports
-        case SCStrings.category.transportation.rawValue:
+        case SCStrings.category.transportation.rawValue.lowercased():
             return .transportation
-        case SCStrings.category.misc.rawValue:
+        case SCStrings.category.misc.rawValue.lowercased():
             return .misc
         default:
             return nil

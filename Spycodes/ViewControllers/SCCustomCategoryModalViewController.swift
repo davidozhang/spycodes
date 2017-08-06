@@ -128,7 +128,6 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     fileprivate func validateCustomCategory(successHandler: ((Void) -> Void)?) {
         // Validate for empty category name, empty word list and whether or not the category name already exists
-        // TOOO: Validation of name should be case-insensitive
         if self.customCategory.getName() == nil {
             self.presentAlert(
                 title: SCStrings.header.emptyCategory.rawValue,
