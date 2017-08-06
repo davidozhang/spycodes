@@ -1,3 +1,17 @@
+extension String {
+    var first: String {
+        return String(characters.prefix(1))
+    }
+
+    var last: String {
+        return String(characters.suffix(1))
+    }
+
+    var uppercasedFirst: String {
+        return first.uppercased() + String(characters.dropFirst())
+    }
+}
+
 class SCStrings {
     enum button: String {
         case showAnswer = "Show Answer"

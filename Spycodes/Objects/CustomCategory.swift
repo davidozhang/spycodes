@@ -3,7 +3,7 @@ class CustomCategory {
     fileprivate var wordList = [String]()
 
     func setName(name: String) {
-        self.name = name
+        self.name = name.uppercasedFirst
     }
 
     func getName() -> String? {
@@ -19,11 +19,11 @@ class CustomCategory {
     }
 
     func wordExists(word: String) -> Bool {
-        return wordList.contains(word)
+        return wordList.contains(word.uppercasedFirst)
     }
 
     func addWord(word: String) {
-        self.wordList.insert(word, at: 0)
+        self.wordList.insert(word.uppercasedFirst, at: 0)
     }
 
     func editWord(word: String, index: Int) {
@@ -31,7 +31,7 @@ class CustomCategory {
             return
         }
 
-        self.wordList[index] = word
+        self.wordList[index] = word.uppercasedFirst
     }
 
     func removeWordAtIndex(index: Int) {
