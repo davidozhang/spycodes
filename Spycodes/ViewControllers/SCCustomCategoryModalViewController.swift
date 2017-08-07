@@ -8,6 +8,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     enum Setting: Int {
         case name = 0
+        case emoji = 1
     }
 
     enum WordList: Int {
@@ -23,6 +24,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     fileprivate let settingsLabels: [Setting: String] = [
         .name: SCStrings.primaryLabel.minigame.rawValue,
+        .emoji: SCStrings.primaryLabel.emoji.rawValue,
     ]
 
     fileprivate var scrolled = false
@@ -366,6 +368,14 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 //  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
+// MARK: SCTableViewCellEmojiDelegate
+extension SCCustomCategoryModalViewController: SCTableViewCellEmojiDelegate {
+    func onEmojiSelected(emoji: String) {
+        self.mutableCustomCategory.setEmoji(emoji: emoji)
+        self.changeStateTo(state: .nonEditing, reload: true)
+    }
+}
+
 // MARK: UITextFieldDelegate
 extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
     func onButtonTapped(textField: UITextField, indexPath: IndexPath) {
@@ -419,11 +429,6 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
 
     func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
-        // Hide section header for settings
-        if section == Section.settings.rawValue {
-            return 0.0
-        }
-
         return 44.0
     }
 
@@ -500,6 +505,37 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                 }
 
                 return cell
+            case Setting.emoji.rawValue:
+                guard let cell = self.tableView.dequeueReusableCell(
+                    withIdentifier: SCConstants.identifier.emojiSettingViewCell.rawValue
+                    ) as? SCTableViewCell else {
+                        return SCTableViewCell()
+                }
+
+                cell.primaryLabel.text = SCStrings.primaryLabel.emoji.rawValue
+                cell.emojiDelegate = self
+                cell.setInputView(inputType: .emoji)
+
+                if let emoji = self.mutableCustomCategory.getEmoji() {
+                    cell.rightTextView.text = emoji
+                    cell.rightTextView.isHidden = false
+                    cell.rightImage.isHidden = true
+                } else {
+                    cell.rightImage.isHidden = false
+                    cell.rightTextView.isHidden = true
+                }
+
+                if SCStates.customCategoryWordListState == .editingEmoji {
+                    cell.rightImage.isHidden = true
+                    cell.rightTextView.isHidden = false
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                        cell.rightTextView.becomeFirstResponder()
+                        self.hasFirstResponder = true
+                    })
+                }
+                
+                return cell
             default:
                 return SCTableViewCell()
             }
@@ -508,7 +544,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
             case WordList.topCell.rawValue:
                 // Top Cell Customization
                 switch SCStates.customCategoryWordListState {
-                case .nonEditing, .editingExistingWord, .editingCategoryName:
+                case .nonEditing, .editingExistingWord, .editingCategoryName, .editingEmoji:
                     guard let cell = self.tableView.dequeueReusableCell(
                         withIdentifier: SCConstants.identifier.addWordViewCell.rawValue
                     ) as? SCTableViewCell else {
@@ -548,7 +584,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                         return SCTableViewCell()
                     }
 
-                    cell.primaryLabel.text = SCStrings.primaryLabel.delete.rawValue
+                    cell.primaryLabel.text = SCStrings.primaryLabel.deleteCategory.rawValue
                     cell.indexPath = indexPath
 
                     return cell
@@ -601,6 +637,8 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                         self.changeStateTo(state: .nonEditing, reload: true)
                     }
                 )
+            case Setting.emoji.rawValue:
+                self.changeStateTo(state: .editingEmoji, reload: true)
             default:
                 break
             }

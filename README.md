@@ -6,7 +6,9 @@ A multiplayer word association game for 2-8 players. It is now available on the 
 
 1. Download the latest version of XCode
 
-2. Open Spycodes.xcodeproj
+2. Run ```pod install```
+
+2. Open Spycodes.xcworkspace
 
 3. Click Run, and if you get code signing issues, simply click 'Fix Issue' on the pop up dialogue
 

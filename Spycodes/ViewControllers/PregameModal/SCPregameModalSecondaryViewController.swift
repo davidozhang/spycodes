@@ -270,16 +270,20 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                         categoryTuple.name,
                         emoji
                     )
+                } else {
+                    cell.primaryLabel.text = String(
+                        format: SCStrings.primaryLabel.categoryNoEmoji.rawValue,
+                        categoryTuple.name
+                    )
                 }
 
-                if categoryTuple.type == .customCategory {
-                    // Custom label in place of emoji
+                /**if categoryTuple.type == .customCategory {
                     cell.primaryLabel.text = String(
                         format: SCStrings.primaryLabel.category.rawValue,
                         categoryTuple.name,
                         SCStrings.primaryLabel.custom.rawValue
                     )
-                }
+                }**/
 
                 let wordCount = categoryTuple.wordCount
                 cell.secondaryLabel.text = String(
@@ -312,16 +316,21 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                         categoryString,
                         emoji
                     )
+                } else {
+                    cell.primaryLabel.text = String(
+                        format: SCStrings.primaryLabel.categoryNoEmoji.rawValue,
+                        categoryString
+                    )
                 }
 
-                if let type = ConsolidatedCategories.instance.getSynchronizedCategoryTypeForCategoryString(string: categoryString),
+                /**if let type = ConsolidatedCategories.instance.getSynchronizedCategoryTypeForCategoryString(string: categoryString),
                    type == ConsolidatedCategories.CategoryType.customCategory {
                     cell.primaryLabel.text = String(
                         format: SCStrings.primaryLabel.category.rawValue,
                         categoryString,
                         SCStrings.primaryLabel.custom.rawValue
                     )
-                }
+                }**/
 
                 let wordCount = ConsolidatedCategories.instance.getSynchronizedWordCountForCategoryString(string: categoryString)
                 cell.secondaryLabel.text = String(

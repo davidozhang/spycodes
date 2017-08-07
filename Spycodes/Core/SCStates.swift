@@ -28,6 +28,7 @@ enum CustomCategoryWordListState: Int {
     case addingNewWord = 1
     case editingExistingWord = 2
     case editingCategoryName = 3
+    case editingEmoji = 4
 }
 
 class SCStates {
