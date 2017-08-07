@@ -2,12 +2,14 @@ import Foundation
 
 class CustomCategory: NSObject, NSCoding, NSCopying {
     fileprivate var name: String?
+    fileprivate var emoji: String?
     fileprivate var wordList = [String]()
 
-    convenience init(name: String?, wordList: [String]) {
+    convenience init(name: String?, emoji: String?, wordList: [String]) {
         self.init()
 
         self.name = name
+        self.emoji = emoji
         self.wordList = wordList
     }
 
@@ -17,6 +19,13 @@ class CustomCategory: NSObject, NSCoding, NSCopying {
             aCoder.encode(
                 name,
                 forKey: SCConstants.coding.categoryName.rawValue
+            )
+        }
+
+        if let emoji = self.emoji {
+            aCoder.encode(
+                emoji,
+                forKey: SCConstants.coding.categoryEmoji.rawValue
             )
         }
 
@@ -37,6 +46,14 @@ class CustomCategory: NSObject, NSCoding, NSCopying {
             }
         }
 
+        if aDecoder.containsValue(forKey: SCConstants.coding.categoryEmoji.rawValue) {
+            if let emoji = aDecoder.decodeObject(
+                forKey: SCConstants.coding.categoryEmoji.rawValue
+                ) as? String {
+                self.emoji = emoji
+            }
+        }
+
         if let wordList = aDecoder.decodeObject(
             forKey: SCConstants.coding.categoryWordList.rawValue
             ) as? [String] {
@@ -46,7 +63,7 @@ class CustomCategory: NSObject, NSCoding, NSCopying {
 
     // MARK: Copying
     func copy(with zone: NSZone? = nil) -> Any {
-        let copy = CustomCategory(name: self.name, wordList: self.wordList)
+        let copy = CustomCategory(name: self.name, emoji: self.emoji, wordList: self.wordList)
         return copy
     }
 
@@ -55,8 +72,16 @@ class CustomCategory: NSObject, NSCoding, NSCopying {
         self.name = name.uppercasedFirst
     }
 
+    func setEmoji(emoji: String) {
+        self.emoji = emoji
+    }
+
     func getName() -> String? {
         return self.name
+    }
+
+    func getEmoji() -> String? {
+        return self.emoji
     }
 
     func getWordList() -> [String] {

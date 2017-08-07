@@ -1,13 +1,25 @@
+import ISEmojiView
 import UIKit
 
+protocol SCTableViewCellEmojiDelegate: class {
+    func onEmojiSelected(emoji: String)
+}
+
 class SCTableViewCell: UITableViewCell {
+    weak var emojiDelegate: SCTableViewCellEmojiDelegate?
     var indexPath: IndexPath?
+
+    enum InputType: Int {
+        case regular = 0
+        case emoji = 1
+    }
 
     @IBOutlet weak var leftLabel: SCLabel!
     @IBOutlet weak var primaryLabel: SCLabel!
     @IBOutlet weak var secondaryLabel: SCLabel!
     @IBOutlet weak var rightLabel: SCLabel!
     @IBOutlet weak var rightImage: UIImageView!
+    @IBOutlet weak var rightTextView: UITextView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +40,11 @@ class SCTableViewCell: UITableViewCell {
 
         if let _ = self.rightLabel {
             self.rightLabel.font = SCFonts.intermediateSizeFont(.bold)
+        }
+
+        if let _ = self.rightTextView {
+            self.rightTextView.font = SCFonts.intermediateSizeFont(.regular)
+            self.rightTextView.tintColor = .clear
         }
 
         self.backgroundColor = .clear
@@ -52,5 +69,28 @@ class SCTableViewCell: UITableViewCell {
                 break
             }
         }
+    }
+
+    func setInputView(inputType: InputType) {
+        switch inputType {
+        case .regular:
+            break
+        case .emoji:
+            let emojiView = ISEmojiView()
+            emojiView.delegate = self
+            self.rightTextView.inputView = emojiView
+        }
+    }
+}
+
+extension SCTableViewCell: ISEmojiViewDelegate {
+    func emojiViewDidSelectEmoji(emojiView: ISEmojiView, emoji: String) {
+        self.emojiDelegate?.onEmojiSelected(emoji: emoji)
+        self.rightTextView.text = emoji
+        self.rightTextView.resignFirstResponder()
+    }
+
+    func emojiViewDidPressDeleteButton(emojiView: ISEmojiView) {
+        self.rightTextView.text = ""
     }
 }

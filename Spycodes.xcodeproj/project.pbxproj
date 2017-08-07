@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F0C397CB76C8878B24830D2 /* Pods_Spycodes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC921B002269746A71C6152 /* Pods_Spycodes.framework */; };
 		630674181D51BE9800339EC8 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630674171D51BE9800339EC8 /* Timer.swift */; };
 		630681A31D62FD6300539773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A21D62FD6300539773 /* LaunchScreen.storyboard */; };
 		630681A51D62FD6900539773 /* Spycodes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630681A41D62FD6900539773 /* Spycodes.storyboard */; };
@@ -81,6 +82,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23F9D4FD36303546D924BA3E /* Pods-Spycodes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spycodes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spycodes/Pods-Spycodes.release.xcconfig"; sourceTree = "<group>"; };
+		2842E0F999A033920F646AF6 /* Pods-Spycodes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spycodes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spycodes/Pods-Spycodes.debug.xcconfig"; sourceTree = "<group>"; };
 		630674171D51BE9800339EC8 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Objects/Timer.swift; sourceTree = "<group>"; };
 		630681A21D62FD6300539773 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		630681A41D62FD6900539773 /* Spycodes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Spycodes.storyboard; path = Storyboards/Spycodes.storyboard; sourceTree = "<group>"; };
@@ -154,6 +157,7 @@
 		63FDED3A1D265BAF00142780 /* SCPregameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCPregameRoomViewController.swift; path = ViewControllers/SCPregameRoomViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63FDED451D28B47200142780 /* SCPregameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCPregameRoomViewCell.swift; path = Views/SCPregameRoomViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63FFA4B01D50635B006A181B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		9CC921B002269746A71C6152 /* Pods_Spycodes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spycodes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63FFA4B11D50635B006A181B /* GameKit.framework in Frameworks */,
+				1F0C397CB76C8878B24830D2 /* Pods_Spycodes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +199,8 @@
 				63FFA4B01D50635B006A181B /* GameKit.framework */,
 				63A04D021D1A5713005A2914 /* Spycodes */,
 				63A04D011D1A5713005A2914 /* Products */,
+				B7BF666BAA7B3C26C5B6A539 /* Pods */,
+				7EF9474D1A1202AA6DB0DBB4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -335,6 +342,23 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		7EF9474D1A1202AA6DB0DBB4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9CC921B002269746A71C6152 /* Pods_Spycodes.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B7BF666BAA7B3C26C5B6A539 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2842E0F999A033920F646AF6 /* Pods-Spycodes.debug.xcconfig */,
+				23F9D4FD36303546D924BA3E /* Pods-Spycodes.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -342,9 +366,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63A04D151D1A5713005A2914 /* Build configuration list for PBXNativeTarget "Spycodes" */;
 			buildPhases = (
+				A099851FC276BA395E02AB40 /* [CP] Check Pods Manifest.lock */,
 				63A04CFC1D1A5713005A2914 /* Sources */,
 				63A04CFD1D1A5713005A2914 /* Frameworks */,
 				63A04CFE1D1A5713005A2914 /* Resources */,
+				1AF75283B65C4B918EC70F67 /* [CP] Embed Pods Frameworks */,
+				CED194B1897EE1C60EC80831 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -409,6 +436,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1AF75283B65C4B918EC70F67 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Spycodes/Pods-Spycodes-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ISEmojiView/ISEmojiView.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISEmojiView.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spycodes/Pods-Spycodes-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A099851FC276BA395E02AB40 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Spycodes-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CED194B1897EE1C60EC80831 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spycodes/Pods-Spycodes-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		63A04CFC1D1A5713005A2914 /* Sources */ = {
@@ -578,6 +659,7 @@
 		};
 		63A04D161D1A5713005A2914 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2842E0F999A033920F646AF6 /* Pods-Spycodes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -594,6 +676,7 @@
 		};
 		63A04D171D1A5713005A2914 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23F9D4FD36303546D924BA3E /* Pods-Spycodes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

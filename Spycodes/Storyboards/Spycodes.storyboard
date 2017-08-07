@@ -649,8 +649,57 @@
                                             <outlet property="rightLabel" destination="Cdg-1U-dRu" id="Dun-me-2La"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="add-word-view-cell" id="xcW-Xg-mka" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="emoji-setting-view-cell" id="9kY-40-qac" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="1024" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9kY-40-qac" id="IBD-dj-6Yf">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emoji" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oml-FI-hjL" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="8" width="64" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="64" id="tWt-u4-SvP"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Add-Circular-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="ijg-6p-pgZ">
+                                                    <rect key="frame" x="999" y="7.5" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="OJH-xs-EnB"/>
+                                                        <constraint firstAttribute="width" constant="25" id="xCE-gg-9yH"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="Woh-cC-aYx" userLabel="Right Text View">
+                                                    <rect key="frame" x="84" y="0.0" width="944" height="44"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="fZZ-oS-gyf"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Oml-FI-hjL" firstAttribute="leading" secondItem="IBD-dj-6Yf" secondAttribute="leading" constant="4" id="1oo-BG-hkG"/>
+                                                <constraint firstItem="ijg-6p-pgZ" firstAttribute="centerY" secondItem="IBD-dj-6Yf" secondAttribute="centerY" constant="-2" id="ClJ-f2-AL1"/>
+                                                <constraint firstItem="Woh-cC-aYx" firstAttribute="leading" secondItem="Oml-FI-hjL" secondAttribute="trailing" constant="16" id="Eva-Vy-OuB"/>
+                                                <constraint firstItem="Woh-cC-aYx" firstAttribute="centerY" secondItem="IBD-dj-6Yf" secondAttribute="centerY" id="IcL-u0-ctt"/>
+                                                <constraint firstAttribute="trailing" secondItem="Woh-cC-aYx" secondAttribute="trailing" constant="-4" id="PYp-c2-d9G"/>
+                                                <constraint firstAttribute="trailing" secondItem="ijg-6p-pgZ" secondAttribute="trailing" id="fDF-5C-a7J"/>
+                                                <constraint firstItem="Oml-FI-hjL" firstAttribute="top" secondItem="IBD-dj-6Yf" secondAttribute="topMargin" id="m5X-Po-Mbh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="primaryLabel" destination="Oml-FI-hjL" id="I9k-yD-lAG"/>
+                                            <outlet property="rightImage" destination="ijg-6p-pgZ" id="vpa-CZ-efO"/>
+                                            <outlet property="rightTextView" destination="Woh-cC-aYx" id="GcH-gh-1XQ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="add-word-view-cell" id="xcW-Xg-mka" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="160" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xcW-Xg-mka" id="4Eb-0x-Xt4">
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
@@ -694,7 +743,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="delete-category-view-cell" id="VRe-gM-vRY" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="204" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VRe-gM-vRY" id="dx9-AV-gns">
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>

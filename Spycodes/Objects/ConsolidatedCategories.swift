@@ -146,7 +146,7 @@ class ConsolidatedCategories: NSObject, NSCoding {
                 let wordCount = category.getWordCount()
 
                 result.append(
-                    ConsolidatedCategories.split(tuple: (.customCategory, name, wordCount, nil))
+                    ConsolidatedCategories.split(tuple: (.customCategory, name, wordCount, category.getEmoji()))
                 )
             }
         }
@@ -209,6 +209,7 @@ class ConsolidatedCategories: NSObject, NSCoding {
             if let name = category.getName() {
                 self.synchronizedCategories[name] = self.selectedCustomCategories.contains(category)
                 self.synchronizedWordCounts[name] = category.getWordCount()
+                self.synchronizedEmojis[name] = category.getEmoji()
                 self.synchronizedCategoryTypes[name] = CategoryType.customCategory.rawValue
             }
         }
