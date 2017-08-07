@@ -55,6 +55,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
         )
 
         self.registerTableViewCells()
+        self.disableSwipeGestureRecognizer()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,6 +73,26 @@ class SCPregameModalSecondaryViewController: SCViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.registerTableViewCells()
+        }
+    }
+
+    fileprivate func disableSwipeGestureRecognizer() {
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: SCConstants.notificationKey.disableSwipeGestureRecognizer.rawValue),
+                object: self,
+                userInfo: nil
+            )
+        }
+    }
+
+    fileprivate func enableSwipeGestureRecognizer() {
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue),
+                object: self,
+                userInfo: nil
+            )
         }
     }
 
@@ -374,28 +395,16 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
             if self.scrolled {
                 return
             }
-            self.scrolled = true
 
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(
-                    name: NSNotification.Name(rawValue: SCConstants.notificationKey.disableSwipeGestureRecognizer.rawValue),
-                    object: self,
-                    userInfo: nil
-                )
-            }
+            self.scrolled = true
+            self.disableSwipeGestureRecognizer()
         } else {
             if !self.scrolled {
                 return
             }
-            self.scrolled = false
 
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(
-                    name: NSNotification.Name(rawValue: SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue),
-                    object: self,
-                    userInfo: nil
-                )
-            }
+            self.scrolled = false
+            self.enableSwipeGestureRecognizer()
         }
 
         self.tableView.reloadData()
