@@ -161,6 +161,20 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         })
     }
 
+    fileprivate func onDeleteCategory() {
+        self.presentConfirmation(
+            title: SCStrings.header.confirmDeletion.rawValue,
+            message: SCStrings.message.confirmDeletion.rawValue,
+            confirmHandler: {
+                if let customCategory = self.nonMutableCustomCategory {
+                    ConsolidatedCategories.instance.removeCustomCategory(category: customCategory)
+                }
+
+                self.dismissView()
+            }
+        )
+    }
+
     fileprivate func validateCustomCategory(successHandler: ((Void) -> Void)?) {
         if self.existingCustomCategory {
             if let successHandler = successHandler {
@@ -268,6 +282,41 @@ class SCCustomCategoryModalViewController: SCModalViewController {
             handler: { (action: UIAlertAction) in
                 self.changeStateTo(state: .nonEditing, reload: false)
                 self.confirmHandler(alertController: alertController, successHandler: successHandler)
+            }
+        )
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil
+        )
+    }
+
+    fileprivate func presentConfirmation(title: String, message: String, confirmHandler: ((Void) -> Void)?) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+
+        let cancelAction = UIAlertAction(
+            title: SCStrings.button.cancel.rawValue,
+            style: .cancel,
+            handler: { (action: UIAlertAction) in
+                self.changeStateTo(state: .nonEditing, reload: false)
+                alertController.dismiss(animated: false, completion: nil)
+            }
+        )
+        let confirmAction = UIAlertAction(
+            title: SCStrings.button.confirm.rawValue,
+            style: .default,
+            handler: { (action: UIAlertAction) in
+                self.changeStateTo(state: .nonEditing, reload: false)
+                if let confirmHandler = confirmHandler {
+                    confirmHandler()
+                }
             }
         )
 
@@ -569,7 +618,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
 
                 // Delete category button
                 if indexPath.row == lastRow && self.existingCustomCategory {
-                    // TODO: Add category deletion logic
+                    self.onDeleteCategory()
                 }
                 break
             }
