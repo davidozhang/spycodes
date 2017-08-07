@@ -418,7 +418,10 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         case Section.settings.rawValue:
             return settingsLabels.count
         case Section.wordList.rawValue:
-            return 1 + self.mutableCustomCategory.getWordCount()
+            let wordCount = self.mutableCustomCategory.getWordCount()
+
+            // Delete category button will show only for existing custom categories
+            return self.existingCustomCategory ? wordCount + 2 : wordCount + 1
         default:
             return 0
         }
@@ -486,6 +489,22 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     return cell
                 }
             default:
+                let lastRow = self.tableView.numberOfRows(inSection: indexPath.section) - 1
+
+                // Delete category button will only show for existing custom categories
+                if indexPath.row == lastRow && self.existingCustomCategory {
+                    guard let cell = self.tableView.dequeueReusableCell(
+                        withIdentifier: SCConstants.identifier.deleteCategoryViewCell.rawValue
+                    ) as? SCTableViewCell else {
+                        return SCTableViewCell()
+                    }
+
+                    cell.primaryLabel.text = SCStrings.primaryLabel.delete.rawValue
+                    cell.indexPath = indexPath
+
+                    return cell
+                }
+
                 // Display words in the list
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.wordViewCell.rawValue
@@ -530,7 +549,6 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     },
                     successHandler: { (name) in
                         self.mutableCustomCategory.setName(name: name)
-
                         self.changeStateTo(state: .nonEditing, reload: true)
                     }
                 )
@@ -547,6 +565,12 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     break
                 }
             default:
+                let lastRow = self.tableView.numberOfRows(inSection: indexPath.section) - 1
+
+                // Delete category button
+                if indexPath.row == lastRow && self.existingCustomCategory {
+                    // TODO: Add category deletion logic
+                }
                 break
             }
         default:

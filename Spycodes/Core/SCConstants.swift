@@ -54,6 +54,7 @@ class SCConstants {
         case addWordViewCell = "add-word-view-cell"
         case customCategory = "custom-category"
         case customCategoryViewController = "custom-category-view-controller"
+        case deleteCategoryViewCell = "delete-category-view-cell"
         case disclosureViewCell = "disclosure-view-cell"
         case gameRoom = "game-room"
         case gameRoomViewCell = "game-room-view-cell"
