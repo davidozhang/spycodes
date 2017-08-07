@@ -150,7 +150,7 @@ class SCStrings {
         case categoryNoEmoji = "%@"
         case custom = "(Custom)"
         case deleteCategory = "Delete Category"
-        case emoji = "Emoji"
+        case emoji = "Emoji (Optional)"
         case icons8 = "Icons8"
         case github = "Github"
         case minigame = "Minigame"

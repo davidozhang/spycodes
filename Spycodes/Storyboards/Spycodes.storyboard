@@ -657,10 +657,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emoji" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oml-FI-hjL" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="8" width="64" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="64" id="tWt-u4-SvP"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="4" y="8" width="41.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -673,7 +670,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="Woh-cC-aYx" userLabel="Right Text View">
-                                                    <rect key="frame" x="84" y="0.0" width="944" height="44"/>
+                                                    <rect key="frame" x="1018" y="0.0" width="10" height="44"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="fZZ-oS-gyf"/>
@@ -685,7 +682,6 @@
                                             <constraints>
                                                 <constraint firstItem="Oml-FI-hjL" firstAttribute="leading" secondItem="IBD-dj-6Yf" secondAttribute="leading" constant="4" id="1oo-BG-hkG"/>
                                                 <constraint firstItem="ijg-6p-pgZ" firstAttribute="centerY" secondItem="IBD-dj-6Yf" secondAttribute="centerY" constant="-2" id="ClJ-f2-AL1"/>
-                                                <constraint firstItem="Woh-cC-aYx" firstAttribute="leading" secondItem="Oml-FI-hjL" secondAttribute="trailing" constant="16" id="Eva-Vy-OuB"/>
                                                 <constraint firstItem="Woh-cC-aYx" firstAttribute="centerY" secondItem="IBD-dj-6Yf" secondAttribute="centerY" id="IcL-u0-ctt"/>
                                                 <constraint firstAttribute="trailing" secondItem="Woh-cC-aYx" secondAttribute="trailing" constant="-4" id="PYp-c2-d9G"/>
                                                 <constraint firstAttribute="trailing" secondItem="ijg-6p-pgZ" secondAttribute="trailing" id="fDF-5C-a7J"/>
