@@ -693,6 +693,50 @@
                                             <outlet property="primaryLabel" destination="Ie5-Z6-85z" id="fSL-gp-cKb"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="delete-category-view-cell" id="VRe-gM-vRY" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="160" width="1024" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VRe-gM-vRY" id="dx9-AV-gns">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlj-MT-1Cw">
+                                                    <rect key="frame" x="470.5" y="11.5" width="83" height="21"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C2-EV-r5y" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                            <rect key="frame" x="33" y="0.0" width="50" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Delete-Circular-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="XdC-Ya-agl">
+                                                            <rect key="frame" x="0.0" y="-4" width="25" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="25" id="5Fr-Yt-cKH"/>
+                                                                <constraint firstAttribute="width" constant="25" id="KG2-Z1-Vro"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="5C2-EV-r5y" secondAttribute="bottom" id="RJM-BU-Dbh"/>
+                                                        <constraint firstItem="XdC-Ya-agl" firstAttribute="leading" secondItem="vlj-MT-1Cw" secondAttribute="leading" id="Ytm-Uf-NUJ"/>
+                                                        <constraint firstItem="5C2-EV-r5y" firstAttribute="top" secondItem="vlj-MT-1Cw" secondAttribute="top" id="gWK-CD-RSa"/>
+                                                        <constraint firstItem="5C2-EV-r5y" firstAttribute="leading" secondItem="XdC-Ya-agl" secondAttribute="trailing" constant="8" id="ghD-SW-7cm"/>
+                                                        <constraint firstItem="XdC-Ya-agl" firstAttribute="centerY" secondItem="vlj-MT-1Cw" secondAttribute="centerY" constant="-2" id="j94-N2-R6t"/>
+                                                        <constraint firstAttribute="trailing" secondItem="5C2-EV-r5y" secondAttribute="trailing" id="wjC-xS-AgZ"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vlj-MT-1Cw" firstAttribute="centerX" secondItem="dx9-AV-gns" secondAttribute="centerX" id="0Vi-mb-ZNh"/>
+                                                <constraint firstItem="vlj-MT-1Cw" firstAttribute="centerY" secondItem="dx9-AV-gns" secondAttribute="centerY" id="F4M-jE-eOc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="primaryLabel" destination="5C2-EV-r5y" id="b3h-af-m0D"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -1961,6 +2005,7 @@
         <image name="Chevron-Up" width="50" height="50"/>
         <image name="Clock" width="50" height="50"/>
         <image name="Crown-Filled" width="100" height="100"/>
+        <image name="Delete-Circular-Filled" width="50" height="50"/>
         <image name="Exit" width="42" height="42"/>
         <image name="Mark-As-Read" width="50" height="50"/>
         <image name="Next" width="100" height="100"/>
