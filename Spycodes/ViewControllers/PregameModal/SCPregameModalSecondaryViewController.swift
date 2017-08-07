@@ -298,22 +298,24 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                     )
                 }
 
-                /**if categoryTuple.type == .customCategory {
-                    cell.primaryLabel.text = String(
-                        format: SCStrings.primaryLabel.category.rawValue,
-                        categoryTuple.name,
-                        SCStrings.primaryLabel.custom.rawValue
-                    )
-                }**/
-
                 let wordCount = categoryTuple.wordCount
-                cell.secondaryLabel.text = String(
-                    format: SCStrings.secondaryLabel.numberOfWords.rawValue,
-                    wordCount,
-                    wordCount == 1 ?
-                        SCStrings.secondaryLabel.word.rawValue :
-                        SCStrings.secondaryLabel.words.rawValue
-                )
+                if categoryTuple.type == .customCategory {
+                    cell.secondaryLabel.text = String(
+                        format: SCStrings.secondaryLabel.numberOfWordsCustomCategory.rawValue,
+                        wordCount,
+                        wordCount == 1 ?
+                            SCStrings.secondaryLabel.word.rawValue :
+                            SCStrings.secondaryLabel.words.rawValue
+                    )
+                } else {
+                    cell.secondaryLabel.text = String(
+                        format: SCStrings.secondaryLabel.numberOfWords.rawValue,
+                        wordCount,
+                        wordCount == 1 ?
+                            SCStrings.secondaryLabel.word.rawValue :
+                            SCStrings.secondaryLabel.words.rawValue
+                    )
+                }
 
                 cell.setEnabled(enabled: true)
 
@@ -344,23 +346,25 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                     )
                 }
 
-                /**if let type = ConsolidatedCategories.instance.getSynchronizedCategoryTypeForCategoryString(string: categoryString),
-                   type == ConsolidatedCategories.CategoryType.customCategory {
-                    cell.primaryLabel.text = String(
-                        format: SCStrings.primaryLabel.category.rawValue,
-                        categoryString,
-                        SCStrings.primaryLabel.custom.rawValue
-                    )
-                }**/
-
                 let wordCount = ConsolidatedCategories.instance.getSynchronizedWordCountForCategoryString(string: categoryString)
-                cell.secondaryLabel.text = String(
-                    format: SCStrings.secondaryLabel.numberOfWords.rawValue,
-                    wordCount,
-                    wordCount == 1 ?
-                        SCStrings.secondaryLabel.word.rawValue :
-                        SCStrings.secondaryLabel.words.rawValue
-                )
+                if let type = ConsolidatedCategories.instance.getSynchronizedCategoryTypeForCategoryString(string: categoryString),
+                   type == ConsolidatedCategories.CategoryType.customCategory {
+                    cell.secondaryLabel.text = String(
+                        format: SCStrings.secondaryLabel.numberOfWordsCustomCategory.rawValue,
+                        wordCount,
+                        wordCount == 1 ?
+                            SCStrings.secondaryLabel.word.rawValue :
+                            SCStrings.secondaryLabel.words.rawValue
+                    )
+                } else {
+                    cell.secondaryLabel.text = String(
+                        format: SCStrings.secondaryLabel.numberOfWords.rawValue,
+                        wordCount,
+                        wordCount == 1 ?
+                            SCStrings.secondaryLabel.word.rawValue :
+                            SCStrings.secondaryLabel.words.rawValue
+                    )
+                }
 
                 cell.setEnabled(enabled: false)
 
