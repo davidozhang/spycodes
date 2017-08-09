@@ -50,6 +50,12 @@ class SCMainMenuViewController: SCViewController {
         Statistics.instance.reset()
         Room.instance.reset()
         SCStates.reset()
+
+        SCStoreKitManager.instance.requestProducts(Set(["com.spycodes.custom.categories"])) { (response, error) in
+            if let products = response?.products {
+                print(products)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

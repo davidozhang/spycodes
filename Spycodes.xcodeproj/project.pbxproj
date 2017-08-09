@@ -21,6 +21,7 @@
 		633292271E7DE8B30090B09D /* SCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633292261E7DE8B30090B09D /* SCTableViewCell.swift */; };
 		6332922B1E7DE9EC0090B09D /* SCLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */; };
 		633B78EB1F380AB400AE3F4B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 633B78EA1F380AB400AE3F4B /* StoreKit.framework */; };
+		633B78ED1F380BD700AE3F4B /* SCStoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633B78EC1F380BD700AE3F4B /* SCStoreKitManager.swift */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
 		63540EAF1F15D40E000A8A7A /* SCCustomCategoryModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63540EAE1F15D40E000A8A7A /* SCCustomCategoryModalViewController.swift */; };
 		635464791EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */; };
@@ -98,6 +99,7 @@
 		633292261E7DE8B30090B09D /* SCTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTableViewCell.swift; path = Views/SCTableViewCell.swift; sourceTree = "<group>"; };
 		6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLocalStorageManager.swift; path = Managers/SCLocalStorageManager.swift; sourceTree = "<group>"; };
 		633B78EA1F380AB400AE3F4B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		633B78EC1F380BD700AE3F4B /* SCStoreKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCStoreKitManager.swift; path = Managers/SCStoreKitManager.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
 		63540EAE1F15D40E000A8A7A /* SCCustomCategoryModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCCustomCategoryModalViewController.swift; path = ViewControllers/SCCustomCategoryModalViewController.swift; sourceTree = "<group>"; };
 		635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTimelineHeaderViewCell.swift; path = Views/SCTimelineHeaderViewCell.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				63EAF9A41D41F1C400BC554E /* SCAudioManager.swift */,
 				63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */,
 				6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */,
+				633B78EC1F380BD700AE3F4B /* SCStoreKitManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				63FDED461D28B47200142780 /* SCPregameRoomViewCell.swift in Sources */,
 				63FDED351D264BE800142780 /* Player.swift in Sources */,
 				63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */,
+				633B78ED1F380BD700AE3F4B /* SCStoreKitManager.swift in Sources */,
 				639F88F11F0615540082D813 /* SCStates.swift in Sources */,
 				633292251E7D0D950090B09D /* SCDisclosureViewCell.swift in Sources */,
 				63D7E73D1EB183EF00B2F536 /* SCReadyStatusLabel.swift in Sources */,
