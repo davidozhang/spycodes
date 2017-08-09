@@ -93,7 +93,9 @@ class CustomCategory: NSObject, NSCoding, NSCopying {
     }
 
     func wordExists(word: String) -> Bool {
-        return wordList.contains(word.uppercasedFirst)
+        return wordList.map({
+            $0.lowercased()
+        }).contains(word.lowercased())
     }
 
     func addWord(word: String) {
