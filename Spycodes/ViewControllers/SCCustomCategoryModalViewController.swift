@@ -387,8 +387,16 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
             break
         default:
             // Word cell
-            let index = self.indexWithOffset(index: indexPath.row)
-            self.mutableCustomCategory.removeWordAtIndex(index: index)
+            // Prevent deletion of word if word count <= 1 for existing categories
+            if self.existingCustomCategory && self.mutableCustomCategory.getWordCount() <= 1 {
+                self.presentAlert(
+                    title: SCStrings.header.categoryWordList.rawValue,
+                    message: SCStrings.message.categoryWordList.rawValue
+                )
+            } else {
+                let index = self.indexWithOffset(index: indexPath.row)
+                self.mutableCustomCategory.removeWordAtIndex(index: index)
+            }
         }
 
         self.changeStateTo(state: .nonEditing, reload: false)
