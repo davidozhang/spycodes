@@ -372,7 +372,8 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 extension SCCustomCategoryModalViewController: SCTableViewCellEmojiDelegate {
     func onEmojiSelected(emoji: String) {
         self.mutableCustomCategory.setEmoji(emoji: emoji)
-        self.changeStateTo(state: .nonEditing, reload: true)
+        self.changeStateTo(state: .nonEditing, reload: false)
+        self.hasFirstResponder = false
     }
 }
 

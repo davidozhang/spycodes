@@ -85,9 +85,9 @@ class SCTableViewCell: UITableViewCell {
 
 extension SCTableViewCell: ISEmojiViewDelegate {
     func emojiViewDidSelectEmoji(emojiView: ISEmojiView, emoji: String) {
-        self.emojiDelegate?.onEmojiSelected(emoji: emoji)
         self.rightTextView.text = emoji
         self.rightTextView.resignFirstResponder()
+        self.emojiDelegate?.onEmojiSelected(emoji: emoji)
     }
 
     func emojiViewDidPressDeleteButton(emojiView: ISEmojiView) {
