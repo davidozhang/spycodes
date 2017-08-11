@@ -22,7 +22,7 @@ class SCTextFieldViewCell: SCTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.textField.font = SCFonts.intermediateSizeFont(.medium)
+        self.textField.font = SCFonts.intermediateSizeFont(.regular)
         self.textField.delegate = self
     }
 

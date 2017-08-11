@@ -1662,8 +1662,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cT-To-sV4">
-                                                    <rect key="frame" x="54.5" y="15" width="41" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cT-To-sV4">
+                                                    <rect key="frame" x="4" y="15" width="142" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1671,7 +1671,8 @@
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="6cT-To-sV4" firstAttribute="centerX" secondItem="PYS-7b-Gca" secondAttribute="centerX" id="Tl6-mW-RNM"/>
+                                            <constraint firstItem="6cT-To-sV4" firstAttribute="leading" secondItem="PYS-7b-Gca" secondAttribute="leading" constant="4" id="V8H-dQ-HSR"/>
+                                            <constraint firstAttribute="trailing" secondItem="6cT-To-sV4" secondAttribute="trailing" constant="4" id="pQV-nR-Msg"/>
                                             <constraint firstItem="6cT-To-sV4" firstAttribute="centerY" secondItem="PYS-7b-Gca" secondAttribute="centerY" id="pjU-kv-Rbf"/>
                                         </constraints>
                                         <connections>
