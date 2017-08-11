@@ -15,14 +15,14 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="58"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NFA-NP-67z" id="cZa-3k-4xu">
-                <rect key="frame" x="0.0" y="0.0" width="1024" height="58"/>
+                <rect key="frame" x="0.0" y="0.0" width="1024" height="57.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWb-m7-YYV">
                         <rect key="frame" x="4" y="6" width="1004" height="46"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWQ-Ci-rGv" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="52" height="21"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1004" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -40,6 +40,7 @@
                             <constraint firstItem="1q4-37-lGp" firstAttribute="top" secondItem="PWQ-Ci-rGv" secondAttribute="bottom" constant="4" id="XkN-OC-ODH"/>
                             <constraint firstAttribute="trailing" secondItem="1q4-37-lGp" secondAttribute="trailing" id="cS7-zR-Qcz"/>
                             <constraint firstItem="1q4-37-lGp" firstAttribute="leading" secondItem="BWb-m7-YYV" secondAttribute="leading" id="dJj-So-F31"/>
+                            <constraint firstAttribute="trailing" secondItem="PWQ-Ci-rGv" secondAttribute="trailing" id="u45-pK-oWd"/>
                             <constraint firstItem="PWQ-Ci-rGv" firstAttribute="top" secondItem="BWb-m7-YYV" secondAttribute="top" id="vBv-LW-Eab"/>
                             <constraint firstItem="PWQ-Ci-rGv" firstAttribute="leading" secondItem="BWb-m7-YYV" secondAttribute="leading" id="vsj-rP-PFA"/>
                         </constraints>
