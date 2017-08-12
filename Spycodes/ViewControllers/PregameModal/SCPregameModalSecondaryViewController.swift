@@ -55,7 +55,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
         )
 
         self.registerTableViewCells()
-        self.disableSwipeGestureRecognizer()
+        self.scrolled = false
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -404,11 +404,11 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
             self.disableSwipeGestureRecognizer()
         } else {
             if !self.scrolled {
-                self.enableSwipeGestureRecognizer()
                 return
             }
 
             self.scrolled = false
+            self.enableSwipeGestureRecognizer()
         }
 
         self.tableView.reloadData()

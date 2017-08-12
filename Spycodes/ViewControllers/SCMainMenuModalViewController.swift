@@ -257,12 +257,14 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
                 return
             }
             self.scrolled = true
+            self.disableSwipeGestureRecognizer()
         } else {
             if !self.scrolled {
                 return
             }
 
             self.scrolled = false
+            self.enableSwipeGestureRecognizer()
         }
 
         self.tableView.reloadData()
