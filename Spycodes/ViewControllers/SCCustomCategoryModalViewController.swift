@@ -4,6 +4,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
     enum Section: Int {
         case settings = 0
         case wordList = 1
+        case deleteCategory = 2
     }
 
     enum Setting: Int {
@@ -433,11 +434,15 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionLabels.count
+        return sectionLabels.count + 1  // Account for delete category section
     }
 
     func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
+        if section == Section.deleteCategory.rawValue {
+            return 0.0
+        }
+
         return 44.0
     }
 
@@ -491,9 +496,10 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
             return settingsLabels.count
         case Section.wordList.rawValue:
             let wordCount = self.mutableCustomCategory.getWordCount()
-
-            // Delete category button will show only for existing custom categories
-            return self.existingCustomCategory ? wordCount + 2 : wordCount + 1
+            return wordCount + 1
+        case Section.deleteCategory.rawValue:
+            // Delete category button will only show for existing categories
+            return self.existingCustomCategory ? 1 : 0
         default:
             return 0
         }
@@ -592,23 +598,6 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     return cell
                 }
             default:
-                let lastRow = self.tableView.numberOfRows(inSection: indexPath.section) - 1
-
-                // Delete category button will only show for existing custom categories
-                if indexPath.row == lastRow && self.existingCustomCategory {
-                    guard let cell = self.tableView.dequeueReusableCell(
-                        withIdentifier: SCConstants.identifier.deleteCategoryViewCell.rawValue
-                    ) as? SCTableViewCell else {
-                        return SCTableViewCell()
-                    }
-
-                    cell.primaryLabel.text = SCStrings.primaryLabel.deleteCategory.rawValue
-                    cell.indexPath = indexPath
-
-                    return cell
-                }
-
-                // Display words in the list
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.wordViewCell.rawValue
                     ) as? SCTextFieldViewCell else {
@@ -630,6 +619,17 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
 
                 return cell
             }
+        case Section.deleteCategory.rawValue:
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCConstants.identifier.deleteCategoryViewCell.rawValue
+                ) as? SCTableViewCell else {
+                    return SCTableViewCell()
+            }
+
+            cell.primaryLabel.text = SCStrings.primaryLabel.deleteCategory.rawValue
+            cell.indexPath = indexPath
+
+            return cell
         default:
             return SCTableViewCell()
         }
@@ -670,13 +670,11 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     break
                 }
             default:
-                let lastRow = self.tableView.numberOfRows(inSection: indexPath.section) - 1
-
-                // Delete category button
-                if indexPath.row == lastRow && self.existingCustomCategory {
-                    self.onDeleteCategory()
-                }
                 break
+            }
+        case Section.deleteCategory.rawValue:
+            if self.existingCustomCategory {
+                self.onDeleteCategory()
             }
         default:
             break
