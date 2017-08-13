@@ -175,7 +175,7 @@ class SCStrings {
         case minigame = "2-3 players play as a team against the CPU."
         case timer = "Set a time duration for each round."
         case numberOfWords = "%d %@"
-        case numberOfWordsCustomCategory = "%d %@ (custom)"
+        case numberOfWordsCustomCategory = "%d %@ (Custom)"
         case word = "word"
         case words = "words"
     }
