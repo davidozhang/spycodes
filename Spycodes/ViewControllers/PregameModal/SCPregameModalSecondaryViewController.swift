@@ -328,8 +328,8 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                     if let emoji = categoryTuple.emoji {
                         cell.primaryLabel.text = String(
                             format: SCStrings.primaryLabel.category.rawValue,
-                            categoryTuple.name,
-                            emoji
+                            emoji,
+                            categoryTuple.name
                         )
                     } else {
                         cell.primaryLabel.text = String(
@@ -379,8 +379,8 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
             if let emoji = ConsolidatedCategories.instance.getSynchronizedEmojiForCategoryString(string: categoryString) {
                 cell.primaryLabel.text = String(
                     format: SCStrings.primaryLabel.category.rawValue,
-                    categoryString,
-                    emoji
+                    emoji,
+                    categoryString
                 )
             } else {
                 cell.primaryLabel.text = String(
