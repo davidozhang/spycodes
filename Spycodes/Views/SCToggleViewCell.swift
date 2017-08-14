@@ -41,6 +41,15 @@ class SCToggleViewCell: SCTableViewCell {
                 toggleSwitch.isOn = SCLocalStorageManager.instance.isLocalSettingEnabled(.accessibility)
             case SCConstants.identifier.minigameToggleViewCell.rawValue:
                 toggleSwitch.isOn = GameMode.instance.getMode() == .miniGame
+            case SCConstants.identifier.selectAllToggleViewCell.rawValue:
+                let allCategoriesSelected = ConsolidatedCategories.instance.allCategoriesSelected()
+                toggleSwitch.isOn = allCategoriesSelected
+
+                if allCategoriesSelected {
+                    self.setEnabled(enabled: false)
+                } else {
+                    self.setEnabled(enabled: true)
+                }
             default:
                 if Player.instance.isHost() {
                     // Retrieve from local data

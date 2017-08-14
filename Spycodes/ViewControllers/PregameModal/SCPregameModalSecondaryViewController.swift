@@ -7,6 +7,10 @@ class SCPregameModalSecondaryViewController: SCViewController {
         case categories = 0
     }
 
+    enum Categories: Int {
+        case selectAll = 0
+    }
+
     fileprivate let sectionLabels: [Section: String] = [
         .categories: SCStrings.section.categories.rawValue,
     ]
@@ -188,6 +192,11 @@ extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
             return
         }
 
+        if reuseIdentifier == SCConstants.identifier.selectAllToggleViewCell.rawValue {
+            ConsolidatedCategories.instance.selectAllCategories()
+            return
+        }
+
         if let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {       // Default categories
             if enabled {
                 ConsolidatedCategories.instance.selectCategory(category: category)
@@ -217,6 +226,8 @@ extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
                 }
             )
         }
+
+        self.tableView.reloadData()
     }
 }
 
@@ -263,7 +274,7 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
         switch section {
         case Section.categories.rawValue:
             if Player.instance.isHost() {
-                return ConsolidatedCategories.instance.getConsolidatedCategoriesCount()
+                return ConsolidatedCategories.instance.getConsolidatedCategoriesCount() + 1     // Account for Enable All option
             } else {
                 return ConsolidatedCategories.instance.getSynchronizedCategoriesCount()
             }
@@ -277,102 +288,117 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
         switch indexPath.section {
         case Section.categories.rawValue:
             if Player.instance.isHost() {
-                let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[indexPath.row]
+                switch indexPath.row {
+                case Categories.selectAll.rawValue:
+                    guard let cell = self.tableView.dequeueReusableCell(
+                        withIdentifier: SCConstants.identifier.selectAllToggleViewCell.rawValue
+                    ) as? SCToggleViewCell else {
+                        return SCTableViewCell()
+                    }
 
-                guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: categoryTuple.name
-                ) as? SCToggleViewCell else {
-                    return SCTableViewCell()
+                    cell.primaryLabel.text = SCStrings.primaryLabel.selectAll.rawValue
+                    cell.synchronizeToggle()
+                    cell.delegate = self
+
+                    return cell
+                default:
+                    let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[indexPath.row]
+
+                    guard let cell = self.tableView.dequeueReusableCell(
+                        withIdentifier: categoryTuple.name
+                        ) as? SCToggleViewCell else {
+                            return SCTableViewCell()
+                    }
+
+                    if let emoji = categoryTuple.emoji {
+                        cell.primaryLabel.text = String(
+                            format: SCStrings.primaryLabel.category.rawValue,
+                            categoryTuple.name,
+                            emoji
+                        )
+                    } else {
+                        cell.primaryLabel.text = String(
+                            format: SCStrings.primaryLabel.categoryNoEmoji.rawValue,
+                            categoryTuple.name
+                        )
+                    }
+
+                    let wordCount = categoryTuple.wordCount
+                    if categoryTuple.type == .customCategory {
+                        cell.secondaryLabel.text = String(
+                            format: SCStrings.secondaryLabel.numberOfWordsCustomCategory.rawValue,
+                            wordCount,
+                            wordCount == 1 ?
+                                SCStrings.secondaryLabel.word.rawValue :
+                                SCStrings.secondaryLabel.words.rawValue
+                        )
+                    } else {
+                        cell.secondaryLabel.text = String(
+                            format: SCStrings.secondaryLabel.numberOfWords.rawValue,
+                            wordCount,
+                            wordCount == 1 ?
+                                SCStrings.secondaryLabel.word.rawValue :
+                                SCStrings.secondaryLabel.words.rawValue
+                        )
+                    }
+                    
+                    cell.setEnabled(enabled: true)
+                    
+                    cell.synchronizeToggle()
+                    cell.delegate = self
+                    
+                    return cell
                 }
-
-                if let emoji = categoryTuple.emoji {
-                    cell.primaryLabel.text = String(
-                        format: SCStrings.primaryLabel.category.rawValue,
-                        categoryTuple.name,
-                        emoji
-                    )
-                } else {
-                    cell.primaryLabel.text = String(
-                        format: SCStrings.primaryLabel.categoryNoEmoji.rawValue,
-                        categoryTuple.name
-                    )
-                }
-
-                let wordCount = categoryTuple.wordCount
-                if categoryTuple.type == .customCategory {
-                    cell.secondaryLabel.text = String(
-                        format: SCStrings.secondaryLabel.numberOfWordsCustomCategory.rawValue,
-                        wordCount,
-                        wordCount == 1 ?
-                            SCStrings.secondaryLabel.word.rawValue :
-                            SCStrings.secondaryLabel.words.rawValue
-                    )
-                } else {
-                    cell.secondaryLabel.text = String(
-                        format: SCStrings.secondaryLabel.numberOfWords.rawValue,
-                        wordCount,
-                        wordCount == 1 ?
-                            SCStrings.secondaryLabel.word.rawValue :
-                            SCStrings.secondaryLabel.words.rawValue
-                    )
-                }
-
-                cell.setEnabled(enabled: true)
-
-                cell.synchronizeToggle()
-                cell.delegate = self
-
-                return cell
-            } else {
-                // Non-host
-                let categoryString = ConsolidatedCategories.instance.getSynchronizedCategories()[indexPath.row]
-
-                guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: categoryString
-                ) as? SCToggleViewCell else {
-                    return SCTableViewCell()
-                }
-
-                if let emoji = ConsolidatedCategories.instance.getSynchronizedEmojiForCategoryString(string: categoryString) {
-                    cell.primaryLabel.text = String(
-                        format: SCStrings.primaryLabel.category.rawValue,
-                        categoryString,
-                        emoji
-                    )
-                } else {
-                    cell.primaryLabel.text = String(
-                        format: SCStrings.primaryLabel.categoryNoEmoji.rawValue,
-                        categoryString
-                    )
-                }
-
-                let wordCount = ConsolidatedCategories.instance.getSynchronizedWordCountForCategoryString(string: categoryString)
-                if let type = ConsolidatedCategories.instance.getSynchronizedCategoryTypeForCategoryString(string: categoryString),
-                   type == ConsolidatedCategories.CategoryType.customCategory {
-                    cell.secondaryLabel.text = String(
-                        format: SCStrings.secondaryLabel.numberOfWordsCustomCategory.rawValue,
-                        wordCount,
-                        wordCount == 1 ?
-                            SCStrings.secondaryLabel.word.rawValue :
-                            SCStrings.secondaryLabel.words.rawValue
-                    )
-                } else {
-                    cell.secondaryLabel.text = String(
-                        format: SCStrings.secondaryLabel.numberOfWords.rawValue,
-                        wordCount,
-                        wordCount == 1 ?
-                            SCStrings.secondaryLabel.word.rawValue :
-                            SCStrings.secondaryLabel.words.rawValue
-                    )
-                }
-
-                cell.setEnabled(enabled: false)
-
-                cell.synchronizeToggle()
-                cell.delegate = self
-
-                return cell
             }
+
+            // Non-host
+            let categoryString = ConsolidatedCategories.instance.getSynchronizedCategories()[indexPath.row]
+
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: categoryString
+            ) as? SCToggleViewCell else {
+                return SCTableViewCell()
+            }
+
+            if let emoji = ConsolidatedCategories.instance.getSynchronizedEmojiForCategoryString(string: categoryString) {
+                cell.primaryLabel.text = String(
+                    format: SCStrings.primaryLabel.category.rawValue,
+                    categoryString,
+                    emoji
+                )
+            } else {
+                cell.primaryLabel.text = String(
+                    format: SCStrings.primaryLabel.categoryNoEmoji.rawValue,
+                    categoryString
+                )
+            }
+
+            let wordCount = ConsolidatedCategories.instance.getSynchronizedWordCountForCategoryString(string: categoryString)
+            if let type = ConsolidatedCategories.instance.getSynchronizedCategoryTypeForCategoryString(string: categoryString),
+               type == ConsolidatedCategories.CategoryType.customCategory {
+                cell.secondaryLabel.text = String(
+                    format: SCStrings.secondaryLabel.numberOfWordsCustomCategory.rawValue,
+                    wordCount,
+                    wordCount == 1 ?
+                        SCStrings.secondaryLabel.word.rawValue :
+                        SCStrings.secondaryLabel.words.rawValue
+                )
+            } else {
+                cell.secondaryLabel.text = String(
+                    format: SCStrings.secondaryLabel.numberOfWords.rawValue,
+                    wordCount,
+                    wordCount == 1 ?
+                        SCStrings.secondaryLabel.word.rawValue :
+                        SCStrings.secondaryLabel.words.rawValue
+                )
+            }
+
+            cell.setEnabled(enabled: false)
+
+            cell.synchronizeToggle()
+            cell.delegate = self
+
+            return cell
         default:
             return SCTableViewCell()
         }

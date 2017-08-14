@@ -120,6 +120,10 @@ class ConsolidatedCategories: NSObject, NSCoding {
         }
     }
 
+    func allCategoriesSelected() -> Bool {
+        return self.selectedCategories.count + self.selectedCustomCategories.count == self.getConsolidatedCategoriesCount()
+    }
+
     // Host-side consolidation of category name, word count and emoji information in a tuple array
     func getConsolidatedCategoryInfo() -> [(type: CategoryType, name: String, wordCount: Int, emoji: String?)] {
         var result = [(type: CategoryType, name: String, wordCount: Int, emoji: String?)]()
