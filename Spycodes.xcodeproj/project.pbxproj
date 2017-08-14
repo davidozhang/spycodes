@@ -14,6 +14,7 @@
 		6307AC121E989CDE00BC1B73 /* SCModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307AC111E989CDE00BC1B73 /* SCModalViewController.swift */; };
 		630883681E80E56F006D2428 /* SCAppInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630883671E80E56F006D2428 /* SCAppInfoManager.swift */; };
 		630D15581E99F1B3001C1D87 /* SCLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630D15571E99F1B3001C1D87 /* SCLabel.swift */; };
+		632601001F423E0C00E28E9D /* SCToggleViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632600FF1F423E0C00E28E9D /* SCToggleViewCell.xib */; };
 		6329BEFD1E512ADF004E6151 /* SCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6329BEFC1E512ADF004E6151 /* SCViewController.swift */; };
 		632D31201E9F5C55005D9999 /* SCTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D311F1E9F5C55005D9999 /* SCTextButton.swift */; };
 		632E4E461E6A91C8004E7180 /* SCPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E4E451E6A91C8004E7180 /* SCPopoverViewController.swift */; };
@@ -90,6 +91,7 @@
 		6307AC111E989CDE00BC1B73 /* SCModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCModalViewController.swift; path = ViewControllers/SCModalViewController.swift; sourceTree = "<group>"; };
 		630883671E80E56F006D2428 /* SCAppInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAppInfoManager.swift; path = Managers/SCAppInfoManager.swift; sourceTree = "<group>"; };
 		630D15571E99F1B3001C1D87 /* SCLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLabel.swift; path = Utilities/SCLabel.swift; sourceTree = "<group>"; };
+		632600FF1F423E0C00E28E9D /* SCToggleViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCToggleViewCell.xib; path = Nibs/SCToggleViewCell.xib; sourceTree = "<group>"; };
 		6329BEFC1E512ADF004E6151 /* SCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCViewController.swift; path = ViewControllers/SCViewController.swift; sourceTree = "<group>"; };
 		632D311F1E9F5C55005D9999 /* SCTextButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTextButton.swift; path = Utilities/SCTextButton.swift; sourceTree = "<group>"; };
 		632E4E451E6A91C8004E7180 /* SCPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPopoverViewController.swift; path = ViewControllers/SCPopoverViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				639F89001F0F2B730082D813 /* SCMultilineToggleViewCell.xib */,
 				63D949E51F18534F00697779 /* SCTextFieldViewCell.xib */,
+				632600FF1F423E0C00E28E9D /* SCToggleViewCell.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				639F89011F0F2B730082D813 /* SCMultilineToggleViewCell.xib in Resources */,
 				630681A51D62FD6900539773 /* Spycodes.storyboard in Resources */,
 				63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */,
+				632601001F423E0C00E28E9D /* SCToggleViewCell.xib in Resources */,
 				630681A31D62FD6300539773 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -136,19 +136,25 @@ class SCPregameModalSecondaryViewController: SCViewController {
     }
 
     fileprivate func registerTableViewCells() {
-        let multilineToggleNib = UINib(nibName: SCConstants.nibs.multilineToggle.rawValue, bundle: nil)
+        let multilineToggleViewCellNib = UINib(nibName: SCConstants.nibs.multilineToggleViewCell.rawValue, bundle: nil)
 
         if Player.instance.isHost() {
             for categoryTuple in ConsolidatedCategories.instance.getConsolidatedCategoryInfo() {
                 self.tableView.register(
-                    multilineToggleNib,
+                    multilineToggleViewCellNib,
                     forCellReuseIdentifier: categoryTuple.name
                 )
             }
+
+            let toggleViewCellNib = UINib(nibName: SCConstants.nibs.toggleViewCell.rawValue, bundle: nil)
+            self.tableView.register(
+                toggleViewCellNib,
+                forCellReuseIdentifier: SCConstants.identifier.selectAllToggleViewCell.rawValue
+            )
         } else {
             for categoryString in ConsolidatedCategories.instance.getSynchronizedCategories() {
                 self.tableView.register(
-                    multilineToggleNib,
+                    multilineToggleViewCellNib,
                     forCellReuseIdentifier: categoryString
                 )
             }
@@ -169,6 +175,14 @@ class SCPregameModalSecondaryViewController: SCViewController {
             object: self,
             userInfo: userInfo
         )
+    }
+
+    fileprivate func getSafeIndex(index: Int) -> Int {
+        if !Player.instance.isHost() {
+            return index
+        }
+
+        return index == 0 ? index : index - 1    // Account for Select All cell
     }
 }
 
@@ -302,7 +316,8 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
 
                     return cell
                 default:
-                    let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[indexPath.row]
+                    let index = self.getSafeIndex(index: indexPath.row)
+                    let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[index]
 
                     guard let cell = self.tableView.dequeueReusableCell(
                         withIdentifier: categoryTuple.name
@@ -352,7 +367,8 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
             }
 
             // Non-host
-            let categoryString = ConsolidatedCategories.instance.getSynchronizedCategories()[indexPath.row]
+            let index = self.getSafeIndex(index: indexPath.row)
+            let categoryString = ConsolidatedCategories.instance.getSynchronizedCategories()[index]
 
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: categoryString
@@ -412,7 +428,8 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                 completionHandler: nil
             )
         } else {
-            let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[indexPath.row]
+            let index = self.getSafeIndex(index: indexPath.row)
+            let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[index]
 
             if categoryTuple.type == .customCategory {
                 self.presentCustomCategoryView(existingCategory: true, category: categoryTuple.name)

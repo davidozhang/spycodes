@@ -238,52 +238,6 @@
                                             <outlet property="primaryLabel" destination="Yin-hz-8gC" id="RV8-f1-mDu"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="accessibility-toggle-view-cell" id="EfC-7r-ipE" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160" width="1024" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EfC-7r-ipE" id="CXv-sl-MSa">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AT2-hc-QHL" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="8" width="52" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="AT2-hc-QHL" firstAttribute="top" secondItem="CXv-sl-MSa" secondAttribute="topMargin" id="bCB-Op-fK5"/>
-                                                <constraint firstItem="AT2-hc-QHL" firstAttribute="leading" secondItem="CXv-sl-MSa" secondAttribute="leading" constant="4" id="grI-Kc-FEr"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="primaryLabel" destination="AT2-hc-QHL" id="bgG-lS-RYT"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="night-mode-toggle-view-cell" id="cdv-kd-VGV" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="204" width="1024" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cdv-kd-VGV" id="hK7-CV-JSE">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egF-MX-862" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="11.5" width="52" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="egF-MX-862" firstAttribute="centerY" secondItem="hK7-CV-JSE" secondAttribute="centerY" id="1un-12-UX7"/>
-                                                <constraint firstItem="egF-MX-862" firstAttribute="leading" secondItem="hK7-CV-JSE" secondAttribute="leading" constant="4" id="3Nv-At-HZs"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="primaryLabel" destination="egF-MX-862" id="DkU-us-qGX"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Up-Arrow-Circled" translatesAutoresizingMaskIntoConstraints="NO" id="47I-wx-ACz">
@@ -1243,77 +1197,8 @@
                                             <outlet property="primaryLabel" destination="zHp-OB-HYt" id="Zua-73-Gtf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="night-mode-toggle-view-cell" id="EVY-ww-g0L" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160" width="1024" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EVY-ww-g0L" id="6v7-Gc-5EF">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0W-jA-ajM" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="8" width="52" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="i0W-jA-ajM" firstAttribute="top" secondItem="6v7-Gc-5EF" secondAttribute="topMargin" id="JKe-ae-Bac"/>
-                                                <constraint firstItem="i0W-jA-ajM" firstAttribute="leading" secondItem="6v7-Gc-5EF" secondAttribute="leading" constant="4" id="JeD-2s-bfv"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="primaryLabel" destination="i0W-jA-ajM" id="gny-eW-x1Q"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="minigame-toggle-view-cell" rowHeight="58" id="Gi7-tn-pYY" userLabel="minigame-toggle-view-cell" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="204" width="1024" height="58"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gi7-tn-pYY" id="yLg-eo-MHK">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="58"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZJ-tv-Kh2">
-                                                    <rect key="frame" x="4" y="6" width="1004" height="46"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wjP-z1-yEN" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="52" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secondary Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Uq-rt-f0n" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="25" width="1004" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstItem="9Uq-rt-f0n" firstAttribute="leading" secondItem="jZJ-tv-Kh2" secondAttribute="leading" id="4Vr-I6-V4g"/>
-                                                        <constraint firstItem="wjP-z1-yEN" firstAttribute="leading" secondItem="jZJ-tv-Kh2" secondAttribute="leading" id="DdM-Gp-zrH"/>
-                                                        <constraint firstItem="9Uq-rt-f0n" firstAttribute="top" secondItem="wjP-z1-yEN" secondAttribute="bottom" constant="4" id="INo-zF-cna"/>
-                                                        <constraint firstAttribute="bottom" secondItem="9Uq-rt-f0n" secondAttribute="bottom" id="XlQ-Z3-9e8"/>
-                                                        <constraint firstItem="wjP-z1-yEN" firstAttribute="top" secondItem="jZJ-tv-Kh2" secondAttribute="top" id="ldH-CF-azV"/>
-                                                        <constraint firstAttribute="trailing" secondItem="9Uq-rt-f0n" secondAttribute="trailing" id="rB0-p2-o8k"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="jZJ-tv-Kh2" firstAttribute="top" secondItem="yLg-eo-MHK" secondAttribute="top" constant="6" id="O00-ar-RyR"/>
-                                                <constraint firstAttribute="bottom" secondItem="jZJ-tv-Kh2" secondAttribute="bottom" constant="6" id="ayA-IO-wo2"/>
-                                                <constraint firstItem="jZJ-tv-Kh2" firstAttribute="leading" secondItem="yLg-eo-MHK" secondAttribute="leading" constant="4" id="juu-IQ-rnV"/>
-                                                <constraint firstAttribute="trailing" secondItem="jZJ-tv-Kh2" secondAttribute="trailing" constant="16" id="pDz-sg-juh"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="primaryLabel" destination="wjP-z1-yEN" id="WOZ-ex-q8U"/>
-                                            <outlet property="secondaryLabel" destination="9Uq-rt-f0n" id="LxK-1d-tqj"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-setting-view-cell" rowHeight="58" id="l3e-qQ-33L" userLabel="timer-setting-view-cell" customClass="SCPickerViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="262" width="1024" height="58"/>
+                                        <rect key="frame" x="0.0" y="160" width="1024" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l3e-qQ-33L" id="Ncp-AL-EVA">
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="58"/>
@@ -1364,29 +1249,6 @@
                                             <outlet property="primaryLabel" destination="YZG-zH-Psm" id="caY-mx-AP8"/>
                                             <outlet property="secondaryLabel" destination="p2M-vo-mDP" id="oKN-w2-gqy"/>
                                             <outlet property="textField" destination="bGU-cV-qD6" id="bFL-Dx-Ihg"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="accessibility-toggle-view-cell" id="ckn-v3-Ye3" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="320" width="1024" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ckn-v3-Ye3" id="M3S-Yu-WAI">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drL-M5-4iW" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="8" width="52" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="drL-M5-4iW" firstAttribute="top" secondItem="M3S-Yu-WAI" secondAttribute="topMargin" id="USD-TX-ZY1"/>
-                                                <constraint firstItem="drL-M5-4iW" firstAttribute="leading" secondItem="M3S-Yu-WAI" secondAttribute="leading" constant="4" id="g6o-f4-Xud"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="primaryLabel" destination="drL-M5-4iW" id="oUS-8a-blG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1463,29 +1325,6 @@
                                         <connections>
                                             <outlet property="button" destination="bcA-Ge-cGU" id="pZj-ee-wvf"/>
                                             <outlet property="primaryLabel" destination="bVW-2q-SKr" id="MFb-lI-7kR"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="select-all-toggle-view-cell" id="5dt-Yi-1wF" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="1024" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5dt-Yi-1wF" id="s3A-Mc-y4q">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NNy-gb-jWl" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="8" width="52" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="NNy-gb-jWl" firstAttribute="leading" secondItem="s3A-Mc-y4q" secondAttribute="leading" constant="4" id="DlM-Ol-ekb"/>
-                                                <constraint firstItem="NNy-gb-jWl" firstAttribute="top" secondItem="s3A-Mc-y4q" secondAttribute="topMargin" id="LPc-DH-cG6"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="primaryLabel" destination="NNy-gb-jWl" id="GcY-Lc-SOV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
