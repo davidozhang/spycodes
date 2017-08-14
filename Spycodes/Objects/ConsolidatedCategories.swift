@@ -19,11 +19,6 @@ class ConsolidatedCategories: NSObject, NSCoding {
     fileprivate var synchronizedEmojis = [String: String]()     // Mapping from string category to emoji
 
     // MARK: Coder
-    override init() {
-        super.init()
-        self.selectAllCategories()
-    }
-
     func encode(with aCoder: NSCoder) {
         self.generateSynchronizedCategories()
 
