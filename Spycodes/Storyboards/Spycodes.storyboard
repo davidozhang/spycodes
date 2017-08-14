@@ -1465,6 +1465,29 @@
                                             <outlet property="primaryLabel" destination="bVW-2q-SKr" id="MFb-lI-7kR"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="select-all-toggle-view-cell" id="5dt-Yi-1wF" customClass="SCToggleViewCell" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="1024" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5dt-Yi-1wF" id="s3A-Mc-y4q">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NNy-gb-jWl" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="8" width="52" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="NNy-gb-jWl" firstAttribute="leading" secondItem="s3A-Mc-y4q" secondAttribute="leading" constant="4" id="DlM-Ol-ekb"/>
+                                                <constraint firstItem="NNy-gb-jWl" firstAttribute="top" secondItem="s3A-Mc-y4q" secondAttribute="topMargin" id="LPc-DH-cG6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="primaryLabel" destination="NNy-gb-jWl" id="GcY-Lc-SOV"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
