@@ -48,7 +48,7 @@ class SCPregameModalMainViewController: SCViewController {
         self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
         self.tableView.layoutIfNeeded()
-
+        self.registerTableViewCells()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +98,15 @@ class SCPregameModalMainViewController: SCViewController {
 
             self.tableView.reloadData()
         }
+    }
+
+    fileprivate func registerTableViewCells() {
+        let multilineToggleViewCellNib = UINib(nibName: SCConstants.nibs.multilineToggleViewCell.rawValue, bundle: nil)
+
+        self.tableView.register(
+            multilineToggleViewCellNib,
+            forCellReuseIdentifier: SCConstants.identifier.minigameToggleViewCell.rawValue
+        )
     }
 
     fileprivate func getChecklistItems() -> [String] {

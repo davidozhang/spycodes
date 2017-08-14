@@ -95,8 +95,9 @@ class SCConstants {
     }
 
     enum nibs: String {
-        case multilineToggle = "SCMultilineToggleViewCell"
+        case multilineToggleViewCell = "SCMultilineToggleViewCell"
         case textFieldViewCell = "SCTextFieldViewCell"
+        case toggleViewCell = "SCToggleViewCell"
     }
 
     enum notificationKey: String {

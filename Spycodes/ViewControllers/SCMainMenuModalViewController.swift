@@ -65,6 +65,7 @@ class SCMainMenuModalViewController: SCModalViewController {
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
+        self.registerTableViewCells()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +96,20 @@ class SCMainMenuModalViewController: SCModalViewController {
         }
 
         super.onDismissal()
+    }
+
+    fileprivate func registerTableViewCells() {
+        let toggleViewCellNib = UINib(nibName: SCConstants.nibs.toggleViewCell.rawValue, bundle: nil)
+
+        self.tableView.register(
+            toggleViewCellNib,
+            forCellReuseIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
+        )
+
+        self.tableView.register(
+            toggleViewCellNib,
+            forCellReuseIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
+        )
     }
 }
 
@@ -162,6 +177,7 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
                     return SCTableViewCell()
                 }
 
+                cell.synchronizeToggle()
                 cell.primaryLabel.text = self.customizeLabels[.nightMode]
                 cell.delegate = self
 
@@ -173,6 +189,7 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
                     return SCTableViewCell()
                 }
 
+                cell.synchronizeToggle()
                 cell.primaryLabel.text = self.customizeLabels[.accessibility]
                 cell.delegate = self
 

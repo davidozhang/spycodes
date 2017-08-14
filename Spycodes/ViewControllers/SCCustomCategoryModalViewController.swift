@@ -332,7 +332,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         )
     }
 
-    fileprivate func indexWithOffset(index: Int) -> Int {
+    fileprivate func getSafeIndex(index: Int) -> Int {
         return index == 0 ? index : index - 1    // Account for top cell
     }
 
@@ -352,7 +352,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
                 self.mutableCustomCategory.addWord(word: word)
             }
         } else {
-            let index = self.indexWithOffset(index: indexPath.row)
+            let index = self.getSafeIndex(index: indexPath.row)
 
             if self.mutableCustomCategory.getWordList()[index] != word && self.mutableCustomCategory.wordExists(word: word) {
                 self.showDuplicateWordAlert()
@@ -395,7 +395,7 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
                     message: SCStrings.message.categoryWordList.rawValue
                 )
             } else {
-                let index = self.indexWithOffset(index: indexPath.row)
+                let index = self.getSafeIndex(index: indexPath.row)
                 self.mutableCustomCategory.removeWordAtIndex(index: index)
             }
         }
@@ -614,7 +614,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     cell.showButton()
                 }
 
-                let index = self.indexWithOffset(index: indexPath.row)
+                let index = self.getSafeIndex(index: indexPath.row)
                 cell.textField.text = self.mutableCustomCategory.getWordList()[index]
 
                 return cell
