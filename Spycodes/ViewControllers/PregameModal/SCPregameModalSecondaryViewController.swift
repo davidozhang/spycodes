@@ -5,11 +5,19 @@ class SCPregameModalSecondaryViewController: SCViewController {
 
     fileprivate var refreshTimer: Foundation.Timer?
 
-    enum Section: Int {
+    fileprivate enum Section: Int {
         case categories = 0
+
+        static var count: Int {
+            var count = 0
+            while let _ = Section(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
     }
 
-    enum Categories: Int {
+    fileprivate enum Categories: Int {
         case selectAll = 0
         case persistentSelection = 1
 
@@ -266,7 +274,7 @@ extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionLabels.count
+        return Section.count
     }
 
     func tableView(_ tableView: UITableView,

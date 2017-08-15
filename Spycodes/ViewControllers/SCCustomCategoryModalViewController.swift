@@ -1,19 +1,43 @@
 import UIKit
 
 class SCCustomCategoryModalViewController: SCModalViewController {
-    enum Section: Int {
+    fileprivate enum Section: Int {
         case settings = 0
         case wordList = 1
         case deleteCategory = 2
+
+        static var count: Int {
+            var count = 0
+            while let _ = Section(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
     }
 
-    enum Setting: Int {
+    fileprivate enum Setting: Int {
         case name = 0
         case emoji = 1
+
+        static var count: Int {
+            var count = 0
+            while let _ = Setting(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
     }
 
-    enum WordList: Int {
+    fileprivate enum WordList: Int {
         case topCell = 0
+
+        static var count: Int {
+            var count = 0
+            while let _ = WordList(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
     }
 
     fileprivate static let margin: CGFloat = 16
@@ -434,7 +458,7 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionLabels.count + 1  // Account for delete category section
+        return Section.count
     }
 
     func tableView(_ tableView: UITableView,
@@ -493,7 +517,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
         case Section.settings.rawValue:
-            return settingsLabels.count
+            return Setting.count
         case Section.wordList.rawValue:
             let wordCount = self.mutableCustomCategory.getWordCount()
             return wordCount + 1
