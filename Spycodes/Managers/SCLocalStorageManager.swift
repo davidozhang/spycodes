@@ -6,6 +6,7 @@ class SCLocalStorageManager {
     enum LocalSettingType: Int {
         case nightMode = 0
         case accessibility = 1
+        case persistentSelection = 2
     }
 
     var localSettings = [LocalSettingType: Bool]()
@@ -59,6 +60,11 @@ class SCLocalStorageManager {
                 self.localSettings[.accessibility],
                 forKey: SCConstants.userDefaults.accessibility.rawValue
             )
+        case .persistentSelection:
+            UserDefaults.standard.set(
+                self.localSettings[.persistentSelection],
+                forKey: SCConstants.userDefaults.persistentSelection.rawValue
+            )
         }
 
         UserDefaults.standard.synchronize()
@@ -77,6 +83,12 @@ class SCLocalStorageManager {
         )
 
         self.localSettings[.accessibility] = storedAccessibility
+
+        let storedPersistentCategorySelection = UserDefaults.standard.bool(
+            forKey: SCConstants.userDefaults.persistentSelection.rawValue
+        )
+
+        self.localSettings[.persistentSelection] = storedPersistentCategorySelection
 
         print ("[SCLocalStorageManager] Local Settings Retrieved.")
     }

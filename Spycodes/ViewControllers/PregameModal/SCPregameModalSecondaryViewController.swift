@@ -1,6 +1,8 @@
 import UIKit
 
 class SCPregameModalSecondaryViewController: SCViewController {
+    fileprivate let extraRows = Categories.count
+
     fileprivate var refreshTimer: Foundation.Timer?
 
     enum Section: Int {
@@ -9,6 +11,15 @@ class SCPregameModalSecondaryViewController: SCViewController {
 
     enum Categories: Int {
         case selectAll = 0
+        case persistentSelection = 1
+
+        static var count: Int {
+            var count = 0
+            while let _ = Categories(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
     }
 
     fileprivate let sectionLabels: [Section: String] = [
@@ -146,10 +157,13 @@ class SCPregameModalSecondaryViewController: SCViewController {
                 )
             }
 
-            let toggleViewCellNib = UINib(nibName: SCConstants.nibs.toggleViewCell.rawValue, bundle: nil)
             self.tableView.register(
-                toggleViewCellNib,
+                multilineToggleViewCellNib,
                 forCellReuseIdentifier: SCConstants.identifier.selectAllToggleViewCell.rawValue
+            )
+            self.tableView.register(
+                multilineToggleViewCellNib,
+                forCellReuseIdentifier: SCConstants.identifier.persistentSelectionToggleViewCell.rawValue
             )
         } else {
             for categoryString in ConsolidatedCategories.instance.getSynchronizedCategories() {
@@ -182,7 +196,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
             return index
         }
 
-        return index == 0 ? index : index - 1    // Account for Select All cell
+        return index == 0 ? index : index - self.extraRows    // Account for Select All cell
     }
 }
 
@@ -209,6 +223,10 @@ extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
         if reuseIdentifier == SCConstants.identifier.selectAllToggleViewCell.rawValue {
             ConsolidatedCategories.instance.selectAllCategories()
             return
+        }
+
+        if reuseIdentifier == SCConstants.identifier.persistentSelectionToggleViewCell.rawValue {
+            SCLocalStorageManager.instance.enableLocalSetting(.persistentSelection, enabled: enabled)
         }
 
         if let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {       // Default categories
@@ -288,7 +306,7 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
         switch section {
         case Section.categories.rawValue:
             if Player.instance.isHost() {
-                return ConsolidatedCategories.instance.getConsolidatedCategoriesCount() + 1     // Account for Enable All option
+                return ConsolidatedCategories.instance.getConsolidatedCategoriesCount() + self.extraRows
             } else {
                 return ConsolidatedCategories.instance.getSynchronizedCategoriesCount()
             }
@@ -310,7 +328,29 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                         return SCTableViewCell()
                     }
 
-                    cell.primaryLabel.text = SCStrings.primaryLabel.selectAll.rawValue
+                    cell.primaryLabel.text = String(
+                        format: SCStrings.primaryLabel.selectAll.rawValue,
+                        SCStrings.emoji.rocket.rawValue
+                    )
+                    cell.secondaryLabel.text = SCStrings.secondaryLabel.selectAll.rawValue
+
+                    cell.synchronizeToggle()
+                    cell.delegate = self
+
+                    return cell
+                case Categories.persistentSelection.rawValue:
+                    guard let cell = self.tableView.dequeueReusableCell(
+                        withIdentifier: SCConstants.identifier.persistentSelectionToggleViewCell.rawValue
+                        ) as? SCToggleViewCell else {
+                            return SCTableViewCell()
+                    }
+
+                    cell.primaryLabel.text = String(
+                        format: SCStrings.primaryLabel.persistentSelection.rawValue,
+                        SCStrings.emoji.setting.rawValue
+                    )
+                    cell.secondaryLabel.text = SCStrings.secondaryLabel.persistentSelection.rawValue
+
                     cell.synchronizeToggle()
                     cell.delegate = self
 
@@ -428,6 +468,10 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                 completionHandler: nil
             )
         } else {
+            if indexPath.row < self.extraRows {
+                return
+            }
+
             let index = self.getSafeIndex(index: indexPath.row)
             let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[index]
 

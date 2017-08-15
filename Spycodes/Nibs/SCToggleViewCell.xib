@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFK-gj-eih" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                        <rect key="frame" x="4" y="8" width="52" height="21"/>
+                        <rect key="frame" x="4" y="8" width="1016" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -28,6 +28,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="LFK-gj-eih" firstAttribute="leading" secondItem="BJp-XN-jWO" secondAttribute="leading" constant="4" id="INM-Yp-I9J"/>
+                    <constraint firstAttribute="trailing" secondItem="LFK-gj-eih" secondAttribute="trailing" constant="4" id="Vv2-kB-kbp"/>
                     <constraint firstItem="LFK-gj-eih" firstAttribute="top" secondItem="BJp-XN-jWO" secondAttribute="topMargin" id="nmO-hx-8Cg"/>
                 </constraints>
             </tableViewCellContentView>

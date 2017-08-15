@@ -50,6 +50,8 @@ class SCToggleViewCell: SCTableViewCell {
                 } else {
                     self.setEnabled(enabled: true)
                 }
+            case SCConstants.identifier.persistentSelectionToggleViewCell.rawValue:
+                toggleSwitch.isOn = SCLocalStorageManager.instance.isLocalSettingEnabled(.persistentSelection)
             default:
                 if Player.instance.isHost() {
                     // Retrieve from local data
