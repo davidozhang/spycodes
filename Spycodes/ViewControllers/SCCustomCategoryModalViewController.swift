@@ -244,22 +244,19 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         }
     }
 
-    fileprivate func confirmHandler(alertController: UIAlertController, successHandler: ((String) -> Void)?) {
-        if let categoryName = alertController.textFields?[0].text {
-            if categoryName.characters.count == 0 {
-                self.presentAlert(
-                    title: SCStrings.header.emptyCategory.rawValue,
-                    message: SCStrings.message.emptyCategoryName.rawValue
-                )
-            } else if ConsolidatedCategories.instance.categoryExists(category: categoryName) {
-                self.presentAlert(
-                    title: SCStrings.header.categoryExists.rawValue,
-                    message: SCStrings.message.categoryExists.rawValue
-                )
-            } else {
-                if let successHandler = successHandler {
-                    successHandler(categoryName)
+    fileprivate func confirmHandler(alertController: UIAlertController,
+                                    verificationHandler: ((String) -> Bool)?,
+                                    successHandler: ((String) -> Void)?) {
+        if let text = alertController.textFields?[0].text {
+            if let verificationHandler = verificationHandler {
+                if !verificationHandler(text) {
+                    self.changeStateTo(state: .nonEditing, reload: true)
+                    return
                 }
+            }
+
+            if let successHandler = successHandler {
+                successHandler(text)
             }
         }
 
@@ -287,7 +284,11 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         )
     }
 
-    fileprivate func presentTextFieldAlert(title: String, message: String, textFieldHandler: ((UITextField) -> Void)?, successHandler: ((String) -> Void)?) {
+    fileprivate func presentTextFieldAlert(title: String,
+                                           message: String?,
+                                           textFieldHandler: ((UITextField) -> Void)?,
+                                           verificationHandler: ((String) -> Bool)?,
+                                           successHandler: ((String) -> Void)?) {
         let alertController = UIAlertController(
             title: title,
             message: message,
@@ -308,7 +309,11 @@ class SCCustomCategoryModalViewController: SCModalViewController {
             style: .default,
             handler: { (action: UIAlertAction) in
                 self.changeStateTo(state: .nonEditing, reload: false)
-                self.confirmHandler(alertController: alertController, successHandler: successHandler)
+                self.confirmHandler(
+                    alertController: alertController,
+                    verificationHandler: verificationHandler,
+                    successHandler: successHandler
+                )
             }
         )
 
@@ -402,7 +407,7 @@ extension SCCustomCategoryModalViewController: SCTableViewCellEmojiDelegate {
     }
 }
 
-// MARK: UITextFieldDelegate
+// MARK: SCTextFieldViewCellDelegate
 extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
     func onButtonTapped(textField: UITextField, indexPath: IndexPath) {
         // When X button is tapped for cells
@@ -641,6 +646,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
 
                 let index = self.getSafeIndex(index: indexPath.row)
                 cell.textField.text = self.mutableCustomCategory.getWordList()[index]
+                cell.textField.isUserInteractionEnabled = false
 
                 return cell
             }
@@ -675,6 +681,28 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                             textField.text = name
                         }
                     },
+                    verificationHandler: { (category) in
+                        if category.characters.count == 0 {
+                            self.presentAlert(
+                                title: SCStrings.header.emptyCategory.rawValue,
+                                message: SCStrings.message.emptyCategoryName.rawValue
+                            )
+                            return false
+                        } else if ConsolidatedCategories.instance.categoryExists(category: category) {
+                            // Ignore if the category name is same as the existing category name passed into the controller 
+                            if self.existingCustomCategory && self.nonMutableCustomCategory?.getName() == category {
+                                return true
+                            }
+
+                            self.presentAlert(
+                                title: SCStrings.header.categoryExists.rawValue,
+                                message: SCStrings.message.categoryExists.rawValue
+                            )
+                            return false
+                        }
+
+                        return true
+                    },
                     successHandler: { (name) in
                         self.mutableCustomCategory.setName(name: name)
                         self.changeStateTo(state: .nonEditing, reload: true)
@@ -695,7 +723,33 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     break
                 }
             default:
-                break
+                // Edit an existing word using a text field alert
+                self.changeStateTo(state: .editingExistingWord, reload: true)
+
+                self.presentTextFieldAlert(
+                    title: SCStrings.header.editWord.rawValue,
+                    message: nil,
+                    textFieldHandler: { (textField) in
+                        let index = self.getSafeIndex(index: indexPath.row)
+                        let word = self.mutableCustomCategory.getWordList()[index]
+                        textField.text = word
+                    },
+                    verificationHandler: { (word) in
+                        if word.characters.count == 0 {
+                            self.presentAlert(
+                                title: SCStrings.header.emptyWord.rawValue,
+                                message: SCStrings.message.emptyWord.rawValue
+                            )
+                            return false
+                        }
+
+                        return true
+                    },
+                    successHandler: { (word) in
+                        self.processWord(word: word, indexPath: indexPath)
+                        self.changeStateTo(state: .nonEditing, reload: true)
+                    }
+                )
             }
         case Section.deleteCategory.rawValue:
             if self.existingCustomCategory {
