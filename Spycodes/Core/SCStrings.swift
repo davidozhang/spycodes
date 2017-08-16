@@ -174,12 +174,14 @@ class SCStrings {
     }
 
     enum secondaryLabel: String {
+        case custom = "Custom"
         case minigame = "2-3 players play as a team against the CPU."
         case timer = "Set a time duration for each round."
         case numberOfWords = "%d %@"
-        case numberOfWordsCustomCategory = "%d %@ (Custom)"
+        case numberOfWordsCustomCategory = "%d %@ (%@)"
         case persistentSelection = "Your current selections will be saved."
         case selectAll = "All categories will be selected."
+        case tapToEdit = "Tap to Edit"
         case word = "word"
         case words = "words"
     }

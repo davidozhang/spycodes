@@ -2,6 +2,7 @@ import UIKit
 
 class SCPregameModalSecondaryViewController: SCViewController {
     fileprivate let extraRows = Categories.count
+    fileprivate var ticker = false
 
     fileprivate var refreshTimer: Foundation.Timer?
 
@@ -94,6 +95,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
     @objc
     fileprivate func refreshView() {
         DispatchQueue.main.async {
+            self.ticker = self.ticker ? false : true
             self.tableView.reloadData()
             self.registerTableViewCells()
         }
@@ -398,7 +400,10 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                             wordCount,
                             wordCount == 1 ?
                                 SCStrings.secondaryLabel.word.rawValue :
-                                SCStrings.secondaryLabel.words.rawValue
+                                SCStrings.secondaryLabel.words.rawValue,
+                            self.ticker ?
+                                SCStrings.secondaryLabel.custom.rawValue :
+                                SCStrings.secondaryLabel.tapToEdit.rawValue
                         )
                     } else {
                         cell.secondaryLabel.text = String(
@@ -450,7 +455,8 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                     wordCount,
                     wordCount == 1 ?
                         SCStrings.secondaryLabel.word.rawValue :
-                        SCStrings.secondaryLabel.words.rawValue
+                        SCStrings.secondaryLabel.words.rawValue,
+                    SCStrings.secondaryLabel.custom.rawValue
                 )
             } else {
                 cell.secondaryLabel.text = String(
