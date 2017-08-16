@@ -145,7 +145,7 @@ class SCConstants {
         case customCategories = "custom-categories"
         case nightMode = "night-mode"
         case persistentSelection = "persistent-selection"
-        case persistentSelectedCategories = "persistent-selected-categories"
-        case persistentSelectedCustomCategories = "persistent-selected-custom-categories"
+        case selectedCategories = "selected-categories"
+        case selectedCustomCategories = "selected-custom-categories"
     }
 }

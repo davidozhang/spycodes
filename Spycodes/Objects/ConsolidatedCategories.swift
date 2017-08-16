@@ -96,14 +96,17 @@ class ConsolidatedCategories: NSObject, NSCoding {
     func updateCustomCategory(originalCategory: CustomCategory, updatedCategory: CustomCategory) {
         self.removeCustomCategory(category: originalCategory)
         self.addCustomCategory(category: updatedCategory)
+
+        self.unselectCustomCategory(category: originalCategory)
+        self.selectCustomCategory(category: updatedCategory)
     }
 
     func addCustomCategory(category: CustomCategory) {
         var allCustomCategories = self.getAllCustomCategories()
         allCustomCategories.append(category)
 
-        self.unselectCustomCategory(category: category)
         SCLocalStorageManager.instance.saveAllCustomCategories(customCategories: allCustomCategories)
+        self.selectCustomCategory(category: category)
 
         self.allCachedCustomCategories?.append(category)
     }
@@ -114,8 +117,8 @@ class ConsolidatedCategories: NSObject, NSCoding {
             $0 != category
         })
 
-        self.unselectCustomCategory(category: category)
         SCLocalStorageManager.instance.saveAllCustomCategories(customCategories: updatedCustomCategories)
+        self.unselectCustomCategory(category: category)
 
         if let allCachedCustomCategories = self.allCachedCustomCategories {
             self.allCachedCustomCategories = allCachedCustomCategories.filter({

@@ -19,7 +19,8 @@ class SCWordBank {
         case sports = 14
         case transportation = 15
 
-        // Enum values should not be changed
+        // Enum values should not be changed; new categories should be added as separate entries
+        // TODO: Implement category migration plan that works for persistent storage
 
         static var count: Int {
             var count = 0

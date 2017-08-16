@@ -29,7 +29,7 @@ class SCLocalStorageManager {
         let data = NSKeyedArchiver.archivedData(withRootObject: selectedCategories)
         UserDefaults.standard.set(
             data,
-            forKey: SCConstants.userDefaults.persistentSelectedCustomCategories.rawValue
+            forKey: SCConstants.userDefaults.selectedCustomCategories.rawValue
         )
 
         UserDefaults.standard.synchronize()
@@ -46,7 +46,7 @@ class SCLocalStorageManager {
         let data = NSKeyedArchiver.archivedData(withRootObject: selectedCategoriesData)
         UserDefaults.standard.set(
             data,
-            forKey: SCConstants.userDefaults.persistentSelectedCategories.rawValue
+            forKey: SCConstants.userDefaults.selectedCategories.rawValue
         )
 
         UserDefaults.standard.synchronize()
@@ -115,11 +115,11 @@ class SCLocalStorageManager {
 
     func clearSelectedConsolidatedCategories() {
         UserDefaults.standard.removeObject(
-            forKey: SCConstants.userDefaults.persistentSelectedCategories.rawValue
+            forKey: SCConstants.userDefaults.selectedCategories.rawValue
         )
 
         UserDefaults.standard.removeObject(
-            forKey: SCConstants.userDefaults.persistentSelectedCustomCategories.rawValue
+            forKey: SCConstants.userDefaults.selectedCustomCategories.rawValue
         )
 
         UserDefaults.standard.synchronize()
@@ -151,7 +151,7 @@ class SCLocalStorageManager {
     }
 
     fileprivate func retrieveSelectedCustomCategories() -> Set<CustomCategory> {
-        if let data = UserDefaults.standard.object(forKey: SCConstants.userDefaults.persistentSelectedCustomCategories.rawValue) as? NSData {
+        if let data = UserDefaults.standard.object(forKey: SCConstants.userDefaults.selectedCustomCategories.rawValue) as? NSData {
             if let retrievedCustomCategories = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [CustomCategory] {
                 return Set<CustomCategory>(retrievedCustomCategories)
             }
@@ -163,7 +163,7 @@ class SCLocalStorageManager {
     fileprivate func retrieveSelectedCategories() -> Set<SCWordBank.Category> {
         var selectedCategories = Array<SCWordBank.Category>()
 
-        if let data = UserDefaults.standard.object(forKey: SCConstants.userDefaults.persistentSelectedCategories.rawValue) as? NSData {
+        if let data = UserDefaults.standard.object(forKey: SCConstants.userDefaults.selectedCategories.rawValue) as? NSData {
             if let retrievedCategories = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [Int] {
                 for category in retrievedCategories {
                     if let category = SCWordBank.Category(rawValue: category) {
