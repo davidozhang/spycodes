@@ -235,6 +235,7 @@ extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
 
         if reuseIdentifier == SCConstants.identifier.persistentSelectionToggleViewCell.rawValue {
             SCLocalStorageManager.instance.enableLocalSetting(.persistentSelection, enabled: enabled)
+            ConsolidatedCategories.instance.persistSelectedCategoriesIfEnabled()
         }
 
         if let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {       // Default categories
