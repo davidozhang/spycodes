@@ -19,6 +19,8 @@ class SCWordBank {
         case sports = 14
         case transportation = 15
 
+        // Enum values should not be changed
+
         static var count: Int {
             var count = 0
             while let _ = Category(rawValue: count) {

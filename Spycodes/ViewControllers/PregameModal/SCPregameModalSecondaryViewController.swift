@@ -158,7 +158,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
         let multilineToggleViewCellNib = UINib(nibName: SCConstants.nibs.multilineToggleViewCell.rawValue, bundle: nil)
 
         if Player.instance.isHost() {
-            for categoryTuple in ConsolidatedCategories.instance.getConsolidatedCategoryInfo() {
+            for categoryTuple in ConsolidatedCategories.instance.getConsolidatedCategoriesInfo() {
                 self.tableView.register(
                     multilineToggleViewCellNib,
                     forCellReuseIdentifier: categoryTuple.name
@@ -365,7 +365,7 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
                     return cell
                 default:
                     let index = self.getSafeIndex(index: indexPath.row)
-                    let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[index]
+                    let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoriesInfo()[index]
 
                     guard let cell = self.tableView.dequeueReusableCell(
                         withIdentifier: categoryTuple.name
@@ -481,7 +481,7 @@ extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableV
             }
 
             let index = self.getSafeIndex(index: indexPath.row)
-            let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoryInfo()[index]
+            let categoryTuple = ConsolidatedCategories.instance.getConsolidatedCategoriesInfo()[index]
 
             if categoryTuple.type == .customCategory {
                 self.presentCustomCategoryView(existingCategory: true, category: categoryTuple.name)

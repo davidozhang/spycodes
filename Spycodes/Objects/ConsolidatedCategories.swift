@@ -65,26 +65,47 @@ class ConsolidatedCategories: NSObject, NSCoding {
     }
 
     // MARK: Public
+    func setSelectedCategories(selectedCategories: Set<SCWordBank.Category>) {
+        self.selectedCategories = selectedCategories
+    }
+
+    func setSelectedCustomCategories(selectedCategories: Set<CustomCategory>) {
+        self.selectedCustomCategories = selectedCategories
+    }
+
     func selectCategory(category: SCWordBank.Category) {
         self.selectedCategories.insert(category)
+        self.persistSelectedCategoriesIfEnabled()
     }
 
     func unselectCategory(category: SCWordBank.Category) {
         self.selectedCategories.remove(category)
+        self.persistSelectedCategoriesIfEnabled()
+    }
+
+    func selectCustomCategory(category: CustomCategory) {
+        self.selectedCustomCategories.insert(category)
+        self.persistSelectedCategoriesIfEnabled()
+    }
+
+    func unselectCustomCategory(category: CustomCategory) {
+        self.selectedCustomCategories.remove(category)
+        self.persistSelectedCategoriesIfEnabled()
+    }
+
+    func updateCustomCategory(originalCategory: CustomCategory, updatedCategory: CustomCategory) {
+        self.removeCustomCategory(category: originalCategory)
+        self.addCustomCategory(category: updatedCategory)
     }
 
     func addCustomCategory(category: CustomCategory) {
         var allCustomCategories = self.getAllCustomCategories()
         allCustomCategories.append(category)
 
-        SCLocalStorageManager.instance.saveCustomCategoriesToLocalStorage(customCategories: allCustomCategories)
+        self.unselectCustomCategory(category: category)
+        SCLocalStorageManager.instance.saveAllCustomCategories(customCategories: allCustomCategories)
 
         self.allCachedCustomCategories?.append(category)
-    }
-
-    func updateCustomCategory(originalCategory: CustomCategory, updatedCategory: CustomCategory) {
-        self.removeCustomCategory(category: originalCategory)
-        self.addCustomCategory(category: updatedCategory)
     }
 
     func removeCustomCategory(category: CustomCategory) {
@@ -93,21 +114,14 @@ class ConsolidatedCategories: NSObject, NSCoding {
             $0 != category
         })
 
-        SCLocalStorageManager.instance.saveCustomCategoriesToLocalStorage(customCategories: updatedCustomCategories)
+        self.unselectCustomCategory(category: category)
+        SCLocalStorageManager.instance.saveAllCustomCategories(customCategories: updatedCustomCategories)
 
         if let allCachedCustomCategories = self.allCachedCustomCategories {
             self.allCachedCustomCategories = allCachedCustomCategories.filter({
                 $0 != category
             })
         }
-    }
-
-    func selectCustomCategory(category: CustomCategory) {
-        self.selectedCustomCategories.insert(category)
-    }
-
-    func unselectCustomCategory(category: CustomCategory) {
-        self.selectedCustomCategories.remove(category)
     }
 
     func selectAllCategories() {
@@ -120,12 +134,31 @@ class ConsolidatedCategories: NSObject, NSCoding {
         }
     }
 
+    func resetCategories() {
+        // Retrieve and set to persistent selections if enabled
+        if SCLocalStorageManager.instance.isLocalSettingEnabled(.persistentSelection) {
+            SCLocalStorageManager.instance.retrieveSelectedConsolidatedCategories()
+            return
+        }
+
+        self.selectAllCategories()
+    }
+
+    func persistSelectedCategoriesIfEnabled() {
+        if !SCLocalStorageManager.instance.isLocalSettingEnabled(.persistentSelection) {
+            return
+        }
+
+        SCLocalStorageManager.instance.saveSelectedCategories(selectedCategories: self.getSelectedCategories())
+        SCLocalStorageManager.instance.saveSelectedCustomCategories(selectedCategories: self.getSelectedCustomCategories())
+    }
+
     func allCategoriesSelected() -> Bool {
         return self.selectedCategories.count + self.selectedCustomCategories.count == self.getConsolidatedCategoriesCount()
     }
 
     // Host-side consolidation of category name, word count and emoji information in a tuple array
-    func getConsolidatedCategoryInfo() -> [(type: CategoryType, name: String, wordCount: Int, emoji: String?)] {
+    func getConsolidatedCategoriesInfo() -> [(type: CategoryType, name: String, wordCount: Int, emoji: String?)] {
         var result = [(type: CategoryType, name: String, wordCount: Int, emoji: String?)]()
 
         // Default category names
@@ -232,8 +265,9 @@ class ConsolidatedCategories: NSObject, NSCoding {
     }
 
     func reset() {
-        self.selectAllCategories()
+        self.resetCategories()
         self.synchronizedCategories.removeAll()
+        self.synchronizedCategoryTypes.removeAll()
         self.synchronizedWordCounts.removeAll()
         self.synchronizedEmojis.removeAll()
     }
@@ -289,7 +323,7 @@ class ConsolidatedCategories: NSObject, NSCoding {
             return allCachedCustomCategories
         }
 
-        let retrievedCustomCategories = SCLocalStorageManager.instance.retrieveCustomCategoriesFromLocalStorage()
+        let retrievedCustomCategories = SCLocalStorageManager.instance.retrieveAllCustomCategories()
         self.allCachedCustomCategories = retrievedCustomCategories
         return retrievedCustomCategories
     }
