@@ -26,6 +26,7 @@ class SCConstants {
         case name = "name"
         case numberOfWords = "number-of-words"
         case parameters = "parameters"
+        case persistentSelection = "persistent-selection"      // Local coding only
         case players = "players"
         case ready = "ready"
         case score = "score"
@@ -68,6 +69,7 @@ class SCConstants {
         case multilineToggleViewCell = "multi-line-toggle-view-cell"
         case nameSettingViewCell = "name-setting-view-cell"
         case nightModeToggleViewCell = "night-mode-toggle-view-cell"
+        case persistentSelectionToggleViewCell = "persistent-selection-toggle-view-cell"
         case pregameModalContainerView = "pregame-modal-container-view"
         case pregameModalMainView = "pregame-modal-main-view"
         case pregameModalSecondaryView = "pregame-modal-secondary-view"
@@ -142,5 +144,8 @@ class SCConstants {
         case accessibility = "accessibility"
         case customCategories = "custom-categories"
         case nightMode = "night-mode"
+        case persistentSelection = "persistent-selection"
+        case selectedCategories = "selected-categories"
+        case selectedCustomCategories = "selected-custom-categories"
     }
 }

@@ -128,11 +128,11 @@ extension CustomCategory {
         return 0
     }
 
-    static func == (left: CustomCategory, right: CustomCategory) -> Bool {
-        return left.name == right.name
-    }
+    override func isEqual(_ object: Any?) -> Bool {
+        if let object = object as? CustomCategory {
+            return self.name == object.name
+        }
 
-    static func != (left: CustomCategory, right: CustomCategory) -> Bool {
-        return left.name != right.name
+        return false
     }
 }

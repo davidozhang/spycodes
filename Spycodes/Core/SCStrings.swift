@@ -66,7 +66,8 @@ class SCStrings {
         case sports = "⚽️"
         case transportation = "✈️"
         case misc = "❓"
-        case disabled = "None"
+        case rocket = "🚀"
+        case setting = "⚙"
     }
 
     enum header: String {
@@ -104,7 +105,7 @@ class SCStrings {
 
     enum message: String {
         case categoryExists = "The category name already exists."
-        case categorySetting = "Only the host can toggle the category settings."
+        case categorySetting = "Only the host can toggle category settings."
         case categoryWordList = "The word list should contain at least 1 word."
         case defaultLoseString = "Your team lost!"
         case defaultWinString = "Your team won!"
@@ -155,9 +156,10 @@ class SCStrings {
         case minigame = "Minigame"
         case name = "Name"
         case nightMode = "Night Mode"
+        case persistentSelection = "%@ Persist"
         case releaseNotes = "Release Notes"
         case reviewApp = "Review App"
-        case selectAll = "Select All"
+        case selectAll = "%@ Select All"
         case support = "Support"
         case teamEmptyState = "No players on the team."
         case timer = "Timer"
@@ -176,6 +178,8 @@ class SCStrings {
         case timer = "Set a time duration for each round."
         case numberOfWords = "%d %@"
         case numberOfWordsCustomCategory = "%d %@ (Custom)"
+        case persistentSelection = "Your current selections will be saved."
+        case selectAll = "All categories will be selected."
         case word = "word"
         case words = "words"
     }

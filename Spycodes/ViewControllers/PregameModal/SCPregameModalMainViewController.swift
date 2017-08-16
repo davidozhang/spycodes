@@ -3,15 +3,31 @@ import UIKit
 class SCPregameModalMainViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
-    enum Section: Int {
+    fileprivate enum Section: Int {
         case info = 0
         case statistics = 1
         case gameSettings = 2
+
+        static var count: Int {
+            var count = 0
+            while let _ = Section(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
     }
 
-    enum GameSetting: Int {
+    fileprivate enum GameSetting: Int {
         case minigame = 0
         case timer = 1
+
+        static var count: Int {
+            var count = 0
+            while let _ = GameSetting(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
     }
 
     fileprivate let sectionLabels: [Section: String] = [
@@ -144,7 +160,7 @@ class SCPregameModalMainViewController: SCViewController {
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionLabels.count
+        return Section.count
     }
 
     func tableView(_ tableView: UITableView,
@@ -181,7 +197,7 @@ extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDe
         case Section.statistics.rawValue:
             return 1
         case Section.gameSettings.rawValue:
-            return settingsLabels.count
+            return GameSetting.count
         default:
             return 0
         }
