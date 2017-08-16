@@ -33,7 +33,7 @@ class SCLocalStorageManager {
         )
 
         UserDefaults.standard.synchronize()
-        print("[SCLocalStorageManager] Selected Custom Categories Saved.")
+        print("[SCLocalStorageManager] Selected custom categories saved.")
     }
 
     func saveSelectedCategories(selectedCategories: [SCWordBank.Category]) {
@@ -50,7 +50,7 @@ class SCLocalStorageManager {
         )
 
         UserDefaults.standard.synchronize()
-        print("[SCLocalStorageManager] Selected Categories Saved.")
+        print("[SCLocalStorageManager] Selected categories saved.")
     }
 
     func saveAllCustomCategories(customCategories: [CustomCategory]) {
@@ -61,13 +61,13 @@ class SCLocalStorageManager {
         )
 
         UserDefaults.standard.synchronize()
-        print("[SCLocalStorageManager] Custom Categories Saved.")
+        print("[SCLocalStorageManager] All custom categories saved.")
     }
 
     func retrieveAllCustomCategories() -> [CustomCategory] {
         if let data = UserDefaults.standard.object(forKey: SCConstants.userDefaults.customCategories.rawValue) as? NSData {
             if let customCategories = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [CustomCategory] {
-                print ("[SCLocalStorageManager] Custom Categories Retrieved.")
+                print ("[SCLocalStorageManager] All custom categories retrieved.")
                 return customCategories
             }
         }
@@ -94,7 +94,7 @@ class SCLocalStorageManager {
 
         self.localSettings[.persistentSelection] = storedPersistentCategorySelection
 
-        print ("[SCLocalStorageManager] Local Settings Retrieved.")
+        print ("[SCLocalStorageManager] Local settings retrieved.")
     }
 
     func retrieveSelectedConsolidatedCategories() {
@@ -109,6 +109,21 @@ class SCLocalStorageManager {
         ConsolidatedCategories.instance.setSelectedCustomCategories(
             selectedCategories: self.retrieveSelectedCustomCategories()
         )
+
+        print ("[SCLocalStorageManager] Selected consolidated categories retrieved.")
+    }
+
+    func clearSelectedConsolidatedCategories() {
+        UserDefaults.standard.removeObject(
+            forKey: SCConstants.userDefaults.persistentSelectedCategories.rawValue
+        )
+
+        UserDefaults.standard.removeObject(
+            forKey: SCConstants.userDefaults.persistentSelectedCustomCategories.rawValue
+        )
+
+        UserDefaults.standard.synchronize()
+        print ("[SCLocalStorageManager] Selected consolidated categories cleared.")
     }
 
     // MARK: Private
@@ -132,13 +147,12 @@ class SCLocalStorageManager {
         }
 
         UserDefaults.standard.synchronize()
-        print("[SCLocalStorageManager] Local Settings Saved.")
+        print("[SCLocalStorageManager] Local settings saved.")
     }
 
     fileprivate func retrieveSelectedCustomCategories() -> Set<CustomCategory> {
         if let data = UserDefaults.standard.object(forKey: SCConstants.userDefaults.persistentSelectedCustomCategories.rawValue) as? NSData {
             if let retrievedCustomCategories = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [CustomCategory] {
-                print ("[SCLocalStorageManager] Selected Custom Categories Retrieved.")
                 return Set<CustomCategory>(retrievedCustomCategories)
             }
         }
@@ -151,7 +165,6 @@ class SCLocalStorageManager {
 
         if let data = UserDefaults.standard.object(forKey: SCConstants.userDefaults.persistentSelectedCategories.rawValue) as? NSData {
             if let retrievedCategories = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [Int] {
-                print ("[SCLocalStorageManager] Selected Categories Retrieved.")
                 for category in retrievedCategories {
                     if let category = SCWordBank.Category(rawValue: category) {
                         selectedCategories.append(category)
