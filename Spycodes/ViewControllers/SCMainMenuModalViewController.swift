@@ -10,12 +10,18 @@ class SCMainMenuModalViewController: SCModalViewController {
     enum Section: Int {
         case about = 0
         case customize = 1
-        case more = 2
+        case inAppPurchases = 2
+        case more = 3
     }
 
     enum CustomSetting: Int {
         case nightMode = 0
         case accessibility = 1
+    }
+
+    enum InAppPurchases: Int {
+        case restorePurchases = 0
+        case promotionalCode = 1
     }
 
     enum Link: Int {
@@ -30,12 +36,18 @@ class SCMainMenuModalViewController: SCModalViewController {
     fileprivate let sectionLabels: [Section: String] = [
         .customize: SCStrings.section.customize.rawValue,
         .about: SCStrings.section.about.rawValue,
+        .inAppPurchases: SCStrings.section.inAppPurchases.rawValue,
         .more: SCStrings.section.more.rawValue,
     ]
 
     fileprivate let customizeLabels: [CustomSetting: String] = [
         .nightMode: SCStrings.primaryLabel.nightMode.rawValue,
         .accessibility: SCStrings.primaryLabel.accessibility.rawValue,
+    ]
+
+    fileprivate let inAppPurchaseLabels: [InAppPurchases: String] = [
+        .restorePurchases: SCStrings.primaryLabel.restorePurchases.rawValue,
+        .promotionalCode: SCStrings.primaryLabel.promotionalCode.rawValue,
     ]
 
     fileprivate let disclosureLabels: [Link: String] = [
@@ -158,6 +170,8 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
             return customizeLabels.count
         case Section.about.rawValue:
             return 1
+        case Section.inAppPurchases.rawValue:
+            return inAppPurchaseLabels.count
         case Section.more.rawValue:
             return disclosureLabels.count
         default:
@@ -206,6 +220,18 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
             }
 
             return cell
+        case Section.inAppPurchases.rawValue:
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCConstants.identifier.disclosureViewCell.rawValue
+                ) as? SCDisclosureViewCell else {
+                    return SCTableViewCell()
+            }
+
+            if let iap = InAppPurchases(rawValue: indexPath.row) {
+                cell.primaryLabel.text = self.inAppPurchaseLabels[iap]
+            }
+
+            return cell
         case Section.more.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.identifier.disclosureViewCell.rawValue
@@ -228,6 +254,18 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
         self.tableView.deselectRow(at: indexPath, animated: false)
 
         switch indexPath.section {
+        case Section.inAppPurchases.rawValue:
+            switch indexPath.row {
+            case InAppPurchases.restorePurchases.rawValue:
+                SCStoreKitManager.instance.restorePurchases({ (set, error) in
+                    print(set)
+                })
+            case InAppPurchases.promotionalCode.rawValue:
+                break
+            default:
+                break
+            }
+
         case Section.more.rawValue:
             switch indexPath.row {
             case Link.support.rawValue:
