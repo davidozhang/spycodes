@@ -613,6 +613,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
 
                     cell.delegate = self
                     cell.indexPath = indexPath
+                    cell.showButton()
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                         cell.textField.becomeFirstResponder()
