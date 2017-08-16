@@ -54,7 +54,6 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     fileprivate var scrolled = false
     fileprivate var inputMode = false
-    fileprivate var hasFirstResponder = false       // Only detects if add word text field is first responder
     fileprivate var existingCustomCategory = false
 
     fileprivate var nonMutableCustomCategory: CustomCategory?
@@ -127,7 +126,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.tableView.dataSource = nil
         self.tableView.delegate = nil
 
-        self.changeStateTo(state: .nonEditing, reload: false)
+        self.changeStateTo(state: .nonEditing)
         self.view.endEditing(true)
     }
 
@@ -148,12 +147,9 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.tableView.reloadData()
     }
 
-    fileprivate func changeStateTo(state: CustomCategoryWordListState, reload: Bool) {
+    fileprivate func changeStateTo(state: CustomCategoryWordListState) {
         SCStates.customCategoryWordListState = state
-
-        if reload {
-            self.reloadView()
-        }
+        self.reloadView()
     }
 
     fileprivate func registerTableViewCells() {
@@ -244,133 +240,8 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         }
     }
 
-    fileprivate func confirmHandler(alertController: UIAlertController,
-                                    verificationHandler: ((String) -> Bool)?,
-                                    successHandler: ((String) -> Void)?) {
-        if let text = alertController.textFields?[0].text {
-            if let verificationHandler = verificationHandler {
-                if !verificationHandler(text) {
-                    self.changeStateTo(state: .nonEditing, reload: true)
-                    return
-                }
-            }
-
-            if let successHandler = successHandler {
-                successHandler(text)
-            }
-        }
-
-        alertController.dismiss(animated: false, completion: nil)
-    }
-
-    fileprivate func presentAlert(title: String, message: String) {
-        let alertController = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        let confirmAction = UIAlertAction(
-            title: SCStrings.button.ok.rawValue,
-            style: .default,
-            handler: { (action: UIAlertAction) in
-                alertController.dismiss(animated: false, completion: nil)
-            }
-        )
-        alertController.addAction(confirmAction)
-        self.present(
-            alertController,
-            animated: true,
-            completion: nil
-        )
-    }
-
-    fileprivate func presentTextFieldAlert(title: String,
-                                           message: String?,
-                                           textFieldHandler: ((UITextField) -> Void)?,
-                                           verificationHandler: ((String) -> Bool)?,
-                                           successHandler: ((String) -> Void)?) {
-        let alertController = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        alertController.addTextField(configurationHandler: textFieldHandler)
-
-        let cancelAction = UIAlertAction(
-            title: SCStrings.button.cancel.rawValue,
-            style: .cancel,
-            handler: { (action: UIAlertAction) in
-                self.changeStateTo(state: .nonEditing, reload: false)
-                alertController.dismiss(animated: false, completion: nil)
-            }
-        )
-        let confirmAction = UIAlertAction(
-            title: SCStrings.button.ok.rawValue,
-            style: .default,
-            handler: { (action: UIAlertAction) in
-                self.changeStateTo(state: .nonEditing, reload: false)
-                self.confirmHandler(
-                    alertController: alertController,
-                    verificationHandler: verificationHandler,
-                    successHandler: successHandler
-                )
-            }
-        )
-
-        alertController.addAction(cancelAction)
-        alertController.addAction(confirmAction)
-        self.present(
-            alertController,
-            animated: true,
-            completion: nil
-        )
-    }
-
-    fileprivate func presentConfirmation(title: String, message: String, confirmHandler: ((Void) -> Void)?) {
-        let alertController = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-
-        let cancelAction = UIAlertAction(
-            title: SCStrings.button.cancel.rawValue,
-            style: .cancel,
-            handler: { (action: UIAlertAction) in
-                self.changeStateTo(state: .nonEditing, reload: false)
-                alertController.dismiss(animated: false, completion: nil)
-            }
-        )
-        let confirmAction = UIAlertAction(
-            title: SCStrings.button.confirm.rawValue,
-            style: .default,
-            handler: { (action: UIAlertAction) in
-                self.changeStateTo(state: .nonEditing, reload: false)
-                if let confirmHandler = confirmHandler {
-                    confirmHandler()
-                }
-            }
-        )
-
-        alertController.addAction(cancelAction)
-        alertController.addAction(confirmAction)
-        self.present(
-            alertController,
-            animated: true,
-            completion: nil
-        )
-    }
-
     fileprivate func getSafeIndex(index: Int) -> Int {
         return index == 0 ? index : index - 1    // Account for top cell
-    }
-
-    fileprivate func showDuplicateWordAlert() {
-        self.changeStateTo(state: .nonEditing, reload: true)
-        self.presentAlert(
-            title: SCStrings.header.duplicateWord.rawValue,
-            message: SCStrings.message.duplicateWord.rawValue
-        )
     }
 
     fileprivate func processWord(word: String, indexPath: IndexPath) {
@@ -382,12 +253,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
             }
         } else {
             let index = self.getSafeIndex(index: indexPath.row)
-
-            if self.mutableCustomCategory.getWordList()[index] != word && self.mutableCustomCategory.wordExists(word: word) {
-                self.showDuplicateWordAlert()
-            } else {
-                self.mutableCustomCategory.editWord(word: word, index: index)
-            }
+            self.mutableCustomCategory.editWord(word: word, index: index)
         }
     }
 }
@@ -402,8 +268,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 extension SCCustomCategoryModalViewController: SCTableViewCellEmojiDelegate {
     func onEmojiSelected(emoji: String) {
         self.mutableCustomCategory.setEmoji(emoji: emoji)
-        self.changeStateTo(state: .nonEditing, reload: true)
-        self.hasFirstResponder = false
+        self.changeStateTo(state: .nonEditing)
     }
 }
 
@@ -429,24 +294,19 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
             }
         }
 
-        self.changeStateTo(state: .nonEditing, reload: false)
-        self.hasFirstResponder = false
+        self.changeStateTo(state: .nonEditing)
         self.reloadView()
     }
 
-    func didEndEditing(textField: UITextField, indexPath: IndexPath) {
-        self.hasFirstResponder = false
-    }
+    func didEndEditing(textField: UITextField, indexPath: IndexPath) {}
 
     func shouldBeginEditing(textField: UITextField, indexPath: IndexPath) -> Bool {
-        // Should prevent other text fields from becoming first responder if there is already a first responder
-        return !self.hasFirstResponder
+        return true
     }
 
     func shouldReturn(textField: UITextField, indexPath: IndexPath) -> Bool {
         if textField.text?.characters.count != 0 {
             textField.resignFirstResponder()
-            self.hasFirstResponder = false
 
             if let word = textField.text {
                 self.processWord(word: word, indexPath: indexPath)
@@ -584,7 +444,6 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                         cell.rightTextView.becomeFirstResponder()
-                        self.hasFirstResponder = true
                     })
                 }
                 
@@ -621,8 +480,8 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     cell.showButton()
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                        cell.textField.isUserInteractionEnabled = true
                         cell.textField.becomeFirstResponder()
-                        self.hasFirstResponder = true
                     })
 
                     return cell
@@ -671,85 +530,21 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         case Section.settings.rawValue:
             switch indexPath.row {
             case Setting.name.rawValue:
-                self.changeStateTo(state: .editingCategoryName, reload: true)
-
-                self.presentTextFieldAlert(
-                    title: SCStrings.header.categoryName.rawValue,
-                    message: SCStrings.message.enterCategoryName.rawValue,
-                    textFieldHandler: { (textField) in
-                        if let name = self.mutableCustomCategory.getName() {
-                            textField.text = name
-                        }
-                    },
-                    verificationHandler: { (category) in
-                        if category.characters.count == 0 {
-                            self.presentAlert(
-                                title: SCStrings.header.emptyCategory.rawValue,
-                                message: SCStrings.message.emptyCategoryName.rawValue
-                            )
-                            return false
-                        } else if ConsolidatedCategories.instance.categoryExists(category: category) {
-                            // Ignore if the category name is same as the existing category name passed into the controller 
-                            if self.existingCustomCategory && self.nonMutableCustomCategory?.getName() == category {
-                                return true
-                            }
-
-                            self.presentAlert(
-                                title: SCStrings.header.categoryExists.rawValue,
-                                message: SCStrings.message.categoryExists.rawValue
-                            )
-                            return false
-                        }
-
-                        return true
-                    },
-                    successHandler: { (name) in
-                        self.mutableCustomCategory.setName(name: name)
-                        self.changeStateTo(state: .nonEditing, reload: true)
-                    }
-                )
+                self.changeStateTo(state: .editingCategoryName)
+                self.presentEditCategoryNameTextFieldAlert()
             case Setting.emoji.rawValue:
-                self.changeStateTo(state: .editingEmoji, reload: true)
+                self.changeStateTo(state: .editingEmoji)
             default:
                 break
             }
         case Section.wordList.rawValue:
             switch indexPath.row {
             case WordList.topCell.rawValue:
-                switch SCStates.customCategoryWordListState {
-                case .nonEditing:
-                    self.changeStateTo(state: .addingNewWord, reload: true)
-                default:
-                    break
-                }
+                self.changeStateTo(state: .addingNewWord)
             default:
                 // Edit an existing word using a text field alert
-                self.changeStateTo(state: .editingExistingWord, reload: true)
-
-                self.presentTextFieldAlert(
-                    title: SCStrings.header.editWord.rawValue,
-                    message: nil,
-                    textFieldHandler: { (textField) in
-                        let index = self.getSafeIndex(index: indexPath.row)
-                        let word = self.mutableCustomCategory.getWordList()[index]
-                        textField.text = word
-                    },
-                    verificationHandler: { (word) in
-                        if word.characters.count == 0 {
-                            self.presentAlert(
-                                title: SCStrings.header.emptyWord.rawValue,
-                                message: SCStrings.message.emptyWord.rawValue
-                            )
-                            return false
-                        }
-
-                        return true
-                    },
-                    successHandler: { (word) in
-                        self.processWord(word: word, indexPath: indexPath)
-                        self.changeStateTo(state: .nonEditing, reload: true)
-                    }
-                )
+                self.changeStateTo(state: .editingExistingWord)
+                self.presentEditWordTextFieldAlert(indexPath: indexPath)
             }
         case Section.deleteCategory.rawValue:
             if self.existingCustomCategory {
@@ -776,5 +571,201 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
         if !self.inputMode {
             self.reloadView()
         }
+    }
+}
+
+// MARK: Alert Controllers
+extension SCCustomCategoryModalViewController {
+    fileprivate func showDuplicateWordAlert() {
+        self.changeStateTo(state: .nonEditing)
+        self.presentAlert(
+            title: SCStrings.header.duplicateWord.rawValue,
+            message: SCStrings.message.duplicateWord.rawValue
+        )
+    }
+
+    fileprivate func textFieldConfirmHandler(alertController: UIAlertController,
+                                    verificationHandler: ((String) -> Bool)?,
+                                    successHandler: ((String) -> Void)?) {
+        self.changeStateTo(state: .nonEditing)
+
+        if let text = alertController.textFields?[0].text {
+            if let verificationHandler = verificationHandler {
+                if !verificationHandler(text) {
+                    return
+                }
+            }
+
+            if let successHandler = successHandler {
+                successHandler(text)
+            }
+        }
+
+        alertController.dismiss(animated: false, completion: nil)
+    }
+
+    fileprivate func presentAlert(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        let confirmAction = UIAlertAction(
+            title: SCStrings.button.ok.rawValue,
+            style: .default,
+            handler: { (action: UIAlertAction) in
+                alertController.dismiss(animated: false, completion: nil)
+            }
+        )
+        alertController.addAction(confirmAction)
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil
+        )
+    }
+
+    fileprivate func presentTextFieldAlert(title: String,
+                                           message: String?,
+                                           textFieldHandler: ((UITextField) -> Void)?,
+                                           verificationHandler: ((String) -> Bool)?,
+                                           successHandler: ((String) -> Void)?) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        alertController.addTextField(configurationHandler: textFieldHandler)
+
+        let cancelAction = UIAlertAction(
+            title: SCStrings.button.cancel.rawValue,
+            style: .cancel,
+            handler: { (action: UIAlertAction) in
+                self.changeStateTo(state: .nonEditing)
+                alertController.dismiss(animated: false, completion: nil)
+            }
+        )
+        let confirmAction = UIAlertAction(
+            title: SCStrings.button.ok.rawValue,
+            style: .default,
+            handler: { (action: UIAlertAction) in
+                self.textFieldConfirmHandler(
+                    alertController: alertController,
+                    verificationHandler: verificationHandler,
+                    successHandler: successHandler
+                )
+            }
+        )
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil
+        )
+    }
+
+    fileprivate func presentConfirmation(title: String, message: String, confirmHandler: ((Void) -> Void)?) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+
+        let cancelAction = UIAlertAction(
+            title: SCStrings.button.cancel.rawValue,
+            style: .cancel,
+            handler: { (action: UIAlertAction) in
+                self.changeStateTo(state: .nonEditing)
+                alertController.dismiss(animated: false, completion: nil)
+            }
+        )
+        let confirmAction = UIAlertAction(
+            title: SCStrings.button.confirm.rawValue,
+            style: .default,
+            handler: { (action: UIAlertAction) in
+                self.changeStateTo(state: .nonEditing)
+                if let confirmHandler = confirmHandler {
+                    confirmHandler()
+                }
+            }
+        )
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil
+        )
+    }
+
+    fileprivate func presentEditCategoryNameTextFieldAlert() {
+        self.presentTextFieldAlert(
+            title: SCStrings.header.categoryName.rawValue,
+            message: SCStrings.message.enterCategoryName.rawValue,
+            textFieldHandler: { (textField) in
+                if let name = self.mutableCustomCategory.getName() {
+                    textField.text = name
+                }
+            },
+            verificationHandler: { (category) in
+                if category.characters.count == 0 {
+                    self.presentAlert(
+                        title: SCStrings.header.emptyCategory.rawValue,
+                        message: SCStrings.message.emptyCategoryName.rawValue
+                    )
+                    return false
+                } else if ConsolidatedCategories.instance.categoryExists(category: category) {
+                    // Ignore if the category name is same as the existing category name passed into the controller
+                    if self.existingCustomCategory && self.nonMutableCustomCategory?.getName() == category {
+                        return true
+                    }
+
+                    self.presentAlert(
+                        title: SCStrings.header.categoryExists.rawValue,
+                        message: SCStrings.message.categoryExists.rawValue
+                    )
+                    return false
+                }
+
+                return true
+            },
+            successHandler: { (name) in
+                self.mutableCustomCategory.setName(name: name)
+            }
+        )
+    }
+
+    fileprivate func presentEditWordTextFieldAlert(indexPath: IndexPath) {
+        self.presentTextFieldAlert(
+            title: SCStrings.header.editWord.rawValue,
+            message: nil,
+            textFieldHandler: { (textField) in
+                let index = self.getSafeIndex(index: indexPath.row)
+                let word = self.mutableCustomCategory.getWordList()[index]
+                textField.text = word
+            },
+            verificationHandler: { (word) in
+                let index = self.getSafeIndex(index: indexPath.row)
+
+                if word.characters.count == 0 {
+                    self.presentAlert(
+                        title: SCStrings.header.emptyWord.rawValue,
+                        message: SCStrings.message.emptyWord.rawValue
+                    )
+                    return false
+                } else if self.mutableCustomCategory.getWordList()[index] != word && self.mutableCustomCategory.wordExists(word: word) {
+                    self.showDuplicateWordAlert()
+                    return false
+                }
+
+                return true
+            },
+            successHandler: { (word) in
+                self.processWord(word: word, indexPath: indexPath)
+            }
+        )
     }
 }
