@@ -180,8 +180,8 @@
 			children = (
 				630883671E80E56F006D2428 /* SCAppInfoManager.swift */,
 				63EAF9A41D41F1C400BC554E /* SCAudioManager.swift */,
-				63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */,
 				6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */,
+				63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";

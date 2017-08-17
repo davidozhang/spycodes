@@ -82,7 +82,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
         self.scrolled = false
 
         // Fallback to ensure that word count integrity holds in the worst case
-        self.checkWordCount(failureHandler: {
+        self.checkWordCount(successHandler: nil, failureHandler: {
             ConsolidatedCategories.instance.selectAllCategories()
         })
     }
@@ -147,7 +147,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
         }
     }
 
-    fileprivate func checkWordCount(failureHandler: ((Void) -> Void)?) {
+    fileprivate func checkWordCount(successHandler: ((Void) -> Void)?, failureHandler: ((Void) -> Void)?) {
         if ConsolidatedCategories.instance.getTotalWords() < SCConstants.constant.cardCount.rawValue {
             self.showAlert(
                 title: SCStrings.header.minimumWords.rawValue,
@@ -158,6 +158,10 @@ class SCPregameModalSecondaryViewController: SCViewController {
                     }
                 }
             )
+        } else {
+            if let successHandler = successHandler {
+                successHandler()
+            }
         }
     }
 
@@ -250,36 +254,39 @@ extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
 
         if let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {       // Default categories
             if enabled {
-                ConsolidatedCategories.instance.selectCategory(category: category)
+                ConsolidatedCategories.instance.selectCategory(category: category, persistSelectionImmediately: false)
             } else {
-                ConsolidatedCategories.instance.unselectCategory(category: category)
+                ConsolidatedCategories.instance.unselectCategory(category: category, persistSelectionImmediately: false)
             }
 
             self.checkWordCount(
-                failureHandler: {
+                successHandler: {
+                    ConsolidatedCategories.instance.persistSelectedCategoriesIfEnabled()
+                    self.tableView.reloadData()
+                }, failureHandler: {
                     // Revert setting if total word count is less than minimum allowed
                     cell.toggleSwitch.isOn = !enabled
-                    ConsolidatedCategories.instance.selectCategory(category: category)
+                    ConsolidatedCategories.instance.selectCategory(category: category, persistSelectionImmediately: false)
                 }
             )
         } else if let category = ConsolidatedCategories.instance.getCustomCategoryFromString(string: reuseIdentifier) {     // Custom categories
             if enabled {
-                ConsolidatedCategories.instance.selectCustomCategory(category: category)
+                ConsolidatedCategories.instance.selectCustomCategory(category: category, persistSelectionImmediately: false)
             } else {
-                ConsolidatedCategories.instance.unselectCustomCategory(category: category)
+                ConsolidatedCategories.instance.unselectCustomCategory(category: category, persistSelectionImmediately: false)
             }
 
             self.checkWordCount(
-                failureHandler: {
+                successHandler: {
+                    ConsolidatedCategories.instance.persistSelectedCategoriesIfEnabled()
+                    self.tableView.reloadData()
+                }, failureHandler: {
                     // Revert setting if total word count is less than minimum allowed
                     cell.toggleSwitch.isOn = !enabled
-                    ConsolidatedCategories.instance.selectCustomCategory(category: category)
+                    ConsolidatedCategories.instance.selectCustomCategory(category: category, persistSelectionImmediately: false)
                 }
             )
         }
-
-        ConsolidatedCategories.instance.persistSelectedCategoriesIfEnabled()
-        self.tableView.reloadData()
     }
 }
 
