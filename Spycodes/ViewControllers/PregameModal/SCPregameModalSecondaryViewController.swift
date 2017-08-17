@@ -148,6 +148,10 @@ class SCPregameModalSecondaryViewController: SCViewController {
     }
 
     fileprivate func checkWordCount(successHandler: ((Void) -> Void)?, failureHandler: ((Void) -> Void)?) {
+        if !Player.instance.isHost() {
+            return
+        }
+
         if ConsolidatedCategories.instance.getTotalWords() < SCConstants.constant.cardCount.rawValue {
             self.showAlert(
                 title: SCStrings.header.minimumWords.rawValue,

@@ -820,7 +820,7 @@ extension SCCustomCategoryModalViewController {
                         message: SCStrings.message.emptyWord.rawValue
                     )
                     return false
-                } else if self.mutableCustomCategory.getWordList()[index] != word && self.mutableCustomCategory.wordExists(word: word) {
+                } else if self.mutableCustomCategory.getWordList()[index].lowercased() != word.lowercased() && self.mutableCustomCategory.wordExists(word: word) {
                     self.showDuplicateWordAlert()
                     return false
                 }
