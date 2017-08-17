@@ -80,6 +80,11 @@ class SCPregameModalSecondaryViewController: SCViewController {
 
         self.registerTableViewCells()
         self.scrolled = false
+
+        // Fallback to ensure that word count integrity holds in the worst case
+        self.checkWordCount(failureHandler: {
+            ConsolidatedCategories.instance.selectAllCategories()
+        })
     }
 
     override func viewWillDisappear(_ animated: Bool) {

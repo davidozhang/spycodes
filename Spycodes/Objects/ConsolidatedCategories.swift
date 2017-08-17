@@ -208,6 +208,24 @@ class ConsolidatedCategories: NSObject, NSCoding {
         return result
     }
 
+    // Integrity check
+    func getTotalWordsWithNonPersistedExistingCategory(originalCategory: CustomCategory?, newNonPersistedCategory: CustomCategory?) -> Int {
+        if let originalCategory = originalCategory,
+           let newNonPersistedCategory = newNonPersistedCategory {
+            return self.getTotalWordsWithDeletedExistedCategory(deletedCategory: originalCategory) + newNonPersistedCategory.getWordCount()
+        }
+
+        return 0
+    }
+
+    func getTotalWordsWithDeletedExistedCategory(deletedCategory: CustomCategory?) -> Int {
+        if let deletedCategory = deletedCategory {
+            return self.getTotalWords() - deletedCategory.getWordCount()
+        }
+
+        return 0
+    }
+
     // Mirrors the mapping function for default categories in SCWordBank
     func getCustomCategoryFromString(string: String?) -> CustomCategory? {
         let filtered = self.getAllCustomCategories().filter({
