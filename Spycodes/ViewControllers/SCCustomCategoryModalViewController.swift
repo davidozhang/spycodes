@@ -40,6 +40,12 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         }
     }
 
+    fileprivate enum IntegrityType: Int {
+        case wordListMutation = 0
+        case categoryDeletion = 1
+        case nonMutating = 2
+    }
+
     fileprivate static let margin: CGFloat = 16
 
     fileprivate let sectionLabels: [Section: String] = [
@@ -164,6 +170,53 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         )
     }
 
+    fileprivate func presentIntegrityCheckAlert() {
+        self.presentAlert(
+            title: SCStrings.header.integrityCheck.rawValue,
+            message: SCStrings.message.integrityCheck.rawValue
+        )
+    }
+
+    fileprivate func integrityCheck(integrityType: IntegrityType) -> Bool {
+        if !self.existingCustomCategory {
+            return true
+        }
+
+        switch integrityType {
+        case .wordListMutation:
+            let totalWordCount = ConsolidatedCategories.instance.getTotalWordsWithNonPersistedExistingCategory(
+                originalCategory: self.nonMutableCustomCategory,
+                newNonPersistedCategory: self.mutableCustomCategory
+            )
+
+            if totalWordCount <= SCConstants.constant.cardCount.rawValue {
+                self.presentIntegrityCheckAlert()
+                return false
+            }
+        case .categoryDeletion:
+            let totalWordCount = ConsolidatedCategories.instance.getTotalWordsWithDeletedExistedCategory(
+                deletedCategory: self.nonMutableCustomCategory
+            )
+
+            if totalWordCount < SCConstants.constant.cardCount.rawValue {
+                self.presentIntegrityCheckAlert()
+                return false
+            }
+        case .nonMutating:
+            let totalWordCount = ConsolidatedCategories.instance.getTotalWordsWithNonPersistedExistingCategory(
+                originalCategory: self.nonMutableCustomCategory,
+                newNonPersistedCategory: self.mutableCustomCategory
+            )
+
+            if totalWordCount < SCConstants.constant.cardCount.rawValue {
+                self.presentIntegrityCheckAlert()
+                return false
+            }
+        }
+
+        return true
+    }
+
     fileprivate func onDone() {
         self.validateCustomCategory(successHandler: {
             if !self.existingCustomCategory {
@@ -189,6 +242,10 @@ class SCCustomCategoryModalViewController: SCModalViewController {
             title: SCStrings.header.confirmDeletion.rawValue,
             message: SCStrings.message.confirmDeletion.rawValue,
             confirmHandler: {
+                if !self.integrityCheck(integrityType: .categoryDeletion) {
+                    return
+                }
+
                 if let customCategory = self.nonMutableCustomCategory {
                     ConsolidatedCategories.instance.removeCustomCategory(category: customCategory)
                 }
@@ -200,6 +257,10 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 
     fileprivate func validateCustomCategory(successHandler: ((Void) -> Void)?) {
         if self.existingCustomCategory {
+            if !self.integrityCheck(integrityType: .nonMutating) {
+                return
+            }
+
             if let successHandler = successHandler {
                 successHandler()
             }
@@ -223,6 +284,8 @@ class SCCustomCategoryModalViewController: SCModalViewController {
                 title: SCStrings.header.categoryWordList.rawValue,
                 message: SCStrings.message.categoryWordList.rawValue
             )
+        } else if !self.integrityCheck(integrityType: .nonMutating) {
+            return
         } else {
             if let successHandler = successHandler {
                 successHandler()
@@ -288,6 +351,8 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
                     title: SCStrings.header.categoryWordList.rawValue,
                     message: SCStrings.message.categoryWordList.rawValue
                 )
+            } else if !self.integrityCheck(integrityType: .wordListMutation) {
+                return
             } else {
                 let index = self.getSafeIndex(index: indexPath.row)
                 self.mutableCustomCategory.removeWordAtIndex(index: index)
