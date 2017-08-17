@@ -1,0 +1,771 @@
+import UIKit
+
+class SCCustomCategoryModalViewController: SCModalViewController {
+    fileprivate enum Section: Int {
+        case settings = 0
+        case wordList = 1
+        case deleteCategory = 2
+
+        static var count: Int {
+            var count = 0
+            while let _ = Section(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
+    }
+
+    fileprivate enum Setting: Int {
+        case name = 0
+        case emoji = 1
+
+        static var count: Int {
+            var count = 0
+            while let _ = Setting(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
+    }
+
+    fileprivate enum WordList: Int {
+        case topCell = 0
+
+        static var count: Int {
+            var count = 0
+            while let _ = WordList(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
+    }
+
+    fileprivate static let margin: CGFloat = 16
+
+    fileprivate let sectionLabels: [Section: String] = [
+        .settings: SCStrings.section.settings.rawValue,
+        .wordList: SCStrings.section.wordList.rawValue,
+    ]
+
+    fileprivate let settingsLabels: [Setting: String] = [
+        .name: SCStrings.primaryLabel.minigame.rawValue,
+        .emoji: SCStrings.primaryLabel.emoji.rawValue,
+    ]
+
+    fileprivate var scrolled = false
+    fileprivate var inputMode = false
+    fileprivate var existingCustomCategory = false
+
+    fileprivate var nonMutableCustomCategory: CustomCategory?
+    fileprivate var mutableCustomCategory = CustomCategory()
+
+    fileprivate var blurView: UIVisualEffectView?
+
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
+
+    @IBAction func onCancelButtonTapped(_ sender: Any) {
+        self.dismissView()
+    }
+
+    @IBAction func onDoneButtonTapped(_ sender: Any) {
+        self.onDone()
+    }
+
+    deinit {
+        print("[DEINIT] " + NSStringFromClass(type(of: self)))
+    }
+
+    // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.automaticallyAdjustsScrollViewInsets = false
+
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 87.0
+
+        self.tableViewBottomSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
+        self.tableViewLeadingSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
+        self.tableViewTrailingSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
+        self.tableView.layoutIfNeeded()
+
+        self.registerTableViewCells()
+
+        // Navigation bar customization
+        if let bounds = self.navigationController?.navigationBar.bounds {
+            if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
+                self.navigationController?.navigationBar.barStyle = .blackTranslucent
+                return
+            }
+
+            self.blurView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+            self.navigationController?.navigationBar.isTranslucent = true
+            self.navigationController?.navigationBar.backgroundColor = .clear
+            self.blurView?.frame = CGRect(x: 0, y: -20, width: bounds.width, height: bounds.height + 20)
+            self.blurView?.tag = SCConstants.tag.navigationBarBlurView.rawValue
+            self.navigationController?.navigationBar.addSubview(self.blurView!)
+            self.navigationController?.navigationBar.sendSubview(toBack: self.blurView!)
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+
+        super.disableSwipeGestureRecognizer()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.tableView.dataSource = nil
+        self.tableView.delegate = nil
+
+        self.changeStateTo(state: .nonEditing)
+        self.view.endEditing(true)
+    }
+
+    // MARK: Public
+    func setCustomCategoryFromString(category: String) {
+        if let customCategory = ConsolidatedCategories.instance.getCustomCategoryFromString(string: category),
+           let nonMutableCopy = customCategory.copy() as? CustomCategory,
+           let mutableCopy = customCategory.copy() as? CustomCategory {
+            // Use copies of custom category object in the event that user cancels
+            self.nonMutableCustomCategory = nonMutableCopy
+            self.mutableCustomCategory = mutableCopy
+            self.existingCustomCategory = true
+        }
+    }
+
+    // MARK: Private
+    fileprivate func reloadView() {
+        self.tableView.reloadData()
+    }
+
+    fileprivate func changeStateTo(state: CustomCategoryWordListState) {
+        SCStates.customCategoryWordListState = state
+        self.reloadView()
+    }
+
+    fileprivate func registerTableViewCells() {
+        let textFieldViewCellNib = UINib(
+            nibName: SCConstants.nibs.textFieldViewCell.rawValue,
+            bundle: nil
+        )
+
+        self.tableView.register(
+            textFieldViewCellNib,
+            forCellReuseIdentifier: SCConstants.identifier.wordViewCell.rawValue
+        )
+    }
+
+    fileprivate func onDone() {
+        self.validateCustomCategory(successHandler: {
+            if !self.existingCustomCategory {
+                // New custom category
+                ConsolidatedCategories.instance.addCustomCategory(category: self.mutableCustomCategory)
+            } else {
+                // Existing custom category
+                if let originalCustomCategory = self.nonMutableCustomCategory {
+                    ConsolidatedCategories.instance.updateCustomCategory(
+                        originalCategory: originalCustomCategory,
+                        updatedCategory: self.mutableCustomCategory
+                    )
+                }
+            }
+
+            ConsolidatedCategories.instance.selectCustomCategory(category: self.mutableCustomCategory)
+            self.dismissView()
+        })
+    }
+
+    fileprivate func onDeleteCategory() {
+        self.presentConfirmation(
+            title: SCStrings.header.confirmDeletion.rawValue,
+            message: SCStrings.message.confirmDeletion.rawValue,
+            confirmHandler: {
+                if let customCategory = self.nonMutableCustomCategory {
+                    ConsolidatedCategories.instance.removeCustomCategory(category: customCategory)
+                }
+
+                self.dismissView()
+            }
+        )
+    }
+
+    fileprivate func validateCustomCategory(successHandler: ((Void) -> Void)?) {
+        if self.existingCustomCategory {
+            if let successHandler = successHandler {
+                successHandler()
+            }
+
+            return
+        }
+
+        // Validate for empty new category name, empty word list and whether or not the new category name already exists
+        if self.mutableCustomCategory.getName() == nil {
+            self.presentAlert(
+                title: SCStrings.header.emptyCategory.rawValue,
+                message: SCStrings.message.emptyCategoryName.rawValue
+            )
+        } else if ConsolidatedCategories.instance.categoryExists(category: self.mutableCustomCategory.getName()) {
+            self.presentAlert(
+                title: SCStrings.header.categoryExists.rawValue,
+                message: SCStrings.message.categoryExists.rawValue
+            )
+        } else if self.mutableCustomCategory.getWordCount() == 0 {
+            self.presentAlert(
+                title: SCStrings.header.categoryWordList.rawValue,
+                message: SCStrings.message.categoryWordList.rawValue
+            )
+        } else {
+            if let successHandler = successHandler {
+                successHandler()
+            }
+        }
+    }
+
+    fileprivate func dismissView() {
+        super.onDismissalWithCompletion {
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: SCConstants.notificationKey.pregameModal.rawValue),
+                object: self,
+                userInfo: nil
+            )
+        }
+    }
+
+    fileprivate func getSafeIndex(index: Int) -> Int {
+        return index == 0 ? index : index - 1    // Account for top cell
+    }
+
+    fileprivate func processWord(word: String, indexPath: IndexPath) {
+        if indexPath.row == WordList.topCell.rawValue {
+            if self.mutableCustomCategory.wordExists(word: word) {
+                self.showDuplicateWordAlert()
+            } else {
+                self.mutableCustomCategory.addWord(word: word)
+            }
+        } else {
+            let index = self.getSafeIndex(index: indexPath.row)
+            self.mutableCustomCategory.editWord(word: word, index: index)
+        }
+    }
+}
+
+//   _____      _                 _
+//  | ____|_  _| |_ ___ _ __  ___(_) ___  _ __  ___
+//  |  _| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \/ __|
+//  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
+//  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
+
+// MARK: SCTableViewCellEmojiDelegate
+extension SCCustomCategoryModalViewController: SCTableViewCellEmojiDelegate {
+    func onEmojiSelected(emoji: String) {
+        self.mutableCustomCategory.setEmoji(emoji: emoji)
+        self.changeStateTo(state: .nonEditing)
+    }
+}
+
+// MARK: SCTextFieldViewCellDelegate
+extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
+    func onButtonTapped(textField: UITextField, indexPath: IndexPath) {
+        // When X button is tapped for cells
+        switch indexPath.row {
+        case WordList.topCell.rawValue:
+            // Top cell
+            break
+        default:
+            // Word cell
+            // Prevent deletion of word if word count <= 1 for existing categories
+            if self.existingCustomCategory && self.mutableCustomCategory.getWordCount() <= 1 {
+                self.presentAlert(
+                    title: SCStrings.header.categoryWordList.rawValue,
+                    message: SCStrings.message.categoryWordList.rawValue
+                )
+            } else {
+                let index = self.getSafeIndex(index: indexPath.row)
+                self.mutableCustomCategory.removeWordAtIndex(index: index)
+            }
+        }
+
+        self.changeStateTo(state: .nonEditing)
+        self.reloadView()
+    }
+
+    func didEndEditing(textField: UITextField, indexPath: IndexPath) {}
+
+    func shouldBeginEditing(textField: UITextField, indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func shouldReturn(textField: UITextField, indexPath: IndexPath) -> Bool {
+        if textField.text?.characters.count != 0 {
+            textField.resignFirstResponder()
+
+            if let word = textField.text {
+                self.processWord(word: word, indexPath: indexPath)
+            }
+
+            self.reloadView()
+            return true
+        }
+
+        return false
+    }
+}
+
+// MARK: UITableViewDelegate, UITableViewDataSource
+extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return Section.count
+    }
+
+    func tableView(_ tableView: UITableView,
+                   heightForHeaderInSection section: Int) -> CGFloat {
+        if section == Section.deleteCategory.rawValue {
+            return 0.0
+        }
+
+        return 44.0
+    }
+
+    func tableView(_ tableView: UITableView,
+                   heightForFooterInSection section: Int) -> CGFloat {
+        return 22.0
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return SCSectionHeaderViewCell()
+    }
+
+    func tableView(_ tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
+        guard let sectionHeader = self.tableView.dequeueReusableCell(
+            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            ) as? SCSectionHeaderViewCell else {
+                return nil
+        }
+
+        if let section = Section(rawValue: section) {
+            if section == .wordList, let sectionLabel = self.sectionLabels[section] {
+                let wordCount = self.mutableCustomCategory.getWordCount()
+                if wordCount == 0 {
+                    sectionHeader.primaryLabel.text = SCStrings.section.wordListDefault.rawValue
+                } else {
+                    sectionHeader.primaryLabel.text = String(
+                        format: sectionLabel,
+                        wordCount,
+                        wordCount == 1 ? "Word" : "Words"
+                    )
+                }
+            } else {
+                sectionHeader.primaryLabel.text = self.sectionLabels[section]
+            }
+        }
+
+        if self.scrolled {
+            sectionHeader.showBlurBackground()
+        } else {
+            sectionHeader.hideBlurBackground()
+        }
+
+        return sectionHeader
+    }
+
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case Section.settings.rawValue:
+            return Setting.count
+        case Section.wordList.rawValue:
+            let wordCount = self.mutableCustomCategory.getWordCount()
+            return wordCount + 1
+        case Section.deleteCategory.rawValue:
+            // Delete category button will only show for existing categories
+            return self.existingCustomCategory ? 1 : 0
+        default:
+            return 0
+        }
+    }
+
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case Section.settings.rawValue:
+            switch indexPath.row {
+            case Setting.name.rawValue:
+                guard let cell = self.tableView.dequeueReusableCell(
+                    withIdentifier: SCConstants.identifier.nameSettingViewCell.rawValue
+                ) as? SCTableViewCell else {
+                    return SCTableViewCell()
+                }
+
+                cell.primaryLabel.text = SCStrings.primaryLabel.name.rawValue
+
+                if let name = self.mutableCustomCategory.getName() {
+                    cell.rightLabel.text = name
+                    cell.rightLabel.isHidden = false
+                    cell.rightImage.isHidden = true
+                } else {
+                    cell.rightImage.isHidden = false
+                    cell.rightLabel.isHidden = true
+                }
+
+                return cell
+            case Setting.emoji.rawValue:
+                guard let cell = self.tableView.dequeueReusableCell(
+                    withIdentifier: SCConstants.identifier.emojiSettingViewCell.rawValue
+                    ) as? SCTableViewCell else {
+                        return SCTableViewCell()
+                }
+
+                cell.primaryLabel.text = SCStrings.primaryLabel.emoji.rawValue
+                cell.emojiDelegate = self
+                cell.setInputView(inputType: .emoji)
+
+                if let emoji = self.mutableCustomCategory.getEmoji() {
+                    cell.rightTextView.text = emoji
+                    cell.rightTextView.isHidden = false
+                    cell.rightImage.isHidden = true
+                } else {
+                    cell.rightImage.isHidden = false
+                    cell.rightTextView.isHidden = true
+                }
+
+                if SCStates.customCategoryWordListState == .editingEmoji {
+                    cell.rightImage.isHidden = true
+                    cell.rightTextView.isHidden = false
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                        cell.rightTextView.becomeFirstResponder()
+                    })
+                }
+                
+                return cell
+            default:
+                return SCTableViewCell()
+            }
+        case Section.wordList.rawValue:
+            switch indexPath.row {
+            case WordList.topCell.rawValue:
+                // Top Cell Customization
+                switch SCStates.customCategoryWordListState {
+                case .nonEditing, .editingExistingWord, .editingCategoryName, .editingEmoji:
+                    guard let cell = self.tableView.dequeueReusableCell(
+                        withIdentifier: SCConstants.identifier.addWordViewCell.rawValue
+                    ) as? SCTableViewCell else {
+                        return SCTableViewCell()
+                    }
+
+                    cell.primaryLabel.text = SCStrings.primaryLabel.addWord.rawValue
+                    cell.indexPath = indexPath
+                    
+                    return cell
+                case .addingNewWord:
+                    // Custom top view cell with text field as first responder
+                    guard let cell = self.tableView.dequeueReusableCell(
+                        withIdentifier: SCConstants.identifier.wordViewCell.rawValue
+                    ) as? SCTextFieldViewCell else {
+                        return SCTableViewCell()
+                    }
+
+                    cell.delegate = self
+                    cell.indexPath = indexPath
+                    cell.showButton()
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                        cell.textField.isUserInteractionEnabled = true
+                        cell.textField.becomeFirstResponder()
+                    })
+
+                    return cell
+                }
+            default:
+                guard let cell = self.tableView.dequeueReusableCell(
+                    withIdentifier: SCConstants.identifier.wordViewCell.rawValue
+                    ) as? SCTextFieldViewCell else {
+                        return SCTableViewCell()
+                }
+
+                cell.delegate = self
+                cell.indexPath = indexPath
+
+                // Hide remove button when adding new words
+                if SCStates.customCategoryWordListState == .addingNewWord {
+                    cell.hideButton()
+                } else {
+                    cell.showButton()
+                }
+
+                let index = self.getSafeIndex(index: indexPath.row)
+                cell.textField.text = self.mutableCustomCategory.getWordList()[index]
+                cell.textField.isUserInteractionEnabled = false
+
+                return cell
+            }
+        case Section.deleteCategory.rawValue:
+            guard let cell = self.tableView.dequeueReusableCell(
+                withIdentifier: SCConstants.identifier.deleteCategoryViewCell.rawValue
+                ) as? SCTableViewCell else {
+                    return SCTableViewCell()
+            }
+
+            cell.primaryLabel.text = SCStrings.primaryLabel.deleteCategory.rawValue
+            cell.indexPath = indexPath
+
+            return cell
+        default:
+            return SCTableViewCell()
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case Section.settings.rawValue:
+            switch indexPath.row {
+            case Setting.name.rawValue:
+                self.changeStateTo(state: .editingCategoryName)
+                self.presentEditCategoryNameTextFieldAlert()
+            case Setting.emoji.rawValue:
+                self.changeStateTo(state: .editingEmoji)
+            default:
+                break
+            }
+        case Section.wordList.rawValue:
+            switch indexPath.row {
+            case WordList.topCell.rawValue:
+                self.changeStateTo(state: .addingNewWord)
+            default:
+                // Edit an existing word using a text field alert
+                self.changeStateTo(state: .editingExistingWord)
+                self.presentEditWordTextFieldAlert(indexPath: indexPath)
+            }
+        case Section.deleteCategory.rawValue:
+            if self.existingCustomCategory {
+                self.onDeleteCategory()
+            }
+        default:
+            break
+        }
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.tableView.contentOffset.y > 0 {
+            if self.scrolled {
+                return
+            }
+            self.scrolled = true
+        } else {
+            if !self.scrolled {
+                return
+            }
+            self.scrolled = false
+        }
+        
+        if !self.inputMode {
+            self.reloadView()
+        }
+    }
+}
+
+// MARK: Alert Controllers
+extension SCCustomCategoryModalViewController {
+    fileprivate func showDuplicateWordAlert() {
+        self.changeStateTo(state: .nonEditing)
+        self.presentAlert(
+            title: SCStrings.header.duplicateWord.rawValue,
+            message: SCStrings.message.duplicateWord.rawValue
+        )
+    }
+
+    fileprivate func textFieldConfirmHandler(alertController: UIAlertController,
+                                    verificationHandler: ((String) -> Bool)?,
+                                    successHandler: ((String) -> Void)?) {
+        self.changeStateTo(state: .nonEditing)
+
+        if let text = alertController.textFields?[0].text {
+            if let verificationHandler = verificationHandler {
+                if !verificationHandler(text) {
+                    return
+                }
+            }
+
+            if let successHandler = successHandler {
+                successHandler(text)
+            }
+        }
+
+        alertController.dismiss(animated: false, completion: nil)
+    }
+
+    fileprivate func presentAlert(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        let confirmAction = UIAlertAction(
+            title: SCStrings.button.ok.rawValue,
+            style: .default,
+            handler: { (action: UIAlertAction) in
+                alertController.dismiss(animated: false, completion: nil)
+            }
+        )
+        alertController.addAction(confirmAction)
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil
+        )
+    }
+
+    fileprivate func presentTextFieldAlert(title: String,
+                                           message: String?,
+                                           textFieldHandler: ((UITextField) -> Void)?,
+                                           verificationHandler: ((String) -> Bool)?,
+                                           successHandler: ((String) -> Void)?) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        alertController.addTextField(configurationHandler: textFieldHandler)
+
+        let cancelAction = UIAlertAction(
+            title: SCStrings.button.cancel.rawValue,
+            style: .cancel,
+            handler: { (action: UIAlertAction) in
+                self.changeStateTo(state: .nonEditing)
+                alertController.dismiss(animated: false, completion: nil)
+            }
+        )
+        let confirmAction = UIAlertAction(
+            title: SCStrings.button.ok.rawValue,
+            style: .default,
+            handler: { (action: UIAlertAction) in
+                self.textFieldConfirmHandler(
+                    alertController: alertController,
+                    verificationHandler: verificationHandler,
+                    successHandler: successHandler
+                )
+            }
+        )
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil
+        )
+    }
+
+    fileprivate func presentConfirmation(title: String, message: String, confirmHandler: ((Void) -> Void)?) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+
+        let cancelAction = UIAlertAction(
+            title: SCStrings.button.cancel.rawValue,
+            style: .cancel,
+            handler: { (action: UIAlertAction) in
+                self.changeStateTo(state: .nonEditing)
+                alertController.dismiss(animated: false, completion: nil)
+            }
+        )
+        let confirmAction = UIAlertAction(
+            title: SCStrings.button.confirm.rawValue,
+            style: .default,
+            handler: { (action: UIAlertAction) in
+                self.changeStateTo(state: .nonEditing)
+                if let confirmHandler = confirmHandler {
+                    confirmHandler()
+                }
+            }
+        )
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil
+        )
+    }
+
+    fileprivate func presentEditCategoryNameTextFieldAlert() {
+        self.presentTextFieldAlert(
+            title: SCStrings.header.categoryName.rawValue,
+            message: SCStrings.message.enterCategoryName.rawValue,
+            textFieldHandler: { (textField) in
+                if let name = self.mutableCustomCategory.getName() {
+                    textField.text = name
+                }
+            },
+            verificationHandler: { (category) in
+                if category.characters.count == 0 {
+                    self.presentAlert(
+                        title: SCStrings.header.emptyCategory.rawValue,
+                        message: SCStrings.message.emptyCategoryName.rawValue
+                    )
+                    return false
+                } else if ConsolidatedCategories.instance.categoryExists(category: category) {
+                    // Ignore if the category name is same as the existing category name passed into the controller
+                    if self.existingCustomCategory && self.nonMutableCustomCategory?.getName() == category {
+                        return true
+                    }
+
+                    self.presentAlert(
+                        title: SCStrings.header.categoryExists.rawValue,
+                        message: SCStrings.message.categoryExists.rawValue
+                    )
+                    return false
+                }
+
+                return true
+            },
+            successHandler: { (name) in
+                self.mutableCustomCategory.setName(name: name)
+            }
+        )
+    }
+
+    fileprivate func presentEditWordTextFieldAlert(indexPath: IndexPath) {
+        self.presentTextFieldAlert(
+            title: SCStrings.header.editWord.rawValue,
+            message: nil,
+            textFieldHandler: { (textField) in
+                let index = self.getSafeIndex(index: indexPath.row)
+                let word = self.mutableCustomCategory.getWordList()[index]
+                textField.text = word
+            },
+            verificationHandler: { (word) in
+                let index = self.getSafeIndex(index: indexPath.row)
+
+                if word.characters.count == 0 {
+                    self.presentAlert(
+                        title: SCStrings.header.emptyWord.rawValue,
+                        message: SCStrings.message.emptyWord.rawValue
+                    )
+                    return false
+                } else if self.mutableCustomCategory.getWordList()[index] != word && self.mutableCustomCategory.wordExists(word: word) {
+                    self.showDuplicateWordAlert()
+                    return false
+                }
+
+                return true
+            },
+            successHandler: { (word) in
+                self.processWord(word: word, indexPath: indexPath)
+            }
+        )
+    }
+}

@@ -5,8 +5,14 @@ class SCConstants {
         case bestRecord = "best-record"
         case card = "card"
         case cards = "cards"
+        case categories = "categories"
+        case categoryEmoji = "category-emoji"
+        case categoryName = "category-name"
+        case categoryTypes = "category-types"
+        case categoryWordList = "category-word-list"
         case clue = "clue"
         case correct = "correct"
+        case emojis = "emojis"
         case eventType = "event-type"
         case hasRead = "has-read"       // Local coding only
         case leader = "leader"
@@ -20,6 +26,7 @@ class SCConstants {
         case name = "name"
         case numberOfWords = "number-of-words"
         case parameters = "parameters"
+        case persistentSelection = "persistent-selection"      // Local coding only
         case players = "players"
         case ready = "ready"
         case score = "score"
@@ -29,6 +36,7 @@ class SCConstants {
         case uuid = "uuid"
         case winningTeam = "winning-team"
         case word = "word"
+        case wordCounts = "word-counts"
     }
 
     enum constant: Int {
@@ -45,7 +53,12 @@ class SCConstants {
     enum identifier: String {
         case accessCode = "access-code"
         case accessibilityToggleViewCell = "accessibility-toggle-view-cell"
+        case addWordViewCell = "add-word-view-cell"
+        case customCategory = "custom-category"
+        case customCategoryViewController = "custom-category-view-controller"
+        case deleteCategoryViewCell = "delete-category-view-cell"
         case disclosureViewCell = "disclosure-view-cell"
+        case emojiSettingViewCell = "emoji-setting-view-cell"
         case gameRoom = "game-room"
         case gameRoomViewCell = "game-room-view-cell"
         case helpView = "help-view"
@@ -53,26 +66,57 @@ class SCConstants {
         case mainMenu = "main-menu"
         case mainMenuModal = "main-menu-modal"
         case minigameToggleViewCell = "minigame-toggle-view-cell"
+        case multilineToggleViewCell = "multi-line-toggle-view-cell"
+        case nameSettingViewCell = "name-setting-view-cell"
         case nightModeToggleViewCell = "night-mode-toggle-view-cell"
+        case persistentSelectionToggleViewCell = "persistent-selection-toggle-view-cell"
+        case pregameModalContainerView = "pregame-modal-container-view"
+        case pregameModalMainView = "pregame-modal-main-view"
+        case pregameModalSecondaryView = "pregame-modal-secondary-view"
+        case pregameModalPageViewController = "pregame-modal-page-view-controller"
         case playerName = "player-name"
-        case pregameModal = "pregame-modal"
         case pregameRoom = "pregame-room"
         case pregameRoomTeamEmptyStateViewCell = "pregame-room-team-empty-state-view-cell"
         case pregameRoomViewCell = "pregame-room-view-cell"
         case releaseNotesViewCell = "release-notes-view-cell"
-        case statisticsViewCell = "statistics-view-cell"
         case sectionHeaderCell = "section-header-view-cell"
+        case selectAllToggleViewCell = "select-all-toggle-view-cell"
         case settings = "settings"
+        case singleLineToggleViewCell = "single-line-toggle-view-cell"
+        case statisticsViewCell = "statistics-view-cell"
         case timelineModal = "timeline-modal"
         case timelineViewCell = "timeline-view-cell"
-        case timerToggleViewCell = "timer-toggle-view-cell"
+        case timerSettingViewCell = "timer-setting-view-cell"
         case versionViewCell = "version-view-cell"
+        case wordViewCell = "word-view-cell"
+    }
+
+    enum images: String {
+        case shuffle = "Shuffle"
+        case markAsRead = "Mark-As-Read"
+    }
+
+    enum nibs: String {
+        case multilineToggleViewCell = "SCMultilineToggleViewCell"
+        case textFieldViewCell = "SCTextFieldViewCell"
+        case toggleViewCell = "SCToggleViewCell"
     }
 
     enum notificationKey: String {
-        case updateCollectionView = "update-collection-view"
+        case customCategory = "custom-category-view"
+        case customCategoryName = "custom-category-name"
+        case disableSwipeGestureRecognizer = "disable-swipe-gesture-recognizer"
+        case dismissModal = "dismiss-modal"
+        case enableSwipeGestureRecognizer = "enable-swipe-gesture-recognizer"
+        case intent = "intent"
         case minigameGameOver = "minigame-game-over"
+        case pregameModal = "pregame-modal"
         case timelineUpdated = "timeline-updated"
+        case updateCollectionView = "update-collection-view"
+    }
+
+    enum storyboards: String {
+        case main = "Spycodes"
     }
 
     enum tag: Int {
@@ -82,6 +126,7 @@ class SCConstants {
         case modalBlurView = 5
         case modalPeekBlurView = 6
         case sectionHeaderBlurView = 7
+        case navigationBarBlurView = 8
     }
 
     enum url: String {
@@ -97,6 +142,10 @@ class SCConstants {
 
     enum userDefaults: String {
         case accessibility = "accessibility"
+        case customCategories = "custom-categories"
         case nightMode = "night-mode"
+        case persistentSelection = "persistent-selection"
+        case selectedCategories = "selected-categories"
+        case selectedCustomCategories = "selected-custom-categories"
     }
 }

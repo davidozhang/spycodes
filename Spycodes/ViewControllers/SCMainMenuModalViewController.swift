@@ -7,24 +7,48 @@ protocol SCMainMenuModalViewControllerDelegate: class {
 class SCMainMenuModalViewController: SCModalViewController {
     weak var delegate: SCMainMenuModalViewControllerDelegate?
 
-    enum Section: Int {
+    fileprivate enum Section: Int {
         case about = 0
         case customize = 1
         case more = 2
+
+        static var count: Int {
+            var count = 0
+            while let _ = Section(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
     }
 
-    enum CustomSetting: Int {
+    fileprivate enum CustomSetting: Int {
         case nightMode = 0
         case accessibility = 1
+
+        static var count: Int {
+            var count = 0
+            while let _ = CustomSetting(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
     }
 
-    enum Link: Int {
+    fileprivate enum Link: Int {
         case support = 0
         case reviewApp = 1
         case website = 2
         case releaseNotes = 3
         case github = 4
         case icons8 = 5
+
+        static var count: Int {
+            var count = 0
+            while let _ = Link(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
     }
 
     fileprivate let sectionLabels: [Section: String] = [
@@ -65,6 +89,7 @@ class SCMainMenuModalViewController: SCModalViewController {
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
+        self.registerTableViewCells()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +121,20 @@ class SCMainMenuModalViewController: SCModalViewController {
 
         super.onDismissal()
     }
+
+    fileprivate func registerTableViewCells() {
+        let toggleViewCellNib = UINib(nibName: SCConstants.nibs.toggleViewCell.rawValue, bundle: nil)
+
+        self.tableView.register(
+            toggleViewCellNib,
+            forCellReuseIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
+        )
+
+        self.tableView.register(
+            toggleViewCellNib,
+            forCellReuseIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
+        )
+    }
 }
 
 //   _____      _                 _
@@ -107,7 +146,7 @@ class SCMainMenuModalViewController: SCModalViewController {
 // MARK: UITableViewDelegate, UITableViewDataSource
 extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionLabels.count
+        return Section.count
     }
 
     func tableView(_ tableView: UITableView,
@@ -127,7 +166,7 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
             sectionHeader.primaryLabel.text = sectionLabels[section]
         }
 
-        if self.tableView.contentOffset.y > 0 {
+        if self.scrolled {
             sectionHeader.showBlurBackground()
         } else {
             sectionHeader.hideBlurBackground()
@@ -140,11 +179,11 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
         case Section.customize.rawValue:
-            return customizeLabels.count
+            return CustomSetting.count
         case Section.about.rawValue:
             return 1
         case Section.more.rawValue:
-            return disclosureLabels.count
+            return Link.count
         default:
             return 0
         }
@@ -162,6 +201,7 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
                     return SCTableViewCell()
                 }
 
+                cell.synchronizeToggle()
                 cell.primaryLabel.text = self.customizeLabels[.nightMode]
                 cell.delegate = self
 
@@ -173,6 +213,7 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
                     return SCTableViewCell()
                 }
 
+                cell.synchronizeToggle()
                 cell.primaryLabel.text = self.customizeLabels[.accessibility]
                 cell.delegate = self
 
@@ -257,12 +298,14 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
                 return
             }
             self.scrolled = true
+            self.disableSwipeGestureRecognizer()
         } else {
             if !self.scrolled {
                 return
             }
 
             self.scrolled = false
+            self.enableSwipeGestureRecognizer()
         }
 
         self.tableView.reloadData()
@@ -275,12 +318,12 @@ extension SCMainMenuModalViewController: SCToggleViewCellDelegate {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
-                SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
+                SCLocalStorageManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
                 super.updateModalAppearance()
                 self.tableView.reloadData()
                 self.delegate?.onNightModeToggleChanged()
             case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
-                SCSettingsManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
+                SCLocalStorageManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
             default:
                 break
             }

@@ -6,7 +6,7 @@ class SCAppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        SCSettingsManager.instance.retrieveLocalSettings()
+        SCLocalStorageManager.instance.retrieveLocalSettings()
 
         application.isIdleTimerDisabled = true
         return true
@@ -14,7 +14,9 @@ class SCAppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillResignActive(_ application: UIApplication) {}
 
-    func applicationDidEnterBackground(_ application: UIApplication) {}
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        UserDefaults.standard.synchronize()
+    }
 
     func applicationWillEnterForeground(_ application: UIApplication) {}
 

@@ -6,11 +6,9 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sectionLabels = [
-        SCStrings.section.teamRed.rawValue,
-        SCStrings.section.teamBlue.rawValue
+        Team.red: SCStrings.section.teamRed.rawValue,
+        Team.blue: SCStrings.section.teamBlue.rawValue
     ]
-
-    fileprivate var readyButtonState: ReadyButtonState = .notReady
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
@@ -23,10 +21,10 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     @IBAction func onReadyButtonTapped(_ sender: Any) {
-        if readyButtonState != .ready {
-            readyButtonState = .ready
+        if SCStates.readyButtonState != .ready {
+            SCStates.readyButtonState = .ready
         } else {
-            readyButtonState = .notReady
+            SCStates.readyButtonState = .notReady
         }
 
         self.updateReadyButton()
@@ -108,6 +106,24 @@ class SCPregameRoomViewController: SCViewController {
         self.resetReadyButton()
 
         Timeline.instance.reset()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(SCPregameRoomViewController.showCustomCategoryView),
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.customCategory.rawValue
+            ),
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(SCPregameRoomViewController.showPregameModalView),
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.pregameModal.rawValue
+            ),
+            object: nil
+        )
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -119,6 +135,22 @@ class SCPregameRoomViewController: SCViewController {
             self.broadcastTimer?.invalidate()
         }
         self.refreshTimer?.invalidate()
+
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.customCategory.rawValue
+            ),
+            object: nil
+        )
+
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(
+                rawValue: SCConstants.notificationKey.pregameModal.rawValue
+            ),
+            object: nil
+        )
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -135,13 +167,39 @@ class SCPregameRoomViewController: SCViewController {
     // MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super._prepareForSegue(segue, sender: sender)
+        self.resetReadyButton()
 
-        // All segues identified here should be forward direction only
-        if let vc = segue.destination as? SCPregameModalViewController {
-            vc.delegate = self
+        if let userInfo = self.userInfo {
+            if let nvc = segue.destination as? UINavigationController,
+               let vc = nvc.topViewController as? SCCustomCategoryModalViewController {
+                if let customCategoryName = userInfo[SCConstants.notificationKey.customCategoryName.rawValue] as? String {
+                    vc.setCustomCategoryFromString(category: customCategoryName)
+                }
+            }
+
+            self.userInfo = nil
         }
     }
 
+    func showCustomCategoryView(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            self.userInfo = userInfo
+        }
+
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.customCategory.rawValue,
+            sender: self
+        )
+    }
+
+    func showPregameModalView() {
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.pregameModalContainerView.rawValue,
+            sender: self
+        )
+    }
+
+    // MARK: SCViewController Overrides
     override func applicationDidBecomeActive() {
         self.animateReadyButtonIfNeeded()
     }
@@ -155,11 +213,7 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     override func swipeUp() {
-        self.resetReadyButton()
-        self.performSegue(
-            withIdentifier: SCConstants.identifier.pregameModal.rawValue,
-            sender: self
-        )
+        self.showPregameModalView()
     }
 
     // MARK: Private
@@ -181,6 +235,7 @@ class SCPregameRoomViewController: SCViewController {
         SCMultipeerManager.instance.broadcast(Room.instance)
         SCMultipeerManager.instance.broadcast(GameMode.instance)
         SCMultipeerManager.instance.broadcast(Timer.instance)
+        SCMultipeerManager.instance.broadcast(ConsolidatedCategories.instance)
     }
 
     fileprivate func broadcastEvent(_ eventType: Event.EventType) {
@@ -188,7 +243,7 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     fileprivate func updateReadyButton() {
-        if self.readyButtonState == .notReady {
+        if SCStates.readyButtonState == .notReady {
             self.broadcastEvent(.cancel)
             UIView.performWithoutAnimation {
                 self.readyButton.setTitle("Ready", for: .normal)
@@ -205,12 +260,12 @@ class SCPregameRoomViewController: SCViewController {
         self.tableView.reloadData()
 
         // Only set ready status locally
-        let isReady = self.readyButtonState == .ready
+        let isReady = SCStates.readyButtonState == .ready
         Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.setIsReady(isReady)
     }
 
     fileprivate func resetReadyButton() {
-        self.readyButtonState = .notReady
+        SCStates.readyButtonState = .notReady
         self.updateReadyButton()
     }
 
@@ -295,7 +350,7 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     fileprivate func animateReadyButtonIfNeeded() {
-        if self.readyButtonState == .ready {
+        if SCStates.readyButtonState == .ready {
             return
         }
 
@@ -375,6 +430,8 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
                     Room.instance.getPlayerWithUUID(uuid)?.setIsReady(false)
                 }
             }
+        case let synchronizedObject as ConsolidatedCategories:
+            ConsolidatedCategories.instance = synchronizedObject
         default:
             break
         }
@@ -388,6 +445,16 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
     }
 }
 
+// MARK: SCSectionHeaderViewCellDelegate
+extension SCPregameRoomViewController: SCSectionHeaderViewCellDelegate {
+    func onSectionHeaderButtonTapped() {
+        Room.instance.autoAssignLeaderForTeam(
+            Player.instance.getTeam(),
+            shuffle: true
+        )
+    }
+}
+
 // MARK: SCPregameRoomViewCellDelegate
 extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
     func teamUpdatedForPlayerWithUUID(_ uuid: String, newTeam: Team) {
@@ -396,15 +463,6 @@ extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
             Room.instance.removePlayerWithUUID(uuid)
             Room.instance.addPlayer(player, team: newTeam)
             SCMultipeerManager.instance.broadcast(Room.instance)
-        }
-    }
-}
-
-// MARK: SCPregameModalViewControllerDelegate
-extension SCPregameRoomViewController: SCPregameModalViewControllerDelegate {
-    func onNightModeToggleChanged() {
-        DispatchQueue.main.async {
-            super.updateAppearance()
         }
     }
 }
@@ -432,8 +490,20 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                 return nil
         }
 
+        sectionHeader.delegate = self
+        sectionHeader.setButtonImage(name: SCConstants.images.shuffle.rawValue)
+
         sectionHeader.primaryLabel.font = SCFonts.regularSizeFont(.regular)
-        sectionHeader.primaryLabel.text = self.sectionLabels[section]
+
+        if let team = Team(rawValue: section) {
+            sectionHeader.primaryLabel.text = self.sectionLabels[team]
+
+            if team == Player.instance.getTeam() {
+                sectionHeader.showButton()
+            } else {
+                sectionHeader.hideButton()
+            }
+        }
 
         if self.tableView.contentOffset.y > 0 {
             sectionHeader.showBlurBackground()

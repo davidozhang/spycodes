@@ -36,16 +36,47 @@ class SCToggleViewCell: SCTableViewCell {
         if let reuseIdentifier = self.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
-                toggleSwitch.isOn = SCSettingsManager.instance.isLocalSettingEnabled(.nightMode)
+                toggleSwitch.isOn = SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode)
             case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
-                toggleSwitch.isOn = SCSettingsManager.instance.isLocalSettingEnabled(.accessibility)
+                toggleSwitch.isOn = SCLocalStorageManager.instance.isLocalSettingEnabled(.accessibility)
             case SCConstants.identifier.minigameToggleViewCell.rawValue:
                 toggleSwitch.isOn = GameMode.instance.getMode() == .miniGame
-            case SCConstants.identifier.timerToggleViewCell.rawValue:
-                toggleSwitch.isOn = Timer.instance.isEnabled()
+            case SCConstants.identifier.selectAllToggleViewCell.rawValue:
+                let allCategoriesSelected = ConsolidatedCategories.instance.allCategoriesSelected()
+                toggleSwitch.isOn = allCategoriesSelected
+
+                if allCategoriesSelected {
+                    self.setEnabled(enabled: false)
+                } else {
+                    self.setEnabled(enabled: true)
+                }
+            case SCConstants.identifier.persistentSelectionToggleViewCell.rawValue:
+                toggleSwitch.isOn = SCLocalStorageManager.instance.isLocalSettingEnabled(.persistentSelection)
             default:
+                if Player.instance.isHost() {
+                    // Retrieve from local data
+                    if let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {
+                        toggleSwitch.isOn = ConsolidatedCategories.instance.isCategorySelected(category: category)
+                    } else if let category = ConsolidatedCategories.instance.getCustomCategoryFromString(string: reuseIdentifier) {
+                        toggleSwitch.isOn = ConsolidatedCategories.instance.isCustomCategorySelected(category: category)
+                    }
+                } else {
+                    // Retrieve from synchronized data
+                    let categoryString = reuseIdentifier
+                    toggleSwitch.isOn = ConsolidatedCategories.instance.isSynchronizedCategoryStringSelected(string: categoryString)
+                }
+
                 break
             }
+        }
+    }
+
+    func setEnabled(enabled: Bool) {
+        toggleSwitch.isEnabled = enabled
+        if enabled {
+            self.alpha = 1.0
+        } else {
+            self.alpha = 0.4
         }
     }
 

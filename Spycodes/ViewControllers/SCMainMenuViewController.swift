@@ -44,10 +44,12 @@ class SCMainMenuViewController: SCViewController {
         self.unwindableIdentifier = SCConstants.identifier.mainMenu.rawValue
         self.isRootViewController = true
 
+        ConsolidatedCategories.instance.reset()
         Player.instance.reset()
         GameMode.instance.reset()
         Statistics.instance.reset()
         Room.instance.reset()
+        SCStates.reset()
     }
 
     override func didReceiveMemoryWarning() {

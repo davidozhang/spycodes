@@ -4,7 +4,7 @@ class CardCollection: NSObject, NSCoding {
     static var instance = CardCollection()
 
     fileprivate var keyObject = Key()
-    fileprivate let words = SCWordList.getShuffledWords()
+    fileprivate let words = SCWordBank.getShuffledWords()
 
     fileprivate var cards = [Card]()
     fileprivate var key = [Team]()

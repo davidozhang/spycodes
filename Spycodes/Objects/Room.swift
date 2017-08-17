@@ -88,11 +88,11 @@ class Room: NSObject, NSCoding {
     // MARK: In-place Modification
     func applyRanking() {
         if self.getLeaderUUIDForTeam(.red) == nil {
-            self.autoAssignLeaderForTeam(.red)
+            self.autoAssignLeaderForTeam(.red, shuffle: false)
         }
 
         if self.getLeaderUUIDForTeam(.blue) == nil {
-            self.autoAssignLeaderForTeam(.blue)
+            self.autoAssignLeaderForTeam(.blue, shuffle: false)
         }
 
         guard self.players.count == SCConstants.constant.numberOfTeams.rawValue else {
@@ -218,13 +218,29 @@ class Room: NSObject, NSCoding {
     }
 
     // MARK: Modifiers
-    func autoAssignLeaderForTeam(_ team: Team) {
+    func autoAssignLeaderForTeam(_ team: Team, shuffle: Bool) {
         guard team.rawValue < self.players.count else {
             return
         }
 
         if self.players[team.rawValue].count > 0 {
-            self.players[team.rawValue][0].setIsLeader(true)
+            if let currentLeaderUUID = self.getLeaderUUIDForTeam(team) {
+                self.getPlayerWithUUID(currentLeaderUUID)?.setIsLeader(false)
+            }
+
+            if !shuffle {
+                // Assign first player as leader
+                self.players[team.rawValue][0].setIsLeader(true)
+            } else {
+                // Assign random player index as leader between 1 to team size - 1
+                if self.players[team.rawValue].count == 1 {
+                    return
+                }
+
+                let randomNumber = arc4random_uniform(UInt32(self.players[team.rawValue].count - 1)) + 1
+                self.players[team.rawValue][Int(randomNumber)].setIsLeader(true)
+                SCMultipeerManager.instance.broadcast(self)
+            }
         }
     }
 

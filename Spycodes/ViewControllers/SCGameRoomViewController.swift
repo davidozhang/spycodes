@@ -10,13 +10,12 @@ class SCGameRoomViewController: SCViewController {
     fileprivate let timerViewDefaultHeight: CGFloat = 25
     fileprivate let bottomBarViewExtendedHeight: CGFloat = 121
 
-    fileprivate var actionButtonState: ActionButtonState = .endRound
-
     fileprivate var buttonAnimationStarted = false
     fileprivate var textFieldAnimationStarted = false
     fileprivate var leaderIsEditing = false
 
     fileprivate var shouldUpdateCollectionView = false
+    fileprivate var showAnswer = false
 
     fileprivate var broadcastTimer: Foundation.Timer?
     fileprivate var refreshTimer: Foundation.Timer?
@@ -50,10 +49,21 @@ class SCGameRoomViewController: SCViewController {
     }
 
     @IBAction func onActionButtonTapped(_ sender: AnyObject) {
-        if actionButtonState == .confirm {
+        switch SCStates.actionButtonState {
+        case .confirm:
             self.didConfirm()
-        } else if actionButtonState == .endRound {
+        case .endRound:
             self.didEndRound(fromTimerExpiry: false)
+        case .showAnswer:
+            self.showAnswer = true
+            self.updateActionButtonStateTo(state: .hideAnswer)
+            self.collectionView.reloadData()
+        case .hideAnswer:
+            self.showAnswer = false
+            self.updateActionButtonStateTo(state: .showAnswer)
+            self.collectionView.reloadData()
+        default:
+            break
         }
     }
 
@@ -151,7 +161,7 @@ class SCGameRoomViewController: SCViewController {
 
         self.bottomBarView.layoutIfNeeded()
 
-        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+        if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             self.topBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
             self.bottomBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         } else {
@@ -244,6 +254,8 @@ class SCGameRoomViewController: SCViewController {
                     height: 0
                 )
             }
+        } else {
+            super._prepareForSegue(segue, sender: self)
         }
     }
 
@@ -306,15 +318,21 @@ class SCGameRoomViewController: SCViewController {
     }
 
     fileprivate func dismissPresentedViewIfNeeded(completion: (() -> Void)?) {
-        if let _ = self.presentedViewController {
-            self.presentedViewController?.dismiss(animated: true, completion: {
-                if let completion = completion {
-                    super.hideDimView()
-                    completion()
-                }
-            })
+        if let presentedViewController = self.presentedViewController {
+            switch presentedViewController {
+            case _ as UIAlertController:
+                // Don't dismiss already presented alert controller
+                return
+            default:
+                self.presentedViewController?.dismiss(animated: true, completion: {
+                    if let completion = completion {
+                        super.hideDimView()
+                        completion()
+                    }
+                })
 
-            return
+                return
+            }
         }
 
         if let completion = completion {
@@ -414,7 +432,7 @@ class SCGameRoomViewController: SCViewController {
 
                     self.startTextFieldAnimations()
 
-                    self.actionButtonState = .confirm
+                    SCStates.actionButtonState = .confirm
                     self.clueTextField.isEnabled = true
                     self.numberOfWordsTextField.isEnabled = true
                 } else {
@@ -475,8 +493,13 @@ class SCGameRoomViewController: SCViewController {
         })
     }
 
+    fileprivate func updateActionButtonStateTo(state: ActionButtonState) {
+        SCStates.actionButtonState = state
+        self.updateActionButton()
+    }
+
     fileprivate func updateActionButton() {
-        switch self.actionButtonState {
+        switch SCStates.actionButtonState {
         case .confirm:
             UIView.performWithoutAnimation {
                 self.actionButton.setTitle(SCStrings.button.confirm.rawValue, for: UIControlState())
@@ -527,6 +550,18 @@ class SCGameRoomViewController: SCViewController {
             }
             self.stopButtonAnimations()
             self.disableActionButton()
+        case .showAnswer:
+            UIView.performWithoutAnimation {
+                self.actionButton.setTitle(SCStrings.button.showAnswer.rawValue, for: UIControlState())
+            }
+            self.stopButtonAnimations()
+            self.enableActionButton()
+        case .hideAnswer:
+            UIView.performWithoutAnimation {
+                self.actionButton.setTitle(SCStrings.button.hideAnswer.rawValue, for: UIControlState())
+            }
+            self.stopButtonAnimations()
+            self.enableActionButton()
         }
     }
 
@@ -545,7 +580,7 @@ class SCGameRoomViewController: SCViewController {
 
         self.clueTextField.isEnabled = false
         self.numberOfWordsTextField.isEnabled = false
-        self.actionButtonState = .endRound
+        SCStates.actionButtonState = .endRound
 
         Round.instance.setClue(self.clueTextField.text)
         Round.instance.setNumberOfWords(self.numberOfWordsTextField.text)
@@ -630,23 +665,23 @@ class SCGameRoomViewController: SCViewController {
                     self.numberOfWordsTextField.resignFirstResponder()
                 }
 
-                self.displayAlert(title: title, reason: reason, onDismissal: onDismissal)
+                self.displayEndGameAlert(title: title, reason: reason, onDismissal: onDismissal)
             })
         }
     }
 
-    func displayAlert(title: String, reason: String, onDismissal: ((Void) -> Void)?) {
+    func displayEndGameAlert(title: String, reason: String, onDismissal: ((Void) -> Void)?) {
         let alertController = UIAlertController(
             title: title,
             message: reason,
             preferredStyle: .alert
         )
         let returnAction = UIAlertAction(
-            title: SCStrings.button.goBack.rawValue,
+            title: SCStrings.button.returnToPregameRoom.rawValue,
             style: .default,
             handler: { (action: UIAlertAction) in
                 super.performUnwindSegue(false, completionHandler: nil)
-        }
+            }
         )
         let dismissAction = UIAlertAction(
             title: SCStrings.button.dismiss.rawValue,
@@ -667,14 +702,19 @@ class SCGameRoomViewController: SCViewController {
     }
 
     func onAbortDismissal() {
-        self.actionButtonState = .gameAborted
+        SCStates.actionButtonState = .gameAborted
         Timeline.instance.addEventIfNeeded(
             event: Event(type: .gameAborted, parameters: nil)
         )
     }
 
     func onGameOverDismissal() {
-        self.actionButtonState = .gameOver
+        if Player.instance.isLeader() {
+            SCStates.actionButtonState = .gameOver
+        } else {
+            SCStates.actionButtonState = .showAnswer
+        }
+
         Timeline.instance.addEventIfNeeded(
             event: Event(type: .gameOver, parameters: nil)
         )
@@ -884,7 +924,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
         cell.contentView.backgroundColor = .clear
 
-        if Player.instance.isLeader() {
+        if Player.instance.isLeader() || self.showAnswer {
             if cardAtIndex.getTeam() == .neutral {
                 cell.wordLabel.textColor = .spycodesGrayColor()
             }
@@ -892,7 +932,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             cell.contentView.backgroundColor = .colorForTeam(cardAtIndex.getTeam())
 
             let attributedString = NSMutableAttributedString(
-                string: SCSettingsManager.instance.isLocalSettingEnabled(.accessibility) ?
+                string: SCLocalStorageManager.instance.isLocalSettingEnabled(.accessibility) ?
                     cardAtIndex.getWord() + " " + cardAtIndex.getAccessibilityLabel() :
                     cardAtIndex.getWord()
             )
@@ -900,7 +940,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
             if cardAtIndex.isSelected() {
                 cell.alpha = 0.4
 
-                if SCSettingsManager.instance.isLocalSettingEnabled(.accessibility) {
+                if SCLocalStorageManager.instance.isLocalSettingEnabled(.accessibility) {
                     attributedString.addAttribute(
                         NSStrikethroughStyleAttributeName,
                         value: 2,
@@ -917,7 +957,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 
         if cardAtIndex.isSelected() {
             let attributedString = NSMutableAttributedString(
-                string: SCSettingsManager.instance.isLocalSettingEnabled(.accessibility) ?
+                string: SCLocalStorageManager.instance.isLocalSettingEnabled(.accessibility) ?
                     cardAtIndex.getWord() + " " + cardAtIndex.getAccessibilityLabel() :
                     cardAtIndex.getWord()
             )

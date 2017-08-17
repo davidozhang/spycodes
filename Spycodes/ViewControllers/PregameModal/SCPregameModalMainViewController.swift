@@ -1,42 +1,53 @@
 import UIKit
 
-protocol SCPregameModalViewControllerDelegate: class {
-    func onNightModeToggleChanged()
-}
-
-class SCPregameModalViewController: SCModalViewController {
-    weak var delegate: SCPregameModalViewControllerDelegate?
+class SCPregameModalMainViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
-    enum Section: Int {
+    fileprivate enum Section: Int {
         case info = 0
         case statistics = 1
         case gameSettings = 2
+
+        static var count: Int {
+            var count = 0
+            while let _ = Section(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
     }
 
-    enum GameSetting: Int {
+    fileprivate enum GameSetting: Int {
         case minigame = 0
         case timer = 1
+
+        static var count: Int {
+            var count = 0
+            while let _ = GameSetting(rawValue: count) {
+                count += 1
+            }
+            return count
+        }
     }
 
     fileprivate let sectionLabels: [Section: String] = [
         .info: SCStrings.section.info.rawValue,
         .statistics: SCStrings.section.statistics.rawValue,
         .gameSettings: SCStrings.section.gameSettings.rawValue,
-    ]
+        ]
 
     fileprivate let settingsLabels: [GameSetting: String] = [
         .minigame: SCStrings.primaryLabel.minigame.rawValue,
         .timer: SCStrings.primaryLabel.timer.rawValue,
-    ]
+        ]
 
     fileprivate var scrolled = false
+    fileprivate var inputMode = false
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet weak var upArrowView: UIImageView!
 
     deinit {
         print("[DEINIT] " + NSStringFromClass(type(of: self)))
@@ -48,28 +59,39 @@ class SCPregameModalViewController: SCModalViewController {
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
+
+        self.tableViewBottomSpaceConstraint.constant = 0
+        self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
+        self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
+        self.tableView.layoutIfNeeded()
+        self.registerTableViewCells()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        SCStates.pregameModalPageState = .main
+
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableViewBottomSpaceConstraint.constant = SCViewController.tableViewMargin
-        self.tableViewLeadingSpaceConstraint.constant = SCViewController.tableViewMargin
-        self.tableViewTrailingSpaceConstraint.constant = SCViewController.tableViewMargin
-        self.tableView.layoutIfNeeded()
+
+        self.view.isOpaque = false
+        self.view.backgroundColor = .clear
 
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 2.0,
             target: self,
-            selector: #selector(SCPregameModalViewController.refreshView),
+            selector: #selector(SCPregameModalMainViewController.refreshView),
             userInfo: nil,
             repeats: true
         )
 
-        if self.tableView.contentSize.height <= self.tableView.bounds.height {
-            self.upArrowView.isHidden = true
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue),
+                object: self,
+                userInfo: nil
+            )
         }
     }
 
@@ -82,21 +104,25 @@ class SCPregameModalViewController: SCModalViewController {
         self.refreshTimer?.invalidate()
     }
 
-    // MARK: SCModalViewController Overrides
-    override func onDismissal() {
-        if self.tableView.contentOffset.y > 0 {
-            return
-        }
-
-        super.onDismissal()
-    }
-
     // MARK: Private
     @objc
     fileprivate func refreshView() {
         DispatchQueue.main.async {
+            if self.inputMode {
+                return
+            }
+
             self.tableView.reloadData()
         }
+    }
+
+    fileprivate func registerTableViewCells() {
+        let multilineToggleViewCellNib = UINib(nibName: SCConstants.nibs.multilineToggleViewCell.rawValue, bundle: nil)
+
+        self.tableView.register(
+            multilineToggleViewCellNib,
+            forCellReuseIdentifier: SCConstants.identifier.minigameToggleViewCell.rawValue
+        )
     }
 
     fileprivate func getChecklistItems() -> [String] {
@@ -120,7 +146,7 @@ class SCPregameModalViewController: SCModalViewController {
                 result.append(SCStrings.info.regularGameTeamSizeUnsatisfied.rawValue)
             }
         }
-        
+
         return result
     }
 }
@@ -132,9 +158,9 @@ class SCPregameModalViewController: SCModalViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionLabels.count
+        return Section.count
     }
 
     func tableView(_ tableView: UITableView,
@@ -154,7 +180,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             sectionHeader.primaryLabel.text = self.sectionLabels[section]
         }
 
-        if self.tableView.contentOffset.y > 0 {
+        if self.scrolled {
             sectionHeader.showBlurBackground()
         } else {
             sectionHeader.hideBlurBackground()
@@ -171,7 +197,7 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
         case Section.statistics.rawValue:
             return 1
         case Section.gameSettings.rawValue:
-            return settingsLabels.count
+            return GameSetting.count
         default:
             return 0
         }
@@ -235,19 +261,20 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
                 cell.primaryLabel.text = self.settingsLabels[.minigame]
                 cell.secondaryLabel.text = SCStrings.secondaryLabel.minigame.rawValue
                 cell.delegate = self
-                
+
                 return cell
             case GameSetting.timer.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.timerToggleViewCell.rawValue
-                    ) as? SCToggleViewCell else {
+                    withIdentifier: SCConstants.identifier.timerSettingViewCell.rawValue
+                    ) as? SCPickerViewCell else {
                         return SCTableViewCell()
                 }
 
-                cell.synchronizeToggle()
                 cell.primaryLabel.text = self.settingsLabels[.timer]
                 cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawValue
                 cell.delegate = self
+
+                cell.synchronizeSetting()
 
                 return cell
             default:
@@ -259,12 +286,6 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.tableView.contentOffset.y <= 0 {
-            self.upArrowView.isHidden = false
-        } else {
-            self.upArrowView.isHidden = true
-        }
-
         if self.tableView.contentOffset.y > 0 {
             if self.scrolled {
                 return
@@ -277,12 +298,14 @@ extension SCPregameModalViewController: UITableViewDataSource, UITableViewDelega
             self.scrolled = false
         }
 
-        self.tableView.reloadData()
+        if !self.inputMode {
+            self.tableView.reloadData()
+        }
     }
 }
 
 // MARK: SCToggleViewCellDelegate
-extension SCPregameModalViewController: SCToggleViewCellDelegate {
+extension SCPregameModalMainViewController: SCToggleViewCellDelegate {
     func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
@@ -305,20 +328,19 @@ extension SCPregameModalViewController: SCToggleViewCellDelegate {
 
                 SCMultipeerManager.instance.broadcast(GameMode.instance)
                 SCMultipeerManager.instance.broadcast(Room.instance)
-            case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
-                SCSettingsManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
-            case SCConstants.identifier.timerToggleViewCell.rawValue:
-                Timer.instance.setEnabled(enabled)
-
-                SCMultipeerManager.instance.broadcast(Timer.instance)
-            case SCConstants.identifier.nightModeToggleViewCell.rawValue:
-                SCSettingsManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
-                super.updateModalAppearance()
-                self.tableView.reloadData()
-                self.delegate?.onNightModeToggleChanged()
             default:
                 break
             }
         }
+    }
+}
+
+extension SCPregameModalMainViewController: SCPickerViewCellDelegate {
+    func onPickerTapped() {
+        self.inputMode = true
+    }
+    
+    func onPickerDismissed() {
+        self.inputMode = false
     }
 }

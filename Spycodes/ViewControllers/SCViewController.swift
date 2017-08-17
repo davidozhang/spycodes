@@ -11,6 +11,8 @@ class SCViewController: UIViewController {
     var unwindingSegue = false
     var isRootViewController = false
 
+    var userInfo: [AnyHashable: Any]?
+
     fileprivate let dimView = UIView()
     fileprivate var modalPeekBlurView: UIVisualEffectView?
 
@@ -116,7 +118,7 @@ class SCViewController: UIViewController {
     }
 
     override var preferredStatusBarStyle : UIStatusBarStyle {
-        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+        if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             return .lightContent
         } else {
             return .default
@@ -163,6 +165,12 @@ class SCViewController: UIViewController {
             return
         }
 
+        // By default, present modal view controllers over current context
+        if let destination = segue.destination as? SCModalViewController {
+            destination.modalPresentationStyle = .overCurrentContext
+            return
+        }
+
         if let destination = segue.destination as? SCViewController {
             destination.previousViewControllerIdentifier = self.unwindableIdentifier
         }
@@ -201,13 +209,21 @@ class SCViewController: UIViewController {
 
     func updateAppearance() {
         let textFieldAppearance = UITextField.appearance()
+        let toolBarAppearance = UIToolbar.appearance()
+        let pageControlAppearance = UIPageControl.appearance()
+        let barButtonItemAppearance = UIBarButtonItem.appearance()
+        let navigationBarAppearance = UINavigationBar.appearance()
 
         if let view = self.view.viewWithTag(SCConstants.tag.modalPeekBlurView.rawValue) {
             view.removeFromSuperview()
         }
 
-        if SCSettingsManager.instance.isLocalSettingEnabled(.nightMode) {
+        // Night mode related appearance customizations
+        if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             textFieldAppearance.keyboardAppearance = .dark
+            toolBarAppearance.tintColor = .white
+            pageControlAppearance.pageIndicatorTintColor = .spycodesGrayColor()
+            pageControlAppearance.currentPageIndicatorTintColor = .white
             self.view.backgroundColor = .black
 
             if let _ = self.modalPeekView {
@@ -218,6 +234,9 @@ class SCViewController: UIViewController {
             }
         } else {
             textFieldAppearance.keyboardAppearance = .light
+            toolBarAppearance.tintColor = .black
+            pageControlAppearance.pageIndicatorTintColor = .spycodesLightGrayColor()
+            pageControlAppearance.currentPageIndicatorTintColor = .spycodesGrayColor()
             self.view.backgroundColor = .white
 
             if let _ = self.modalPeekView {
@@ -227,6 +246,16 @@ class SCViewController: UIViewController {
                 )
             }
         }
+
+        barButtonItemAppearance.tintColor = .spycodesGrayColor()
+
+        if let font = SCFonts.regularSizeFont(.medium) {
+            barButtonItemAppearance.setTitleTextAttributes([NSFontAttributeName: font], for: UIControlState())
+            navigationBarAppearance.titleTextAttributes = [NSFontAttributeName: font]
+        }
+
+        pageControlAppearance.hidesForSinglePage = true
+        pageControlAppearance.defersCurrentPageDisplay = true
 
         if let _ = self.modalPeekView {
             self.modalPeekBlurView?.frame = self.modalPeekView.bounds

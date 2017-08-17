@@ -1,26 +1,90 @@
+extension String {
+    var first: String {
+        return String(characters.prefix(1))
+    }
+
+    var last: String {
+        return String(characters.suffix(1))
+    }
+
+    var uppercasedFirst: String {
+        return first.uppercased() + String(characters.dropFirst())
+    }
+}
+
 class SCStrings {
     enum button: String {
+        case showAnswer = "Show Answer"
+        case cancel = "Cancel"
         case confirm = "Confirm"
-        case dismiss = "Dismiss"
+        case dismiss = "Continue"
+        case done = "Done"
         case endRound = "End Round"
         case gameAborted = "Aborted"
         case gameOver = "Game Over"
-        case goBack = "Go Back"
+        case hideAnswer = "Hide Answer"
+        case returnToPregameRoom = "Return to Pregame Room"
         case ok = "OK"
     }
 
+    enum category: String {
+        case animals = "Animals"
+        case architecture = "Architecture"
+        case arts = "Arts"
+        case body = "Body"
+        case clothing = "Clothing"
+        case foodAndDrinks = "Food & Drinks"
+        case game = "Game"
+        case garden = "Garden"
+        case items = "Items"
+        case nature = "Nature"
+        case people = "People"
+        case places = "Places"
+        case space = "Space"
+        case sports = "Sports"
+        case transportation = "Transportation"
+        case misc = "Miscellaneous"
+    }
+
     enum emoji: String {
+        case animals = "🐘"
+        case architecture = "⛪️"
+        case arts = "🖼"
+        case body = "👀"
+        case clothing = "👕"
         case completed = "✅"
+        case foodAndDrinks = "🍹"
+        case game = "🎲"
+        case garden = "🌻"
         case incomplete = "❌"
+        case items = "🎈"
         case info = "ℹ️"
+        case nature = "🌲"
+        case people = "🚶"
+        case places = "🗼"
+        case space = "🌎"
+        case sports = "⚽️"
+        case transportation = "✈️"
+        case misc = "❓"
+        case rocket = "🚀"
+        case setting = "⚙"
     }
 
     enum header: String {
         case accessCode = "Access Code: "
+        case categoryExists = "Existing Category"
+        case categoryName = "Category Name"
+        case categoryWordList = "Category Word List"
         case clue = "Clue"
         case confirm = "Confirm"
+        case confirmDeletion = "Confirm Deletion"
+        case duplicateWord = "Duplicate Word"
+        case editWord = "Edit Word"
+        case emptyCategory = "Empty Category"
+        case emptyWord = "Empty Word"
         case enterClue = "Enter Clue"
         case ending = "Final Note"
+        case hostOnly = "Host Only Feature"
         case introduction = "Introduction"
         case gameAborted = "Game Aborted"
         case gameOver = "Game Over"
@@ -28,6 +92,7 @@ class SCStrings {
         case guess = "Guessing Time"
         case returningToMainMenu = "Returning to Main Menu"
         case roundEnd = "Round End"
+        case minimumWords = "Too Few Words"
         case updateApp = "Update App"
         case waitForClue = "Waiting For Clue"
     }
@@ -41,8 +106,16 @@ class SCStrings {
     }
 
     enum message: String {
+        case categoryExists = "The category name already exists."
+        case categorySetting = "Only the host can toggle category settings."
+        case categoryWordList = "The word list should contain at least 1 word."
         case defaultLoseString = "Your team lost!"
         case defaultWinString = "Your team won!"
+        case confirmDeletion = "Are you sure you want to delete the category?"
+        case duplicateWord = "The word is already in the list."
+        case emptyCategoryName = "Category name cannot be empty."
+        case emptyWord = "Word cannot be empty."
+        case enterCategoryName = "Enter a category name"
         case hostDisconnected = "Host player has disconnected."
         case leaderConfirm = "Once you are comfortable with your clue and number, tap Confirm to allow your teammates to see the clue and number. The clue and number cannot be modified until the round ends. You cannot talk or make eye contact with your teammates!"
         case leaderEnterClue = "Look over the words belonging to your team carefully and enter a 1-word clue followed by a number. The number represents the amount of words corresponding to your clue. Your clue cannot be a word already in the game!"
@@ -52,6 +125,7 @@ class SCStrings {
         case minigameIntro = "You are currently playing a Minigame with your teammates on Team Red versus a CPU player on Team Blue. There are 22 words in total: 8 Red, 7 Blue, 6 Neutral (white) and 1 Assassin (black)."
         case minigameRoundEnd = "After each round ends, the CPU automatically eliminates one of its words and hands the round back to your team. Your teammates must try to guess all of your team's words before the CPU finishes all of its words."
         case minigameWinString = "Your team won! There were %d opponent cards remaining. Great work!"
+        case minimumWords = "There must be a minimum of %d words."
         case playerAborted = "A player in the game has aborted."
         case playerClue = "A 1-word clue and number will show at the top once your leader is done coming up with it. The number represents the amount of words corresponding to that clue. You cannot talk or make eye contact with your leader!"
         case playerDisconnected = "A player in the game has disconnected."
@@ -64,6 +138,10 @@ class SCStrings {
         case updatePrompt = "Please download the latest version of Spycodes."
     }
 
+    enum navigationItem: String {
+        case newCategory = "New Category"
+    }
+
     enum player: String {
         case cpu = "CPU"
         case localPlayer = "You"
@@ -71,12 +149,20 @@ class SCStrings {
 
     enum primaryLabel: String {
         case accessibility = "Accessibility"
+        case addWord = "Add Word"
+        case category = "%@ %@"
+        case categoryNoEmoji = "%@"
+        case deleteCategory = "Delete Category"
+        case emoji = "Emoji (Optional)"
         case icons8 = "Icons8"
         case github = "Github"
         case minigame = "Minigame"
+        case name = "Name"
         case nightMode = "Night Mode"
+        case persistentSelection = "%@ Persist"
         case releaseNotes = "Release Notes"
         case reviewApp = "Review App"
+        case selectAll = "%@ Select All"
         case support = "Support"
         case teamEmptyState = "No players on the team."
         case timer = "Timer"
@@ -91,20 +177,32 @@ class SCStrings {
     }
 
     enum secondaryLabel: String {
+        case custom = "Custom"
         case minigame = "2-3 players play as a team against the CPU."
-        case timer = "Limit each round to 2 minutes."
+        case timer = "Set a time duration for each round."
+        case numberOfWords = "%d %@"
+        case numberOfWordsCustomCategory = "%d %@ (%@)"
+        case persistentSelection = "Your current selections will be saved."
+        case selectAll = "All categories will be selected."
+        case tapToEdit = "Tap to Edit"
+        case word = "word"
+        case words = "words"
     }
 
     enum section: String {
         case about = "About"
+        case categories = "Categories"
         case customize = "Customize"
         case gameSettings = "Game Settings"
         case info = "Info"
         case more = "More"
+        case settings = "Settings"
         case statistics = "Statistics"
         case teamRed = "Team Red"
         case teamBlue = "Team Blue"
         case timeline = "Timeline"
+        case wordList = "Word List (%d %@)"
+        case wordListDefault = "Word List"
     }
 
     enum status: String {
@@ -136,7 +234,9 @@ class SCStrings {
     }
 
     enum timer: String {
+        case disabled = "None"
         case format = "%d:%02d"
+        case minutes = "%d min"
         case stopped = "--:--"
     }
 }

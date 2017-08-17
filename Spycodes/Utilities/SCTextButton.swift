@@ -25,4 +25,8 @@ class SCTextButton: UIButton {
             }
         }
     }
+
+    func setBoldTitleFont() {
+        self.titleLabel?.font = SCFonts.regularSizeFont(.bold)
+    }
 }
