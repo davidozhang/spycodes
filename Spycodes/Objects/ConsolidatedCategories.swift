@@ -73,65 +73,64 @@ class ConsolidatedCategories: NSObject, NSCoding {
         self.selectedCustomCategories = selectedCategories
     }
 
-    func selectCategory(category: SCWordBank.Category, persistImmediately: Bool) {
+    func selectCategory(category: SCWordBank.Category, persistSelectionImmediately: Bool) {
         self.selectedCategories.insert(category)
 
-        if persistImmediately {
+        if persistSelectionImmediately {
             self.persistSelectedCategoriesIfEnabled()
         }
     }
 
-    func unselectCategory(category: SCWordBank.Category, persistImmediately: Bool) {
+    func unselectCategory(category: SCWordBank.Category, persistSelectionImmediately: Bool) {
         self.selectedCategories.remove(category)
 
-        if persistImmediately {
+        if persistSelectionImmediately {
             self.persistSelectedCategoriesIfEnabled()
         }
     }
 
-    func selectCustomCategory(category: CustomCategory, persistImmediately: Bool) {
+    func selectCustomCategory(category: CustomCategory, persistSelectionImmediately: Bool) {
         self.selectedCustomCategories.insert(category)
 
-        if persistImmediately {
+        if persistSelectionImmediately {
             self.persistSelectedCategoriesIfEnabled()
         }
     }
 
-    func unselectCustomCategory(category: CustomCategory, persistImmediately: Bool) {
+    func unselectCustomCategory(category: CustomCategory, persistSelectionImmediately: Bool) {
         self.selectedCustomCategories.remove(category)
-        self.persistSelectedCategoriesIfEnabled()
 
-        if persistImmediately {
+        if persistSelectionImmediately {
             self.persistSelectedCategoriesIfEnabled()
         }
     }
 
     func updateCustomCategory(originalCategory: CustomCategory, updatedCategory: CustomCategory) {
-        self.removeCustomCategory(category: originalCategory)
-        self.addCustomCategory(category: updatedCategory)
+        self.removeCustomCategory(category: originalCategory, persistSelectionImmediately: false)
+        self.addCustomCategory(category: updatedCategory, persistSelectionImmediately: false)
 
-        self.unselectCustomCategory(category: originalCategory, persistImmediately: false)
-        self.selectCustomCategory(category: updatedCategory, persistImmediately: true)
+        self.unselectCustomCategory(category: originalCategory, persistSelectionImmediately: false)
+        self.selectCustomCategory(category: updatedCategory, persistSelectionImmediately: true)
     }
 
-    func addCustomCategory(category: CustomCategory) {
+    func addCustomCategory(category: CustomCategory, persistSelectionImmediately: Bool) {
         var allCustomCategories = self.getAllCustomCategories()
         allCustomCategories.append(category)
 
         SCLocalStorageManager.instance.saveAllCustomCategories(customCategories: allCustomCategories)
-        self.selectCustomCategory(category: category, persistImmediately: true)
+        self.selectCustomCategory(category: category, persistSelectionImmediately: persistSelectionImmediately)
 
         self.allCachedCustomCategories?.append(category)
     }
 
-    func removeCustomCategory(category: CustomCategory) {
+    func removeCustomCategory(category: CustomCategory, persistSelectionImmediately: Bool) {
         let allCustomCategories = self.getAllCustomCategories()
         let updatedCustomCategories = allCustomCategories.filter({
             $0 != category
         })
 
         SCLocalStorageManager.instance.saveAllCustomCategories(customCategories: updatedCustomCategories)
-        self.unselectCustomCategory(category: category, persistImmediately: true)
+        self.unselectCustomCategory(category: category, persistSelectionImmediately: persistSelectionImmediately)
 
         if let allCachedCustomCategories = self.allCachedCustomCategories {
             self.allCachedCustomCategories = allCachedCustomCategories.filter({
@@ -142,11 +141,11 @@ class ConsolidatedCategories: NSObject, NSCoding {
 
     func selectAllCategories() {
         for category in SCWordBank.Category.all {
-            self.selectCategory(category: category, persistImmediately: false)
+            self.selectCategory(category: category, persistSelectionImmediately: false)
         }
 
         for category in self.getAllCustomCategories() {
-            self.selectCustomCategory(category: category, persistImmediately: false)
+            self.selectCustomCategory(category: category, persistSelectionImmediately: false)
         }
 
         self.persistSelectedCategoriesIfEnabled()

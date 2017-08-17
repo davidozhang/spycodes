@@ -221,7 +221,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.validateCustomCategory(successHandler: {
             if !self.existingCustomCategory {
                 // New custom category
-                ConsolidatedCategories.instance.addCustomCategory(category: self.mutableCustomCategory)
+                ConsolidatedCategories.instance.addCustomCategory(category: self.mutableCustomCategory, persistSelectionImmediately: true)
             } else {
                 // Existing custom category
                 if let originalCustomCategory = self.nonMutableCustomCategory {
@@ -232,7 +232,6 @@ class SCCustomCategoryModalViewController: SCModalViewController {
                 }
             }
 
-            ConsolidatedCategories.instance.selectCustomCategory(category: self.mutableCustomCategory, persistImmediately: true)
             self.dismissView()
         })
     }
@@ -247,7 +246,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
                 }
 
                 if let customCategory = self.nonMutableCustomCategory {
-                    ConsolidatedCategories.instance.removeCustomCategory(category: customCategory)
+                    ConsolidatedCategories.instance.removeCustomCategory(category: customCategory, persistSelectionImmediately: true)
                 }
 
                 self.dismissView()
