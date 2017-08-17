@@ -140,6 +140,7 @@ class SCGameRoomViewController: SCViewController {
         }
 
         self.actionButton.isHidden = false
+        SCStates.resetActionButtonState()
 
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 1.0,

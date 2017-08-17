@@ -265,7 +265,7 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     fileprivate func resetReadyButton() {
-        SCStates.readyButtonState = .notReady
+        SCStates.resetReadyButtonState()
         self.updateReadyButton()
     }
 

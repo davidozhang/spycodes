@@ -37,10 +37,26 @@ class SCStates {
     static var pregameModalPageState: PregameModalPageState = .main
     static var customCategoryWordListState: CustomCategoryWordListState = .nonEditing
 
-    static func reset() {
+    static func resetAll() {
+        SCStates.resetActionButtonState()
+        SCStates.resetReadyButtonState()
+        SCStates.resetPregameModalPageState()
+        SCStates.resetCustomCategoryWordListState()
+    }
+
+    static func resetActionButtonState() {
         SCStates.actionButtonState = .endRound
+    }
+
+    static func resetReadyButtonState() {
         SCStates.readyButtonState = .notReady
+    }
+
+    static func resetPregameModalPageState() {
         SCStates.pregameModalPageState = .main
+    }
+
+    static func resetCustomCategoryWordListState() {
         SCStates.customCategoryWordListState = .nonEditing
     }
 }
