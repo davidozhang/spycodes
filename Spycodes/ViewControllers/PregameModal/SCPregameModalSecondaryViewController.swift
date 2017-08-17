@@ -250,30 +250,30 @@ extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
 
         if let category = SCWordBank.getCategoryFromString(string: reuseIdentifier) {       // Default categories
             if enabled {
-                ConsolidatedCategories.instance.selectCategory(category: category)
+                ConsolidatedCategories.instance.selectCategory(category: category, persistImmediately: false)
             } else {
-                ConsolidatedCategories.instance.unselectCategory(category: category)
+                ConsolidatedCategories.instance.unselectCategory(category: category, persistImmediately: false)
             }
 
             self.checkWordCount(
                 failureHandler: {
                     // Revert setting if total word count is less than minimum allowed
                     cell.toggleSwitch.isOn = !enabled
-                    ConsolidatedCategories.instance.selectCategory(category: category)
+                    ConsolidatedCategories.instance.selectCategory(category: category, persistImmediately: false)
                 }
             )
         } else if let category = ConsolidatedCategories.instance.getCustomCategoryFromString(string: reuseIdentifier) {     // Custom categories
             if enabled {
-                ConsolidatedCategories.instance.selectCustomCategory(category: category)
+                ConsolidatedCategories.instance.selectCustomCategory(category: category, persistImmediately: false)
             } else {
-                ConsolidatedCategories.instance.unselectCustomCategory(category: category)
+                ConsolidatedCategories.instance.unselectCustomCategory(category: category, persistImmediately: false)
             }
 
             self.checkWordCount(
                 failureHandler: {
                     // Revert setting if total word count is less than minimum allowed
                     cell.toggleSwitch.isOn = !enabled
-                    ConsolidatedCategories.instance.selectCustomCategory(category: category)
+                    ConsolidatedCategories.instance.selectCustomCategory(category: category, persistImmediately: false)
                 }
             )
         }

@@ -232,7 +232,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
                 }
             }
 
-            ConsolidatedCategories.instance.selectCustomCategory(category: self.mutableCustomCategory)
+            ConsolidatedCategories.instance.selectCustomCategory(category: self.mutableCustomCategory, persistImmediately: true)
             self.dismissView()
         })
     }
