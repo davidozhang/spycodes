@@ -8,18 +8,23 @@ class CardCollection: NSObject, NSCoding {
 
     fileprivate var cards = [Card]()
     fileprivate var key = [Team]()
-    fileprivate var startingTeam: Team
+    fileprivate var startingTeam: Team?
 
     // MARK: Constructor/Destructor
     override init() {
+        if !Player.instance.isHost() {
+            return
+        }
+
         if GameMode.instance.getMode() == .miniGame {
             self.startingTeam = .red
-            self.keyObject = Key(startingTeam: self.startingTeam)
+            self.keyObject = Key(startingTeam: self.startingTeam!)
             self.key = self.keyObject.getKey()
         } else {
             self.key = self.keyObject.getKey()
             self.startingTeam = self.keyObject.getStartingTeam()
         }
+
         for i in 0..<SCConstants.constant.cardCount.rawValue {
             self.cards.append(
                 Card(
@@ -64,7 +69,7 @@ class CardCollection: NSObject, NSCoding {
         return self.cards
     }
 
-    func getStartingTeam() -> Team {
+    func getStartingTeam() -> Team? {
         return self.startingTeam
     }
 

@@ -343,10 +343,12 @@ class SCPregameRoomViewController: SCViewController {
 
         SCMultipeerManager.instance.broadcast(CardCollection.instance)
 
-        Round.instance.setCurrentTeam(CardCollection.instance.getStartingTeam())
-        SCMultipeerManager.instance.broadcast(Round.instance)
+        if let startingTeam = CardCollection.instance.getStartingTeam() {
+            Round.instance.setCurrentTeam(startingTeam)
+            SCMultipeerManager.instance.broadcast(Round.instance)
 
-        self.goToGame()
+            self.goToGame()
+        }
     }
 
     fileprivate func animateReadyButtonIfNeeded() {

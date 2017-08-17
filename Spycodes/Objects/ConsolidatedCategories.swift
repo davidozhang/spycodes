@@ -230,6 +230,8 @@ class ConsolidatedCategories: NSObject, NSCoding {
     }
 
     func generateSynchronizedCategories() {
+        self.resetSynchronizedInfo()
+
         // Default categories
         for category in SCWordBank.Category.all {
             let name = SCWordBank.getCategoryName(category: category)
@@ -248,6 +250,13 @@ class ConsolidatedCategories: NSObject, NSCoding {
                 self.synchronizedCategoryTypes[name] = CategoryType.customCategory.rawValue
             }
         }
+    }
+
+    func resetSynchronizedInfo() {
+        self.synchronizedCategories.removeAll()
+        self.synchronizedCategoryTypes.removeAll()
+        self.synchronizedWordCounts.removeAll()
+        self.synchronizedEmojis.removeAll()
     }
 
     func categoryExists(category: String?) -> Bool {
@@ -269,10 +278,7 @@ class ConsolidatedCategories: NSObject, NSCoding {
 
     func reset() {
         self.resetCategories()
-        self.synchronizedCategories.removeAll()
-        self.synchronizedCategoryTypes.removeAll()
-        self.synchronizedWordCounts.removeAll()
-        self.synchronizedEmojis.removeAll()
+        self.resetSynchronizedInfo()
     }
 
     // Non-host methods for synchronized categories
