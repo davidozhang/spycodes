@@ -237,7 +237,6 @@ extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
 
         if reuseIdentifier == SCConstants.identifier.persistentSelectionToggleViewCell.rawValue {
             SCLocalStorageManager.instance.enableLocalSetting(.persistentSelection, enabled: enabled)
-            ConsolidatedCategories.instance.persistSelectedCategoriesIfEnabled()
 
             if !enabled {
                 SCLocalStorageManager.instance.clearSelectedConsolidatedCategories()
@@ -274,6 +273,7 @@ extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
             )
         }
 
+        ConsolidatedCategories.instance.persistSelectedCategoriesIfEnabled()
         self.tableView.reloadData()
     }
 }
