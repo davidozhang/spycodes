@@ -1,7 +1,8 @@
 import UIKit
 
 protocol SCMainSettingsViewControllerDelegate: class {
-    func onNightModeToggleChanged()
+    func mainSettings(onToggleViewCellChanged toggleViewCell: SCToggleViewCell,
+                      settingType: SCLocalStorageManager.LocalSettingType)
 }
 
 class SCMainSettingsViewController: SCModalViewController {
@@ -314,14 +315,14 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
 
 // MARK: SCToggleViewCellDelegate
 extension SCMainSettingsViewController: SCToggleViewCellDelegate {
-    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
+    func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
                 SCLocalStorageManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
                 super.updateModalAppearance()
                 self.tableView.reloadData()
-                self.delegate?.onNightModeToggleChanged()
+                self.delegate?.mainSettings(onToggleViewCellChanged: cell, settingType: .nightMode)
             case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
                 SCLocalStorageManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
             default:

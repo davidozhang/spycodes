@@ -324,7 +324,7 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
 
 // MARK: SCSingleCharacterTextFieldBackspaceDelegate
 extension SCAccessCodeViewController: SCSingleCharacterTextFieldBackspaceDelegate {
-    func onBackspaceDetected(_ textField: UITextField) {
+    func singleCharacterTextField(onBackspaceDetected textField: UITextField) {
         let currentTag = textField.tag
 
         // If currently on last text field and it was filled, do not advance cursor to previous text field

@@ -449,7 +449,7 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
 
 // MARK: SCSectionHeaderViewCellDelegate
 extension SCPregameRoomViewController: SCSectionHeaderViewCellDelegate {
-    func onSectionHeaderButtonTapped() {
+    func sectionHeaderViewCell(onButtonTapped sectionHeaderViewCell: SCSectionHeaderViewCell) {
         Room.instance.autoAssignLeaderForTeam(
             Player.instance.getTeam(),
             shuffle: true
@@ -459,7 +459,7 @@ extension SCPregameRoomViewController: SCSectionHeaderViewCellDelegate {
 
 // MARK: SCPregameRoomViewCellDelegate
 extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
-    func teamUpdatedForPlayerWithUUID(_ uuid: String, newTeam: Team) {
+    func pregameRoomViewCell(teamUpdatedForPlayer uuid: String, newTeam: Team) {
         if let player = Room.instance.getPlayerWithUUID(uuid) {
             player.setIsLeader(false)
             Room.instance.removePlayerWithUUID(uuid)

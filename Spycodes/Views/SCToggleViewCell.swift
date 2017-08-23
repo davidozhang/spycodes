@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SCToggleViewCellDelegate: class {
-    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool)
+    func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool)
 }
 
 class SCToggleViewCell: SCTableViewCell {
@@ -83,6 +83,6 @@ class SCToggleViewCell: SCTableViewCell {
     @objc
     fileprivate func onToggleChanged(_ toggleSwitch: UISwitch) {
         let enabled = toggleSwitch.isOn
-        delegate?.onToggleChanged(self, enabled: enabled)
+        self.delegate?.toggleViewCell(onToggleViewCellChanged: self, enabled: enabled)
     }
 }

@@ -2,7 +2,7 @@ import ISEmojiView
 import UIKit
 
 protocol SCTableViewCellEmojiDelegate: class {
-    func onEmojiSelected(emoji: String)
+    func tableViewCell(onEmojiSelected emoji: String)
 }
 
 class SCTableViewCell: UITableViewCell {
@@ -87,7 +87,7 @@ extension SCTableViewCell: ISEmojiViewDelegate {
     func emojiViewDidSelectEmoji(emojiView: ISEmojiView, emoji: String) {
         self.rightTextView.text = emoji
         self.rightTextView.resignFirstResponder()
-        self.emojiDelegate?.onEmojiSelected(emoji: emoji)
+        self.emojiDelegate?.tableViewCell(onEmojiSelected: emoji)
     }
 
     func emojiViewDidPressDeleteButton(emojiView: ISEmojiView) {
