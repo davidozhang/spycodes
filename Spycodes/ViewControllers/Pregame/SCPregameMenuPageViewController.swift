@@ -20,7 +20,7 @@ class SCPregameMenuPageViewController: UIPageViewController {
         self.dataSource = self
         self.delegate = self
 
-        switch SCStates.pregameModalPageState {
+        switch SCStates.getPregameMenuState() {
         case .main:
             self.showMainViewController()
         case .secondary:
@@ -83,6 +83,6 @@ extension SCPregameMenuPageViewController: UIPageViewControllerDataSource, UIPag
     }
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return SCStates.pregameModalPageState.rawValue
+        return SCStates.getPregameMenuState().rawValue
     }
 }

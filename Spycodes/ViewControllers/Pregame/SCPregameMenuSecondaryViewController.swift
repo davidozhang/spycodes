@@ -62,7 +62,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        SCStates.pregameModalPageState = .secondary
+        SCStates.changePregameMenuState(to: .secondary)
 
         self.tableView.dataSource = self
         self.tableView.delegate = self

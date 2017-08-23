@@ -153,8 +153,8 @@ class SCCustomCategoryViewController: SCModalViewController {
         self.tableView.reloadData()
     }
 
-    fileprivate func changeStateTo(state: CustomCategoryWordListState) {
-        SCStates.customCategoryWordListState = state
+    fileprivate func changeStateTo(state: CustomCategoryState) {
+        SCStates.changeCustomCategoryState(to: state)
         self.reloadView()
     }
 
@@ -502,7 +502,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                     cell.rightTextView.isHidden = true
                 }
 
-                if SCStates.customCategoryWordListState == .editingEmoji {
+                if SCStates.getCustomCategoryState() == .editingEmoji {
                     cell.rightImage.isHidden = true
                     cell.rightTextView.isHidden = false
 
@@ -519,7 +519,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
             switch indexPath.row {
             case WordList.topCell.rawValue:
                 // Top Cell Customization
-                switch SCStates.customCategoryWordListState {
+                switch SCStates.getCustomCategoryState() {
                 case .nonEditing, .editingExistingWord, .editingCategoryName, .editingEmoji:
                     guard let cell = self.tableView.dequeueReusableCell(
                         withIdentifier: SCConstants.identifier.addWordViewCell.rawValue
@@ -561,7 +561,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                 cell.indexPath = indexPath
 
                 // Hide remove button when adding new words
-                if SCStates.customCategoryWordListState == .addingNewWord {
+                if SCStates.getCustomCategoryState() == .addingNewWord {
                     cell.hideButton()
                 } else {
                     cell.showButton()

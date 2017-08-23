@@ -21,10 +21,11 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     @IBAction func onReadyButtonTapped(_ sender: Any) {
-        if SCStates.readyButtonState != .ready {
-            SCStates.readyButtonState = .ready
-        } else {
-            SCStates.readyButtonState = .notReady
+        switch SCStates.getReadyButtonState() {
+        case .notReady:
+            SCStates.changeReadyButtonState(to: .ready)
+        case .ready:
+            SCStates.changeReadyButtonState(to: .notReady)
         }
 
         self.updateReadyButton()
@@ -243,13 +244,14 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     fileprivate func updateReadyButton() {
-        if SCStates.readyButtonState == .notReady {
+        switch SCStates.getReadyButtonState() {
+        case .notReady:
             self.broadcastEvent(.cancel)
             UIView.performWithoutAnimation {
                 self.readyButton.setTitle("Ready", for: .normal)
             }
             self.animateReadyButtonIfNeeded()
-        } else {
+        case .ready:
             self.broadcastEvent(.ready)
             UIView.performWithoutAnimation {
                 self.readyButton.setTitle("Cancel", for: .normal)
@@ -260,12 +262,12 @@ class SCPregameRoomViewController: SCViewController {
         self.tableView.reloadData()
 
         // Only set ready status locally
-        let isReady = SCStates.readyButtonState == .ready
+        let isReady = SCStates.getReadyButtonState() == .ready
         Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.setIsReady(isReady)
     }
 
     fileprivate func resetReadyButton() {
-        SCStates.resetReadyButtonState()
+        SCStates.resetState(type: .readyButton)
         self.updateReadyButton()
     }
 
@@ -352,7 +354,7 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     fileprivate func animateReadyButtonIfNeeded() {
-        if SCStates.readyButtonState == .ready {
+        if SCStates.getReadyButtonState() == .ready {
             return
         }
 
