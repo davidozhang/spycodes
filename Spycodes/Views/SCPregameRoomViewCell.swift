@@ -28,7 +28,7 @@ class SCPregameRoomViewCell: SCTableViewCell {
         if let uuid = self.uuid,
            let oldTeam = Room.instance.getPlayerWithUUID(uuid)?.getTeam(),
            let newTeam = Team(rawValue: oldTeam.rawValue ^ 1) {
-            delegate?.pregameRoomViewCell(teamUpdatedForPlayer: uuid, newTeam: newTeam)
+            self.delegate?.pregameRoomViewCell(teamUpdatedForPlayer: uuid, newTeam: newTeam)
         }
     }
 

@@ -214,12 +214,12 @@ extension SCMultipeerManager: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser,
                  foundPeer peerID: MCPeerID,
                  withDiscoveryInfo info: [String: String]?) {
-        delegate?.multipeerManager(foundPeer: peerID, withDiscoveryInfo: info)
+        self.delegate?.multipeerManager(foundPeer: peerID, withDiscoveryInfo: info)
     }
 
     func browser(_ browser: MCNearbyServiceBrowser,
                  lostPeer peerID: MCPeerID) {
-        delegate?.multipeerManager(lostPeer: peerID)
+        self.delegate?.multipeerManager(lostPeer: peerID)
     }
 }
 
@@ -228,7 +228,7 @@ extension SCMultipeerManager: MCSessionDelegate {
     func session(_ session: MCSession,
                  didReceive data: Data,
                  fromPeer peerID: MCPeerID) {
-        delegate?.multipeerManager(didReceiveData: data, fromPeer: peerID)
+        self.delegate?.multipeerManager(didReceiveData: data, fromPeer: peerID)
     }
 
     func session(_ session: MCSession,
@@ -251,7 +251,7 @@ extension SCMultipeerManager: MCSessionDelegate {
                  peer peerID: MCPeerID,
                  didChange state: MCSessionState) {
         if state == MCSessionState.notConnected {
-            delegate?.multipeerManager(peerDisconnected: peerID)
+            self.delegate?.multipeerManager(peerDisconnected: peerID)
         }
     }
 
