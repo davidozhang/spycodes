@@ -293,7 +293,7 @@ class SCAccessCodeViewController: SCViewController {
 
 // MARK: SCMultipeerManagerDelegate
 extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
-    func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
+    func multipeerManager(didReceiveData data: Data, fromPeer peerID: MCPeerID) {
         // Navigate to pregame room only when preliminary sync data from host is received
         if let room = NSKeyedUnarchiver.unarchiveObject(with: data) as? Room {
             Room.instance = room
@@ -315,16 +315,16 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
         }
     }
 
-    func peerDisconnectedFromSession(_ peerID: MCPeerID) {}
+    func multipeerManager(peerDisconnected peerID: MCPeerID) {}
 
-    func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {}
+    func multipeerManager(foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {}
 
-    func lostPeer(_ peerID: MCPeerID) {}
+    func multipeerManager(lostPeer peerID: MCPeerID) {}
 }
 
 // MARK: SCSingleCharacterTextFieldBackspaceDelegate
 extension SCAccessCodeViewController: SCSingleCharacterTextFieldBackspaceDelegate {
-    func onBackspaceDetected(_ textField: UITextField) {
+    func singleCharacterTextField(onBackspaceDetected textField: UITextField) {
         let currentTag = textField.tag
 
         // If currently on last text field and it was filled, do not advance cursor to previous text field

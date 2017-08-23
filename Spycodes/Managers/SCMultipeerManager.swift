@@ -1,10 +1,10 @@
 import MultipeerConnectivity
 
 protocol SCMultipeerManagerDelegate: class {
-    func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String: String]?)
-    func lostPeer(_ peerID: MCPeerID)
-    func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID)
-    func peerDisconnectedFromSession(_ peerID: MCPeerID)
+    func multipeerManager(foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String: String]?)
+    func multipeerManager(lostPeer peerID: MCPeerID)
+    func multipeerManager(didReceiveData data: Data, fromPeer peerID: MCPeerID)
+    func multipeerManager(peerDisconnected peerID: MCPeerID)
 }
 
 class SCMultipeerManager: NSObject {
@@ -214,12 +214,12 @@ extension SCMultipeerManager: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser,
                  foundPeer peerID: MCPeerID,
                  withDiscoveryInfo info: [String: String]?) {
-        delegate?.foundPeer(peerID, withDiscoveryInfo: info)
+        self.delegate?.multipeerManager(foundPeer: peerID, withDiscoveryInfo: info)
     }
 
     func browser(_ browser: MCNearbyServiceBrowser,
                  lostPeer peerID: MCPeerID) {
-        delegate?.lostPeer(peerID)
+        self.delegate?.multipeerManager(lostPeer: peerID)
     }
 }
 
@@ -228,7 +228,7 @@ extension SCMultipeerManager: MCSessionDelegate {
     func session(_ session: MCSession,
                  didReceive data: Data,
                  fromPeer peerID: MCPeerID) {
-        delegate?.didReceiveData(data, fromPeer: peerID)
+        self.delegate?.multipeerManager(didReceiveData: data, fromPeer: peerID)
     }
 
     func session(_ session: MCSession,
@@ -251,7 +251,7 @@ extension SCMultipeerManager: MCSessionDelegate {
                  peer peerID: MCPeerID,
                  didChange state: MCSessionState) {
         if state == MCSessionState.notConnected {
-            delegate?.peerDisconnectedFromSession(peerID)
+            self.delegate?.multipeerManager(peerDisconnected: peerID)
         }
     }
 

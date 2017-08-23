@@ -306,7 +306,7 @@ extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDel
 
 // MARK: SCToggleViewCellDelegate
 extension SCPregameMenuMainViewController: SCToggleViewCellDelegate {
-    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
+    func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.identifier.minigameToggleViewCell.rawValue:
@@ -336,11 +336,11 @@ extension SCPregameMenuMainViewController: SCToggleViewCellDelegate {
 }
 
 extension SCPregameMenuMainViewController: SCPickerViewCellDelegate {
-    func onPickerTapped() {
+    func pickerViewCell(onPickerViewCellTapped pickerViewCell: SCPickerViewCell) {
         self.inputMode = true
     }
-    
-    func onPickerDismissed() {
+
+    func pickerViewCell(onPickerViewCellDismissed pickerViewCell: SCPickerViewCell) {
         self.inputMode = false
     }
 }

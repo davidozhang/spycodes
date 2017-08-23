@@ -101,7 +101,7 @@ class SCTimelineViewController: SCModalViewController {
 
 // MARK: SCSectionHeaderViewCellDelegate
 extension SCTimelineViewController: SCSectionHeaderViewCellDelegate {
-    func onSectionHeaderButtonTapped() {
+    func sectionHeaderViewCell(onButtonTapped sectionHeaderViewCell: SCSectionHeaderViewCell) {
         Timeline.instance.markAllAsRead()
         self.tableView.reloadData()
     }

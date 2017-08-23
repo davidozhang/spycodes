@@ -231,14 +231,14 @@ class SCPregameMenuSecondaryViewController: SCViewController {
 
 // MARK: SCSectionHeaderViewCellDelegate
 extension SCPregameMenuSecondaryViewController: SCSectionHeaderViewCellDelegate {
-    func onSectionHeaderButtonTapped() {
+    func sectionHeaderViewCell(onButtonTapped sectionHeaderViewCell: SCSectionHeaderViewCell) {
         self.presentCustomCategoryView(existingCategory: false, category: nil)
     }
 }
 
 // MARK: SCToggleViewCellDelegate
 extension SCPregameMenuSecondaryViewController: SCToggleViewCellDelegate {
-    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
+    func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool) {
         guard let reuseIdentifier = cell.reuseIdentifier else {
             return
         }

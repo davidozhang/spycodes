@@ -382,16 +382,16 @@ class SCPregameRoomViewController: SCViewController {
 
 // MARK: SCMultipeerManagerDelegate
 extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
-    func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
+    func multipeerManager(foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         if let info = info,
                info[SCConstants.discoveryInfo.accessCode.rawValue] == Room.instance.getAccessCode() {
             SCMultipeerManager.instance.invitePeerToSession(peerID)
         }
     }
 
-    func lostPeer(_ peerID: MCPeerID) {}
+    func multipeerManager(lostPeer peerID: MCPeerID) {}
 
-    func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
+    func multipeerManager(didReceiveData data: Data, fromPeer peerID: MCPeerID) {
         let synchronizedObject = NSKeyedUnarchiver.unarchiveObject(with: data)
 
         switch synchronizedObject {
@@ -439,7 +439,7 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
         }
     }
 
-    func peerDisconnectedFromSession(_ peerID: MCPeerID) {
+    func multipeerManager(peerDisconnected peerID: MCPeerID) {
         if let playerUUID = Room.instance.getUUIDWithPeerID(peerID: peerID) {
             Room.instance.removePlayerWithUUID(playerUUID)
             Room.instance.removeConnectedPeer(peerID: peerID)
@@ -449,7 +449,7 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
 
 // MARK: SCSectionHeaderViewCellDelegate
 extension SCPregameRoomViewController: SCSectionHeaderViewCellDelegate {
-    func onSectionHeaderButtonTapped() {
+    func sectionHeaderViewCell(onButtonTapped sectionHeaderViewCell: SCSectionHeaderViewCell) {
         Room.instance.autoAssignLeaderForTeam(
             Player.instance.getTeam(),
             shuffle: true
@@ -459,7 +459,7 @@ extension SCPregameRoomViewController: SCSectionHeaderViewCellDelegate {
 
 // MARK: SCPregameRoomViewCellDelegate
 extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
-    func teamUpdatedForPlayerWithUUID(_ uuid: String, newTeam: Team) {
+    func pregameRoomViewCell(teamUpdatedForPlayer uuid: String, newTeam: Team) {
         if let player = Room.instance.getPlayerWithUUID(uuid) {
             player.setIsLeader(false)
             Room.instance.removePlayerWithUUID(uuid)

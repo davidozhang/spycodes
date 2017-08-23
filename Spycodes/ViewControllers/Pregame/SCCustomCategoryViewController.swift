@@ -328,7 +328,7 @@ class SCCustomCategoryViewController: SCModalViewController {
 
 // MARK: SCTableViewCellEmojiDelegate
 extension SCCustomCategoryViewController: SCTableViewCellEmojiDelegate {
-    func onEmojiSelected(emoji: String) {
+    func tableViewCell(onEmojiSelected emoji: String) {
         self.mutableCustomCategory.setEmoji(emoji: emoji)
         self.changeStateTo(state: .nonEditing)
     }
@@ -336,7 +336,7 @@ extension SCCustomCategoryViewController: SCTableViewCellEmojiDelegate {
 
 // MARK: SCTextFieldViewCellDelegate
 extension SCCustomCategoryViewController: SCTextFieldViewCellDelegate {
-    func onButtonTapped(textField: UITextField, indexPath: IndexPath) {
+    func textFieldViewCell(onButtonTapped textField: UITextField, indexPath: IndexPath) {
         // When X button is tapped for cells
         switch indexPath.row {
         case WordList.topCell.rawValue:
@@ -362,13 +362,13 @@ extension SCCustomCategoryViewController: SCTextFieldViewCellDelegate {
         self.reloadView()
     }
 
-    func didEndEditing(textField: UITextField, indexPath: IndexPath) {}
+    func textFieldViewCell(didEndEditing textField: UITextField, indexPath: IndexPath) {}
 
-    func shouldBeginEditing(textField: UITextField, indexPath: IndexPath) -> Bool {
+    func textFieldViewCell(shouldBeginEditing textField: UITextField, indexPath: IndexPath) -> Bool {
         return true
     }
 
-    func shouldReturn(textField: UITextField, indexPath: IndexPath) -> Bool {
+    func textFieldViewCell(shouldReturn textField: UITextField, indexPath: IndexPath) -> Bool {
         if textField.text?.characters.count != 0 {
             textField.resignFirstResponder()
 

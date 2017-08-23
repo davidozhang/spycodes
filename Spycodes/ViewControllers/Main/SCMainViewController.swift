@@ -106,9 +106,12 @@ class SCMainViewController: SCViewController {
 
 // MARK: SCMainSettingsViewControllerDelegate
 extension SCMainViewController: SCMainSettingsViewControllerDelegate {
-    func onNightModeToggleChanged() {
-        DispatchQueue.main.async {
-            super.updateAppearance()
+    func mainSettings(onToggleViewCellChanged toggleViewCell: SCToggleViewCell,
+                      settingType: SCLocalStorageManager.LocalSettingType) {
+        if settingType == .nightMode {
+            DispatchQueue.main.async {
+                super.updateAppearance()
+            }
         }
     }
 }

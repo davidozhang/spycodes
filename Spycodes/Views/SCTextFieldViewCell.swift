@@ -1,10 +1,10 @@
 import UIKit
 
 protocol SCTextFieldViewCellDelegate: class {
-    func onButtonTapped(textField: UITextField, indexPath: IndexPath)
-    func didEndEditing(textField: UITextField, indexPath: IndexPath)
-    func shouldBeginEditing(textField: UITextField, indexPath: IndexPath) -> Bool
-    func shouldReturn(textField: UITextField, indexPath: IndexPath) -> Bool
+    func textFieldViewCell(onButtonTapped textField: UITextField, indexPath: IndexPath)
+    func textFieldViewCell(didEndEditing textField: UITextField, indexPath: IndexPath)
+    func textFieldViewCell(shouldBeginEditing textField: UITextField, indexPath: IndexPath) -> Bool
+    func textFieldViewCell(shouldReturn textField: UITextField, indexPath: IndexPath) -> Bool
 }
 
 class SCTextFieldViewCell: SCTableViewCell {
@@ -15,7 +15,7 @@ class SCTextFieldViewCell: SCTableViewCell {
 
     @IBAction func onButtonTapped(_ sender: Any) {
         if let indexPath = self.indexPath {
-            self.delegate?.onButtonTapped(textField: textField, indexPath: indexPath)
+            self.delegate?.textFieldViewCell(onButtonTapped: textField, indexPath: indexPath)
         }
     }
 
@@ -51,7 +51,7 @@ class SCTextFieldViewCell: SCTableViewCell {
 extension SCTextFieldViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let indexPath = self.indexPath,
-           let shouldReturn = self.delegate?.shouldReturn(textField: textField, indexPath: indexPath) {
+           let shouldReturn = self.delegate?.textFieldViewCell(shouldReturn: textField, indexPath: indexPath) {
             return shouldReturn
         }
 
@@ -60,7 +60,7 @@ extension SCTextFieldViewCell: UITextFieldDelegate {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if let indexPath = self.indexPath,
-           let shouldBeginEditing = self.delegate?.shouldBeginEditing(textField: textField, indexPath: indexPath) {
+           let shouldBeginEditing = self.delegate?.textFieldViewCell(shouldBeginEditing: textField, indexPath: indexPath) {
             return shouldBeginEditing
         }
 
@@ -69,7 +69,7 @@ extension SCTextFieldViewCell: UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let indexPath = self.indexPath {
-            self.delegate?.didEndEditing(textField: textField, indexPath: indexPath)
+            self.delegate?.textFieldViewCell(didEndEditing: textField, indexPath: indexPath)
         }
     }
 }

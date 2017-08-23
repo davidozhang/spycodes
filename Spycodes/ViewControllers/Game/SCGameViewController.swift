@@ -743,7 +743,7 @@ class SCGameViewController: SCViewController {
 
 // MARK: SCMultipeerManagerDelegate
 extension SCGameViewController: SCMultipeerManagerDelegate {
-    func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
+    func multipeerManager(didReceiveData data: Data, fromPeer peerID: MCPeerID) {
         let synchronizedObject = NSKeyedUnarchiver.unarchiveObject(with: data)
         let opponentTeam = Team(rawValue: Player.instance.getTeam().rawValue ^ 1)
 
@@ -849,7 +849,7 @@ extension SCGameViewController: SCMultipeerManagerDelegate {
         }
     }
 
-    func peerDisconnectedFromSession(_ peerID: MCPeerID) {
+    func multipeerManager(peerDisconnected peerID: MCPeerID) {
         if let uuid = Room.instance.getUUIDWithPeerID(peerID: peerID),
            let player = Room.instance.getPlayerWithUUID(uuid) {
 
@@ -893,9 +893,9 @@ extension SCGameViewController: SCMultipeerManagerDelegate {
         }
     }
 
-    func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {}
+    func multipeerManager(foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {}
 
-    func lostPeer(_ peerID: MCPeerID) {}
+    func multipeerManager(lostPeer peerID: MCPeerID) {}
 }
 
 // MARK: UICollectionViewDelegate, UICollectionViewDataSource
