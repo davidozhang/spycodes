@@ -50,32 +50,40 @@ class SCStates {
         self.actionButtonState = state
     }
 
-    static func changeState(to state: ReadyButtonState) {
-        self.readyButtonState = state
+    static func changeState(to state: CustomCategoryState) {
+        self.customCategoryState = state
     }
 
     static func changeState(to state: PregameMenuState) {
         self.pregameMenuState = state
     }
 
-    static func changeState(to state: CustomCategoryState) {
-        self.customCategoryState = state
+    static func changeState(to state: ReadyButtonState) {
+        self.readyButtonState = state
+    }
+
+    static func changeState(to state: TimerState) {
+        self.timerState = state
     }
 
     static func getActionButtonState() -> ActionButtonState {
         return self.actionButtonState
     }
 
-    static func getReadyButtonState() -> ReadyButtonState {
-        return self.readyButtonState
+    static func getCustomCategoryState() -> CustomCategoryState {
+        return self.customCategoryState
     }
 
     static func getPregameMenuState() -> PregameMenuState {
         return self.pregameMenuState
     }
 
-    static func getCustomCategoryState() -> CustomCategoryState {
-        return self.customCategoryState
+    static func getReadyButtonState() -> ReadyButtonState {
+        return self.readyButtonState
+    }
+
+    static func getTimerState() -> TimerState {
+        return self.timerState
     }
 
     static func resetAll() {
@@ -83,6 +91,7 @@ class SCStates {
         SCStates.resetState(type: .customCategory)
         SCStates.resetState(type: .pregameMenu)
         SCStates.resetState(type: .readyButton)
+        SCStates.resetState(type: .timer)
     }
 
     static func resetState(type: StateType) {

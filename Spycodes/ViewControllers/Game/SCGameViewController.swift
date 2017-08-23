@@ -453,25 +453,25 @@ class SCGameViewController: SCViewController {
         }
 
         if Round.instance.getCurrentTeam() == Player.instance.getTeam() && !Round.instance.hasGameEnded() {
-            if Timer.instance.state == .stopped {
-                Timer.instance.state = .willStart
+            if SCStates.getTimerState() == .stopped {
+                SCStates.changeState(to: .willStart)
             }
         } else {
-            Timer.instance.state = .stopped
+            SCStates.changeState(to: .stopped)
         }
 
-        if Timer.instance.state == .stopped {
+        if SCStates.getTimerState() == .stopped {
             Timer.instance.invalidate()
             self.timerLabel.textColor = .spycodesGrayColor()
             self.timerLabel.text = SCStrings.timer.stopped.rawValue
-        } else if Timer.instance.state == .willStart {
+        } else if SCStates.getTimerState() == .willStart {
             Timer.instance.startTimer({
                 self.timerDidEnd()
             }, timerInProgress: { (remainingTime) in
                     self.timerInProgress(remainingTime)
             })
 
-            Timer.instance.state = .started
+            SCStates.changeState(to: .started)
         }
     }
 
@@ -816,7 +816,7 @@ extension SCGameViewController: SCMultipeerManagerDelegate {
 
                 if GameMode.instance.getMode() == .miniGame {
                     if Timer.instance.isEnabled() {
-                        Timer.instance.state = .stopped
+                        SCStates.changeState(to: .stopped)
                     }
                 }
 
