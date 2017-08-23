@@ -46,23 +46,23 @@ class SCStates {
     static fileprivate var customCategoryState: CustomCategoryState = .nonEditing
     static fileprivate var timerState: TimerState = .stopped
 
-    static func changeState(to state: ActionButtonState) {
+    static func changeActionButtonState(to state: ActionButtonState) {
         self.actionButtonState = state
     }
 
-    static func changeState(to state: CustomCategoryState) {
+    static func changeCustomCategoryState(to state: CustomCategoryState) {
         self.customCategoryState = state
     }
 
-    static func changeState(to state: PregameMenuState) {
+    static func changePregameMenuState(to state: PregameMenuState) {
         self.pregameMenuState = state
     }
 
-    static func changeState(to state: ReadyButtonState) {
+    static func changeReadyButtonState(to state: ReadyButtonState) {
         self.readyButtonState = state
     }
 
-    static func changeState(to state: TimerState) {
+    static func changeTimerState(to state: TimerState) {
         self.timerState = state
     }
 

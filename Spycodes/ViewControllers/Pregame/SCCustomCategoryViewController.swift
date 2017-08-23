@@ -154,7 +154,7 @@ class SCCustomCategoryViewController: SCModalViewController {
     }
 
     fileprivate func changeStateTo(state: CustomCategoryState) {
-        SCStates.changeState(to: state)
+        SCStates.changeCustomCategoryState(to: state)
         self.reloadView()
     }
 

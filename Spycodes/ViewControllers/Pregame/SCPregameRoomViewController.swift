@@ -23,9 +23,9 @@ class SCPregameRoomViewController: SCViewController {
     @IBAction func onReadyButtonTapped(_ sender: Any) {
         switch SCStates.getReadyButtonState() {
         case .notReady:
-            SCStates.changeState(to: .ready)
+            SCStates.changeReadyButtonState(to: .ready)
         case .ready:
-            SCStates.changeState(to: .notReady)
+            SCStates.changeReadyButtonState(to: .notReady)
         }
 
         self.updateReadyButton()

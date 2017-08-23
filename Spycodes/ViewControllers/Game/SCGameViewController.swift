@@ -433,7 +433,7 @@ class SCGameViewController: SCViewController {
 
                     self.startTextFieldAnimations()
 
-                    SCStates.changeState(to: .confirm)
+                    SCStates.changeActionButtonState(to: .confirm)
                     self.clueTextField.isEnabled = true
                     self.numberOfWordsTextField.isEnabled = true
                 } else {
@@ -454,10 +454,10 @@ class SCGameViewController: SCViewController {
 
         if Round.instance.getCurrentTeam() == Player.instance.getTeam() && !Round.instance.hasGameEnded() {
             if SCStates.getTimerState() == .stopped {
-                SCStates.changeState(to: .willStart)
+                SCStates.changeTimerState(to: .willStart)
             }
         } else {
-            SCStates.changeState(to: .stopped)
+            SCStates.changeTimerState(to: .stopped)
         }
 
         if SCStates.getTimerState() == .stopped {
@@ -471,7 +471,7 @@ class SCGameViewController: SCViewController {
                     self.timerInProgress(remainingTime)
             })
 
-            SCStates.changeState(to: .started)
+            SCStates.changeTimerState(to: .started)
         }
     }
 
@@ -495,7 +495,7 @@ class SCGameViewController: SCViewController {
     }
 
     fileprivate func updateActionButtonStateTo(state: ActionButtonState) {
-        SCStates.changeState(to: state)
+        SCStates.changeActionButtonState(to: state)
         self.updateActionButton()
     }
 
@@ -581,7 +581,7 @@ class SCGameViewController: SCViewController {
 
         self.clueTextField.isEnabled = false
         self.numberOfWordsTextField.isEnabled = false
-        SCStates.changeState(to: .endRound)
+        SCStates.changeActionButtonState(to: .endRound)
 
         Round.instance.setClue(self.clueTextField.text)
         Round.instance.setNumberOfWords(self.numberOfWordsTextField.text)
@@ -703,7 +703,7 @@ class SCGameViewController: SCViewController {
     }
 
     func onAbortDismissal() {
-        SCStates.changeState(to: .gameAborted)
+        SCStates.changeActionButtonState(to: .gameAborted)
         Timeline.instance.addEventIfNeeded(
             event: Event(type: .gameAborted, parameters: nil)
         )
@@ -711,9 +711,9 @@ class SCGameViewController: SCViewController {
 
     func onGameOverDismissal() {
         if Player.instance.isLeader() {
-            SCStates.changeState(to: .gameOver)
+            SCStates.changeActionButtonState(to: .gameOver)
         } else {
-            SCStates.changeState(to: .showAnswer)
+            SCStates.changeActionButtonState(to: .showAnswer)
         }
 
         Timeline.instance.addEventIfNeeded(
@@ -816,7 +816,7 @@ extension SCGameViewController: SCMultipeerManagerDelegate {
 
                 if GameMode.instance.getMode() == .miniGame {
                     if Timer.instance.isEnabled() {
-                        SCStates.changeState(to: .stopped)
+                        SCStates.changeTimerState(to: .stopped)
                     }
                 }
 
