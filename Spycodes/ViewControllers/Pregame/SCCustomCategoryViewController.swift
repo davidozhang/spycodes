@@ -1,6 +1,6 @@
 import UIKit
 
-class SCCustomCategoryModalViewController: SCModalViewController {
+class SCCustomCategoryViewController: SCModalViewController {
     fileprivate enum Section: Int {
         case settings = 0
         case wordList = 1
@@ -93,9 +93,9 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
 
-        self.tableViewBottomSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
-        self.tableViewLeadingSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
-        self.tableViewTrailingSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
+        self.tableViewBottomSpaceConstraint.constant = SCCustomCategoryViewController.margin
+        self.tableViewLeadingSpaceConstraint.constant = SCCustomCategoryViewController.margin
+        self.tableViewTrailingSpaceConstraint.constant = SCCustomCategoryViewController.margin
         self.tableView.layoutIfNeeded()
 
         self.registerTableViewCells()
@@ -327,7 +327,7 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: SCTableViewCellEmojiDelegate
-extension SCCustomCategoryModalViewController: SCTableViewCellEmojiDelegate {
+extension SCCustomCategoryViewController: SCTableViewCellEmojiDelegate {
     func onEmojiSelected(emoji: String) {
         self.mutableCustomCategory.setEmoji(emoji: emoji)
         self.changeStateTo(state: .nonEditing)
@@ -335,7 +335,7 @@ extension SCCustomCategoryModalViewController: SCTableViewCellEmojiDelegate {
 }
 
 // MARK: SCTextFieldViewCellDelegate
-extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
+extension SCCustomCategoryViewController: SCTextFieldViewCellDelegate {
     func onButtonTapped(textField: UITextField, indexPath: IndexPath) {
         // When X button is tapped for cells
         switch indexPath.row {
@@ -385,7 +385,7 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Section.count
     }
@@ -639,7 +639,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
 }
 
 // MARK: Alert Controllers
-extension SCCustomCategoryModalViewController {
+extension SCCustomCategoryViewController {
     fileprivate func showDuplicateWordAlert() {
         self.changeStateTo(state: .nonEditing)
         self.presentAlert(

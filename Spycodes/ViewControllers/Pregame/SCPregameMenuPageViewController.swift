@@ -1,6 +1,6 @@
 import UIKit
 
-class SCPregameModalPageViewController: UIPageViewController {
+class SCPregameMenuPageViewController: UIPageViewController {
     static let storyboard = UIStoryboard(name: SCConstants.storyboards.main.rawValue, bundle: nil)
     static let mainViewController = storyboard.instantiateViewController(
         withIdentifier: SCConstants.identifier.pregameModalMainView.rawValue
@@ -37,7 +37,7 @@ class SCPregameModalPageViewController: UIPageViewController {
 
     fileprivate func showMainViewController() {
         self.setViewControllers(
-            [SCPregameModalPageViewController.mainViewController],
+            [SCPregameMenuPageViewController.mainViewController],
             direction: .forward,
             animated: false,
             completion: nil
@@ -46,7 +46,7 @@ class SCPregameModalPageViewController: UIPageViewController {
 
     fileprivate func showSecondaryViewController() {
         self.setViewControllers(
-            [SCPregameModalPageViewController.secondaryViewController],
+            [SCPregameMenuPageViewController.secondaryViewController],
             direction: .forward,
             animated: false,
             completion: nil
@@ -61,18 +61,18 @@ class SCPregameModalPageViewController: UIPageViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: UIPageViewControllerDataSource, UIPageViewControllerDelegate
-extension SCPregameModalPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension SCPregameMenuPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let _ = viewController as? SCPregameModalSecondaryViewController {
-            return SCPregameModalPageViewController.mainViewController
+        if let _ = viewController as? SCPregameMenuSecondaryViewController {
+            return SCPregameMenuPageViewController.mainViewController
         }
 
         return nil
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let _ = viewController as? SCPregameModalMainViewController {
-            return SCPregameModalPageViewController.secondaryViewController
+        if let _ = viewController as? SCPregameMenuMainViewController {
+            return SCPregameMenuPageViewController.secondaryViewController
         }
 
         return nil

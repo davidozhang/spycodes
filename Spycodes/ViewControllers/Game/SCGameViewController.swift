@@ -1,7 +1,7 @@
 import MultipeerConnectivity
 import UIKit
 
-class SCGameRoomViewController: SCViewController {
+class SCGameViewController: SCViewController {
     fileprivate let edgeInset: CGFloat = 12
     fileprivate let minCellSpacing: CGFloat = 12
     fileprivate let modalWidth = UIScreen.main.bounds.width - 60
@@ -92,7 +92,7 @@ class SCGameRoomViewController: SCViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(SCGameRoomViewController.didEndMinigameWithNotification),
+            selector: #selector(SCGameViewController.didEndMinigameWithNotification),
             name: NSNotification.Name(
                 rawValue: SCConstants.notificationKey.minigameGameOver.rawValue
             ),
@@ -101,7 +101,7 @@ class SCGameRoomViewController: SCViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(SCGameRoomViewController.showNotificationDotIfNeeded),
+            selector: #selector(SCGameViewController.showNotificationDotIfNeeded),
             name: NSNotification.Name(
                 rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
             ),
@@ -110,7 +110,7 @@ class SCGameRoomViewController: SCViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(SCGameRoomViewController.updateCollectionView),
+            selector: #selector(SCGameViewController.updateCollectionView),
             name: NSNotification.Name(
                 rawValue: SCConstants.notificationKey.updateCollectionView.rawValue
             ),
@@ -145,7 +145,7 @@ class SCGameRoomViewController: SCViewController {
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 1.0,
             target: self,
-            selector: #selector(SCGameRoomViewController.refresh),
+            selector: #selector(SCGameViewController.refresh),
             userInfo: nil,
             repeats: true
         )
@@ -742,7 +742,7 @@ class SCGameRoomViewController: SCViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: SCMultipeerManagerDelegate
-extension SCGameRoomViewController: SCMultipeerManagerDelegate {
+extension SCGameViewController: SCMultipeerManagerDelegate {
     func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
         let synchronizedObject = NSKeyedUnarchiver.unarchiveObject(with: data)
         let opponentTeam = Team(rawValue: Player.instance.getTeam().rawValue ^ 1)
@@ -899,7 +899,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
 }
 
 // MARK: UICollectionViewDelegate, UICollectionViewDataSource
-extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension SCGameViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -1090,7 +1090,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 }
 
 // MARK: UITextFieldDelegate
-extension SCGameRoomViewController: UITextFieldDelegate {
+extension SCGameViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if Player.instance.isLeader() &&
            Round.instance.getCurrentTeam() == Player.instance.getTeam() &&

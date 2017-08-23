@@ -1,6 +1,6 @@
 import UIKit
 
-class SCPregameModalMainViewController: SCViewController {
+class SCPregameMenuMainViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate enum Section: Int {
@@ -81,7 +81,7 @@ class SCPregameModalMainViewController: SCViewController {
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 2.0,
             target: self,
-            selector: #selector(SCPregameModalMainViewController.refreshView),
+            selector: #selector(SCPregameMenuMainViewController.refreshView),
             userInfo: nil,
             repeats: true
         )
@@ -158,7 +158,7 @@ class SCPregameModalMainViewController: SCViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Section.count
     }
@@ -305,7 +305,7 @@ extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDe
 }
 
 // MARK: SCToggleViewCellDelegate
-extension SCPregameModalMainViewController: SCToggleViewCellDelegate {
+extension SCPregameMenuMainViewController: SCToggleViewCellDelegate {
     func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
@@ -335,7 +335,7 @@ extension SCPregameModalMainViewController: SCToggleViewCellDelegate {
     }
 }
 
-extension SCPregameModalMainViewController: SCPickerViewCellDelegate {
+extension SCPregameMenuMainViewController: SCPickerViewCellDelegate {
     func onPickerTapped() {
         self.inputMode = true
     }

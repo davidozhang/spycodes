@@ -171,7 +171,7 @@ class SCPregameRoomViewController: SCViewController {
 
         if let userInfo = self.userInfo {
             if let nvc = segue.destination as? UINavigationController,
-               let vc = nvc.topViewController as? SCCustomCategoryModalViewController {
+               let vc = nvc.topViewController as? SCCustomCategoryViewController {
                 if let customCategoryName = userInfo[SCConstants.notificationKey.customCategoryName.rawValue] as? String {
                     vc.setCustomCategoryFromString(category: customCategoryName)
                 }

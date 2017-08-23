@@ -1,6 +1,6 @@
 import UIKit
 
-class SCHelpViewController: SCPopoverViewController {
+class SCGameHelpViewController: SCPopoverViewController {
     fileprivate static let maxIndex = 6
     fileprivate static let sharedLeaderStringSequence = [
         SCStrings.message.leaderGoal.rawValue,
@@ -81,9 +81,9 @@ class SCHelpViewController: SCPopoverViewController {
             result += [SCStrings.message.minigameIntro.rawValue]
 
             if Player.instance.isLeader() {
-                result += SCHelpViewController.sharedLeaderStringSequence
+                result += SCGameHelpViewController.sharedLeaderStringSequence
             } else {
-                result += SCHelpViewController.sharedPlayerStringSequence
+                result += SCGameHelpViewController.sharedPlayerStringSequence
             }
 
             result += [SCStrings.message.minigameRoundEnd.rawValue]
@@ -92,9 +92,9 @@ class SCHelpViewController: SCPopoverViewController {
             result += [SCStrings.message.regularGameIntro.rawValue]
 
             if Player.instance.isLeader() {
-                result += SCHelpViewController.sharedLeaderStringSequence
+                result += SCGameHelpViewController.sharedLeaderStringSequence
             } else {
-                result += SCHelpViewController.sharedPlayerStringSequence
+                result += SCGameHelpViewController.sharedPlayerStringSequence
             }
 
             result += [SCStrings.message.regularGameRoundEnd.rawValue]
@@ -112,16 +112,16 @@ class SCHelpViewController: SCPopoverViewController {
                 self.leftButton.isHidden = false
             }
 
-            if self.currentIndex == SCHelpViewController.maxIndex {
+            if self.currentIndex == SCGameHelpViewController.maxIndex {
                 self.rightButton.isHidden = true
             } else {
                 self.rightButton.isHidden = false
             }
 
             if Player.instance.isLeader() {
-                self.headerLabel.text = SCHelpViewController.leaderHeaders[self.currentIndex]
+                self.headerLabel.text = SCGameHelpViewController.leaderHeaders[self.currentIndex]
             } else {
-                self.headerLabel.text = SCHelpViewController.playerHeaders[self.currentIndex]
+                self.headerLabel.text = SCGameHelpViewController.playerHeaders[self.currentIndex]
             }
 
             self.descriptionLabel.text = self.stringSequence[self.currentIndex]
