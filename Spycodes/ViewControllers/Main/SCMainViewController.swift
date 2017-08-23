@@ -1,6 +1,6 @@
 import UIKit
 
-class SCMainMenuViewController: SCViewController {
+class SCMainViewController: SCViewController {
     // MARK: Actions
     @IBAction func unwindToMainMenu(_ sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
@@ -61,7 +61,7 @@ class SCMainMenuViewController: SCViewController {
         super._prepareForSegue(segue, sender: sender)
 
         // All segues identified here should be forward direction only
-        if let vc = segue.destination as? SCMainMenuModalViewController {
+        if let vc = segue.destination as? SCMainSettingsViewController {
             vc.delegate = self
         }
     }
@@ -104,8 +104,8 @@ class SCMainMenuViewController: SCViewController {
 //  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
-// MARK: SCMainMenuModalViewControllerDelegate
-extension SCMainMenuViewController: SCMainMenuModalViewControllerDelegate {
+// MARK: SCMainSettingsViewControllerDelegate
+extension SCMainViewController: SCMainSettingsViewControllerDelegate {
     func onNightModeToggleChanged() {
         DispatchQueue.main.async {
             super.updateAppearance()

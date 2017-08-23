@@ -1,6 +1,6 @@
 import UIKit
 
-class SCTimelineModalViewController: SCModalViewController {
+class SCTimelineViewController: SCModalViewController {
     fileprivate var emptyStateLabel: UILabel?
     fileprivate var scrolled = false
 
@@ -44,7 +44,7 @@ class SCTimelineModalViewController: SCModalViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(SCTimelineModalViewController.refreshView),
+            selector: #selector(SCTimelineViewController.refreshView),
             name: NSNotification.Name(
                 rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
             ),
@@ -100,7 +100,7 @@ class SCTimelineModalViewController: SCModalViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: SCSectionHeaderViewCellDelegate
-extension SCTimelineModalViewController: SCSectionHeaderViewCellDelegate {
+extension SCTimelineViewController: SCSectionHeaderViewCellDelegate {
     func onSectionHeaderButtonTapped() {
         Timeline.instance.markAllAsRead()
         self.tableView.reloadData()
@@ -108,7 +108,7 @@ extension SCTimelineModalViewController: SCSectionHeaderViewCellDelegate {
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCTimelineViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

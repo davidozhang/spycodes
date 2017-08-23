@@ -1,6 +1,6 @@
 import UIKit
 
-class SCPregameModalSecondaryViewController: SCViewController {
+class SCPregameMenuSecondaryViewController: SCViewController {
     fileprivate let extraRows = Categories.count
     fileprivate var ticker = false
 
@@ -73,7 +73,7 @@ class SCPregameModalSecondaryViewController: SCViewController {
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 2.0,
             target: self,
-            selector: #selector(SCPregameModalSecondaryViewController.refreshView),
+            selector: #selector(SCPregameMenuSecondaryViewController.refreshView),
             userInfo: nil,
             repeats: true
         )
@@ -230,14 +230,14 @@ class SCPregameModalSecondaryViewController: SCViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: SCSectionHeaderViewCellDelegate
-extension SCPregameModalSecondaryViewController: SCSectionHeaderViewCellDelegate {
+extension SCPregameMenuSecondaryViewController: SCSectionHeaderViewCellDelegate {
     func onSectionHeaderButtonTapped() {
         self.presentCustomCategoryView(existingCategory: false, category: nil)
     }
 }
 
 // MARK: SCToggleViewCellDelegate
-extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
+extension SCPregameMenuSecondaryViewController: SCToggleViewCellDelegate {
     func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
         guard let reuseIdentifier = cell.reuseIdentifier else {
             return
@@ -295,7 +295,7 @@ extension SCPregameModalSecondaryViewController: SCToggleViewCellDelegate {
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCPregameModalSecondaryViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Section.count
     }

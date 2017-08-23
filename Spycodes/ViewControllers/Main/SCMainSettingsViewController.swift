@@ -1,11 +1,11 @@
 import UIKit
 
-protocol SCMainMenuModalViewControllerDelegate: class {
+protocol SCMainSettingsViewControllerDelegate: class {
     func onNightModeToggleChanged()
 }
 
-class SCMainMenuModalViewController: SCModalViewController {
-    weak var delegate: SCMainMenuModalViewControllerDelegate?
+class SCMainSettingsViewController: SCModalViewController {
+    weak var delegate: SCMainSettingsViewControllerDelegate?
 
     fileprivate enum Section: Int {
         case about = 0
@@ -144,7 +144,7 @@ class SCMainMenuModalViewController: SCModalViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSource {
+extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Section.count
     }
@@ -313,7 +313,7 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
 }
 
 // MARK: SCToggleViewCellDelegate
-extension SCMainMenuModalViewController: SCToggleViewCellDelegate {
+extension SCMainSettingsViewController: SCToggleViewCellDelegate {
     func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {

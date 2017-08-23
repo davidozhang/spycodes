@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main Menu View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="main-menu-view-controller" id="BYZ-38-t0r" customClass="SCMainMenuViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="main-menu-view-controller" id="BYZ-38-t0r" customClass="SCMainViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -128,10 +128,10 @@
             </objects>
             <point key="canvasLocation" x="217.3828125" y="338.21376281112737"/>
         </scene>
-        <!--Main Menu Modal View Controller-->
+        <!--Main Settings View Controller-->
         <scene sceneID="cV3-jj-Kon">
             <objects>
-                <viewController id="oCs-d3-UDI" customClass="SCMainMenuModalViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oCs-d3-UDI" customClass="SCMainSettingsViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nGe-bY-2XB"/>
                         <viewControllerLayoutGuide type="bottom" id="o82-JI-MmW"/>
@@ -520,7 +520,7 @@
         <!--Custom Category-->
         <scene sceneID="dnD-uW-8F5">
             <objects>
-                <viewController storyboardIdentifier="custom-category-view-controller" automaticallyAdjustsScrollViewInsets="NO" id="gDu-LU-Che" customClass="SCCustomCategoryModalViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="custom-category-view-controller" automaticallyAdjustsScrollViewInsets="NO" id="gDu-LU-Che" customClass="SCCustomCategoryViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gab-Hm-sVu"/>
                         <viewControllerLayoutGuide type="bottom" id="Yk6-ov-0Jb"/>
@@ -1030,10 +1030,10 @@
             </objects>
             <point key="canvasLocation" x="1825.7812499999998" y="338.21376281112737"/>
         </scene>
-        <!--Pregame Modal Container View Controller-->
+        <!--Pregame Menu Container View Controller-->
         <scene sceneID="EeC-NJ-N0R">
             <objects>
-                <viewController storyboardIdentifier="pregame-modal-container-view" id="Bsc-BJ-zGX" customClass="SCPregameModalContainerViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pregame-modal-container-view" id="Bsc-BJ-zGX" customClass="SCPregameMenuContainerViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iLe-eX-mDc"/>
                         <viewControllerLayoutGuide type="bottom" id="MLa-iE-UmV"/>
@@ -1088,18 +1088,18 @@
             </objects>
             <point key="canvasLocation" x="1826" y="1156"/>
         </scene>
-        <!--Pregame Modal Page View Controller-->
+        <!--Pregame Menu Page View Controller-->
         <scene sceneID="Rr9-HP-0Ne">
             <objects>
-                <pageViewController storyboardIdentifier="pregame-page-view-controller" autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="overCurrentContext" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="DJ4-hE-VYj" customClass="SCPregameModalPageViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="pregame-page-view-controller" autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="overCurrentContext" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="DJ4-hE-VYj" customClass="SCPregameMenuPageViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8eq-31-sXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1826" y="1938"/>
         </scene>
-        <!--Pregame Modal Main View Controller-->
+        <!--Pregame Menu Main View Controller-->
         <scene sceneID="Nl8-ZF-fk9">
             <objects>
-                <viewController storyboardIdentifier="pregame-modal-main-view" id="R1J-Mf-Sjp" customClass="SCPregameModalMainViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pregame-modal-main-view" id="R1J-Mf-Sjp" customClass="SCPregameMenuMainViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kXk-ok-nU4"/>
                         <viewControllerLayoutGuide type="bottom" id="1LJ-wz-GW3"/>
@@ -1273,10 +1273,10 @@
             </objects>
             <point key="canvasLocation" x="1825.7812499999998" y="2748.7554904831622"/>
         </scene>
-        <!--Pregame Modal Secondary View Controller-->
+        <!--Pregame Menu Secondary View Controller-->
         <scene sceneID="jkV-qk-FcC">
             <objects>
-                <viewController storyboardIdentifier="pregame-modal-secondary-view" id="LAW-Ow-WYx" customClass="SCPregameModalSecondaryViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pregame-modal-secondary-view" id="LAW-Ow-WYx" customClass="SCPregameMenuSecondaryViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fhi-4I-yKc"/>
                         <viewControllerLayoutGuide type="bottom" id="hl5-MT-36A"/>
@@ -1349,10 +1349,10 @@
             </objects>
             <point key="canvasLocation" x="2642" y="2749"/>
         </scene>
-        <!--Timeline Modal View Controller-->
+        <!--Timeline View Controller-->
         <scene sceneID="QbP-47-cxE">
             <objects>
-                <viewController id="HuE-xd-fYV" customClass="SCTimelineModalViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HuE-xd-fYV" customClass="SCTimelineViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zcm-Dl-ICE"/>
                         <viewControllerLayoutGuide type="bottom" id="htW-uQ-Xx7"/>
@@ -1495,10 +1495,10 @@
             </objects>
             <point key="canvasLocation" x="2641.9921875" y="1155.6368960468521"/>
         </scene>
-        <!--Game Room View Controller-->
+        <!--Game View Controller-->
         <scene sceneID="9GO-gD-g4A">
             <objects>
-                <viewController storyboardIdentifier="game-room-view-controller" id="yX4-d1-WHr" customClass="SCGameRoomViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="game-room-view-controller" id="yX4-d1-WHr" customClass="SCGameViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DMO-Jt-Cx9"/>
                         <viewControllerLayoutGuide type="bottom" id="Zrc-Nf-5YD"/>
@@ -1786,10 +1786,10 @@
             </objects>
             <point key="canvasLocation" x="2641.9921875" y="338.65300146412881"/>
         </scene>
-        <!--Help View Controller-->
+        <!--Game Help View Controller-->
         <scene sceneID="I3C-gg-tTW">
             <objects>
-                <viewController id="e9C-iv-SDh" customClass="SCHelpViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="e9C-iv-SDh" customClass="SCGameHelpViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gyg-n5-NU8"/>
                         <viewControllerLayoutGuide type="bottom" id="TdX-78-Xw5"/>

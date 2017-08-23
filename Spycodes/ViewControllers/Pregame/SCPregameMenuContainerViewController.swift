@@ -1,6 +1,6 @@
 import UIKit
 
-class SCPregameModalContainerViewController: SCModalViewController {
+class SCPregameMenuContainerViewController: SCModalViewController {
     deinit {
         print("[DEINIT] " + NSStringFromClass(type(of: self)))
     }
@@ -15,7 +15,7 @@ class SCPregameModalContainerViewController: SCModalViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(SCPregameModalContainerViewController.dismissViewFromNotification),
+            selector: #selector(SCPregameMenuContainerViewController.dismissViewFromNotification),
             name: NSNotification.Name(
                 rawValue: SCConstants.notificationKey.dismissModal.rawValue
             ),
