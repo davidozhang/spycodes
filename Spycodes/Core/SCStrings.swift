@@ -207,6 +207,33 @@ class SCStrings {
         case wordListDefault = "Word List"
     }
 
+    enum state: String {
+        case actionButton = "Action Button"
+        case addingNewWord = "Adding New Word"
+        case confirm = "Confirm"
+        case customCategory = "Custom Category"
+        case editingCategoryName = "Editing Category Name"
+        case editingEmoji = "Editing Emoji"
+        case editingExistingWord = "Editing Existing Word"
+        case endRound = "End Round"
+        case gameAborted = "Game Aborted"
+        case gameOver = "Game Over"
+        case hideAnswer = "Hide Answer"
+        case log = "%@: %@"
+        case main = "Main"
+        case nonEditing = "Non-Editing"
+        case notReady = "Not Ready"
+        case pregameMenu = "Pregame Menu"
+        case ready = "Ready"
+        case readyButton = "Ready Button"
+        case secondary = "Secondary"
+        case showAnswer = "Show Answer"
+        case started = "Started"
+        case stopped = "Stopped"
+        case timer = "Timer"
+        case willStart = "Will Start"
+    }
+
     enum status: String {
         case blue = "Blue"
         case fail = "Failed to join room"
