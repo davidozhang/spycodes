@@ -31,15 +31,15 @@ class SCPregameMenuMainViewController: SCViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .info: SCStrings.section.info.rawValue,
-        .statistics: SCStrings.section.statistics.rawValue,
-        .gameSettings: SCStrings.section.gameSettings.rawValue,
-        ]
+        .info: SCStrings.section.info.rawValue.localized,
+        .statistics: SCStrings.section.statistics.rawValue.localized,
+        .gameSettings: SCStrings.section.gameSettings.rawValue.localized,
+    ]
 
     fileprivate let settingsLabels: [GameSetting: String] = [
-        .minigame: SCStrings.primaryLabel.minigame.rawValue,
-        .timer: SCStrings.primaryLabel.timer.rawValue,
-        ]
+        .minigame: SCStrings.primaryLabel.minigame.rawValue.localized,
+        .timer: SCStrings.primaryLabel.timer.rawValue.localized,
+    ]
 
     fileprivate var scrolled = false
     fileprivate var inputMode = false
@@ -133,17 +133,17 @@ class SCPregameMenuMainViewController: SCViewController {
             result.append(SCStrings.emoji.completed.rawValue)
 
             if GameMode.instance.getMode() == .miniGame {
-                result.append(SCStrings.info.minigameTeamSizeSatisfied.rawValue)
+                result.append(SCStrings.info.minigameTeamSizeSatisfied.rawValue.localized)
             } else {
-                result.append(SCStrings.info.regularGameTeamSizeSatisfied.rawValue)
+                result.append(SCStrings.info.regularGameTeamSizeSatisfied.rawValue.localized)
             }
         } else {
             result.append(SCStrings.emoji.incomplete.rawValue)
 
             if GameMode.instance.getMode() == .miniGame {
-                result.append(SCStrings.info.minigameTeamSizeUnsatisfied.rawValue)
+                result.append(SCStrings.info.minigameTeamSizeUnsatisfied.rawValue.localized)
             } else {
-                result.append(SCStrings.info.regularGameTeamSizeUnsatisfied.rawValue)
+                result.append(SCStrings.info.regularGameTeamSizeUnsatisfied.rawValue.localized)
             }
         }
 
@@ -223,7 +223,7 @@ extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDel
                 cell.primaryLabel.text = checkListItems[1]
             case 1: // Leader nomination info
                 cell.leftLabel.text = SCStrings.emoji.info.rawValue
-                cell.primaryLabel.text = SCStrings.info.leaderNomination.rawValue
+                cell.primaryLabel.text = SCStrings.info.leaderNomination.rawValue.localized
             default:
                 break
             }
@@ -238,13 +238,27 @@ extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDel
 
             if GameMode.instance.getMode() == .miniGame {
                 if let bestRecord = Statistics.instance.getBestRecord() {
-                    cell.primaryLabel.text = "Best Record: " + String(bestRecord)
+                    cell.primaryLabel.text = String(
+                        format: SCStrings.primaryLabel.minigameStatistics.rawValue,
+                        SCStrings.primaryLabel.bestRecord.rawValue,
+                        String(bestRecord)
+                    )
                 } else {
-                    cell.primaryLabel.text = "Best Record: --"
+                    cell.primaryLabel.text = String(
+                        format: SCStrings.primaryLabel.minigameStatistics.rawValue,
+                        SCStrings.primaryLabel.bestRecord.rawValue.localized,
+                        SCStrings.primaryLabel.none.rawValue
+                    )
                 }
             } else {
                 let score = Statistics.instance.getScore()
-                cell.primaryLabel.text = "Red " + String(score[0]) + " : " + String(score[1]) + " Blue"
+                cell.primaryLabel.text = String(
+                    format: SCStrings.primaryLabel.regularGameStatistics.rawValue,
+                    SCStrings.primaryLabel.teamRed.rawValue.localized,
+                    String(score[0]),
+                    String(score[1]),
+                    SCStrings.primaryLabel.teamBlue.rawValue.localized
+                )
             }
 
             return cell
@@ -259,7 +273,7 @@ extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDel
 
                 cell.synchronizeToggle()
                 cell.primaryLabel.text = self.settingsLabels[.minigame]
-                cell.secondaryLabel.text = SCStrings.secondaryLabel.minigame.rawValue
+                cell.secondaryLabel.text = SCStrings.secondaryLabel.minigame.rawValue.localized
                 cell.delegate = self
 
                 return cell
@@ -271,7 +285,7 @@ extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDel
                 }
 
                 cell.primaryLabel.text = self.settingsLabels[.timer]
-                cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawValue
+                cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawValue.localized
                 cell.delegate = self
 
                 cell.synchronizeSetting()

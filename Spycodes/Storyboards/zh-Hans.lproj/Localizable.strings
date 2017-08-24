@@ -30,6 +30,22 @@
 "Ready" = "准备好了";
 "Cancel" = "取消";
 
+// Pregame Menu (Main)
+"Best Record" = "最佳纪录";
+"Info" = "信息";
+"Game Settings" = "游戏设置";
+"Minigame" = "迷你游戏";
+"Timer" = "计时器";
+"Statistics" = "统计";
+"Your team should have 2-3 players." = "你的队应该有2-3位队员.";
+"Your team currently has 2-3 players." = "你的队已有2-3位队员.";
+"Each team should have 2-4 players." = "每个队应该有2-3位队员.";
+"Each team currently has 2-4 players." = "每个队已有2-3位队员.";
+"2-3 players play as a team against the CPU." = "2-3位队员 vs CPU.";
+"Set a time duration for each round." = "设置每一轮的时间限制.";
+"Tap on a teammate to nominate as leader." = "点击一位队员即可提名做领袖.";
+"None" = "无启用";
+
 // Alerts
 "Returning to Main Menu" = "回到主页";
 "Host player has disconnected." = "房主掉线了.";
