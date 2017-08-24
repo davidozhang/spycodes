@@ -53,23 +53,23 @@ class SCMainSettingsViewController: SCModalViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .customize: SCStrings.section.customize.rawValue,
-        .about: SCStrings.section.about.rawValue,
-        .more: SCStrings.section.more.rawValue,
+        .customize: SCStrings.section.customize.rawValue.localized,
+        .about: SCStrings.section.about.rawValue.localized,
+        .more: SCStrings.section.more.rawValue.localized,
     ]
 
     fileprivate let customizeLabels: [CustomSetting: String] = [
-        .nightMode: SCStrings.primaryLabel.nightMode.rawValue,
-        .accessibility: SCStrings.primaryLabel.accessibility.rawValue,
+        .nightMode: SCStrings.primaryLabel.nightMode.rawValue.localized,
+        .accessibility: SCStrings.primaryLabel.accessibility.rawValue.localized,
     ]
 
     fileprivate let disclosureLabels: [Link: String] = [
-        .releaseNotes: SCStrings.primaryLabel.releaseNotes.rawValue,
-        .support: SCStrings.primaryLabel.support.rawValue,
-        .reviewApp: SCStrings.primaryLabel.reviewApp.rawValue,
-        .website: SCStrings.primaryLabel.website.rawValue,
-        .github: SCStrings.primaryLabel.github.rawValue,
-        .icons8: SCStrings.primaryLabel.icons8.rawValue,
+        .releaseNotes: SCStrings.primaryLabel.releaseNotes.rawValue.localized,
+        .support: SCStrings.primaryLabel.support.rawValue.localized,
+        .reviewApp: SCStrings.primaryLabel.reviewApp.rawValue.localized,
+        .website: SCStrings.primaryLabel.website.rawValue.localized,
+        .github: SCStrings.primaryLabel.github.rawValue.localized,
+        .icons8: SCStrings.primaryLabel.icons8.rawValue.localized,
     ]
 
     fileprivate var scrolled = false
@@ -229,6 +229,21 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
             ) as? SCTableViewCell else {
                 return SCTableViewCell()
             }
+
+            let attributedString = NSMutableAttributedString(
+                string: SCAppInfoManager.appVersion + " (\(SCAppInfoManager.buildNumber))"
+            )
+            attributedString.addAttribute(
+                NSFontAttributeName,
+                value: SCFonts.intermediateSizeFont(.medium) ?? 0,
+                range: NSMakeRange(
+                    SCAppInfoManager.appVersion.characters.count + 1,
+                    SCAppInfoManager.buildNumber.characters.count + 2
+                )
+            )
+
+            cell.primaryLabel.text = SCStrings.primaryLabel.version.rawValue.localized
+            cell.rightLabel.attributedText = attributedString
 
             return cell
         case Section.more.rawValue:

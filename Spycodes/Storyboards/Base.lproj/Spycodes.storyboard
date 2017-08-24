@@ -23,27 +23,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYZ-sL-kCY">
-                                <rect key="frame" x="438.5" y="510.5" width="147" height="291"/>
+                                <rect key="frame" x="465" y="510" width="94" height="292"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spy" translatesAutoresizingMaskIntoConstraints="NO" id="4mz-Ms-1Ld">
-                                        <rect key="frame" x="9.5" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="-17" y="0.0" width="128" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="olh-Nu-wzw"/>
                                             <constraint firstAttribute="height" constant="128" id="rNC-HL-uV8"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spycodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwp-LV-dpu" customClass="SCLargeLabel" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="36.5" y="128" width="75.5" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwp-LV-dpu" customClass="SCLogoLabel" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="26" y="128" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdj-Hd-5OI" customClass="SCButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="208" width="107" height="34"/>
+                                        <rect key="frame" x="20" y="209" width="54" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Ofo-gX-pWl"/>
                                         </constraints>
-                                        <state key="normal" title="Create Game">
+                                        <state key="normal" title="Button">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <variation key="default">
@@ -56,11 +56,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBi-9c-KRm" customClass="SCButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="257" width="107" height="34"/>
+                                        <rect key="frame" x="20" y="258" width="54" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="1hV-px-VJN"/>
                                         </constraints>
-                                        <state key="normal" title="Join Game">
+                                        <state key="normal" title="Button">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <variation key="default">
@@ -119,6 +119,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="createGameButton" destination="Mdj-Hd-5OI" id="2Rh-lv-Sxu"/>
+                        <outlet property="joinGameButton" destination="CBi-9c-KRm" id="dUo-jD-ddi"/>
+                        <outlet property="logoLabel" destination="kwp-LV-dpu" id="rpS-d7-Jwi"/>
                         <outlet property="modalPeekView" destination="nVj-tx-bo9" id="qlw-TL-Mg7"/>
                         <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
                         <segue destination="oCs-d3-UDI" kind="presentation" identifier="main-menu-modal" id="cpV-DQ-cDx"/>
@@ -190,14 +193,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZy-Cq-4CR" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="12" width="57" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZy-Cq-4CR" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="12" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0 (160)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ml8-t1-bfc" userLabel="Right Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="950" y="12.5" width="66" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ml8-t1-bfc" userLabel="Right Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="974" y="12.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -222,8 +225,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Support" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yin-hz-8gC" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="11" width="62" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yin-hz-8gC" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="11" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

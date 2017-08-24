@@ -1,3 +1,5 @@
+import Foundation
+
 extension String {
     var first: String {
         return String(characters.prefix(1))
@@ -10,19 +12,43 @@ extension String {
     var uppercasedFirst: String {
         return first.uppercased() + String(characters.dropFirst())
     }
+
+    var localized: String {
+        return NSLocalizedString(
+            self,
+            tableName: nil,
+            bundle: .main,
+            value: "",
+            comment: ""
+        )
+    }
+
+    func localized(comment: String) -> String {
+        return NSLocalizedString(
+            self,
+            tableName: nil,
+            bundle: .main,
+            value: "",
+            comment: comment
+        )
+    }
 }
 
 class SCStrings {
+    static let appName = "Spycodes"
+
     enum button: String {
         case showAnswer = "Show Answer"
         case cancel = "Cancel"
         case confirm = "Confirm"
+        case createGame = "Create Game"
         case dismiss = "Continue"
         case done = "Done"
         case endRound = "End Round"
         case gameAborted = "Aborted"
         case gameOver = "Game Over"
         case hideAnswer = "Hide Answer"
+        case joinGame = "Join Game"
         case returnToPregameRoom = "Return to Pregame Room"
         case ok = "OK"
     }
@@ -168,6 +194,7 @@ class SCStrings {
         case support = "Support"
         case teamEmptyState = "No players on the team."
         case timer = "Timer"
+        case version = "Version"
         case website = "Website"
     }
 

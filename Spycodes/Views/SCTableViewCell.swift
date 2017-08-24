@@ -49,26 +49,6 @@ class SCTableViewCell: UITableViewCell {
 
         self.backgroundColor = .clear
         self.selectionStyle = .none
-
-        if let reuseIdentifier = self.reuseIdentifier {
-            switch reuseIdentifier {
-            case SCConstants.identifier.versionViewCell.rawValue:
-                let attributedString = NSMutableAttributedString(
-                    string: SCAppInfoManager.appVersion + " (\(SCAppInfoManager.buildNumber))"
-                )
-                attributedString.addAttribute(
-                    NSFontAttributeName,
-                    value: SCFonts.intermediateSizeFont(.medium) ?? 0,
-                    range: NSMakeRange(
-                        SCAppInfoManager.appVersion.characters.count + 1,
-                        SCAppInfoManager.buildNumber.characters.count + 2
-                    )
-                )
-                self.rightLabel.attributedText = attributedString
-            default:
-                break
-            }
-        }
     }
 
     func setInputView(inputType: InputType) {

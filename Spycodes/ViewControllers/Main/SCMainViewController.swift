@@ -1,6 +1,10 @@
 import UIKit
 
 class SCMainViewController: SCViewController {
+    @IBOutlet weak var logoLabel: SCLogoLabel!
+    @IBOutlet weak var createGameButton: SCButton!
+    @IBOutlet weak var joinGameButton: SCButton!
+
     // MARK: Actions
     @IBAction func unwindToMainMenu(_ sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
@@ -35,6 +39,18 @@ class SCMainViewController: SCViewController {
                 self.showUpdateAppAlert()
             }
         })
+
+        self.logoLabel.text = SCStrings.appName.localized
+
+        self.createGameButton.setTitle(
+            SCStrings.button.createGame.rawValue.localized,
+            for: .normal
+        )
+
+        self.joinGameButton.setTitle(
+            SCStrings.button.joinGame.rawValue.localized,
+            for: .normal
+        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
