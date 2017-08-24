@@ -32,7 +32,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .categories: SCStrings.section.categories.rawValue,
+        .categories: SCStrings.section.categories.rawValue.localized,
     ]
 
     fileprivate var scrolled = false
@@ -134,7 +134,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
                 preferredStyle: .alert
             )
             let confirmAction = UIAlertAction(
-                title: SCStrings.button.ok.rawValue,
+                title: SCStrings.button.ok.rawValue.localized,
                 style: .default,
                 handler: nil
             )
@@ -154,8 +154,10 @@ class SCPregameMenuSecondaryViewController: SCViewController {
 
         if ConsolidatedCategories.instance.getTotalWords() < SCConstants.constant.cardCount.rawValue {
             self.showAlert(
-                title: SCStrings.header.minimumWords.rawValue,
-                reason: String(format: SCStrings.message.minimumWords.rawValue, SCConstants.constant.cardCount.rawValue),
+                title: SCStrings.header.minimumWords.rawValue.localized,
+                reason: String(
+                    format: SCStrings.message.minimumWords.rawValue,
+                    SCConstants.constant.cardCount.rawValue).localized,
                 completionHandler: {
                     if let failureHandler = failureHandler {
                         failureHandler()
@@ -360,10 +362,11 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                     }
 
                     cell.primaryLabel.text = String(
-                        format: SCStrings.primaryLabel.selectAll.rawValue,
-                        SCStrings.emoji.rocket.rawValue
+                        format: SCStrings.primaryLabel.category.rawValue,
+                        SCStrings.emoji.rocket.rawValue,
+                        SCStrings.primaryLabel.selectAll.rawValue.localized
                     )
-                    cell.secondaryLabel.text = SCStrings.secondaryLabel.selectAll.rawValue
+                    cell.secondaryLabel.text = SCStrings.secondaryLabel.selectAll.rawValue.localized
 
                     cell.synchronizeToggle()
                     cell.delegate = self
@@ -377,10 +380,11 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                     }
 
                     cell.primaryLabel.text = String(
-                        format: SCStrings.primaryLabel.persistentSelection.rawValue,
-                        SCStrings.emoji.setting.rawValue
+                        format: SCStrings.primaryLabel.category.rawValue,
+                        SCStrings.emoji.setting.rawValue,
+                        SCStrings.primaryLabel.persist.rawValue.localized
                     )
-                    cell.secondaryLabel.text = SCStrings.secondaryLabel.persistentSelection.rawValue
+                    cell.secondaryLabel.text = SCStrings.secondaryLabel.persistentSelection.rawValue.localized
 
                     cell.synchronizeToggle()
                     cell.delegate = self
@@ -400,12 +404,12 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                         cell.primaryLabel.text = String(
                             format: SCStrings.primaryLabel.category.rawValue,
                             emoji,
-                            categoryTuple.name
+                            categoryTuple.name.localized
                         )
                     } else {
                         cell.primaryLabel.text = String(
                             format: SCStrings.primaryLabel.categoryNoEmoji.rawValue,
-                            categoryTuple.name
+                            categoryTuple.name.localized
                         )
                     }
 
@@ -415,19 +419,19 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                             format: SCStrings.secondaryLabel.numberOfWordsCustomCategory.rawValue,
                             wordCount,
                             wordCount == 1 ?
-                                SCStrings.secondaryLabel.word.rawValue :
-                                SCStrings.secondaryLabel.words.rawValue,
+                                SCStrings.secondaryLabel.word.rawValue.localized :
+                                SCStrings.secondaryLabel.words.rawValue.localized,
                             self.ticker ?
-                                SCStrings.secondaryLabel.custom.rawValue :
-                                SCStrings.secondaryLabel.tapToEdit.rawValue
+                                SCStrings.secondaryLabel.custom.rawValue.localized :
+                                SCStrings.secondaryLabel.tapToEdit.rawValue.localized
                         )
                     } else {
                         cell.secondaryLabel.text = String(
                             format: SCStrings.secondaryLabel.numberOfWords.rawValue,
                             wordCount,
                             wordCount == 1 ?
-                                SCStrings.secondaryLabel.word.rawValue :
-                                SCStrings.secondaryLabel.words.rawValue
+                                SCStrings.secondaryLabel.word.rawValue.localized :
+                                SCStrings.secondaryLabel.words.rawValue.localized
                         )
                     }
                     
@@ -454,12 +458,12 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                 cell.primaryLabel.text = String(
                     format: SCStrings.primaryLabel.category.rawValue,
                     emoji,
-                    categoryString
+                    categoryString.localized
                 )
             } else {
                 cell.primaryLabel.text = String(
                     format: SCStrings.primaryLabel.categoryNoEmoji.rawValue,
-                    categoryString
+                    categoryString.localized
                 )
             }
 
@@ -470,17 +474,17 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                     format: SCStrings.secondaryLabel.numberOfWordsCustomCategory.rawValue,
                     wordCount,
                     wordCount == 1 ?
-                        SCStrings.secondaryLabel.word.rawValue :
-                        SCStrings.secondaryLabel.words.rawValue,
-                    SCStrings.secondaryLabel.custom.rawValue
+                        SCStrings.secondaryLabel.word.rawValue.localized :
+                        SCStrings.secondaryLabel.words.rawValue.localized,
+                    SCStrings.secondaryLabel.custom.rawValue.localized
                 )
             } else {
                 cell.secondaryLabel.text = String(
                     format: SCStrings.secondaryLabel.numberOfWords.rawValue,
                     wordCount,
                     wordCount == 1 ?
-                        SCStrings.secondaryLabel.word.rawValue :
-                        SCStrings.secondaryLabel.words.rawValue
+                        SCStrings.secondaryLabel.word.rawValue.localized :
+                        SCStrings.secondaryLabel.words.rawValue.localized
                 )
             }
 
@@ -498,8 +502,8 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !Player.instance.isHost() {
             self.showAlert(
-                title: SCStrings.header.hostOnly.rawValue,
-                reason: SCStrings.message.categorySetting.rawValue,
+                title: SCStrings.header.hostOnly.rawValue.localized,
+                reason: SCStrings.message.categorySetting.rawValue.localized,
                 completionHandler: nil
             )
         } else {

@@ -6,8 +6,8 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sectionLabels = [
-        Team.red: SCStrings.section.teamRed.rawValue,
-        Team.blue: SCStrings.section.teamBlue.rawValue
+        Team.red: SCStrings.section.teamRed.rawValue.localized,
+        Team.blue: SCStrings.section.teamBlue.rawValue.localized
     ]
 
     @IBOutlet weak var tableView: UITableView!
@@ -252,13 +252,13 @@ class SCPregameRoomViewController: SCViewController {
         case .notReady:
             self.broadcastEvent(.cancel)
             UIView.performWithoutAnimation {
-                self.readyButton.setTitle("Ready", for: .normal)
+                self.readyButton.setTitle(SCStrings.button.ready.rawValue.localized, for: .normal)
             }
             self.animateReadyButtonIfNeeded()
         case .ready:
             self.broadcastEvent(.ready)
             UIView.performWithoutAnimation {
-                self.readyButton.setTitle("Cancel", for: .normal)
+                self.readyButton.setTitle(SCStrings.button.cancel.rawValue.localized, for: .normal)
             }
             self.stopReadyButtonAnimation()
         }
@@ -299,7 +299,7 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         let alertController = UIAlertController(
-            title: SCStrings.header.returningToMainMenu.rawValue,
+            title: SCStrings.header.returningToMainMenu.rawValue.localized,
             message: reason,
             preferredStyle: .alert
         )
@@ -322,7 +322,7 @@ class SCPregameRoomViewController: SCViewController {
 
     fileprivate func checkRoom() {
         if !Room.instance.hasHost() {
-            self.returnToMainMenu(reason: SCStrings.message.hostDisconnected.rawValue)
+            self.returnToMainMenu(reason: SCStrings.message.hostDisconnected.rawValue.localized)
         }
 
         if !Player.instance.isHost() {
@@ -550,7 +550,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                     return SCTableViewCell()
             }
 
-            cell.primaryLabel.text = SCStrings.primaryLabel.teamEmptyState.rawValue
+            cell.primaryLabel.text = SCStrings.primaryLabel.teamEmptyState.rawValue.localized
 
             return cell
         }

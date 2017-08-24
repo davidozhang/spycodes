@@ -74,7 +74,7 @@ class SCPickerViewCell: SCTableViewCell {
                 self.textField.text = String(format: SCStrings.timer.minutes.rawValue, minutes)
                 self.pickerView.selectRow(minutes, inComponent: 0, animated: false)
             } else {
-                self.textField.text = SCStrings.timer.disabled.rawValue
+                self.textField.text = SCStrings.timer.disabled.rawValue.localized
                 self.pickerView.selectRow(SCPickerViewCell.disabledOptionRow, inComponent: 0, animated: false)
             }
         default:
