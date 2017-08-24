@@ -194,6 +194,7 @@ class SCStrings {
         case support = "Support"
         case teamEmptyState = "No players on the team."
         case timer = "Timer"
+        case version = "Version"
         case website = "Website"
     }
 
