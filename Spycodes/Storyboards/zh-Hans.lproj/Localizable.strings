@@ -22,3 +22,14 @@
 
 // Player Name
 "Your Name" = "你的名字";
+
+// Pregane Room
+"Team Red" = "红队";
+"Team Blue" = "蓝队";
+"No players on the team." = "队里无人.";
+"Ready" = "准备好了";
+"Cancel" = "取消";
+
+// Alerts
+"Returning to Main Menu" = "回到主页";
+"Host player has disconnected." = "房主掉线了.";

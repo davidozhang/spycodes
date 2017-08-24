@@ -49,6 +49,7 @@ class SCStrings {
         case gameOver = "Game Over"
         case hideAnswer = "Hide Answer"
         case joinGame = "Join Game"
+        case ready = "Ready"
         case returnToPregameRoom = "Return to Pregame Room"
         case ok = "OK"
     }
