@@ -46,6 +46,40 @@
 "Tap on a teammate to nominate as leader." = "点击一位队员即可提名做领袖.";
 "None" = "无启用";
 
+// Pregame Menu (Secondary)
+"Categories" = "分类";
+"Select All" = "全选";
+"Persist" = "保存";
+"All categories will be selected." = "所有的分类都会被选.";
+"Your current selections will be saved." = "你的所有选择都会被保存到存储.";
+"words" = "个字";
+"word" = "个字";
+"Custom" = "定制分类";
+"Tap to Edit" = "点击编辑";
+
 // Alerts
 "Returning to Main Menu" = "回到主页";
-"Host player has disconnected." = "房主掉线了.";
+"Host player has disconnected." = "房间主人掉线了.";
+"OK" = "确认";
+"Too Few Words" = "字数太少";
+"There must be a minimum of 22 words." = "至少需要22个字.";
+"Host Only Feature" = "房间主人的功能";
+"Only the host can toggle category settings." = "只有房间主人能够调节分类设置.";
+
+// Default Categories
+"Animals" = "动物";
+"Architecture" = "建筑";
+"Arts" = "艺术";
+"Body" = "身体";
+"Clothing" = "服饰";
+"Food & Drinks" = "饮食";
+"Game" = "游戏";
+"Garden" = "花园";
+"Items" = "小物品";
+"Miscellaneous" = "杂项";
+"Nature" = "自然";
+"People" = "人物";
+"Places" = "地方";
+"Space" = "宇宙";
+"Sports" = "体育";
+"Transportation" = "交通";
