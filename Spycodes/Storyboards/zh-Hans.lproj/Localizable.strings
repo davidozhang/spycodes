@@ -23,7 +23,7 @@
 // Player Name
 "Your Name" = "你的名字";
 
-// Pregane Room
+// Pregame Room
 "Team Red" = "红队";
 "Team Blue" = "蓝队";
 "No players on the team." = "队里无人.";
@@ -48,22 +48,52 @@
 "None" = "无启用";
 
 // Pregame Menu (Secondary)
-"Categories" = "分类";
+"Categories" = "单词分类";
 "Select All" = "全选";
 "Persist" = "保存";
-"All categories will be selected." = "所有的分类都会被选.";
-"Your current selections will be saved." = "你的所有选择都会被保存到存储.";
-"words" = "个字";
-"word" = "个字";
+"All categories will be selected." = "所有的单词分类都会被选.";
+"Your current selections will be saved." = "所有的分类选择都会被保存到存储.";
+"words" = "个单词";
+"word" = "个单词";
 "Custom" = "定制分类";
 "Tap to Edit" = "点击编辑";
+
+// Custom Category
+"Custom Category" = "定制分类";
+"Name" = "名称";
+"Emoji (Optional)" = "表情符号 (可选的)";
+"Add Word" = "加单词";
+"Delete Category" = "删除分类";
+"Settings" = "设置";
+"Word List" = "单词表";
+"Duplicate Word" = "重复单词";
+"The word is already in the list." = "单词表里已有这个单词.";
+"Category Name" = "分类名字";
+"Enter a category name" = "输入分类名称";
+"Words" = "个单词";
+"Word" = "个单词";
+"Empty Category" = "分类名称为空";
+"Category name cannot be empty." = "分类名称不能为空.";
+"Existing Category" = "此分类已存在";
+"The category name already exists." = "分类名称已经存在.";
+"Edit Word" = "编辑单词";
+"Empty Word" = "空的单词";
+"Word cannot be empty." = "单词不能为空.";
+"Integrity Check" = "完整性检查";
+"There must be at least 22 words for all selected categories." = "所有选择的分类一共需要至少22个单词.";
+"Category Word List" = "分类单词表";
+"The word list should contain at least 1 word." = "单词表至少需要1个单词.";
+"Confirm Deletion" = "确认删除";
+"Are you sure you want to delete the category?" = "确认删除此单词分类?";
 
 // Alerts
 "Returning to Main Menu" = "回到主页";
 "Host player has disconnected." = "房间主人掉线了.";
 "OK" = "确认";
-"Too Few Words" = "字数太少";
-"There must be a minimum of 22 words." = "至少需要22个字.";
+"Confirm" = "确认";
+"Cancel" = "取消";
+"Too Few Words" = "单词太少";
+"There must be a minimum of 22 words." = "至少需要22个单词.";
 "Host Only Feature" = "房间主人的功能";
 "Only the host can toggle category settings." = "只有房间主人能够调节分类设置.";
 
