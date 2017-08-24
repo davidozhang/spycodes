@@ -50,13 +50,17 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         let attributedString = NSMutableAttributedString(
-            string: SCStrings.header.accessCode.rawValue + Room.instance.getAccessCode()
+            string: String(
+                format: SCStrings.header.pregameRoom.rawValue,
+                SCStrings.header.accessCode.rawValue.localized,
+                Room.instance.getAccessCode()
+            )
         )
         attributedString.addAttribute(
             NSFontAttributeName,
             value: SCFonts.regularSizeFont(.bold) ?? 0,
             range: NSMakeRange(
-                SCStrings.header.accessCode.rawValue.characters.count,
+                SCStrings.header.accessCode.rawValue.localized.characters.count + 2,
                 SCConstants.constant.accessCodeLength.rawValue
             )
         )

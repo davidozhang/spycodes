@@ -1,6 +1,7 @@
 import UIKit
 
 class SCPlayerNameViewController: SCViewController {
+    @IBOutlet weak var headerLabel: SCNavigationBarLabel!
     @IBOutlet weak var userNameTextField: SCTextField!
     @IBOutlet weak var headerLabelTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var userNameTextFieldVerticalCenterConstraint: NSLayoutConstraint!
@@ -25,8 +26,12 @@ class SCPlayerNameViewController: SCViewController {
         // Unwindable view controller identifier
         self.unwindableIdentifier = SCConstants.identifier.playerName.rawValue
 
+        self.headerLabel.text = SCStrings.header.playerName.rawValue.localized
+
         if let name = Player.instance.getName(), name.characters.count > 0 {
             self.userNameTextField.text = name
+        } else {
+            self.userNameTextField.placeholder = SCStrings.header.playerName.rawValue.localized
         }
 
         self.userNameTextField.delegate = self

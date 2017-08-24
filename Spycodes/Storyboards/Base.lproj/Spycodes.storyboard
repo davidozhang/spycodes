@@ -304,14 +304,14 @@
                                     <action selector="onBackButtonTapped:" destination="RKo-Nr-UiC" eventType="touchUpInside" id="jX7-Xr-XmJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Access Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJJ-9X-JwH" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="461.5" y="31" width="101" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJJ-9X-JwH" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="491" y="31" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxf-jD-guR" customClass="SCStatusLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="487" y="60" width="50" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxf-jD-guR" customClass="SCStatusLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="491" y="60" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -426,6 +426,7 @@
                         <outlet property="cancelButton" destination="Oge-X0-89i" id="Geh-eJ-iTz"/>
                         <outlet property="cancelButtonHeightConstraint" destination="R9Q-Cm-zpW" id="pn0-Gk-dYf"/>
                         <outlet property="contentViewVerticalCenterConstraint" destination="vHl-l6-CkW" id="qfe-6c-P8R"/>
+                        <outlet property="headerLabel" destination="fJJ-9X-JwH" id="syO-eN-poW"/>
                         <outlet property="headerTopMarginConstraint" destination="Nzg-Tc-ti5" id="4lv-uj-zdY"/>
                         <outlet property="statusLabel" destination="Lxf-jD-guR" id="MYy-k5-4mw"/>
                         <outlet property="statusLabelTopMarginConstraint" destination="Jyf-ti-DR9" id="DjB-SB-1Nb"/>
@@ -476,8 +477,8 @@
                                     <action selector="onBackButtonTapped:" destination="oCE-jf-1fM" eventType="touchUpInside" id="id7-EV-RUW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPo-CD-ok9" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="470" y="31" width="84" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPo-CD-ok9" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="491" y="31" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -507,6 +508,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="headerLabel" destination="KPo-CD-ok9" id="nyV-6o-L0z"/>
                         <outlet property="headerLabelTopMarginConstraint" destination="LmF-O1-SiH" id="HBa-XQ-SoJ"/>
                         <outlet property="userNameTextField" destination="4s9-er-VpV" id="KFG-Mj-S6u"/>
                         <outlet property="userNameTextFieldVerticalCenterConstraint" destination="UwC-kY-pWD" id="dho-lO-OK1"/>
