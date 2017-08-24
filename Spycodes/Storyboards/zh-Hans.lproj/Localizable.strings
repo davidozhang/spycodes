@@ -1,3 +1,9 @@
+// Access Code
+"Access Code" = "房间代码";
+"Enter access code" = "输入代码";
+"Failed to join room" = "参与失败";
+"Joining room..." = "参与中...";
+
 // Main
 "Create Game" = "创建游戏";
 "Join Game" = "参与游戏";

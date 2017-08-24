@@ -97,7 +97,7 @@ class SCStrings {
     }
 
     enum header: String {
-        case accessCode = "Access Code: "
+        case accessCode = "Access Code"
         case categoryExists = "Existing Category"
         case categoryName = "Category Name"
         case categoryWordList = "Category Word List"
@@ -118,6 +118,7 @@ class SCStrings {
         case goal = "Goal"
         case guess = "Guessing Time"
         case playerName = "Your Name"
+        case pregameRoom = "%@: %@"
         case returningToMainMenu = "Returning to Main Menu"
         case roundEnd = "Round End"
         case minimumWords = "Too Few Words"

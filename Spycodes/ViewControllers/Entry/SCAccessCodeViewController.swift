@@ -22,6 +22,7 @@ class SCAccessCodeViewController: SCViewController {
     )
 
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var headerLabel: SCNavigationBarLabel!
     @IBOutlet weak var statusLabel: SCStatusLabel!
     @IBOutlet weak var textFieldsView: UIView!
     @IBOutlet weak var headerTopMarginConstraint: NSLayoutConstraint!
@@ -60,6 +61,8 @@ class SCAccessCodeViewController: SCViewController {
         self.unwindableIdentifier = SCConstants.identifier.accessCode.rawValue
 
         SCMultipeerManager.instance.delegate = self
+
+        self.headerLabel.text = SCStrings.header.accessCode.rawValue.localized
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? SCSingleCharacterTextField {
@@ -149,7 +152,7 @@ class SCAccessCodeViewController: SCViewController {
         self.timeoutTimer?.invalidate()
         SCMultipeerManager.instance.stopAdvertiser()
 
-        self.statusLabel.text = SCStrings.status.fail.rawValue
+        self.statusLabel.text = SCStrings.status.fail.rawValue.localized
 
         self.timeoutTimer = Foundation.Timer.scheduledTimer(
             timeInterval: SCAccessCodeViewController.shortTimeoutInterval,
@@ -217,7 +220,7 @@ class SCAccessCodeViewController: SCViewController {
 
     @objc
     fileprivate func restoreStatus() {
-        self.statusLabel.text = SCStrings.status.normal.rawValue
+        self.statusLabel.text = SCStrings.status.normal.rawValue.localized
         self.hideCancelButton(true)
     }
 
@@ -270,7 +273,7 @@ class SCAccessCodeViewController: SCViewController {
         self.startTime = Int(Date.timeIntervalSinceReferenceDate)
         self.showCancelButton()
 
-        self.statusLabel.text = SCStrings.status.pending.rawValue
+        self.statusLabel.text = SCStrings.status.pending.rawValue.localized
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? UITextField {
