@@ -28,6 +28,7 @@
 "Team Blue" = "蓝队";
 "No players on the team." = "队里无人.";
 "Ready" = "准备好了";
+"READY" = "准备完毕";
 "Cancel" = "取消";
 
 // Pregame Menu (Main)
