@@ -50,8 +50,6 @@ class SCAccessCodeViewController: SCViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.restoreStatus()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -82,6 +80,7 @@ class SCAccessCodeViewController: SCViewController {
         }
 
         self.hideCancelButton(true)
+        self.restoreStatus()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -309,7 +308,6 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
             )
 
             DispatchQueue.main.async(execute: {
-                self.restoreStatus()
                 self.performSegue(
                     withIdentifier: SCConstants.identifier.pregameRoom.rawValue,
                     sender: self
