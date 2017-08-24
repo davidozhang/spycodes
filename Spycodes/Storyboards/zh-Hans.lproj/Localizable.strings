@@ -1,12 +1,18 @@
+// Main
 "Create Game" = "创建游戏";
 "Join Game" = "参与游戏";
-"Customize" = "定制";
+
+// Main Settings
 "About" = "关于";
+"Accessibility" = "无障碍";
+"Customize" = "定制";
 "More" = "更多";
 "Night Mode" = "夜间模式";
-"Accessibility" = "无障碍";
 "Release Notes" = "发行说明";
-"Support" = "支持";
 "Review App" = "评论";
-"Website" = "网站";
+"Support" = "支持";
 "Version" = "版本";
+"Website" = "网站";
+
+// Player Name
+"Your Name" = "你的名字";

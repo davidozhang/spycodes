@@ -117,6 +117,7 @@ class SCStrings {
         case gameOver = "Game Over"
         case goal = "Goal"
         case guess = "Guessing Time"
+        case playerName = "Your Name"
         case returningToMainMenu = "Returning to Main Menu"
         case roundEnd = "Round End"
         case minimumWords = "Too Few Words"

@@ -476,8 +476,8 @@
                                     <action selector="onBackButtonTapped:" destination="oCE-jf-1fM" eventType="touchUpInside" id="id7-EV-RUW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPo-CD-ok9" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="470" y="31" width="84" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPo-CD-ok9" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="491" y="31" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -507,6 +507,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="headerLabel" destination="KPo-CD-ok9" id="nyV-6o-L0z"/>
                         <outlet property="headerLabelTopMarginConstraint" destination="LmF-O1-SiH" id="HBa-XQ-SoJ"/>
                         <outlet property="userNameTextField" destination="4s9-er-VpV" id="KFG-Mj-S6u"/>
                         <outlet property="userNameTextFieldVerticalCenterConstraint" destination="UwC-kY-pWD" id="dho-lO-OK1"/>
@@ -1930,6 +1931,6 @@
         <image name="Up-Arrow-Circled" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="N7R-5v-7k6"/>
+        <segue reference="7yd-xs-fux"/>
     </inferredMetricsTieBreakers>
 </document>
