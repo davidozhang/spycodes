@@ -95,6 +95,7 @@
 		633292261E7DE8B30090B09D /* SCTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTableViewCell.swift; path = Views/SCTableViewCell.swift; sourceTree = "<group>"; };
 		6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLocalStorageManager.swift; path = Managers/SCLocalStorageManager.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
+		63512E051F5083A400837032 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Spycodes.strings"; sourceTree = "<group>"; };
 		635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTimelineHeaderViewCell.swift; path = Views/SCTimelineHeaderViewCell.swift; sourceTree = "<group>"; };
 		635599B21F4DD35200508FE9 /* SCPregameMenuContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameMenuContainerViewController.swift; path = ViewControllers/Pregame/SCPregameMenuContainerViewController.swift; sourceTree = "<group>"; };
 		635599B31F4DD35200508FE9 /* SCPregameMenuMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameMenuMainViewController.swift; path = ViewControllers/Pregame/SCPregameMenuMainViewController.swift; sourceTree = "<group>"; };
@@ -613,6 +614,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				635599DA1F4E763D00508FE9 /* Base */,
+				63512E051F5083A400837032 /* zh-Hans */,
 			);
 			name = Spycodes.storyboard;
 			path = Storyboards;
