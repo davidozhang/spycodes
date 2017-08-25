@@ -96,12 +96,12 @@
 "a bystander" = "旁观者";
 "correctly selected" = "正确地选择了";
 "CPU selected" = "CPU 选择了";
-"No events yet." = "无活动.";
+"No events yet." = "没有事情发生.";
 "ended the game" = "结束了游戏";
 "ended the round" = "结束了一轮";
 "an enemy card" = "敌人的单词";
 "Game has been aborted." = "游戏已被中止.";
-"Game over" = "游戏结束";
+"Game over" = "游戏已结束";
 "lost" = "输了";
 "selected" = "选择了";
 "set the clue to" = "提供了线索";
