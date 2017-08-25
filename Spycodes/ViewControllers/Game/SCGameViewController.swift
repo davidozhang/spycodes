@@ -150,7 +150,7 @@ class SCGameViewController: SCViewController {
             repeats: true
         )
 
-        self.teamLabel.text = Player.instance.getTeam() == .red ? SCStrings.status.red.rawValue : SCStrings.status.blue.rawValue
+        self.teamLabel.text = Player.instance.getTeam() == .red ? SCStrings.status.red.rawValue.localized : SCStrings.status.blue.rawValue.localized
 
         if !Timer.instance.isEnabled() {
             self.bottomBarViewHeightConstraint.constant = self.bottomBarViewDefaultHeight
@@ -428,8 +428,8 @@ class SCGameViewController: SCViewController {
                 self.numberOfWordsTextField.isEnabled = false
             } else {
                 if Player.instance.isLeader() {
-                    self.clueTextField.text = SCStrings.round.defaultLeaderClue.rawValue
-                    self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue
+                    self.clueTextField.text = SCStrings.round.defaultLeaderClue.rawValue.localized
+                    self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue.localized
 
                     self.startTextFieldAnimations()
 
@@ -439,13 +439,13 @@ class SCGameViewController: SCViewController {
                     self.clueTextField.isEnabled = true
                     self.numberOfWordsTextField.isEnabled = true
                 } else {
-                    self.clueTextField.text = SCStrings.round.defaultIsTurnClue.rawValue
-                    self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue
+                    self.clueTextField.text = SCStrings.round.defaultIsTurnClue.rawValue.localized
+                    self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue.localized
                 }
             }
         } else {
-            self.clueTextField.text = SCStrings.round.defaultNonTurnClue.rawValue
-            self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue
+            self.clueTextField.text = SCStrings.round.defaultNonTurnClue.rawValue.localized
+            self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue.localized
         }
     }
 
@@ -507,7 +507,7 @@ class SCGameViewController: SCViewController {
         switch SCStates.getActionButtonState() {
         case .confirm:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.confirm.rawValue, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.confirm.rawValue.localized, for: UIControlState())
             }
 
             if !Player.instance.isLeader() ||
@@ -518,9 +518,9 @@ class SCGameViewController: SCViewController {
             if let clueTextFieldCharacterCount = self.clueTextField.text?.characters.count,
                let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.characters.count {
                 if clueTextFieldCharacterCount > 0 &&
-                   self.clueTextField.text != SCStrings.round.defaultLeaderClue.rawValue &&
+                   self.clueTextField.text != SCStrings.round.defaultLeaderClue.rawValue.localized &&
                    numberOfWordsTextFieldCharacterCount > 0 &&
-                   self.numberOfWordsTextField.text != SCStrings.round.defaultNumberOfWords.rawValue {
+                   self.numberOfWordsTextField.text != SCStrings.round.defaultNumberOfWords.rawValue.localized {
                     self.actionButton.isEnabled = true
                     self.startButtonAnimations()
                 } else {
@@ -530,7 +530,7 @@ class SCGameViewController: SCViewController {
             }
         case .endRound:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.endRound.rawValue, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.endRound.rawValue.localized, for: UIControlState())
             }
             self.stopButtonAnimations()
 
@@ -545,25 +545,25 @@ class SCGameViewController: SCViewController {
             }
         case .gameOver:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.gameOver.rawValue, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.gameOver.rawValue.localized, for: UIControlState())
             }
             self.stopButtonAnimations()
             self.disableActionButton()
         case .gameAborted:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.gameAborted.rawValue, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.gameAborted.rawValue.localized, for: UIControlState())
             }
             self.stopButtonAnimations()
             self.disableActionButton()
         case .showAnswer:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.showAnswer.rawValue, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.showAnswer.rawValue.localized, for: UIControlState())
             }
             self.stopButtonAnimations()
             self.enableActionButton()
         case .hideAnswer:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.hideAnswer.rawValue, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.hideAnswer.rawValue.localized, for: UIControlState())
             }
             self.stopButtonAnimations()
             self.enableActionButton()
@@ -677,19 +677,19 @@ class SCGameViewController: SCViewController {
 
     func displayEndGameAlert(title: String, reason: String, onDismissal: ((Void) -> Void)?) {
         let alertController = UIAlertController(
-            title: title,
-            message: reason,
+            title: title.localized,
+            message: reason.localized,
             preferredStyle: .alert
         )
         let returnAction = UIAlertAction(
-            title: SCStrings.button.returnToPregameRoom.rawValue,
+            title: SCStrings.button.returnToPregameRoom.rawValue.localized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 super.performUnwindSegue(false, completionHandler: nil)
             }
         )
         let dismissAction = UIAlertAction(
-            title: SCStrings.button.dismiss.rawValue,
+            title: SCStrings.button.dismiss.rawValue.localized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 if let onDismissal = onDismissal {
@@ -790,7 +790,7 @@ extension SCGameViewController: SCMultipeerManagerDelegate {
                         self.didEndGame(
                             SCStrings.header.gameOver.rawValue,
                             reason: String(
-                                format: SCStrings.message.minigameWinString.rawValue,
+                                format: SCStrings.message.minigameWinString.rawValue.localized,
                                 CardCollection.instance.getCardsRemainingForTeam(.blue)
                             ),
                             onDismissal: self.onGameOverDismissal
@@ -864,16 +864,16 @@ extension SCGameViewController: SCMultipeerManagerDelegate {
             self.dismissPresentedViewIfNeeded(completion: {
                 if player.isHost() {
                     let alertController = UIAlertController(
-                        title: SCStrings.header.returningToMainMenu.rawValue,
-                        message: SCStrings.message.hostDisconnected.rawValue,
+                        title: SCStrings.header.returningToMainMenu.rawValue.localized,
+                        message: SCStrings.message.hostDisconnected.rawValue.localized,
                         preferredStyle: .alert
                     )
                     let confirmAction = UIAlertAction(
-                        title: SCStrings.button.ok.rawValue,
+                        title: SCStrings.button.ok.rawValue.localized,
                         style: .default,
                         handler: { (action: UIAlertAction) in
                             super.performUnwindSegue(true, completionHandler: nil)
-                    }
+                        }
                     )
                     alertController.addAction(confirmAction)
                     self.present(
@@ -1048,7 +1048,7 @@ extension SCGameViewController: UICollectionViewDelegateFlowLayout, UICollection
                     self.didEndGame(
                         SCStrings.header.gameOver.rawValue,
                         reason: String(
-                            format: SCStrings.message.minigameWinString.rawValue,
+                            format: SCStrings.message.minigameWinString.rawValue.localized,
                             CardCollection.instance.getCardsRemainingForTeam(.blue)
                         ),
                         onDismissal: self.onGameOverDismissal
@@ -1113,14 +1113,14 @@ extension SCGameViewController: UITextFieldDelegate {
         self.leaderIsEditing = true
 
         if textField == self.clueTextField {
-            if textField.text == SCStrings.round.defaultLeaderClue.rawValue {
+            if textField.text == SCStrings.round.defaultLeaderClue.rawValue.localized {
                 textField.text = ""
-                textField.placeholder = SCStrings.round.defaultLeaderClue.rawValue
+                textField.placeholder = SCStrings.round.defaultLeaderClue.rawValue.localized
             }
         } else if textField == self.numberOfWordsTextField {
-            if textField.text == SCStrings.round.defaultNumberOfWords.rawValue {
+            if textField.text == SCStrings.round.defaultNumberOfWords.rawValue.localized {
                 textField.text = ""
-                textField.placeholder = SCStrings.round.defaultNumberOfWords.rawValue
+                textField.placeholder = SCStrings.round.defaultNumberOfWords.rawValue.localized
             }
         }
     }
@@ -1139,18 +1139,18 @@ extension SCGameViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text == "" {
             if textField == self.clueTextField {
-                self.clueTextField.text = SCStrings.round.defaultLeaderClue.rawValue
+                self.clueTextField.text = SCStrings.round.defaultLeaderClue.rawValue.localized
             } else if textField == self.numberOfWordsTextField {
-                self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue
+                self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue.localized
             }
         }
     }
 
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField == self.clueTextField {
-            textField.placeholder = SCStrings.round.defaultLeaderClue.rawValue
+            textField.placeholder = SCStrings.round.defaultLeaderClue.rawValue.localized
         } else if textField == self.numberOfWordsTextField {
-            textField.placeholder = SCStrings.round.defaultNumberOfWords.rawValue
+            textField.placeholder = SCStrings.round.defaultNumberOfWords.rawValue.localized
         }
         return true
     }
