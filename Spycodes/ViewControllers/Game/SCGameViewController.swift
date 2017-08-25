@@ -433,7 +433,9 @@ class SCGameViewController: SCViewController {
 
                     self.startTextFieldAnimations()
 
-                    SCStates.changeActionButtonState(to: .confirm)
+                    if SCStates.getActionButtonState() != .confirm {
+                        SCStates.changeActionButtonState(to: .confirm)
+                    }
                     self.clueTextField.isEnabled = true
                     self.numberOfWordsTextField.isEnabled = true
                 } else {
