@@ -96,6 +96,10 @@
 		6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLocalStorageManager.swift; path = Managers/SCLocalStorageManager.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
 		63512E051F5083A400837032 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Spycodes.strings"; sourceTree = "<group>"; };
+		63512E061F50A4F900837032 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		63512E071F50A4F900837032 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Spycodes.strings"; sourceTree = "<group>"; };
+		63512E081F50A4F900837032 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "Spycodes/Storyboards/zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		63512E0C1F50A58500837032 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTimelineHeaderViewCell.swift; path = Views/SCTimelineHeaderViewCell.swift; sourceTree = "<group>"; };
 		635599B21F4DD35200508FE9 /* SCPregameMenuContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameMenuContainerViewController.swift; path = ViewControllers/Pregame/SCPregameMenuContainerViewController.swift; sourceTree = "<group>"; };
 		635599B31F4DD35200508FE9 /* SCPregameMenuMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameMenuMainViewController.swift; path = ViewControllers/Pregame/SCPregameMenuMainViewController.swift; sourceTree = "<group>"; };
@@ -452,6 +456,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 63A04CF71D1A5713005A2914;
 			productRefGroup = 63A04D011D1A5713005A2914 /* Products */;
@@ -615,6 +620,7 @@
 			children = (
 				635599DA1F4E763D00508FE9 /* Base */,
 				63512E051F5083A400837032 /* zh-Hans */,
+				63512E071F50A4F900837032 /* zh-Hant */,
 			);
 			name = Spycodes.storyboard;
 			path = Storyboards;
@@ -624,6 +630,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				635599DD1F4E76CC00508FE9 /* Base */,
+				63512E061F50A4F900837032 /* zh-Hant */,
+				63512E0C1F50A58500837032 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			path = Storyboards;
@@ -634,6 +642,7 @@
 			children = (
 				635599E21F4E778E00508FE9 /* Base */,
 				635599E41F4E77B900508FE9 /* zh-Hans */,
+				63512E081F50A4F900837032 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			path = ..;

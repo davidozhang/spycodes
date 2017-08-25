@@ -1,0 +1,194 @@
+// Mapping from User-facing strings from SCStrings.swift
+
+// Button
+"Cancel" = "取消";
+"Confirm" = "確認";
+"Continue" = "繼續";
+"Create Game" = "創建遊戲";
+"Done" = "完成";
+"End Round" = "結束此輪";
+"Aborted" = "遊戲中止";
+"Game Over" = "遊戲結束";
+"Hide Answer" = "隱藏答案";
+"Join Game" = "參與遊戲";
+"OK" = "確認";
+"Ready" = "準備好了";
+"Return to Pregame Room" = "回到房間";
+"Show Answer" = "顯示答案";
+
+// Category
+"Animals" = "動物";
+"Architecture" = "建築";
+"Arts" = "藝術";
+"Body" = "身體";
+"Clothing" = "服飾";
+"Food & Drinks" = "飲食";
+"Game" = "遊戲";
+"Garden" = "花園";
+"Items" = "小物品";
+"Miscellaneous" = "雜項";
+"Nature" = "自然";
+"People" = "人物";
+"Places" = "地方";
+"Space" = "宇宙";
+"Sports" = "體育";
+"Transportation" = "交通";
+
+// Header
+"Access Code" = "房間代碼";
+"Existing Category" = "此分類已存在";
+"Category Name" = "分類名字";
+"Category Word List" = "分類單詞表";
+"Clue" = "線索";
+"Confirm" = "確認線索";
+"Confirm Deletion" = "確認刪除";
+"Duplicate Word" = "重複單詞";
+"Edit Word" = "編輯單詞";
+"Empty Category" = "空的分類名稱";
+"Empty Word" = "空的單詞";
+"Final Note" = "結尾";
+"Enter Clue" = "輸入線索";
+"Host Only Feature" = "房間主人的功能";
+"Integrity Check" = "完整性檢查";
+"Introduction" = "遊戲介紹";
+"Game Aborted" = "遊戲被中止";
+"Game Over" = "遊戲結束";
+"Goal" = "遊戲目標";
+"Guessing Time" = "猜單詞";
+"Your Name" = "你的名字";
+"Returning to Main Menu" = "回到主頁";
+"Round End" = "遊戲輪結束";
+"Too Few Words" = "單詞太少";
+"Update App" = "更新應用程序";
+"Waiting for Clue" = "等待線索";
+
+// Info
+"Tap on a teammate to nominate as leader." = "點擊一位隊員即可提名做領袖。";
+"Your team should have 2-3 players." = "你的隊應該有2-3位隊員。";
+"Your team currently has 2-3 players." = "你的隊已有2-3位隊員。";
+"Each team should have 2-4 players." = "每個隊應該有2-3位隊員。";
+"Each team currently has 2-4 players." = "每個隊已有2-3位隊員。";
+
+// Message
+"The category name already exists." = "分類名稱已經存在。";
+"Only the host can toggle category settings." = "只有房間主人能夠調節分類設置。";
+"The word list should contain at least 1 word." = "單詞表至少需要1個單詞。";
+"Your team lost!" = "你的隊輸了！";
+"Your team won!" = "你的隊贏了！";
+"Are you sure you want to delete the category?" = "確認刪除此分類？";
+"The word is already in the list." = "單詞表裡已有此單詞。";
+"Category name cannot be empty." = "分類名稱不能為空。";
+"Word cannot be empty." = "單詞不能為空。";
+"Enter a category name" = "輸入分類名稱";
+"Host player has disconnected." = "房間主人掉線了。";
+"There must be at least 22 words for all selected categories." = "所有選擇的分類一共需要至少22個單詞。";
+"Once you are comfortable with your clue and number, tap Confirm to allow your teammates to see the clue and number. The clue and number cannot be modified until the round ends. You cannot talk or make eye contact with your teammates!" = "點擊確認即可讓你的隊友看到你設置的線索。線索確認後不能被編輯。 請注意不能和隊友有任何的溝通，包括眼神！";
+"Look over the words belonging to your team carefully and enter a 1-word clue followed by a number. The number represents the amount of words corresponding to your clue. Your clue cannot be a word already in the game!" = "查看一下所有有關你的隊的單詞，然後輸入一個線索。線索包括一個單詞和一位數字。數字代表有多少單詞是和此線索有關的。線索不能是遊戲裡面的任何單詞！";
+"While guessing, your teammates can tap End Round at any time. If they guess the Assassin word, then it is Game Over. Guessing an enemy team word or a neutral word will end the round." = "你的隊員在猜單詞時可以隨時結束此輪。隊員猜到刺客會立即讓你的隊輸。猜到敵人或者旁觀者的單詞會結束此輪。";
+"As a leader, you will see a color coded version of all the words. Your goal is to provide clues that would allow your teammates to guess all of your team's words in as few rounds as possible." = "作為領袖，你看得到所有單詞的顏色。你的目標是讓你的隊友在最少的輪數裡猜到所有屬於你的隊的單詞。";
+"Your best record is based on the number of words remaining on the CPU team after each successful game. Try to aim for as high a number as possible!" = "你的最佳紀錄是根據CPU在遊戲結束時剩下的單詞。CPU剩下的單詞越多越好！";
+"You are currently playing a Minigame with your teammates on Team Red versus a CPU player on Team Blue. There are 22 words in total: 8 Red, 7 Blue, 6 Neutral (white) and 1 Assassin (black)." = "迷你游戲讓你的隊一起vs CPU隊。遊戲裡一共有22個單詞：8個紅色單詞，7個藍色單詞，6個旁觀者單詞（白色），1個刺客單詞（黑色）。";
+"After each round ends, the CPU automatically eliminates one of its words and hands the round back to your team. Your teammates must try to guess all of your team's words before the CPU finishes all of its words." = "每一輪結束後，CPU會自動選擇屬於它的一個單詞。你的隊員們需要在CPU淘汰所有單詞前猜對屬於你的隊的單詞。";
+"Your team won! There were %d opponent cards remaining. Great work!" = "你的隊贏了！敵人單詞還剩％d個。不錯！";
+"There must be a minimum of 22 words." = "至少需要22個單詞。";
+"A player in the game has aborted." = "一位玩家中止了遊戲。";
+"A 1-word clue and number will show at the top once your leader is done coming up with it. The number represents the amount of words corresponding to that clue. You cannot talk or make eye contact with your leader!" = "線索設置後會在屏幕上方顯示。數字代表有多少單詞與這個線索有關。你不能和領袖有任何溝通，包括眼神！";
+"A player in the game has disconnected." = "一位玩家斷了連接。";
+"As a regular player, your goal is to guess all the words belonging to your team in as few rounds as possible. You will be using the clues provided to you by your leader." = "你的目標是在最少的輪數里，利用領袖提供的線索猜到所有屬於你的隊的單詞。";
+"Now it is your turn to guess! You can tap End Round at any time. If your team guesses the Assassin word, then it is Game Over. Guessing an enemy team word or a neutral word will end the round." = "輪到你猜單詞的時候了！你可以在任何時候結束此輪。 如果你猜到刺客的單詞，你的隊就立即輸了。 如果猜到敵人或者旁觀者的單詞，此輪就結束了。";
+"While your leader is coming up with the clue for the current round, you can wait and look over the words." = "領袖在想出線索的時候，你可以查閱並熟悉所有的單詞。";
+"Your team's wins and losses are tracked after each game. Try to win as many games as possible!" = "你的隊的贏輸都會被記錄。你的隊要盡量贏更多！";
+"You are currently playing a regular game with your teammates. There are 22 words in total, including 6 Neutral (white) and 1 Assassin (black). Your team may get 7 or 8 starting words." = "遊戲裡一共有22個單詞：8個紅色單詞，7個藍色單詞，6個旁觀者單詞（白色），1個刺客單詞（黑色）你的隊在開始時可能有7個或著8個單詞。";
+"The other team will now follow the same process. Once they are done guessing they will hand the round back to your team. The round exchanges until one team guesses all of its words." = "另一個隊猜完後會把遊戲輪還給你的隊。兩個隊會輪流交替遊戲輪，直到其中一個隊猜到所有屬於它的單詞。";
+"Please download the latest version of Spycodes." = "請下載最新版本的應用程序。";
+
+// Player
+"CPU" = "CPU";
+"You" = "你";
+
+// Primary Label
+"Accessibility" = "無障礙";
+"Add Word" = "添加單詞";
+"Best Record" = "最佳紀錄";
+"Delete Category" = "刪除分類";
+"Emoji (Optional)" = "表情符號（可選的）";
+"Minigame" = "迷你遊戲";
+"Name" = "名稱";
+"Night Mode" = "夜間模式";
+"Persist" = "保存";
+"Release Notes" = "發行說明";
+"Review App" = "評論";
+"Select All" = "全選";
+"Support" = "支持";
+"Team Blue" = "藍色隊";
+"No players on the team." = "無隊員。";
+"Team Red" = "紅色隊";
+"Timer" = "計時器";
+"Version" = "版本";
+"Website" = "網站";
+
+// Round
+"Waiting for Clue" = "等待線索";
+"Enter Clue" = "輸入線索";
+"Not Your Turn" = "沒輪到你的隊";
+
+// Secondary Label
+"Custom" = "定制分類";
+"2-3 players play as a team against the CPU." = "2-3位隊員 vs CPU。";
+"Set a time duration for each round." = "設置每一輪的時間限制。";
+"Your current selections will be saved." = "所有的分類選擇都會被保存到存儲。";
+"All categories will be selected." = "所有的分類都會被選擇。";
+"Tap to Edit" = "點擊編輯";
+"word" = "個單詞";
+"words" = "個單詞";
+
+// Section
+"About" = "關於";
+"Categories" = "單詞分類";
+"Customize" = "定制";
+"Game Settings" = "遊戲設置";
+"Info" = "信息";
+"More" = "更多";
+"Settings" = "設置";
+"Statistics" = "統計";
+"Team Red" = "紅色隊";
+"Team Blue" = "藍色隊";
+"Timeline" = "時間軸";
+"Word" = "個單詞";
+"Words" = "個單詞";
+"Word List" = "單詞表";
+
+// Status
+"Blue" = "藍色隊";
+"Enter access code" = "輸入代碼";
+"Failed to join room" = "參與失敗";
+"Joining room..." = "参与中。。。";
+"Ready" = "準備好了";
+"READY" = "準備好了";
+"Red" = "紅色隊";
+
+// Timeline
+"&" = ", ";
+"the assassin" = "刺客";
+"a bystander" = "旁觀者";
+"correctly selected" = "正確地選擇了";
+"CPU selected" = "CPU 選擇了";
+"No events yet." = "無活動。";
+"ended the game" = "結束了遊戲";
+"ended the round" = "結束了一輪";
+"an enemy card" = "敵人的單詞";
+"Game has been aborted." = "遊戲已被中止。";
+"Game over" = "遊戲已結束";
+"lost" = "輸了";
+"selected" = "選擇了";
+"set the clue to" = "提供了線索";
+"Round has ended due to timer expiry." = "計時器到期，結束了一輪。";
+"Unknown event. Please update Spycodes!" = "未知的活動。請更新應用程序！";
+"won" = "贏了";
+"Your team" = "你的隊";
+
+// Timer
+"None" = "無啟用";
+
+// Misc
+"Custom Category" = "定制分類";
