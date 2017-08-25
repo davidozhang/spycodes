@@ -278,22 +278,29 @@ class SCStrings {
     }
 
     enum timeline: String {
+        case and = "&"
         case assassin = "the assassin"
         case bystander = "a bystander"
-        case correctlySelected = "%@ correctly selected '%@'."
-        case clueSetTo = "%@ set the clue to '%@ %@'."
-        case cpuSelected = "CPU selected '%@' & ended the round."
+        case correctlySelected = "correctly selected"
+        case correctlySelectedEvent = "%@ %@ '%@'."     // [Player] [correctly selected] '[Word]'.
+        case confirmEvent = "%@ %@ '%@ %@'."    // [Player] [set the clue to] '[Clue] [1]'.
+        case cpuSelected = "CPU selected"
+        case cpuSelectedEvent = "%@ '%@' %@ %@."    // [CPU selected] '[Word]' [&] [ended the round].
         case emptyState = "No events yet."
+        case endedGame = "ended the game"
+        case endedRound = "ended the round"
+        case endRoundEvent = "%@ %@."   // [Player] [ended the round].
         case enemy = "an enemy card"
-        case game = "game"
-        case gameAborted = "Game has been aborted."
-        case gameOver = "Game over. Your team %@."
+        case gameAbortedEvent = "Game has been aborted."
+        case gameOver = "Game over"
+        case gameOverEvent = "%@. %@ %@."   // [Game over]. [Your team] [won].
+        case incorrectlySelectedEvent = "%@ %@ %@ '%@' %@ %@."   // [Player] [selected] [an enemy card] '[Word]' [&] [ended the round].
         case lost = "lost"
-        case round = "round"
-        case roundEnded = "%@ ended the round."
-        case selected = "%@ selected %@ '%@' & ended the %@."
+        case selected = "selected"
+        case setClueTo = "set the clue to"
         case timerExpiry = "Round has ended due to timer expiry."
         case won = "won"
+        case yourTeam = "Your team"
     }
 
     enum timer: String {

@@ -86,6 +86,29 @@
 "Confirm Deletion" = "确认删除";
 "Are you sure you want to delete the category?" = "确认删除此单词分类?";
 
+// Player
+"You" = "你";
+
+// Timeline
+"Timeline" = "时间轴";
+"&" = ", ";
+"the assassin" = "刺客";
+"a bystander" = "旁观者";
+"correctly selected" = "正确地选择了";
+"CPU selected" = "CPU 选择了";
+"No events yet." = "无活动.";
+"ended the game" = "结束了游戏";
+"ended the round" = "结束了一轮";
+"an enemy card" = "敌人的单词";
+"Game has been aborted." = "游戏已被中止.";
+"Game over" = "游戏结束";
+"lost" = "输了";
+"selected" = "选择了";
+"set the clue to" = "提供了线索";
+"Round has ended due to timer expiry." = "计时器到期, 结束了一轮.";
+"won" = "赢了";
+"Your team" = "你的队";
+
 // Alerts
 "Returning to Main Menu" = "回到主页";
 "Host player has disconnected." = "房间主人掉线了.";
