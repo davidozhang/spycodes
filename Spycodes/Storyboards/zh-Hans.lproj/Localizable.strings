@@ -24,11 +24,11 @@
 "Your Name" = "你的名字";
 
 // Pregame Room
-"Team Red" = "红队";
-"Team Blue" = "蓝队";
-"No players on the team." = "队里无人.";
+"Team Red" = "红色队";
+"Team Blue" = "蓝色队";
+"No players on the team." = "无队员.";
 "Ready" = "准备好了";
-"READY" = "准备完毕";
+"READY" = "准备好了";
 "Cancel" = "取消";
 
 // Pregame Menu (Main)
@@ -51,7 +51,7 @@
 "Categories" = "单词分类";
 "Select All" = "全选";
 "Persist" = "保存";
-"All categories will be selected." = "所有的单词分类都会被选.";
+"All categories will be selected." = "所有的分类都会被选择.";
 "Your current selections will be saved." = "所有的分类选择都会被保存到存储.";
 "words" = "个单词";
 "word" = "个单词";
@@ -67,7 +67,7 @@
 "Settings" = "设置";
 "Word List" = "单词表";
 "Duplicate Word" = "重复单词";
-"The word is already in the list." = "单词表里已有这个单词.";
+"The word is already in the list." = "单词表里已有此单词.";
 "Category Name" = "分类名字";
 "Enter a category name" = "输入分类名称";
 "Words" = "个单词";
@@ -84,7 +84,7 @@
 "Category Word List" = "分类单词表";
 "The word list should contain at least 1 word." = "单词表至少需要1个单词.";
 "Confirm Deletion" = "确认删除";
-"Are you sure you want to delete the category?" = "确认删除此单词分类?";
+"Are you sure you want to delete the category?" = "确认删除此分类?";
 
 // Player
 "You" = "你";
@@ -96,7 +96,7 @@
 "a bystander" = "旁观者";
 "correctly selected" = "正确地选择了";
 "CPU selected" = "CPU 选择了";
-"No events yet." = "没有事情发生.";
+"No events yet." = "无活动.";
 "ended the game" = "结束了游戏";
 "ended the round" = "结束了一轮";
 "an enemy card" = "敌人的单词";
