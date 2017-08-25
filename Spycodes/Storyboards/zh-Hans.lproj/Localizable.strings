@@ -1,173 +1,22 @@
-// Access Code
-"Access Code" = "房间代码";
-"Enter access code" = "输入代码";
-"Failed to join room" = "参与失败";
-"Joining room..." = "参与中...";
-
-// Game
-"Waiting for Clue" = "等待线索";
-"Enter Clue" = "输入线索";
-"Not Your Turn" = "没轮到你的队";
-"Red" = "红色队";
-"Blue" = "蓝色队";
-
-// Help
-"Once you are comfortable with your clue and number, tap Confirm to allow your teammates to see the clue and number. The clue and number cannot be modified until the round ends. You cannot talk or make eye contact with your teammates!" = "点击确认即可让你的队友看到你设置的线索. 线索确认后不能被编辑. 请注意不能和队友有任何的沟通, 包括眼神!";
-"Look over the words belonging to your team carefully and enter a 1-word clue followed by a number. The number represents the amount of words corresponding to your clue. Your clue cannot be a word already in the game!" = "查阅一下所有有关你的队的单词, 然后输入一个线索. 线索包括一个单词和一位数字. 数字代表有多少单词是和此线索有关的. 线索不能是游戏里面的任何单词!";
-"While guessing, your teammates can tap End Round at any time. If they guess the Assassin word, then it is Game Over. Guessing an enemy team word or a neutral word will end the round." = "你的队员在猜单词时可以随时结束此轮. 队员猜到刺客会立即让你的队输. 猜到敌人或者旁观者的单词会结束此轮.";
-"As a leader, you will see a color coded version of all the words. Your goal is to provide clues that would allow your teammates to guess all of your team's words in as few rounds as possible." = "作为领袖,你看得到所有单词的颜色. 你的目标是让你的队友在最少的轮数里猜到所有属于你的队的单词.";
-"Your best record is based on the number of words remaining on the CPU team after each successful game. Try to aim for as high a number as possible!" = "你的最佳纪录是根据CPU在游戏结束时剩下的单词.CPU剩下的单词越多越好！";
-"You are currently playing a Minigame with your teammates on Team Red versus a CPU player on Team Blue. There are 22 words in total: 8 Red, 7 Blue, 6 Neutral (white) and 1 Assassin (black)." = "迷你游戏让你的队一起 vs CPU队. 游戏里一共有22个单词: 8个红色单词, 7个蓝色单词, 6个旁观者单词(白色), 1个刺客单词(黑色).";
-"After each round ends, the CPU automatically eliminates one of its words and hands the round back to your team. Your teammates must try to guess all of your team's words before the CPU finishes all of its words." = "每一轮结束后, CPU会自动选择属于它的一个单词. 你的队员们需要在CPU淘汰所有单词前猜对属于你的队的单词.";
-"A 1-word clue and number will show at the top once your leader is done coming up with it. The number represents the amount of words corresponding to that clue. You cannot talk or make eye contact with your leader!" = "线索设置后会在屏幕上方显示. 数字代表有多少单词与这个线索有关. 你不能和领袖有任何沟通, 包括眼神!";
-"As a regular player, your goal is to guess all the words belonging to your team in as few rounds as possible. You will be using the clues provided to you by your leader." = "你的目标是在最少的轮数里, 利用领袖提供的线索猜到所有属于你的队的单词.";
-"Now it is your turn to guess! You can tap End Round at any time. If your team guesses the Assassin word, then it is Game Over. Guessing an enemy team word or a neutral word will end the round." = "轮到你猜单词的时候了!你可以在任何时候结束此轮. 如果你猜到刺客的单词, 你的队就立即输了. 如果猜到敌人或者旁观者的单词, 此轮就结束了.";
-"While your leader is coming up with the clue for the current round, you can wait and look over the words." = "领袖在想出线索的时候, 你可以查阅并熟悉所有的单词.";
-"Your team's wins and losses are tracked after each game. Try to win as many games as possible!" = "你的队的赢输都会被记录. 你的队要尽量赢更多!";
-"You are currently playing a regular game with your teammates. There are 22 words in total, including 6 Neutral (white) and 1 Assassin (black). Your team may get 7 or 8 starting words." = "游戏里一共有22个单词: 8个红色单词, 7个蓝色单词, 6个旁观者单词(白色), 1个刺客单词(黑色). 你的队在开始时可能有7个或着8个单词.";
-"The other team will now follow the same process. Once they are done guessing they will hand the round back to your team. The round exchanges until one team guesses all of its words." = "另一个队猜完后会把游戏轮还给你的队. 两个队会轮流交替游戏轮, 直到其中一个队猜到所有属于它的单词.";
-"Introduction" = "游戏介绍";
-"Goal" = "游戏目标";
-"Enter Clue" = "输入线索";
-"Confirm" = "确认线索";
-"Guessing Time" = "猜单词";
-"Round End" = "游戏轮结束";
-"Final Note" = "结尾";
-
-// Main
-"Create Game" = "创建游戏";
-"Join Game" = "参与游戏";
-
-// Main Settings
-"About" = "关于";
-"Accessibility" = "无障碍";
-"Customize" = "定制";
-"More" = "更多";
-"Night Mode" = "夜间模式";
-"Release Notes" = "发行说明";
-"Review App" = "评论";
-"Support" = "支持";
-"Version" = "版本";
-"Website" = "网站";
-
-// Player Name
-"Your Name" = "你的名字";
-
-// Pregame Room
-"Team Red" = "红色队";
-"Team Blue" = "蓝色队";
-"No players on the team." = "无队员.";
-"Ready" = "准备好了";
-"READY" = "准备好了";
-"Cancel" = "取消";
-
-// Pregame Menu (Main)
-"Best Record" = "最佳纪录";
-"Info" = "信息";
-"Game Settings" = "游戏设置";
-"Minigame" = "迷你游戏";
-"Timer" = "计时器";
-"Statistics" = "统计";
-"Your team should have 2-3 players." = "你的队应该有2-3位队员.";
-"Your team currently has 2-3 players." = "你的队已有2-3位队员.";
-"Each team should have 2-4 players." = "每个队应该有2-3位队员.";
-"Each team currently has 2-4 players." = "每个队已有2-3位队员.";
-"2-3 players play as a team against the CPU." = "2-3位队员 vs CPU.";
-"Set a time duration for each round." = "设置每一轮的时间限制.";
-"Tap on a teammate to nominate as leader." = "点击一位队员即可提名做领袖.";
-"None" = "无启用";
-
-// Pregame Menu (Secondary)
-"Categories" = "单词分类";
-"Select All" = "全选";
-"Persist" = "保存";
-"All categories will be selected." = "所有的分类都会被选择.";
-"Your current selections will be saved." = "所有的分类选择都会被保存到存储.";
-"words" = "个单词";
-"word" = "个单词";
-"Custom" = "定制分类";
-"Tap to Edit" = "点击编辑";
-
-// Custom Category
-"Custom Category" = "定制分类";
-"Name" = "名称";
-"Emoji (Optional)" = "表情符号 (可选的)";
-"Add Word" = "加单词";
-"Delete Category" = "删除分类";
-"Settings" = "设置";
-"Word List" = "单词表";
-"Duplicate Word" = "重复单词";
-"The word is already in the list." = "单词表里已有此单词.";
-"Category Name" = "分类名字";
-"Enter a category name" = "输入分类名称";
-"Words" = "个单词";
-"Word" = "个单词";
-"Empty Category" = "分类名称为空";
-"Category name cannot be empty." = "分类名称不能为空.";
-"Existing Category" = "此分类已存在";
-"The category name already exists." = "分类名称已经存在.";
-"Edit Word" = "编辑单词";
-"Empty Word" = "空的单词";
-"Word cannot be empty." = "单词不能为空.";
-"Integrity Check" = "完整性检查";
-"There must be at least 22 words for all selected categories." = "所有选择的分类一共需要至少22个单词.";
-"Category Word List" = "分类单词表";
-"The word list should contain at least 1 word." = "单词表至少需要1个单词.";
-"Confirm Deletion" = "确认删除";
-"Are you sure you want to delete the category?" = "确认删除此分类?";
-
-// Player
-"You" = "你";
-
-// Timeline
-"Timeline" = "时间轴";
-"&" = ", ";
-"the assassin" = "刺客";
-"a bystander" = "旁观者";
-"correctly selected" = "正确地选择了";
-"CPU selected" = "CPU 选择了";
-"No events yet." = "无活动.";
-"ended the game" = "结束了游戏";
-"ended the round" = "结束了一轮";
-"an enemy card" = "敌人的单词";
-"Game has been aborted." = "游戏已被中止.";
-"Game over" = "游戏已结束";
-"lost" = "输了";
-"selected" = "选择了";
-"set the clue to" = "提供了线索";
-"Round has ended due to timer expiry." = "计时器到期, 结束了一轮.";
-"won" = "赢了";
-"Your team" = "你的队";
-
-// Alerts
-"Returning to Main Menu" = "回到主页";
-"Host player has disconnected." = "房间主人掉线了.";
-"Too Few Words" = "单词太少";
-"There must be a minimum of 22 words." = "至少需要22个单词.";
-"Host Only Feature" = "房间主人的功能";
-"Only the host can toggle category settings." = "只有房间主人能够调节分类设置.";
-"Your team lost!" = "你的队输了!";
-"Your team won!" = "你的队赢了!";
-"Game Aborted" = "游戏被中止";
-"A player in the game has aborted." = "一位玩家中止了游戏.";
-"A player in the game has disconnected." = "一位玩家断了连接.";
-"Game Over" = "游戏结束";
-"Your team won! There were %d opponent cards remaining. Great work!" = "你的队赢了！敌人单词还剩%d个. 不错!";
-"Please download the latest version of Spycodes." = "请下载最新版本的app.";
+// Mapping from User-facing strings from SCStrings.swift
 
 // Button
-"OK" = "确认";
-"Confirm" = "确认";
 "Cancel" = "取消";
-"End Round" = "结束此轮";
-"Game Over" = "游戏结束";
-"Aborted" = "游戏中止";
-"Show Answer" = "显示答案";
-"Hide Answer" = "隐藏答案";
-"Return to Pregame Room" = "回到房间";
+"Confirm" = "确认";
 "Continue" = "继续";
+"Create Game" = "创建游戏";
+"Done" = "完成";
+"End Round" = "结束此轮";
+"Aborted" = "游戏中止";
+"Game Over" = "游戏结束";
+"Hide Answer" = "隐藏答案";
+"Join Game" = "参与游戏";
+"OK" = "确认";
+"Ready" = "准备好了";
+"Return to Pregame Room" = "回到房间";
+"Show Answer" = "显示答案";
 
-// Default Categories
+// Category
 "Animals" = "动物";
 "Architecture" = "建筑";
 "Arts" = "艺术";
@@ -184,3 +33,162 @@
 "Space" = "宇宙";
 "Sports" = "体育";
 "Transportation" = "交通";
+
+// Header
+"Access Code" = "房间代码";
+"Existing Category" = "此分类已存在";
+"Category Name" = "分类名字";
+"Category Word List" = "分类单词表";
+"Clue" = "线索";
+"Confirm" = "确认线索";
+"Confirm Deletion" = "确认删除";
+"Duplicate Word" = "重复单词";
+"Edit Word" = "编辑单词";
+"Empty Category" = "空的分类名称";
+"Empty Word" = "空的单词";
+"Final Note" = "结尾";
+"Enter Clue" = "输入线索";
+"Host Only Feature" = "房间主人的功能";
+"Integrity Check" = "完整性检查";
+"Introduction" = "游戏介绍";
+"Game Aborted" = "游戏被中止";
+"Game Over" = "游戏结束";
+"Goal" = "游戏目标";
+"Guessing Time" = "猜单词";
+"Your Name" = "你的名字";
+"Returning to Main Menu" = "回到主页";
+"Round End" = "游戏轮结束";
+"Too Few Words" = "单词太少";
+"Update App" = "更新App";
+"Waiting for Clue" = "等待线索";
+
+// Info
+"Tap on a teammate to nominate as leader." = "点击一位队员即可提名做领袖.";
+"Your team should have 2-3 players." = "你的队应该有2-3位队员.";
+"Your team currently has 2-3 players." = "你的队已有2-3位队员.";
+"Each team should have 2-4 players." = "每个队应该有2-3位队员.";
+"Each team currently has 2-4 players." = "每个队已有2-3位队员.";
+
+// Message
+"The category name already exists." = "分类名称已经存在.";
+"Only the host can toggle category settings." = "只有房间主人能够调节分类设置.";
+"The word list should contain at least 1 word." = "单词表至少需要1个单词.";
+"Your team lost!" = "你的队输了!";
+"Your team won!" = "你的队赢了!";
+"Are you sure you want to delete the category?" = "确认删除此分类?";
+"The word is already in the list." = "单词表里已有此单词.";
+"Category name cannot be empty." = "分类名称不能为空.";
+"Word cannot be empty." = "单词不能为空.";
+"Enter a category name" = "输入分类名称";
+"Host player has disconnected." = "房间主人掉线了.";
+"There must be at least 22 words for all selected categories." = "所有选择的分类一共需要至少22个单词.";
+"Once you are comfortable with your clue and number, tap Confirm to allow your teammates to see the clue and number. The clue and number cannot be modified until the round ends. You cannot talk or make eye contact with your teammates!" = "点击确认即可让你的队友看到你设置的线索. 线索确认后不能被编辑. 请注意不能和队友有任何的沟通, 包括眼神!";
+"Look over the words belonging to your team carefully and enter a 1-word clue followed by a number. The number represents the amount of words corresponding to your clue. Your clue cannot be a word already in the game!" = "查阅一下所有有关你的队的单词, 然后输入一个线索. 线索包括一个单词和一位数字. 数字代表有多少单词是和此线索有关的. 线索不能是游戏里面的任何单词!";
+"While guessing, your teammates can tap End Round at any time. If they guess the Assassin word, then it is Game Over. Guessing an enemy team word or a neutral word will end the round." = "你的队员在猜单词时可以随时结束此轮. 队员猜到刺客会立即让你的队输. 猜到敌人或者旁观者的单词会结束此轮.";
+"As a leader, you will see a color coded version of all the words. Your goal is to provide clues that would allow your teammates to guess all of your team's words in as few rounds as possible." = "作为领袖,你看得到所有单词的颜色. 你的目标是让你的队友在最少的轮数里猜到所有属于你的队的单词.";
+"Your best record is based on the number of words remaining on the CPU team after each successful game. Try to aim for as high a number as possible!" = "你的最佳纪录是根据CPU在游戏结束时剩下的单词.CPU剩下的单词越多越好！";
+"You are currently playing a Minigame with your teammates on Team Red versus a CPU player on Team Blue. There are 22 words in total: 8 Red, 7 Blue, 6 Neutral (white) and 1 Assassin (black)." = "迷你游戏让你的队一起 vs CPU队. 游戏里一共有22个单词: 8个红色单词, 7个蓝色单词, 6个旁观者单词(白色), 1个刺客单词(黑色).";
+"After each round ends, the CPU automatically eliminates one of its words and hands the round back to your team. Your teammates must try to guess all of your team's words before the CPU finishes all of its words." = "每一轮结束后, CPU会自动选择属于它的一个单词. 你的队员们需要在CPU淘汰所有单词前猜对属于你的队的单词.";
+"Your team won! There were %d opponent cards remaining. Great work!" = "你的队赢了！敌人单词还剩%d个. 不错!";
+"There must be a minimum of 22 words." = "至少需要22个单词.";
+"A player in the game has aborted." = "一位玩家中止了游戏.";
+"A 1-word clue and number will show at the top once your leader is done coming up with it. The number represents the amount of words corresponding to that clue. You cannot talk or make eye contact with your leader!" = "线索设置后会在屏幕上方显示. 数字代表有多少单词与这个线索有关. 你不能和领袖有任何沟通, 包括眼神!";
+"A player in the game has disconnected." = "一位玩家断了连接.";
+"As a regular player, your goal is to guess all the words belonging to your team in as few rounds as possible. You will be using the clues provided to you by your leader." = "你的目标是在最少的轮数里, 利用领袖提供的线索猜到所有属于你的队的单词.";
+"Now it is your turn to guess! You can tap End Round at any time. If your team guesses the Assassin word, then it is Game Over. Guessing an enemy team word or a neutral word will end the round." = "轮到你猜单词的时候了!你可以在任何时候结束此轮. 如果你猜到刺客的单词, 你的队就立即输了. 如果猜到敌人或者旁观者的单词, 此轮就结束了.";
+"While your leader is coming up with the clue for the current round, you can wait and look over the words." = "领袖在想出线索的时候, 你可以查阅并熟悉所有的单词.";
+"Your team's wins and losses are tracked after each game. Try to win as many games as possible!" = "你的队的赢输都会被记录. 你的队要尽量赢更多!";
+"You are currently playing a regular game with your teammates. There are 22 words in total, including 6 Neutral (white) and 1 Assassin (black). Your team may get 7 or 8 starting words." = "游戏里一共有22个单词: 8个红色单词, 7个蓝色单词, 6个旁观者单词(白色), 1个刺客单词(黑色). 你的队在开始时可能有7个或着8个单词.";
+"The other team will now follow the same process. Once they are done guessing they will hand the round back to your team. The round exchanges until one team guesses all of its words." = "另一个队猜完后会把游戏轮还给你的队. 两个队会轮流交替游戏轮, 直到其中一个队猜到所有属于它的单词.";
+"Please download the latest version of Spycodes." = "请下载最新版本的App.";
+
+// Player
+"CPU" = "CPU";
+"You" = "你";
+
+// Primary Label
+"Accessibility" = "无障碍";
+"Add Word" = "添加单词";
+"Best Record" = "最佳纪录";
+"Delete Category" = "删除分类";
+"Emoji (Optional)" = "表情符号 (可选的)";
+"Minigame" = "迷你游戏";
+"Name" = "名称";
+"Night Mode" = "夜间模式";
+"Persist" = "保存";
+"Release Notes" = "发行说明";
+"Review App" = "评论";
+"Select All" = "全选";
+"Support" = "支持";
+"Team Blue" = "蓝色队";
+"No players on the team." = "无队员.";
+"Team Red" = "红色队";
+"Timer" = "计时器";
+"Version" = "版本";
+"Website" = "网站";
+
+// Round
+"Waiting for Clue" = "等待线索";
+"Enter Clue" = "输入线索";
+"Not Your Turn" = "没轮到你的队";
+
+// Secondary Label
+"Custom" = "定制分类";
+"2-3 players play as a team against the CPU." = "2-3位队员 vs CPU.";
+"Set a time duration for each round." = "设置每一轮的时间限制.";
+"Your current selections will be saved." = "所有的分类选择都会被保存到存储.";
+"All categories will be selected." = "所有的分类都会被选择.";
+"Tap to Edit" = "点击编辑";
+"word" = "个单词";
+"words" = "个单词";
+
+// Section
+"About" = "关于";
+"Categories" = "单词分类";
+"Customize" = "定制";
+"Game Settings" = "游戏设置";
+"Info" = "信息";
+"More" = "更多";
+"Settings" = "设置";
+"Statistics" = "统计";
+"Team Red" = "红色队";
+"Team Blue" = "蓝色队";
+"Timeline" = "时间轴";
+"Word" = "个单词";
+"Words" = "个单词";
+"Word List" = "单词表";
+
+// Status
+"Blue" = "蓝色队";
+"Enter access code" = "输入代码";
+"Failed to join room" = "参与失败";
+"Joining room..." = "参与中...";
+"Ready" = "准备好了";
+"READY" = "准备好了";
+"Red" = "红色队";
+
+// Timeline
+"&" = ", ";
+"the assassin" = "刺客";
+"a bystander" = "旁观者";
+"correctly selected" = "正确地选择了";
+"CPU selected" = "CPU 选择了";
+"No events yet." = "无活动.";
+"ended the game" = "结束了游戏";
+"ended the round" = "结束了一轮";
+"an enemy card" = "敌人的单词";
+"Game has been aborted." = "游戏已被中止.";
+"Game over" = "游戏已结束";
+"lost" = "输了";
+"selected" = "选择了";
+"set the clue to" = "提供了线索";
+"Round has ended due to timer expiry." = "计时器到期, 结束了一轮.";
+"Unknown event. Please update Spycodes!" = "未知的活动. 请更新App!";
+"won" = "赢了";
+"Your team" = "你的队";
+
+// Timer
+"None" = "无启用";
+
+// Misc
+"Custom Category" = "定制分类";

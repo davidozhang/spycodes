@@ -299,7 +299,7 @@ extension SCTimelineViewController: UITableViewDataSource, UITableViewDelegate {
         case .gameAborted:
             baseString = SCStrings.timeline.gameAbortedEvent.rawValue.localized
         default:
-            break
+            baseString = SCStrings.timeline.unknownEvent.rawValue.localized
         }
 
         // Apply attributed string decorations here if applicable

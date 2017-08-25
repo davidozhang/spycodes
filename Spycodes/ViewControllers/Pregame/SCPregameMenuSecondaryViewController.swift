@@ -129,8 +129,8 @@ class SCPregameMenuSecondaryViewController: SCViewController {
     fileprivate func showAlert(title: String, reason: String, completionHandler: ((Void) -> Void)?) {
         DispatchQueue.main.async {
             let alertController = UIAlertController(
-                title: title,
-                message: reason,
+                title: title.localized,
+                message: reason.localized,
                 preferredStyle: .alert
             )
             let confirmAction = UIAlertAction(
@@ -154,10 +154,8 @@ class SCPregameMenuSecondaryViewController: SCViewController {
 
         if ConsolidatedCategories.instance.getTotalWords() < SCConstants.constant.cardCount.rawValue {
             self.showAlert(
-                title: SCStrings.header.minimumWords.rawValue.localized,
-                reason: String(
-                    format: SCStrings.message.minimumWords.rawValue,
-                    SCConstants.constant.cardCount.rawValue).localized,
+                title: SCStrings.header.minimumWords.rawValue,
+                reason: SCStrings.message.minimumWords.rawValue,
                 completionHandler: {
                     if let failureHandler = failureHandler {
                         failureHandler()
@@ -502,8 +500,8 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !Player.instance.isHost() {
             self.showAlert(
-                title: SCStrings.header.hostOnly.rawValue.localized,
-                reason: SCStrings.message.categorySetting.rawValue.localized,
+                title: SCStrings.header.hostOnly.rawValue,
+                reason: SCStrings.message.categorySetting.rawValue,
                 completionHandler: nil
             )
         } else {
