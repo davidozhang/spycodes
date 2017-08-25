@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main Menu View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="main-menu-view-controller" id="BYZ-38-t0r" customClass="SCMainMenuViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="main-menu-view-controller" id="BYZ-38-t0r" customClass="SCMainViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -23,27 +23,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYZ-sL-kCY">
-                                <rect key="frame" x="438.5" y="510.5" width="147" height="291"/>
+                                <rect key="frame" x="465" y="510" width="94" height="292"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spy" translatesAutoresizingMaskIntoConstraints="NO" id="4mz-Ms-1Ld">
-                                        <rect key="frame" x="9.5" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="-17" y="0.0" width="128" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="olh-Nu-wzw"/>
                                             <constraint firstAttribute="height" constant="128" id="rNC-HL-uV8"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spycodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwp-LV-dpu" customClass="SCLargeLabel" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="36.5" y="128" width="75.5" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwp-LV-dpu" customClass="SCLogoLabel" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="26" y="128" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdj-Hd-5OI" customClass="SCButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="208" width="107" height="34"/>
+                                        <rect key="frame" x="20" y="209" width="54" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Ofo-gX-pWl"/>
                                         </constraints>
-                                        <state key="normal" title="Create Game">
+                                        <state key="normal" title="Button">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <variation key="default">
@@ -56,11 +56,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBi-9c-KRm" customClass="SCButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="257" width="107" height="34"/>
+                                        <rect key="frame" x="20" y="258" width="54" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="1hV-px-VJN"/>
                                         </constraints>
-                                        <state key="normal" title="Join Game">
+                                        <state key="normal" title="Button">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <variation key="default">
@@ -119,6 +119,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="createGameButton" destination="Mdj-Hd-5OI" id="2Rh-lv-Sxu"/>
+                        <outlet property="joinGameButton" destination="CBi-9c-KRm" id="dUo-jD-ddi"/>
+                        <outlet property="logoLabel" destination="kwp-LV-dpu" id="rpS-d7-Jwi"/>
                         <outlet property="modalPeekView" destination="nVj-tx-bo9" id="qlw-TL-Mg7"/>
                         <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
                         <segue destination="oCs-d3-UDI" kind="presentation" identifier="main-menu-modal" id="cpV-DQ-cDx"/>
@@ -128,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="217.3828125" y="338.21376281112737"/>
         </scene>
-        <!--Main Menu Modal View Controller-->
+        <!--Main Settings View Controller-->
         <scene sceneID="cV3-jj-Kon">
             <objects>
-                <viewController id="oCs-d3-UDI" customClass="SCMainMenuModalViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oCs-d3-UDI" customClass="SCMainSettingsViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nGe-bY-2XB"/>
                         <viewControllerLayoutGuide type="bottom" id="o82-JI-MmW"/>
@@ -190,14 +193,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZy-Cq-4CR" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="12" width="57" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZy-Cq-4CR" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="12" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0 (160)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ml8-t1-bfc" userLabel="Right Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="950" y="12.5" width="66" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ml8-t1-bfc" userLabel="Right Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="974" y="12.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -222,8 +225,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Support" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yin-hz-8gC" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="11" width="62" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yin-hz-8gC" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="11" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -301,14 +304,14 @@
                                     <action selector="onBackButtonTapped:" destination="RKo-Nr-UiC" eventType="touchUpInside" id="jX7-Xr-XmJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Access Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJJ-9X-JwH" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="461.5" y="31" width="101" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJJ-9X-JwH" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="491" y="31" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxf-jD-guR" customClass="SCStatusLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="487" y="60" width="50" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxf-jD-guR" customClass="SCStatusLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="491" y="60" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -423,6 +426,7 @@
                         <outlet property="cancelButton" destination="Oge-X0-89i" id="Geh-eJ-iTz"/>
                         <outlet property="cancelButtonHeightConstraint" destination="R9Q-Cm-zpW" id="pn0-Gk-dYf"/>
                         <outlet property="contentViewVerticalCenterConstraint" destination="vHl-l6-CkW" id="qfe-6c-P8R"/>
+                        <outlet property="headerLabel" destination="fJJ-9X-JwH" id="syO-eN-poW"/>
                         <outlet property="headerTopMarginConstraint" destination="Nzg-Tc-ti5" id="4lv-uj-zdY"/>
                         <outlet property="statusLabel" destination="Lxf-jD-guR" id="MYy-k5-4mw"/>
                         <outlet property="statusLabelTopMarginConstraint" destination="Jyf-ti-DR9" id="DjB-SB-1Nb"/>
@@ -473,8 +477,8 @@
                                     <action selector="onBackButtonTapped:" destination="oCE-jf-1fM" eventType="touchUpInside" id="id7-EV-RUW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPo-CD-ok9" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="470" y="31" width="84" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPo-CD-ok9" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="491" y="31" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -504,6 +508,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="headerLabel" destination="KPo-CD-ok9" id="nyV-6o-L0z"/>
                         <outlet property="headerLabelTopMarginConstraint" destination="LmF-O1-SiH" id="HBa-XQ-SoJ"/>
                         <outlet property="userNameTextField" destination="4s9-er-VpV" id="KFG-Mj-S6u"/>
                         <outlet property="userNameTextFieldVerticalCenterConstraint" destination="UwC-kY-pWD" id="dho-lO-OK1"/>
@@ -520,7 +525,7 @@
         <!--Custom Category-->
         <scene sceneID="dnD-uW-8F5">
             <objects>
-                <viewController storyboardIdentifier="custom-category-view-controller" automaticallyAdjustsScrollViewInsets="NO" id="gDu-LU-Che" customClass="SCCustomCategoryModalViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="custom-category-view-controller" automaticallyAdjustsScrollViewInsets="NO" id="gDu-LU-Che" customClass="SCCustomCategoryViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gab-Hm-sVu"/>
                         <viewControllerLayoutGuide type="bottom" id="Yk6-ov-0Jb"/>
@@ -564,7 +569,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xe-JU-OVw" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xe-JU-OVw" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
                                                     <rect key="frame" x="4" y="8" width="64" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="64" id="SWQ-rP-tp9"/>
@@ -610,8 +615,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emoji" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oml-FI-hjL" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="8" width="41.5" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oml-FI-hjL" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="8" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -656,10 +661,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4By-EB-13S">
-                                                    <rect key="frame" x="473" y="11.5" width="78" height="21"/>
+                                                    <rect key="frame" x="474.5" y="11.5" width="75" height="21"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ie5-Z6-85z" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                            <rect key="frame" x="33" y="0.0" width="45" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ie5-Z6-85z" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                            <rect key="frame" x="33" y="0.0" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -700,10 +705,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlj-MT-1Cw">
-                                                    <rect key="frame" x="470.5" y="11.5" width="83" height="21"/>
+                                                    <rect key="frame" x="474.5" y="11.5" width="75" height="21"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C2-EV-r5y" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                            <rect key="frame" x="33" y="0.0" width="50" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C2-EV-r5y" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                            <rect key="frame" x="33" y="0.0" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -938,8 +943,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No players on the team yet." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xni-IZ-iQ2" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="0.0" width="209.5" height="44"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xni-IZ-iQ2" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="0.0" width="42" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1030,10 +1035,10 @@
             </objects>
             <point key="canvasLocation" x="1825.7812499999998" y="338.21376281112737"/>
         </scene>
-        <!--Pregame Modal Container View Controller-->
+        <!--Pregame Menu Container View Controller-->
         <scene sceneID="EeC-NJ-N0R">
             <objects>
-                <viewController storyboardIdentifier="pregame-modal-container-view" id="Bsc-BJ-zGX" customClass="SCPregameModalContainerViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pregame-modal-container-view" id="Bsc-BJ-zGX" customClass="SCPregameMenuContainerViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iLe-eX-mDc"/>
                         <viewControllerLayoutGuide type="bottom" id="MLa-iE-UmV"/>
@@ -1088,18 +1093,18 @@
             </objects>
             <point key="canvasLocation" x="1826" y="1156"/>
         </scene>
-        <!--Pregame Modal Page View Controller-->
+        <!--Pregame Menu Page View Controller-->
         <scene sceneID="Rr9-HP-0Ne">
             <objects>
-                <pageViewController storyboardIdentifier="pregame-page-view-controller" autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="overCurrentContext" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="DJ4-hE-VYj" customClass="SCPregameModalPageViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="pregame-page-view-controller" autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="overCurrentContext" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="DJ4-hE-VYj" customClass="SCPregameMenuPageViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8eq-31-sXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1826" y="1938"/>
         </scene>
-        <!--Pregame Modal Main View Controller-->
+        <!--Pregame Menu Main View Controller-->
         <scene sceneID="Nl8-ZF-fk9">
             <objects>
-                <viewController storyboardIdentifier="pregame-modal-main-view" id="R1J-Mf-Sjp" customClass="SCPregameModalMainViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pregame-modal-main-view" id="R1J-Mf-Sjp" customClass="SCPregameMenuMainViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kXk-ok-nU4"/>
                         <viewControllerLayoutGuide type="bottom" id="1LJ-wz-GW3"/>
@@ -1143,8 +1148,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpI-da-aAb" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="6" width="70.5" height="32"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpI-da-aAb" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                    <rect key="frame" x="4" y="6" width="42" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1167,7 +1172,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHp-OB-HYt" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHp-OB-HYt" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
                                                     <rect key="frame" x="36" y="8" width="984" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1219,7 +1224,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2 min" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bGU-cV-qD6" userLabel="Timer Duration" customClass="SCTextField" customModule="Spycodes" customModuleProvider="target">
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Label" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bGU-cV-qD6" userLabel="Timer Duration" customClass="SCTextField" customModule="Spycodes" customModuleProvider="target">
                                                             <rect key="frame" x="936" y="14.5" width="68" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <nil key="textColor"/>
@@ -1273,10 +1278,10 @@
             </objects>
             <point key="canvasLocation" x="1825.7812499999998" y="2748.7554904831622"/>
         </scene>
-        <!--Pregame Modal Secondary View Controller-->
+        <!--Pregame Menu Secondary View Controller-->
         <scene sceneID="jkV-qk-FcC">
             <objects>
-                <viewController storyboardIdentifier="pregame-modal-secondary-view" id="LAW-Ow-WYx" customClass="SCPregameModalSecondaryViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pregame-modal-secondary-view" id="LAW-Ow-WYx" customClass="SCPregameMenuSecondaryViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fhi-4I-yKc"/>
                         <viewControllerLayoutGuide type="bottom" id="hl5-MT-36A"/>
@@ -1349,10 +1354,10 @@
             </objects>
             <point key="canvasLocation" x="2642" y="2749"/>
         </scene>
-        <!--Timeline Modal View Controller-->
+        <!--Timeline View Controller-->
         <scene sceneID="QbP-47-cxE">
             <objects>
-                <viewController id="HuE-xd-fYV" customClass="SCTimelineModalViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HuE-xd-fYV" customClass="SCTimelineViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zcm-Dl-ICE"/>
                         <viewControllerLayoutGuide type="bottom" id="htW-uQ-Xx7"/>
@@ -1495,10 +1500,10 @@
             </objects>
             <point key="canvasLocation" x="2641.9921875" y="1155.6368960468521"/>
         </scene>
-        <!--Game Room View Controller-->
+        <!--Game View Controller-->
         <scene sceneID="9GO-gD-g4A">
             <objects>
-                <viewController storyboardIdentifier="game-room-view-controller" id="yX4-d1-WHr" customClass="SCGameRoomViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="game-room-view-controller" id="yX4-d1-WHr" customClass="SCGameViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DMO-Jt-Cx9"/>
                         <viewControllerLayoutGuide type="bottom" id="Zrc-Nf-5YD"/>
@@ -1786,10 +1791,10 @@
             </objects>
             <point key="canvasLocation" x="2641.9921875" y="338.65300146412881"/>
         </scene>
-        <!--Help View Controller-->
+        <!--Game Help View Controller-->
         <scene sceneID="I3C-gg-tTW">
             <objects>
-                <viewController id="e9C-iv-SDh" customClass="SCHelpViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="e9C-iv-SDh" customClass="SCGameHelpViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gyg-n5-NU8"/>
                         <viewControllerLayoutGuide type="bottom" id="TdX-78-Xw5"/>

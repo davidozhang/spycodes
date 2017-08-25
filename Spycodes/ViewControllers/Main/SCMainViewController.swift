@@ -1,6 +1,10 @@
 import UIKit
 
-class SCMainMenuViewController: SCViewController {
+class SCMainViewController: SCViewController {
+    @IBOutlet weak var logoLabel: SCLogoLabel!
+    @IBOutlet weak var createGameButton: SCButton!
+    @IBOutlet weak var joinGameButton: SCButton!
+
     // MARK: Actions
     @IBAction func unwindToMainMenu(_ sender: UIStoryboardSegue) {
         super.unwindedToSelf(sender)
@@ -35,6 +39,18 @@ class SCMainMenuViewController: SCViewController {
                 self.showUpdateAppAlert()
             }
         })
+
+        self.logoLabel.text = SCStrings.appName.localized
+
+        self.createGameButton.setTitle(
+            SCStrings.button.createGame.rawValue.localized,
+            for: .normal
+        )
+
+        self.joinGameButton.setTitle(
+            SCStrings.button.joinGame.rawValue.localized,
+            for: .normal
+        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,7 +77,7 @@ class SCMainMenuViewController: SCViewController {
         super._prepareForSegue(segue, sender: sender)
 
         // All segues identified here should be forward direction only
-        if let vc = segue.destination as? SCMainMenuModalViewController {
+        if let vc = segue.destination as? SCMainSettingsViewController {
             vc.delegate = self
         }
     }
@@ -104,11 +120,14 @@ class SCMainMenuViewController: SCViewController {
 //  | |___ >  <| ||  __/ | | \__ \ | (_) | | | \__ \
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
-// MARK: SCMainMenuModalViewControllerDelegate
-extension SCMainMenuViewController: SCMainMenuModalViewControllerDelegate {
-    func onNightModeToggleChanged() {
-        DispatchQueue.main.async {
-            super.updateAppearance()
+// MARK: SCMainSettingsViewControllerDelegate
+extension SCMainViewController: SCMainSettingsViewControllerDelegate {
+    func mainSettings(onToggleViewCellChanged toggleViewCell: SCToggleViewCell,
+                      settingType: SCLocalStorageManager.LocalSettingType) {
+        if settingType == .nightMode {
+            DispatchQueue.main.async {
+                super.updateAppearance()
+            }
         }
     }
 }

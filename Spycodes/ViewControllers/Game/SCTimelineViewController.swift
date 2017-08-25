@@ -1,6 +1,6 @@
 import UIKit
 
-class SCTimelineModalViewController: SCModalViewController {
+class SCTimelineViewController: SCModalViewController {
     fileprivate var emptyStateLabel: UILabel?
     fileprivate var scrolled = false
 
@@ -35,7 +35,7 @@ class SCTimelineModalViewController: SCModalViewController {
         self.tableView.layoutIfNeeded()
 
         self.emptyStateLabel = UILabel(frame: self.tableView.frame)
-        self.emptyStateLabel?.text = SCStrings.timeline.emptyState.rawValue
+        self.emptyStateLabel?.text = SCStrings.timeline.emptyState.rawValue.localized
         self.emptyStateLabel?.font = SCFonts.intermediateSizeFont(.regular)
         self.emptyStateLabel?.textColor = .spycodesGrayColor()
         self.emptyStateLabel?.textAlignment = .center
@@ -44,7 +44,7 @@ class SCTimelineModalViewController: SCModalViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(SCTimelineModalViewController.refreshView),
+            selector: #selector(SCTimelineViewController.refreshView),
             name: NSNotification.Name(
                 rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
             ),
@@ -100,15 +100,15 @@ class SCTimelineModalViewController: SCModalViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: SCSectionHeaderViewCellDelegate
-extension SCTimelineModalViewController: SCSectionHeaderViewCellDelegate {
-    func onSectionHeaderButtonTapped() {
+extension SCTimelineViewController: SCSectionHeaderViewCellDelegate {
+    func sectionHeaderViewCell(onButtonTapped sectionHeaderViewCell: SCSectionHeaderViewCell) {
         Timeline.instance.markAllAsRead()
         self.tableView.reloadData()
     }
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCTimelineViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -138,7 +138,7 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
         }
 
         timelineHeader.primaryLabel.font = SCFonts.regularSizeFont(.regular)
-        timelineHeader.primaryLabel.text = SCStrings.section.timeline.rawValue
+        timelineHeader.primaryLabel.text = SCStrings.section.timeline.rawValue.localized
 
         if self.scrolled {
             timelineHeader.showBlurBackground()
@@ -180,15 +180,17 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
                     // Local player (You)
                     baseString = String(
-                        format: SCStrings.timeline.clueSetTo.rawValue,
-                        SCStrings.player.localPlayer.rawValue,
+                        format: SCStrings.timeline.confirmEvent.rawValue,
+                        SCStrings.player.localPlayer.rawValue.localized,
+                        SCStrings.timeline.setClueTo.rawValue.localized,
                         clue,
                         numberOfWords
                     )
                 } else {
                     baseString = String(
-                        format: SCStrings.timeline.clueSetTo.rawValue,
+                        format: SCStrings.timeline.confirmEvent.rawValue,
                         name,
+                        SCStrings.timeline.setClueTo.rawValue.localized,
                         clue,
                         numberOfWords
                     )
@@ -199,24 +201,32 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                 if let _ = parameters[SCConstants.coding.localPlayer.rawValue] {
                     // Local player (You)
                     baseString = String(
-                        format: SCStrings.timeline.roundEnded.rawValue,
-                        SCStrings.player.localPlayer.rawValue
+                        format: SCStrings.timeline.endRoundEvent.rawValue,
+                        SCStrings.player.localPlayer.rawValue.localized,
+                        SCStrings.timeline.endedRound.rawValue.localized
                     )
                 } else {
                     baseString = String(
-                        format: SCStrings.timeline.roundEnded.rawValue,
-                        name
+                        format: SCStrings.timeline.endRoundEvent.rawValue,
+                        name,
+                        SCStrings.timeline.endedRound.rawValue.localized
                     )
                 }
             } else {
-                baseString = SCStrings.timeline.timerExpiry.rawValue
+                baseString = SCStrings.timeline.timerExpiry.rawValue.localized
             }
         case .selectCard:
             if let name = parameters[SCConstants.coding.name.rawValue] as? String,
                let card = parameters[SCConstants.coding.card.rawValue] as? Card {
                 if name == SCStrings.player.cpu.rawValue {
                     // CPU player
-                    baseString = String(format: SCStrings.timeline.cpuSelected.rawValue, card.getWord())
+                    baseString = String(
+                        format: SCStrings.timeline.cpuSelectedEvent.rawValue,
+                        SCStrings.timeline.cpuSelected.rawValue.localized,
+                        card.getWord(),
+                        SCStrings.timeline.and.rawValue.localized,
+                        SCStrings.timeline.endedRound.rawValue.localized
+                    )
                     break
                 }
 
@@ -224,49 +234,54 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
                     // Local player (You)
                     if let correct = parameters[SCConstants.coding.correct.rawValue] as? Bool, correct {
                         baseString = String(
-                            format: SCStrings.timeline.correctlySelected.rawValue,
-                            SCStrings.player.localPlayer.rawValue,
+                            format: SCStrings.timeline.correctlySelectedEvent.rawValue,
+                            SCStrings.player.localPlayer.rawValue.localized,
+                            SCStrings.timeline.correctlySelected.rawValue.localized,
                             card.getWord()
                         )
                     } else {
                         baseString = String(
-                            format: SCStrings.timeline.selected.rawValue,
-                            SCStrings.player.localPlayer.rawValue,
+                            format: SCStrings.timeline.incorrectlySelectedEvent.rawValue,
+                            SCStrings.player.localPlayer.rawValue.localized,
+                            SCStrings.timeline.selected.rawValue.localized,
                             card.getTeam() == Team.neutral ?
-                            SCStrings.timeline.bystander.rawValue :
+                            SCStrings.timeline.bystander.rawValue.localized :
                             (card.getTeam() == Team.assassin ?
-                                SCStrings.timeline.assassin.rawValue :
-                                SCStrings.timeline.enemy.rawValue
+                                SCStrings.timeline.assassin.rawValue.localized :
+                                SCStrings.timeline.enemy.rawValue.localized
                             ),
                             card.getWord(),
+                            SCStrings.timeline.and.rawValue.localized,
                             (card.getTeam() == Team.assassin ?
-                                SCStrings.timeline.game.rawValue :
-                                SCStrings.timeline.round.rawValue
+                                SCStrings.timeline.endedGame.rawValue.localized :
+                                SCStrings.timeline.endedRound.rawValue.localized
                             )
                         )
                     }
                 } else {
                     if let correct = parameters[SCConstants.coding.correct.rawValue] as? Bool, correct {
-                        // Local player (You)
                         baseString = String(
-                            format: SCStrings.timeline.correctlySelected.rawValue,
+                            format: SCStrings.timeline.correctlySelectedEvent.rawValue,
                             name,
+                            SCStrings.timeline.correctlySelected.rawValue.localized,
                             card.getWord()
                         )
                     } else {
                         baseString = String(
-                            format: SCStrings.timeline.selected.rawValue,
+                            format: SCStrings.timeline.incorrectlySelectedEvent.rawValue,
                             name,
+                            SCStrings.timeline.selected.rawValue.localized,
                             card.getTeam() == Team.neutral ?
-                            SCStrings.timeline.bystander.rawValue :
+                            SCStrings.timeline.bystander.rawValue.localized :
                             (card.getTeam() == Team.assassin ?
-                                SCStrings.timeline.assassin.rawValue :
-                                SCStrings.timeline.enemy.rawValue
+                                SCStrings.timeline.assassin.rawValue.localized :
+                                SCStrings.timeline.enemy.rawValue.localized
                             ),
                             card.getWord(),
+                            SCStrings.timeline.and.rawValue.localized,
                             (card.getTeam() == Team.assassin ?
-                                SCStrings.timeline.game.rawValue :
-                                SCStrings.timeline.round.rawValue
+                                SCStrings.timeline.endedGame.rawValue.localized :
+                                SCStrings.timeline.endedRound.rawValue.localized
                             )
                         )
                     }
@@ -274,15 +289,17 @@ extension SCTimelineModalViewController: UITableViewDataSource, UITableViewDeleg
             }
         case .gameOver:
             baseString = String(
-                format: SCStrings.timeline.gameOver.rawValue,
+                format: SCStrings.timeline.gameOverEvent.rawValue,
+                SCStrings.timeline.gameOver.rawValue.localized,
+                SCStrings.timeline.yourTeam.rawValue.localized,
                 Round.instance.getWinningTeam() == Player.instance.getTeam() ?
-                SCStrings.timeline.won.rawValue :
-                SCStrings.timeline.lost.rawValue
+                    SCStrings.timeline.won.rawValue.localized :
+                    SCStrings.timeline.lost.rawValue.localized
             )
         case .gameAborted:
-            baseString = SCStrings.timeline.gameAborted.rawValue
+            baseString = SCStrings.timeline.gameAbortedEvent.rawValue.localized
         default:
-            break
+            baseString = SCStrings.timeline.unknownEvent.rawValue.localized
         }
 
         // Apply attributed string decorations here if applicable

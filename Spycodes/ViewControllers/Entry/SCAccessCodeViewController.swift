@@ -22,6 +22,7 @@ class SCAccessCodeViewController: SCViewController {
     )
 
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var headerLabel: SCNavigationBarLabel!
     @IBOutlet weak var statusLabel: SCStatusLabel!
     @IBOutlet weak var textFieldsView: UIView!
     @IBOutlet weak var headerTopMarginConstraint: NSLayoutConstraint!
@@ -49,8 +50,6 @@ class SCAccessCodeViewController: SCViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.restoreStatus()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +59,8 @@ class SCAccessCodeViewController: SCViewController {
         self.unwindableIdentifier = SCConstants.identifier.accessCode.rawValue
 
         SCMultipeerManager.instance.delegate = self
+
+        self.headerLabel.text = SCStrings.header.accessCode.rawValue.localized
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? SCSingleCharacterTextField {
@@ -79,6 +80,7 @@ class SCAccessCodeViewController: SCViewController {
         }
 
         self.hideCancelButton(true)
+        self.restoreStatus()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -149,7 +151,7 @@ class SCAccessCodeViewController: SCViewController {
         self.timeoutTimer?.invalidate()
         SCMultipeerManager.instance.stopAdvertiser()
 
-        self.statusLabel.text = SCStrings.status.fail.rawValue
+        self.statusLabel.text = SCStrings.status.fail.rawValue.localized
 
         self.timeoutTimer = Foundation.Timer.scheduledTimer(
             timeInterval: SCAccessCodeViewController.shortTimeoutInterval,
@@ -217,7 +219,7 @@ class SCAccessCodeViewController: SCViewController {
 
     @objc
     fileprivate func restoreStatus() {
-        self.statusLabel.text = SCStrings.status.normal.rawValue
+        self.statusLabel.text = SCStrings.status.normal.rawValue.localized
         self.hideCancelButton(true)
     }
 
@@ -270,7 +272,7 @@ class SCAccessCodeViewController: SCViewController {
         self.startTime = Int(Date.timeIntervalSinceReferenceDate)
         self.showCancelButton()
 
-        self.statusLabel.text = SCStrings.status.pending.rawValue
+        self.statusLabel.text = SCStrings.status.pending.rawValue.localized
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? UITextField {
@@ -293,7 +295,7 @@ class SCAccessCodeViewController: SCViewController {
 
 // MARK: SCMultipeerManagerDelegate
 extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
-    func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
+    func multipeerManager(didReceiveData data: Data, fromPeer peerID: MCPeerID) {
         // Navigate to pregame room only when preliminary sync data from host is received
         if let room = NSKeyedUnarchiver.unarchiveObject(with: data) as? Room {
             Room.instance = room
@@ -306,7 +308,6 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
             )
 
             DispatchQueue.main.async(execute: {
-                self.restoreStatus()
                 self.performSegue(
                     withIdentifier: SCConstants.identifier.pregameRoom.rawValue,
                     sender: self
@@ -315,16 +316,16 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
         }
     }
 
-    func peerDisconnectedFromSession(_ peerID: MCPeerID) {}
+    func multipeerManager(peerDisconnected peerID: MCPeerID) {}
 
-    func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {}
+    func multipeerManager(foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {}
 
-    func lostPeer(_ peerID: MCPeerID) {}
+    func multipeerManager(lostPeer peerID: MCPeerID) {}
 }
 
 // MARK: SCSingleCharacterTextFieldBackspaceDelegate
 extension SCAccessCodeViewController: SCSingleCharacterTextFieldBackspaceDelegate {
-    func onBackspaceDetected(_ textField: UITextField) {
+    func singleCharacterTextField(onBackspaceDetected textField: UITextField) {
         let currentTag = textField.tag
 
         // If currently on last text field and it was filled, do not advance cursor to previous text field

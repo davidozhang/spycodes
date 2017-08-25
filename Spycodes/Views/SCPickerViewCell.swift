@@ -1,8 +1,8 @@
 import UIKit
 
 protocol SCPickerViewCellDelegate: class {
-    func onPickerTapped()
-    func onPickerDismissed()
+    func pickerViewCell(onPickerViewCellTapped pickerViewCell: SCPickerViewCell)
+    func pickerViewCell(onPickerViewCellDismissed pickerViewCell: SCPickerViewCell)
 }
 
 class SCPickerViewCell: SCTableViewCell {
@@ -74,7 +74,7 @@ class SCPickerViewCell: SCTableViewCell {
                 self.textField.text = String(format: SCStrings.timer.minutes.rawValue, minutes)
                 self.pickerView.selectRow(minutes, inComponent: 0, animated: false)
             } else {
-                self.textField.text = SCStrings.timer.disabled.rawValue
+                self.textField.text = SCStrings.timer.disabled.rawValue.localized
                 self.pickerView.selectRow(SCPickerViewCell.disabledOptionRow, inComponent: 0, animated: false)
             }
         default:
@@ -115,7 +115,7 @@ class SCPickerViewCell: SCTableViewCell {
     fileprivate func resignTextField() {
         self.synchronizeSetting()
         self.textField.resignFirstResponder()
-        self.delegate?.onPickerDismissed()
+        self.delegate?.pickerViewCell(onPickerViewCellDismissed: self)
     }
 }
 
@@ -189,6 +189,6 @@ extension SCPickerViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
 // MARK: UITextFieldDelegate
 extension SCPickerViewCell: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.delegate?.onPickerTapped()
+        self.delegate?.pickerViewCell(onPickerViewCellTapped: self)
     }
 }

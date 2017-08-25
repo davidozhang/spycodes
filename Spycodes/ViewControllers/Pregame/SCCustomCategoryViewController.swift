@@ -1,6 +1,6 @@
 import UIKit
 
-class SCCustomCategoryModalViewController: SCModalViewController {
+class SCCustomCategoryViewController: SCModalViewController {
     fileprivate enum Section: Int {
         case settings = 0
         case wordList = 1
@@ -49,13 +49,13 @@ class SCCustomCategoryModalViewController: SCModalViewController {
     fileprivate static let margin: CGFloat = 16
 
     fileprivate let sectionLabels: [Section: String] = [
-        .settings: SCStrings.section.settings.rawValue,
-        .wordList: SCStrings.section.wordList.rawValue,
+        .settings: SCStrings.section.settings.rawValue.localized,
+        .wordList: SCStrings.section.wordListWithWordCount.rawValue.localized,
     ]
 
     fileprivate let settingsLabels: [Setting: String] = [
-        .name: SCStrings.primaryLabel.minigame.rawValue,
-        .emoji: SCStrings.primaryLabel.emoji.rawValue,
+        .name: SCStrings.primaryLabel.name.rawValue.localized,
+        .emoji: SCStrings.primaryLabel.emoji.rawValue.localized,
     ]
 
     fileprivate var scrolled = false
@@ -93,9 +93,9 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
 
-        self.tableViewBottomSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
-        self.tableViewLeadingSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
-        self.tableViewTrailingSpaceConstraint.constant = SCCustomCategoryModalViewController.margin
+        self.tableViewBottomSpaceConstraint.constant = SCCustomCategoryViewController.margin
+        self.tableViewLeadingSpaceConstraint.constant = SCCustomCategoryViewController.margin
+        self.tableViewTrailingSpaceConstraint.constant = SCCustomCategoryViewController.margin
         self.tableView.layoutIfNeeded()
 
         self.registerTableViewCells()
@@ -153,8 +153,8 @@ class SCCustomCategoryModalViewController: SCModalViewController {
         self.tableView.reloadData()
     }
 
-    fileprivate func changeStateTo(state: CustomCategoryWordListState) {
-        SCStates.customCategoryWordListState = state
+    fileprivate func changeStateTo(state: CustomCategoryState) {
+        SCStates.changeCustomCategoryState(to: state)
         self.reloadView()
     }
 
@@ -327,16 +327,16 @@ class SCCustomCategoryModalViewController: SCModalViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: SCTableViewCellEmojiDelegate
-extension SCCustomCategoryModalViewController: SCTableViewCellEmojiDelegate {
-    func onEmojiSelected(emoji: String) {
+extension SCCustomCategoryViewController: SCTableViewCellEmojiDelegate {
+    func tableViewCell(onEmojiSelected emoji: String) {
         self.mutableCustomCategory.setEmoji(emoji: emoji)
         self.changeStateTo(state: .nonEditing)
     }
 }
 
 // MARK: SCTextFieldViewCellDelegate
-extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
-    func onButtonTapped(textField: UITextField, indexPath: IndexPath) {
+extension SCCustomCategoryViewController: SCTextFieldViewCellDelegate {
+    func textFieldViewCell(onButtonTapped textField: UITextField, indexPath: IndexPath) {
         // When X button is tapped for cells
         switch indexPath.row {
         case WordList.topCell.rawValue:
@@ -362,13 +362,13 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
         self.reloadView()
     }
 
-    func didEndEditing(textField: UITextField, indexPath: IndexPath) {}
+    func textFieldViewCell(didEndEditing textField: UITextField, indexPath: IndexPath) {}
 
-    func shouldBeginEditing(textField: UITextField, indexPath: IndexPath) -> Bool {
+    func textFieldViewCell(shouldBeginEditing textField: UITextField, indexPath: IndexPath) -> Bool {
         return true
     }
 
-    func shouldReturn(textField: UITextField, indexPath: IndexPath) -> Bool {
+    func textFieldViewCell(shouldReturn textField: UITextField, indexPath: IndexPath) -> Bool {
         if textField.text?.characters.count != 0 {
             textField.resignFirstResponder()
 
@@ -385,7 +385,7 @@ extension SCCustomCategoryModalViewController: SCTextFieldViewCellDelegate {
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Section.count
     }
@@ -420,12 +420,15 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
             if section == .wordList, let sectionLabel = self.sectionLabels[section] {
                 let wordCount = self.mutableCustomCategory.getWordCount()
                 if wordCount == 0 {
-                    sectionHeader.primaryLabel.text = SCStrings.section.wordListDefault.rawValue
+                    sectionHeader.primaryLabel.text = SCStrings.section.wordList.rawValue.localized
                 } else {
                     sectionHeader.primaryLabel.text = String(
                         format: sectionLabel,
+                        SCStrings.section.wordList.rawValue.localized,
                         wordCount,
-                        wordCount == 1 ? "Word" : "Words"
+                        wordCount == 1 ?
+                            SCStrings.section.word.rawValue.localized :
+                            SCStrings.section.words.rawValue.localized
                     )
                 }
             } else {
@@ -470,7 +473,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     return SCTableViewCell()
                 }
 
-                cell.primaryLabel.text = SCStrings.primaryLabel.name.rawValue
+                cell.primaryLabel.text = self.settingsLabels[.name]
 
                 if let name = self.mutableCustomCategory.getName() {
                     cell.rightLabel.text = name
@@ -489,7 +492,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                         return SCTableViewCell()
                 }
 
-                cell.primaryLabel.text = SCStrings.primaryLabel.emoji.rawValue
+                cell.primaryLabel.text = self.settingsLabels[.emoji]
                 cell.emojiDelegate = self
                 cell.setInputView(inputType: .emoji)
 
@@ -502,7 +505,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     cell.rightTextView.isHidden = true
                 }
 
-                if SCStates.customCategoryWordListState == .editingEmoji {
+                if SCStates.getCustomCategoryState() == .editingEmoji {
                     cell.rightImage.isHidden = true
                     cell.rightTextView.isHidden = false
 
@@ -519,7 +522,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
             switch indexPath.row {
             case WordList.topCell.rawValue:
                 // Top Cell Customization
-                switch SCStates.customCategoryWordListState {
+                switch SCStates.getCustomCategoryState() {
                 case .nonEditing, .editingExistingWord, .editingCategoryName, .editingEmoji:
                     guard let cell = self.tableView.dequeueReusableCell(
                         withIdentifier: SCConstants.identifier.addWordViewCell.rawValue
@@ -527,7 +530,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                         return SCTableViewCell()
                     }
 
-                    cell.primaryLabel.text = SCStrings.primaryLabel.addWord.rawValue
+                    cell.primaryLabel.text = SCStrings.primaryLabel.addWord.rawValue.localized
                     cell.indexPath = indexPath
                     
                     return cell
@@ -553,7 +556,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
             default:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.identifier.wordViewCell.rawValue
-                    ) as? SCTextFieldViewCell else {
+                ) as? SCTextFieldViewCell else {
                         return SCTableViewCell()
                 }
 
@@ -561,7 +564,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                 cell.indexPath = indexPath
 
                 // Hide remove button when adding new words
-                if SCStates.customCategoryWordListState == .addingNewWord {
+                if SCStates.getCustomCategoryState() == .addingNewWord {
                     cell.hideButton()
                 } else {
                     cell.showButton()
@@ -580,7 +583,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
                     return SCTableViewCell()
             }
 
-            cell.primaryLabel.text = SCStrings.primaryLabel.deleteCategory.rawValue
+            cell.primaryLabel.text = SCStrings.primaryLabel.deleteCategory.rawValue.localized
             cell.indexPath = indexPath
 
             return cell
@@ -639,7 +642,7 @@ extension SCCustomCategoryModalViewController: UITableViewDataSource, UITableVie
 }
 
 // MARK: Alert Controllers
-extension SCCustomCategoryModalViewController {
+extension SCCustomCategoryViewController {
     fileprivate func showDuplicateWordAlert() {
         self.changeStateTo(state: .nonEditing)
         self.presentAlert(
@@ -670,12 +673,12 @@ extension SCCustomCategoryModalViewController {
 
     fileprivate func presentAlert(title: String, message: String) {
         let alertController = UIAlertController(
-            title: title,
-            message: message,
+            title: title.localized,
+            message: message.localized,
             preferredStyle: .alert
         )
         let confirmAction = UIAlertAction(
-            title: SCStrings.button.ok.rawValue,
+            title: SCStrings.button.ok.rawValue.localized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 alertController.dismiss(animated: false, completion: nil)
@@ -695,14 +698,14 @@ extension SCCustomCategoryModalViewController {
                                            verificationHandler: ((String) -> Bool)?,
                                            successHandler: ((String) -> Void)?) {
         let alertController = UIAlertController(
-            title: title,
-            message: message,
+            title: title.localized,
+            message: message?.localized,
             preferredStyle: .alert
         )
         alertController.addTextField(configurationHandler: textFieldHandler)
 
         let cancelAction = UIAlertAction(
-            title: SCStrings.button.cancel.rawValue,
+            title: SCStrings.button.cancel.rawValue.localized,
             style: .cancel,
             handler: { (action: UIAlertAction) in
                 self.changeStateTo(state: .nonEditing)
@@ -710,7 +713,7 @@ extension SCCustomCategoryModalViewController {
             }
         )
         let confirmAction = UIAlertAction(
-            title: SCStrings.button.ok.rawValue,
+            title: SCStrings.button.ok.rawValue.localized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 self.textFieldConfirmHandler(
@@ -732,13 +735,13 @@ extension SCCustomCategoryModalViewController {
 
     fileprivate func presentConfirmation(title: String, message: String, confirmHandler: ((Void) -> Void)?) {
         let alertController = UIAlertController(
-            title: title,
-            message: message,
+            title: title.localized,
+            message: message.localized,
             preferredStyle: .alert
         )
 
         let cancelAction = UIAlertAction(
-            title: SCStrings.button.cancel.rawValue,
+            title: SCStrings.button.cancel.rawValue.localized,
             style: .cancel,
             handler: { (action: UIAlertAction) in
                 self.changeStateTo(state: .nonEditing)
@@ -746,7 +749,7 @@ extension SCCustomCategoryModalViewController {
             }
         )
         let confirmAction = UIAlertAction(
-            title: SCStrings.button.confirm.rawValue,
+            title: SCStrings.button.confirm.rawValue.localized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 self.changeStateTo(state: .nonEditing)

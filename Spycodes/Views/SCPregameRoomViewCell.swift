@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SCPregameRoomViewCellDelegate: class {
-    func teamUpdatedForPlayerWithUUID(_ uuid: String, newTeam: Team)
+    func pregameRoomViewCell(teamUpdatedForPlayer uuid: String, newTeam: Team)
 }
 
 class SCPregameRoomViewCell: SCTableViewCell {
@@ -28,7 +28,7 @@ class SCPregameRoomViewCell: SCTableViewCell {
         if let uuid = self.uuid,
            let oldTeam = Room.instance.getPlayerWithUUID(uuid)?.getTeam(),
            let newTeam = Team(rawValue: oldTeam.rawValue ^ 1) {
-            delegate?.teamUpdatedForPlayerWithUUID(uuid, newTeam: newTeam)
+            self.delegate?.pregameRoomViewCell(teamUpdatedForPlayer: uuid, newTeam: newTeam)
         }
     }
 

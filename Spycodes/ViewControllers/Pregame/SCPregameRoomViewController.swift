@@ -6,8 +6,8 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sectionLabels = [
-        Team.red: SCStrings.section.teamRed.rawValue,
-        Team.blue: SCStrings.section.teamBlue.rawValue
+        Team.red: SCStrings.section.teamRed.rawValue.localized,
+        Team.blue: SCStrings.section.teamBlue.rawValue.localized
     ]
 
     @IBOutlet weak var tableView: UITableView!
@@ -21,10 +21,11 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     @IBAction func onReadyButtonTapped(_ sender: Any) {
-        if SCStates.readyButtonState != .ready {
-            SCStates.readyButtonState = .ready
-        } else {
-            SCStates.readyButtonState = .notReady
+        switch SCStates.getReadyButtonState() {
+        case .notReady:
+            SCStates.changeReadyButtonState(to: .ready)
+        case .ready:
+            SCStates.changeReadyButtonState(to: .notReady)
         }
 
         self.updateReadyButton()
@@ -49,13 +50,17 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         let attributedString = NSMutableAttributedString(
-            string: SCStrings.header.accessCode.rawValue + Room.instance.getAccessCode()
+            string: String(
+                format: SCStrings.header.pregameRoom.rawValue,
+                SCStrings.header.accessCode.rawValue.localized,
+                Room.instance.getAccessCode()
+            )
         )
         attributedString.addAttribute(
             NSFontAttributeName,
             value: SCFonts.regularSizeFont(.bold) ?? 0,
             range: NSMakeRange(
-                SCStrings.header.accessCode.rawValue.characters.count,
+                SCStrings.header.accessCode.rawValue.localized.characters.count + 2,
                 SCConstants.constant.accessCodeLength.rawValue
             )
         )
@@ -171,7 +176,7 @@ class SCPregameRoomViewController: SCViewController {
 
         if let userInfo = self.userInfo {
             if let nvc = segue.destination as? UINavigationController,
-               let vc = nvc.topViewController as? SCCustomCategoryModalViewController {
+               let vc = nvc.topViewController as? SCCustomCategoryViewController {
                 if let customCategoryName = userInfo[SCConstants.notificationKey.customCategoryName.rawValue] as? String {
                     vc.setCustomCategoryFromString(category: customCategoryName)
                 }
@@ -243,16 +248,17 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     fileprivate func updateReadyButton() {
-        if SCStates.readyButtonState == .notReady {
+        switch SCStates.getReadyButtonState() {
+        case .notReady:
             self.broadcastEvent(.cancel)
             UIView.performWithoutAnimation {
-                self.readyButton.setTitle("Ready", for: .normal)
+                self.readyButton.setTitle(SCStrings.button.ready.rawValue.localized, for: .normal)
             }
             self.animateReadyButtonIfNeeded()
-        } else {
+        case .ready:
             self.broadcastEvent(.ready)
             UIView.performWithoutAnimation {
-                self.readyButton.setTitle("Cancel", for: .normal)
+                self.readyButton.setTitle(SCStrings.button.cancel.rawValue.localized, for: .normal)
             }
             self.stopReadyButtonAnimation()
         }
@@ -260,12 +266,12 @@ class SCPregameRoomViewController: SCViewController {
         self.tableView.reloadData()
 
         // Only set ready status locally
-        let isReady = SCStates.readyButtonState == .ready
+        let isReady = SCStates.getReadyButtonState() == .ready
         Room.instance.getPlayerWithUUID(Player.instance.getUUID())?.setIsReady(isReady)
     }
 
     fileprivate func resetReadyButton() {
-        SCStates.resetReadyButtonState()
+        SCStates.resetState(type: .readyButton)
         self.updateReadyButton()
     }
 
@@ -293,7 +299,7 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         let alertController = UIAlertController(
-            title: SCStrings.header.returningToMainMenu.rawValue,
+            title: SCStrings.header.returningToMainMenu.rawValue.localized,
             message: reason,
             preferredStyle: .alert
         )
@@ -316,7 +322,7 @@ class SCPregameRoomViewController: SCViewController {
 
     fileprivate func checkRoom() {
         if !Room.instance.hasHost() {
-            self.returnToMainMenu(reason: SCStrings.message.hostDisconnected.rawValue)
+            self.returnToMainMenu(reason: SCStrings.message.hostDisconnected.rawValue.localized)
         }
 
         if !Player.instance.isHost() {
@@ -352,7 +358,7 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     fileprivate func animateReadyButtonIfNeeded() {
-        if SCStates.readyButtonState == .ready {
+        if SCStates.getReadyButtonState() == .ready {
             return
         }
 
@@ -382,16 +388,16 @@ class SCPregameRoomViewController: SCViewController {
 
 // MARK: SCMultipeerManagerDelegate
 extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
-    func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
+    func multipeerManager(foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         if let info = info,
                info[SCConstants.discoveryInfo.accessCode.rawValue] == Room.instance.getAccessCode() {
             SCMultipeerManager.instance.invitePeerToSession(peerID)
         }
     }
 
-    func lostPeer(_ peerID: MCPeerID) {}
+    func multipeerManager(lostPeer peerID: MCPeerID) {}
 
-    func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
+    func multipeerManager(didReceiveData data: Data, fromPeer peerID: MCPeerID) {
         let synchronizedObject = NSKeyedUnarchiver.unarchiveObject(with: data)
 
         switch synchronizedObject {
@@ -439,7 +445,7 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
         }
     }
 
-    func peerDisconnectedFromSession(_ peerID: MCPeerID) {
+    func multipeerManager(peerDisconnected peerID: MCPeerID) {
         if let playerUUID = Room.instance.getUUIDWithPeerID(peerID: peerID) {
             Room.instance.removePlayerWithUUID(playerUUID)
             Room.instance.removeConnectedPeer(peerID: peerID)
@@ -449,7 +455,7 @@ extension SCPregameRoomViewController: SCMultipeerManagerDelegate {
 
 // MARK: SCSectionHeaderViewCellDelegate
 extension SCPregameRoomViewController: SCSectionHeaderViewCellDelegate {
-    func onSectionHeaderButtonTapped() {
+    func sectionHeaderViewCell(onButtonTapped sectionHeaderViewCell: SCSectionHeaderViewCell) {
         Room.instance.autoAssignLeaderForTeam(
             Player.instance.getTeam(),
             shuffle: true
@@ -459,7 +465,7 @@ extension SCPregameRoomViewController: SCSectionHeaderViewCellDelegate {
 
 // MARK: SCPregameRoomViewCellDelegate
 extension SCPregameRoomViewController: SCPregameRoomViewCellDelegate {
-    func teamUpdatedForPlayerWithUUID(_ uuid: String, newTeam: Team) {
+    func pregameRoomViewCell(teamUpdatedForPlayer uuid: String, newTeam: Team) {
         if let player = Room.instance.getPlayerWithUUID(uuid) {
             player.setIsLeader(false)
             Room.instance.removePlayerWithUUID(uuid)
@@ -544,7 +550,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                     return SCTableViewCell()
             }
 
-            cell.primaryLabel.text = SCStrings.primaryLabel.teamEmptyState.rawValue
+            cell.primaryLabel.text = SCStrings.primaryLabel.teamEmptyState.rawValue.localized
 
             return cell
         }

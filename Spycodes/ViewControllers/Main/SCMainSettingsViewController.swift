@@ -1,11 +1,12 @@
 import UIKit
 
-protocol SCMainMenuModalViewControllerDelegate: class {
-    func onNightModeToggleChanged()
+protocol SCMainSettingsViewControllerDelegate: class {
+    func mainSettings(onToggleViewCellChanged toggleViewCell: SCToggleViewCell,
+                      settingType: SCLocalStorageManager.LocalSettingType)
 }
 
-class SCMainMenuModalViewController: SCModalViewController {
-    weak var delegate: SCMainMenuModalViewControllerDelegate?
+class SCMainSettingsViewController: SCModalViewController {
+    weak var delegate: SCMainSettingsViewControllerDelegate?
 
     fileprivate enum Section: Int {
         case about = 0
@@ -52,23 +53,23 @@ class SCMainMenuModalViewController: SCModalViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .customize: SCStrings.section.customize.rawValue,
-        .about: SCStrings.section.about.rawValue,
-        .more: SCStrings.section.more.rawValue,
+        .customize: SCStrings.section.customize.rawValue.localized,
+        .about: SCStrings.section.about.rawValue.localized,
+        .more: SCStrings.section.more.rawValue.localized,
     ]
 
     fileprivate let customizeLabels: [CustomSetting: String] = [
-        .nightMode: SCStrings.primaryLabel.nightMode.rawValue,
-        .accessibility: SCStrings.primaryLabel.accessibility.rawValue,
+        .nightMode: SCStrings.primaryLabel.nightMode.rawValue.localized,
+        .accessibility: SCStrings.primaryLabel.accessibility.rawValue.localized,
     ]
 
     fileprivate let disclosureLabels: [Link: String] = [
-        .releaseNotes: SCStrings.primaryLabel.releaseNotes.rawValue,
-        .support: SCStrings.primaryLabel.support.rawValue,
-        .reviewApp: SCStrings.primaryLabel.reviewApp.rawValue,
-        .website: SCStrings.primaryLabel.website.rawValue,
-        .github: SCStrings.primaryLabel.github.rawValue,
-        .icons8: SCStrings.primaryLabel.icons8.rawValue,
+        .releaseNotes: SCStrings.primaryLabel.releaseNotes.rawValue.localized,
+        .support: SCStrings.primaryLabel.support.rawValue.localized,
+        .reviewApp: SCStrings.primaryLabel.reviewApp.rawValue.localized,
+        .website: SCStrings.primaryLabel.website.rawValue.localized,
+        .github: SCStrings.primaryLabel.github.rawValue.localized,
+        .icons8: SCStrings.primaryLabel.icons8.rawValue.localized,
     ]
 
     fileprivate var scrolled = false
@@ -144,7 +145,7 @@ class SCMainMenuModalViewController: SCModalViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSource {
+extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Section.count
     }
@@ -228,6 +229,21 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
             ) as? SCTableViewCell else {
                 return SCTableViewCell()
             }
+
+            let attributedString = NSMutableAttributedString(
+                string: SCAppInfoManager.appVersion + " (\(SCAppInfoManager.buildNumber))"
+            )
+            attributedString.addAttribute(
+                NSFontAttributeName,
+                value: SCFonts.intermediateSizeFont(.medium) ?? 0,
+                range: NSMakeRange(
+                    SCAppInfoManager.appVersion.characters.count + 1,
+                    SCAppInfoManager.buildNumber.characters.count + 2
+                )
+            )
+
+            cell.primaryLabel.text = SCStrings.primaryLabel.version.rawValue.localized
+            cell.rightLabel.attributedText = attributedString
 
             return cell
         case Section.more.rawValue:
@@ -313,15 +329,15 @@ extension SCMainMenuModalViewController: UITableViewDelegate, UITableViewDataSou
 }
 
 // MARK: SCToggleViewCellDelegate
-extension SCMainMenuModalViewController: SCToggleViewCellDelegate {
-    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
+extension SCMainSettingsViewController: SCToggleViewCellDelegate {
+    func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.identifier.nightModeToggleViewCell.rawValue:
                 SCLocalStorageManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
                 super.updateModalAppearance()
                 self.tableView.reloadData()
-                self.delegate?.onNightModeToggleChanged()
+                self.delegate?.mainSettings(onToggleViewCellChanged: cell, settingType: .nightMode)
             case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
                 SCLocalStorageManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
             default:

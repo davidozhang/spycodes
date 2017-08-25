@@ -1,7 +1,7 @@
 import MultipeerConnectivity
 import UIKit
 
-class SCGameRoomViewController: SCViewController {
+class SCGameViewController: SCViewController {
     fileprivate let edgeInset: CGFloat = 12
     fileprivate let minCellSpacing: CGFloat = 12
     fileprivate let modalWidth = UIScreen.main.bounds.width - 60
@@ -49,7 +49,7 @@ class SCGameRoomViewController: SCViewController {
     }
 
     @IBAction func onActionButtonTapped(_ sender: AnyObject) {
-        switch SCStates.actionButtonState {
+        switch SCStates.getActionButtonState() {
         case .confirm:
             self.didConfirm()
         case .endRound:
@@ -92,7 +92,7 @@ class SCGameRoomViewController: SCViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(SCGameRoomViewController.didEndMinigameWithNotification),
+            selector: #selector(SCGameViewController.didEndMinigameWithNotification),
             name: NSNotification.Name(
                 rawValue: SCConstants.notificationKey.minigameGameOver.rawValue
             ),
@@ -101,7 +101,7 @@ class SCGameRoomViewController: SCViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(SCGameRoomViewController.showNotificationDotIfNeeded),
+            selector: #selector(SCGameViewController.showNotificationDotIfNeeded),
             name: NSNotification.Name(
                 rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
             ),
@@ -110,7 +110,7 @@ class SCGameRoomViewController: SCViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(SCGameRoomViewController.updateCollectionView),
+            selector: #selector(SCGameViewController.updateCollectionView),
             name: NSNotification.Name(
                 rawValue: SCConstants.notificationKey.updateCollectionView.rawValue
             ),
@@ -140,17 +140,17 @@ class SCGameRoomViewController: SCViewController {
         }
 
         self.actionButton.isHidden = false
-        SCStates.resetActionButtonState()
+        SCStates.resetState(type: .actionButton)
 
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 1.0,
             target: self,
-            selector: #selector(SCGameRoomViewController.refresh),
+            selector: #selector(SCGameViewController.refresh),
             userInfo: nil,
             repeats: true
         )
 
-        self.teamLabel.text = Player.instance.getTeam() == .red ? SCStrings.status.red.rawValue : SCStrings.status.blue.rawValue
+        self.teamLabel.text = Player.instance.getTeam() == .red ? SCStrings.status.red.rawValue.localized : SCStrings.status.blue.rawValue.localized
 
         if !Timer.instance.isEnabled() {
             self.bottomBarViewHeightConstraint.constant = self.bottomBarViewDefaultHeight
@@ -428,22 +428,24 @@ class SCGameRoomViewController: SCViewController {
                 self.numberOfWordsTextField.isEnabled = false
             } else {
                 if Player.instance.isLeader() {
-                    self.clueTextField.text = SCStrings.round.defaultLeaderClue.rawValue
-                    self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue
+                    self.clueTextField.text = SCStrings.round.defaultLeaderClue.rawValue.localized
+                    self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue.localized
 
                     self.startTextFieldAnimations()
 
-                    SCStates.actionButtonState = .confirm
+                    if SCStates.getActionButtonState() != .confirm {
+                        SCStates.changeActionButtonState(to: .confirm)
+                    }
                     self.clueTextField.isEnabled = true
                     self.numberOfWordsTextField.isEnabled = true
                 } else {
-                    self.clueTextField.text = SCStrings.round.defaultIsTurnClue.rawValue
-                    self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue
+                    self.clueTextField.text = SCStrings.round.defaultIsTurnClue.rawValue.localized
+                    self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue.localized
                 }
             }
         } else {
-            self.clueTextField.text = SCStrings.round.defaultNonTurnClue.rawValue
-            self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue
+            self.clueTextField.text = SCStrings.round.defaultNonTurnClue.rawValue.localized
+            self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue.localized
         }
     }
 
@@ -453,25 +455,27 @@ class SCGameRoomViewController: SCViewController {
         }
 
         if Round.instance.getCurrentTeam() == Player.instance.getTeam() && !Round.instance.hasGameEnded() {
-            if Timer.instance.state == .stopped {
-                Timer.instance.state = .willStart
+            if SCStates.getTimerState() == .stopped {
+                SCStates.changeTimerState(to: .willStart)
             }
         } else {
-            Timer.instance.state = .stopped
+            if SCStates.getTimerState() != .stopped {
+                SCStates.changeTimerState(to: .stopped)
+            }
         }
 
-        if Timer.instance.state == .stopped {
+        if SCStates.getTimerState() == .stopped {
             Timer.instance.invalidate()
             self.timerLabel.textColor = .spycodesGrayColor()
             self.timerLabel.text = SCStrings.timer.stopped.rawValue
-        } else if Timer.instance.state == .willStart {
+        } else if SCStates.getTimerState() == .willStart {
             Timer.instance.startTimer({
                 self.timerDidEnd()
             }, timerInProgress: { (remainingTime) in
-                    self.timerInProgress(remainingTime)
+                self.timerInProgress(remainingTime)
             })
 
-            Timer.instance.state = .started
+            SCStates.changeTimerState(to: .started)
         }
     }
 
@@ -495,15 +499,15 @@ class SCGameRoomViewController: SCViewController {
     }
 
     fileprivate func updateActionButtonStateTo(state: ActionButtonState) {
-        SCStates.actionButtonState = state
+        SCStates.changeActionButtonState(to: state)
         self.updateActionButton()
     }
 
     fileprivate func updateActionButton() {
-        switch SCStates.actionButtonState {
+        switch SCStates.getActionButtonState() {
         case .confirm:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.confirm.rawValue, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.confirm.rawValue.localized, for: UIControlState())
             }
 
             if !Player.instance.isLeader() ||
@@ -514,9 +518,9 @@ class SCGameRoomViewController: SCViewController {
             if let clueTextFieldCharacterCount = self.clueTextField.text?.characters.count,
                let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.characters.count {
                 if clueTextFieldCharacterCount > 0 &&
-                   self.clueTextField.text != SCStrings.round.defaultLeaderClue.rawValue &&
+                   self.clueTextField.text != SCStrings.round.defaultLeaderClue.rawValue.localized &&
                    numberOfWordsTextFieldCharacterCount > 0 &&
-                   self.numberOfWordsTextField.text != SCStrings.round.defaultNumberOfWords.rawValue {
+                   self.numberOfWordsTextField.text != SCStrings.round.defaultNumberOfWords.rawValue.localized {
                     self.actionButton.isEnabled = true
                     self.startButtonAnimations()
                 } else {
@@ -526,7 +530,7 @@ class SCGameRoomViewController: SCViewController {
             }
         case .endRound:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.endRound.rawValue, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.endRound.rawValue.localized, for: UIControlState())
             }
             self.stopButtonAnimations()
 
@@ -541,25 +545,25 @@ class SCGameRoomViewController: SCViewController {
             }
         case .gameOver:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.gameOver.rawValue, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.gameOver.rawValue.localized, for: UIControlState())
             }
             self.stopButtonAnimations()
             self.disableActionButton()
         case .gameAborted:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.gameAborted.rawValue, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.gameAborted.rawValue.localized, for: UIControlState())
             }
             self.stopButtonAnimations()
             self.disableActionButton()
         case .showAnswer:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.showAnswer.rawValue, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.showAnswer.rawValue.localized, for: UIControlState())
             }
             self.stopButtonAnimations()
             self.enableActionButton()
         case .hideAnswer:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.hideAnswer.rawValue, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.hideAnswer.rawValue.localized, for: UIControlState())
             }
             self.stopButtonAnimations()
             self.enableActionButton()
@@ -581,7 +585,7 @@ class SCGameRoomViewController: SCViewController {
 
         self.clueTextField.isEnabled = false
         self.numberOfWordsTextField.isEnabled = false
-        SCStates.actionButtonState = .endRound
+        SCStates.changeActionButtonState(to: .endRound)
 
         Round.instance.setClue(self.clueTextField.text)
         Round.instance.setNumberOfWords(self.numberOfWordsTextField.text)
@@ -673,19 +677,19 @@ class SCGameRoomViewController: SCViewController {
 
     func displayEndGameAlert(title: String, reason: String, onDismissal: ((Void) -> Void)?) {
         let alertController = UIAlertController(
-            title: title,
-            message: reason,
+            title: title.localized,
+            message: reason.localized,
             preferredStyle: .alert
         )
         let returnAction = UIAlertAction(
-            title: SCStrings.button.returnToPregameRoom.rawValue,
+            title: SCStrings.button.returnToPregameRoom.rawValue.localized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 super.performUnwindSegue(false, completionHandler: nil)
             }
         )
         let dismissAction = UIAlertAction(
-            title: SCStrings.button.dismiss.rawValue,
+            title: SCStrings.button.dismiss.rawValue.localized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 if let onDismissal = onDismissal {
@@ -703,7 +707,7 @@ class SCGameRoomViewController: SCViewController {
     }
 
     func onAbortDismissal() {
-        SCStates.actionButtonState = .gameAborted
+        SCStates.changeActionButtonState(to: .gameAborted)
         Timeline.instance.addEventIfNeeded(
             event: Event(type: .gameAborted, parameters: nil)
         )
@@ -711,9 +715,9 @@ class SCGameRoomViewController: SCViewController {
 
     func onGameOverDismissal() {
         if Player.instance.isLeader() {
-            SCStates.actionButtonState = .gameOver
+            SCStates.changeActionButtonState(to: .gameOver)
         } else {
-            SCStates.actionButtonState = .showAnswer
+            SCStates.changeActionButtonState(to: .showAnswer)
         }
 
         Timeline.instance.addEventIfNeeded(
@@ -742,8 +746,8 @@ class SCGameRoomViewController: SCViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: SCMultipeerManagerDelegate
-extension SCGameRoomViewController: SCMultipeerManagerDelegate {
-    func didReceiveData(_ data: Data, fromPeer peerID: MCPeerID) {
+extension SCGameViewController: SCMultipeerManagerDelegate {
+    func multipeerManager(didReceiveData data: Data, fromPeer peerID: MCPeerID) {
         let synchronizedObject = NSKeyedUnarchiver.unarchiveObject(with: data)
         let opponentTeam = Team(rawValue: Player.instance.getTeam().rawValue ^ 1)
 
@@ -786,7 +790,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
                         self.didEndGame(
                             SCStrings.header.gameOver.rawValue,
                             reason: String(
-                                format: SCStrings.message.minigameWinString.rawValue,
+                                format: SCStrings.message.minigameWinString.rawValue.localized,
                                 CardCollection.instance.getCardsRemainingForTeam(.blue)
                             ),
                             onDismissal: self.onGameOverDismissal
@@ -816,7 +820,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
 
                 if GameMode.instance.getMode() == .miniGame {
                     if Timer.instance.isEnabled() {
-                        Timer.instance.state = .stopped
+                        SCStates.changeTimerState(to: .stopped)
                     }
                 }
 
@@ -849,7 +853,7 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
         }
     }
 
-    func peerDisconnectedFromSession(_ peerID: MCPeerID) {
+    func multipeerManager(peerDisconnected peerID: MCPeerID) {
         if let uuid = Room.instance.getUUIDWithPeerID(peerID: peerID),
            let player = Room.instance.getPlayerWithUUID(uuid) {
 
@@ -860,16 +864,16 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
             self.dismissPresentedViewIfNeeded(completion: {
                 if player.isHost() {
                     let alertController = UIAlertController(
-                        title: SCStrings.header.returningToMainMenu.rawValue,
-                        message: SCStrings.message.hostDisconnected.rawValue,
+                        title: SCStrings.header.returningToMainMenu.rawValue.localized,
+                        message: SCStrings.message.hostDisconnected.rawValue.localized,
                         preferredStyle: .alert
                     )
                     let confirmAction = UIAlertAction(
-                        title: SCStrings.button.ok.rawValue,
+                        title: SCStrings.button.ok.rawValue.localized,
                         style: .default,
                         handler: { (action: UIAlertAction) in
                             super.performUnwindSegue(true, completionHandler: nil)
-                    }
+                        }
                     )
                     alertController.addAction(confirmAction)
                     self.present(
@@ -893,13 +897,13 @@ extension SCGameRoomViewController: SCMultipeerManagerDelegate {
         }
     }
 
-    func foundPeer(_ peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {}
+    func multipeerManager(foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {}
 
-    func lostPeer(_ peerID: MCPeerID) {}
+    func multipeerManager(lostPeer peerID: MCPeerID) {}
 }
 
 // MARK: UICollectionViewDelegate, UICollectionViewDataSource
-extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension SCGameViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -1044,7 +1048,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
                     self.didEndGame(
                         SCStrings.header.gameOver.rawValue,
                         reason: String(
-                            format: SCStrings.message.minigameWinString.rawValue,
+                            format: SCStrings.message.minigameWinString.rawValue.localized,
                             CardCollection.instance.getCardsRemainingForTeam(.blue)
                         ),
                         onDismissal: self.onGameOverDismissal
@@ -1090,7 +1094,7 @@ extension SCGameRoomViewController: UICollectionViewDelegateFlowLayout, UICollec
 }
 
 // MARK: UITextFieldDelegate
-extension SCGameRoomViewController: UITextFieldDelegate {
+extension SCGameViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if Player.instance.isLeader() &&
            Round.instance.getCurrentTeam() == Player.instance.getTeam() &&
@@ -1109,14 +1113,14 @@ extension SCGameRoomViewController: UITextFieldDelegate {
         self.leaderIsEditing = true
 
         if textField == self.clueTextField {
-            if textField.text == SCStrings.round.defaultLeaderClue.rawValue {
+            if textField.text == SCStrings.round.defaultLeaderClue.rawValue.localized {
                 textField.text = ""
-                textField.placeholder = SCStrings.round.defaultLeaderClue.rawValue
+                textField.placeholder = SCStrings.round.defaultLeaderClue.rawValue.localized
             }
         } else if textField == self.numberOfWordsTextField {
-            if textField.text == SCStrings.round.defaultNumberOfWords.rawValue {
+            if textField.text == SCStrings.round.defaultNumberOfWords.rawValue.localized {
                 textField.text = ""
-                textField.placeholder = SCStrings.round.defaultNumberOfWords.rawValue
+                textField.placeholder = SCStrings.round.defaultNumberOfWords.rawValue.localized
             }
         }
     }
@@ -1135,18 +1139,18 @@ extension SCGameRoomViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text == "" {
             if textField == self.clueTextField {
-                self.clueTextField.text = SCStrings.round.defaultLeaderClue.rawValue
+                self.clueTextField.text = SCStrings.round.defaultLeaderClue.rawValue.localized
             } else if textField == self.numberOfWordsTextField {
-                self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue
+                self.numberOfWordsTextField.text = SCStrings.round.defaultNumberOfWords.rawValue.localized
             }
         }
     }
 
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField == self.clueTextField {
-            textField.placeholder = SCStrings.round.defaultLeaderClue.rawValue
+            textField.placeholder = SCStrings.round.defaultLeaderClue.rawValue.localized
         } else if textField == self.numberOfWordsTextField {
-            textField.placeholder = SCStrings.round.defaultNumberOfWords.rawValue
+            textField.placeholder = SCStrings.round.defaultNumberOfWords.rawValue.localized
         }
         return true
     }

@@ -1,39 +1,39 @@
 import UIKit
 
-class SCHelpViewController: SCPopoverViewController {
+class SCGameHelpViewController: SCPopoverViewController {
     fileprivate static let maxIndex = 6
     fileprivate static let sharedLeaderStringSequence = [
-        SCStrings.message.leaderGoal.rawValue,
-        SCStrings.message.leaderEnterClue.rawValue,
-        SCStrings.message.leaderConfirm.rawValue,
-        SCStrings.message.leaderGuess.rawValue
+        SCStrings.message.leaderGoal.rawValue.localized,
+        SCStrings.message.leaderEnterClue.rawValue.localized,
+        SCStrings.message.leaderConfirm.rawValue.localized,
+        SCStrings.message.leaderGuess.rawValue.localized
     ]
 
     fileprivate static let sharedPlayerStringSequence = [
-        SCStrings.message.playerGoal.rawValue,
-        SCStrings.message.playerWait.rawValue,
-        SCStrings.message.playerClue.rawValue,
-        SCStrings.message.playerGuess.rawValue
+        SCStrings.message.playerGoal.rawValue.localized,
+        SCStrings.message.playerWait.rawValue.localized,
+        SCStrings.message.playerClue.rawValue.localized,
+        SCStrings.message.playerGuess.rawValue.localized
     ]
 
     fileprivate static let leaderHeaders = [
-        SCStrings.header.introduction.rawValue,
-        SCStrings.header.goal.rawValue,
-        SCStrings.header.enterClue.rawValue,
-        SCStrings.header.confirm.rawValue,
-        SCStrings.header.guess.rawValue,
-        SCStrings.header.roundEnd.rawValue,
-        SCStrings.header.ending.rawValue
+        SCStrings.header.introduction.rawValue.localized,
+        SCStrings.header.goal.rawValue.localized,
+        SCStrings.header.enterClue.rawValue.localized,
+        SCStrings.header.confirm.rawValue.localized,
+        SCStrings.header.guess.rawValue.localized,
+        SCStrings.header.roundEnd.rawValue.localized,
+        SCStrings.header.ending.rawValue.localized
     ]
 
     fileprivate static let playerHeaders = [
-        SCStrings.header.introduction.rawValue,
-        SCStrings.header.goal.rawValue,
-        SCStrings.header.waitForClue.rawValue,
-        SCStrings.header.clue.rawValue,
-        SCStrings.header.guess.rawValue,
-        SCStrings.header.roundEnd.rawValue,
-        SCStrings.header.ending.rawValue
+        SCStrings.header.introduction.rawValue.localized,
+        SCStrings.header.goal.rawValue.localized,
+        SCStrings.header.waitForClue.rawValue.localized,
+        SCStrings.header.clue.rawValue.localized,
+        SCStrings.header.guess.rawValue.localized,
+        SCStrings.header.roundEnd.rawValue.localized,
+        SCStrings.header.ending.rawValue.localized
     ]
 
     fileprivate var stringSequence = [String]()
@@ -78,27 +78,27 @@ class SCHelpViewController: SCPopoverViewController {
     fileprivate func generateStringSequence() -> [String] {
         var result = [String]()
         if GameMode.instance.getMode() == .miniGame {
-            result += [SCStrings.message.minigameIntro.rawValue]
+            result += [SCStrings.message.minigameIntro.rawValue.localized]
 
             if Player.instance.isLeader() {
-                result += SCHelpViewController.sharedLeaderStringSequence
+                result += SCGameHelpViewController.sharedLeaderStringSequence
             } else {
-                result += SCHelpViewController.sharedPlayerStringSequence
+                result += SCGameHelpViewController.sharedPlayerStringSequence
             }
 
-            result += [SCStrings.message.minigameRoundEnd.rawValue]
-            result += [SCStrings.message.minigameEnd.rawValue]
+            result += [SCStrings.message.minigameRoundEnd.rawValue.localized]
+            result += [SCStrings.message.minigameEnd.rawValue.localized]
         } else {
-            result += [SCStrings.message.regularGameIntro.rawValue]
+            result += [SCStrings.message.regularGameIntro.rawValue.localized]
 
             if Player.instance.isLeader() {
-                result += SCHelpViewController.sharedLeaderStringSequence
+                result += SCGameHelpViewController.sharedLeaderStringSequence
             } else {
-                result += SCHelpViewController.sharedPlayerStringSequence
+                result += SCGameHelpViewController.sharedPlayerStringSequence
             }
 
-            result += [SCStrings.message.regularGameRoundEnd.rawValue]
-            result += [SCStrings.message.regularGameEnd.rawValue]
+            result += [SCStrings.message.regularGameRoundEnd.rawValue.localized]
+            result += [SCStrings.message.regularGameEnd.rawValue.localized]
         }
 
         return result
@@ -112,16 +112,16 @@ class SCHelpViewController: SCPopoverViewController {
                 self.leftButton.isHidden = false
             }
 
-            if self.currentIndex == SCHelpViewController.maxIndex {
+            if self.currentIndex == SCGameHelpViewController.maxIndex {
                 self.rightButton.isHidden = true
             } else {
                 self.rightButton.isHidden = false
             }
 
             if Player.instance.isLeader() {
-                self.headerLabel.text = SCHelpViewController.leaderHeaders[self.currentIndex]
+                self.headerLabel.text = SCGameHelpViewController.leaderHeaders[self.currentIndex]
             } else {
-                self.headerLabel.text = SCHelpViewController.playerHeaders[self.currentIndex]
+                self.headerLabel.text = SCGameHelpViewController.playerHeaders[self.currentIndex]
             }
 
             self.descriptionLabel.text = self.stringSequence[self.currentIndex]

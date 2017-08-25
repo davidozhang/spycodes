@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SCSectionHeaderViewCellDelegate: class {
-    func onSectionHeaderButtonTapped()
+    func sectionHeaderViewCell(onButtonTapped sectionHeaderViewCell: SCSectionHeaderViewCell)
 }
 
 class SCSectionHeaderViewCell: SCTableViewCell {
@@ -11,7 +11,7 @@ class SCSectionHeaderViewCell: SCTableViewCell {
     @IBOutlet weak var button: SCImageButton!
 
     @IBAction func onSectionHeaderButtonTapped(_ sender: Any) {
-        self.delegate?.onSectionHeaderButtonTapped()
+        self.delegate?.sectionHeaderViewCell(onButtonTapped: self)
     }
 
     override func awakeFromNib() {

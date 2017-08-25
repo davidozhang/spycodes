@@ -1,6 +1,6 @@
 import UIKit
 
-class SCPregameModalMainViewController: SCViewController {
+class SCPregameMenuMainViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate enum Section: Int {
@@ -31,15 +31,15 @@ class SCPregameModalMainViewController: SCViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .info: SCStrings.section.info.rawValue,
-        .statistics: SCStrings.section.statistics.rawValue,
-        .gameSettings: SCStrings.section.gameSettings.rawValue,
-        ]
+        .info: SCStrings.section.info.rawValue.localized,
+        .statistics: SCStrings.section.statistics.rawValue.localized,
+        .gameSettings: SCStrings.section.gameSettings.rawValue.localized,
+    ]
 
     fileprivate let settingsLabels: [GameSetting: String] = [
-        .minigame: SCStrings.primaryLabel.minigame.rawValue,
-        .timer: SCStrings.primaryLabel.timer.rawValue,
-        ]
+        .minigame: SCStrings.primaryLabel.minigame.rawValue.localized,
+        .timer: SCStrings.primaryLabel.timer.rawValue.localized,
+    ]
 
     fileprivate var scrolled = false
     fileprivate var inputMode = false
@@ -70,7 +70,7 @@ class SCPregameModalMainViewController: SCViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        SCStates.pregameModalPageState = .main
+        SCStates.changePregameMenuState(to: .main)
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -81,7 +81,7 @@ class SCPregameModalMainViewController: SCViewController {
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 2.0,
             target: self,
-            selector: #selector(SCPregameModalMainViewController.refreshView),
+            selector: #selector(SCPregameMenuMainViewController.refreshView),
             userInfo: nil,
             repeats: true
         )
@@ -133,17 +133,17 @@ class SCPregameModalMainViewController: SCViewController {
             result.append(SCStrings.emoji.completed.rawValue)
 
             if GameMode.instance.getMode() == .miniGame {
-                result.append(SCStrings.info.minigameTeamSizeSatisfied.rawValue)
+                result.append(SCStrings.info.minigameTeamSizeSatisfied.rawValue.localized)
             } else {
-                result.append(SCStrings.info.regularGameTeamSizeSatisfied.rawValue)
+                result.append(SCStrings.info.regularGameTeamSizeSatisfied.rawValue.localized)
             }
         } else {
             result.append(SCStrings.emoji.incomplete.rawValue)
 
             if GameMode.instance.getMode() == .miniGame {
-                result.append(SCStrings.info.minigameTeamSizeUnsatisfied.rawValue)
+                result.append(SCStrings.info.minigameTeamSizeUnsatisfied.rawValue.localized)
             } else {
-                result.append(SCStrings.info.regularGameTeamSizeUnsatisfied.rawValue)
+                result.append(SCStrings.info.regularGameTeamSizeUnsatisfied.rawValue.localized)
             }
         }
 
@@ -158,7 +158,7 @@ class SCPregameModalMainViewController: SCViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Section.count
     }
@@ -223,7 +223,7 @@ extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDe
                 cell.primaryLabel.text = checkListItems[1]
             case 1: // Leader nomination info
                 cell.leftLabel.text = SCStrings.emoji.info.rawValue
-                cell.primaryLabel.text = SCStrings.info.leaderNomination.rawValue
+                cell.primaryLabel.text = SCStrings.info.leaderNomination.rawValue.localized
             default:
                 break
             }
@@ -238,13 +238,27 @@ extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDe
 
             if GameMode.instance.getMode() == .miniGame {
                 if let bestRecord = Statistics.instance.getBestRecord() {
-                    cell.primaryLabel.text = "Best Record: " + String(bestRecord)
+                    cell.primaryLabel.text = String(
+                        format: SCStrings.primaryLabel.minigameStatistics.rawValue,
+                        SCStrings.primaryLabel.bestRecord.rawValue,
+                        String(bestRecord)
+                    )
                 } else {
-                    cell.primaryLabel.text = "Best Record: --"
+                    cell.primaryLabel.text = String(
+                        format: SCStrings.primaryLabel.minigameStatistics.rawValue,
+                        SCStrings.primaryLabel.bestRecord.rawValue.localized,
+                        SCStrings.primaryLabel.none.rawValue
+                    )
                 }
             } else {
                 let score = Statistics.instance.getScore()
-                cell.primaryLabel.text = "Red " + String(score[0]) + " : " + String(score[1]) + " Blue"
+                cell.primaryLabel.text = String(
+                    format: SCStrings.primaryLabel.regularGameStatistics.rawValue,
+                    SCStrings.primaryLabel.teamRed.rawValue.localized,
+                    String(score[0]),
+                    String(score[1]),
+                    SCStrings.primaryLabel.teamBlue.rawValue.localized
+                )
             }
 
             return cell
@@ -259,7 +273,7 @@ extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDe
 
                 cell.synchronizeToggle()
                 cell.primaryLabel.text = self.settingsLabels[.minigame]
-                cell.secondaryLabel.text = SCStrings.secondaryLabel.minigame.rawValue
+                cell.secondaryLabel.text = SCStrings.secondaryLabel.minigame.rawValue.localized
                 cell.delegate = self
 
                 return cell
@@ -271,7 +285,7 @@ extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDe
                 }
 
                 cell.primaryLabel.text = self.settingsLabels[.timer]
-                cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawValue
+                cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawValue.localized
                 cell.delegate = self
 
                 cell.synchronizeSetting()
@@ -305,8 +319,8 @@ extension SCPregameModalMainViewController: UITableViewDataSource, UITableViewDe
 }
 
 // MARK: SCToggleViewCellDelegate
-extension SCPregameModalMainViewController: SCToggleViewCellDelegate {
-    func onToggleChanged(_ cell: SCToggleViewCell, enabled: Bool) {
+extension SCPregameMenuMainViewController: SCToggleViewCellDelegate {
+    func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.identifier.minigameToggleViewCell.rawValue:
@@ -335,12 +349,12 @@ extension SCPregameModalMainViewController: SCToggleViewCellDelegate {
     }
 }
 
-extension SCPregameModalMainViewController: SCPickerViewCellDelegate {
-    func onPickerTapped() {
+extension SCPregameMenuMainViewController: SCPickerViewCellDelegate {
+    func pickerViewCell(onPickerViewCellTapped pickerViewCell: SCPickerViewCell) {
         self.inputMode = true
     }
-    
-    func onPickerDismissed() {
+
+    func pickerViewCell(onPickerViewCellDismissed pickerViewCell: SCPickerViewCell) {
         self.inputMode = false
     }
 }

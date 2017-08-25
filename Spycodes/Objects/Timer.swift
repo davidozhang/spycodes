@@ -3,8 +3,6 @@ import Foundation
 class Timer: NSObject, NSCoding {
     static var instance = Timer()
 
-    var state: TimerState = .stopped
-
     fileprivate var enabled = false
     fileprivate var timer: Foundation.Timer?
     fileprivate var startTime: Int?
@@ -88,7 +86,7 @@ class Timer: NSObject, NSCoding {
     }
 
     func invalidate() {
-        self.state = .stopped
+        SCStates.resetState(type: .timer)
         self.timer?.invalidate()
         self.timerEndedCallback = nil
         self.timerInProgressCallback = nil

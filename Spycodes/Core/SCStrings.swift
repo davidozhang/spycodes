@@ -1,3 +1,5 @@
+import Foundation
+
 extension String {
     var first: String {
         return String(characters.prefix(1))
@@ -10,21 +12,46 @@ extension String {
     var uppercasedFirst: String {
         return first.uppercased() + String(characters.dropFirst())
     }
+
+    var localized: String {
+        return NSLocalizedString(
+            self,
+            tableName: nil,
+            bundle: .main,
+            value: "",
+            comment: ""
+        )
+    }
+
+    func localized(comment: String) -> String {
+        return NSLocalizedString(
+            self,
+            tableName: nil,
+            bundle: .main,
+            value: "",
+            comment: comment
+        )
+    }
 }
 
 class SCStrings {
+    static let appName = "Spycodes"
+
     enum button: String {
-        case showAnswer = "Show Answer"
         case cancel = "Cancel"
         case confirm = "Confirm"
         case dismiss = "Continue"
+        case createGame = "Create Game"
         case done = "Done"
         case endRound = "End Round"
         case gameAborted = "Aborted"
         case gameOver = "Game Over"
         case hideAnswer = "Hide Answer"
-        case returnToPregameRoom = "Return to Pregame Room"
+        case joinGame = "Join Game"
         case ok = "OK"
+        case ready = "Ready"
+        case returnToPregameRoom = "Return to Pregame Room"
+        case showAnswer = "Show Answer"
     }
 
     enum category: String {
@@ -37,13 +64,13 @@ class SCStrings {
         case game = "Game"
         case garden = "Garden"
         case items = "Items"
+        case misc = "Miscellaneous"
         case nature = "Nature"
         case people = "People"
         case places = "Places"
         case space = "Space"
         case sports = "Sports"
         case transportation = "Transportation"
-        case misc = "Miscellaneous"
     }
 
     enum emoji: String {
@@ -71,7 +98,7 @@ class SCStrings {
     }
 
     enum header: String {
-        case accessCode = "Access Code: "
+        case accessCode = "Access Code"
         case categoryExists = "Existing Category"
         case categoryName = "Category Name"
         case categoryWordList = "Category Word List"
@@ -82,8 +109,8 @@ class SCStrings {
         case editWord = "Edit Word"
         case emptyCategory = "Empty Category"
         case emptyWord = "Empty Word"
-        case enterClue = "Enter Clue"
         case ending = "Final Note"
+        case enterClue = "Enter Clue"
         case hostOnly = "Host Only Feature"
         case integrityCheck = "Integrity Check"
         case introduction = "Introduction"
@@ -91,6 +118,8 @@ class SCStrings {
         case gameOver = "Game Over"
         case goal = "Goal"
         case guess = "Guessing Time"
+        case playerName = "Your Name"
+        case pregameRoom = "%@: %@"
         case returningToMainMenu = "Returning to Main Menu"
         case roundEnd = "Round End"
         case minimumWords = "Too Few Words"
@@ -127,7 +156,7 @@ class SCStrings {
         case minigameIntro = "You are currently playing a Minigame with your teammates on Team Red versus a CPU player on Team Blue. There are 22 words in total: 8 Red, 7 Blue, 6 Neutral (white) and 1 Assassin (black)."
         case minigameRoundEnd = "After each round ends, the CPU automatically eliminates one of its words and hands the round back to your team. Your teammates must try to guess all of your team's words before the CPU finishes all of its words."
         case minigameWinString = "Your team won! There were %d opponent cards remaining. Great work!"
-        case minimumWords = "There must be a minimum of %d words."
+        case minimumWords = "There must be a minimum of 22 words."
         case playerAborted = "A player in the game has aborted."
         case playerClue = "A 1-word clue and number will show at the top once your leader is done coming up with it. The number represents the amount of words corresponding to that clue. You cannot talk or make eye contact with your leader!"
         case playerDisconnected = "A player in the game has disconnected."
@@ -140,10 +169,6 @@ class SCStrings {
         case updatePrompt = "Please download the latest version of Spycodes."
     }
 
-    enum navigationItem: String {
-        case newCategory = "New Category"
-    }
-
     enum player: String {
         case cpu = "CPU"
         case localPlayer = "You"
@@ -152,6 +177,7 @@ class SCStrings {
     enum primaryLabel: String {
         case accessibility = "Accessibility"
         case addWord = "Add Word"
+        case bestRecord = "Best Record"
         case category = "%@ %@"
         case categoryNoEmoji = "%@"
         case deleteCategory = "Delete Category"
@@ -159,15 +185,21 @@ class SCStrings {
         case icons8 = "Icons8"
         case github = "Github"
         case minigame = "Minigame"
+        case minigameStatistics = "%@: %@"
         case name = "Name"
         case nightMode = "Night Mode"
-        case persistentSelection = "%@ Persist"
+        case none = "--"
+        case persist = "Persist"
+        case regularGameStatistics = "%@ %@ : %@ %@"
         case releaseNotes = "Release Notes"
         case reviewApp = "Review App"
-        case selectAll = "%@ Select All"
+        case selectAll = "Select All"
         case support = "Support"
+        case teamBlue = "Team Blue"
         case teamEmptyState = "No players on the team."
+        case teamRed = "Team Red"
         case timer = "Timer"
+        case version = "Version"
         case website = "Website"
     }
 
@@ -203,8 +235,37 @@ class SCStrings {
         case teamRed = "Team Red"
         case teamBlue = "Team Blue"
         case timeline = "Timeline"
-        case wordList = "Word List (%d %@)"
-        case wordListDefault = "Word List"
+        case word = "Word"
+        case words = "Words"
+        case wordListWithWordCount = "%@ (%d %@)"
+        case wordList = "Word List"
+    }
+
+    enum state: String {
+        case actionButton = "Action Button"
+        case addingNewWord = "Adding New Word"
+        case confirm = "Confirm"
+        case customCategory = "Custom Category"
+        case editingCategoryName = "Editing Category Name"
+        case editingEmoji = "Editing Emoji"
+        case editingExistingWord = "Editing Existing Word"
+        case endRound = "End Round"
+        case gameAborted = "Game Aborted"
+        case gameOver = "Game Over"
+        case hideAnswer = "Hide Answer"
+        case log = "%@: %@"
+        case main = "Main"
+        case nonEditing = "Non-Editing"
+        case notReady = "Not Ready"
+        case pregameMenu = "Pregame Menu"
+        case ready = "Ready"
+        case readyButton = "Ready Button"
+        case secondary = "Secondary"
+        case showAnswer = "Show Answer"
+        case started = "Started"
+        case stopped = "Stopped"
+        case timer = "Timer"
+        case willStart = "Will Start"
     }
 
     enum status: String {
@@ -217,22 +278,30 @@ class SCStrings {
     }
 
     enum timeline: String {
+        case and = "&"
         case assassin = "the assassin"
         case bystander = "a bystander"
-        case correctlySelected = "%@ correctly selected '%@'."
-        case clueSetTo = "%@ set the clue to '%@ %@'."
-        case cpuSelected = "CPU selected '%@' & ended the round."
+        case correctlySelected = "correctly selected"
+        case correctlySelectedEvent = "%@ %@ '%@'."     // [Player] [correctly selected] '[Word]'.
+        case confirmEvent = "%@ %@ '%@ %@'."    // [Player] [set the clue to] '[Clue] [1]'.
+        case cpuSelected = "CPU selected"
+        case cpuSelectedEvent = "%@ '%@' %@ %@."    // [CPU selected] '[Word]' [&] [ended the round].
         case emptyState = "No events yet."
+        case endedGame = "ended the game"
+        case endedRound = "ended the round"
+        case endRoundEvent = "%@ %@."   // [Player] [ended the round].
         case enemy = "an enemy card"
-        case game = "game"
-        case gameAborted = "Game has been aborted."
-        case gameOver = "Game over. Your team %@."
+        case gameAbortedEvent = "Game has been aborted."
+        case gameOver = "Game over"
+        case gameOverEvent = "%@. %@ %@."   // [Game over]. [Your team] [won].
+        case incorrectlySelectedEvent = "%@ %@ %@ '%@' %@ %@."   // [Player] [selected] [an enemy card] '[Word]' [&] [ended the round].
         case lost = "lost"
-        case round = "round"
-        case roundEnded = "%@ ended the round."
-        case selected = "%@ selected %@ '%@' & ended the %@."
+        case selected = "selected"
+        case setClueTo = "set the clue to"
         case timerExpiry = "Round has ended due to timer expiry."
+        case unknownEvent = "Unknown event. Please update Spycodes!"
         case won = "won"
+        case yourTeam = "Your team"
     }
 
     enum timer: String {
