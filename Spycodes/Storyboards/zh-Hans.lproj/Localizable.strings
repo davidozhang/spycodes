@@ -4,6 +4,13 @@
 "Failed to join room" = "参与失败";
 "Joining room..." = "参与中...";
 
+// Game
+"Waiting for Clue" = "等待线索";
+"Enter Clue" = "输入线索";
+"Not Your Turn" = "没轮到你的队";
+"Red" = "红色队";
+"Blue" = "蓝色队";
+
 // Main
 "Create Game" = "创建游戏";
 "Join Game" = "参与游戏";
@@ -112,13 +119,29 @@
 // Alerts
 "Returning to Main Menu" = "回到主页";
 "Host player has disconnected." = "房间主人掉线了.";
-"OK" = "确认";
-"Confirm" = "确认";
-"Cancel" = "取消";
 "Too Few Words" = "单词太少";
 "There must be a minimum of 22 words." = "至少需要22个单词.";
 "Host Only Feature" = "房间主人的功能";
 "Only the host can toggle category settings." = "只有房间主人能够调节分类设置.";
+"Your team lost!" = "你的队输了!";
+"Your team won!" = "你的队赢了!";
+"Game Aborted" = "游戏被中止";
+"A player in the game has aborted." = "一位玩家中止了游戏.";
+"A player in the game has disconnected." = "一位玩家断了连接.";
+"Game Over" = "游戏结束";
+"Your team won! There were %d opponent cards remaining. Great work!" = "你的队赢了！敌人单词还剩%d.不错!";
+
+// Button
+"OK" = "确认";
+"Confirm" = "确认";
+"Cancel" = "取消";
+"End Round" = "结束此轮";
+"Game Over" = "游戏结束";
+"Aborted" = "游戏中止";
+"Show Answer" = "显示答案";
+"Hide Answer" = "隐藏答案";
+"Return to Pregame Room" = "回到房间";
+"Continue" = "继续";
 
 // Default Categories
 "Animals" = "动物";
