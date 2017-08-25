@@ -38,20 +38,20 @@ class SCStrings {
     static let appName = "Spycodes"
 
     enum button: String {
-        case showAnswer = "Show Answer"
         case cancel = "Cancel"
         case confirm = "Confirm"
-        case createGame = "Create Game"
         case dismiss = "Continue"
+        case createGame = "Create Game"
         case done = "Done"
         case endRound = "End Round"
         case gameAborted = "Aborted"
         case gameOver = "Game Over"
         case hideAnswer = "Hide Answer"
         case joinGame = "Join Game"
+        case ok = "OK"
         case ready = "Ready"
         case returnToPregameRoom = "Return to Pregame Room"
-        case ok = "OK"
+        case showAnswer = "Show Answer"
     }
 
     enum category: String {
@@ -64,13 +64,13 @@ class SCStrings {
         case game = "Game"
         case garden = "Garden"
         case items = "Items"
+        case misc = "Miscellaneous"
         case nature = "Nature"
         case people = "People"
         case places = "Places"
         case space = "Space"
         case sports = "Sports"
         case transportation = "Transportation"
-        case misc = "Miscellaneous"
     }
 
     enum emoji: String {
@@ -109,8 +109,8 @@ class SCStrings {
         case editWord = "Edit Word"
         case emptyCategory = "Empty Category"
         case emptyWord = "Empty Word"
-        case enterClue = "Enter Clue"
         case ending = "Final Note"
+        case enterClue = "Enter Clue"
         case hostOnly = "Host Only Feature"
         case integrityCheck = "Integrity Check"
         case introduction = "Introduction"
@@ -156,7 +156,7 @@ class SCStrings {
         case minigameIntro = "You are currently playing a Minigame with your teammates on Team Red versus a CPU player on Team Blue. There are 22 words in total: 8 Red, 7 Blue, 6 Neutral (white) and 1 Assassin (black)."
         case minigameRoundEnd = "After each round ends, the CPU automatically eliminates one of its words and hands the round back to your team. Your teammates must try to guess all of your team's words before the CPU finishes all of its words."
         case minigameWinString = "Your team won! There were %d opponent cards remaining. Great work!"
-        case minimumWords = "There must be a minimum of %d words."
+        case minimumWords = "There must be a minimum of 22 words."
         case playerAborted = "A player in the game has aborted."
         case playerClue = "A 1-word clue and number will show at the top once your leader is done coming up with it. The number represents the amount of words corresponding to that clue. You cannot talk or make eye contact with your leader!"
         case playerDisconnected = "A player in the game has disconnected."
@@ -299,6 +299,7 @@ class SCStrings {
         case selected = "selected"
         case setClueTo = "set the clue to"
         case timerExpiry = "Round has ended due to timer expiry."
+        case unknownEvent = "Unknown event. Please update Spycodes!"
         case won = "won"
         case yourTeam = "Your team"
     }
