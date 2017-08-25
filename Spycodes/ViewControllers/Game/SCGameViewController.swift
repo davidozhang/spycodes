@@ -459,7 +459,9 @@ class SCGameViewController: SCViewController {
                 SCStates.changeTimerState(to: .willStart)
             }
         } else {
-            SCStates.changeTimerState(to: .stopped)
+            if SCStates.getTimerState() != .stopped {
+                SCStates.changeTimerState(to: .stopped)
+            }
         }
 
         if SCStates.getTimerState() == .stopped {
@@ -470,7 +472,7 @@ class SCGameViewController: SCViewController {
             Timer.instance.startTimer({
                 self.timerDidEnd()
             }, timerInProgress: { (remainingTime) in
-                    self.timerInProgress(remainingTime)
+                self.timerInProgress(remainingTime)
             })
 
             SCStates.changeTimerState(to: .started)
