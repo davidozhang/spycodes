@@ -25,6 +25,10 @@ class CardCollection: NSObject, NSCoding {
             self.startingTeam = self.keyObject.getStartingTeam()
         }
 
+        guard words.count >= SCConstants.constant.cardCount.rawValue else {
+            return
+        }
+
         for i in 0..<SCConstants.constant.cardCount.rawValue {
             self.cards.append(
                 Card(
