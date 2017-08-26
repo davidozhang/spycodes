@@ -11,6 +11,8 @@ class SCSingleCharacterTextField: SCUnderlineTextField {
         super.init(coder: aDecoder)
 
         self.textAlignment = .center
+        self.keyboardType = .asciiCapable
+        self.autocapitalizationType = .none
     }
 
     override func deleteBackward() {

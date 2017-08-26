@@ -367,7 +367,7 @@ extension SCAccessCodeViewController: UITextFieldDelegate {
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         // Disallow all special characters
-        if string.rangeOfCharacter(from: SCAccessCodeViewController.allowedCharactersSet.inverted) != nil {
+        if let _ = string.rangeOfCharacter(from: SCAccessCodeViewController.allowedCharactersSet.inverted) {
             return false
         }
 
