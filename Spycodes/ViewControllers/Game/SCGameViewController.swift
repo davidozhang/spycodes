@@ -132,6 +132,17 @@ class SCGameViewController: SCViewController {
         self.clueTextField.delegate = self
         self.numberOfWordsTextField.delegate = self
 
+        self.clueTextField.addTarget(
+            self,
+            action: #selector(SCGameViewController.textFieldEditingChanged),
+            for: .editingChanged
+        )
+        self.numberOfWordsTextField.addTarget(
+            self,
+            action: #selector(SCGameViewController.textFieldEditingChanged),
+            for: .editingChanged
+        )
+
         SCMultipeerManager.instance.delegate = self
 
         if Player.instance.isHost() {
@@ -1095,6 +1106,11 @@ extension SCGameViewController: UICollectionViewDelegateFlowLayout, UICollection
 
 // MARK: UITextFieldDelegate
 extension SCGameViewController: UITextFieldDelegate {
+    @objc
+    func textFieldEditingChanged(_ textField: UITextField) {
+        textField.invalidateIntrinsicContentSize()
+    }
+
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if Player.instance.isLeader() &&
            Round.instance.getCurrentTeam() == Player.instance.getTeam() &&
