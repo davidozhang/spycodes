@@ -4,7 +4,7 @@ class CardCollection: NSObject, NSCoding {
     static var instance = CardCollection()
 
     fileprivate var keyObject = Key()
-    fileprivate let words = SCWordBank.getShuffledWords()
+    fileprivate var words = [String]()
 
     fileprivate var cards = [Card]()
     fileprivate var key = [Team]()
@@ -12,6 +12,8 @@ class CardCollection: NSObject, NSCoding {
 
     // MARK: Constructor/Destructor
     override init() {
+        super.init()
+
         if !Player.instance.isHost() {
             return
         }
@@ -25,14 +27,16 @@ class CardCollection: NSObject, NSCoding {
             self.startingTeam = self.keyObject.getStartingTeam()
         }
 
-        guard words.count >= SCConstants.constant.cardCount.rawValue else {
+        self.words = SCWordBank.getShuffledWords()
+
+        guard self.words.count >= SCConstants.constant.cardCount.rawValue else {
             return
         }
 
         for i in 0..<SCConstants.constant.cardCount.rawValue {
             self.cards.append(
                 Card(
-                    word: words[i],
+                    word: self.words[i],
                     selected: false,
                     team: self.key[i]
                 )
