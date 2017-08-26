@@ -110,7 +110,7 @@ class SCWordBank {
             result += category.getWordList()
         }
 
-        return result.choose(SCConstants.constant.cardCount.rawValue)
+        return result[choose: SCConstants.constant.cardCount.rawValue]
     }
 
     static func getCategoryName(category: Category) -> String {

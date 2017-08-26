@@ -19,6 +19,18 @@ extension Array {
         return self
     }
 
+    // Picks 'n' random elements (partial Fisher-Yates shuffle approach)
+    subscript (choose n: Int) -> [Element] {
+        var copy = self
+        for i in stride(from: count - 1, to: count - n - 1, by: -1) {
+            let j = Int(arc4random_uniform(UInt32(i + 1)))
+            if j != i {
+                swap(&copy[i], &copy[j])
+            }
+        }
+        return Array(copy.suffix(n))
+    }
+
     func choose(_ n: Int) -> Array {
         return Array(shuffled.prefix(n))
     }

@@ -103,7 +103,7 @@ class SCPregameRoomViewController: SCViewController {
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 1.0,
             target: self,
-            selector: #selector(SCPregameRoomViewController.refreshView),
+            selector: #selector(SCPregameRoomViewController.refresh),
             userInfo: nil,
             repeats: true
         )
@@ -223,7 +223,7 @@ class SCPregameRoomViewController: SCViewController {
 
     // MARK: Private
     @objc
-    fileprivate func refreshView() {
+    fileprivate func refresh() {
         DispatchQueue.main.async(execute: {
             Room.instance.applyRanking()
             self.tableView.reloadData()
@@ -240,7 +240,10 @@ class SCPregameRoomViewController: SCViewController {
         SCMultipeerManager.instance.broadcast(Room.instance)
         SCMultipeerManager.instance.broadcast(GameMode.instance)
         SCMultipeerManager.instance.broadcast(Timer.instance)
-        SCMultipeerManager.instance.broadcast(ConsolidatedCategories.instance)
+
+        if Player.instance.isHost() {
+            SCMultipeerManager.instance.broadcast(ConsolidatedCategories.instance)
+        }
     }
 
     fileprivate func broadcastEvent(_ eventType: Event.EventType) {
