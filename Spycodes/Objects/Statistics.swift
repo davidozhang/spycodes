@@ -16,7 +16,7 @@ class Statistics: NSObject, NSCoding {
             self.score,
             forKey: SCConstants.coding.score.rawValue
         )
-        
+
         if let bestRecord = self.bestRecord {
             aCoder.encode(
                 bestRecord,

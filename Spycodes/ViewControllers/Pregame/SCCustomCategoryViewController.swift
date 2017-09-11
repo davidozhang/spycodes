@@ -513,7 +513,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                         cell.rightTextView.becomeFirstResponder()
                     })
                 }
-                
+
                 return cell
             default:
                 return SCTableViewCell()
@@ -532,7 +532,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
 
                     cell.primaryLabel.text = SCStrings.primaryLabel.addWord.rawValue.localized
                     cell.indexPath = indexPath
-                    
+
                     return cell
                 case .addingNewWord:
                     // Custom top view cell with text field as first responder
@@ -634,7 +634,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
             }
             self.scrolled = false
         }
-        
+
         if !self.inputMode {
             self.reloadView()
         }

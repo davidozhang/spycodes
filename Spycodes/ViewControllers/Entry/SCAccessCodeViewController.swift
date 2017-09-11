@@ -318,7 +318,7 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
 
     func multipeerManager(peerDisconnected peerID: MCPeerID) {}
 
-    func multipeerManager(foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {}
+    func multipeerManager(foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {}
 
     func multipeerManager(lostPeer peerID: MCPeerID) {}
 }

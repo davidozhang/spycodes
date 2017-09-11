@@ -82,16 +82,16 @@ class CardCollection: NSObject, NSCoding {
     }
 
     func getCardsRemainingForTeam(_ team: Team) -> Int {
-        return self.cards.filter({
+        return self.cards.filter {
             ($0 as Card).getTeam() == team && !($0 as Card).isSelected()
-        }).count
+        }.count
     }
 
     // Minigame Specific
     func autoEliminateOpponentTeamCard(_ opponentTeam: Team) {
-        var opponentRemainingCards = self.cards.filter({
+        var opponentRemainingCards = self.cards.filter {
             ($0 as Card).getTeam() == opponentTeam && !($0 as Card).isSelected()
-        })
+        }
         opponentRemainingCards = opponentRemainingCards.shuffled
         if opponentRemainingCards.count > 0 {
             let card = opponentRemainingCards[0]
