@@ -432,12 +432,12 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                                 SCStrings.secondaryLabel.words.rawValue.localized
                         )
                     }
-                    
+
                     cell.setEnabled(enabled: true)
-                    
+
                     cell.synchronizeToggle()
                     cell.delegate = self
-                    
+
                     return cell
                 }
             }

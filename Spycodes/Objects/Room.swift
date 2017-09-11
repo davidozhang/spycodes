@@ -132,9 +132,9 @@ class Room: NSObject, NSCoding {
 
     func getPlayerWithUUID(_ uuid: String) -> Player? {
         for players in self.players {
-            let filtered = players.filter({
+            let filtered = players.filter {
                 ($0 as Player).getUUID() == uuid
-            })
+            }
 
             if filtered.count == 1 {
                 return filtered[0]
@@ -149,9 +149,9 @@ class Room: NSObject, NSCoding {
             return nil
         }
 
-        let filtered = self.players[team.rawValue].filter({
+        let filtered = self.players[team.rawValue].filter {
             ($0 as Player).isLeader() && ($0 as Player).getTeam() == team
-        })
+        }
         if filtered.count == 1 {
             return filtered[0].getUUID()
         } else {
@@ -208,13 +208,13 @@ class Room: NSObject, NSCoding {
             return
         }
 
-        self.players[Team.red.rawValue] = self.players[Team.red.rawValue].filter({
+        self.players[Team.red.rawValue] = self.players[Team.red.rawValue].filter {
             ($0 as Player).getUUID() != uuid
-        })
+        }
 
-        self.players[Team.blue.rawValue] = self.players[Team.blue.rawValue].filter({
+        self.players[Team.blue.rawValue] = self.players[Team.blue.rawValue].filter {
             ($0 as Player).getUUID() != uuid
-        })
+        }
     }
 
     // MARK: Modifiers
@@ -282,11 +282,11 @@ class Room: NSObject, NSCoding {
             return false
         }
 
-        return self.players[Team.red.rawValue].filter({
+        return self.players[Team.red.rawValue].filter {
             ($0 as Player).isHost()
-        }).count == 1 || self.players[Team.blue.rawValue].filter({
+        }.count == 1 || self.players[Team.blue.rawValue].filter {
             ($0 as Player).isHost()
-        }).count == 1
+        }.count == 1
     }
 
     func teamSizesValid() -> Bool {
@@ -295,12 +295,12 @@ class Room: NSObject, NSCoding {
         }
 
         if GameMode.instance.getMode() == .regularGame {
-            let redValid = self.players[Team.red.rawValue].filter({
+            let redValid = self.players[Team.red.rawValue].filter {
                 ($0 as Player).getTeam() == .red
-            }).count >= 2
-            let blueValid = self.players[Team.blue.rawValue].filter({
+            }.count >= 2
+            let blueValid = self.players[Team.blue.rawValue].filter {
                 ($0 as Player).getTeam() == .blue
-            }).count >= 2
+            }.count >= 2
 
             if redValid && blueValid {
                 return true
@@ -340,11 +340,11 @@ class Room: NSObject, NSCoding {
             return false
         }
 
-        let readyPlayers = self.players[Team.red.rawValue].filter({
+        let readyPlayers = self.players[Team.red.rawValue].filter {
             ($0 as Player).isReady()
-        }).count + self.players[Team.blue.rawValue].filter({
+        }.count + self.players[Team.blue.rawValue].filter {
             ($0 as Player).isReady()
-        }).count
+        }.count
 
         return readyPlayers == self.getPlayerCount()
     }

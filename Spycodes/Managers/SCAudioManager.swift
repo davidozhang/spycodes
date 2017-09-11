@@ -6,8 +6,8 @@ class SCAudioManager {
     }
 
     static func playClickSound() {
-        DispatchQueue.main.async(execute: {
-            AudioServicesPlaySystemSound(1104);
-        });
+        DispatchQueue.main.async {
+            AudioServicesPlaySystemSound(1104)
+        }
     }
 }

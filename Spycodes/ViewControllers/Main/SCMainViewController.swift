@@ -33,12 +33,12 @@ class SCMainViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        SCAppInfoManager.checkLatestAppVersion({
+        SCAppInfoManager.checkLatestAppVersion {
             // If not on latest app version
             DispatchQueue.main.async {
                 self.showUpdateAppAlert()
             }
-        })
+        }
 
         self.logoLabel.text = SCStrings.appName.localized
 

@@ -97,12 +97,12 @@ class SCViewController: UIViewController {
 
         NotificationCenter.default.removeObserver(
             self,
-            name:NSNotification.Name.UIApplicationDidBecomeActive,
+            name: NSNotification.Name.UIApplicationDidBecomeActive,
             object: nil
         )
         NotificationCenter.default.removeObserver(
             self,
-            name:NSNotification.Name.UIApplicationWillResignActive,
+            name: NSNotification.Name.UIApplicationWillResignActive,
             object: nil
         )
         NotificationCenter.default.removeObserver(
@@ -117,7 +117,7 @@ class SCViewController: UIViewController {
         )
     }
 
-    override var preferredStatusBarStyle : UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             return .lightContent
         } else {
