@@ -4,8 +4,6 @@ import UIKit
 class SCGameViewController: SCViewController {
     fileprivate let edgeInset: CGFloat = 12
     fileprivate let minCellSpacing: CGFloat = 12
-    fileprivate let modalWidth = UIScreen.main.bounds.width - 60
-    fileprivate let modalHeight = UIScreen.main.bounds.height/2
     fileprivate let bottomBarViewDefaultHeight: CGFloat = 82
     fileprivate let timerViewDefaultHeight: CGFloat = 25
     fileprivate let bottomBarViewExtendedHeight: CGFloat = 121
@@ -245,30 +243,7 @@ class SCGameViewController: SCViewController {
 
     // MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? SCPopoverViewController {
-            super.showDimView()
-
-            vc.rootViewController = self
-            vc.modalPresentationStyle = .popover
-            vc.preferredContentSize = CGSize(
-                width: self.modalWidth,
-                height: self.modalHeight
-            )
-
-            if let popvc = vc.popoverPresentationController {
-                popvc.delegate = self
-                popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-                popvc.sourceView = self.view
-                popvc.sourceRect = CGRect(
-                    x: self.view.bounds.midX,
-                    y: self.view.bounds.midY,
-                    width: 0,
-                    height: 0
-                )
-            }
-        } else {
-            super._prepareForSegue(segue, sender: self)
-        }
+        super._prepareForSegue(segue, sender: self)
     }
 
     // MARK: Touch

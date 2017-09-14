@@ -2,6 +2,9 @@ import UIKit
 
 class SCViewController: UIViewController {
     static let tableViewMargin: CGFloat = 30
+    static let modalWidth = UIScreen.main.bounds.width - 60
+    static let modalHeight = UIScreen.main.bounds.height/2
+
     let animationDuration: TimeInterval = 0.6
     let animationAlpha: CGFloat = 0.5
 
@@ -169,6 +172,29 @@ class SCViewController: UIViewController {
         if let destination = segue.destination as? SCModalViewController {
             destination.modalPresentationStyle = .overCurrentContext
             return
+        }
+
+        if let destination = segue.destination as? SCPopoverViewController {
+            self.showDimView()
+
+            destination.rootViewController = self
+            destination.modalPresentationStyle = .popover
+            destination.preferredContentSize = CGSize(
+                width: SCViewController.modalWidth,
+                height: SCViewController.modalHeight
+            )
+
+            if let popover = destination.popoverPresentationController {
+                popover.delegate = self
+                popover.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+                popover.sourceView = self.view
+                popover.sourceRect = CGRect(
+                    x: self.view.bounds.midX,
+                    y: self.view.bounds.midY,
+                    width: 0,
+                    height: 0
+                )
+            }
         }
 
         if let destination = segue.destination as? SCViewController {
