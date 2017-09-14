@@ -135,6 +135,13 @@ class SCStrings {
         case regularGameTeamSizeSatisfied = "Each team currently has 2-4 players."
     }
 
+    enum logging: String {
+        case addedObserver = "[%@] Added observer '%@' for view controller with identifier %@"
+        case removedObserver = "[%@] Removed observer '%@' for view controller with identifier %@"
+        case unidentifiedViewControllerAddingObservers = "[%@] Unidentified view controller adding observers!"
+        case unidentifiedViewControllerRemovingObservers = "[%@] Unidentified view controller removing observers!"
+    }
+
     enum message: String {
         case categoryExists = "The category name already exists."
         case categorySetting = "Only the host can toggle category settings."

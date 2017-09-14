@@ -20,11 +20,14 @@ class SCPlayerNameViewController: SCViewController {
     }
 
     // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.viewControllerIdentifier = SCConstants.identifier.playerNameViewController.rawValue
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        // Unwindable view controller identifier
-        self.unwindableIdentifier = SCConstants.identifier.playerName.rawValue
 
         self.headerLabel.text = SCStrings.header.playerName.rawValue.localized
 
@@ -103,7 +106,7 @@ extension SCPlayerNameViewController: UITextFieldDelegate {
                 )
             } else {
                 self.performSegue(
-                    withIdentifier: SCConstants.identifier.accessCode.rawValue,
+                    withIdentifier: SCConstants.identifier.accessCodeViewController.rawValue,
                     sender: self
                 )
             }

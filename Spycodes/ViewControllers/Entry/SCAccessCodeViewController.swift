@@ -50,13 +50,12 @@ class SCAccessCodeViewController: SCViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.viewControllerIdentifier = SCConstants.identifier.accessCodeViewController.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        // Unwindable view controller identifier
-        self.unwindableIdentifier = SCConstants.identifier.accessCode.rawValue
 
         SCMultipeerManager.instance.delegate = self
 

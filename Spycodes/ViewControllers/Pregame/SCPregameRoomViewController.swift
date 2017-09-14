@@ -43,6 +43,8 @@ class SCPregameRoomViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.viewControllerIdentifier = SCConstants.identifier.pregameRoom.rawValue
+
         if Player.instance.isHost() {
             Room.instance.generateNewAccessCode()
             SCMultipeerManager.instance.setPeerID(Room.instance.getUUID())
@@ -70,9 +72,6 @@ class SCPregameRoomViewController: SCViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        // Unwindable view controller identifier
-        self.unwindableIdentifier = SCConstants.identifier.pregameRoom.rawValue
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -112,23 +111,12 @@ class SCPregameRoomViewController: SCViewController {
 
         Timeline.instance.reset()
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCPregameRoomViewController.showCustomCategoryView),
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.customCategory.rawValue
-            ),
-            object: nil
-        )
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCPregameRoomViewController.showPregameModalView),
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.pregameModal.rawValue
-            ),
-            object: nil
-        )
+        super.registerObservers(observers: [
+            SCConstants.notificationKey.customCategory.rawValue:
+                #selector(SCPregameRoomViewController.showCustomCategoryView),
+            SCConstants.notificationKey.pregameModal.rawValue:
+                #selector(SCPregameRoomViewController.showPregameModalView)
+        ])
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -140,22 +128,6 @@ class SCPregameRoomViewController: SCViewController {
             self.broadcastTimer?.invalidate()
         }
         self.refreshTimer?.invalidate()
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.customCategory.rawValue
-            ),
-            object: nil
-        )
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.pregameModal.rawValue
-            ),
-            object: nil
-        )
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -281,7 +253,7 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate func goToGame() {
         DispatchQueue.main.async(execute: {
             self.performSegue(
-                withIdentifier: SCConstants.identifier.gameRoom.rawValue,
+                withIdentifier: SCConstants.identifier.gameRoomViewController.rawValue,
                 sender: self
             )
         })

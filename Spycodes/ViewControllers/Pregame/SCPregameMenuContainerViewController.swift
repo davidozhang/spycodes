@@ -8,31 +8,21 @@ class SCPregameMenuContainerViewController: SCModalViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.viewControllerIdentifier = SCConstants.identifier.pregameMenuContainerViewController.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCPregameMenuContainerViewController.dismissViewFromNotification),
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.dismissModal.rawValue
-            ),
-            object: nil
-        )
+        super.registerObservers(observers: [
+            SCConstants.notificationKey.dismissModal.rawValue:
+                #selector(SCPregameMenuContainerViewController.dismissViewFromNotification)
+        ])
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.dismissModal.rawValue
-            ),
-            object: nil
-        )
     }
 
     // MARK: SCViewController Overrides

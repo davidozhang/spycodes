@@ -13,14 +13,14 @@ class SCMainViewController: SCViewController {
     @IBAction func onCreateGame(_ sender: AnyObject) {
         Player.instance.setIsHost(true)
         self.performSegue(
-            withIdentifier: SCConstants.identifier.playerName.rawValue,
+            withIdentifier: SCConstants.identifier.playerNameViewController.rawValue,
             sender: self
         )
     }
 
     @IBAction func onJoinGame(_ sender: AnyObject) {
         self.performSegue(
-            withIdentifier: SCConstants.identifier.playerName.rawValue,
+            withIdentifier: SCConstants.identifier.playerNameViewController.rawValue,
             sender: self
         )
     }
@@ -32,6 +32,10 @@ class SCMainViewController: SCViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Currently this view is the root view controller for unwinding logic
+        self.viewControllerIdentifier = SCConstants.identifier.mainMenu.rawValue
+        self.isRootViewController = true
 
         SCAppInfoManager.checkLatestAppVersion {
             // If not on latest app version
@@ -55,10 +59,6 @@ class SCMainViewController: SCViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        // Currently this view is the root view controller for unwinding logic
-        self.unwindableIdentifier = SCConstants.identifier.mainMenu.rawValue
-        self.isRootViewController = true
 
         ConsolidatedCategories.instance.reset()
         Player.instance.reset()
