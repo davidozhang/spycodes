@@ -5,9 +5,9 @@ class SCLogger {
 
     static func log(identifier: String?, _ statement: String) {
         if let identifier = identifier {
-            print(String(format: "[%@] %@", identifier, statement))
+            print(String(format: "[%@] %@\n", identifier, statement))
         } else {
-            print(statement)
+            print(statement + "\n")
         }
 
     }

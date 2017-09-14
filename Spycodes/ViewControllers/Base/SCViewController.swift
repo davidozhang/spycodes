@@ -24,7 +24,7 @@ class SCViewController: UIViewController {
     deinit {
         if let identifier = self.identifier {
             SCLogger.log(
-                identifier: SCStrings.logging.deinitIdentifier.rawValue,
+                identifier: SCConstants.loggingIdentifier.deinitialize.rawValue,
                 String(format: SCStrings.logging.deinitStatement.rawValue, identifier)
             )
         }

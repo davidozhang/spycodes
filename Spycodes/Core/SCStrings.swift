@@ -136,14 +136,13 @@ class SCStrings {
     }
 
     enum logging: String {
-        case addedObserver = "Added observer '%@' for view controller with identifier '%@'."
+        case addedObservers = "%d observers '%@' registered for view controller with identifier '%@'."
         case allCustomCategoriesRetrieved = "All custom categories retrieved."
         case allCustomCategoriesSaved = "All custom categories saved."
-        case deinitIdentifier = "DEINIT"
         case deinitStatement = "View controller with identifier '%@' deinitialized."
         case localSettingsRetrieved = "Local settings retrieved."
         case localSettingsSaved = "Local settings saved."
-        case removedObserver = "Removed observer '%@' for view controller with identifier '%@'."
+        case removedObservers = "%d observers '%@' removed for view controller with identifier '%@'."
         case selectedCategoriesSaved = "Selected categories saved."
         case selectedConsolidatedCategoriesCleared = "Selected consolidated categories cleared."
         case selectedConsolidatedCategoriesRetrieved = "Selected consolidated categories retrieved."
@@ -270,7 +269,7 @@ class SCStrings {
         case gameAborted = "Game Aborted"
         case gameOver = "Game Over"
         case hideAnswer = "Hide Answer"
-        case log = "%@: %@"
+        case log = "%@: %@."
         case main = "Main"
         case nonEditing = "Non-Editing"
         case notReady = "Not Ready"

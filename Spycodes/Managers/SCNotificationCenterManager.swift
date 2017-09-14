@@ -27,10 +27,13 @@ class SCNotificationCenterManager: SCLogger {
             }
 
             self.registration[key]?[name] = selector
+        }
 
+        if let registeredObservers = self.registration[key] {
             super.log(String(
-                format: SCStrings.logging.addedObserver.rawValue,
-                name,
+                format: SCStrings.logging.addedObservers.rawValue,
+                registeredObservers.keys.count,
+                registeredObservers.keys.joined(separator: ", "),
                 key
             ))
         }
@@ -49,10 +52,13 @@ class SCNotificationCenterManager: SCLogger {
                     name: NSNotification.Name(rawValue: name),
                     object: nil
                 )
+            }
 
+            if let registeredObservers = self.registration[key] {
                 super.log(String(
-                    format: SCStrings.logging.removedObserver.rawValue,
-                    name,
+                    format: SCStrings.logging.removedObservers.rawValue,
+                    registeredObservers.keys.count,
+                    registeredObservers.keys.joined(separator: ", "),
                     key
                 ))
             }
