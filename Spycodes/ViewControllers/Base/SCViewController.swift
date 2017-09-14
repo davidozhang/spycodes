@@ -174,6 +174,8 @@ class SCViewController: UIViewController {
                     height: 0
                 )
             }
+
+            return
         }
 
         if let destination = segue.destination as? SCViewController {
