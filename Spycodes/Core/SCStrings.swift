@@ -41,6 +41,7 @@ class SCStrings {
         case cancel = "Cancel"
         case confirm = "Confirm"
         case dismiss = "Continue"
+        case download = "Download"
         case createGame = "Create Game"
         case done = "Done"
         case endRound = "End Round"

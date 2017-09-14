@@ -88,12 +88,12 @@ class SCMainViewController: SCViewController {
     // MARK: Private
     fileprivate func showUpdateAppAlert() {
         let alertController = UIAlertController(
-            title: SCStrings.header.updateApp.rawValue,
-            message: SCStrings.message.updatePrompt.rawValue,
+            title: SCStrings.header.updateApp.rawValue.localized,
+            message: SCStrings.message.updatePrompt.rawValue.localized,
             preferredStyle: .alert
         )
         let confirmAction = UIAlertAction(
-            title: "Download",
+            title: SCStrings.button.download.rawValue.localized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 if let appStoreURL = URL(string: SCConstants.url.appStore.rawValue) {
