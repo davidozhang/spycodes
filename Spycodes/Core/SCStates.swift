@@ -118,7 +118,7 @@ class SCStates {
 // MARK: Logging
 extension SCStates {
     static func logState(type: StateType) {
-        var output = "[SCStates] "
+        var output = ""
         switch type {
         case .actionButton:
             output += String(
@@ -152,7 +152,7 @@ extension SCStates {
             )
         }
 
-        print(output)
+        SCLogger.log(identifier: SCConstants.loggingIdentifier.states.rawValue, output)
     }
 
     static func getActionButtonStateString(state: ActionButtonState) -> String {

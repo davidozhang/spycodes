@@ -9,10 +9,6 @@ class SCTimelineViewController: SCModalViewController {
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
-    }
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

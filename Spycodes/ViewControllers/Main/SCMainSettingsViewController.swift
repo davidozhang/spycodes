@@ -80,10 +80,6 @@ class SCMainSettingsViewController: SCModalViewController {
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var upArrowView: UIImageView!
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
-    }
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

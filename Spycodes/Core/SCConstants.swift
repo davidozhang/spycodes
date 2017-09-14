@@ -59,6 +59,7 @@ class SCConstants {
         case deleteCategoryViewCell = "delete-category-view-cell"
         case disclosureViewCell = "disclosure-view-cell"
         case emojiSettingViewCell = "emoji-setting-view-cell"
+        case gameHelpViewController = "game-help-view-controller"
         case gameRoomViewController = "game-room"
         case gameRoomViewCell = "game-room-view-cell"
         case helpView = "help-view"
@@ -97,6 +98,12 @@ class SCConstants {
     enum images: String {
         case shuffle = "Shuffle"
         case markAsRead = "Mark-As-Read"
+    }
+
+    enum loggingIdentifier: String {
+        case localStorageManager = "SCLocalStorageManager"
+        case notificationCenterManager = "SCNotificationCenterManager"
+        case states = "SCStates"
     }
 
     enum nibs: String {

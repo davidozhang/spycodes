@@ -15,10 +15,6 @@ class SCPlayerNameViewController: SCViewController {
         self.swipeRight()
     }
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
-    }
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

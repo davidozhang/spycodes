@@ -1,16 +1,16 @@
 import Foundation
 
-class SCNotificationCenterManager {
+class SCNotificationCenterManager: SCLogger {
     static let instance = SCNotificationCenterManager()
-    static let loggingIdentifier = "SCNotificationCenterManager"
     fileprivate var registration = [String: [String: Selector]]()
+
+    override func getIdentifier() -> String? {
+        return SCConstants.loggingIdentifier.notificationCenterManager.rawValue
+    }
 
     func addObservers(viewController: SCViewController, observers: [String: Selector]) {
         guard let key = viewController.identifier else {
-            print(String(
-                format: SCStrings.logging.unidentifiedViewControllerAddingObservers.rawValue,
-                SCNotificationCenterManager.loggingIdentifier
-            ))
+            super.log(SCStrings.logging.unidentifiedViewControllerAddingObservers.rawValue)
             return
         }
 
@@ -28,9 +28,8 @@ class SCNotificationCenterManager {
 
             self.registration[key]?[name] = selector
 
-            print(String(
+            super.log(String(
                 format: SCStrings.logging.addedObserver.rawValue,
-                SCNotificationCenterManager.loggingIdentifier,
                 name,
                 key
             ))
@@ -39,10 +38,7 @@ class SCNotificationCenterManager {
 
     func removeObservers(viewController: SCViewController) {
         guard let key = viewController.identifier else {
-            print(String(
-                format: SCStrings.logging.unidentifiedViewControllerRemovingObservers.rawValue,
-                SCNotificationCenterManager.loggingIdentifier
-            ))
+            super.log(SCStrings.logging.unidentifiedViewControllerRemovingObservers.rawValue)
             return
         }
 
@@ -54,9 +50,8 @@ class SCNotificationCenterManager {
                     object: nil
                 )
 
-                print(String(
+                super.log(String(
                     format: SCStrings.logging.removedObserver.rawValue,
-                    SCNotificationCenterManager.loggingIdentifier,
                     name,
                     key
                 ))

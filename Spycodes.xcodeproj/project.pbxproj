@@ -46,6 +46,7 @@
 		638CE44F1EAB45A500033480 /* SCTimelineViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CE44E1EAB45A500033480 /* SCTimelineViewCell.swift */; };
 		63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */; };
 		639488AC1F6A3D23009D24A5 /* SCNotificationCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639488AB1F6A3D23009D24A5 /* SCNotificationCenterManager.swift */; };
+		639488B01F6A5BB1009D24A5 /* SCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639488AF1F6A5BB1009D24A5 /* SCLogger.swift */; };
 		639E17681E00EADB00640540 /* SCSectionHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */; };
 		639F88EE1F0615540082D813 /* SCArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88E71F0615540082D813 /* SCArray.swift */; };
 		639F88EF1F0615540082D813 /* SCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88E81F0615540082D813 /* SCConstants.swift */; };
@@ -131,6 +132,7 @@
 		638CE44E1EAB45A500033480 /* SCTimelineViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTimelineViewCell.swift; path = Views/SCTimelineViewCell.swift; sourceTree = "<group>"; };
 		63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCMultipeerManager.swift; path = Managers/SCMultipeerManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		639488AB1F6A3D23009D24A5 /* SCNotificationCenterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCNotificationCenterManager.swift; path = Managers/SCNotificationCenterManager.swift; sourceTree = "<group>"; };
+		639488AF1F6A5BB1009D24A5 /* SCLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLogger.swift; path = Core/SCLogger.swift; sourceTree = "<group>"; };
 		639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCSectionHeaderViewCell.swift; path = Views/SCSectionHeaderViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		639F88E71F0615540082D813 /* SCArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCArray.swift; path = Core/SCArray.swift; sourceTree = "<group>"; };
 		639F88E81F0615540082D813 /* SCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCConstants.swift; path = Core/SCConstants.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 				639F88E71F0615540082D813 /* SCArray.swift */,
 				639F88E81F0615540082D813 /* SCConstants.swift */,
 				639F88E91F0615540082D813 /* SCFonts.swift */,
+				639488AF1F6A5BB1009D24A5 /* SCLogger.swift */,
 				639F88EA1F0615540082D813 /* SCStates.swift */,
 				639F88EB1F0615540082D813 /* SCStrings.swift */,
 				639F88EC1F0615540082D813 /* SCUIColor.swift */,
@@ -562,6 +565,7 @@
 				63D256871E6BA6BA0061D80C /* SCNavigationBarLabel.swift in Sources */,
 				639F88EF1F0615540082D813 /* SCConstants.swift in Sources */,
 				630674181D51BE9800339EC8 /* Timer.swift in Sources */,
+				639488B01F6A5BB1009D24A5 /* SCLogger.swift in Sources */,
 				63486DA91D3DE29C00795403 /* Key.swift in Sources */,
 				63D256811E6BA6BA0061D80C /* SCButton.swift in Sources */,
 				639F89031F0F36120082D813 /* ConsolidatedCategories.swift in Sources */,

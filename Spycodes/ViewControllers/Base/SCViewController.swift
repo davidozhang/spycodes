@@ -21,6 +21,15 @@ class SCViewController: UIViewController {
 
     @IBOutlet weak var modalPeekView: UIView!
 
+    deinit {
+        if let identifier = self.identifier {
+            SCLogger.log(
+                identifier: SCStrings.logging.deinitIdentifier.rawValue,
+                String(format: SCStrings.logging.deinitStatement.rawValue, identifier)
+            )
+        }
+    }
+
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
