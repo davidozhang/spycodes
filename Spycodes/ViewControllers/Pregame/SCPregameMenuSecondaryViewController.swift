@@ -50,6 +50,8 @@ class SCPregameMenuSecondaryViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.identifier = SCConstants.identifier.pregameModalSecondaryView.rawValue
+
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
 

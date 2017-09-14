@@ -88,6 +88,8 @@ class SCMainSettingsViewController: SCModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.identifier = SCConstants.identifier.mainSettingsViewController.rawValue
+
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
         self.registerTableViewCells()

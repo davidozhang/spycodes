@@ -8,7 +8,7 @@ class SCViewController: UIViewController {
     let animationDuration: TimeInterval = 0.6
     let animationAlpha: CGFloat = 0.5
 
-    var unwindableIdentifier: String = ""
+    var identifier: String?
     var previousViewControllerIdentifier: String?
     var returnToRootViewController = false
     var unwindingSegue = false
@@ -69,55 +69,25 @@ class SCViewController: UIViewController {
         swipeGestureRecognizer.direction = .right
         self.view.addGestureRecognizer(swipeGestureRecognizer)
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCViewController.applicationDidBecomeActive),
-            name: NSNotification.Name.UIApplicationDidBecomeActive,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCViewController.applicationWillResignActive),
-            name: NSNotification.Name.UIApplicationWillResignActive,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCViewController.keyboardWillShow),
-            name: NSNotification.Name.UIKeyboardWillShow,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCViewController.keyboardWillHide),
-            name: NSNotification.Name.UIKeyboardWillHide,
-            object: nil
+        SCNotificationCenterManager.instance.addObservers(
+            viewController: self,
+            observers: [
+                NSNotification.Name.UIApplicationDidBecomeActive.rawValue:
+                    #selector(SCViewController.applicationDidBecomeActive),
+                NSNotification.Name.UIApplicationWillResignActive.rawValue:
+                    #selector(SCViewController.applicationWillResignActive),
+                NSNotification.Name.UIKeyboardWillShow.rawValue:
+                    #selector(SCViewController.keyboardWillShow),
+                NSNotification.Name.UIKeyboardWillHide.rawValue:
+                    #selector(SCViewController.keyboardWillHide)
+            ]
         )
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name.UIApplicationDidBecomeActive,
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name.UIApplicationWillResignActive,
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name.UIKeyboardWillShow,
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name.UIKeyboardWillHide,
-            object: nil
-        )
+        SCNotificationCenterManager.instance.removeObservers(viewController: self)
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -198,7 +168,7 @@ class SCViewController: UIViewController {
         }
 
         if let destination = segue.destination as? SCViewController {
-            destination.previousViewControllerIdentifier = self.unwindableIdentifier
+            destination.previousViewControllerIdentifier = self.identifier
         }
     }
 
@@ -292,6 +262,13 @@ class SCViewController: UIViewController {
         }
 
         self.setNeedsStatusBarAppearanceUpdate()
+    }
+
+    func registerObservers(observers: [String: Selector]) {
+        SCNotificationCenterManager.instance.addObservers(
+            viewController: self,
+            observers: observers
+        )
     }
 
     func showDimView() {

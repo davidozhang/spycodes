@@ -88,6 +88,8 @@ class SCCustomCategoryViewController: SCModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.identifier = SCConstants.identifier.customCategoryViewController.rawValue
+
         self.automaticallyAdjustsScrollViewInsets = false
 
         self.tableView.rowHeight = UITableViewAutomaticDimension

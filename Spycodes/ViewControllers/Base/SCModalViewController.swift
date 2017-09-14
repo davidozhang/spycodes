@@ -15,6 +15,13 @@ class SCModalViewController: SCViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        super.registerObservers(observers: [
+            SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue:
+                #selector(SCModalViewController.enableSwipeGestureRecognizer),
+            SCConstants.notificationKey.disableSwipeGestureRecognizer.rawValue:
+                #selector(SCModalViewController.disableSwipeGestureRecognizer)
+        ])
+
         self.view.isOpaque = false
 
         self.updateModalAppearance()
@@ -39,34 +46,6 @@ class SCModalViewController: SCViewController {
 
             self.topBarView.addGestureRecognizer(tapGestureRecognizer)
         }
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCModalViewController.enableSwipeGestureRecognizer),
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue),
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCModalViewController.disableSwipeGestureRecognizer),
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.disableSwipeGestureRecognizer.rawValue),
-            object: nil
-        )
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue),
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.disableSwipeGestureRecognizer.rawValue),
-            object: nil
-        )
     }
 
     // MARK: Swipe Gesture Recognizer

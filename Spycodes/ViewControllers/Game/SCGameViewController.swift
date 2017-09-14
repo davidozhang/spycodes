@@ -88,41 +88,22 @@ class SCGameViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCGameViewController.didEndMinigameWithNotification),
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.minigameGameOver.rawValue
-            ),
-            object: nil
-        )
+        self.identifier = SCConstants.identifier.gameRoomViewController.rawValue
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCGameViewController.showNotificationDotIfNeeded),
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
-            ),
-            object: nil
-        )
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCGameViewController.updateCollectionView),
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.updateCollectionView.rawValue
-            ),
-            object: nil
-        )
+        super.registerObservers(observers: [
+            SCConstants.notificationKey.minigameGameOver.rawValue:
+                #selector(SCGameViewController.didEndMinigameWithNotification),
+            SCConstants.notificationKey.timelineUpdated.rawValue:
+                #selector(SCGameViewController.showNotificationDotIfNeeded),
+            SCConstants.notificationKey.updateCollectionView.rawValue:
+                #selector(SCGameViewController.updateCollectionView)
+        ])
 
         self.hideNotificationDot()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        // Unwindable view controller identifier
-        self.unwindableIdentifier = SCConstants.identifier.gameRoom.rawValue
 
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -199,30 +180,6 @@ class SCGameViewController: SCViewController {
         self.refreshTimer?.invalidate()
 
         Timer.instance.invalidate()
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.minigameGameOver.rawValue
-            ),
-            object: nil
-        )
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
-            ),
-            object: nil
-        )
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.updateCollectionView.rawValue
-            ),
-            object: nil
-        )
 
         self.hideNotificationDot()
     }
