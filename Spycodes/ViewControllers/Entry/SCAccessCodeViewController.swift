@@ -51,7 +51,7 @@ class SCAccessCodeViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.viewControllerIdentifier = SCConstants.identifier.accessCodeViewController.rawValue
+        self.identifier = SCConstants.identifier.accessCodeViewController.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {

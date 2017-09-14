@@ -34,7 +34,7 @@ class SCMainViewController: SCViewController {
         super.viewDidLoad()
 
         // Currently this view is the root view controller for unwinding logic
-        self.viewControllerIdentifier = SCConstants.identifier.mainMenu.rawValue
+        self.identifier = SCConstants.identifier.mainMenu.rawValue
         self.isRootViewController = true
 
         SCAppInfoManager.checkLatestAppVersion {

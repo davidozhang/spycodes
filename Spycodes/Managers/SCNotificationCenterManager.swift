@@ -6,7 +6,7 @@ class SCNotificationCenterManager {
     fileprivate var registration = [String: [String: Selector]]()
 
     func addObservers(viewController: SCViewController, observers: [String: Selector]) {
-        guard let key = viewController.viewControllerIdentifier else {
+        guard let key = viewController.identifier else {
             print(String(
                 format: SCStrings.logging.unidentifiedViewControllerAddingObservers.rawValue,
                 SCNotificationCenterManager.loggingIdentifier
@@ -38,7 +38,7 @@ class SCNotificationCenterManager {
     }
 
     func removeObservers(viewController: SCViewController) {
-        guard let key = viewController.viewControllerIdentifier else {
+        guard let key = viewController.identifier else {
             print(String(
                 format: SCStrings.logging.unidentifiedViewControllerRemovingObservers.rawValue,
                 SCNotificationCenterManager.loggingIdentifier

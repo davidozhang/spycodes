@@ -8,7 +8,7 @@ class SCViewController: UIViewController {
     let animationDuration: TimeInterval = 0.6
     let animationAlpha: CGFloat = 0.5
 
-    var viewControllerIdentifier: String?
+    var identifier: String?
     var previousViewControllerIdentifier: String?
     var returnToRootViewController = false
     var unwindingSegue = false
@@ -168,7 +168,7 @@ class SCViewController: UIViewController {
         }
 
         if let destination = segue.destination as? SCViewController {
-            destination.previousViewControllerIdentifier = self.viewControllerIdentifier
+            destination.previousViewControllerIdentifier = self.identifier
         }
     }
 

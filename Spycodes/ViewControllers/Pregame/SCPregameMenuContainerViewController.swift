@@ -9,7 +9,7 @@ class SCPregameMenuContainerViewController: SCModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.viewControllerIdentifier = SCConstants.identifier.pregameMenuContainerViewController.rawValue
+        self.identifier = SCConstants.identifier.pregameMenuContainerViewController.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -19,10 +19,6 @@ class SCPregameMenuContainerViewController: SCModalViewController {
             SCConstants.notificationKey.dismissModal.rawValue:
                 #selector(SCPregameMenuContainerViewController.dismissViewFromNotification)
         ])
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
     }
 
     // MARK: SCViewController Overrides

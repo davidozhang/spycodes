@@ -43,7 +43,7 @@ class SCPregameRoomViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.viewControllerIdentifier = SCConstants.identifier.pregameRoom.rawValue
+        self.identifier = SCConstants.identifier.pregameRoom.rawValue
 
         if Player.instance.isHost() {
             Room.instance.generateNewAccessCode()

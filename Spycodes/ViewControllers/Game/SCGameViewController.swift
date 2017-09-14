@@ -88,7 +88,7 @@ class SCGameViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.viewControllerIdentifier = SCConstants.identifier.gameRoomViewController.rawValue
+        self.identifier = SCConstants.identifier.gameRoomViewController.rawValue
 
         super.registerObservers(observers: [
             SCConstants.notificationKey.minigameGameOver.rawValue:

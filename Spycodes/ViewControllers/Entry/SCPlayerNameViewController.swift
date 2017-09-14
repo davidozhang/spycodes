@@ -23,7 +23,7 @@ class SCPlayerNameViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.viewControllerIdentifier = SCConstants.identifier.playerNameViewController.rawValue
+        self.identifier = SCConstants.identifier.playerNameViewController.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {
