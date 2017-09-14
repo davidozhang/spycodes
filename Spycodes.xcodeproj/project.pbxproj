@@ -761,6 +761,7 @@
 				INFOPLIST_FILE = Spycodes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidzhang.Spycodes;
 				PRODUCT_NAME = Spycodes;
 				PROVISIONING_PROFILE = "";
