@@ -1,10 +1,6 @@
 import UIKit
 
 class SCPregameMenuContainerViewController: SCModalViewController {
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
-    }
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

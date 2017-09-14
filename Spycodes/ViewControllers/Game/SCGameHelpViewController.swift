@@ -60,11 +60,13 @@ class SCGameHelpViewController: SCPopoverViewController {
         super.onExitTapped()
     }
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
+    // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.identifier = SCConstants.identifier.gameHelpViewController.rawValue
     }
 
-    // MARK: Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 

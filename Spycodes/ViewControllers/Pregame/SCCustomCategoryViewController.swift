@@ -80,10 +80,6 @@ class SCCustomCategoryViewController: SCModalViewController {
         self.onDone()
     }
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
-    }
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -1,16 +1,16 @@
 import Foundation
 
-class SCNotificationCenterManager {
+class SCNotificationCenterManager: SCLogger {
     static let instance = SCNotificationCenterManager()
-    static let loggingIdentifier = "SCNotificationCenterManager"
     fileprivate var registration = [String: [String: Selector]]()
+
+    override func getIdentifier() -> String? {
+        return SCConstants.loggingIdentifier.notificationCenterManager.rawValue
+    }
 
     func addObservers(viewController: SCViewController, observers: [String: Selector]) {
         guard let key = viewController.identifier else {
-            print(String(
-                format: SCStrings.logging.unidentifiedViewControllerAddingObservers.rawValue,
-                SCNotificationCenterManager.loggingIdentifier
-            ))
+            super.log(SCStrings.logging.unidentifiedViewControllerAddingObservers.rawValue)
             return
         }
 
@@ -27,11 +27,13 @@ class SCNotificationCenterManager {
             }
 
             self.registration[key]?[name] = selector
+        }
 
-            print(String(
-                format: SCStrings.logging.addedObserver.rawValue,
-                SCNotificationCenterManager.loggingIdentifier,
-                name,
+        if let registeredObservers = self.registration[key] {
+            super.log(String(
+                format: SCStrings.logging.addedObservers.rawValue,
+                registeredObservers.keys.count,
+                registeredObservers.keys.joined(separator: ", "),
                 key
             ))
         }
@@ -39,10 +41,7 @@ class SCNotificationCenterManager {
 
     func removeObservers(viewController: SCViewController) {
         guard let key = viewController.identifier else {
-            print(String(
-                format: SCStrings.logging.unidentifiedViewControllerRemovingObservers.rawValue,
-                SCNotificationCenterManager.loggingIdentifier
-            ))
+            super.log(SCStrings.logging.unidentifiedViewControllerRemovingObservers.rawValue)
             return
         }
 
@@ -53,11 +52,13 @@ class SCNotificationCenterManager {
                     name: NSNotification.Name(rawValue: name),
                     object: nil
                 )
+            }
 
-                print(String(
-                    format: SCStrings.logging.removedObserver.rawValue,
-                    SCNotificationCenterManager.loggingIdentifier,
-                    name,
+            if let registeredObservers = self.registration[key] {
+                super.log(String(
+                    format: SCStrings.logging.removedObservers.rawValue,
+                    registeredObservers.keys.count,
+                    registeredObservers.keys.joined(separator: ", "),
                     key
                 ))
             }

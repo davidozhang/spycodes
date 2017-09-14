@@ -10,7 +10,13 @@ class SCPregameMenuPageViewController: UIPageViewController {
     )
 
     deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
+        SCLogger.log(
+            identifier: SCConstants.loggingIdentifier.deinitialize.rawValue,
+            String(
+                format: SCStrings.logging.deinitStatement.rawValue,
+                SCConstants.identifier.pregameMenuPageViewController.rawValue
+            )
+        )
     }
 
     // MARK: Lifecycle

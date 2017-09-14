@@ -59,6 +59,7 @@ class SCConstants {
         case deleteCategoryViewCell = "delete-category-view-cell"
         case disclosureViewCell = "disclosure-view-cell"
         case emojiSettingViewCell = "emoji-setting-view-cell"
+        case gameHelpViewController = "game-help-view-controller"
         case gameRoomViewController = "game-room"
         case gameRoomViewCell = "game-room-view-cell"
         case helpView = "help-view"
@@ -72,6 +73,7 @@ class SCConstants {
         case nightModeToggleViewCell = "night-mode-toggle-view-cell"
         case persistentSelectionToggleViewCell = "persistent-selection-toggle-view-cell"
         case pregameMenuContainerViewController = "pregame-menu-container-view-controller"
+        case pregameMenuPageViewController = "pregame-menu-page-view-controller"
         case pregameModalContainerView = "pregame-modal-container-view"
         case pregameModalMainView = "pregame-modal-main-view"
         case pregameModalSecondaryView = "pregame-modal-secondary-view"
@@ -97,6 +99,13 @@ class SCConstants {
     enum images: String {
         case shuffle = "Shuffle"
         case markAsRead = "Mark-As-Read"
+    }
+
+    enum loggingIdentifier: String {
+        case deinitialize = "DEINIT"
+        case localStorageManager = "SCLocalStorageManager"
+        case notificationCenterManager = "SCNotificationCenterManager"
+        case states = "SCStates"
     }
 
     enum nibs: String {

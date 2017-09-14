@@ -136,10 +136,19 @@ class SCStrings {
     }
 
     enum logging: String {
-        case addedObserver = "[%@] Added observer '%@' for view controller with identifier %@"
-        case removedObserver = "[%@] Removed observer '%@' for view controller with identifier %@"
-        case unidentifiedViewControllerAddingObservers = "[%@] Unidentified view controller adding observers!"
-        case unidentifiedViewControllerRemovingObservers = "[%@] Unidentified view controller removing observers!"
+        case addedObservers = "%d observers '%@' registered for view controller with identifier '%@'."
+        case allCustomCategoriesRetrieved = "All custom categories retrieved."
+        case allCustomCategoriesSaved = "All custom categories saved."
+        case deinitStatement = "View controller with identifier '%@' deinitialized."
+        case localSettingsRetrieved = "Local settings retrieved."
+        case localSettingsSaved = "Local settings saved."
+        case removedObservers = "%d observers '%@' removed for view controller with identifier '%@'."
+        case selectedCategoriesSaved = "Selected categories saved."
+        case selectedConsolidatedCategoriesCleared = "Selected consolidated categories cleared."
+        case selectedConsolidatedCategoriesRetrieved = "Selected consolidated categories retrieved."
+        case selectedCustomCategoriesSaved = "Selected custom categories saved."
+        case unidentifiedViewControllerAddingObservers = "Unidentified view controller adding observers!"
+        case unidentifiedViewControllerRemovingObservers = "Unidentified view controller removing observers!"
     }
 
     enum message: String {
@@ -260,7 +269,7 @@ class SCStrings {
         case gameAborted = "Game Aborted"
         case gameOver = "Game Over"
         case hideAnswer = "Hide Answer"
-        case log = "%@: %@"
+        case log = "%@: %@."
         case main = "Main"
         case nonEditing = "Non-Editing"
         case notReady = "Not Ready"

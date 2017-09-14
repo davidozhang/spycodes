@@ -60,7 +60,7 @@ class SCAppInfoManager {
                     return dictionary
                 }
             } catch {
-                print("Cannot deserialize version data to dictionary")
+                SCLogger.log(identifier: nil, "Cannot deserialize version data to dictionary")
             }
         }
 
