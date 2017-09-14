@@ -1028,6 +1028,9 @@
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="access-code" unwindAction="unwindToAccessCode:" id="v3W-bc-vVR"/>
                         <segue destination="Bsc-BJ-zGX" kind="presentation" identifier="pregame-modal-container-view" id="CKf-j2-Ls6"/>
                         <segue destination="HKy-Oo-bc1" kind="presentation" identifier="custom-category" modalPresentationStyle="overCurrentContext" id="NwO-x4-uMo"/>
+                        <segue destination="HxB-If-ThO" kind="popoverPresentation" identifier="quick-setup-view" popoverAnchorView="5W3-A0-VGs" id="srK-5z-tvp">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lDc-cz-jrN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1888,6 +1891,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HJ3-MJ-N3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3534.7826086956525" y="336.68478260869568"/>
+        </scene>
+        <!--Quick Setup View Controller-->
+        <scene sceneID="YGV-S4-U53">
+            <objects>
+                <viewController storyboardIdentifier="quick-setup-view-controller" id="HxB-If-ThO" customClass="SCQuickSetupViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1ls-6d-pH7"/>
+                        <viewControllerLayoutGuide type="bottom" id="IhA-dL-Yte"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MZq-il-xGc">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1If-4D-RRO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1012" y="-508"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4qB-N6-aTh">

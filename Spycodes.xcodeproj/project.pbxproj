@@ -47,6 +47,7 @@
 		63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */; };
 		639488AC1F6A3D23009D24A5 /* SCNotificationCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639488AB1F6A3D23009D24A5 /* SCNotificationCenterManager.swift */; };
 		639488B01F6A5BB1009D24A5 /* SCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639488AF1F6A5BB1009D24A5 /* SCLogger.swift */; };
+		639488AA1F6A3A30009D24A5 /* SCQuickSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639488A91F6A3A30009D24A5 /* SCQuickSetupViewController.swift */; };
 		639E17681E00EADB00640540 /* SCSectionHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */; };
 		639F88EE1F0615540082D813 /* SCArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88E71F0615540082D813 /* SCArray.swift */; };
 		639F88EF1F0615540082D813 /* SCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88E81F0615540082D813 /* SCConstants.swift */; };
@@ -133,6 +134,7 @@
 		63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCMultipeerManager.swift; path = Managers/SCMultipeerManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		639488AB1F6A3D23009D24A5 /* SCNotificationCenterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCNotificationCenterManager.swift; path = Managers/SCNotificationCenterManager.swift; sourceTree = "<group>"; };
 		639488AF1F6A5BB1009D24A5 /* SCLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLogger.swift; path = Core/SCLogger.swift; sourceTree = "<group>"; };
+		639488A91F6A3A30009D24A5 /* SCQuickSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCQuickSetupViewController.swift; path = ViewControllers/Pregame/SCQuickSetupViewController.swift; sourceTree = "<group>"; };
 		639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCSectionHeaderViewCell.swift; path = Views/SCSectionHeaderViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		639F88E71F0615540082D813 /* SCArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCArray.swift; path = Core/SCArray.swift; sourceTree = "<group>"; };
 		639F88E81F0615540082D813 /* SCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCConstants.swift; path = Core/SCConstants.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				635599B41F4DD35200508FE9 /* SCPregameMenuPageViewController.swift */,
 				635599B51F4DD35200508FE9 /* SCPregameMenuSecondaryViewController.swift */,
 				635599B61F4DD35200508FE9 /* SCPregameRoomViewController.swift */,
+				639488A91F6A3A30009D24A5 /* SCQuickSetupViewController.swift */,
 			);
 			name = Pregame;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				63D949E81F18553000697779 /* SCTextFieldViewCell.swift in Sources */,
 				630883681E80E56F006D2428 /* SCAppInfoManager.swift in Sources */,
 				63D2568B1E6BA6BA0061D80C /* SCTextField.swift in Sources */,
+				639488AA1F6A3A30009D24A5 /* SCQuickSetupViewController.swift in Sources */,
 				632D31201E9F5C55005D9999 /* SCTextButton.swift in Sources */,
 				633292271E7DE8B30090B09D /* SCTableViewCell.swift in Sources */,
 				63D256891E6BA6BA0061D80C /* SCSingleCharacterTextField.swift in Sources */,

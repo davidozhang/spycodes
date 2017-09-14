@@ -82,6 +82,8 @@ class SCConstants {
         case pregameRoom = "pregame-room"
         case pregameRoomTeamEmptyStateViewCell = "pregame-room-team-empty-state-view-cell"
         case pregameRoomViewCell = "pregame-room-view-cell"
+        case quickSetupView = "quick-setup-view"
+        case quickSetupViewController = "quick-setup-view-controller"
         case releaseNotesViewCell = "release-notes-view-cell"
         case sectionHeaderCell = "section-header-view-cell"
         case selectAllToggleViewCell = "select-all-toggle-view-cell"

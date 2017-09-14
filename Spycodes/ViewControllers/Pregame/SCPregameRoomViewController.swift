@@ -115,6 +115,11 @@ class SCPregameRoomViewController: SCViewController {
         ])
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.showQuickSetupView()
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
@@ -152,6 +157,13 @@ class SCPregameRoomViewController: SCViewController {
 
             self.userInfo = nil
         }
+    }
+
+    func showQuickSetupView() {
+        self.performSegue(
+            withIdentifier: SCConstants.identifier.quickSetupView.rawValue,
+            sender: self
+        )
     }
 
     func showCustomCategoryView(_ notification: Notification) {
