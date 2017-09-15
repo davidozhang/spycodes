@@ -123,7 +123,7 @@
                         <outlet property="joinGameButton" destination="CBi-9c-KRm" id="dUo-jD-ddi"/>
                         <outlet property="logoLabel" destination="kwp-LV-dpu" id="rpS-d7-Jwi"/>
                         <outlet property="modalPeekView" destination="nVj-tx-bo9" id="qlw-TL-Mg7"/>
-                        <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name" modalTransitionStyle="flipHorizontal" id="M2x-yW-um3"/>
+                        <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name" modalTransitionStyle="crossDissolve" id="M2x-yW-um3"/>
                         <segue destination="oCs-d3-UDI" kind="presentation" identifier="main-menu-modal" id="cpV-DQ-cDx"/>
                     </connections>
                 </viewController>
@@ -432,7 +432,7 @@
                         <outlet property="statusLabelTopMarginConstraint" destination="Jyf-ti-DR9" id="DjB-SB-1Nb"/>
                         <outlet property="textFieldsView" destination="oCC-FN-amc" id="Ahu-DB-j5h"/>
                         <segue destination="vJw-If-bFy" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="417-vA-iX0"/>
-                        <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" id="N7R-5v-7k6"/>
+                        <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" modalTransitionStyle="crossDissolve" id="N7R-5v-7k6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ll0-UV-VBC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -512,9 +512,9 @@
                         <outlet property="headerLabelTopMarginConstraint" destination="LmF-O1-SiH" id="HBa-XQ-SoJ"/>
                         <outlet property="userNameTextField" destination="4s9-er-VpV" id="KFG-Mj-S6u"/>
                         <outlet property="userNameTextFieldVerticalCenterConstraint" destination="UwC-kY-pWD" id="dho-lO-OK1"/>
-                        <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" id="7yd-xs-fux"/>
+                        <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" modalTransitionStyle="crossDissolve" id="7yd-xs-fux"/>
                         <segue destination="Z98-DM-ptk" kind="unwind" identifier="main-menu" unwindAction="unwindToMainMenu:" id="XBQ-Hk-25x"/>
-                        <segue destination="RKo-Nr-UiC" kind="presentation" identifier="access-code" modalTransitionStyle="flipHorizontal" id="9Td-mv-cvu"/>
+                        <segue destination="RKo-Nr-UiC" kind="presentation" identifier="access-code" modalTransitionStyle="crossDissolve" id="9Td-mv-cvu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sKn-Jb-gii" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1023,7 +1023,7 @@
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="JyP-Fd-tkk" id="fGm-hU-E9O"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="jKW-MX-l9L" id="Dhs-xX-o3L"/>
-                        <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-room" id="pzx-vK-usD"/>
+                        <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-room" modalTransitionStyle="crossDissolve" id="pzx-vK-usD"/>
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="4eT-dC-kfX"/>
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="access-code" unwindAction="unwindToAccessCode:" id="v3W-bc-vVR"/>
                         <segue destination="Bsc-BJ-zGX" kind="presentation" identifier="pregame-modal-container-view" id="CKf-j2-Ls6"/>
