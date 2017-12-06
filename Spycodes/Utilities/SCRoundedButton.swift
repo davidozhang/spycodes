@@ -3,9 +3,10 @@ import UIKit
 class SCRoundedButton: SCButton {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.contentEdgeInsets = UIEdgeInsetsMake(10, 30, 10, 30)
         self.backgroundColor = .spycodesGreenColor()
         self.layer.borderColor = UIColor.clear.cgColor
-        self.layer.cornerRadius = 22.0
+        self.layer.cornerRadius = 24.0
         self.setTitleColor(
             .white,
             for: UIControlState()
@@ -14,7 +15,7 @@ class SCRoundedButton: SCButton {
             .spycodesGrayColor(),
             for: .highlighted
         )
-        self.titleLabel?.font = SCFonts.regularSizeFont(.bold)
+        self.titleLabel?.font = SCFonts.intermediateSizeFont(.bold)
     }
 
     override var isHighlighted: Bool {
