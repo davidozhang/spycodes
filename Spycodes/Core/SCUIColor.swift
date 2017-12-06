@@ -30,6 +30,10 @@ extension UIColor {
         return UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 1.0)
     }
 
+    static func nightModeBackgroundColor() -> UIColor {
+        return UIColor(red: 55/255, green: 50/255, blue: 55/255, alpha: 0.6)
+    }
+
     static func spycodesBorderColor() -> UIColor {
         return UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 0.1)
     }
@@ -39,7 +43,7 @@ extension UIColor {
     }
 
     static func darkTintColor() -> UIColor {
-        return UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+        return UIColor(red: 55/255, green: 50/255, blue: 55/255, alpha: 0.2)
     }
 
     static func lightTintColor() -> UIColor {

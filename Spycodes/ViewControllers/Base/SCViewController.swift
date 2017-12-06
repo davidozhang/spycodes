@@ -231,7 +231,7 @@ class SCViewController: UIViewController {
             toolBarAppearance.tintColor = .white
             pageControlAppearance.pageIndicatorTintColor = .spycodesGrayColor()
             pageControlAppearance.currentPageIndicatorTintColor = .white
-            self.view.backgroundColor = .black
+            self.view.backgroundColor = .nightModeBackgroundColor()
 
             if let _ = self.modalPeekView {
                 self.modalPeekView.backgroundColor = .darkTintColor()
