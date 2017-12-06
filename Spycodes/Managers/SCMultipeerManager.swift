@@ -239,7 +239,7 @@ extension SCMultipeerManager: MCSessionDelegate {
     func session(_ session: MCSession,
                  didFinishReceivingResourceWithName resourceName: String,
                  fromPeer peerID: MCPeerID,
-                 at localURL: URL,
+                 at localURL: URL?,
                  withError error: Error?) {}
 
     func session(_ session: MCSession,

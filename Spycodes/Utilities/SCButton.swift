@@ -5,7 +5,7 @@ class SCButton: UIButton {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.contentEdgeInsets = UIEdgeInsetsMake(10, 30, 10, 30)
+        self.contentEdgeInsets = UIEdgeInsetsMake(15, 25, 15, 25)
         self.setTitleColor(
             .spycodesGrayColor(),
             for: UIControlState()
@@ -14,10 +14,10 @@ class SCButton: UIButton {
             .white,
             for: .highlighted
         )
-        self.titleLabel?.font = SCFonts.regularSizeFont(.regular)
+        self.titleLabel?.font = SCFonts.intermediateSizeFont(.regular)
         self.layer.borderColor = UIColor.spycodesGrayColor().cgColor
-        self.layer.borderWidth = 1.5
-        self.layer.cornerRadius = 5.0
+        self.layer.borderWidth = 2.0
+        self.layer.cornerRadius = 4.0
     }
 
     override var isHighlighted: Bool {

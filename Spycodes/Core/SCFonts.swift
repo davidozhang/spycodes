@@ -12,7 +12,7 @@ class SCFonts {
     }
 
     // MARK: Font Sizes
-    fileprivate static let largeFontSize: CGFloat = 36
+    fileprivate static let largeFontSize: CGFloat = 40
     fileprivate static let intermediateFontSize: CGFloat = 24
     fileprivate static let regularFontSize: CGFloat = 20
     fileprivate static let smallFontSize: CGFloat = 16
