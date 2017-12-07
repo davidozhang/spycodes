@@ -58,7 +58,7 @@ class SCPregameRoomViewController: SCViewController {
             NSFontAttributeName,
             value: SCFonts.regularSizeFont(.bold) ?? 0,
             range: NSMakeRange(
-                SCStrings.header.accessCode.rawValue.localized.characters.count + 2,
+                SCStrings.header.accessCode.rawValue.localized.count + 2,
                 SCConstants.constant.accessCodeLength.rawValue
             )
         )
@@ -558,7 +558,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                 attributedString.addAttribute(
                     NSFontAttributeName,
                     value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                    range: NSMakeRange(0, name.characters.count)
+                    range: NSMakeRange(0, name.count)
                 )
 
                 cell.primaryLabel.attributedText = attributedString

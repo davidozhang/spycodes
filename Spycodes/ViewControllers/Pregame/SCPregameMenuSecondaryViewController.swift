@@ -124,7 +124,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
         }
     }
 
-    fileprivate func showAlert(title: String, reason: String, completionHandler: ((Void) -> Void)?) {
+    fileprivate func showAlert(title: String, reason: String, completionHandler: (() -> Void)?) {
         DispatchQueue.main.async {
             let alertController = UIAlertController(
                 title: title.localized,
@@ -145,7 +145,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
         }
     }
 
-    fileprivate func checkWordCount(successHandler: ((Void) -> Void)?, failureHandler: ((Void) -> Void)?) {
+    fileprivate func checkWordCount(successHandler: (() -> Void)?, failureHandler: (() -> Void)?) {
         if !Player.instance.isHost() {
             return
         }

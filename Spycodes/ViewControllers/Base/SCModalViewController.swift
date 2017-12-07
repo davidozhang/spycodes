@@ -60,7 +60,7 @@ class SCModalViewController: SCViewController {
         self.onDismissalWithCompletion(completion: nil)
     }
 
-    func onDismissalWithCompletion(completion: ((Void) -> Void)?) {
+    func onDismissalWithCompletion(completion: (() -> Void)?) {
         DispatchQueue.main.async {
             self.dismiss(animated: true, completion: completion)
         }

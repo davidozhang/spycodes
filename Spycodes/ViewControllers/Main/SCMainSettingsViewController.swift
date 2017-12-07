@@ -235,8 +235,8 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
                 NSFontAttributeName,
                 value: SCFonts.intermediateSizeFont(.medium) ?? 0,
                 range: NSMakeRange(
-                    SCAppInfoManager.appVersion.characters.count + 1,
-                    SCAppInfoManager.buildNumber.characters.count + 2
+                    SCAppInfoManager.appVersion.count + 1,
+                    SCAppInfoManager.buildNumber.count + 2
                 )
             )
 

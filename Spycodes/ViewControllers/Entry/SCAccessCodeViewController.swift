@@ -222,7 +222,7 @@ class SCAccessCodeViewController: SCViewController {
     fileprivate func textFieldDidChange(_ textField: UITextField) {
         let currentTag = textField.tag
 
-        if let character = textField.text, character.characters.count == 1 {
+        if let character = textField.text, character.count == 1 {
             self.accessCodeCharacters[currentTag] = character
 
             if currentTag == SCConstants.tag.lastTextField.rawValue {
@@ -348,7 +348,7 @@ extension SCAccessCodeViewController: UITextFieldDelegate {
 
         // Allow return key if cursor is on last text field and it is filled
         if currentTag == SCConstants.tag.lastTextField.rawValue &&
-           textField.text?.characters.count == 1 {
+           textField.text?.count == 1 {
             let accessCode = self.accessCodeCharacters.componentsJoined(by: "")
             self.joinRoomWithAccessCode(accessCode)
 
@@ -367,11 +367,11 @@ extension SCAccessCodeViewController: UITextFieldDelegate {
         }
 
         // Edge case where the last text field is filled
-        if textField.text?.characters.count == 1 {
+        if textField.text?.count == 1 {
             self.lastTextFieldWasFilled = true
 
             // Disallow appending to existing text in last text field
-            if string.characters.count > 0 {
+            if string.count > 0 {
                 return false
             }
         }
