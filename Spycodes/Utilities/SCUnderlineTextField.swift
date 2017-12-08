@@ -1,7 +1,7 @@
 import UIKit
 
 class SCUnderlineTextField: SCTextField {
-    static let lineHeight: CGFloat = 1.5
+    static let lineHeight: CGFloat = 2.0
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
