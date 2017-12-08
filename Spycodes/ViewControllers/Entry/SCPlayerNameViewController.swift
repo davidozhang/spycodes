@@ -29,7 +29,7 @@ class SCPlayerNameViewController: SCViewController {
 
         if let name = Player.instance.getName(), name.characters.count > 0 {
             self.userNameTextField.text = name
-        } else {
+        } else if !SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             self.userNameTextField.placeholder = SCStrings.header.playerName.rawValue.localized
         }
 
