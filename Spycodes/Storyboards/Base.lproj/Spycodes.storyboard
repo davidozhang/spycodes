@@ -269,6 +269,7 @@
                     </view>
                     <connections>
                         <outlet property="swipeDownButton" destination="Bct-GX-0L1" id="Cim-Lq-8zD"/>
+                        <outlet property="swipeDownButtonTopSpaceConstraint" destination="wR2-YL-qdh" id="Yqc-LW-suA"/>
                         <outlet property="tableView" destination="U45-QB-oub" id="7Kc-LI-EXB"/>
                         <outlet property="tableViewBottomSpaceConstraint" destination="4dv-YU-1hY" id="PHu-BW-0ed"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="Pfa-Vn-mFp" id="3h8-8Q-SlI"/>
@@ -1086,6 +1087,7 @@
                     </view>
                     <connections>
                         <outlet property="swipeDownButton" destination="FjP-pl-Sjb" id="KdE-8H-2wa"/>
+                        <outlet property="swipeDownButtonTopSpaceConstraint" destination="fFl-S5-QCV" id="v6n-H6-HK4"/>
                         <outlet property="topBarView" destination="9Q7-RG-wBr" id="5dy-fY-WRM"/>
                     </connections>
                 </viewController>
@@ -1489,6 +1491,7 @@
                     </view>
                     <connections>
                         <outlet property="swipeDownButton" destination="Jpi-zT-CKN" id="2fQ-tO-JAV"/>
+                        <outlet property="swipeDownButtonTopSpaceConstraint" destination="tqf-Ui-POY" id="yMz-bg-E2f"/>
                         <outlet property="tableView" destination="dQz-dg-RRO" id="OIS-er-8nu"/>
                         <outlet property="tableViewBottomSpaceConstraint" destination="Y3v-81-Q3i" id="Rik-j3-96y"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="8FP-PB-AGq" id="hPE-mb-YmO"/>
