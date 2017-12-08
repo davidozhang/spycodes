@@ -33,6 +33,11 @@ class SCMainViewController: SCViewController {
         self.identifier = SCConstants.identifier.mainMenu.rawValue
         self.isRootViewController = true
 
+        SCLogger.log(
+            identifier: SCConstants.loggingIdentifier.deviceType.rawValue,
+            SCDeviceTypeManager.getDeviceType().rawValue
+        )
+
         SCAppInfoManager.checkLatestAppVersion {
             // If not on latest app version
             DispatchQueue.main.async {

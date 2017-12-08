@@ -59,6 +59,7 @@
 		639F89031F0F36120082D813 /* ConsolidatedCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F89021F0F36120082D813 /* ConsolidatedCategories.swift */; };
 		63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* SCAppDelegate.swift */; };
 		63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D0D1D1A5713005A2914 /* Assets.xcassets */; };
+		63BF43BC1FDA5FBB0079B5EE /* SCDeviceTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BF43BB1FDA5FBA0079B5EE /* SCDeviceTypeManager.swift */; };
 		63CB4F081D3CB3C300211D3A /* SCGameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */; };
 		63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F091D3CB88D00211D3A /* Card.swift */; };
 		63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */; };
@@ -147,6 +148,7 @@
 		63A04D031D1A5713005A2914 /* SCAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SCAppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63A04D0D1D1A5713005A2914 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63A04D121D1A5713005A2914 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63BF43BB1FDA5FBA0079B5EE /* SCDeviceTypeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDeviceTypeManager.swift; path = Managers/SCDeviceTypeManager.swift; sourceTree = "<group>"; };
 		63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCGameRoomViewCell.swift; path = Views/SCGameRoomViewCell.swift; sourceTree = "<group>"; };
 		63CB4F091D3CB88D00211D3A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Objects/Card.swift; sourceTree = "<group>"; };
 		63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CardCollection.swift; path = Objects/CardCollection.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -230,6 +232,7 @@
 			children = (
 				630883671E80E56F006D2428 /* SCAppInfoManager.swift */,
 				63EAF9A41D41F1C400BC554E /* SCAudioManager.swift */,
+				63BF43BB1FDA5FBA0079B5EE /* SCDeviceTypeManager.swift */,
 				6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */,
 				63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */,
 				639488AB1F6A3D23009D24A5 /* SCNotificationCenterManager.swift */,
@@ -561,6 +564,7 @@
 				63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */,
 				630D15581E99F1B3001C1D87 /* SCLabel.swift in Sources */,
 				6363EB651E7E4D5600CC287B /* SCUnderlineTextField.swift in Sources */,
+				63BF43BC1FDA5FBB0079B5EE /* SCDeviceTypeManager.swift in Sources */,
 				63D256841E6BA6BA0061D80C /* SCLogoLabel.swift in Sources */,
 				63D256871E6BA6BA0061D80C /* SCNavigationBarLabel.swift in Sources */,
 				639F88EF1F0615540082D813 /* SCConstants.swift in Sources */,

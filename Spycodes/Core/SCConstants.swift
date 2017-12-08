@@ -103,6 +103,7 @@ class SCConstants {
 
     enum loggingIdentifier: String {
         case deinitialize = "DEINIT"
+        case deviceType = "DEVICE TYPE"
         case localStorageManager = "SCLocalStorageManager"
         case notificationCenterManager = "SCNotificationCenterManager"
         case states = "SCStates"
