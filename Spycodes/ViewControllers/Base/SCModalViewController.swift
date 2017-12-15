@@ -47,9 +47,12 @@ class SCModalViewController: SCViewController {
 
             self.topBarView.addGestureRecognizer(tapGestureRecognizer)
         }
+    }
 
+    // MARK: Device Type Management
+    override func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {
         // Custom top space offset for iPhone X
-        if SCDeviceTypeManager.getDeviceType() == SCDeviceTypeManager.DeviceType.iPhone_X {
+        if deviceType == SCDeviceTypeManager.DeviceType.iPhone_X {
             self.swipeDownButtonTopSpaceConstraint.constant = 32
         } else {
             self.swipeDownButtonTopSpaceConstraint.constant = 24

@@ -15,6 +15,11 @@ class SCPregameRoomViewController: SCViewController {
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var accessCodeLabel: SCNavigationBarLabel!
     @IBOutlet weak var readyButton: SCButton!
+    @IBOutlet weak var swipeUpButton: SCImageButton!
+
+    @IBAction func onSwipeUpButtonTapped(_ sender: Any) {
+        self.swipeUp()
+    }
 
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         self.swipeRight()
@@ -135,6 +140,15 @@ class SCPregameRoomViewController: SCViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    override func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {
+        if deviceType == SCDeviceTypeManager.DeviceType.iPhone_X {
+            self.swipeUpButton.isHidden = false
+            self.swipeUpButton.setImage(UIImage(named: "Chevron-Up"), for: UIControlState())
+        } else {
+            self.swipeUpButton.isHidden = true
+        }
     }
 
     // MARK: Segue
