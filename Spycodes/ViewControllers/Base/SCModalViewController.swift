@@ -5,6 +5,7 @@ class SCModalViewController: SCViewController {
     fileprivate var swipeGestureRecognizer: UISwipeGestureRecognizer?
 
     @IBOutlet weak var swipeDownButton: SCImageButton!
+    @IBOutlet weak var swipeDownButtonTopSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBarView: UIView!
 
     @IBAction func onSwipeDownTapped(_ sender: Any) {
@@ -45,6 +46,13 @@ class SCModalViewController: SCViewController {
             )
 
             self.topBarView.addGestureRecognizer(tapGestureRecognizer)
+        }
+
+        // Custom top space offset for iPhone X
+        if SCDeviceTypeManager.getDeviceType() == SCDeviceTypeManager.DeviceType.iPhone_X {
+            self.swipeDownButtonTopSpaceConstraint.constant = 32
+        } else {
+            self.swipeDownButtonTopSpaceConstraint.constant = 24
         }
     }
 
