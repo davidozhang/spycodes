@@ -4,6 +4,7 @@ class SCMainViewController: SCViewController {
     @IBOutlet weak var logoLabel: SCLogoLabel!
     @IBOutlet weak var createGameButton: SCButton!
     @IBOutlet weak var joinGameButton: SCButton!
+    @IBOutlet weak var swipeUpButton: SCImageButton!
 
     // MARK: Actions
     @IBAction func unwindToMainMenu(_ sender: UIStoryboardSegue) {
@@ -23,6 +24,10 @@ class SCMainViewController: SCViewController {
             withIdentifier: SCConstants.identifier.playerNameViewController.rawValue,
             sender: self
         )
+    }
+
+    @IBAction func onSwipeUpButtonTapped(_ sender: Any) {
+        self.swipeUp()
     }
 
     // MARK: Lifecycle
@@ -88,6 +93,15 @@ class SCMainViewController: SCViewController {
             withIdentifier: SCConstants.identifier.mainMenuModal.rawValue,
             sender: self
         )
+    }
+
+    override func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {
+        if deviceType == SCDeviceTypeManager.DeviceType.iPhone_X {
+            self.swipeUpButton.isHidden = false
+            self.swipeUpButton.setImage(UIImage(named: "Chevron-Up"), for: UIControlState())
+        } else {
+            self.swipeUpButton.isHidden = true
+        }
     }
 
     // MARK: Private
