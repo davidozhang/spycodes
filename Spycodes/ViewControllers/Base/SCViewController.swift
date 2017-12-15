@@ -193,7 +193,7 @@ class SCViewController: UIViewController {
     }
 
     func performUnwindSegue(_ returnToRootViewController: Bool,
-                            completionHandler: ((Void) -> Void)?) {
+                            completionHandler: (() -> Void)?) {
         if isRootViewController {
             return
         }

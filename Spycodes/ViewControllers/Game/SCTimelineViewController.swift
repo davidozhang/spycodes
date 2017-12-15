@@ -299,7 +299,7 @@ extension SCTimelineViewController: UITableViewDataSource, UITableViewDelegate {
                 attributedString.addAttribute(
                     NSFontAttributeName,
                     value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                    range: NSMakeRange(0, baseString.characters.count - 1)
+                    range: NSMakeRange(0, baseString.count - 1)
                 )
             }
 

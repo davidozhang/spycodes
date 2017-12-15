@@ -454,8 +454,8 @@ class SCGameViewController: SCViewController {
                 return
             }
 
-            if let clueTextFieldCharacterCount = self.clueTextField.text?.characters.count,
-               let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.characters.count {
+            if let clueTextFieldCharacterCount = self.clueTextField.text?.count,
+               let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.count {
                 if clueTextFieldCharacterCount > 0 &&
                    self.clueTextField.text != SCStrings.round.defaultLeaderClue.rawValue.localized &&
                    numberOfWordsTextFieldCharacterCount > 0 &&
@@ -593,7 +593,7 @@ class SCGameViewController: SCViewController {
         }
     }
 
-    fileprivate func didEndGame(_ title: String, reason: String, onDismissal: @escaping ((Void) -> Void)) {
+    fileprivate func didEndGame(_ title: String, reason: String, onDismissal: @escaping (() -> Void)) {
         DispatchQueue.main.async {
             self.dismissPresentedViewIfNeeded(completion: {
                 Round.instance.endGame()
@@ -614,7 +614,7 @@ class SCGameViewController: SCViewController {
         }
     }
 
-    func displayEndGameAlert(title: String, reason: String, onDismissal: ((Void) -> Void)?) {
+    func displayEndGameAlert(title: String, reason: String, onDismissal: (() -> Void)?) {
         let alertController = UIAlertController(
             title: title.localized,
             message: reason.localized,
@@ -1100,7 +1100,7 @@ extension SCGameViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let characterCount = textField.text?.characters.count {
+        if let characterCount = textField.text?.count {
             if textField == self.clueTextField &&
                 characterCount >= 1 {
                 self.numberOfWordsTextField.becomeFirstResponder()

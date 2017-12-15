@@ -27,7 +27,7 @@ class SCPlayerNameViewController: SCViewController {
 
         self.headerLabel.text = SCStrings.header.playerName.rawValue.localized
 
-        if let name = Player.instance.getName(), name.characters.count > 0 {
+        if let name = Player.instance.getName(), name.count > 0 {
             self.userNameTextField.text = name
         } else if !SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             self.userNameTextField.placeholder = SCStrings.header.playerName.rawValue.localized
@@ -91,7 +91,7 @@ extension SCPlayerNameViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let name = self.userNameTextField.text, name.characters.count >= 1 {
+        if let name = self.userNameTextField.text, name.count >= 1 {
             Player.instance.setName(name: name)
 
             if Player.instance.isHost() {

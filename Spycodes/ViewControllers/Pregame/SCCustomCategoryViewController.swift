@@ -252,7 +252,7 @@ class SCCustomCategoryViewController: SCModalViewController {
         )
     }
 
-    fileprivate func validateCustomCategory(successHandler: ((Void) -> Void)?) {
+    fileprivate func validateCustomCategory(successHandler: (() -> Void)?) {
         if self.existingCustomCategory {
             if !self.integrityCheck(integrityType: .nonMutating) {
                 return
@@ -367,7 +367,7 @@ extension SCCustomCategoryViewController: SCTextFieldViewCellDelegate {
     }
 
     func textFieldViewCell(shouldReturn textField: UITextField, indexPath: IndexPath) -> Bool {
-        if textField.text?.characters.count != 0 {
+        if textField.text?.count != 0 {
             textField.resignFirstResponder()
 
             if let word = textField.text {
@@ -731,7 +731,7 @@ extension SCCustomCategoryViewController {
         )
     }
 
-    fileprivate func presentConfirmation(title: String, message: String, confirmHandler: ((Void) -> Void)?) {
+    fileprivate func presentConfirmation(title: String, message: String, confirmHandler: (() -> Void)?) {
         let alertController = UIAlertController(
             title: title.localized,
             message: message.localized,
@@ -776,7 +776,7 @@ extension SCCustomCategoryViewController {
                 }
             },
             verificationHandler: { (category) in
-                if category.characters.count == 0 {
+                if category.count == 0 {
                     self.presentAlert(
                         title: SCStrings.header.emptyCategory.rawValue,
                         message: SCStrings.message.emptyCategoryName.rawValue
@@ -815,7 +815,7 @@ extension SCCustomCategoryViewController {
             verificationHandler: { (word) in
                 let index = self.getSafeIndex(index: indexPath.row)
 
-                if word.characters.count == 0 {
+                if word.count == 0 {
                     self.presentAlert(
                         title: SCStrings.header.emptyWord.rawValue,
                         message: SCStrings.message.emptyWord.rawValue
