@@ -44,7 +44,7 @@ class SCViewController: UIViewController {
                 x: 0.0,
                 y: 1.0,
                 width: self.modalPeekView.frame.size.width,
-                height: 1.0
+                height: 1.5
             )
 
             topBorder.backgroundColor = UIColor.spycodesBorderColor().cgColor
