@@ -43,7 +43,7 @@ extension UIColor {
     }
 
     static func darkTintColor() -> UIColor {
-        return UIColor(red: 55/255, green: 50/255, blue: 55/255, alpha: 0.2)
+        return UIColor(red: 170/255, green: 140/255, blue: 170/255, alpha: 0.2)
     }
 
     static func lightTintColor() -> UIColor {
