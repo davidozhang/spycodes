@@ -31,9 +31,9 @@ class SCWordBank {
         }
 
         static var all: [Category] {
-            return (0..<count).flatMap({
+            return (0..<count).flatMap {
                 Category(rawValue: $0)
-            })
+            }
         }
     }
 

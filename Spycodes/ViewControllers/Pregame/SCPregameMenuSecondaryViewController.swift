@@ -42,13 +42,11 @@ class SCPregameMenuSecondaryViewController: SCViewController {
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
-    }
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.identifier = SCConstants.identifier.pregameModalSecondaryView.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
@@ -126,7 +124,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
         }
     }
 
-    fileprivate func showAlert(title: String, reason: String, completionHandler: ((Void) -> Void)?) {
+    fileprivate func showAlert(title: String, reason: String, completionHandler: (() -> Void)?) {
         DispatchQueue.main.async {
             let alertController = UIAlertController(
                 title: title.localized,
@@ -147,7 +145,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
         }
     }
 
-    fileprivate func checkWordCount(successHandler: ((Void) -> Void)?, failureHandler: ((Void) -> Void)?) {
+    fileprivate func checkWordCount(successHandler: (() -> Void)?, failureHandler: (() -> Void)?) {
         if !Player.instance.isHost() {
             return
         }
@@ -432,12 +430,12 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                                 SCStrings.secondaryLabel.words.rawValue.localized
                         )
                     }
-                    
+
                     cell.setEnabled(enabled: true)
-                    
+
                     cell.synchronizeToggle()
                     cell.delegate = self
-                    
+
                     return cell
                 }
             }

@@ -51,7 +51,7 @@ class SCConstants {
     }
 
     enum identifier: String {
-        case accessCode = "access-code"
+        case accessCodeViewController = "access-code"
         case accessibilityToggleViewCell = "accessibility-toggle-view-cell"
         case addWordViewCell = "add-word-view-cell"
         case customCategory = "custom-category"
@@ -59,22 +59,26 @@ class SCConstants {
         case deleteCategoryViewCell = "delete-category-view-cell"
         case disclosureViewCell = "disclosure-view-cell"
         case emojiSettingViewCell = "emoji-setting-view-cell"
-        case gameRoom = "game-room"
+        case gameHelpViewController = "game-help-view-controller"
+        case gameRoomViewController = "game-room"
         case gameRoomViewCell = "game-room-view-cell"
         case helpView = "help-view"
         case infoViewCell = "info-view-cell"
         case mainMenu = "main-menu"
         case mainMenuModal = "main-menu-modal"
+        case mainSettingsViewController = "main-settings-view-controller"
         case minigameToggleViewCell = "minigame-toggle-view-cell"
         case multilineToggleViewCell = "multi-line-toggle-view-cell"
         case nameSettingViewCell = "name-setting-view-cell"
         case nightModeToggleViewCell = "night-mode-toggle-view-cell"
         case persistentSelectionToggleViewCell = "persistent-selection-toggle-view-cell"
+        case pregameMenuContainerViewController = "pregame-menu-container-view-controller"
+        case pregameMenuPageViewController = "pregame-menu-page-view-controller"
         case pregameModalContainerView = "pregame-modal-container-view"
         case pregameModalMainView = "pregame-modal-main-view"
         case pregameModalSecondaryView = "pregame-modal-secondary-view"
         case pregameModalPageViewController = "pregame-modal-page-view-controller"
-        case playerName = "player-name"
+        case playerNameViewController = "player-name"
         case pregameRoom = "pregame-room"
         case pregameRoomTeamEmptyStateViewCell = "pregame-room-team-empty-state-view-cell"
         case pregameRoomViewCell = "pregame-room-view-cell"
@@ -86,6 +90,7 @@ class SCConstants {
         case statisticsViewCell = "statistics-view-cell"
         case timelineModal = "timeline-modal"
         case timelineViewCell = "timeline-view-cell"
+        case timelineViewController = "timeline-view-controller"
         case timerSettingViewCell = "timer-setting-view-cell"
         case versionViewCell = "version-view-cell"
         case wordViewCell = "word-view-cell"
@@ -94,6 +99,14 @@ class SCConstants {
     enum images: String {
         case shuffle = "Shuffle"
         case markAsRead = "Mark-As-Read"
+    }
+
+    enum loggingIdentifier: String {
+        case deinitialize = "DEINIT"
+        case deviceType = "DEVICE TYPE"
+        case localStorageManager = "SCLocalStorageManager"
+        case notificationCenterManager = "SCNotificationCenterManager"
+        case states = "SCStates"
     }
 
     enum nibs: String {

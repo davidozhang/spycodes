@@ -80,13 +80,11 @@ class SCMainSettingsViewController: SCModalViewController {
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var upArrowView: UIImageView!
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
-    }
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.identifier = SCConstants.identifier.mainSettingsViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
@@ -237,8 +235,8 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
                 NSFontAttributeName,
                 value: SCFonts.intermediateSizeFont(.medium) ?? 0,
                 range: NSMakeRange(
-                    SCAppInfoManager.appVersion.characters.count + 1,
-                    SCAppInfoManager.buildNumber.characters.count + 2
+                    SCAppInfoManager.appVersion.count + 1,
+                    SCAppInfoManager.buildNumber.count + 2
                 )
             )
 

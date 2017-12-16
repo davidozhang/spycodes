@@ -11,7 +11,7 @@ class SCAppInfoManager {
     ) as! String
 
     // MARK: Public
-    static func checkLatestAppVersion(_ failure: @escaping ((Void) -> Void)) {
+    static func checkLatestAppVersion(_ failure: @escaping (() -> Void)) {
         let successHandler: (NSDictionary) -> Void = { dict in
             if let resultCount = dict["resultCount"] as? NSInteger, resultCount == 1,
                let result = dict["results"] as? NSArray,
@@ -60,7 +60,7 @@ class SCAppInfoManager {
                     return dictionary
                 }
             } catch {
-                print("Cannot deserialize version data to dictionary")
+                SCLogger.log(identifier: nil, "Cannot deserialize version data to dictionary")
             }
         }
 

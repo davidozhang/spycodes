@@ -125,17 +125,17 @@ class ConsolidatedCategories: NSObject, NSCoding {
 
     func removeCustomCategory(category: CustomCategory, persistSelectionImmediately: Bool) {
         let allCustomCategories = self.getAllCustomCategories()
-        let updatedCustomCategories = allCustomCategories.filter({
+        let updatedCustomCategories = allCustomCategories.filter {
             $0 != category
-        })
+        }
 
         SCLocalStorageManager.instance.saveAllCustomCategories(customCategories: updatedCustomCategories)
         self.unselectCustomCategory(category: category, persistSelectionImmediately: persistSelectionImmediately)
 
         if let allCachedCustomCategories = self.allCachedCustomCategories {
-            self.allCachedCustomCategories = allCachedCustomCategories.filter({
+            self.allCachedCustomCategories = allCachedCustomCategories.filter {
                 $0 != category
-            })
+            }
         }
     }
 
@@ -242,9 +242,9 @@ class ConsolidatedCategories: NSObject, NSCoding {
 
     // Mirrors the mapping function for default categories in SCWordBank
     func getCustomCategoryFromString(string: String?) -> CustomCategory? {
-        let filtered = self.getAllCustomCategories().filter({
+        let filtered = self.getAllCustomCategories().filter {
             $0.getName()?.lowercased() == string?.lowercased()
-        })
+        }
 
         if filtered.count == 1 {
             return filtered[0]

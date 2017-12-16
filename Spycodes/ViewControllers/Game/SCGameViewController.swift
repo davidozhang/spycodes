@@ -4,8 +4,6 @@ import UIKit
 class SCGameViewController: SCViewController {
     fileprivate let edgeInset: CGFloat = 12
     fileprivate let minCellSpacing: CGFloat = 12
-    fileprivate let modalWidth = UIScreen.main.bounds.width - 60
-    fileprivate let modalHeight = UIScreen.main.bounds.height/2
     fileprivate let bottomBarViewDefaultHeight: CGFloat = 82
     fileprivate let timerViewDefaultHeight: CGFloat = 25
     fileprivate let bottomBarViewExtendedHeight: CGFloat = 121
@@ -82,49 +80,26 @@ class SCGameViewController: SCViewController {
         )
     }
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
-    }
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCGameViewController.didEndMinigameWithNotification),
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.minigameGameOver.rawValue
-            ),
-            object: nil
-        )
+        self.identifier = SCConstants.identifier.gameRoomViewController.rawValue
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCGameViewController.showNotificationDotIfNeeded),
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
-            ),
-            object: nil
-        )
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCGameViewController.updateCollectionView),
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.updateCollectionView.rawValue
-            ),
-            object: nil
-        )
+        super.registerObservers(observers: [
+            SCConstants.notificationKey.minigameGameOver.rawValue:
+                #selector(SCGameViewController.didEndMinigameWithNotification),
+            SCConstants.notificationKey.timelineUpdated.rawValue:
+                #selector(SCGameViewController.showNotificationDotIfNeeded),
+            SCConstants.notificationKey.updateCollectionView.rawValue:
+                #selector(SCGameViewController.updateCollectionView)
+        ])
 
         self.hideNotificationDot()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        // Unwindable view controller identifier
-        self.unwindableIdentifier = SCConstants.identifier.gameRoom.rawValue
 
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -202,30 +177,6 @@ class SCGameViewController: SCViewController {
 
         Timer.instance.invalidate()
 
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.minigameGameOver.rawValue
-            ),
-            object: nil
-        )
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
-            ),
-            object: nil
-        )
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.updateCollectionView.rawValue
-            ),
-            object: nil
-        )
-
         self.hideNotificationDot()
     }
 
@@ -245,30 +196,7 @@ class SCGameViewController: SCViewController {
 
     // MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? SCPopoverViewController {
-            super.showDimView()
-
-            vc.rootViewController = self
-            vc.modalPresentationStyle = .popover
-            vc.preferredContentSize = CGSize(
-                width: self.modalWidth,
-                height: self.modalHeight
-            )
-
-            if let popvc = vc.popoverPresentationController {
-                popvc.delegate = self
-                popvc.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-                popvc.sourceView = self.view
-                popvc.sourceRect = CGRect(
-                    x: self.view.bounds.midX,
-                    y: self.view.bounds.midY,
-                    width: 0,
-                    height: 0
-                )
-            }
-        } else {
-            super._prepareForSegue(segue, sender: self)
-        }
+        super._prepareForSegue(segue, sender: self)
     }
 
     // MARK: Touch
@@ -526,8 +454,8 @@ class SCGameViewController: SCViewController {
                 return
             }
 
-            if let clueTextFieldCharacterCount = self.clueTextField.text?.characters.count,
-               let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.characters.count {
+            if let clueTextFieldCharacterCount = self.clueTextField.text?.count,
+               let numberOfWordsTextFieldCharacterCount = self.numberOfWordsTextField.text?.count {
                 if clueTextFieldCharacterCount > 0 &&
                    self.clueTextField.text != SCStrings.round.defaultLeaderClue.rawValue.localized &&
                    numberOfWordsTextFieldCharacterCount > 0 &&
@@ -665,7 +593,7 @@ class SCGameViewController: SCViewController {
         }
     }
 
-    fileprivate func didEndGame(_ title: String, reason: String, onDismissal: @escaping ((Void) -> Void)) {
+    fileprivate func didEndGame(_ title: String, reason: String, onDismissal: @escaping (() -> Void)) {
         DispatchQueue.main.async {
             self.dismissPresentedViewIfNeeded(completion: {
                 Round.instance.endGame()
@@ -686,7 +614,7 @@ class SCGameViewController: SCViewController {
         }
     }
 
-    func displayEndGameAlert(title: String, reason: String, onDismissal: ((Void) -> Void)?) {
+    func displayEndGameAlert(title: String, reason: String, onDismissal: (() -> Void)?) {
         let alertController = UIAlertController(
             title: title.localized,
             message: reason.localized,
@@ -1172,7 +1100,7 @@ extension SCGameViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let characterCount = textField.text?.characters.count {
+        if let characterCount = textField.text?.count {
             if textField == self.clueTextField &&
                 characterCount >= 1 {
                 self.numberOfWordsTextField.becomeFirstResponder()

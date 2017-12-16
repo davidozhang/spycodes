@@ -80,13 +80,11 @@ class SCCustomCategoryViewController: SCModalViewController {
         self.onDone()
     }
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
-    }
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.identifier = SCConstants.identifier.customCategoryViewController.rawValue
 
         self.automaticallyAdjustsScrollViewInsets = false
 
@@ -254,7 +252,7 @@ class SCCustomCategoryViewController: SCModalViewController {
         )
     }
 
-    fileprivate func validateCustomCategory(successHandler: ((Void) -> Void)?) {
+    fileprivate func validateCustomCategory(successHandler: (() -> Void)?) {
         if self.existingCustomCategory {
             if !self.integrityCheck(integrityType: .nonMutating) {
                 return
@@ -369,7 +367,7 @@ extension SCCustomCategoryViewController: SCTextFieldViewCellDelegate {
     }
 
     func textFieldViewCell(shouldReturn textField: UITextField, indexPath: IndexPath) -> Bool {
-        if textField.text?.characters.count != 0 {
+        if textField.text?.count != 0 {
             textField.resignFirstResponder()
 
             if let word = textField.text {
@@ -513,7 +511,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                         cell.rightTextView.becomeFirstResponder()
                     })
                 }
-                
+
                 return cell
             default:
                 return SCTableViewCell()
@@ -532,7 +530,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
 
                     cell.primaryLabel.text = SCStrings.primaryLabel.addWord.rawValue.localized
                     cell.indexPath = indexPath
-                    
+
                     return cell
                 case .addingNewWord:
                     // Custom top view cell with text field as first responder
@@ -634,7 +632,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
             }
             self.scrolled = false
         }
-        
+
         if !self.inputMode {
             self.reloadView()
         }
@@ -733,7 +731,7 @@ extension SCCustomCategoryViewController {
         )
     }
 
-    fileprivate func presentConfirmation(title: String, message: String, confirmHandler: ((Void) -> Void)?) {
+    fileprivate func presentConfirmation(title: String, message: String, confirmHandler: (() -> Void)?) {
         let alertController = UIAlertController(
             title: title.localized,
             message: message.localized,
@@ -778,7 +776,7 @@ extension SCCustomCategoryViewController {
                 }
             },
             verificationHandler: { (category) in
-                if category.characters.count == 0 {
+                if category.count == 0 {
                     self.presentAlert(
                         title: SCStrings.header.emptyCategory.rawValue,
                         message: SCStrings.message.emptyCategoryName.rawValue
@@ -817,7 +815,7 @@ extension SCCustomCategoryViewController {
             verificationHandler: { (word) in
                 let index = self.getSafeIndex(index: indexPath.row)
 
-                if word.characters.count == 0 {
+                if word.count == 0 {
                     self.presentAlert(
                         title: SCStrings.header.emptyWord.rawValue,
                         message: SCStrings.message.emptyWord.rawValue

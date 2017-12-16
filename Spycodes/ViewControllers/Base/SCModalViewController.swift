@@ -5,6 +5,7 @@ class SCModalViewController: SCViewController {
     fileprivate var swipeGestureRecognizer: UISwipeGestureRecognizer?
 
     @IBOutlet weak var swipeDownButton: SCImageButton!
+    @IBOutlet weak var swipeDownButtonTopSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBarView: UIView!
 
     @IBAction func onSwipeDownTapped(_ sender: Any) {
@@ -14,6 +15,13 @@ class SCModalViewController: SCViewController {
     // MARK: Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        super.registerObservers(observers: [
+            SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue:
+                #selector(SCModalViewController.enableSwipeGestureRecognizer),
+            SCConstants.notificationKey.disableSwipeGestureRecognizer.rawValue:
+                #selector(SCModalViewController.disableSwipeGestureRecognizer)
+        ])
 
         self.view.isOpaque = false
 
@@ -39,34 +47,16 @@ class SCModalViewController: SCViewController {
 
             self.topBarView.addGestureRecognizer(tapGestureRecognizer)
         }
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCModalViewController.enableSwipeGestureRecognizer),
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue),
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCModalViewController.disableSwipeGestureRecognizer),
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.disableSwipeGestureRecognizer.rawValue),
-            object: nil
-        )
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.enableSwipeGestureRecognizer.rawValue),
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.disableSwipeGestureRecognizer.rawValue),
-            object: nil
-        )
+    // MARK: Device Type Management
+    override func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {
+        // Custom top space offset for iPhone X
+        if deviceType == SCDeviceTypeManager.DeviceType.iPhone_X {
+            self.swipeDownButtonTopSpaceConstraint.constant = 44
+        } else {
+            self.swipeDownButtonTopSpaceConstraint.constant = 24
+        }
     }
 
     // MARK: Swipe Gesture Recognizer
@@ -81,7 +71,7 @@ class SCModalViewController: SCViewController {
         self.onDismissalWithCompletion(completion: nil)
     }
 
-    func onDismissalWithCompletion(completion: ((Void) -> Void)?) {
+    func onDismissalWithCompletion(completion: (() -> Void)?) {
         DispatchQueue.main.async {
             self.dismiss(animated: true, completion: completion)
         }

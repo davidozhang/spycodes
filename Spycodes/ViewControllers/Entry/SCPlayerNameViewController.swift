@@ -15,22 +15,21 @@ class SCPlayerNameViewController: SCViewController {
         self.swipeRight()
     }
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
+    // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.identifier = SCConstants.identifier.playerNameViewController.rawValue
     }
 
-    // MARK: Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // Unwindable view controller identifier
-        self.unwindableIdentifier = SCConstants.identifier.playerName.rawValue
-
         self.headerLabel.text = SCStrings.header.playerName.rawValue.localized
 
-        if let name = Player.instance.getName(), name.characters.count > 0 {
+        if let name = Player.instance.getName(), name.count > 0 {
             self.userNameTextField.text = name
-        } else {
+        } else if !SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             self.userNameTextField.placeholder = SCStrings.header.playerName.rawValue.localized
         }
 
@@ -92,7 +91,7 @@ extension SCPlayerNameViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let name = self.userNameTextField.text, name.characters.count >= 1 {
+        if let name = self.userNameTextField.text, name.count >= 1 {
             Player.instance.setName(name: name)
 
             if Player.instance.isHost() {
@@ -103,7 +102,7 @@ extension SCPlayerNameViewController: UITextFieldDelegate {
                 )
             } else {
                 self.performSegue(
-                    withIdentifier: SCConstants.identifier.accessCode.rawValue,
+                    withIdentifier: SCConstants.identifier.accessCodeViewController.rawValue,
                     sender: self
                 )
             }

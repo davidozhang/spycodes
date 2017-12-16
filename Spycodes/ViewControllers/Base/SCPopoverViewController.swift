@@ -1,6 +1,6 @@
 import UIKit
 
-class SCPopoverViewController: UIViewController {
+class SCPopoverViewController: SCViewController {
     weak var rootViewController: SCViewController?
 
     static let defaultModalWidth = UIScreen.main.bounds.width - 60

@@ -45,6 +45,8 @@
 		638CE44D1EAB3D4B00033480 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CE44C1EAB3D4B00033480 /* Timeline.swift */; };
 		638CE44F1EAB45A500033480 /* SCTimelineViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CE44E1EAB45A500033480 /* SCTimelineViewCell.swift */; };
 		63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */; };
+		639488AC1F6A3D23009D24A5 /* SCNotificationCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639488AB1F6A3D23009D24A5 /* SCNotificationCenterManager.swift */; };
+		639488B01F6A5BB1009D24A5 /* SCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639488AF1F6A5BB1009D24A5 /* SCLogger.swift */; };
 		639E17681E00EADB00640540 /* SCSectionHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */; };
 		639F88EE1F0615540082D813 /* SCArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88E71F0615540082D813 /* SCArray.swift */; };
 		639F88EF1F0615540082D813 /* SCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88E81F0615540082D813 /* SCConstants.swift */; };
@@ -57,6 +59,7 @@
 		639F89031F0F36120082D813 /* ConsolidatedCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F89021F0F36120082D813 /* ConsolidatedCategories.swift */; };
 		63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A04D031D1A5713005A2914 /* SCAppDelegate.swift */; };
 		63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A04D0D1D1A5713005A2914 /* Assets.xcassets */; };
+		63BF43BC1FDA5FBB0079B5EE /* SCDeviceTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BF43BB1FDA5FBA0079B5EE /* SCDeviceTypeManager.swift */; };
 		63CB4F081D3CB3C300211D3A /* SCGameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */; };
 		63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F091D3CB88D00211D3A /* Card.swift */; };
 		63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */; };
@@ -129,6 +132,8 @@
 		638CE44C1EAB3D4B00033480 /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Objects/Timeline.swift; sourceTree = "<group>"; };
 		638CE44E1EAB45A500033480 /* SCTimelineViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTimelineViewCell.swift; path = Views/SCTimelineViewCell.swift; sourceTree = "<group>"; };
 		63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCMultipeerManager.swift; path = Managers/SCMultipeerManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		639488AB1F6A3D23009D24A5 /* SCNotificationCenterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCNotificationCenterManager.swift; path = Managers/SCNotificationCenterManager.swift; sourceTree = "<group>"; };
+		639488AF1F6A5BB1009D24A5 /* SCLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLogger.swift; path = Core/SCLogger.swift; sourceTree = "<group>"; };
 		639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCSectionHeaderViewCell.swift; path = Views/SCSectionHeaderViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		639F88E71F0615540082D813 /* SCArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCArray.swift; path = Core/SCArray.swift; sourceTree = "<group>"; };
 		639F88E81F0615540082D813 /* SCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCConstants.swift; path = Core/SCConstants.swift; sourceTree = "<group>"; };
@@ -143,6 +148,7 @@
 		63A04D031D1A5713005A2914 /* SCAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SCAppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63A04D0D1D1A5713005A2914 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63A04D121D1A5713005A2914 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63BF43BB1FDA5FBA0079B5EE /* SCDeviceTypeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDeviceTypeManager.swift; path = Managers/SCDeviceTypeManager.swift; sourceTree = "<group>"; };
 		63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCGameRoomViewCell.swift; path = Views/SCGameRoomViewCell.swift; sourceTree = "<group>"; };
 		63CB4F091D3CB88D00211D3A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Objects/Card.swift; sourceTree = "<group>"; };
 		63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CardCollection.swift; path = Objects/CardCollection.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -226,8 +232,10 @@
 			children = (
 				630883671E80E56F006D2428 /* SCAppInfoManager.swift */,
 				63EAF9A41D41F1C400BC554E /* SCAudioManager.swift */,
+				63BF43BB1FDA5FBA0079B5EE /* SCDeviceTypeManager.swift */,
 				6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */,
 				63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */,
+				639488AB1F6A3D23009D24A5 /* SCNotificationCenterManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -297,6 +305,7 @@
 				639F88E71F0615540082D813 /* SCArray.swift */,
 				639F88E81F0615540082D813 /* SCConstants.swift */,
 				639F88E91F0615540082D813 /* SCFonts.swift */,
+				639488AF1F6A5BB1009D24A5 /* SCLogger.swift */,
 				639F88EA1F0615540082D813 /* SCStates.swift */,
 				639F88EB1F0615540082D813 /* SCStrings.swift */,
 				639F88EC1F0615540082D813 /* SCUIColor.swift */,
@@ -433,7 +442,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "David Zhang";
 				TargetAttributes = {
 					63A04CFF1D1A5713005A2914 = {
@@ -555,10 +564,12 @@
 				63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */,
 				630D15581E99F1B3001C1D87 /* SCLabel.swift in Sources */,
 				6363EB651E7E4D5600CC287B /* SCUnderlineTextField.swift in Sources */,
+				63BF43BC1FDA5FBB0079B5EE /* SCDeviceTypeManager.swift in Sources */,
 				63D256841E6BA6BA0061D80C /* SCLogoLabel.swift in Sources */,
 				63D256871E6BA6BA0061D80C /* SCNavigationBarLabel.swift in Sources */,
 				639F88EF1F0615540082D813 /* SCConstants.swift in Sources */,
 				630674181D51BE9800339EC8 /* Timer.swift in Sources */,
+				639488B01F6A5BB1009D24A5 /* SCLogger.swift in Sources */,
 				63486DA91D3DE29C00795403 /* Key.swift in Sources */,
 				63D256811E6BA6BA0061D80C /* SCButton.swift in Sources */,
 				639F89031F0F36120082D813 /* ConsolidatedCategories.swift in Sources */,
@@ -591,6 +602,7 @@
 				6363EB671E7E5A3900CC287B /* SCToggleViewCell.swift in Sources */,
 				63D2568A1E6BA6BA0061D80C /* SCStatusLabel.swift in Sources */,
 				638CE44D1EAB3D4B00033480 /* Timeline.swift in Sources */,
+				639488AC1F6A3D23009D24A5 /* SCNotificationCenterManager.swift in Sources */,
 				635599C81F4DD8ED00508FE9 /* SCTimelineViewController.swift in Sources */,
 				635599BA1F4DD35200508FE9 /* SCPregameMenuSecondaryViewController.swift in Sources */,
 				63FDED391D26557200142780 /* Room.swift in Sources */,
@@ -661,14 +673,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -710,14 +728,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -753,6 +777,7 @@
 				INFOPLIST_FILE = Spycodes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidzhang.Spycodes;
 				PRODUCT_NAME = Spycodes;
 				PROVISIONING_PROFILE = "";

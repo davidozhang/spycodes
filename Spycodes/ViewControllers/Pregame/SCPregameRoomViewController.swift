@@ -15,6 +15,11 @@ class SCPregameRoomViewController: SCViewController {
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var accessCodeLabel: SCNavigationBarLabel!
     @IBOutlet weak var readyButton: SCButton!
+    @IBOutlet weak var swipeUpButton: SCImageButton!
+
+    @IBAction func onSwipeUpButtonTapped(_ sender: Any) {
+        self.swipeUp()
+    }
 
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         self.swipeRight()
@@ -35,13 +40,11 @@ class SCPregameRoomViewController: SCViewController {
         super.unwindedToSelf(segue)
     }
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
-    }
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.identifier = SCConstants.identifier.pregameRoom.rawValue
 
         if Player.instance.isHost() {
             Room.instance.generateNewAccessCode()
@@ -60,7 +63,7 @@ class SCPregameRoomViewController: SCViewController {
             NSFontAttributeName,
             value: SCFonts.regularSizeFont(.bold) ?? 0,
             range: NSMakeRange(
-                SCStrings.header.accessCode.rawValue.localized.characters.count + 2,
+                SCStrings.header.accessCode.rawValue.localized.count + 2,
                 SCConstants.constant.accessCodeLength.rawValue
             )
         )
@@ -70,9 +73,6 @@ class SCPregameRoomViewController: SCViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        // Unwindable view controller identifier
-        self.unwindableIdentifier = SCConstants.identifier.pregameRoom.rawValue
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -112,23 +112,12 @@ class SCPregameRoomViewController: SCViewController {
 
         Timeline.instance.reset()
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCPregameRoomViewController.showCustomCategoryView),
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.customCategory.rawValue
-            ),
-            object: nil
-        )
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCPregameRoomViewController.showPregameModalView),
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.pregameModal.rawValue
-            ),
-            object: nil
-        )
+        super.registerObservers(observers: [
+            SCConstants.notificationKey.customCategory.rawValue:
+                #selector(SCPregameRoomViewController.showCustomCategoryView),
+            SCConstants.notificationKey.pregameModal.rawValue:
+                #selector(SCPregameRoomViewController.showPregameModalView)
+        ])
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -140,22 +129,6 @@ class SCPregameRoomViewController: SCViewController {
             self.broadcastTimer?.invalidate()
         }
         self.refreshTimer?.invalidate()
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.customCategory.rawValue
-            ),
-            object: nil
-        )
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.pregameModal.rawValue
-            ),
-            object: nil
-        )
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -167,6 +140,15 @@ class SCPregameRoomViewController: SCViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    override func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {
+        if deviceType == SCDeviceTypeManager.DeviceType.iPhone_X {
+            self.swipeUpButton.isHidden = false
+            self.swipeUpButton.setImage(UIImage(named: "Chevron-Up"), for: UIControlState())
+        } else {
+            self.swipeUpButton.isHidden = true
+        }
     }
 
     // MARK: Segue
@@ -281,7 +263,7 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate func goToGame() {
         DispatchQueue.main.async(execute: {
             self.performSegue(
-                withIdentifier: SCConstants.identifier.gameRoom.rawValue,
+                withIdentifier: SCConstants.identifier.gameRoomViewController.rawValue,
                 sender: self
             )
         })
@@ -590,7 +572,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                 attributedString.addAttribute(
                     NSFontAttributeName,
                     value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                    range: NSMakeRange(0, name.characters.count)
+                    range: NSMakeRange(0, name.count)
                 )
 
                 cell.primaryLabel.attributedText = attributedString

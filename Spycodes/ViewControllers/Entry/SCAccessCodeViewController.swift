@@ -43,20 +43,15 @@ class SCAccessCodeViewController: SCViewController {
         self.onCancel()
     }
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
-    }
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.identifier = SCConstants.identifier.accessCodeViewController.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        // Unwindable view controller identifier
-        self.unwindableIdentifier = SCConstants.identifier.accessCode.rawValue
 
         SCMultipeerManager.instance.delegate = self
 
@@ -227,7 +222,7 @@ class SCAccessCodeViewController: SCViewController {
     fileprivate func textFieldDidChange(_ textField: UITextField) {
         let currentTag = textField.tag
 
-        if let character = textField.text, character.characters.count == 1 {
+        if let character = textField.text, character.count == 1 {
             self.accessCodeCharacters[currentTag] = character
 
             if currentTag == SCConstants.tag.lastTextField.rawValue {
@@ -318,7 +313,7 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
 
     func multipeerManager(peerDisconnected peerID: MCPeerID) {}
 
-    func multipeerManager(foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {}
+    func multipeerManager(foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {}
 
     func multipeerManager(lostPeer peerID: MCPeerID) {}
 }
@@ -353,7 +348,7 @@ extension SCAccessCodeViewController: UITextFieldDelegate {
 
         // Allow return key if cursor is on last text field and it is filled
         if currentTag == SCConstants.tag.lastTextField.rawValue &&
-           textField.text?.characters.count == 1 {
+           textField.text?.count == 1 {
             let accessCode = self.accessCodeCharacters.componentsJoined(by: "")
             self.joinRoomWithAccessCode(accessCode)
 
@@ -372,11 +367,11 @@ extension SCAccessCodeViewController: UITextFieldDelegate {
         }
 
         // Edge case where the last text field is filled
-        if textField.text?.characters.count == 1 {
+        if textField.text?.count == 1 {
             self.lastTextFieldWasFilled = true
 
             // Disallow appending to existing text in last text field
-            if string.characters.count > 0 {
+            if string.count > 0 {
                 return false
             }
         }

@@ -4,6 +4,7 @@ class SCMainViewController: SCViewController {
     @IBOutlet weak var logoLabel: SCLogoLabel!
     @IBOutlet weak var createGameButton: SCButton!
     @IBOutlet weak var joinGameButton: SCButton!
+    @IBOutlet weak var swipeUpButton: SCImageButton!
 
     // MARK: Actions
     @IBAction func unwindToMainMenu(_ sender: UIStoryboardSegue) {
@@ -13,32 +14,41 @@ class SCMainViewController: SCViewController {
     @IBAction func onCreateGame(_ sender: AnyObject) {
         Player.instance.setIsHost(true)
         self.performSegue(
-            withIdentifier: SCConstants.identifier.playerName.rawValue,
+            withIdentifier: SCConstants.identifier.playerNameViewController.rawValue,
             sender: self
         )
     }
 
     @IBAction func onJoinGame(_ sender: AnyObject) {
         self.performSegue(
-            withIdentifier: SCConstants.identifier.playerName.rawValue,
+            withIdentifier: SCConstants.identifier.playerNameViewController.rawValue,
             sender: self
         )
     }
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
+    @IBAction func onSwipeUpButtonTapped(_ sender: Any) {
+        self.swipeUp()
     }
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        SCAppInfoManager.checkLatestAppVersion({
+        // Currently this view is the root view controller for unwinding logic
+        self.identifier = SCConstants.identifier.mainMenu.rawValue
+        self.isRootViewController = true
+
+        SCLogger.log(
+            identifier: SCConstants.loggingIdentifier.deviceType.rawValue,
+            SCDeviceTypeManager.getDeviceType().rawValue
+        )
+
+        SCAppInfoManager.checkLatestAppVersion {
             // If not on latest app version
             DispatchQueue.main.async {
                 self.showUpdateAppAlert()
             }
-        })
+        }
 
         self.logoLabel.text = SCStrings.appName.localized
 
@@ -55,10 +65,6 @@ class SCMainViewController: SCViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        // Currently this view is the root view controller for unwinding logic
-        self.unwindableIdentifier = SCConstants.identifier.mainMenu.rawValue
-        self.isRootViewController = true
 
         ConsolidatedCategories.instance.reset()
         Player.instance.reset()
@@ -89,15 +95,24 @@ class SCMainViewController: SCViewController {
         )
     }
 
+    override func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {
+        if deviceType == SCDeviceTypeManager.DeviceType.iPhone_X {
+            self.swipeUpButton.isHidden = false
+            self.swipeUpButton.setImage(UIImage(named: "Chevron-Up"), for: UIControlState())
+        } else {
+            self.swipeUpButton.isHidden = true
+        }
+    }
+
     // MARK: Private
     fileprivate func showUpdateAppAlert() {
         let alertController = UIAlertController(
-            title: SCStrings.header.updateApp.rawValue,
-            message: SCStrings.message.updatePrompt.rawValue,
+            title: SCStrings.header.updateApp.rawValue.localized,
+            message: SCStrings.message.updatePrompt.rawValue.localized,
             preferredStyle: .alert
         )
         let confirmAction = UIAlertAction(
-            title: "Download",
+            title: SCStrings.button.download.rawValue.localized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 if let appStoreURL = URL(string: SCConstants.url.appStore.rawValue) {

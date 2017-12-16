@@ -2,10 +2,13 @@ import UIKit
 
 class SCViewController: UIViewController {
     static let tableViewMargin: CGFloat = 30
+    static let modalWidth = UIScreen.main.bounds.width - 60
+    static let modalHeight = UIScreen.main.bounds.height/2
+
     let animationDuration: TimeInterval = 0.6
     let animationAlpha: CGFloat = 0.5
 
-    var unwindableIdentifier: String = ""
+    var identifier: String?
     var previousViewControllerIdentifier: String?
     var returnToRootViewController = false
     var unwindingSegue = false
@@ -17,6 +20,15 @@ class SCViewController: UIViewController {
     fileprivate var modalPeekBlurView: UIVisualEffectView?
 
     @IBOutlet weak var modalPeekView: UIView!
+
+    deinit {
+        if let identifier = self.identifier {
+            SCLogger.log(
+                identifier: SCConstants.loggingIdentifier.deinitialize.rawValue,
+                String(format: SCStrings.logging.deinitStatement.rawValue, identifier)
+            )
+        }
+    }
 
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -32,7 +44,7 @@ class SCViewController: UIViewController {
                 x: 0.0,
                 y: 1.0,
                 width: self.modalPeekView.frame.size.width,
-                height: 1.0
+                height: 1.5
             )
 
             topBorder.backgroundColor = UIColor.spycodesBorderColor().cgColor
@@ -51,7 +63,16 @@ class SCViewController: UIViewController {
                 action: #selector(SCViewController.swipeUp)
             )
             self.modalPeekView.addGestureRecognizer(tapGestureRecognizer)
+
+            if SCDeviceTypeManager.getDeviceType() == SCDeviceTypeManager.DeviceType.iPhone_X {
+                self.hideModalPeekView()
+            } else {
+                self.showModalPeekView()
+            }
         }
+
+        let deviceType = SCDeviceTypeManager.getDeviceType()
+        self.setCustomLayoutForDeviceType(deviceType: deviceType)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -66,58 +87,28 @@ class SCViewController: UIViewController {
         swipeGestureRecognizer.direction = .right
         self.view.addGestureRecognizer(swipeGestureRecognizer)
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCViewController.applicationDidBecomeActive),
-            name: NSNotification.Name.UIApplicationDidBecomeActive,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCViewController.applicationWillResignActive),
-            name: NSNotification.Name.UIApplicationWillResignActive,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCViewController.keyboardWillShow),
-            name: NSNotification.Name.UIKeyboardWillShow,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCViewController.keyboardWillHide),
-            name: NSNotification.Name.UIKeyboardWillHide,
-            object: nil
+        SCNotificationCenterManager.instance.addObservers(
+            viewController: self,
+            observers: [
+                NSNotification.Name.UIApplicationDidBecomeActive.rawValue:
+                    #selector(SCViewController.applicationDidBecomeActive),
+                NSNotification.Name.UIApplicationWillResignActive.rawValue:
+                    #selector(SCViewController.applicationWillResignActive),
+                NSNotification.Name.UIKeyboardWillShow.rawValue:
+                    #selector(SCViewController.keyboardWillShow),
+                NSNotification.Name.UIKeyboardWillHide.rawValue:
+                    #selector(SCViewController.keyboardWillHide)
+            ]
         )
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        NotificationCenter.default.removeObserver(
-            self,
-            name:NSNotification.Name.UIApplicationDidBecomeActive,
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
-            self,
-            name:NSNotification.Name.UIApplicationWillResignActive,
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name.UIKeyboardWillShow,
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name.UIKeyboardWillHide,
-            object: nil
-        )
+        SCNotificationCenterManager.instance.removeObservers(viewController: self)
     }
 
-    override var preferredStatusBarStyle : UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
             return .lightContent
         } else {
@@ -171,13 +162,38 @@ class SCViewController: UIViewController {
             return
         }
 
+        if let destination = segue.destination as? SCPopoverViewController {
+            self.showDimView()
+
+            destination.rootViewController = self
+            destination.modalPresentationStyle = .popover
+            destination.preferredContentSize = CGSize(
+                width: SCViewController.modalWidth,
+                height: SCViewController.modalHeight
+            )
+
+            if let popover = destination.popoverPresentationController {
+                popover.delegate = self
+                popover.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+                popover.sourceView = self.view
+                popover.sourceRect = CGRect(
+                    x: self.view.bounds.midX,
+                    y: self.view.bounds.midY,
+                    width: 0,
+                    height: 0
+                )
+            }
+
+            return
+        }
+
         if let destination = segue.destination as? SCViewController {
-            destination.previousViewControllerIdentifier = self.unwindableIdentifier
+            destination.previousViewControllerIdentifier = self.identifier
         }
     }
 
     func performUnwindSegue(_ returnToRootViewController: Bool,
-                            completionHandler: ((Void) -> Void)?) {
+                            completionHandler: (() -> Void)?) {
         if isRootViewController {
             return
         }
@@ -224,7 +240,7 @@ class SCViewController: UIViewController {
             toolBarAppearance.tintColor = .white
             pageControlAppearance.pageIndicatorTintColor = .spycodesGrayColor()
             pageControlAppearance.currentPageIndicatorTintColor = .white
-            self.view.backgroundColor = .black
+            self.view.backgroundColor = .nightModeBackgroundColor()
 
             if let _ = self.modalPeekView {
                 self.modalPeekView.backgroundColor = .darkTintColor()
@@ -268,6 +284,13 @@ class SCViewController: UIViewController {
         self.setNeedsStatusBarAppearanceUpdate()
     }
 
+    func registerObservers(observers: [String: Selector]) {
+        SCNotificationCenterManager.instance.addObservers(
+            viewController: self,
+            observers: observers
+        )
+    }
+
     func showDimView() {
         self.view.addSubview(self.dimView)
     }
@@ -277,6 +300,18 @@ class SCViewController: UIViewController {
             view.removeFromSuperview()
         }
     }
+
+    func showModalPeekView() {
+        self.modalPeekView.isHidden = false
+        self.modalPeekBlurView?.isHidden = false
+    }
+
+    func hideModalPeekView() {
+        self.modalPeekView.isHidden = true
+        self.modalPeekBlurView?.isHidden = true
+    }
+
+    func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {}
 
     func swipeRight() {}
 

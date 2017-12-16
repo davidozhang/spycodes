@@ -85,7 +85,7 @@ class Player: NSObject, NSCoding {
             let ready = aDecoder.decodeBool(
                 forKey: SCConstants.coding.ready.rawValue
             )
-    
+
             self.init(
                 name: name,
                 uuid: uuid,

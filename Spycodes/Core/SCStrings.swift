@@ -2,15 +2,15 @@ import Foundation
 
 extension String {
     var first: String {
-        return String(characters.prefix(1))
+        return String(prefix(1))
     }
 
     var last: String {
-        return String(characters.suffix(1))
+        return String(suffix(1))
     }
 
     var uppercasedFirst: String {
-        return first.uppercased() + String(characters.dropFirst())
+        return first.uppercased() + String(dropFirst())
     }
 
     var localized: String {
@@ -41,6 +41,7 @@ class SCStrings {
         case cancel = "Cancel"
         case confirm = "Confirm"
         case dismiss = "Continue"
+        case download = "Download"
         case createGame = "Create Game"
         case done = "Done"
         case endRound = "End Round"
@@ -133,6 +134,22 @@ class SCStrings {
         case minigameTeamSizeSatisfied = "Your team currently has 2-3 players."
         case regularGameTeamSizeUnsatisfied = "Each team should have 2-4 players."
         case regularGameTeamSizeSatisfied = "Each team currently has 2-4 players."
+    }
+
+    enum logging: String {
+        case addedObservers = "%d observers '%@' registered for view controller with identifier '%@'."
+        case allCustomCategoriesRetrieved = "All custom categories retrieved."
+        case allCustomCategoriesSaved = "All custom categories saved."
+        case deinitStatement = "View controller with identifier '%@' deinitialized."
+        case localSettingsRetrieved = "Local settings retrieved."
+        case localSettingsSaved = "Local settings saved."
+        case removedObservers = "%d observers '%@' removed for view controller with identifier '%@'."
+        case selectedCategoriesSaved = "Selected categories saved."
+        case selectedConsolidatedCategoriesCleared = "Selected consolidated categories cleared."
+        case selectedConsolidatedCategoriesRetrieved = "Selected consolidated categories retrieved."
+        case selectedCustomCategoriesSaved = "Selected custom categories saved."
+        case unidentifiedViewControllerAddingObservers = "Unidentified view controller adding observers!"
+        case unidentifiedViewControllerRemovingObservers = "Unidentified view controller removing observers!"
     }
 
     enum message: String {
@@ -253,7 +270,7 @@ class SCStrings {
         case gameAborted = "Game Aborted"
         case gameOver = "Game Over"
         case hideAnswer = "Hide Answer"
-        case log = "%@: %@"
+        case log = "%@: %@."
         case main = "Main"
         case nonEditing = "Non-Editing"
         case notReady = "Not Ready"

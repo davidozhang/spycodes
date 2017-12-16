@@ -9,13 +9,11 @@ class SCTimelineViewController: SCModalViewController {
     @IBOutlet weak var tableViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewTrailingSpaceConstraint: NSLayoutConstraint!
 
-    deinit {
-        print("[DEINIT] " + NSStringFromClass(type(of: self)))
-    }
-
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.identifier = SCConstants.identifier.timelineViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
@@ -42,14 +40,10 @@ class SCTimelineViewController: SCModalViewController {
         self.emptyStateLabel?.numberOfLines = 0
         self.emptyStateLabel?.center = self.view.center
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SCTimelineViewController.refreshView),
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
-            ),
-            object: nil
-        )
+        super.registerObservers(observers: [
+            SCConstants.notificationKey.timelineUpdated.rawValue:
+                #selector(SCTimelineViewController.refreshView)
+        ])
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -59,14 +53,6 @@ class SCTimelineViewController: SCModalViewController {
         self.tableView.delegate = nil
 
         Timeline.instance.markAllAsRead()
-
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name(
-                rawValue: SCConstants.notificationKey.timelineUpdated.rawValue
-            ),
-            object: nil
-        )
     }
 
     // MARK: SCModalViewController Overrides
@@ -313,7 +299,7 @@ extension SCTimelineViewController: UITableViewDataSource, UITableViewDelegate {
                 attributedString.addAttribute(
                     NSFontAttributeName,
                     value: SCFonts.intermediateSizeFont(.bold) ?? 0,
-                    range: NSMakeRange(0, baseString.characters.count - 1)
+                    range: NSMakeRange(0, baseString.count - 1)
                 )
             }
 
