@@ -46,7 +46,7 @@ class SCCategoriesViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.viewControllers.categoriesViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.categoriesViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0

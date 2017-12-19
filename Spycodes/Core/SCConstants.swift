@@ -55,16 +55,15 @@ class SCConstants {
         case categoriesViewController = "categories-view-controller"
         case customCategoryViewController = "custom-category-view-controller"
         case gameHelpViewController = "game-help-view-controller"
-        case gameRoomViewController = "game-room"
         case gameSettingsViewController = "game-settings-view-controller"
-        case mainMenuViewController = "main-menu-view-controller"
+        case gameViewController = "game-view-controller"
         case mainSettingsViewController = "main-settings-view-controller"
+        case mainViewController = "main-view-controller"
         case pageViewContainerViewController = "page-view-container-view-controller"
         case pageViewController = "page-view-controller"
         case playerNameViewController = "player-name-view-controller"
         case pregameRoomViewController = "pregame-room-view-controller"
         case timelineViewController = "timeline-view-controller"
-        
     }
 
     enum images: String {
@@ -128,14 +127,18 @@ class SCConstants {
     
     enum segues: String {
         case accessCodeViewControllerSegue = "access-code-view-controller-segue"
+        case accessCodeViewControllerUnwindSegue = "access-code-view-controller-unwind-segue"
         case customCategoryViewControllerSegue = "custom-category-view-controller-segue"
-        case gameRoomViewControllerSegue = "game-room-view-controller-segue"
+        case gameViewControllerSegue = "game-view-controller-segue"
         case gameHelpViewControllerSegue = "game-help-view-controller-segue"
+        case mainViewControllerUnwindSegue = "main-view-controller-unwind-segue"
         case mainSettingsViewControllerSegue = "main-settings-view-controller-segue"
         case pageViewControllerSegue = "page-view-controller-segue"
         case pageViewContainerViewControllerSegue = "page-view-container-view-controller-segue"
         case pregameRoomViewControllerSegue = "pregame-room-view-controller-segue"
+        case pregameRoomViewControllerUnwindSegue = "pregame-room-view-controller-unwind-segue"
         case playerNameViewControllerSegue = "player-name-view-controller-segue"
+        case playerNameViewControllerUnwindSegue = "player-name-view-controller-unwind-segue"
         case timelineViewControllerSegue = "timeline-view-controller-segue"
     }
 

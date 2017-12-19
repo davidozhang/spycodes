@@ -19,7 +19,8 @@ class SCPlayerNameViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.viewControllers.playerNameViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.playerNameViewController.rawValue
+        self.unwindSegueIdentifier = SCConstants.segues.playerNameViewControllerUnwindSegue.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {

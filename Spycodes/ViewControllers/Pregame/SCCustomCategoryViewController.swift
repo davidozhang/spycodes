@@ -84,7 +84,7 @@ class SCCustomCategoryViewController: SCModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.viewControllers.customCategoryViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.customCategoryViewController.rawValue
 
         self.automaticallyAdjustsScrollViewInsets = false
 

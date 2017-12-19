@@ -53,7 +53,7 @@ class SCGameSettingsViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.viewControllers.gameSettingsViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.gameSettingsViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0

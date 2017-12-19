@@ -34,8 +34,10 @@ class SCMainViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.uniqueIdentifier = SCConstants.viewControllers.mainViewController.rawValue
+
         // Currently this view is the root view controller for unwinding logic
-        self.identifier = SCConstants.viewControllers.mainMenuViewController.rawValue
+        self.unwindSegueIdentifier = SCConstants.segues.mainViewControllerUnwindSegue.rawValue
         self.isRootViewController = true
 
         SCLogger.log(

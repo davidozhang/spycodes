@@ -44,7 +44,8 @@ class SCPregameRoomViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.viewControllers.pregameRoomViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.pregameRoomViewController.rawValue
+        self.unwindSegueIdentifier = SCConstants.segues.pregameRoomViewControllerUnwindSegue.rawValue
 
         if Player.instance.isHost() {
             Room.instance.generateNewAccessCode()
@@ -263,7 +264,7 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate func goToGame() {
         DispatchQueue.main.async(execute: {
             self.performSegue(
-                withIdentifier: SCConstants.viewControllers.gameRoomViewController.rawValue,
+                withIdentifier: SCConstants.segues.gameViewControllerSegue.rawValue,
                 sender: self
             )
         })

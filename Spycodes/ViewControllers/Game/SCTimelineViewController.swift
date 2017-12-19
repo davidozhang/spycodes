@@ -13,7 +13,7 @@ class SCTimelineViewController: SCModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.viewControllers.timelineViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.timelineViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0

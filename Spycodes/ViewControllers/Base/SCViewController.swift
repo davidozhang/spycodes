@@ -8,8 +8,11 @@ class SCViewController: UIViewController {
     let animationDuration: TimeInterval = 0.6
     let animationAlpha: CGFloat = 0.5
 
-    var identifier: String?
-    var previousViewControllerIdentifier: String?
+    // Separate identifiers
+    var uniqueIdentifier: String?
+    var unwindSegueIdentifier: String?
+    var previousViewControllerUnwindSegueIdentifier: String?
+
     var returnToRootViewController = false
     var unwindingSegue = false
     var isRootViewController = false
@@ -22,10 +25,10 @@ class SCViewController: UIViewController {
     @IBOutlet weak var modalPeekView: UIView!
 
     deinit {
-        if let identifier = self.identifier {
+        if let uniqueIdentifier = self.uniqueIdentifier {
             SCLogger.log(
                 identifier: SCConstants.loggingIdentifier.deinitialize.rawValue,
-                String(format: SCStrings.logging.deinitStatement.rawValue, identifier)
+                String(format: SCStrings.logging.deinitStatement.rawValue, uniqueIdentifier)
             )
         }
     }
@@ -188,7 +191,7 @@ class SCViewController: UIViewController {
         }
 
         if let destination = segue.destination as? SCViewController {
-            destination.previousViewControllerIdentifier = self.identifier
+            destination.previousViewControllerUnwindSegueIdentifier = self.unwindSegueIdentifier
         }
     }
 
@@ -201,9 +204,9 @@ class SCViewController: UIViewController {
         self.unwindingSegue = true
         self.returnToRootViewController = returnToRootViewController
 
-        if let previousViewControllerIdentifier = self.previousViewControllerIdentifier {
+        if let previousViewControllerUnwindSegueIdentifier = self.previousViewControllerUnwindSegueIdentifier {
             self.performSegue(
-                withIdentifier: previousViewControllerIdentifier,
+                withIdentifier: previousViewControllerUnwindSegueIdentifier,
                 sender: self
             )
 
@@ -212,7 +215,7 @@ class SCViewController: UIViewController {
             }
         }
 
-        self.previousViewControllerIdentifier = nil
+        self.previousViewControllerUnwindSegueIdentifier = nil
     }
 
     func unwindedToSelf(_ sender: UIStoryboardSegue) {
