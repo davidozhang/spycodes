@@ -105,7 +105,6 @@ class SCConstants {
         case disclosureViewCell = "disclosure-view-cell"
         case emojiSettingViewCell = "emoji-setting-view-cell"
         case gameRoomViewCell = "game-room-view-cell"
-        case infoViewCell = "info-view-cell"
         case minigameToggleViewCell = "minigame-toggle-view-cell"
         case multilineToggleViewCell = "multi-line-toggle-view-cell"
         case nameSettingViewCell = "name-setting-view-cell"

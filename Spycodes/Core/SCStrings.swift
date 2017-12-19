@@ -245,7 +245,6 @@ class SCStrings {
         case categories = "Categories"
         case customize = "Customize"
         case gameSettings = "Game Settings"
-        case info = "Info"
         case more = "More"
         case settings = "Settings"
         case statistics = "Statistics"
