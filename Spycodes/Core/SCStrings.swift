@@ -218,8 +218,10 @@ class SCStrings {
     }
 
     enum secondaryLabel: String {
+        case accessibility = "Add indicators to differentiate card colors."
         case custom = "Custom"
         case minigame = "2-3 players play as a team against the CPU."
+        case nightMode = "Reduce the brightness of the background."
         case timer = "Set a time duration for each round."
         case numberOfWords = "%d %@"
         case numberOfWordsCustomCategory = "%d %@ (%@)"

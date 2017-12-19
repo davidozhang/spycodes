@@ -156,13 +156,10 @@ class SCConstants {
 
     enum url: String {
         case appStore = "itms-apps://itunes.apple.com/app/id1141711201"
-        case appStoreWeb = "https://itunes.apple.com/app/spycodes/id1141711201?mt=8"
         case github = "https://github.com/davidozhang/spycodes"
         case icons8 = "https://icons8.com/"
-        case releaseNotes = "https://github.com/davidozhang/spycodes/releases"
         case support = "https://www.spycodes.net/support/"
         case version = "https://itunes.apple.com/lookup?bundleId=com.davidzhang.Spycodes"
-        case website = "https://www.spycodes.net/"
     }
 
     enum userDefaults: String {

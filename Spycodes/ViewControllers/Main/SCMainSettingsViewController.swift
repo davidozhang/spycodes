@@ -37,11 +37,8 @@ class SCMainSettingsViewController: SCModalViewController {
 
     fileprivate enum Link: Int {
         case support = 0
-        case reviewApp = 1
-        case website = 2
-        case releaseNotes = 3
-        case github = 4
-        case icons8 = 5
+        case github = 1
+        case icons8 = 2
 
         static var count: Int {
             var count = 0
@@ -62,12 +59,14 @@ class SCMainSettingsViewController: SCModalViewController {
         .nightMode: SCStrings.primaryLabel.nightMode.rawValue.localized,
         .accessibility: SCStrings.primaryLabel.accessibility.rawValue.localized,
     ]
+    
+    fileprivate let customizeSecondaryLabels: [CustomSetting: String] = [
+        .nightMode: SCStrings.secondaryLabel.nightMode.rawValue.localized,
+        .accessibility: SCStrings.secondaryLabel.accessibility.rawValue.localized,
+    ]
 
     fileprivate let disclosureLabels: [Link: String] = [
-        .releaseNotes: SCStrings.primaryLabel.releaseNotes.rawValue.localized,
         .support: SCStrings.primaryLabel.support.rawValue.localized,
-        .reviewApp: SCStrings.primaryLabel.reviewApp.rawValue.localized,
-        .website: SCStrings.primaryLabel.website.rawValue.localized,
         .github: SCStrings.primaryLabel.github.rawValue.localized,
         .icons8: SCStrings.primaryLabel.icons8.rawValue.localized,
     ]
@@ -122,15 +121,15 @@ class SCMainSettingsViewController: SCModalViewController {
     }
 
     fileprivate func registerTableViewCells() {
-        let toggleViewCellNib = UINib(nibName: SCConstants.nibs.toggleViewCell.rawValue, bundle: nil)
+        let multilineToggleViewCellNib = UINib(nibName: SCConstants.nibs.multilineToggleViewCell.rawValue, bundle: nil)
 
         self.tableView.register(
-            toggleViewCellNib,
+            multilineToggleViewCellNib,
             forCellReuseIdentifier: SCConstants.reuseIdentifiers.nightModeToggleViewCell.rawValue
         )
 
         self.tableView.register(
-            toggleViewCellNib,
+            multilineToggleViewCellNib,
             forCellReuseIdentifier: SCConstants.reuseIdentifiers.accessibilityToggleViewCell.rawValue
         )
     }
@@ -202,6 +201,7 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
 
                 cell.synchronizeToggle()
                 cell.primaryLabel.text = self.customizeLabels[.nightMode]
+                cell.secondaryLabel.text = self.customizeSecondaryLabels[.nightMode]
                 cell.delegate = self
 
                 return cell
@@ -214,6 +214,7 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
 
                 cell.synchronizeToggle()
                 cell.primaryLabel.text = self.customizeLabels[.accessibility]
+                cell.secondaryLabel.text = self.customizeSecondaryLabels[.accessibility]
                 cell.delegate = self
 
                 return cell
@@ -272,14 +273,6 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
                 if let supportURL = URL(string: SCConstants.url.support.rawValue) {
                     UIApplication.shared.openURL(supportURL)
                 }
-            case Link.reviewApp.rawValue:
-                if let appStoreURL = URL(string: SCConstants.url.appStore.rawValue) {
-                    UIApplication.shared.openURL(appStoreURL)
-                }
-            case Link.website.rawValue:
-                if let websiteURL = URL(string: SCConstants.url.website.rawValue) {
-                    UIApplication.shared.openURL(websiteURL)
-                }
             case Link.github.rawValue:
                 if let githubURL = URL(string: SCConstants.url.github.rawValue) {
                     UIApplication.shared.openURL(githubURL)
@@ -287,10 +280,6 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
             case Link.icons8.rawValue:
                 if let icons8URL = URL(string: SCConstants.url.icons8.rawValue) {
                     UIApplication.shared.openURL(icons8URL)
-                }
-            case Link.releaseNotes.rawValue:
-                if let supportURL = URL(string: SCConstants.url.releaseNotes.rawValue) {
-                    UIApplication.shared.openURL(supportURL)
                 }
             default:
                 return
