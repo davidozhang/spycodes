@@ -3,7 +3,6 @@ class SCGameSettingsManager: SCLogger {
 
     enum GameSettingType: Int {
         case minigame = 0
-        case validateClues = 1
     }
     
     fileprivate var gameSettings = [GameSettingType: Bool]()
@@ -43,6 +42,6 @@ class SCGameSettingsManager: SCLogger {
     
     func resetGameSettings() {
         self.gameSettings[.minigame] = false
-        self.gameSettings[.validateClues] = false
+        GameMode.instance.setMode(mode: .regularGame)
     }
 }

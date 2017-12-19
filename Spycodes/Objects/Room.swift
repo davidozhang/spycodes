@@ -318,21 +318,12 @@ class Room: NSObject, NSCoding {
     }
 
     func leadersSelected() -> Bool {
-        if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
-            if self.getLeaderUUIDForTeam(.red) != nil &&
-                self.getLeaderUUIDForTeam(.blue) != nil {
-                return true
-            }
-            
-            return false
-        } else {
-            if self.getLeaderUUIDForTeam(.red) != nil &&
-                self.getLeaderUUIDForTeam(.blue) != nil {
-                return true
-            }
-            
-            return false
+        if self.getLeaderUUIDForTeam(.red) != nil &&
+            self.getLeaderUUIDForTeam(.blue) != nil {
+            return true
         }
+        
+        return false
     }
 
     func allPlayersReady() -> Bool {
