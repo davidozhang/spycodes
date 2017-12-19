@@ -4,8 +4,7 @@ class SCGameSettingsViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate enum Section: Int {
-        case statistics = 0
-        case gameSettings = 1
+        case gameSettings = 0
 
         static var count: Int {
             var count = 0
@@ -30,7 +29,6 @@ class SCGameSettingsViewController: SCViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .statistics: SCStrings.section.statistics.rawValue.localized,
         .gameSettings: SCStrings.section.gameSettings.rawValue.localized,
     ]
 
@@ -163,8 +161,6 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case Section.statistics.rawValue:
-            return 1
         case Section.gameSettings.rawValue:
             return GameSetting.count
         default:
@@ -175,39 +171,6 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case Section.statistics.rawValue:
-            guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.reuseIdentifiers.statisticsViewCell.rawValue
-                ) as? SCTableViewCell else {
-                    return SCTableViewCell()
-            }
-
-            if GameMode.instance.getMode() == .miniGame {
-                if let bestRecord = Statistics.instance.getBestRecord() {
-                    cell.primaryLabel.text = String(
-                        format: SCStrings.primaryLabel.minigameStatistics.rawValue,
-                        SCStrings.primaryLabel.bestRecord.rawValue,
-                        String(bestRecord)
-                    )
-                } else {
-                    cell.primaryLabel.text = String(
-                        format: SCStrings.primaryLabel.minigameStatistics.rawValue,
-                        SCStrings.primaryLabel.bestRecord.rawValue.localized,
-                        SCStrings.primaryLabel.none.rawValue
-                    )
-                }
-            } else {
-                let score = Statistics.instance.getScore()
-                cell.primaryLabel.text = String(
-                    format: SCStrings.primaryLabel.regularGameStatistics.rawValue,
-                    SCStrings.primaryLabel.teamRed.rawValue.localized,
-                    String(score[0]),
-                    String(score[1]),
-                    SCStrings.primaryLabel.teamBlue.rawValue.localized
-                )
-            }
-
-            return cell
         case Section.gameSettings.rawValue:
             switch indexPath.row {
             case GameSetting.minigame.rawValue:

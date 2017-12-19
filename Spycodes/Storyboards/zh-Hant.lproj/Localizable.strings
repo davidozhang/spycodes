@@ -63,13 +63,6 @@
 "Update App" = "更新應用程序";
 "Waiting For Clue" = "等待線索";
 
-// Info
-"Tap on a teammate to nominate as leader." = "點擊一位隊員即可提名做領袖。";
-"Your team should have 2-3 players." = "你的隊應該有2-3位隊員。";
-"Your team currently has 2-3 players." = "你的隊已有2-3位隊員。";
-"Each team should have 2-4 players." = "每個隊應該有2-3位隊員。";
-"Each team currently has 2-4 players." = "每個隊已有2-3位隊員。";
-
 // Message
 "The category name already exists." = "分類名稱已經存在。";
 "Only the host can toggle category settings." = "只有房間主人能夠調節分類設置。";
@@ -148,10 +141,8 @@
 "Categories" = "單詞分類";
 "Customize" = "定制";
 "Game Settings" = "遊戲設置";
-"Info" = "信息";
 "More" = "更多";
 "Settings" = "設置";
-"Statistics" = "統計";
 "Team Red" = "紅色隊";
 "Team Blue" = "藍色隊";
 "Timeline" = "時間軸";
