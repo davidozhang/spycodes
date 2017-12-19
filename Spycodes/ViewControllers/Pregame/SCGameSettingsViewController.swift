@@ -1,6 +1,6 @@
 import UIKit
 
-class SCPregameMenuMainViewController: SCViewController {
+class SCGameSettingsViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate enum Section: Int {
@@ -53,7 +53,7 @@ class SCPregameMenuMainViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.pregameModalMainView.rawValue
+        self.identifier = SCConstants.identifier.gameSettingsViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
@@ -79,7 +79,7 @@ class SCPregameMenuMainViewController: SCViewController {
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 2.0,
             target: self,
-            selector: #selector(SCPregameMenuMainViewController.refreshView),
+            selector: #selector(SCGameSettingsViewController.refreshView),
             userInfo: nil,
             repeats: true
         )
@@ -156,7 +156,7 @@ class SCPregameMenuMainViewController: SCViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Section.count
     }
@@ -317,7 +317,7 @@ extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDel
 }
 
 // MARK: SCToggleViewCellDelegate
-extension SCPregameMenuMainViewController: SCToggleViewCellDelegate {
+extension SCGameSettingsViewController: SCToggleViewCellDelegate {
     func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
@@ -347,7 +347,7 @@ extension SCPregameMenuMainViewController: SCToggleViewCellDelegate {
     }
 }
 
-extension SCPregameMenuMainViewController: SCPickerViewCellDelegate {
+extension SCGameSettingsViewController: SCPickerViewCellDelegate {
     func pickerViewCell(onPickerViewCellTapped pickerViewCell: SCPickerViewCell) {
         self.inputMode = true
     }
