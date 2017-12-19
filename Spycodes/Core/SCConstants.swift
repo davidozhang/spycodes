@@ -116,7 +116,6 @@ class SCConstants {
         case sectionHeaderCell = "section-header-view-cell"
         case selectAllToggleViewCell = "select-all-toggle-view-cell"
         case singleLineToggleViewCell = "single-line-toggle-view-cell"
-        case statisticsViewCell = "statistics-view-cell"
         case timelineModal = "timeline-modal"
         case timelineViewCell = "timeline-view-cell"
         case timerSettingViewCell = "timer-setting-view-cell"

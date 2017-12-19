@@ -80,11 +80,9 @@ class SCStrings {
         case arts = "🖼"
         case body = "👀"
         case clothing = "👕"
-        case completed = "✅"
         case foodAndDrinks = "🍹"
         case game = "🎲"
         case garden = "🌻"
-        case incomplete = "❌"
         case items = "🎈"
         case info = "ℹ️"
         case nature = "🌲"
@@ -126,14 +124,6 @@ class SCStrings {
         case minimumWords = "Too Few Words"
         case updateApp = "Update App"
         case waitForClue = "Waiting For Clue"
-    }
-
-    enum info: String {
-        case leaderNomination = "Tap on a teammate to nominate as leader."
-        case minigameTeamSizeUnsatisfied = "Your team should have 2-3 players."
-        case minigameTeamSizeSatisfied = "Your team currently has 2-3 players."
-        case regularGameTeamSizeUnsatisfied = "Each team should have 2-4 players."
-        case regularGameTeamSizeSatisfied = "Each team currently has 2-4 players."
     }
 
     enum logging: String {
@@ -247,7 +237,6 @@ class SCStrings {
         case gameSettings = "Game Settings"
         case more = "More"
         case settings = "Settings"
-        case statistics = "Statistics"
         case teamRed = "Team Red"
         case teamBlue = "Team Blue"
         case timeline = "Timeline"
