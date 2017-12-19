@@ -18,7 +18,7 @@ class CardCollection: NSObject, NSCoding {
             return
         }
 
-        if GameMode.instance.getMode() == .miniGame {
+        if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
             self.startingTeam = .red
             self.keyObject = Key(startingTeam: self.startingTeam!)
             self.key = self.keyObject.getKey()

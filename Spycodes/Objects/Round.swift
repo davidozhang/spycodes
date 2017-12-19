@@ -154,7 +154,7 @@ class Round: NSObject, NSCoding {
         self.clue = nil
         self.numberOfWords = nil
 
-        if GameMode.instance.getMode() == .miniGame {
+        if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
             CardCollection.instance.autoEliminateOpponentTeamCard(.blue)
             SCMultipeerManager.instance.broadcast(CardCollection.instance)
 
