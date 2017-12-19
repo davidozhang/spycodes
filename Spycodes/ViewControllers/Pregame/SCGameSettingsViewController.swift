@@ -4,9 +4,8 @@ class SCGameSettingsViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate enum Section: Int {
-        case info = 0
-        case statistics = 1
-        case gameSettings = 2
+        case statistics = 0
+        case gameSettings = 1
 
         static var count: Int {
             var count = 0
@@ -31,7 +30,6 @@ class SCGameSettingsViewController: SCViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .info: SCStrings.section.info.rawValue.localized,
         .statistics: SCStrings.section.statistics.rawValue.localized,
         .gameSettings: SCStrings.section.gameSettings.rawValue.localized,
     ]
@@ -122,31 +120,6 @@ class SCGameSettingsViewController: SCViewController {
             forCellReuseIdentifier: SCConstants.reuseIdentifiers.minigameToggleViewCell.rawValue
         )
     }
-
-    fileprivate func getChecklistItems() -> [String] {
-        var result = [String]()
-
-        // Team size check
-        if Room.instance.teamSizesValid() {
-            result.append(SCStrings.emoji.completed.rawValue)
-
-            if GameMode.instance.getMode() == .miniGame {
-                result.append(SCStrings.info.minigameTeamSizeSatisfied.rawValue.localized)
-            } else {
-                result.append(SCStrings.info.regularGameTeamSizeSatisfied.rawValue.localized)
-            }
-        } else {
-            result.append(SCStrings.emoji.incomplete.rawValue)
-
-            if GameMode.instance.getMode() == .miniGame {
-                result.append(SCStrings.info.minigameTeamSizeUnsatisfied.rawValue.localized)
-            } else {
-                result.append(SCStrings.info.regularGameTeamSizeUnsatisfied.rawValue.localized)
-            }
-        }
-
-        return result
-    }
 }
 
 //   _____      _                 _
@@ -190,8 +163,6 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case Section.info.rawValue:
-            return 2
         case Section.statistics.rawValue:
             return 1
         case Section.gameSettings.rawValue:
@@ -204,29 +175,6 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case Section.info.rawValue:
-            guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.reuseIdentifiers.infoViewCell.rawValue
-                ) as? SCTableViewCell else {
-                    return SCTableViewCell()
-            }
-
-            cell.primaryLabel.font = SCFonts.regularSizeFont(.regular)
-            cell.primaryLabel.numberOfLines = 2
-
-            switch indexPath.row {
-            case 0: // Start game checklist
-                let checkListItems = self.getChecklistItems()
-                cell.leftLabel.text = checkListItems[0]
-                cell.primaryLabel.text = checkListItems[1]
-            case 1: // Leader nomination info
-                cell.leftLabel.text = SCStrings.emoji.info.rawValue
-                cell.primaryLabel.text = SCStrings.info.leaderNomination.rawValue.localized
-            default:
-                break
-            }
-
-            return cell
         case Section.statistics.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
                 withIdentifier: SCConstants.reuseIdentifiers.statisticsViewCell.rawValue
