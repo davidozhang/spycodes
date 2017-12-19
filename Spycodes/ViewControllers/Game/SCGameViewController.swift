@@ -944,6 +944,11 @@ extension SCGameViewController: UICollectionViewDelegateFlowLayout, UICollection
         if cardAtIndex.isSelected() {
             return
         }
+        
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+        }
 
         CardCollection.instance.getCards()[indexPath.row].setSelected()
         SCMultipeerManager.instance.broadcast(CardCollection.instance)

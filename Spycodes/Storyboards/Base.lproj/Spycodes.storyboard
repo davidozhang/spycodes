@@ -1629,7 +1629,7 @@
                                             <action selector="onHelpButtonTapped:" destination="yX4-d1-WHr" eventType="touchUpInside" id="eWY-A2-2E1"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxl-gd-SeO" userLabel="Timeline Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxl-gd-SeO" userLabel="Timeline Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="953" y="30" width="23" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="Bxb-Z0-LKP"/>
