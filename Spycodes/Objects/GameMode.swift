@@ -1,5 +1,11 @@
 import Foundation
 
+/**
+ NOTE: This class is no longer actively supported and will be deprecated in version 4.0+.
+ It is kept in the codebase for backwards compatibility.
+ **/
+
+@available(*, deprecated)
 class GameMode: NSObject, NSCoding {
     static var instance = GameMode()
     fileprivate var mode: Mode?

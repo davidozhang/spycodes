@@ -5,6 +5,7 @@ import Foundation
  It is kept in the codebase for backwards compatibility.
  **/
 
+@available(*, deprecated)
 class Statistics: NSObject, NSCoding {
     static var instance = Statistics()
     fileprivate var bestRecord: Int?        // For minigame
