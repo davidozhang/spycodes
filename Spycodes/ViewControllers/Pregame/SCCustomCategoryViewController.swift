@@ -97,22 +97,6 @@ class SCCustomCategoryViewController: SCModalViewController {
         self.tableView.layoutIfNeeded()
 
         self.registerTableViewCells()
-
-        // Navigation bar customization
-        if let bounds = self.navigationController?.navigationBar.bounds {
-            if SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
-                self.navigationController?.navigationBar.barStyle = .blackTranslucent
-                return
-            }
-
-            self.blurView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
-            self.navigationController?.navigationBar.isTranslucent = true
-            self.navigationController?.navigationBar.backgroundColor = .clear
-            self.blurView?.frame = CGRect(x: 0, y: -20, width: bounds.width, height: bounds.height + 20)
-            self.blurView?.tag = SCConstants.tag.navigationBarBlurView.rawValue
-            self.navigationController?.navigationBar.addSubview(self.blurView!)
-            self.navigationController?.navigationBar.sendSubview(toBack: self.blurView!)
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

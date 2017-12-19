@@ -240,6 +240,7 @@ class SCViewController: UIViewController {
             toolBarAppearance.tintColor = .white
             pageControlAppearance.pageIndicatorTintColor = .spycodesGrayColor()
             pageControlAppearance.currentPageIndicatorTintColor = .white
+            navigationBarAppearance.barStyle = .blackTranslucent
             self.view.backgroundColor = .nightModeBackgroundColor()
 
             if let _ = self.modalPeekView {
@@ -253,6 +254,7 @@ class SCViewController: UIViewController {
             toolBarAppearance.tintColor = .black
             pageControlAppearance.pageIndicatorTintColor = .spycodesLightGrayColor()
             pageControlAppearance.currentPageIndicatorTintColor = .spycodesGrayColor()
+            navigationBarAppearance.barStyle = .default
             self.view.backgroundColor = .white
 
             if let _ = self.modalPeekView {
