@@ -18,6 +18,15 @@ class SCButton: UIButton {
         self.layer.borderColor = UIColor.spycodesGrayColor().cgColor
         self.layer.borderWidth = 2.0
         self.layer.cornerRadius = 4.0
+        
+        self.addTarget(self, action: #selector(self.onTouchDown), for: UIControlEvents.touchDown)
+    }
+    
+    func onTouchDown() {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+        }
     }
 
     override var isHighlighted: Bool {
