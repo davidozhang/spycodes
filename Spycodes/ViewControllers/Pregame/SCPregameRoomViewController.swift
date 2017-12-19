@@ -116,7 +116,7 @@ class SCPregameRoomViewController: SCViewController {
             SCConstants.notificationKey.customCategory.rawValue:
                 #selector(SCPregameRoomViewController.showCustomCategoryView),
             SCConstants.notificationKey.pregameModal.rawValue:
-                #selector(SCPregameRoomViewController.showPregameModalView)
+                #selector(SCPregameRoomViewController.showPageModalView)
         ])
     }
 
@@ -179,9 +179,9 @@ class SCPregameRoomViewController: SCViewController {
         )
     }
 
-    func showPregameModalView() {
+    func showPageModalView() {
         self.performSegue(
-            withIdentifier: SCConstants.identifier.pregameModalContainerView.rawValue,
+            withIdentifier: SCConstants.identifier.pageViewContainerView.rawValue,
             sender: self
         )
     }
@@ -200,7 +200,7 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     override func swipeUp() {
-        self.showPregameModalView()
+        self.showPageModalView()
     }
 
     // MARK: Private

@@ -1,12 +1,12 @@
 import UIKit
 
-class SCPregameMenuPageViewController: UIPageViewController {
+class SCPageViewController: UIPageViewController {
     static let storyboard = UIStoryboard(name: SCConstants.storyboards.main.rawValue, bundle: nil)
     static let mainViewController = storyboard.instantiateViewController(
-        withIdentifier: SCConstants.identifier.pregameModalMainView.rawValue
+        withIdentifier: SCConstants.identifier.gameSettingsView.rawValue
     )
     static let secondaryViewController = storyboard.instantiateViewController(
-        withIdentifier: SCConstants.identifier.pregameModalSecondaryView.rawValue
+        withIdentifier: SCConstants.identifier.categoriesView.rawValue
     )
 
     deinit {
@@ -14,7 +14,7 @@ class SCPregameMenuPageViewController: UIPageViewController {
             identifier: SCConstants.loggingIdentifier.deinitialize.rawValue,
             String(
                 format: SCStrings.logging.deinitStatement.rawValue,
-                SCConstants.identifier.pregameMenuPageViewController.rawValue
+                SCConstants.identifier.pageViewController.rawValue
             )
         )
     }
@@ -43,7 +43,7 @@ class SCPregameMenuPageViewController: UIPageViewController {
 
     fileprivate func showMainViewController() {
         self.setViewControllers(
-            [SCPregameMenuPageViewController.mainViewController],
+            [SCPageViewController.mainViewController],
             direction: .forward,
             animated: false,
             completion: nil
@@ -52,7 +52,7 @@ class SCPregameMenuPageViewController: UIPageViewController {
 
     fileprivate func showSecondaryViewController() {
         self.setViewControllers(
-            [SCPregameMenuPageViewController.secondaryViewController],
+            [SCPageViewController.secondaryViewController],
             direction: .forward,
             animated: false,
             completion: nil
@@ -67,18 +67,18 @@ class SCPregameMenuPageViewController: UIPageViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: UIPageViewControllerDataSource, UIPageViewControllerDelegate
-extension SCPregameMenuPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension SCPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let _ = viewController as? SCPregameMenuSecondaryViewController {
-            return SCPregameMenuPageViewController.mainViewController
+        if let _ = viewController as? SCCategoriesViewController {
+            return SCPageViewController.mainViewController
         }
 
         return nil
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let _ = viewController as? SCPregameMenuMainViewController {
-            return SCPregameMenuPageViewController.secondaryViewController
+        if let _ = viewController as? SCGameSettingsViewController {
+            return SCPageViewController.secondaryViewController
         }
 
         return nil

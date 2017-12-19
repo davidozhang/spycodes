@@ -1,11 +1,11 @@
 import UIKit
 
-class SCPregameMenuContainerViewController: SCModalViewController {
+class SCPageViewContainerViewController: SCModalViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.pregameMenuContainerViewController.rawValue
+        self.identifier = SCConstants.identifier.pageViewContainerViewController.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -13,7 +13,7 @@ class SCPregameMenuContainerViewController: SCModalViewController {
 
         super.registerObservers(observers: [
             SCConstants.notificationKey.dismissModal.rawValue:
-                #selector(SCPregameMenuContainerViewController.dismissViewFromNotification)
+                #selector(SCPageViewContainerViewController.dismissViewFromNotification)
         ])
     }
 

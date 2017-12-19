@@ -1,6 +1,6 @@
 import UIKit
 
-class SCPregameMenuSecondaryViewController: SCViewController {
+class SCCategoriesViewController: SCViewController {
     fileprivate let extraRows = Categories.count
     fileprivate var ticker = false
 
@@ -46,7 +46,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.pregameModalSecondaryView.rawValue
+        self.identifier = SCConstants.identifier.categoriesViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
@@ -71,7 +71,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 2.0,
             target: self,
-            selector: #selector(SCPregameMenuSecondaryViewController.refreshView),
+            selector: #selector(SCCategoriesViewController.refreshView),
             userInfo: nil,
             repeats: true
         )
@@ -228,14 +228,14 @@ class SCPregameMenuSecondaryViewController: SCViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: SCSectionHeaderViewCellDelegate
-extension SCPregameMenuSecondaryViewController: SCSectionHeaderViewCellDelegate {
+extension SCCategoriesViewController: SCSectionHeaderViewCellDelegate {
     func sectionHeaderViewCell(onButtonTapped sectionHeaderViewCell: SCSectionHeaderViewCell) {
         self.presentCustomCategoryView(existingCategory: false, category: nil)
     }
 }
 
 // MARK: SCToggleViewCellDelegate
-extension SCPregameMenuSecondaryViewController: SCToggleViewCellDelegate {
+extension SCCategoriesViewController: SCToggleViewCellDelegate {
     func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool) {
         guard let reuseIdentifier = cell.reuseIdentifier else {
             return
@@ -293,7 +293,7 @@ extension SCPregameMenuSecondaryViewController: SCToggleViewCellDelegate {
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCCategoriesViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Section.count
     }
