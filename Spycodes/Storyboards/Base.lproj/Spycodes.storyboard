@@ -1169,32 +1169,8 @@
                                             <outlet property="primaryLabel" destination="IYE-QG-WB5" id="YlR-uh-avJ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="statistics-view-cell" id="vA5-4g-NUA" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="1024" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vA5-4g-NUA" id="RX9-CZ-q6R">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpI-da-aAb" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="6" width="42" height="32"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="MpI-da-aAb" secondAttribute="bottom" constant="6" id="JCF-2I-maJ"/>
-                                                <constraint firstItem="MpI-da-aAb" firstAttribute="top" secondItem="RX9-CZ-q6R" secondAttribute="top" constant="6" id="KG3-UN-b0i"/>
-                                                <constraint firstItem="MpI-da-aAb" firstAttribute="leading" secondItem="RX9-CZ-q6R" secondAttribute="leading" constant="4" id="Wmm-0L-xbd"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="primaryLabel" destination="MpI-da-aAb" id="0di-eJ-BzR"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-setting-view-cell" rowHeight="58" id="l3e-qQ-33L" userLabel="timer-setting-view-cell" customClass="SCPickerViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116" width="1024" height="58"/>
+                                        <rect key="frame" x="0.0" y="72" width="1024" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l3e-qQ-33L" id="Ncp-AL-EVA">
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="58"/>
