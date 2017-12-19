@@ -52,10 +52,12 @@ class SCModalViewController: SCViewController {
     // MARK: Device Type Management
     override func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {
         // Custom top space offset for iPhone X
-        if deviceType == SCDeviceTypeManager.DeviceType.iPhone_X {
-            self.swipeDownButtonTopSpaceConstraint.constant = 44
-        } else {
-            self.swipeDownButtonTopSpaceConstraint.constant = 24
+        if let swipeDownButtonTopSpaceConstraint = self.swipeDownButtonTopSpaceConstraint {
+            if deviceType == SCDeviceTypeManager.DeviceType.iPhone_X {
+                swipeDownButtonTopSpaceConstraint.constant = 44
+            } else {
+                swipeDownButtonTopSpaceConstraint.constant = 24
+            }
         }
     }
 

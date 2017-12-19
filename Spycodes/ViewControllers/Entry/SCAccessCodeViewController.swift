@@ -272,11 +272,7 @@ class SCAccessCodeViewController: SCViewController {
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? UITextField {
                 textField.isEnabled = false
-                textField.textColor = .lightGray
-
-                if textField.tag == SCConstants.tag.lastTextField.rawValue {
-                    textField.resignFirstResponder()
-                }
+                textField.resignFirstResponder()
             }
         }
     }
