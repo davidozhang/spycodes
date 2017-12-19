@@ -64,7 +64,7 @@ class SCGameHelpViewController: SCPopoverViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.gameHelpViewController.rawValue
+        self.identifier = SCConstants.viewControllers.gameHelpViewController.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {

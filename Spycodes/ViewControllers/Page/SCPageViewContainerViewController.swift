@@ -5,7 +5,7 @@ class SCPageViewContainerViewController: SCModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.pageViewContainerViewController.rawValue
+        self.identifier = SCConstants.viewControllers.pageViewContainerViewController.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {

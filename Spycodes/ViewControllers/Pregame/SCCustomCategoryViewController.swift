@@ -84,7 +84,7 @@ class SCCustomCategoryViewController: SCModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.customCategoryViewController.rawValue
+        self.identifier = SCConstants.viewControllers.customCategoryViewController.rawValue
 
         self.automaticallyAdjustsScrollViewInsets = false
 
@@ -148,7 +148,7 @@ class SCCustomCategoryViewController: SCModalViewController {
 
         self.tableView.register(
             textFieldViewCellNib,
-            forCellReuseIdentifier: SCConstants.identifier.wordViewCell.rawValue
+            forCellReuseIdentifier: SCConstants.reuseIdentifiers.wordViewCell.rawValue
         )
     }
 
@@ -393,7 +393,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionHeader = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.sectionHeaderCell.rawValue
             ) as? SCSectionHeaderViewCell else {
                 return nil
         }
@@ -450,7 +450,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
             switch indexPath.row {
             case Setting.name.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.nameSettingViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.nameSettingViewCell.rawValue
                 ) as? SCTableViewCell else {
                     return SCTableViewCell()
                 }
@@ -469,7 +469,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                 return cell
             case Setting.emoji.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.emojiSettingViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.emojiSettingViewCell.rawValue
                     ) as? SCTableViewCell else {
                         return SCTableViewCell()
                 }
@@ -507,7 +507,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                 switch SCStates.getCustomCategoryState() {
                 case .nonEditing, .editingExistingWord, .editingCategoryName, .editingEmoji:
                     guard let cell = self.tableView.dequeueReusableCell(
-                        withIdentifier: SCConstants.identifier.addWordViewCell.rawValue
+                        withIdentifier: SCConstants.reuseIdentifiers.addWordViewCell.rawValue
                     ) as? SCTableViewCell else {
                         return SCTableViewCell()
                     }
@@ -519,7 +519,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                 case .addingNewWord:
                     // Custom top view cell with text field as first responder
                     guard let cell = self.tableView.dequeueReusableCell(
-                        withIdentifier: SCConstants.identifier.wordViewCell.rawValue
+                        withIdentifier: SCConstants.reuseIdentifiers.wordViewCell.rawValue
                     ) as? SCTextFieldViewCell else {
                         return SCTableViewCell()
                     }
@@ -537,7 +537,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                 }
             default:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.wordViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.wordViewCell.rawValue
                 ) as? SCTextFieldViewCell else {
                         return SCTableViewCell()
                 }
@@ -560,7 +560,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
             }
         case Section.deleteCategory.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.deleteCategoryViewCell.rawValue
+                withIdentifier: SCConstants.reuseIdentifiers.deleteCategoryViewCell.rawValue
                 ) as? SCTableViewCell else {
                     return SCTableViewCell()
             }

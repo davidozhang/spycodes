@@ -14,14 +14,14 @@ class SCMainViewController: SCViewController {
     @IBAction func onCreateGame(_ sender: AnyObject) {
         Player.instance.setIsHost(true)
         self.performSegue(
-            withIdentifier: SCConstants.identifier.playerNameViewController.rawValue,
+            withIdentifier: SCConstants.segues.playerNameViewControllerSegue.rawValue,
             sender: self
         )
     }
 
     @IBAction func onJoinGame(_ sender: AnyObject) {
         self.performSegue(
-            withIdentifier: SCConstants.identifier.playerNameViewController.rawValue,
+            withIdentifier: SCConstants.segues.playerNameViewControllerSegue.rawValue,
             sender: self
         )
     }
@@ -35,7 +35,7 @@ class SCMainViewController: SCViewController {
         super.viewDidLoad()
 
         // Currently this view is the root view controller for unwinding logic
-        self.identifier = SCConstants.identifier.mainMenu.rawValue
+        self.identifier = SCConstants.viewControllers.mainMenuViewController.rawValue
         self.isRootViewController = true
 
         SCLogger.log(
@@ -90,7 +90,7 @@ class SCMainViewController: SCViewController {
 
     override func swipeUp() {
         self.performSegue(
-            withIdentifier: SCConstants.identifier.mainMenuModal.rawValue,
+            withIdentifier: SCConstants.segues.mainSettingsViewControllerSegue.rawValue,
             sender: self
         )
     }

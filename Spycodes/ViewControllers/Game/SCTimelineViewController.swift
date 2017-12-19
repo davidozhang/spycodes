@@ -13,7 +13,7 @@ class SCTimelineViewController: SCModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.timelineViewController.rawValue
+        self.identifier = SCConstants.viewControllers.timelineViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
@@ -109,7 +109,7 @@ extension SCTimelineViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         guard let timelineHeader = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.sectionHeaderCell.rawValue
             ) as? SCTimelineHeaderViewCell else {
                 return nil
         }
@@ -141,7 +141,7 @@ extension SCTimelineViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.timelineViewCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.timelineViewCell.rawValue
             ) as? SCTimelineViewCell else {
                 return SCTableViewCell()
         }

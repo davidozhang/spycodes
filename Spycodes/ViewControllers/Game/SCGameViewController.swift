@@ -68,14 +68,14 @@ class SCGameViewController: SCViewController {
     @IBAction func onTimelineButtonTapped(_ sender: Any) {
         self.hideNotificationDot()
         self.performSegue(
-            withIdentifier: SCConstants.identifier.timelineModal.rawValue,
+            withIdentifier: SCConstants.segues.timelineViewControllerSegue.rawValue,
             sender: self
         )
     }
 
     @IBAction func onHelpButtonTapped(_ sender: AnyObject) {
         self.performSegue(
-            withIdentifier: SCConstants.identifier.helpView.rawValue,
+            withIdentifier: SCConstants.segues.gameHelpViewControllerSegue.rawValue,
             sender: self
         )
     }
@@ -84,7 +84,7 @@ class SCGameViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.gameRoomViewController.rawValue
+        self.identifier = SCConstants.viewControllers.gameRoomViewController.rawValue
 
         super.registerObservers(observers: [
             SCConstants.notificationKey.minigameGameOver.rawValue:
@@ -855,7 +855,7 @@ extension SCGameViewController: UICollectionViewDelegateFlowLayout, UICollection
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: SCConstants.identifier.gameRoomViewCell.rawValue,
+            withReuseIdentifier: SCConstants.reuseIdentifiers.gameRoomViewCell.rawValue,
             for: indexPath
         ) as? SCGameRoomViewCell else {
             return UICollectionViewCell()

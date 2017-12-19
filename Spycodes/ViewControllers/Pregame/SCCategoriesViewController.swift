@@ -46,7 +46,7 @@ class SCCategoriesViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.categoriesViewController.rawValue
+        self.identifier = SCConstants.viewControllers.categoriesViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
@@ -180,11 +180,11 @@ class SCCategoriesViewController: SCViewController {
 
             self.tableView.register(
                 multilineToggleViewCellNib,
-                forCellReuseIdentifier: SCConstants.identifier.selectAllToggleViewCell.rawValue
+                forCellReuseIdentifier: SCConstants.reuseIdentifiers.selectAllToggleViewCell.rawValue
             )
             self.tableView.register(
                 multilineToggleViewCellNib,
-                forCellReuseIdentifier: SCConstants.identifier.persistentSelectionToggleViewCell.rawValue
+                forCellReuseIdentifier: SCConstants.reuseIdentifiers.persistentSelectionToggleViewCell.rawValue
             )
         } else {
             for categoryString in ConsolidatedCategories.instance.getSynchronizedCategories() {
@@ -241,12 +241,12 @@ extension SCCategoriesViewController: SCToggleViewCellDelegate {
             return
         }
 
-        if reuseIdentifier == SCConstants.identifier.selectAllToggleViewCell.rawValue {
+        if reuseIdentifier == SCConstants.reuseIdentifiers.selectAllToggleViewCell.rawValue {
             ConsolidatedCategories.instance.selectAllCategories()
             return
         }
 
-        if reuseIdentifier == SCConstants.identifier.persistentSelectionToggleViewCell.rawValue {
+        if reuseIdentifier == SCConstants.reuseIdentifiers.persistentSelectionToggleViewCell.rawValue {
             SCLocalStorageManager.instance.enableLocalSetting(.persistentSelection, enabled: enabled)
 
             if !enabled {
@@ -306,7 +306,7 @@ extension SCCategoriesViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionHeader = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.sectionHeaderCell.rawValue
         ) as? SCSectionHeaderViewCell else {
                 return nil
         }
@@ -352,7 +352,7 @@ extension SCCategoriesViewController: UITableViewDataSource, UITableViewDelegate
                 switch indexPath.row {
                 case Categories.selectAll.rawValue:
                     guard let cell = self.tableView.dequeueReusableCell(
-                        withIdentifier: SCConstants.identifier.selectAllToggleViewCell.rawValue
+                        withIdentifier: SCConstants.reuseIdentifiers.selectAllToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
                         return SCTableViewCell()
                     }
@@ -370,7 +370,7 @@ extension SCCategoriesViewController: UITableViewDataSource, UITableViewDelegate
                     return cell
                 case Categories.persistentSelection.rawValue:
                     guard let cell = self.tableView.dequeueReusableCell(
-                        withIdentifier: SCConstants.identifier.persistentSelectionToggleViewCell.rawValue
+                        withIdentifier: SCConstants.reuseIdentifiers.persistentSelectionToggleViewCell.rawValue
                         ) as? SCToggleViewCell else {
                             return SCTableViewCell()
                     }
