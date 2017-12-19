@@ -3,10 +3,10 @@ import UIKit
 class SCPageViewController: UIPageViewController {
     static let storyboard = UIStoryboard(name: SCConstants.storyboards.main.rawValue, bundle: nil)
     static let mainViewController = storyboard.instantiateViewController(
-        withIdentifier: SCConstants.identifier.gameSettingsView.rawValue
+        withIdentifier: SCConstants.identifier.gameSettingsViewController.rawValue
     )
     static let secondaryViewController = storyboard.instantiateViewController(
-        withIdentifier: SCConstants.identifier.categoriesView.rawValue
+        withIdentifier: SCConstants.identifier.categoriesViewController.rawValue
     )
 
     deinit {

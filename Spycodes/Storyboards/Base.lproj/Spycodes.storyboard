@@ -1053,7 +1053,7 @@
                         <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-room" modalTransitionStyle="crossDissolve" id="pzx-vK-usD"/>
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="4eT-dC-kfX"/>
                         <segue destination="Vvw-J8-7L6" kind="unwind" identifier="access-code" unwindAction="unwindToAccessCode:" id="v3W-bc-vVR"/>
-                        <segue destination="Bsc-BJ-zGX" kind="presentation" identifier="page-view-container-view" id="CKf-j2-Ls6"/>
+                        <segue destination="Bsc-BJ-zGX" kind="presentation" identifier="page-view-container-view-controller" id="CKf-j2-Ls6"/>
                         <segue destination="HKy-Oo-bc1" kind="presentation" identifier="custom-category" modalPresentationStyle="overCurrentContext" id="NwO-x4-uMo"/>
                     </connections>
                 </viewController>
@@ -1065,7 +1065,7 @@
         <!--Page View Container View Controller-->
         <scene sceneID="EeC-NJ-N0R">
             <objects>
-                <viewController storyboardIdentifier="page-view-container-view" id="Bsc-BJ-zGX" customClass="SCPageViewContainerViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="page-view-container-view-controller" id="Bsc-BJ-zGX" customClass="SCPageViewContainerViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iLe-eX-mDc"/>
                         <viewControllerLayoutGuide type="bottom" id="MLa-iE-UmV"/>
@@ -1132,7 +1132,7 @@
         <!--Game Settings View Controller-->
         <scene sceneID="Nl8-ZF-fk9">
             <objects>
-                <viewController storyboardIdentifier="game-settings-view" id="R1J-Mf-Sjp" customClass="SCGameSettingsViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="game-settings-view-controller" id="R1J-Mf-Sjp" customClass="SCGameSettingsViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kXk-ok-nU4"/>
                         <viewControllerLayoutGuide type="bottom" id="1LJ-wz-GW3"/>
@@ -1309,7 +1309,7 @@
         <!--Categories View Controller-->
         <scene sceneID="jkV-qk-FcC">
             <objects>
-                <viewController storyboardIdentifier="categories-view" id="LAW-Ow-WYx" customClass="SCCategoriesViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="categories-view-controller" id="LAW-Ow-WYx" customClass="SCCategoriesViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fhi-4I-yKc"/>
                         <viewControllerLayoutGuide type="bottom" id="hl5-MT-36A"/>

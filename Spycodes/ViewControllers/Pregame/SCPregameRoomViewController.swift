@@ -181,7 +181,7 @@ class SCPregameRoomViewController: SCViewController {
 
     func showPageModalView() {
         self.performSegue(
-            withIdentifier: SCConstants.identifier.pageViewContainerView.rawValue,
+            withIdentifier: SCConstants.identifier.pageViewContainerViewController.rawValue,
             sender: self
         )
     }
