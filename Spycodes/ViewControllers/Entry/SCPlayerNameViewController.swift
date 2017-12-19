@@ -19,7 +19,8 @@ class SCPlayerNameViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.playerNameViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.playerNameViewController.rawValue
+        self.unwindSegueIdentifier = SCConstants.segues.playerNameViewControllerUnwindSegue.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -97,12 +98,12 @@ extension SCPlayerNameViewController: UITextFieldDelegate {
             if Player.instance.isHost() {
                 Room.instance.addPlayer(Player.instance, team: Team.red)
                 self.performSegue(
-                    withIdentifier: SCConstants.identifier.pregameRoom.rawValue,
+                    withIdentifier: SCConstants.segues.pregameRoomViewControllerSegue.rawValue,
                     sender: self
                 )
             } else {
                 self.performSegue(
-                    withIdentifier: SCConstants.identifier.accessCodeViewController.rawValue,
+                    withIdentifier: SCConstants.segues.accessCodeViewControllerSegue.rawValue,
                     sender: self
                 )
             }

@@ -53,7 +53,7 @@ class SCGameSettingsViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.gameSettingsViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.gameSettingsViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
@@ -119,7 +119,7 @@ class SCGameSettingsViewController: SCViewController {
 
         self.tableView.register(
             multilineToggleViewCellNib,
-            forCellReuseIdentifier: SCConstants.identifier.minigameToggleViewCell.rawValue
+            forCellReuseIdentifier: SCConstants.reuseIdentifiers.minigameToggleViewCell.rawValue
         )
     }
 
@@ -169,7 +169,7 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionHeader = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.sectionHeaderCell.rawValue
             ) as? SCSectionHeaderViewCell else {
                 return nil
         }
@@ -206,7 +206,7 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
         switch indexPath.section {
         case Section.info.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.infoViewCell.rawValue
+                withIdentifier: SCConstants.reuseIdentifiers.infoViewCell.rawValue
                 ) as? SCTableViewCell else {
                     return SCTableViewCell()
             }
@@ -229,7 +229,7 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
             return cell
         case Section.statistics.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.statisticsViewCell.rawValue
+                withIdentifier: SCConstants.reuseIdentifiers.statisticsViewCell.rawValue
                 ) as? SCTableViewCell else {
                     return SCTableViewCell()
             }
@@ -264,7 +264,7 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
             switch indexPath.row {
             case GameSetting.minigame.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.minigameToggleViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.minigameToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
                         return SCTableViewCell()
                 }
@@ -277,7 +277,7 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
                 return cell
             case GameSetting.timer.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.timerSettingViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.timerSettingViewCell.rawValue
                     ) as? SCPickerViewCell else {
                         return SCTableViewCell()
                 }
@@ -321,7 +321,7 @@ extension SCGameSettingsViewController: SCToggleViewCellDelegate {
     func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
-            case SCConstants.identifier.minigameToggleViewCell.rawValue:
+            case SCConstants.reuseIdentifiers.minigameToggleViewCell.rawValue:
                 if enabled {
                     GameMode.instance.setMode(mode: .miniGame)
                 } else {

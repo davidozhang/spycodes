@@ -36,13 +36,13 @@ class SCToggleViewCell: SCTableViewCell {
     func synchronizeToggle() {
         if let reuseIdentifier = self.reuseIdentifier {
             switch reuseIdentifier {
-            case SCConstants.identifier.nightModeToggleViewCell.rawValue:
+            case SCConstants.reuseIdentifiers.nightModeToggleViewCell.rawValue:
                 toggleSwitch.isOn = SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode)
-            case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
+            case SCConstants.reuseIdentifiers.accessibilityToggleViewCell.rawValue:
                 toggleSwitch.isOn = SCLocalStorageManager.instance.isLocalSettingEnabled(.accessibility)
-            case SCConstants.identifier.minigameToggleViewCell.rawValue:
+            case SCConstants.reuseIdentifiers.minigameToggleViewCell.rawValue:
                 toggleSwitch.isOn = GameMode.instance.getMode() == .miniGame
-            case SCConstants.identifier.selectAllToggleViewCell.rawValue:
+            case SCConstants.reuseIdentifiers.selectAllToggleViewCell.rawValue:
                 let allCategoriesSelected = ConsolidatedCategories.instance.allCategoriesSelected()
                 toggleSwitch.isOn = allCategoriesSelected
 
@@ -51,7 +51,7 @@ class SCToggleViewCell: SCTableViewCell {
                 } else {
                     self.setEnabled(enabled: true)
                 }
-            case SCConstants.identifier.persistentSelectionToggleViewCell.rawValue:
+            case SCConstants.reuseIdentifiers.persistentSelectionToggleViewCell.rawValue:
                 toggleSwitch.isOn = SCLocalStorageManager.instance.isLocalSettingEnabled(.persistentSelection)
             default:
                 if Player.instance.isHost() {

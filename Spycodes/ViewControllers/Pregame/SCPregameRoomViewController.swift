@@ -44,7 +44,8 @@ class SCPregameRoomViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.pregameRoom.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.pregameRoomViewController.rawValue
+        self.unwindSegueIdentifier = SCConstants.segues.pregameRoomViewControllerUnwindSegue.rawValue
 
         if Player.instance.isHost() {
             Room.instance.generateNewAccessCode()
@@ -174,14 +175,14 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         self.performSegue(
-            withIdentifier: SCConstants.identifier.customCategory.rawValue,
+            withIdentifier: SCConstants.segues.customCategoryViewControllerSegue.rawValue,
             sender: self
         )
     }
 
     func showPageModalView() {
         self.performSegue(
-            withIdentifier: SCConstants.identifier.pageViewContainerViewController.rawValue,
+            withIdentifier: SCConstants.segues.pageViewContainerViewControllerSegue.rawValue,
             sender: self
         )
     }
@@ -263,7 +264,7 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate func goToGame() {
         DispatchQueue.main.async(execute: {
             self.performSegue(
-                withIdentifier: SCConstants.identifier.gameRoomViewController.rawValue,
+                withIdentifier: SCConstants.segues.gameViewControllerSegue.rawValue,
                 sender: self
             )
         })
@@ -478,7 +479,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         guard let sectionHeader = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.sectionHeaderCell.rawValue
             ) as? SCSectionHeaderViewCell else {
                 return nil
         }
@@ -530,7 +531,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         // Team empty state cell
         if Room.instance.getPlayers()[indexPath.section].count == 0 {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.pregameRoomTeamEmptyStateViewCell.rawValue
+                withIdentifier: SCConstants.reuseIdentifiers.pregameRoomTeamEmptyStateViewCell.rawValue
                 ) as? SCTableViewCell else {
                     return SCTableViewCell()
             }
@@ -545,7 +546,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.pregameRoomViewCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.pregameRoomViewCell.rawValue
         ) as? SCPregameRoomViewCell else {
             return SCTableViewCell()
         }
@@ -611,7 +612,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         if let cell = self.tableView.cellForRow(at: indexPath) as? SCTableViewCell,
-           cell.reuseIdentifier == SCConstants.identifier.pregameRoomTeamEmptyStateViewCell.rawValue {
+           cell.reuseIdentifier == SCConstants.reuseIdentifiers.pregameRoomTeamEmptyStateViewCell.rawValue {
             return
         }
 

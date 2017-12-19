@@ -9,7 +9,7 @@ class SCNotificationCenterManager: SCLogger {
     }
 
     func addObservers(viewController: SCViewController, observers: [String: Selector]) {
-        guard let key = viewController.identifier else {
+        guard let key = viewController.uniqueIdentifier else {
             super.log(SCStrings.logging.unidentifiedViewControllerAddingObservers.rawValue)
             return
         }
@@ -40,7 +40,7 @@ class SCNotificationCenterManager: SCLogger {
     }
 
     func removeObservers(viewController: SCViewController) {
-        guard let key = viewController.identifier else {
+        guard let key = viewController.uniqueIdentifier else {
             super.log(SCStrings.logging.unidentifiedViewControllerRemovingObservers.rawValue)
             return
         }

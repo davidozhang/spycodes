@@ -3,10 +3,10 @@ import UIKit
 class SCPageViewController: UIPageViewController {
     static let storyboard = UIStoryboard(name: SCConstants.storyboards.main.rawValue, bundle: nil)
     static let mainViewController = storyboard.instantiateViewController(
-        withIdentifier: SCConstants.identifier.gameSettingsViewController.rawValue
+        withIdentifier: SCConstants.viewControllers.gameSettingsViewController.rawValue
     )
     static let secondaryViewController = storyboard.instantiateViewController(
-        withIdentifier: SCConstants.identifier.categoriesViewController.rawValue
+        withIdentifier: SCConstants.viewControllers.categoriesViewController.rawValue
     )
 
     deinit {
@@ -14,7 +14,7 @@ class SCPageViewController: UIPageViewController {
             identifier: SCConstants.loggingIdentifier.deinitialize.rawValue,
             String(
                 format: SCStrings.logging.deinitStatement.rawValue,
-                SCConstants.identifier.pageViewController.rawValue
+                SCConstants.viewControllers.pageViewController.rawValue
             )
         )
     }

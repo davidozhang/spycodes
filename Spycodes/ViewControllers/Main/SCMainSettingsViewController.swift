@@ -84,7 +84,7 @@ class SCMainSettingsViewController: SCModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.mainSettingsViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.mainSettingsViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
@@ -126,12 +126,12 @@ class SCMainSettingsViewController: SCModalViewController {
 
         self.tableView.register(
             toggleViewCellNib,
-            forCellReuseIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
+            forCellReuseIdentifier: SCConstants.reuseIdentifiers.nightModeToggleViewCell.rawValue
         )
 
         self.tableView.register(
             toggleViewCellNib,
-            forCellReuseIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
+            forCellReuseIdentifier: SCConstants.reuseIdentifiers.accessibilityToggleViewCell.rawValue
         )
     }
 }
@@ -156,7 +156,7 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionHeader = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.sectionHeaderCell.rawValue
         ) as? SCSectionHeaderViewCell else {
             return nil
         }
@@ -195,7 +195,7 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
             switch indexPath.row {
             case CustomSetting.nightMode.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.nightModeToggleViewCell.rawValue
                 ) as? SCToggleViewCell else {
                     return SCTableViewCell()
                 }
@@ -207,7 +207,7 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
                 return cell
             case CustomSetting.accessibility.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.accessibilityToggleViewCell.rawValue
                 ) as? SCToggleViewCell else {
                     return SCTableViewCell()
                 }
@@ -223,7 +223,7 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
 
         case Section.about.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.versionViewCell.rawValue
+                withIdentifier: SCConstants.reuseIdentifiers.versionViewCell.rawValue
             ) as? SCTableViewCell else {
                 return SCTableViewCell()
             }
@@ -246,7 +246,7 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
             return cell
         case Section.more.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.disclosureViewCell.rawValue
+                withIdentifier: SCConstants.reuseIdentifiers.disclosureViewCell.rawValue
             ) as? SCDisclosureViewCell else {
                 return SCTableViewCell()
             }
@@ -331,12 +331,12 @@ extension SCMainSettingsViewController: SCToggleViewCellDelegate {
     func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
-            case SCConstants.identifier.nightModeToggleViewCell.rawValue:
+            case SCConstants.reuseIdentifiers.nightModeToggleViewCell.rawValue:
                 SCLocalStorageManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
                 super.updateModalAppearance()
                 self.tableView.reloadData()
                 self.delegate?.mainSettings(onToggleViewCellChanged: cell, settingType: .nightMode)
-            case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
+            case SCConstants.reuseIdentifiers.accessibilityToggleViewCell.rawValue:
                 SCLocalStorageManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
             default:
                 break

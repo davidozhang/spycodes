@@ -47,7 +47,8 @@ class SCAccessCodeViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.accessCodeViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.accessCodeViewController.rawValue
+        self.unwindSegueIdentifier = SCConstants.segues.accessCodeViewControllerUnwindSegue.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -300,7 +301,7 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
 
             DispatchQueue.main.async(execute: {
                 self.performSegue(
-                    withIdentifier: SCConstants.identifier.pregameRoom.rawValue,
+                    withIdentifier: SCConstants.segues.pregameRoomViewControllerSegue.rawValue,
                     sender: self
                 )
             })
