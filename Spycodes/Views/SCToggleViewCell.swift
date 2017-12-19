@@ -11,6 +11,7 @@ class SCToggleViewCell: SCTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.primaryLabel.adjustsFontSizeToFitWidth = true
 
         toggleSwitch.addTarget(
             self,
