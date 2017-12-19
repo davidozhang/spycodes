@@ -7,6 +7,12 @@ class SCPopoverViewController: SCViewController {
     static let defaultModalHeight = UIScreen.main.bounds.height/2
 
     // MARK: Lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.view.backgroundColor = .white
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
