@@ -24,8 +24,8 @@ enum CustomCategoryState: Int {
 }
 
 enum PregameMenuState: Int {
-    case main = 0
-    case secondary = 1
+    case gameSettings = 0
+    case categories = 1
 }
 
 enum ReadyButtonState: Int {
@@ -42,7 +42,7 @@ enum TimerState: Int {
 class SCStates {
     static fileprivate var actionButtonState: ActionButtonState = .endRound
     static fileprivate var readyButtonState: ReadyButtonState = .notReady
-    static fileprivate var pregameMenuState: PregameMenuState = .main
+    static fileprivate var pregameMenuState: PregameMenuState = .gameSettings
     static fileprivate var customCategoryState: CustomCategoryState = .nonEditing
     static fileprivate var timerState: TimerState = .stopped
 
@@ -106,7 +106,7 @@ class SCStates {
         case .customCategory:
             SCStates.changeCustomCategoryState(to: .nonEditing)
         case .pregameMenu:
-            SCStates.changePregameMenuState(to: .main)
+            SCStates.changePregameMenuState(to: .gameSettings)
         case .readyButton:
             SCStates.changeReadyButtonState(to: .notReady)
         case .timer:
@@ -189,10 +189,10 @@ extension SCStates {
 
     static func getPregameMenuStateString(state: PregameMenuState) -> String {
         switch state {
-        case .main:
-            return SCStrings.state.main.rawValue
-        case .secondary:
-            return SCStrings.state.secondary.rawValue
+        case .gameSettings:
+            return SCStrings.state.gameSettings.rawValue
+        case .categories:
+            return SCStrings.state.categories.rawValue
         }
     }
 

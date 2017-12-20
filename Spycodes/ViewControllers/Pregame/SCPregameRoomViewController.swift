@@ -116,8 +116,8 @@ class SCPregameRoomViewController: SCViewController {
         super.registerObservers(observers: [
             SCConstants.notificationKey.customCategory.rawValue:
                 #selector(SCPregameRoomViewController.showCustomCategoryView),
-            SCConstants.notificationKey.pregameModal.rawValue:
-                #selector(SCPregameRoomViewController.showPageModalView)
+            SCConstants.notificationKey.pregameMenu.rawValue:
+                #selector(SCPregameRoomViewController.showPregameMenu)
         ])
     }
 
@@ -169,22 +169,28 @@ class SCPregameRoomViewController: SCViewController {
         }
     }
 
+    // MARK: Public
     func showCustomCategoryView(_ notification: Notification) {
         if let userInfo = notification.userInfo {
             self.userInfo = userInfo
         }
 
-        self.performSegue(
-            withIdentifier: SCConstants.segues.customCategoryViewControllerSegue.rawValue,
-            sender: self
-        )
+        DispatchQueue.main.async {
+            self.performSegue(
+                withIdentifier: SCConstants.segues.customCategoryViewControllerSegue.rawValue,
+                sender: self
+            )
+        }
     }
 
-    func showPageModalView() {
-        self.performSegue(
-            withIdentifier: SCConstants.segues.pageViewContainerViewControllerSegue.rawValue,
-            sender: self
-        )
+    func showPregameMenu() {
+        self.destinationPageViewType = SCPageViewController.PageViewType.PregameMenu
+        DispatchQueue.main.async {
+            self.performSegue(
+                withIdentifier: SCConstants.segues.pageViewContainerViewControllerSegue.rawValue,
+                sender: self
+            )
+        }
     }
 
     // MARK: SCViewController Overrides
@@ -201,7 +207,7 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     override func swipeUp() {
-        self.showPageModalView()
+        self.showPregameMenu()
     }
 
     // MARK: Private

@@ -64,7 +64,7 @@ class SCGameSettingsViewController: SCViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        SCStates.changePregameMenuState(to: .main)
+        SCStates.changePregameMenuState(to: .gameSettings)
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
