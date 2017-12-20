@@ -8,11 +8,12 @@ class SCPageViewController: UIPageViewController {
     static let categoriesViewController = storyboard.instantiateViewController(
         withIdentifier: SCConstants.viewControllers.categoriesViewController.rawValue
     )
+    static let onboardingViewController = storyboard.instantiateViewController(withIdentifier: SCConstants.viewControllers.onboardingViewController.rawValue)
     
     enum PageViewType: Int {
         case PregameMenu = 0
-        case PregameHelp = 1
-        case GameHelp = 2
+        case PregameOnboarding = 1
+        case GameOnboarding = 2
     }
 
     var pageViewType: PageViewType?
@@ -43,8 +44,9 @@ class SCPageViewController: UIPageViewController {
                 case .categories:
                     self.showCategoriesViewController()
                 }
-            default:
-                break
+            case .PregameOnboarding, .GameOnboarding:
+                // TODO: Differentiate between pregame and game onboarding
+                self.showOnboardingViewController()
             }
         }
     }
@@ -73,6 +75,15 @@ class SCPageViewController: UIPageViewController {
             completion: nil
         )
     }
+    
+    fileprivate func showOnboardingViewController() {
+        self.setViewControllers(
+            [SCPageViewController.onboardingViewController],
+            direction: .forward,
+            animated: false,
+            completion: nil
+        )
+    }
 }
 
 //   _____      _                 _
@@ -84,26 +95,68 @@ class SCPageViewController: UIPageViewController {
 // MARK: UIPageViewControllerDataSource, UIPageViewControllerDelegate
 extension SCPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let _ = viewController as? SCCategoriesViewController {
-            return SCPageViewController.gameSettingsViewController
+        if let pageViewType = self.pageViewType {
+            switch pageViewType {
+            case .PregameMenu:
+                if let _ = viewController as? SCCategoriesViewController {
+                    return SCPageViewController.gameSettingsViewController
+                }
+            case .PregameOnboarding, .GameOnboarding:
+                if let _ = viewController as? SCOnboardingViewController {
+                    // TODO: Customize next view controller
+                    let nextViewController = SCOnboardingViewController()
+                    return nextViewController
+                }
+            }
         }
 
         return nil
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let _ = viewController as? SCGameSettingsViewController {
-            return SCPageViewController.categoriesViewController
+        if let pageViewType = self.pageViewType {
+            switch pageViewType {
+            case .PregameMenu:
+                if let _ = viewController as? SCGameSettingsViewController {
+                    return SCPageViewController.categoriesViewController
+                }
+            case .PregameOnboarding, .GameOnboarding:
+                if let _ = viewController as? SCOnboardingViewController {
+                    // TODO: Customize next view controller
+                    let nextViewController = SCOnboardingViewController()
+                    return nextViewController
+                }
+            }
         }
 
         return nil
     }
 
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return 2
+        if let pageViewType = self.pageViewType {
+            switch pageViewType {
+            case .PregameMenu:
+                return 2
+            case .PregameOnboarding:
+                return 2
+            case .GameOnboarding:
+                return 2
+            }
+        }
+        
+        return 0
     }
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return SCStates.getPregameMenuState().rawValue
+        if let pageViewType = self.pageViewType {
+            switch pageViewType {
+            case .PregameMenu:
+                return SCStates.getPregameMenuState().rawValue
+            default:
+                return 0
+            }
+        }
+        
+        return 0
     }
 }
