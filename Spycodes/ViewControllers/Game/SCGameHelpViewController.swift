@@ -79,7 +79,7 @@ class SCGameHelpViewController: SCPopoverViewController {
     // MARK: Private
     fileprivate func generateStringSequence() -> [String] {
         var result = [String]()
-        if GameMode.instance.getMode() == .miniGame {
+        if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
             result += [SCStrings.message.minigameIntro.rawValue.localized]
 
             if Player.instance.isLeader() {

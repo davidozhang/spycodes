@@ -315,9 +315,9 @@ class SCPregameRoomViewController: SCViewController {
             return
         }
 
-        let maxRoomSize = GameMode.instance.getMode() == .regularGame ?
-            SCConstants.constant.roomMaxSize.rawValue :
-            SCConstants.constant.roomMaxSize.rawValue + 1     // Account for additional CPU player in minigame
+        let maxRoomSize = SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) ?
+            SCConstants.constant.roomMaxSize.rawValue + 1 : // Account for additional CPU player in minigame
+            SCConstants.constant.roomMaxSize.rawValue
 
         if Room.instance.getPlayerCount() >= maxRoomSize {
             SCMultipeerManager.instance.stopAdvertiser()
@@ -580,7 +580,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             }
 
 
-            if GameMode.instance.getMode() == .miniGame {
+            if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
                 cell.hideChangeTeamButton()
             } else {
                 cell.showChangeTeamButtonIfAllowed()

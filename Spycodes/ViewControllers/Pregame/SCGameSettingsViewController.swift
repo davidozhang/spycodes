@@ -233,17 +233,13 @@ extension SCGameSettingsViewController: SCToggleViewCellDelegate {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
             case SCConstants.reuseIdentifiers.minigameToggleViewCell.rawValue:
-                if enabled {
-                    GameMode.instance.setMode(mode: .miniGame)
-                } else {
-                    GameMode.instance.setMode(mode: .regularGame)
-                }
+                SCGameSettingsManager.instance.enableGameSetting(.minigame, enabled: enabled)
 
                 self.tableView.reloadData()
 
                 Room.instance.resetPlayers()
 
-                if GameMode.instance.getMode() == .miniGame {
+                if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
                     Room.instance.addCPUPlayer()
                 } else {
                     Room.instance.removeCPUPlayer()

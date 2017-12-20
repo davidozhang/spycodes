@@ -294,7 +294,14 @@ class Room: NSObject, NSCoding {
             return false
         }
 
-        if GameMode.instance.getMode() == .regularGame {
+        if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
+            if self.players[Team.red.rawValue].count == 2 ||
+                self.players[Team.red.rawValue].count == 3 {
+                return true
+            }
+            
+            return false
+        } else {
             let redValid = self.players[Team.red.rawValue].filter {
                 ($0 as Player).getTeam() == .red
             }.count >= 2
@@ -307,32 +314,16 @@ class Room: NSObject, NSCoding {
             }
 
             return false
-        } else {
-            if self.players[Team.red.rawValue].count == 2 ||
-               self.players[Team.red.rawValue].count == 3 {
-                return true
-            }
-
-            return false
         }
     }
 
     func leadersSelected() -> Bool {
-        if GameMode.instance.getMode() == .regularGame {
-            if self.getLeaderUUIDForTeam(.red) != nil &&
-               self.getLeaderUUIDForTeam(.blue) != nil {
-                return true
-            }
-
-            return false
-        } else {    // Minigame
-            if self.getLeaderUUIDForTeam(.red) != nil &&
-               self.getLeaderUUIDForTeam(.blue) != nil {
-                return true
-            }
-
-            return false
+        if self.getLeaderUUIDForTeam(.red) != nil &&
+            self.getLeaderUUIDForTeam(.blue) != nil {
+            return true
         }
+        
+        return false
     }
 
     func allPlayersReady() -> Bool {

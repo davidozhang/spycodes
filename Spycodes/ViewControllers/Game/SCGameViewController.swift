@@ -540,7 +540,7 @@ class SCGameViewController: SCViewController {
     }
 
     fileprivate func didEndRound(fromTimerExpiry: Bool) {
-        if GameMode.instance.getMode() == .miniGame {
+        if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
             SCAudioManager.vibrate()
         }
 
@@ -549,7 +549,7 @@ class SCGameViewController: SCViewController {
         }
 
         if fromTimerExpiry {
-            if GameMode.instance.getMode() == .miniGame {
+            if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
                 if Player.instance.isHost() {
                     Round.instance.endRound(Player.instance.getTeam())
                     SCMultipeerManager.instance.broadcast(Round.instance)
@@ -719,13 +719,7 @@ extension SCGameViewController: SCMultipeerManagerDelegate {
                 )
             } else if Round.instance.getWinningTeam() == Player.instance.getTeam() {
                 self.dismissPresentedViewIfNeeded(completion: {
-                    if GameMode.instance.getMode() == .regularGame {
-                        self.didEndGame(
-                            SCStrings.header.gameOver.rawValue,
-                            reason: SCStrings.message.defaultWinString.rawValue,
-                            onDismissal: self.onGameOverDismissal
-                        )
-                    } else {
+                    if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
                         self.didEndGame(
                             SCStrings.header.gameOver.rawValue,
                             reason: String(
@@ -734,9 +728,15 @@ extension SCGameViewController: SCMultipeerManagerDelegate {
                             ),
                             onDismissal: self.onGameOverDismissal
                         )
-
+                        
                         Statistics.instance.setBestRecord(
                             CardCollection.instance.getCardsRemainingForTeam(.blue)
+                        )
+                    } else {
+                        self.didEndGame(
+                            SCStrings.header.gameOver.rawValue,
+                            reason: SCStrings.message.defaultWinString.rawValue,
+                            onDismissal: self.onGameOverDismissal
                         )
                     }
                 })
@@ -757,7 +757,7 @@ extension SCGameViewController: SCMultipeerManagerDelegate {
                     SCAudioManager.vibrate()
                 }
 
-                if GameMode.instance.getMode() == .miniGame {
+                if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
                     if Timer.instance.isEnabled() {
                         SCStates.changeTimerState(to: .stopped)
                     }
@@ -980,15 +980,7 @@ extension SCGameViewController: UICollectionViewDelegateFlowLayout, UICollection
             Round.instance.setWinningTeam(playerTeam)
 
             self.dismissPresentedViewIfNeeded(completion: {
-                if GameMode.instance.getMode() == .regularGame {
-                    Statistics.instance.recordWinForTeam(playerTeam)
-
-                    self.didEndGame(
-                        SCStrings.header.gameOver.rawValue,
-                        reason: SCStrings.message.defaultWinString.rawValue,
-                        onDismissal: self.onGameOverDismissal
-                    )
-                } else {
+                if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
                     self.didEndGame(
                         SCStrings.header.gameOver.rawValue,
                         reason: String(
@@ -999,6 +991,14 @@ extension SCGameViewController: UICollectionViewDelegateFlowLayout, UICollection
                     )
                     Statistics.instance.setBestRecord(
                         CardCollection.instance.getCardsRemainingForTeam(.blue)
+                    )
+                } else {
+                    Statistics.instance.recordWinForTeam(playerTeam)
+                    
+                    self.didEndGame(
+                        SCStrings.header.gameOver.rawValue,
+                        reason: SCStrings.message.defaultWinString.rawValue,
+                        onDismissal: self.onGameOverDismissal
                     )
                 }
             })
