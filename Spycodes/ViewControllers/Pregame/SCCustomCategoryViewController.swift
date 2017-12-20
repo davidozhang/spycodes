@@ -276,11 +276,13 @@ class SCCustomCategoryViewController: SCModalViewController {
 
     fileprivate func dismissView() {
         super.onDismissalWithCompletion {
-            NotificationCenter.default.post(
-                name: NSNotification.Name(rawValue: SCConstants.notificationKey.pregameModal.rawValue),
-                object: self,
-                userInfo: nil
-            )
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(
+                    name: NSNotification.Name(rawValue: SCConstants.notificationKey.pregameMenu.rawValue),
+                    object: self,
+                    userInfo: nil
+                )
+            }
         }
     }
 

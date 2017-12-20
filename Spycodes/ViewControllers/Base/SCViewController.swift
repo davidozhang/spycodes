@@ -12,6 +12,8 @@ class SCViewController: UIViewController {
     var uniqueIdentifier: String?
     var unwindSegueIdentifier: String?
     var previousViewControllerUnwindSegueIdentifier: String?
+    
+    var destinationPageViewType: SCPageViewController.PageViewType?
 
     var returnToRootViewController = false
     var unwindingSegue = false
@@ -161,7 +163,21 @@ class SCViewController: UIViewController {
 
         // By default, present modal view controllers over current context
         if let destination = segue.destination as? SCModalViewController {
+            if let sender = segue.source as? SCViewController,
+               let destination = segue.destination as? SCPageViewContainerViewController,
+                let destinationPageViewType = sender.destinationPageViewType {
+                destination.destinationPageViewType = destinationPageViewType
+                return
+            }
+
             destination.modalPresentationStyle = .overCurrentContext
+            return
+        }
+        
+        if let sender = segue.source as? SCPageViewContainerViewController,
+            let destination = segue.destination as? SCPageViewController,
+            let destinationPageViewType = sender.destinationPageViewType {
+            destination.pageViewType = destinationPageViewType
             return
         }
 

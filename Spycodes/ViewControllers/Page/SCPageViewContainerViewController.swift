@@ -25,6 +25,10 @@ class SCPageViewContainerViewController: SCModalViewController {
     override func keyboardWillHide(_ notification: Notification) {
         super.hideDimView()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super._prepareForSegue(segue, sender: self)
+    }
 
     @objc
     fileprivate func dismissViewFromNotification(notification: Notification) {

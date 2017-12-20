@@ -60,7 +60,7 @@ class SCCategoriesViewController: SCViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        SCStates.changePregameMenuState(to: .secondary)
+        SCStates.changePregameMenuState(to: .categories)
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -205,11 +205,13 @@ class SCCategoriesViewController: SCViewController {
             userInfo[SCConstants.notificationKey.customCategoryName.rawValue] = category
         }
 
-        NotificationCenter.default.post(
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.dismissModal.rawValue),
-            object: self,
-            userInfo: userInfo
-        )
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: SCConstants.notificationKey.dismissModal.rawValue),
+                object: self,
+                userInfo: userInfo
+            )
+        }
     }
 
     fileprivate func getSafeIndex(index: Int) -> Int {

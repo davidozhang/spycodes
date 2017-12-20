@@ -2,12 +2,20 @@ import UIKit
 
 class SCPageViewController: UIPageViewController {
     static let storyboard = UIStoryboard(name: SCConstants.storyboards.main.rawValue, bundle: nil)
-    static let mainViewController = storyboard.instantiateViewController(
+    static let gameSettingsViewController = storyboard.instantiateViewController(
         withIdentifier: SCConstants.viewControllers.gameSettingsViewController.rawValue
     )
-    static let secondaryViewController = storyboard.instantiateViewController(
+    static let categoriesViewController = storyboard.instantiateViewController(
         withIdentifier: SCConstants.viewControllers.categoriesViewController.rawValue
     )
+    
+    enum PageViewType: Int {
+        case PregameMenu = 0
+        case PregameHelp = 1
+        case GameHelp = 2
+    }
+
+    var pageViewType: PageViewType?
 
     deinit {
         SCLogger.log(
@@ -20,17 +28,24 @@ class SCPageViewController: UIPageViewController {
     }
 
     // MARK: Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         self.dataSource = self
         self.delegate = self
-
-        switch SCStates.getPregameMenuState() {
-        case .main:
-            self.showMainViewController()
-        case .secondary:
-            self.showSecondaryViewController()
+        
+        if let pageViewType = self.pageViewType {
+            switch pageViewType {
+            case .PregameMenu:
+                switch SCStates.getPregameMenuState() {
+                case .gameSettings:
+                    self.showGameSettingsViewController()
+                case .categories:
+                    self.showCategoriesViewController()
+                }
+            default:
+                break
+            }
         }
     }
 
@@ -41,18 +56,18 @@ class SCPageViewController: UIPageViewController {
         self.delegate = nil
     }
 
-    fileprivate func showMainViewController() {
+    fileprivate func showGameSettingsViewController() {
         self.setViewControllers(
-            [SCPageViewController.mainViewController],
+            [SCPageViewController.gameSettingsViewController],
             direction: .forward,
             animated: false,
             completion: nil
         )
     }
 
-    fileprivate func showSecondaryViewController() {
+    fileprivate func showCategoriesViewController() {
         self.setViewControllers(
-            [SCPageViewController.secondaryViewController],
+            [SCPageViewController.categoriesViewController],
             direction: .forward,
             animated: false,
             completion: nil
@@ -70,7 +85,7 @@ class SCPageViewController: UIPageViewController {
 extension SCPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if let _ = viewController as? SCCategoriesViewController {
-            return SCPageViewController.mainViewController
+            return SCPageViewController.gameSettingsViewController
         }
 
         return nil
@@ -78,7 +93,7 @@ extension SCPageViewController: UIPageViewControllerDataSource, UIPageViewContro
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if let _ = viewController as? SCGameSettingsViewController {
-            return SCPageViewController.secondaryViewController
+            return SCPageViewController.categoriesViewController
         }
 
         return nil
