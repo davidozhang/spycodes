@@ -110,8 +110,6 @@
 "Name" = "名稱";
 "Night Mode" = "夜間模式";
 "Persist" = "保存";
-"Release Notes" = "發行說明";
-"Review App" = "評論";
 "Select All" = "全選";
 "Support" = "支持";
 "Blue" = "藍色隊";
@@ -119,7 +117,6 @@
 "Red" = "紅色隊";
 "Timer" = "計時器";
 "Version" = "版本";
-"Website" = "網站";
 
 // Round
 "Waiting for Clue" = "等待線索中";
@@ -127,8 +124,10 @@
 "Not Your Turn" = "还沒輪到你的隊";
 
 // Secondary Label
+"Add indicators to differentiate card colors." = "另加標示來區分卡片顏色。";
 "Custom" = "定制分類";
 "2-3 players play as a team against the CPU." = "2-3位隊員 vs CPU。";
+"Reduce the brightness of the background." = "降低背景的亮度。";
 "Set a time duration for each round." = "設置每一輪的時間限制。";
 "Your current selections will be saved." = "所有的分類選擇都會被保存到存儲。";
 "All categories will be selected." = "所有的分類都會被選擇。";

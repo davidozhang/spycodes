@@ -110,8 +110,6 @@
 "Name" = "名称";
 "Night Mode" = "夜间模式";
 "Persist" = "保存";
-"Release Notes" = "发行说明";
-"Review App" = "评论";
 "Select All" = "全选";
 "Support" = "支持";
 "Blue" = "蓝色队";
@@ -119,7 +117,6 @@
 "Red" = "红色队";
 "Timer" = "计时器";
 "Version" = "版本";
-"Website" = "网站";
 
 // Round
 "Waiting for Clue" = "等待线索中";
@@ -127,8 +124,10 @@
 "Not Your Turn" = "还没轮到你的队";
 
 // Secondary Label
+"Add indicators to differentiate card colors." = "另加标示来区分卡片颜色。";
 "Custom" = "定制分类";
 "2-3 players play as a team against the CPU." = "2-3位队员 vs CPU。";
+"Reduce the brightness of the background." = "降低背景的亮度。";
 "Set a time duration for each round." = "设置每一轮的时间限制。";
 "Your current selections will be saved." = "所有的分类选择都会被保存到存储。";
 "All categories will be selected." = "所有的分类都会被选择。";
