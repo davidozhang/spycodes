@@ -185,6 +185,7 @@ class SCPregameRoomViewController: SCViewController {
 
     func showPregameMenu() {
         self.destinationPageViewType = SCPageViewController.PageViewType.PregameMenu
+
         DispatchQueue.main.async {
             self.performSegue(
                 withIdentifier: SCConstants.segues.pageViewContainerViewControllerSegue.rawValue,

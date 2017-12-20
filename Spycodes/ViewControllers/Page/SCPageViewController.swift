@@ -30,7 +30,7 @@ class SCPageViewController: UIPageViewController {
     // MARK: Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.dataSource = self
         self.delegate = self
         
