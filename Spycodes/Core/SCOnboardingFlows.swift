@@ -11,7 +11,7 @@ class SCOnboardingFlows {
                    SCConstants.onboardingFlowEntryKey.displayImageName.rawValue: "Spy",
                    SCConstants.onboardingFlowEntryKey.displayImageWidth.rawValue: 128,
                    SCConstants.onboardingFlowEntryKey.displayImageHeight.rawValue: 128,
-                   SCConstants.onboardingFlowEntryKey.displayText.rawValue: "First onboarding view",
+                   SCConstants.onboardingFlowEntryKey.displayText.rawValue: "First onboarding view that has a lot of text, like a lot of text.. would this overflow? test test test test",
                 ]),
             1:
                 SCOnboardingFlowEntry([
