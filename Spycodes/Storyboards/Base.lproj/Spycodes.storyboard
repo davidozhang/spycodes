@@ -1013,6 +1013,17 @@
                                     <action selector="onSwipeUpButtonTapped:" destination="VkA-D4-zlT" eventType="touchUpInside" id="T7T-7I-kHs"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohS-rg-aAB" userLabel="Help Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="984" y="29" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="HLF-6h-CBA"/>
+                                    <constraint firstAttribute="height" constant="25" id="hkA-qs-LX9"/>
+                                </constraints>
+                                <state key="normal" image="Question"/>
+                                <connections>
+                                    <action selector="onHelpButtonTapped:" destination="VkA-D4-zlT" eventType="touchUpInside" id="bNr-8r-6sa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1024,6 +1035,7 @@
                             <constraint firstItem="084-kN-Fki" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="JYY-yq-p6M"/>
                             <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="A1z-dP-UpL" secondAttribute="bottom" constant="16" id="Jqg-Zb-QvE"/>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" id="JyP-Fd-tkk"/>
+                            <constraint firstItem="ohS-rg-aAB" firstAttribute="centerY" secondItem="Zpa-v1-yiA" secondAttribute="centerY" id="X8k-Fj-XWq"/>
                             <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="50" id="XBE-ff-nvo"/>
                             <constraint firstItem="Zpa-v1-yiA" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="20" id="Yg8-eX-EZE"/>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="top" secondItem="Zpa-v1-yiA" secondAttribute="bottom" constant="16" id="dJQ-a4-9Pw"/>
@@ -1033,6 +1045,7 @@
                             <constraint firstItem="A1z-dP-UpL" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="16" id="nbi-Jb-JYX"/>
                             <constraint firstAttribute="trailing" secondItem="qn1-V1-kty" secondAttribute="trailing" id="pZJ-G4-EGl"/>
                             <constraint firstItem="2Qg-Lg-n4v" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="8" id="x3O-jC-Q5S"/>
+                            <constraint firstAttribute="trailing" secondItem="ohS-rg-aAB" secondAttribute="trailing" constant="15" id="xuI-qW-CEd"/>
                             <constraint firstItem="qn1-V1-kty" firstAttribute="top" secondItem="084-kN-Fki" secondAttribute="bottom" constant="16" id="yAM-OL-D3l"/>
                         </constraints>
                         <variation key="default">
@@ -1128,6 +1141,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8eq-31-sXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1826" y="1938"/>
+        </scene>
+        <!--Onboarding View Controller-->
+        <scene sceneID="pRz-U1-dnG">
+            <objects>
+                <viewController storyboardIdentifier="onboarding-view-controller" id="70g-iv-FoM" customClass="SCOnboardingViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hzi-bG-Xx4"/>
+                        <viewControllerLayoutGuide type="bottom" id="8Dc-Gp-hEk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6av-ke-ws8">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ew4-Ow-Qzc">
+                                <rect key="frame" x="364.5" y="532.5" width="296" height="301"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vca-6v-mPL">
+                                        <rect key="frame" x="20" y="0.0" width="256" height="256"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="256" id="JzP-5a-u5j"/>
+                                            <constraint firstAttribute="width" constant="256" id="P6i-yF-owp"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRD-ch-cEQ" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="127" y="280" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Vca-6v-mPL" secondAttribute="trailing" constant="20" id="2Oy-nt-vWb"/>
+                                    <constraint firstItem="VRD-ch-cEQ" firstAttribute="top" secondItem="Vca-6v-mPL" secondAttribute="bottom" constant="24" id="Nb1-KX-nEq"/>
+                                    <constraint firstItem="Vca-6v-mPL" firstAttribute="top" secondItem="ew4-Ow-Qzc" secondAttribute="top" id="Wfa-29-pMS"/>
+                                    <constraint firstAttribute="bottom" secondItem="VRD-ch-cEQ" secondAttribute="bottom" id="bZf-m0-988"/>
+                                    <constraint firstItem="VRD-ch-cEQ" firstAttribute="centerX" secondItem="ew4-Ow-Qzc" secondAttribute="centerX" id="g2V-Xp-W3z"/>
+                                    <constraint firstItem="Vca-6v-mPL" firstAttribute="leading" secondItem="ew4-Ow-Qzc" secondAttribute="leading" constant="20" id="oYC-3D-20p"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ew4-Ow-Qzc" firstAttribute="centerY" secondItem="6av-ke-ws8" secondAttribute="centerY" id="k5x-Fh-iKm"/>
+                            <constraint firstItem="ew4-Ow-Qzc" firstAttribute="centerX" secondItem="6av-ke-ws8" secondAttribute="centerX" id="rVE-MS-gM3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="Vca-6v-mPL" id="Dna-90-I4D"/>
+                        <outlet property="label" destination="VRD-ch-cEQ" id="NBr-5j-I4S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r7z-pe-KfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2641.9921875" y="1951.9765739385064"/>
         </scene>
         <!--Game Settings View Controller-->
         <scene sceneID="Nl8-ZF-fk9">

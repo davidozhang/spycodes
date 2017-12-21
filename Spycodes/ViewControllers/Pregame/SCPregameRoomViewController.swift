@@ -24,6 +24,10 @@ class SCPregameRoomViewController: SCViewController {
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         self.swipeRight()
     }
+    
+    @IBAction func onHelpButtonTapped(_ sender: Any) {
+        self.showOnboardingView()
+    }
 
     @IBAction func onReadyButtonTapped(_ sender: Any) {
         switch SCStates.getReadyButtonState() {
@@ -182,16 +186,15 @@ class SCPregameRoomViewController: SCViewController {
             )
         }
     }
+    
+    func showOnboardingView() {
+        self.destinationPageViewType = SCPageViewController.PageViewType.PregameOnboarding
+        self.showPageViewContainer()
+    }
 
     func showPregameMenu() {
         self.destinationPageViewType = SCPageViewController.PageViewType.PregameMenu
-
-        DispatchQueue.main.async {
-            self.performSegue(
-                withIdentifier: SCConstants.segues.pageViewContainerViewControllerSegue.rawValue,
-                sender: self
-            )
-        }
+        self.showPageViewContainer()
     }
 
     // MARK: SCViewController Overrides
@@ -266,6 +269,15 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate func resetReadyButton() {
         SCStates.resetState(type: .readyButton)
         self.updateReadyButton()
+    }
+    
+    fileprivate func showPageViewContainer() {
+        DispatchQueue.main.async {
+            self.performSegue(
+                withIdentifier: SCConstants.segues.pageViewContainerViewControllerSegue.rawValue,
+                sender: self
+            )
+        }
     }
 
     fileprivate func goToGame() {

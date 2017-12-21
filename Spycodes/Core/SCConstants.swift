@@ -59,6 +59,7 @@ class SCConstants {
         case gameViewController = "game-view-controller"
         case mainSettingsViewController = "main-settings-view-controller"
         case mainViewController = "main-view-controller"
+        case onboardingViewController = "onboarding-view-controller"
         case pageViewContainerViewController = "page-view-container-view-controller"
         case pageViewController = "page-view-controller"
         case playerNameViewController = "player-name-view-controller"
