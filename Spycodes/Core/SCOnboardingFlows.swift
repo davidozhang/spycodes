@@ -4,17 +4,17 @@ class SCOnboardingFlows {
         case Game = 1
     }
 
-    // TODO: Encapsulate mapping into new object
     fileprivate static let mapping: [FlowType: [Int: SCOnboardingFlowEntry]] = [
         .Pregame: [
             0:
                 SCOnboardingFlowEntry([
                    SCConstants.onboardingFlowEntryKey.displayImageName.rawValue: "Spy",
+                   SCConstants.onboardingFlowEntryKey.displayImageWidth.rawValue: 128,
+                   SCConstants.onboardingFlowEntryKey.displayImageHeight.rawValue: 128,
                    SCConstants.onboardingFlowEntryKey.displayText.rawValue: "First onboarding view",
                 ]),
             1:
                 SCOnboardingFlowEntry([
-                    SCConstants.onboardingFlowEntryKey.displayImageName.rawValue: "Change",
                     SCConstants.onboardingFlowEntryKey.displayText.rawValue: "Second onboarding view",
                 ]),
             2:
