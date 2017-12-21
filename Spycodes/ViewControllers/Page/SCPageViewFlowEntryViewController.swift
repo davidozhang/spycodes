@@ -3,14 +3,12 @@ import UIKit
 class SCPageViewFlowEntryViewController: SCViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: SCLabel!
+
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var labelTopSpaceConstraint: NSLayoutConstraint!
 
-    fileprivate static let defaultImageViewWidth: CGFloat = 256.0
-    fileprivate static let defaultImageViewHeight: CGFloat = 256.0
-    fileprivate static let defaultLabelTopSpace: CGFloat = 24.0
-    
+    static let defaultLabelTopSpace: CGFloat = 48.0
+
     var pageViewFlowEntry: SCPageViewFlowEntry?
     var index: Int?
 
@@ -28,19 +26,10 @@ class SCPageViewFlowEntryViewController: SCViewController {
         if let pageViewFlowEntry = self.pageViewFlowEntry {
             if let displayImage = pageViewFlowEntry.getDisplayImage() {
                 self.imageView.image = displayImage
-
-                if let height = pageViewFlowEntry.getDisplayImageHeight(),
-                   let width = pageViewFlowEntry.getDisplayImageWidth() {
-                    self.imageViewHeightConstraint.constant = CGFloat(height)
-                    self.imageViewWidthConstraint.constant = CGFloat(width)
-                } else {
-                    self.imageViewHeightConstraint.constant = SCOnboardingViewController.defaultImageViewHeight
-                    self.imageViewWidthConstraint.constant = SCOnboardingViewController.defaultImageViewWidth
-                    self.labelTopSpaceConstraint.constant = 0
-                }
+                self.labelTopSpaceConstraint.constant = SCPageViewFlowEntryViewController.defaultLabelTopSpace
             } else {
                 self.imageViewWidthConstraint.constant = 0
-                self.imageViewHeightConstraint.constant = 0
+                self.labelTopSpaceConstraint.constant = 0
             }
             
             if let displayText = pageViewFlowEntry.getDisplayText() {
