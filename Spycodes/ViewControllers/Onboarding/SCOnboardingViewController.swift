@@ -6,6 +6,7 @@ class SCOnboardingViewController: SCViewController {
 
     var displayImage: UIImage?
     var displayText: String?
+    var index: Int?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

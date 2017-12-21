@@ -61,6 +61,8 @@
 		63B4C3B41FE8EFA200161773 /* SCPageViewContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4C3B21FE8EFA200161773 /* SCPageViewContainerViewController.swift */; };
 		63B4C3B61FE910A300161773 /* SCGameSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4C3B51FE910A300161773 /* SCGameSettingsManager.swift */; };
 		63B4C3B91FEA6D2000161773 /* SCOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4C3B81FEA6D2000161773 /* SCOnboardingViewController.swift */; };
+		63B4C3BB1FEB7F6000161773 /* SCOnboardingFlows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4C3BA1FEB7F5F00161773 /* SCOnboardingFlows.swift */; };
+		63B4C3BD1FEB813000161773 /* SCOnboardingFlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4C3BC1FEB813000161773 /* SCOnboardingFlowManager.swift */; };
 		63BF43BC1FDA5FBB0079B5EE /* SCDeviceTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BF43BB1FDA5FBA0079B5EE /* SCDeviceTypeManager.swift */; };
 		63CB4F081D3CB3C300211D3A /* SCGameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */; };
 		63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F091D3CB88D00211D3A /* Card.swift */; };
@@ -152,6 +154,8 @@
 		63B4C3B21FE8EFA200161773 /* SCPageViewContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPageViewContainerViewController.swift; path = ViewControllers/Page/SCPageViewContainerViewController.swift; sourceTree = "<group>"; };
 		63B4C3B51FE910A300161773 /* SCGameSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCGameSettingsManager.swift; path = Managers/SCGameSettingsManager.swift; sourceTree = "<group>"; };
 		63B4C3B81FEA6D2000161773 /* SCOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCOnboardingViewController.swift; path = ViewControllers/Onboarding/SCOnboardingViewController.swift; sourceTree = "<group>"; };
+		63B4C3BA1FEB7F5F00161773 /* SCOnboardingFlows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCOnboardingFlows.swift; path = Core/SCOnboardingFlows.swift; sourceTree = "<group>"; };
+		63B4C3BC1FEB813000161773 /* SCOnboardingFlowManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCOnboardingFlowManager.swift; path = Managers/SCOnboardingFlowManager.swift; sourceTree = "<group>"; };
 		63BF43BB1FDA5FBA0079B5EE /* SCDeviceTypeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDeviceTypeManager.swift; path = Managers/SCDeviceTypeManager.swift; sourceTree = "<group>"; };
 		63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCGameRoomViewCell.swift; path = Views/SCGameRoomViewCell.swift; sourceTree = "<group>"; };
 		63CB4F091D3CB88D00211D3A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Objects/Card.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 				63BF43BB1FDA5FBA0079B5EE /* SCDeviceTypeManager.swift */,
 				63B4C3B51FE910A300161773 /* SCGameSettingsManager.swift */,
 				6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */,
+				63B4C3BC1FEB813000161773 /* SCOnboardingFlowManager.swift */,
 				63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */,
 				639488AB1F6A3D23009D24A5 /* SCNotificationCenterManager.swift */,
 			);
@@ -313,6 +318,7 @@
 				639F88E81F0615540082D813 /* SCConstants.swift */,
 				639F88E91F0615540082D813 /* SCFonts.swift */,
 				639488AF1F6A5BB1009D24A5 /* SCLogger.swift */,
+				63B4C3BA1FEB7F5F00161773 /* SCOnboardingFlows.swift */,
 				639F88EA1F0615540082D813 /* SCStates.swift */,
 				639F88EB1F0615540082D813 /* SCStrings.swift */,
 				639F88EC1F0615540082D813 /* SCUIColor.swift */,
@@ -595,6 +601,7 @@
 				63486DA91D3DE29C00795403 /* Key.swift in Sources */,
 				63D256811E6BA6BA0061D80C /* SCButton.swift in Sources */,
 				639F89031F0F36120082D813 /* ConsolidatedCategories.swift in Sources */,
+				63B4C3BD1FEB813000161773 /* SCOnboardingFlowManager.swift in Sources */,
 				639F88F31F0615540082D813 /* SCUIColor.swift in Sources */,
 				63D949E81F18553000697779 /* SCTextFieldViewCell.swift in Sources */,
 				630883681E80E56F006D2428 /* SCAppInfoManager.swift in Sources */,
@@ -640,6 +647,7 @@
 				635599C01F4DD45100508FE9 /* SCPopoverViewController.swift in Sources */,
 				635599CE1F4DEF8700508FE9 /* SCAccessCodeViewController.swift in Sources */,
 				63B4C3B41FE8EFA200161773 /* SCPageViewContainerViewController.swift in Sources */,
+				63B4C3BB1FEB7F6000161773 /* SCOnboardingFlows.swift in Sources */,
 				635599BB1F4DD35200508FE9 /* SCPregameRoomViewController.swift in Sources */,
 				63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */,
 				639F88F11F0615540082D813 /* SCStates.swift in Sources */,
