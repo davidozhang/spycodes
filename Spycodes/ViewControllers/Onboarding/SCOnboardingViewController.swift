@@ -36,6 +36,10 @@ class SCOnboardingViewController: SCViewController {
             
             if let displayText = onboardingFlowEntry.getDisplayText() {
                 self.label.font = SCFonts.intermediateSizeFont(.medium)
+                self.label.numberOfLines = 0
+                self.label.lineBreakMode = .byTruncatingHead
+                self.label.adjustsFontSizeToFitWidth = true
+
                 self.label.text = displayText
             }
         }
