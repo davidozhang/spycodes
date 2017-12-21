@@ -8,7 +8,7 @@ class SCPageViewController: UIPageViewController {
     static let categoriesViewController = storyboard.instantiateViewController(
         withIdentifier: SCConstants.viewControllers.categoriesViewController.rawValue
     )
-    static let onboardingViewController = storyboard.instantiateViewController(withIdentifier: SCConstants.viewControllers.onboardingViewController.rawValue)
+    static let initialOnboardingViewController = storyboard.instantiateViewController(withIdentifier: SCConstants.viewControllers.onboardingViewController.rawValue)
     
     enum PageViewType: Int {
         case PregameMenu = 0
@@ -46,7 +46,7 @@ class SCPageViewController: UIPageViewController {
                 }
             case .PregameOnboarding, .GameOnboarding:
                 // TODO: Differentiate between pregame and game onboarding
-                self.showOnboardingViewController()
+                self.showInitialOnboardingViewController()
             }
         }
     }
@@ -75,14 +75,42 @@ class SCPageViewController: UIPageViewController {
             completion: nil
         )
     }
-    
-    fileprivate func showOnboardingViewController() {
-        self.setViewControllers(
-            [SCPageViewController.onboardingViewController],
-            direction: .forward,
-            animated: false,
-            completion: nil
-        )
+
+    fileprivate func showInitialOnboardingViewController() {
+        if let initialOnboardingViewController = SCPageViewController.initialOnboardingViewController as? SCOnboardingViewController {
+            initialOnboardingViewController.displayImage = UIImage(named: "Spy")
+            initialOnboardingViewController.displayText = "First onboarding view"
+            
+            self.setViewControllers(
+                [initialOnboardingViewController],
+                direction: .forward,
+                animated: false,
+                completion: nil
+            )
+        }
+    }
+
+    fileprivate func getOnboardingViewController(
+        displayImage: UIImage?,
+        displayText: String?) -> SCOnboardingViewController? {
+        let viewController = SCPageViewController.storyboard.instantiateViewController(
+            withIdentifier: SCConstants.viewControllers.onboardingViewController.rawValue
+            ) as? SCOnboardingViewController
+        viewController?.displayImage = displayImage
+        viewController?.displayText = displayText
+        return viewController
+    }
+
+    fileprivate func getPreviousOnboardingViewController(
+        displayImage: UIImage?,
+        displayText: String?) -> SCOnboardingViewController? {
+        return self.getOnboardingViewController(displayImage: displayImage, displayText: displayText)
+    }
+
+    fileprivate func getNextOnboardingViewController(
+        displayImage: UIImage?,
+        displayText: String?) -> SCOnboardingViewController? {
+        return self.getOnboardingViewController(displayImage: displayImage, displayText: displayText)
     }
 }
 
@@ -103,9 +131,10 @@ extension SCPageViewController: UIPageViewControllerDataSource, UIPageViewContro
                 }
             case .PregameOnboarding, .GameOnboarding:
                 if let _ = viewController as? SCOnboardingViewController {
-                    // TODO: Customize next view controller
-                    let nextViewController = SCOnboardingViewController()
-                    return nextViewController
+                    return self.getNextOnboardingViewController(
+                        displayImage: UIImage(named: "Change"),
+                        displayText: "Previous onboarding view"
+                    )
                 }
             }
         }
@@ -122,9 +151,10 @@ extension SCPageViewController: UIPageViewControllerDataSource, UIPageViewContro
                 }
             case .PregameOnboarding, .GameOnboarding:
                 if let _ = viewController as? SCOnboardingViewController {
-                    // TODO: Customize next view controller
-                    let nextViewController = SCOnboardingViewController()
-                    return nextViewController
+                    return self.getNextOnboardingViewController(
+                        displayImage: UIImage(named: "Shuffle"),
+                        displayText: "Next onboarding view"
+                    )
                 }
             }
         }
