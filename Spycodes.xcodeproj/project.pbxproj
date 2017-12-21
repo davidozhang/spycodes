@@ -294,6 +294,7 @@
 				63920A351D3090BC0073E7F7 /* Managers */,
 				639F88FF1F0F25660082D813 /* Nibs */,
 				63FDED331D264BD800142780 /* Objects */,
+				63B4C3C41FECB0AD00161773 /* Onboarding */,
 				63FA54E31D1BCFA6004515DA /* Storyboards */,
 				63D256751E6BA6600061D80C /* Utilities */,
 				63A04D1A1D1A7F25005A2914 /* View Controllers */,
@@ -529,10 +530,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Spycodes/Pods-Spycodes-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ISEmojiView/ISEmojiView.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftGifOrigin/SwiftGifOrigin.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISEmojiView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftGifOrigin.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
