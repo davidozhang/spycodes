@@ -50,23 +50,6 @@ class SCConstants {
         case accessCode = "access-code"
     }
 
-    enum viewControllers: String {
-        case accessCodeViewController = "access-code-view-controller"
-        case categoriesViewController = "categories-view-controller"
-        case customCategoryViewController = "custom-category-view-controller"
-        case gameHelpViewController = "game-help-view-controller"
-        case gameSettingsViewController = "game-settings-view-controller"
-        case gameViewController = "game-view-controller"
-        case mainSettingsViewController = "main-settings-view-controller"
-        case mainViewController = "main-view-controller"
-        case onboardingViewController = "onboarding-view-controller"
-        case pageViewContainerViewController = "page-view-container-view-controller"
-        case pageViewController = "page-view-controller"
-        case playerNameViewController = "player-name-view-controller"
-        case pregameRoomViewController = "pregame-room-view-controller"
-        case timelineViewController = "timeline-view-controller"
-    }
-
     enum images: String {
         case shuffle = "Shuffle"
         case markAsRead = "Mark-As-Read"
@@ -98,6 +81,11 @@ class SCConstants {
         case pregameMenu = "pregame-menu"
         case timelineUpdated = "timeline-updated"
         case updateCollectionView = "update-collection-view"
+    }
+    
+    enum onboardingFlowEntryKey: String {
+        case displayImageName = "display-image"
+        case displayText = "display-text"
     }
     
     enum reuseIdentifiers: String {
@@ -171,5 +159,22 @@ class SCConstants {
         case persistentSelection = "persistent-selection"
         case selectedCategories = "selected-categories"
         case selectedCustomCategories = "selected-custom-categories"
+    }
+    
+    enum viewControllers: String {
+        case accessCodeViewController = "access-code-view-controller"
+        case categoriesViewController = "categories-view-controller"
+        case customCategoryViewController = "custom-category-view-controller"
+        case gameHelpViewController = "game-help-view-controller"
+        case gameSettingsViewController = "game-settings-view-controller"
+        case gameViewController = "game-view-controller"
+        case mainSettingsViewController = "main-settings-view-controller"
+        case mainViewController = "main-view-controller"
+        case onboardingViewController = "onboarding-view-controller"
+        case pageViewContainerViewController = "page-view-container-view-controller"
+        case pageViewController = "page-view-controller"
+        case playerNameViewController = "player-name-view-controller"
+        case pregameRoomViewController = "pregame-room-view-controller"
+        case timelineViewController = "timeline-view-controller"
     }
 }

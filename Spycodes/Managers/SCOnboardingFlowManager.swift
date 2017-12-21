@@ -1,7 +1,7 @@
 class SCOnboardingFlowManager {
     static let instance = SCOnboardingFlowManager()
 
-    fileprivate var flow: [Int: (String, String)]?
+    fileprivate var flow: [Int: SCOnboardingFlowEntry]?
 
     func initializeForFlow(flowType: SCOnboardingFlows.FlowType) {
         self.flow = SCOnboardingFlows.retrieveFlow(flowType: flowType)
@@ -15,7 +15,7 @@ class SCOnboardingFlowManager {
         return flow.count
     }
     
-    func getInitial() -> (String, String)? {
+    func getInitialEntry() -> SCOnboardingFlowEntry? {
         guard let flow = self.flow else {
             return nil
         }
@@ -27,7 +27,7 @@ class SCOnboardingFlowManager {
         return nil
     }
     
-    func getPrevious(index: Int) -> (String, String)? {
+    func getPreviousEntry(index: Int) -> SCOnboardingFlowEntry? {
         guard let flow = self.flow else {
             return nil
         }
@@ -46,7 +46,7 @@ class SCOnboardingFlowManager {
         return nil
     }
     
-    func getNext(index: Int) -> (String, String)? {
+    func getNextEntry(index: Int) -> SCOnboardingFlowEntry? {
         guard let flow = self.flow else {
             return nil
         }
