@@ -90,21 +90,18 @@ class SCPageViewController: UIPageViewController {
     }
 
     fileprivate func getOnboardingViewController(
-        displayImage: UIImage?,
-        displayText: String?) -> SCOnboardingViewController? {
+        onboardingFlowEntry: SCOnboardingFlowEntry?) -> SCOnboardingViewController? {
         let viewController = SCPageViewController.storyboard.instantiateViewController(
             withIdentifier: SCConstants.viewControllers.onboardingViewController.rawValue
             ) as? SCOnboardingViewController
-        viewController?.displayImage = displayImage
-        viewController?.displayText = displayText
+        viewController?.onboardingFlowEntry = onboardingFlowEntry
         return viewController
     }
 
     fileprivate func getInitialOnboardingViewController() -> SCOnboardingViewController? {
-        if let initialTuple = SCOnboardingFlowManager.instance.getInitial(),
+        if let initialEntry = SCOnboardingFlowManager.instance.getInitialEntry(),
            let initialOnboardingViewController = self.getOnboardingViewController(
-               displayImage: UIImage(named: initialTuple.0),
-               displayText: initialTuple.1) {
+               onboardingFlowEntry: initialEntry) {
             initialOnboardingViewController.index = 0
             return initialOnboardingViewController
         }
@@ -113,8 +110,9 @@ class SCPageViewController: UIPageViewController {
     }
 
     fileprivate func getPreviousOnboardingViewController(index: Int) -> SCOnboardingViewController? {
-        if let previous = SCOnboardingFlowManager.instance.getPrevious(index: index),
-           let previousOnboardingViewController = self.getOnboardingViewController(displayImage: UIImage(named: previous.0), displayText: previous.1) {
+        if let previousEntry = SCOnboardingFlowManager.instance.getPreviousEntry(index: index),
+           let previousOnboardingViewController = self.getOnboardingViewController(
+               onboardingFlowEntry: previousEntry) {
             previousOnboardingViewController.index = index - 1
             return previousOnboardingViewController
         }
@@ -123,8 +121,9 @@ class SCPageViewController: UIPageViewController {
     }
 
     fileprivate func getNextOnboardingViewController(index: Int) -> SCOnboardingViewController? {
-        if let next = SCOnboardingFlowManager.instance.getNext(index: index),
-           let nextOnboardingViewController = self.getOnboardingViewController(displayImage: UIImage(named: next.0), displayText: next.1) {
+        if let nextEntry = SCOnboardingFlowManager.instance.getNextEntry(index: index),
+           let nextOnboardingViewController = self.getOnboardingViewController(
+               onboardingFlowEntry: nextEntry) {
             nextOnboardingViewController.index = index + 1
             return nextOnboardingViewController
         }
