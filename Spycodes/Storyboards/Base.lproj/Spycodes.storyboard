@@ -1190,6 +1190,8 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="Vca-6v-mPL" id="Dna-90-I4D"/>
+                        <outlet property="imageViewHeightConstraint" destination="JzP-5a-u5j" id="aE8-N9-XH5"/>
+                        <outlet property="imageViewWidthConstraint" destination="P6i-yF-owp" id="AKH-5b-qHe"/>
                         <outlet property="label" destination="VRD-ch-cEQ" id="NBr-5j-I4S"/>
                     </connections>
                 </viewController>

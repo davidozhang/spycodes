@@ -85,6 +85,8 @@ class SCConstants {
     
     enum onboardingFlowEntryKey: String {
         case displayImageName = "display-image"
+        case displayImageHeight = "display-image-height"
+        case displayImageWidth = "display-image-width"
         case displayText = "display-text"
     }
     
