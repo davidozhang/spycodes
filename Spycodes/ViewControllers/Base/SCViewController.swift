@@ -167,7 +167,6 @@ class SCViewController: UIViewController {
                let destination = segue.destination as? SCPageViewContainerViewController,
                 let destinationPageViewType = sender.destinationPageViewType {
                 destination.destinationPageViewType = destinationPageViewType
-                return
             }
 
             destination.modalPresentationStyle = .overCurrentContext
