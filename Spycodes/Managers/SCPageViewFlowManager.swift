@@ -18,8 +18,8 @@ class SCPageViewFlowManager {
             return nil
         }
 
-        if let tuple = flow[0] {
-            return tuple
+        if let entry = flow[0] {
+            return entry
         }
 
         return nil
@@ -37,8 +37,8 @@ class SCPageViewFlowManager {
             return nil
         }
 
-        if let tuple = flow[currentIndex] {
-            return tuple
+        if let entry = flow[currentIndex] {
+            return entry
         }
 
         return nil
@@ -56,8 +56,8 @@ class SCPageViewFlowManager {
             return nil
         }
 
-        if let tuple = flow[currentIndex] {
-            return tuple
+        if let entry = flow[currentIndex] {
+            return entry
         }
         
         return nil

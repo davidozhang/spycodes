@@ -1196,6 +1196,7 @@
                         <outlet property="imageViewHeightConstraint" destination="JzP-5a-u5j" id="aE8-N9-XH5"/>
                         <outlet property="imageViewWidthConstraint" destination="P6i-yF-owp" id="AKH-5b-qHe"/>
                         <outlet property="label" destination="VRD-ch-cEQ" id="NBr-5j-I4S"/>
+                        <outlet property="labelTopSpaceConstraint" destination="Nb1-KX-nEq" id="aOa-Vb-Wo2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7z-pe-KfM" userLabel="First Responder" sceneMemberID="firstResponder"/>

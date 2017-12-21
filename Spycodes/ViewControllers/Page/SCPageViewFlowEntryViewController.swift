@@ -5,9 +5,11 @@ class SCPageViewFlowEntryViewController: SCViewController {
     @IBOutlet weak var label: SCLabel!
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var labelTopSpaceConstraint: NSLayoutConstraint!
+
     fileprivate static let defaultImageViewWidth: CGFloat = 256.0
     fileprivate static let defaultImageViewHeight: CGFloat = 256.0
+    fileprivate static let defaultLabelTopSpace: CGFloat = 24.0
     
     var pageViewFlowEntry: SCPageViewFlowEntry?
     var index: Int?
@@ -32,8 +34,9 @@ class SCPageViewFlowEntryViewController: SCViewController {
                     self.imageViewHeightConstraint.constant = CGFloat(height)
                     self.imageViewWidthConstraint.constant = CGFloat(width)
                 } else {
-                    self.imageViewHeightConstraint.constant = SCPageViewFlowEntryViewController.defaultImageViewHeight
-                    self.imageViewWidthConstraint.constant = SCPageViewFlowEntryViewController.defaultImageViewWidth
+                    self.imageViewHeightConstraint.constant = SCOnboardingViewController.defaultImageViewHeight
+                    self.imageViewWidthConstraint.constant = SCOnboardingViewController.defaultImageViewWidth
+                    self.labelTopSpaceConstraint.constant = 0
                 }
             } else {
                 self.imageViewWidthConstraint.constant = 0
