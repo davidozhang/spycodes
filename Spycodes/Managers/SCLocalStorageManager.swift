@@ -29,6 +29,33 @@ class SCLocalStorageManager: SCLogger {
         return false
     }
 
+    // MARK: Private
+    fileprivate func saveLocalSetting(_ type: LocalSettingType) {
+        switch type {
+        case .nightMode:
+            UserDefaults.standard.set(
+                self.localSettings[.nightMode],
+                forKey: SCConstants.userDefaults.nightMode.rawValue
+            )
+        case .accessibility:
+            UserDefaults.standard.set(
+                self.localSettings[.accessibility],
+                forKey: SCConstants.userDefaults.accessibility.rawValue
+            )
+        case .persistentSelection:
+            UserDefaults.standard.set(
+                self.localSettings[.persistentSelection],
+                forKey: SCConstants.userDefaults.persistentSelection.rawValue
+            )
+        }
+
+        UserDefaults.standard.synchronize()
+        super.log(SCStrings.logging.localSettingsSaved.rawValue)
+    }
+}
+
+// MARK: ConsolidatedCategories Methods
+extension SCLocalStorageManager {
     func saveSelectedCustomCategories(selectedCategories: [CustomCategory]) {
         let data = NSKeyedArchiver.archivedData(withRootObject: selectedCategories)
         UserDefaults.standard.set(
@@ -129,30 +156,6 @@ class SCLocalStorageManager: SCLogger {
 
         UserDefaults.standard.synchronize()
         super.log(SCStrings.logging.selectedConsolidatedCategoriesCleared.rawValue)
-    }
-
-    // MARK: Private
-    fileprivate func saveLocalSetting(_ type: LocalSettingType) {
-        switch type {
-        case .nightMode:
-            UserDefaults.standard.set(
-                self.localSettings[.nightMode],
-                forKey: SCConstants.userDefaults.nightMode.rawValue
-            )
-        case .accessibility:
-            UserDefaults.standard.set(
-                self.localSettings[.accessibility],
-                forKey: SCConstants.userDefaults.accessibility.rawValue
-            )
-        case .persistentSelection:
-            UserDefaults.standard.set(
-                self.localSettings[.persistentSelection],
-                forKey: SCConstants.userDefaults.persistentSelection.rawValue
-            )
-        }
-
-        UserDefaults.standard.synchronize()
-        super.log(SCStrings.logging.localSettingsSaved.rawValue)
     }
 
     fileprivate func retrieveSelectedCustomCategories() -> Set<CustomCategory> {
