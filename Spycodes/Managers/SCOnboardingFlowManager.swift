@@ -1,9 +1,7 @@
 class SCOnboardingFlowManager {
-    static let instance = SCOnboardingFlowManager()
-
     fileprivate var flow: [Int: SCOnboardingFlowEntry]?
 
-    func initializeForFlow(flowType: SCOnboardingFlows.FlowType) {
+    init(flowType: SCOnboardingFlows.FlowType) {
         self.flow = SCOnboardingFlows.retrieveFlow(flowType: flowType)
     }
     

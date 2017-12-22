@@ -16,6 +16,7 @@ class SCPageViewController: UIPageViewController {
     }
 
     var pageViewType: PageViewType?
+    var onboardingFlowManager: SCOnboardingFlowManager?
 
     deinit {
         SCLogger.log(
@@ -44,10 +45,10 @@ class SCPageViewController: UIPageViewController {
                     self.showCategoriesViewController()
                 }
             case .PregameOnboarding:
-                SCOnboardingFlowManager.instance.initializeForFlow(flowType: .Pregame)
+                self.onboardingFlowManager = SCOnboardingFlowManager(flowType: .Pregame)
                 self.showInitialOnboardingViewController()
             case .GameOnboarding:
-                SCOnboardingFlowManager.instance.initializeForFlow(flowType: .Game)
+                self.onboardingFlowManager = SCOnboardingFlowManager(flowType: .Game)
                 self.showInitialOnboardingViewController()
             }
         }
@@ -99,7 +100,8 @@ class SCPageViewController: UIPageViewController {
     }
 
     fileprivate func getInitialOnboardingViewController() -> SCOnboardingViewController? {
-        if let initialEntry = SCOnboardingFlowManager.instance.getInitialEntry(),
+        if let onboardingFlowManager = self.onboardingFlowManager,
+           let initialEntry = onboardingFlowManager.getInitialEntry(),
            let initialOnboardingViewController = self.getOnboardingViewController(
                onboardingFlowEntry: initialEntry) {
             initialOnboardingViewController.index = 0
@@ -110,7 +112,8 @@ class SCPageViewController: UIPageViewController {
     }
 
     fileprivate func getPreviousOnboardingViewController(index: Int) -> SCOnboardingViewController? {
-        if let previousEntry = SCOnboardingFlowManager.instance.getPreviousEntry(index: index),
+        if let onboardingFlowManager = self.onboardingFlowManager,
+           let previousEntry = onboardingFlowManager.getPreviousEntry(index: index),
            let previousOnboardingViewController = self.getOnboardingViewController(
                onboardingFlowEntry: previousEntry) {
             previousOnboardingViewController.index = index - 1
@@ -121,7 +124,8 @@ class SCPageViewController: UIPageViewController {
     }
 
     fileprivate func getNextOnboardingViewController(index: Int) -> SCOnboardingViewController? {
-        if let nextEntry = SCOnboardingFlowManager.instance.getNextEntry(index: index),
+        if let onboardingFlowManager = self.onboardingFlowManager,
+           let nextEntry = onboardingFlowManager.getNextEntry(index: index),
            let nextOnboardingViewController = self.getOnboardingViewController(
                onboardingFlowEntry: nextEntry) {
             nextOnboardingViewController.index = index + 1
@@ -186,7 +190,11 @@ extension SCPageViewController: UIPageViewControllerDataSource, UIPageViewContro
             case .PregameMenu:
                 return 2
             case .PregameOnboarding, .GameOnboarding:
-                return SCOnboardingFlowManager.instance.getFlowCount()
+                guard let onboardingFlowManager = self.onboardingFlowManager else {
+                    return 0
+                }
+
+                return onboardingFlowManager.getFlowCount()
             }
         }
         
