@@ -10,7 +10,7 @@ class SCGameSettingsManager: SCLogger {
     override init() {
         super.init()
 
-        self.resetGameSettings()
+        self.reset()
     }
     
     override func getIdentifier() -> String? {
@@ -33,6 +33,10 @@ class SCGameSettingsManager: SCLogger {
     }
     
     func isGameSettingEnabled(_ type: GameSettingType) -> Bool {
+        if type == .minigame {
+            return GameMode.instance.getMode() == GameMode.Mode.miniGame
+        }
+
         if let setting = self.gameSettings[type] {
             return setting
         }
@@ -40,7 +44,7 @@ class SCGameSettingsManager: SCLogger {
         return false
     }
     
-    func resetGameSettings() {
+    func reset() {
         self.gameSettings[.minigame] = false
         GameMode.instance.setMode(mode: .regularGame)
     }

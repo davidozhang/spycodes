@@ -70,7 +70,7 @@ class SCMainViewController: SCViewController {
 
         ConsolidatedCategories.instance.reset()
         Player.instance.reset()
-        GameMode.instance.reset()
+        SCGameSettingsManager.instance.reset()
         Statistics.instance.reset()
         Room.instance.reset()
         Timer.instance.reset()
