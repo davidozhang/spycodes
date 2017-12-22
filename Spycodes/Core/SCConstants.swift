@@ -62,6 +62,7 @@ class SCConstants {
         case localStorageManager = "SCLocalStorageManager"
         case notificationCenterManager = "SCNotificationCenterManager"
         case states = "SCStates"
+        case usageStatisticsManager = "SCUsageStatisticsManager"
     }
 
     enum nibs: String {
@@ -156,7 +157,9 @@ class SCConstants {
 
     enum userDefaults: String {
         case accessibility = "accessibility"
+        case appOpens = "app-opens"
         case customCategories = "custom-categories"
+        case gamePlays = "game-plays"
         case nightMode = "night-mode"
         case persistentSelection = "persistent-selection"
         case selectedCategories = "selected-categories"

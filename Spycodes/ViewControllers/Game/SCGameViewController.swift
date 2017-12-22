@@ -96,6 +96,8 @@ class SCGameViewController: SCViewController {
         ])
 
         self.hideNotificationDot()
+
+        SCUsageStatisticsManager.instance.recordDiscreteUsageStatistics(.gamePlays)
     }
 
     override func viewWillAppear(_ animated: Bool) {
