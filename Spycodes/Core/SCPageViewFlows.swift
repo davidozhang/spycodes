@@ -9,10 +9,11 @@ class SCPageViewFlows {
             0:
                 SCPageViewFlowEntry([
                     SCConstants.onboardingFlowEntryKey.displayText.rawValue: "Welcome to Spycodes! Let's help you get started.",
-                    
                 ]),
             1:
                 SCPageViewFlowEntry([
+                    SCConstants.onboardingFlowEntryKey.displayImageName.rawValue: "out",
+                    SCConstants.onboardingFlowEntryKey.displayImageType.rawValue: SCPageViewFlowEntry.DisplayImageType.GIF,
                     SCConstants.onboardingFlowEntryKey.displayText.rawValue: "There are two types of games you could play: regular and minigame.",
                 ]),
             2:
