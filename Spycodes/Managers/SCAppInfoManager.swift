@@ -17,8 +17,9 @@ class SCAppInfoManager {
                let result = dict["results"] as? NSArray,
                let dict = result[0] as? NSDictionary,
                let latestAppVersion = dict["version"] as? String {
-                if let current = Double(SCAppInfoManager.appVersion),
-                   let latest = Double(latestAppVersion), current < latest {
+               if self.compareVersions(
+                   current: SCAppInfoManager.appVersion,
+                   latest: latestAppVersion) {
                     failure()
                 }
             }
@@ -28,6 +29,11 @@ class SCAppInfoManager {
     }
 
     // MARK: Private
+    // Returns true if current version is strictly smaller than latest version
+    fileprivate static func compareVersions(current: String, latest: String) -> Bool {
+        return latest.compare(current, options: .numeric) == .orderedDescending
+    }
+
     fileprivate static func sendRequest(_ success: @escaping ((NSDictionary) -> Void)) {
         let requestURL = URL(string: SCConstants.url.version.rawValue)
         let task = URLSession(
