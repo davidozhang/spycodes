@@ -54,6 +54,42 @@ class SCLocalStorageManager: SCLogger {
     }
 }
 
+// MARK: SCUsageStatisticsManager Methods
+extension SCLocalStorageManager {
+    func saveDiscreteUsageStatistics(_ type: SCUsageStatisticsManager.DiscreteUsageStatisticsType, value: Int) {
+        switch type {
+        case .appOpens:
+            UserDefaults.standard.set(
+                value,
+                forKey: SCConstants.userDefaults.appOpens.rawValue
+            )
+        case .gamePlays:
+            UserDefaults.standard.set(
+                value,
+                forKey: SCConstants.userDefaults.gamePlays.rawValue
+            )
+        }
+    }
+
+    func retrieveDiscreteUsageStatistics() -> [SCUsageStatisticsManager.DiscreteUsageStatisticsType: Int] {
+        var result = [SCUsageStatisticsManager.DiscreteUsageStatisticsType: Int]()
+        let storedAppOpens = UserDefaults.standard.integer(
+            forKey: SCConstants.userDefaults.appOpens.rawValue
+        )
+
+        result[.appOpens] = storedAppOpens
+
+        let storedGamePlays = UserDefaults.standard.integer(
+            forKey: SCConstants.userDefaults.gamePlays.rawValue
+        )
+
+        result[.gamePlays] = storedGamePlays
+        super.log(SCStrings.logging.discreteUsageStatisticsRetrieved.rawValue)
+
+        return result
+    }
+}
+
 // MARK: ConsolidatedCategories Methods
 extension SCLocalStorageManager {
     func saveSelectedCustomCategories(selectedCategories: [CustomCategory]) {

@@ -131,6 +131,7 @@ class SCStrings {
         case allCustomCategoriesRetrieved = "All custom categories retrieved."
         case allCustomCategoriesSaved = "All custom categories saved."
         case deinitStatement = "View controller with identifier '%@' deinitialized."
+        case discreteUsageStatisticsRetrieved = "Discrete usage statistics retrieved."
         case localSettingsRetrieved = "Local settings retrieved."
         case localSettingsSaved = "Local settings saved."
         case removedObservers = "%d observers '%@' removed for view controller with identifier '%@'."

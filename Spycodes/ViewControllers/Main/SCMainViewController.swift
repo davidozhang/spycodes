@@ -51,6 +51,8 @@ class SCMainViewController: SCViewController {
                 self.showUpdateAppAlert()
             }
         }
+        
+        SCUsageStatisticsManager.instance.recordDiscreteUsageStatistics(.appOpens)
 
         self.logoLabel.text = SCStrings.appName.localized
 

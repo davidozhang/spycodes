@@ -64,6 +64,7 @@
 		63B4C3BB1FEB7F6000161773 /* SCOnboardingFlows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4C3BA1FEB7F5F00161773 /* SCOnboardingFlows.swift */; };
 		63B4C3BD1FEB813000161773 /* SCOnboardingFlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4C3BC1FEB813000161773 /* SCOnboardingFlowManager.swift */; };
 		63B4C3BF1FEBA19F00161773 /* OnboardingFlowEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4C3BE1FEBA19F00161773 /* OnboardingFlowEntry.swift */; };
+		63B4C3C91FED9D9A00161773 /* SCUsageStatisticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4C3C81FED9D9A00161773 /* SCUsageStatisticsManager.swift */; };
 		63BF43BC1FDA5FBB0079B5EE /* SCDeviceTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BF43BB1FDA5FBA0079B5EE /* SCDeviceTypeManager.swift */; };
 		63CB4F081D3CB3C300211D3A /* SCGameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */; };
 		63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F091D3CB88D00211D3A /* Card.swift */; };
@@ -158,6 +159,7 @@
 		63B4C3BA1FEB7F5F00161773 /* SCOnboardingFlows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCOnboardingFlows.swift; path = Core/SCOnboardingFlows.swift; sourceTree = "<group>"; };
 		63B4C3BC1FEB813000161773 /* SCOnboardingFlowManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCOnboardingFlowManager.swift; path = Managers/SCOnboardingFlowManager.swift; sourceTree = "<group>"; };
 		63B4C3BE1FEBA19F00161773 /* OnboardingFlowEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardingFlowEntry.swift; path = Objects/OnboardingFlowEntry.swift; sourceTree = "<group>"; };
+		63B4C3C81FED9D9A00161773 /* SCUsageStatisticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUsageStatisticsManager.swift; path = Managers/SCUsageStatisticsManager.swift; sourceTree = "<group>"; };
 		63BF43BB1FDA5FBA0079B5EE /* SCDeviceTypeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDeviceTypeManager.swift; path = Managers/SCDeviceTypeManager.swift; sourceTree = "<group>"; };
 		63CB4F071D3CB3C300211D3A /* SCGameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCGameRoomViewCell.swift; path = Views/SCGameRoomViewCell.swift; sourceTree = "<group>"; };
 		63CB4F091D3CB88D00211D3A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Objects/Card.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				63920A361D3090D60073E7F7 /* SCMultipeerManager.swift */,
 				639488AB1F6A3D23009D24A5 /* SCNotificationCenterManager.swift */,
 				63B4C3BC1FEB813000161773 /* SCOnboardingFlowManager.swift */,
+				63B4C3C81FED9D9A00161773 /* SCUsageStatisticsManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				635599CE1F4DEF8700508FE9 /* SCAccessCodeViewController.swift in Sources */,
 				63B4C3B41FE8EFA200161773 /* SCPageViewContainerViewController.swift in Sources */,
 				63B4C3BB1FEB7F6000161773 /* SCOnboardingFlows.swift in Sources */,
+				63B4C3C91FED9D9A00161773 /* SCUsageStatisticsManager.swift in Sources */,
 				635599BB1F4DD35200508FE9 /* SCPregameRoomViewController.swift in Sources */,
 				63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */,
 				639F88F11F0615540082D813 /* SCStates.swift in Sources */,
