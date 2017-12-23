@@ -12,11 +12,11 @@ class SCPageViewFlowEntry {
     }
 
     init(_ mapping: [String: Any]) {
-        if let displayImageType = mapping[SCConstants.onboardingFlowEntryKey.displayImageType.rawValue] as? DisplayImageType {
+        if let displayImageType = mapping[SCConstants.pageViewFlowEntryKey.displayImageType.rawValue] as? DisplayImageType {
             self.displayImageType = displayImageType
         }
 
-        if let displayImageName = mapping[SCConstants.onboardingFlowEntryKey.displayImageName.rawValue] as? String {
+        if let displayImageName = mapping[SCConstants.pageViewFlowEntryKey.displayImageName.rawValue] as? String {
             if let displayImageType = self.displayImageType {
                 switch displayImageType {
                 case .GIF:
@@ -27,7 +27,7 @@ class SCPageViewFlowEntry {
             }
         }
 
-        if let displayText = mapping[SCConstants.onboardingFlowEntryKey.displayText.rawValue] as? String? {
+        if let displayText = mapping[SCConstants.pageViewFlowEntryKey.displayText.rawValue] as? String? {
             self.displayText = displayText
         }
     }
