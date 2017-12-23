@@ -1,6 +1,6 @@
 import UIKit
 
-class SCOnboardingViewController: SCViewController {
+class SCPageViewFlowEntryViewController: SCViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: SCLabel!
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
@@ -9,32 +9,38 @@ class SCOnboardingViewController: SCViewController {
     fileprivate static let defaultImageViewWidth: CGFloat = 256.0
     fileprivate static let defaultImageViewHeight: CGFloat = 256.0
     
-    var onboardingFlowEntry: SCOnboardingFlowEntry?
+    var pageViewFlowEntry: SCPageViewFlowEntry?
     var index: Int?
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.uniqueIdentifier = SCConstants.viewControllers.pageViewFlowEntryViewController.rawValue
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         self.view.backgroundColor = .clear
 
-        if let onboardingFlowEntry = self.onboardingFlowEntry {
-            if let displayImage = onboardingFlowEntry.getDisplayImage() {
+        if let pageViewFlowEntry = self.pageViewFlowEntry {
+            if let displayImage = pageViewFlowEntry.getDisplayImage() {
                 self.imageView.image = displayImage
 
-                if let height = onboardingFlowEntry.getDisplayImageHeight(),
-                   let width = onboardingFlowEntry.getDisplayImageWidth() {
+                if let height = pageViewFlowEntry.getDisplayImageHeight(),
+                   let width = pageViewFlowEntry.getDisplayImageWidth() {
                     self.imageViewHeightConstraint.constant = CGFloat(height)
                     self.imageViewWidthConstraint.constant = CGFloat(width)
                 } else {
-                    self.imageViewHeightConstraint.constant = SCOnboardingViewController.defaultImageViewHeight
-                    self.imageViewWidthConstraint.constant = SCOnboardingViewController.defaultImageViewWidth
+                    self.imageViewHeightConstraint.constant = SCPageViewFlowEntryViewController.defaultImageViewHeight
+                    self.imageViewWidthConstraint.constant = SCPageViewFlowEntryViewController.defaultImageViewWidth
                 }
             } else {
                 self.imageViewWidthConstraint.constant = 0
                 self.imageViewHeightConstraint.constant = 0
             }
             
-            if let displayText = onboardingFlowEntry.getDisplayText() {
+            if let displayText = pageViewFlowEntry.getDisplayText() {
                 self.label.font = SCFonts.intermediateSizeFont(.medium)
                 self.label.numberOfLines = 0
                 self.label.lineBreakMode = .byTruncatingHead

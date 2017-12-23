@@ -1,6 +1,6 @@
 import UIKit
 
-class SCPageViewController: UIPageViewController {
+class SCPageViewFlowViewController: UIPageViewController {
     static let storyboard = UIStoryboard(name: SCConstants.storyboards.main.rawValue, bundle: nil)
     static let gameSettingsViewController = storyboard.instantiateViewController(
         withIdentifier: SCConstants.viewControllers.gameSettingsViewController.rawValue
@@ -16,14 +16,14 @@ class SCPageViewController: UIPageViewController {
     }
 
     var pageViewType: PageViewType?
-    var onboardingFlowManager: SCOnboardingFlowManager?
+    var pageViewFlowManager: SCPageViewFlowManager?
 
     deinit {
         SCLogger.log(
             identifier: SCConstants.loggingIdentifier.deinitialize.rawValue,
             String(
                 format: SCStrings.logging.deinitStatement.rawValue,
-                SCConstants.viewControllers.pageViewController.rawValue
+                SCConstants.viewControllers.pageViewFlowViewController.rawValue
             )
         )
     }
@@ -45,10 +45,10 @@ class SCPageViewController: UIPageViewController {
                     self.showCategoriesViewController()
                 }
             case .PregameOnboarding:
-                self.onboardingFlowManager = SCOnboardingFlowManager(flowType: .Pregame)
+                self.pageViewFlowManager = SCPageViewFlowManager(flowType: .Pregame)
                 self.showInitialOnboardingViewController()
             case .GameOnboarding:
-                self.onboardingFlowManager = SCOnboardingFlowManager(flowType: .Game)
+                self.pageViewFlowManager = SCPageViewFlowManager(flowType: .Game)
                 self.showInitialOnboardingViewController()
             }
         }
@@ -63,7 +63,7 @@ class SCPageViewController: UIPageViewController {
 
     fileprivate func showGameSettingsViewController() {
         self.setViewControllers(
-            [SCPageViewController.gameSettingsViewController],
+            [SCPageViewFlowViewController.gameSettingsViewController],
             direction: .forward,
             animated: false,
             completion: nil
@@ -72,7 +72,7 @@ class SCPageViewController: UIPageViewController {
 
     fileprivate func showCategoriesViewController() {
         self.setViewControllers(
-            [SCPageViewController.categoriesViewController],
+            [SCPageViewFlowViewController.categoriesViewController],
             direction: .forward,
             animated: false,
             completion: nil
@@ -80,7 +80,7 @@ class SCPageViewController: UIPageViewController {
     }
 
     fileprivate func showInitialOnboardingViewController() {
-        if let initialOnboardingViewController = self.getInitialOnboardingViewController() {
+        if let initialOnboardingViewController = self.getInitialPageViewFlowEntryViewController() {
             self.setViewControllers(
                 [initialOnboardingViewController],
                 direction: .forward,
@@ -90,46 +90,48 @@ class SCPageViewController: UIPageViewController {
         }
     }
 
-    fileprivate func getOnboardingViewController(
-        onboardingFlowEntry: SCOnboardingFlowEntry?) -> SCOnboardingViewController? {
-        let viewController = SCPageViewController.storyboard.instantiateViewController(
-            withIdentifier: SCConstants.viewControllers.onboardingViewController.rawValue
-            ) as? SCOnboardingViewController
-        viewController?.onboardingFlowEntry = onboardingFlowEntry
+    fileprivate func getPageViewFlowEntryViewController(
+        pageViewFlowEntry: SCPageViewFlowEntry?) -> SCPageViewFlowEntryViewController? {
+        let viewController = SCPageViewFlowViewController.storyboard.instantiateViewController(
+            withIdentifier: SCConstants.viewControllers.pageViewFlowEntryViewController.rawValue
+            ) as? SCPageViewFlowEntryViewController
+        viewController?.pageViewFlowEntry = pageViewFlowEntry
         return viewController
     }
 
-    fileprivate func getInitialOnboardingViewController() -> SCOnboardingViewController? {
-        if let onboardingFlowManager = self.onboardingFlowManager,
-           let initialEntry = onboardingFlowManager.getInitialEntry(),
-           let initialOnboardingViewController = self.getOnboardingViewController(
-               onboardingFlowEntry: initialEntry) {
-            initialOnboardingViewController.index = 0
-            return initialOnboardingViewController
+    fileprivate func getInitialPageViewFlowEntryViewController() -> SCPageViewFlowEntryViewController? {
+        if let pageViewFlowManager = self.pageViewFlowManager,
+           let initialEntry = pageViewFlowManager.getInitialEntry(),
+           let initialPageViewFlowEntryViewController = self.getPageViewFlowEntryViewController(
+               pageViewFlowEntry: initialEntry) {
+            initialPageViewFlowEntryViewController.index = 0
+            return initialPageViewFlowEntryViewController
         }
         
         return nil
     }
 
-    fileprivate func getPreviousOnboardingViewController(index: Int) -> SCOnboardingViewController? {
-        if let onboardingFlowManager = self.onboardingFlowManager,
-           let previousEntry = onboardingFlowManager.getPreviousEntry(index: index),
-           let previousOnboardingViewController = self.getOnboardingViewController(
-               onboardingFlowEntry: previousEntry) {
-            previousOnboardingViewController.index = index - 1
-            return previousOnboardingViewController
+    fileprivate func getPreviousPageViewFlowEntryViewController(
+        index: Int) -> SCPageViewFlowEntryViewController? {
+        if let pageViewFlowManager = self.pageViewFlowManager,
+           let previousEntry = pageViewFlowManager.getPreviousEntry(index: index),
+           let previousPageViewFlowEntryViewController = self.getPageViewFlowEntryViewController(
+               pageViewFlowEntry: previousEntry) {
+            previousPageViewFlowEntryViewController.index = index - 1
+            return previousPageViewFlowEntryViewController
         }
         
         return nil
     }
 
-    fileprivate func getNextOnboardingViewController(index: Int) -> SCOnboardingViewController? {
-        if let onboardingFlowManager = self.onboardingFlowManager,
-           let nextEntry = onboardingFlowManager.getNextEntry(index: index),
-           let nextOnboardingViewController = self.getOnboardingViewController(
-               onboardingFlowEntry: nextEntry) {
-            nextOnboardingViewController.index = index + 1
-            return nextOnboardingViewController
+    fileprivate func getNextPageViewFlowEntryViewController(
+        index: Int) -> SCPageViewFlowEntryViewController? {
+        if let pageViewFlowManager = self.pageViewFlowManager,
+           let nextEntry = pageViewFlowManager.getNextEntry(index: index),
+           let nextPageViewFlowEntryViewController = self.getPageViewFlowEntryViewController(
+               pageViewFlowEntry: nextEntry) {
+            nextPageViewFlowEntryViewController.index = index + 1
+            return nextPageViewFlowEntryViewController
         }
 
         return nil
@@ -143,7 +145,7 @@ class SCPageViewController: UIPageViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: UIPageViewControllerDataSource, UIPageViewControllerDelegate
-extension SCPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension SCPageViewFlowViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -151,12 +153,12 @@ extension SCPageViewController: UIPageViewControllerDataSource, UIPageViewContro
             switch pageViewType {
             case .PregameMenu:
                 if let _ = viewController as? SCCategoriesViewController {
-                    return SCPageViewController.gameSettingsViewController
+                    return SCPageViewFlowViewController.gameSettingsViewController
                 }
             case .PregameOnboarding, .GameOnboarding:
-                if let onboardingViewController = viewController as? SCOnboardingViewController,
-                    let index = onboardingViewController.index {
-                    return self.getPreviousOnboardingViewController(index: index)
+                if let pageViewFlowEntryViewController = viewController as? SCPageViewFlowEntryViewController,
+                    let index = pageViewFlowEntryViewController.index {
+                    return self.getPreviousPageViewFlowEntryViewController(index: index)
                 }
             }
         }
@@ -171,12 +173,12 @@ extension SCPageViewController: UIPageViewControllerDataSource, UIPageViewContro
             switch pageViewType {
             case .PregameMenu:
                 if let _ = viewController as? SCGameSettingsViewController {
-                    return SCPageViewController.categoriesViewController
+                    return SCPageViewFlowViewController.categoriesViewController
                 }
             case .PregameOnboarding, .GameOnboarding:
-                if let onboardingViewController = viewController as? SCOnboardingViewController,
-                    let index = onboardingViewController.index {
-                    return self.getNextOnboardingViewController(index: index)
+                if let pageViewFlowEntryViewController = viewController as? SCPageViewFlowEntryViewController,
+                    let index = pageViewFlowEntryViewController.index {
+                    return self.getNextPageViewFlowEntryViewController(index: index)
                 }
             }
         }
@@ -190,11 +192,11 @@ extension SCPageViewController: UIPageViewControllerDataSource, UIPageViewContro
             case .PregameMenu:
                 return 2
             case .PregameOnboarding, .GameOnboarding:
-                guard let onboardingFlowManager = self.onboardingFlowManager else {
+                guard let pageViewFlowManager = self.pageViewFlowManager else {
                     return 0
                 }
 
-                return onboardingFlowManager.getFlowCount()
+                return pageViewFlowManager.getFlowCount()
             }
         }
         

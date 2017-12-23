@@ -188,12 +188,12 @@ class SCPregameRoomViewController: SCViewController {
     }
     
     func showOnboardingView() {
-        self.destinationPageViewType = SCPageViewController.PageViewType.PregameOnboarding
+        self.destinationPageViewType = SCPageViewFlowViewController.PageViewType.PregameOnboarding
         self.showPageViewContainer()
     }
 
     func showPregameMenu() {
-        self.destinationPageViewType = SCPageViewController.PageViewType.PregameMenu
+        self.destinationPageViewType = SCPageViewFlowViewController.PageViewType.PregameMenu
         self.showPageViewContainer()
     }
 
@@ -274,7 +274,7 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate func showPageViewContainer() {
         DispatchQueue.main.async {
             self.performSegue(
-                withIdentifier: SCConstants.segues.pageViewContainerViewControllerSegue.rawValue,
+                withIdentifier: SCConstants.segues.pageViewFlowContainerViewControllerSegue.rawValue,
                 sender: self
             )
         }
