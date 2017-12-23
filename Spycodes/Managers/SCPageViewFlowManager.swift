@@ -1,8 +1,8 @@
-class SCOnboardingFlowManager {
-    fileprivate var flow: [Int: SCOnboardingFlowEntry]?
+class SCPageViewFlowManager {
+    fileprivate var flow: [Int: SCPageViewFlowEntry]?
 
-    init(flowType: SCOnboardingFlows.FlowType) {
-        self.flow = SCOnboardingFlows.retrieveFlow(flowType: flowType)
+    init(flowType: SCPageViewFlows.FlowType) {
+        self.flow = SCPageViewFlows.retrieveFlow(flowType: flowType)
     }
     
     func getFlowCount() -> Int {
@@ -13,7 +13,7 @@ class SCOnboardingFlowManager {
         return flow.count
     }
     
-    func getInitialEntry() -> SCOnboardingFlowEntry? {
+    func getInitialEntry() -> SCPageViewFlowEntry? {
         guard let flow = self.flow else {
             return nil
         }
@@ -25,7 +25,7 @@ class SCOnboardingFlowManager {
         return nil
     }
     
-    func getPreviousEntry(index: Int) -> SCOnboardingFlowEntry? {
+    func getPreviousEntry(index: Int) -> SCPageViewFlowEntry? {
         guard let flow = self.flow else {
             return nil
         }
@@ -44,7 +44,7 @@ class SCOnboardingFlowManager {
         return nil
     }
     
-    func getNextEntry(index: Int) -> SCOnboardingFlowEntry? {
+    func getNextEntry(index: Int) -> SCPageViewFlowEntry? {
         guard let flow = self.flow else {
             return nil
         }

@@ -1,6 +1,6 @@
 import UIKit
 
-class SCOnboardingFlowEntry {
+class SCPageViewFlowEntry {
     fileprivate var displayImage: UIImage?
     fileprivate var displayImageHeight: Int?
     fileprivate var displayImageWidth: Int?

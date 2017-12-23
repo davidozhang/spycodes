@@ -1,11 +1,11 @@
 import UIKit
 
-class SCPageViewContainerViewController: SCModalViewController {
+class SCPageViewFlowContainerViewController: SCModalViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.uniqueIdentifier = SCConstants.viewControllers.pageViewContainerViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.pageViewFlowContainerViewController.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -13,7 +13,7 @@ class SCPageViewContainerViewController: SCModalViewController {
 
         super.registerObservers(observers: [
             SCConstants.notificationKey.dismissModal.rawValue:
-                #selector(SCPageViewContainerViewController.dismissViewFromNotification)
+                #selector(SCPageViewFlowContainerViewController.dismissViewFromNotification)
         ])
     }
 
