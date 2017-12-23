@@ -533,6 +533,14 @@ class SCGameViewController: SCViewController {
         self.actionButton.alpha = 0.4
         self.actionButton.isEnabled = false
     }
+    
+    fileprivate func validate(word: String) -> Bool {
+        let checker = UITextChecker()
+        let range = NSRange(location: 0, length: word.count)
+        let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        
+        return misspelledRange.location == NSNotFound
+    }
 
     fileprivate func didConfirm() {
         self.leaderIsEditing = false
@@ -1126,6 +1134,7 @@ extension SCGameViewController: UITextFieldDelegate {
                 self.numberOfWordsTextField.becomeFirstResponder()
 
                 Round.instance.setClue(self.clueTextField.text)
+                SCLogger.log(identifier: nil, self.validate(word: Round.instance.getClue()!).description)
             } else if textField == self.numberOfWordsTextField &&
                 characterCount >= 1 {
                 if Round.instance.isClueSet() {
