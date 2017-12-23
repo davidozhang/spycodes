@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1154,18 +1155,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ew4-Ow-Qzc">
-                                <rect key="frame" x="30" y="532.5" width="964" height="301"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwb-zi-xv8">
+                                <rect key="frame" x="40" y="488.5" width="944" height="389"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vca-6v-mPL">
-                                        <rect key="frame" x="354" y="0.0" width="256" height="256"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vca-6v-mPL">
+                                        <rect key="frame" x="382" y="0.0" width="180" height="320"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="256" id="JzP-5a-u5j"/>
-                                            <constraint firstAttribute="width" constant="256" id="P6i-yF-owp"/>
+                                            <constraint firstAttribute="width" constant="180" id="0gG-dN-k3e"/>
+                                            <constraint firstAttribute="width" secondItem="Vca-6v-mPL" secondAttribute="height" multiplier="9:16" id="6qF-kQ-KhK"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRD-ch-cEQ" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="280" width="964" height="21"/>
+                                        <rect key="frame" x="0.0" y="368" width="944" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1173,29 +1174,29 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="VRD-ch-cEQ" firstAttribute="leading" secondItem="ew4-Ow-Qzc" secondAttribute="leading" id="DuZ-fb-p3F"/>
-                                    <constraint firstItem="VRD-ch-cEQ" firstAttribute="top" secondItem="Vca-6v-mPL" secondAttribute="bottom" constant="24" id="Nb1-KX-nEq"/>
-                                    <constraint firstItem="Vca-6v-mPL" firstAttribute="top" secondItem="ew4-Ow-Qzc" secondAttribute="top" id="Wfa-29-pMS"/>
-                                    <constraint firstAttribute="bottom" secondItem="VRD-ch-cEQ" secondAttribute="bottom" id="bZf-m0-988"/>
-                                    <constraint firstItem="VRD-ch-cEQ" firstAttribute="centerX" secondItem="ew4-Ow-Qzc" secondAttribute="centerX" id="g2V-Xp-W3z"/>
-                                    <constraint firstItem="Vca-6v-mPL" firstAttribute="centerX" secondItem="ew4-Ow-Qzc" secondAttribute="centerX" id="i5R-pg-aXu"/>
-                                    <constraint firstAttribute="trailing" secondItem="VRD-ch-cEQ" secondAttribute="trailing" id="ic5-Rv-M03"/>
+                                    <constraint firstAttribute="trailing" secondItem="VRD-ch-cEQ" secondAttribute="trailing" id="8F0-YA-OUE"/>
+                                    <constraint firstItem="VRD-ch-cEQ" firstAttribute="centerX" secondItem="rwb-zi-xv8" secondAttribute="centerX" id="KBm-tG-abg"/>
+                                    <constraint firstItem="Vca-6v-mPL" firstAttribute="centerX" secondItem="rwb-zi-xv8" secondAttribute="centerX" id="Pph-Wa-pvz"/>
+                                    <constraint firstItem="VRD-ch-cEQ" firstAttribute="leading" secondItem="rwb-zi-xv8" secondAttribute="leading" id="ULX-Yb-fWP"/>
+                                    <constraint firstAttribute="bottom" secondItem="VRD-ch-cEQ" secondAttribute="bottom" id="mcX-Vr-UtP"/>
+                                    <constraint firstItem="Vca-6v-mPL" firstAttribute="top" secondItem="rwb-zi-xv8" secondAttribute="top" id="mtp-gh-U9j"/>
+                                    <constraint firstItem="VRD-ch-cEQ" firstAttribute="top" secondItem="Vca-6v-mPL" secondAttribute="bottom" constant="48" id="vfL-q0-wSA"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ew4-Ow-Qzc" firstAttribute="leading" secondItem="6av-ke-ws8" secondAttribute="leading" constant="30" id="eN1-KD-LDH"/>
-                            <constraint firstItem="ew4-Ow-Qzc" firstAttribute="centerY" secondItem="6av-ke-ws8" secondAttribute="centerY" id="k5x-Fh-iKm"/>
-                            <constraint firstItem="ew4-Ow-Qzc" firstAttribute="centerX" secondItem="6av-ke-ws8" secondAttribute="centerX" id="rVE-MS-gM3"/>
-                            <constraint firstAttribute="trailing" secondItem="ew4-Ow-Qzc" secondAttribute="trailing" constant="30" id="uFZ-Lb-Fyd"/>
+                            <constraint firstAttribute="trailing" secondItem="rwb-zi-xv8" secondAttribute="trailing" constant="40" id="206-4k-P53"/>
+                            <constraint firstItem="rwb-zi-xv8" firstAttribute="centerY" secondItem="6av-ke-ws8" secondAttribute="centerY" id="BIs-b1-Txi"/>
+                            <constraint firstItem="rwb-zi-xv8" firstAttribute="leading" secondItem="6av-ke-ws8" secondAttribute="leading" constant="40" id="PS9-ef-aL2"/>
+                            <constraint firstItem="rwb-zi-xv8" firstAttribute="centerX" secondItem="6av-ke-ws8" secondAttribute="centerX" id="q7c-eB-kTG"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="Vca-6v-mPL" id="Dna-90-I4D"/>
-                        <outlet property="imageViewHeightConstraint" destination="JzP-5a-u5j" id="aE8-N9-XH5"/>
-                        <outlet property="imageViewWidthConstraint" destination="P6i-yF-owp" id="AKH-5b-qHe"/>
+                        <outlet property="imageViewWidthConstraint" destination="0gG-dN-k3e" id="OxS-9o-m6F"/>
                         <outlet property="label" destination="VRD-ch-cEQ" id="NBr-5j-I4S"/>
+                        <outlet property="labelTopSpaceConstraint" destination="vfL-q0-wSA" id="2BM-FJ-8VV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7z-pe-KfM" userLabel="First Responder" sceneMemberID="firstResponder"/>

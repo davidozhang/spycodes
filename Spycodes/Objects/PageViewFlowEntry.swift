@@ -1,39 +1,39 @@
 import UIKit
+import SwiftGifOrigin
 
 class SCPageViewFlowEntry {
     fileprivate var displayImage: UIImage?
-    fileprivate var displayImageHeight: Int?
-    fileprivate var displayImageWidth: Int?
+    fileprivate var displayImageType: DisplayImageType?
     fileprivate var displayText: String?
+    
+    enum DisplayImageType: Int {
+        case GIF
+        case Image
+    }
 
     init(_ mapping: [String: Any]) {
-        if let displayImageName = mapping[SCConstants.onboardingFlowEntryKey.displayImageName.rawValue] as? String {
-            self.displayImage = UIImage(named: displayImageName)
+        if let displayImageType = mapping[SCConstants.pageViewFlowEntryKey.displayImageType.rawValue] as? DisplayImageType {
+            self.displayImageType = displayImageType
         }
 
-        if let displayText = mapping[SCConstants.onboardingFlowEntryKey.displayText.rawValue] as? String? {
+        if let displayImageName = mapping[SCConstants.pageViewFlowEntryKey.displayImageName.rawValue] as? String {
+            if let displayImageType = self.displayImageType {
+                switch displayImageType {
+                case .GIF:
+                    self.displayImage = UIImage.gif(name: displayImageName)
+                case .Image:
+                    self.displayImage = UIImage(named: displayImageName)
+                }
+            }
+        }
+
+        if let displayText = mapping[SCConstants.pageViewFlowEntryKey.displayText.rawValue] as? String? {
             self.displayText = displayText
-        }
-
-        if let displayImageHeight = mapping[SCConstants.onboardingFlowEntryKey.displayImageHeight.rawValue] as? Int {
-            self.displayImageHeight = displayImageHeight
-        }
-        
-        if let displayImageWidth = mapping[SCConstants.onboardingFlowEntryKey.displayImageWidth.rawValue] as? Int {
-            self.displayImageWidth = displayImageWidth
         }
     }
     
     func getDisplayImage() -> UIImage? {
         return self.displayImage
-    }
-    
-    func getDisplayImageHeight() -> Int? {
-        return self.displayImageHeight
-    }
-    
-    func getDisplayImageWidth() -> Int? {
-        return self.displayImageWidth
     }
     
     func getDisplayText() -> String? {

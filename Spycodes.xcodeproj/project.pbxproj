@@ -17,6 +17,7 @@
 		633292271E7DE8B30090B09D /* SCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633292261E7DE8B30090B09D /* SCTableViewCell.swift */; };
 		6332922B1E7DE9EC0090B09D /* SCLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */; };
 		633C48661FEDED6800EA2DD9 /* SCPageViewFlowEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C48651FEDED6800EA2DD9 /* SCPageViewFlowEntryViewController.swift */; };
+		633C48641FEDC92400EA2DD9 /* out.gif in Resources */ = {isa = PBXBuildFile; fileRef = 633C48631FEDC92400EA2DD9 /* out.gif */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
 		635464791EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */; };
 		635599B81F4DD35200508FE9 /* SCGameSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635599B31F4DD35200508FE9 /* SCGameSettingsViewController.swift */; };
@@ -104,6 +105,7 @@
 		633292261E7DE8B30090B09D /* SCTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTableViewCell.swift; path = Views/SCTableViewCell.swift; sourceTree = "<group>"; };
 		6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLocalStorageManager.swift; path = Managers/SCLocalStorageManager.swift; sourceTree = "<group>"; };
 		633C48651FEDED6800EA2DD9 /* SCPageViewFlowEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPageViewFlowEntryViewController.swift; path = ViewControllers/Page/SCPageViewFlowEntryViewController.swift; sourceTree = "<group>"; };
+		633C48631FEDC92400EA2DD9 /* out.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = out.gif; path = Onboarding/Pregame/out.gif; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
 		63512E051F5083A400837032 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Spycodes.strings"; sourceTree = "<group>"; };
 		63512E061F50A4F900837032 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				63920A351D3090BC0073E7F7 /* Managers */,
 				639F88FF1F0F25660082D813 /* Nibs */,
 				63FDED331D264BD800142780 /* Objects */,
+				63B4C3C41FECB0AD00161773 /* Onboarding */,
 				63FA54E31D1BCFA6004515DA /* Storyboards */,
 				63D256751E6BA6600061D80C /* Utilities */,
 				63A04D1A1D1A7F25005A2914 /* View Controllers */,
@@ -350,6 +353,30 @@
 				63B4C3B11FE8EFA200161773 /* SCPageViewFlowViewController.swift */,
 			);
 			name = Page;
+			sourceTree = "<group>";
+		};
+		63B4C3B71FEA6D0500161773 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				63B4C3B81FEA6D2000161773 /* SCOnboardingViewController.swift */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		63B4C3C41FECB0AD00161773 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				63B4C3C51FECB0B500161773 /* Pregame */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		63B4C3C51FECB0B500161773 /* Pregame */ = {
+			isa = PBXGroup;
+			children = (
+				633C48631FEDC92400EA2DD9 /* out.gif */,
+			);
+			name = Pregame;
 			sourceTree = "<group>";
 		};
 		63D256751E6BA6600061D80C /* Utilities */ = {
@@ -513,6 +540,7 @@
 				635599D71F4E762B00508FE9 /* Spycodes.storyboard in Resources */,
 				635599E31F4E778E00508FE9 /* Localizable.strings in Resources */,
 				63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */,
+				633C48641FEDC92400EA2DD9 /* out.gif in Resources */,
 				632601001F423E0C00E28E9D /* SCToggleViewCell.xib in Resources */,
 				635599DC1F4E76CC00508FE9 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -529,10 +557,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Spycodes/Pods-Spycodes-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ISEmojiView/ISEmojiView.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftGifOrigin/SwiftGifOrigin.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISEmojiView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftGifOrigin.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

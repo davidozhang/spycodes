@@ -84,10 +84,9 @@ class SCConstants {
         case updateCollectionView = "update-collection-view"
     }
     
-    enum onboardingFlowEntryKey: String {
+    enum pageViewFlowEntryKey: String {
         case displayImageName = "display-image"
-        case displayImageHeight = "display-image-height"
-        case displayImageWidth = "display-image-width"
+        case displayImageType = "display-image-type"
         case displayText = "display-text"
     }
     
