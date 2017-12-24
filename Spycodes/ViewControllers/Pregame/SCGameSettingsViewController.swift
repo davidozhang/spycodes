@@ -15,14 +15,15 @@ class SCGameSettingsViewController: SCViewController {
         }
     }
 
-    fileprivate enum GameSetting: Int {
+    fileprivate enum GameSettings: Int {
         case minigame = 0
         case validateClues = 1
-        case timer = 2
+        case wordLookup = 2
+        case timer = 3
 
         static var count: Int {
             var count = 0
-            while let _ = GameSetting(rawValue: count) {
+            while let _ = GameSettings(rawValue: count) {
                 count += 1
             }
             return count
@@ -33,10 +34,11 @@ class SCGameSettingsViewController: SCViewController {
         .gameSettings: SCStrings.section.gameSettings.rawValue.localized,
     ]
 
-    fileprivate let settingsLabels: [GameSetting: String] = [
+    fileprivate let settingsLabels: [GameSettings: String] = [
         .minigame: SCStrings.primaryLabel.minigame.rawValue.localized,
         .timer: SCStrings.primaryLabel.timer.rawValue.localized,
         .validateClues: SCStrings.primaryLabel.validateClues.rawValue.localized,
+        .wordLookup: SCStrings.primaryLabel.wordLookup.rawValue.localized,
     ]
 
     fileprivate var scrolled = false
@@ -124,6 +126,11 @@ class SCGameSettingsViewController: SCViewController {
             multilineToggleViewCellNib,
             forCellReuseIdentifier: SCConstants.reuseIdentifiers.validateCluesToggleViewCell.rawValue
         )
+        
+        self.tableView.register(
+            multilineToggleViewCellNib,
+            forCellReuseIdentifier: SCConstants.reuseIdentifiers.wordLookupToggleViewCell.rawValue
+        )
     }
 }
 
@@ -169,7 +176,7 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
         case Section.gameSettings.rawValue:
-            return GameSetting.count
+            return GameSettings.count
         default:
             return 0
         }
@@ -180,7 +187,7 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
         switch indexPath.section {
         case Section.gameSettings.rawValue:
             switch indexPath.row {
-            case GameSetting.minigame.rawValue:
+            case GameSettings.minigame.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.reuseIdentifiers.minigameToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
@@ -193,7 +200,7 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
                 cell.delegate = self
 
                 return cell
-            case GameSetting.timer.rawValue:
+            case GameSettings.timer.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
                     withIdentifier: SCConstants.reuseIdentifiers.timerSettingViewCell.rawValue
                     ) as? SCPickerViewCell else {
@@ -207,7 +214,7 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
                 cell.synchronizeSetting()
 
                 return cell
-            case GameSetting.validateClues.rawValue:
+            case GameSettings.validateClues.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(withIdentifier: SCConstants.reuseIdentifiers.validateCluesToggleViewCell.rawValue) as? SCToggleViewCell else {
                     return SCTableViewCell()
                 }
@@ -217,6 +224,17 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
                 cell.secondaryLabel.text = SCStrings.secondaryLabel.validateClues.rawValue.localized
                 cell.delegate = self
 
+                return cell
+            case GameSettings.wordLookup.rawValue:
+                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: SCConstants.reuseIdentifiers.wordLookupToggleViewCell.rawValue) as? SCToggleViewCell else {
+                    return SCTableViewCell()
+                }
+                
+                cell.synchronizeToggle()
+                cell.primaryLabel.text = self.settingsLabels[.wordLookup]
+                cell.secondaryLabel.text = SCStrings.secondaryLabel.wordLookup.rawValue.localized
+                cell.delegate = self
+                
                 return cell
             default:
                 return SCTableViewCell()
@@ -267,6 +285,8 @@ extension SCGameSettingsViewController: SCToggleViewCellDelegate {
                 SCMultipeerManager.instance.broadcast(Room.instance)
             case SCConstants.reuseIdentifiers.validateCluesToggleViewCell.rawValue:
                 SCGameSettingsManager.instance.enableGameSetting(.validateClues, enabled: enabled)
+            case SCConstants.reuseIdentifiers.wordLookupToggleViewCell.rawValue:
+                SCGameSettingsManager.instance.enableGameSetting(.wordLookup, enabled: enabled)
             default:
                 break
             }

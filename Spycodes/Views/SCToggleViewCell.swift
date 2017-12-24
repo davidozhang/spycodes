@@ -44,6 +44,8 @@ class SCToggleViewCell: SCTableViewCell {
                 toggleSwitch.isOn = SCGameSettingsManager.instance.isGameSettingEnabled(.minigame)
             case SCConstants.reuseIdentifiers.validateCluesToggleViewCell.rawValue:
                 toggleSwitch.isOn = SCGameSettingsManager.instance.isGameSettingEnabled(.validateClues)
+            case SCConstants.reuseIdentifiers.wordLookupToggleViewCell.rawValue:
+                toggleSwitch.isOn = SCGameSettingsManager.instance.isGameSettingEnabled(.wordLookup)
             case SCConstants.reuseIdentifiers.selectAllToggleViewCell.rawValue:
                 let allCategoriesSelected = ConsolidatedCategories.instance.allCategoriesSelected()
                 toggleSwitch.isOn = allCategoriesSelected

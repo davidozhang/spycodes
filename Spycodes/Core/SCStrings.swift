@@ -212,6 +212,7 @@ class SCStrings {
         case validateClues = "Clue Validation (Beta)"
         case version = "Version"
         case website = "Website"
+        case wordLookup = "Word Lookup (Beta)"
     }
 
     enum round: String {
@@ -234,6 +235,7 @@ class SCStrings {
         case tapToEdit = "Tap to Edit"
         case validateClues = "Checks if clue word is valid (English only)."
         case word = "word"
+        case wordLookup = "Look up word definitions using 3D Touch."
         case words = "words"
     }
 

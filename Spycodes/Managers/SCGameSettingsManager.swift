@@ -4,6 +4,7 @@ class SCGameSettingsManager: SCLogger {
     enum GameSettingType: Int {
         case minigame = 0
         case validateClues = 1
+        case wordLookup = 2
     }
     
     fileprivate var gameSettings = [GameSettingType: Bool]()
@@ -50,8 +51,10 @@ class SCGameSettingsManager: SCLogger {
     }
     
     func reset() {
-        self.gameSettings[.minigame] = false
-        self.gameSettings[.validateClues] = false
+        for setting in self.gameSettings.keys {
+            self.gameSettings[setting] = false
+        }
+
         GameMode.instance.setMode(mode: .regularGame)
     }
 }

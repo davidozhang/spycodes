@@ -114,6 +114,7 @@ class SCConstants {
         case timerSettingViewCell = "timer-setting-view-cell"
         case validateCluesToggleViewCell = "validate-clues-toggle-view-cell"
         case versionViewCell = "version-view-cell"
+        case wordLookupToggleViewCell = "word-lookup-toggle-view-cell"
         case wordViewCell = "word-view-cell"
     }
     

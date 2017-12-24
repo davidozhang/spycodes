@@ -119,6 +119,13 @@ class SCGameViewController: SCViewController {
             action: #selector(SCGameViewController.textFieldEditingChanged),
             for: .editingChanged
         )
+        
+        // 3D Touch support
+        if #available(iOS 9.0, *) {
+            if self.traitCollection.forceTouchCapability == .available {
+                self.registerForPreviewing(with: self, sourceView: self.view)
+            }
+        }
 
         SCMultipeerManager.instance.delegate = self
 
@@ -1180,5 +1187,25 @@ extension SCGameViewController: UITextFieldDelegate {
         }
 
         return true
+    }
+}
+
+extension SCGameViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = self.collectionView.indexPathForItem(at: location) else {
+            return nil
+        }
+        
+        let cardAtIndex = CardCollection.instance.getCards()[indexPath.row]
+        let word = cardAtIndex.getWord()
+        if UIReferenceLibraryViewController.dictionaryHasDefinition(forTerm: word) {
+            return UIReferenceLibraryViewController(term: word)
+        }
+
+        return nil
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.present(viewControllerToCommit, animated: true)
     }
 }
