@@ -112,6 +112,7 @@ class SCConstants {
         case timelineModal = "timeline-modal"
         case timelineViewCell = "timeline-view-cell"
         case timerSettingViewCell = "timer-setting-view-cell"
+        case validateCluesToggleViewCell = "validate-clues-toggle-view-cell"
         case versionViewCell = "version-view-cell"
         case wordViewCell = "word-view-cell"
     }
