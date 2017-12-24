@@ -521,12 +521,29 @@ class SCGameViewController: SCViewController {
         self.actionButton.isEnabled = false
     }
     
-    fileprivate func validate(word: String) -> Bool {
+    fileprivate func validateClueIfEnabled(
+        word: String,
+        successHandler:(String) -> Void,
+        failureHandler: () -> Void) {
+        if !SCGameSettingsManager.instance.isGameSettingEnabled(.validateClues) || Bundle.main.preferredLocalizations.first != "en" {
+            successHandler(word)
+            return
+        }
+
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.count)
-        let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        let misspelledRange = checker.rangeOfMisspelledWord(
+            in: word,
+            range: range,
+            startingAt: 0,
+            wrap: false,
+            language: "en")
         
-        return misspelledRange.location == NSNotFound
+        if misspelledRange.location == NSNotFound {
+            successHandler(word)
+        } else {
+            failureHandler()
+        }
     }
 
     fileprivate func didConfirm() {
@@ -622,6 +639,25 @@ class SCGameViewController: SCViewController {
                 self.displayEndGameAlert(title: title, reason: reason, onDismissal: onDismissal)
             })
         }
+    }
+    
+    func displayValidationAlert() {
+        let alertController = UIAlertController(
+            title: SCStrings.header.invalidClue.rawValue.localized,
+            message: SCStrings.message.invalidClue.rawValue.localized,
+            preferredStyle: .alert
+        )
+        let confirmAction = UIAlertAction(
+            title: SCStrings.button.ok.rawValue.localized,
+            style: .default,
+            handler: { (action: UIAlertAction) in }
+        )
+        alertController.addAction(confirmAction)
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil
+        )
     }
 
     func displayEndGameAlert(title: String, reason: String, onDismissal: (() -> Void)?) {
@@ -1118,10 +1154,22 @@ extension SCGameViewController: UITextFieldDelegate {
         if let characterCount = textField.text?.count {
             if textField == self.clueTextField &&
                 characterCount >= 1 {
-                self.numberOfWordsTextField.becomeFirstResponder()
 
-                Round.instance.setClue(self.clueTextField.text)
-                SCLogger.log(identifier: nil, self.validate(word: Round.instance.getClue()!).description)
+                if let word = self.clueTextField.text {
+                    self.validateClueIfEnabled(
+                        word: word,
+                        successHandler: { (word) in
+                            Round.instance.setClue(word)
+                            self.numberOfWordsTextField.becomeFirstResponder()
+                        }, failureHandler: {
+                            DispatchQueue.main.async {
+                                self.displayValidationAlert()
+                                self.clueTextField.text = ""
+                                self.clueTextField.becomeFirstResponder()
+                            }
+                        }
+                    )
+                }
             } else if textField == self.numberOfWordsTextField &&
                 characterCount >= 1 {
                 if Round.instance.isClueSet() {

@@ -113,6 +113,7 @@ class SCStrings {
         case hostOnly = "Host Only Feature"
         case integrityCheck = "Integrity Check"
         case introduction = "Introduction"
+        case invalidClue = "Invalid Clue"
         case gameAborted = "Game Aborted"
         case gameOver = "Game Over"
         case goal = "Goal"
@@ -156,6 +157,7 @@ class SCStrings {
         case enterCategoryName = "Enter a category name"
         case hostDisconnected = "Host player has disconnected."
         case integrityCheck = "There must be at least 22 words for all selected categories."
+        case invalidClue = "The clue is an invalid word. Please enter another one."
         case leaderConfirm = "Once you are comfortable with your clue and number, tap Confirm to allow your teammates to see the clue and number. The clue and number cannot be modified until the round ends. You cannot talk or make eye contact with your teammates!"
         case leaderEnterClue = "Look over the words belonging to your team carefully and enter a 1-word clue followed by a number. The number represents the amount of words corresponding to your clue. Your clue cannot be a word already in the game!"
         case leaderGuess = "While guessing, your teammates can tap End Round at any time. If they guess the Assassin word, then it is Game Over. Guessing an enemy team word or a neutral word will end the round."
@@ -207,6 +209,7 @@ class SCStrings {
         case teamEmptyState = "No players on the team."
         case teamRed = "Red"
         case timer = "Timer"
+        case validateClues = "Clue Validation (Beta)"
         case version = "Version"
         case website = "Website"
     }
@@ -229,6 +232,7 @@ class SCStrings {
         case persistentSelection = "Your current selections will be saved."
         case selectAll = "All categories will be selected."
         case tapToEdit = "Tap to Edit"
+        case validateClues = "Checks if clue word is valid (English only)."
         case word = "word"
         case words = "words"
     }
