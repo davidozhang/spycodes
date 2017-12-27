@@ -61,32 +61,30 @@ class SCPageViewFlowViewController: UIPageViewController {
         self.delegate = nil
     }
 
-    fileprivate func showGameSettingsViewController() {
+    fileprivate func setInitialViewController(viewController: UIViewController) {
         self.setViewControllers(
-            [SCPageViewFlowViewController.gameSettingsViewController],
+            [viewController],
             direction: .forward,
             animated: false,
             completion: nil
         )
     }
 
+    fileprivate func showGameSettingsViewController() {
+        self.setInitialViewController(
+            viewController: SCPageViewFlowViewController.gameSettingsViewController
+        )
+    }
+
     fileprivate func showCategoriesViewController() {
-        self.setViewControllers(
-            [SCPageViewFlowViewController.categoriesViewController],
-            direction: .forward,
-            animated: false,
-            completion: nil
+        self.setInitialViewController(
+            viewController: SCPageViewFlowViewController.categoriesViewController
         )
     }
 
     fileprivate func showInitialOnboardingViewController() {
         if let initialOnboardingViewController = self.getInitialPageViewFlowEntryViewController() {
-            self.setViewControllers(
-                [initialOnboardingViewController],
-                direction: .forward,
-                animated: false,
-                completion: nil
-            )
+            self.setInitialViewController(viewController: initialOnboardingViewController)
         }
     }
 
