@@ -1,10 +1,6 @@
 class SCPageViewFlows {
-    enum FlowType: Int {
-        case Pregame = 0
-    }
-
-    fileprivate static let mapping: [FlowType: [SCPageViewFlowEntry]] = [
-        .Pregame: [
+    fileprivate static let mapping: [SCPageViewFlowType: [SCPageViewFlowEntry]] = [
+        .PregameOnboarding: [
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue: "Welcome to Spycodes! Let's help you get started.",
             ]),
@@ -43,7 +39,7 @@ class SCPageViewFlows {
         ],
     ]
 
-    static func retrieveFlow(flowType: FlowType) -> [SCPageViewFlowEntry]? {
+    static func retrieveFlow(flowType: SCPageViewFlowType) -> [SCPageViewFlowEntry]? {
         if let mapping = SCPageViewFlows.mapping[flowType] {
             return mapping
         }

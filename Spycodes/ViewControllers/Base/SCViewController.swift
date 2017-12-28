@@ -13,7 +13,7 @@ class SCViewController: UIViewController {
     var unwindSegueIdentifier: String?
     var previousViewControllerUnwindSegueIdentifier: String?
     
-    var destinationPageViewType: SCPageViewFlowViewController.PageViewType?
+    var destinationPageViewFlowType: SCPageViewFlowType?
 
     var returnToRootViewController = false
     var unwindingSegue = false
@@ -165,8 +165,8 @@ class SCViewController: UIViewController {
         if let destination = segue.destination as? SCModalViewController {
             if let sender = segue.source as? SCViewController,
                let destination = segue.destination as? SCPageViewFlowContainerViewController,
-                let destinationPageViewType = sender.destinationPageViewType {
-                destination.destinationPageViewType = destinationPageViewType
+                let destinationPageViewFlowType = sender.destinationPageViewFlowType {
+                destination.destinationPageViewFlowType = destinationPageViewFlowType
             }
 
             destination.modalPresentationStyle = .overCurrentContext
@@ -175,8 +175,8 @@ class SCViewController: UIViewController {
         
         if let sender = segue.source as? SCPageViewFlowContainerViewController,
             let destination = segue.destination as? SCPageViewFlowViewController,
-            let destinationPageViewType = sender.destinationPageViewType {
-            destination.pageViewType = destinationPageViewType
+            let destinationPageViewFlowType = sender.destinationPageViewFlowType {
+            destination.pageViewFlowType = destinationPageViewFlowType
             return
         }
 

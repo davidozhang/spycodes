@@ -1,7 +1,7 @@
 class SCPageViewFlowManager {
     fileprivate var flow: [SCPageViewFlowEntry]?
 
-    init(flowType: SCPageViewFlows.FlowType) {
+    init(flowType: SCPageViewFlowType) {
         self.flow = SCPageViewFlows.retrieveFlow(flowType: flowType)
     }
     

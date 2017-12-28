@@ -8,13 +8,8 @@ class SCPageViewFlowViewController: UIPageViewController {
     static let categoriesViewController = storyboard.instantiateViewController(
         withIdentifier: SCConstants.viewControllers.categoriesViewController.rawValue
     )
-    
-    enum PageViewType: Int {
-        case PregameMenu = 0
-        case PregameOnboarding = 1
-    }
 
-    var pageViewType: PageViewType?
+    var pageViewFlowType: SCPageViewFlowType?
     var pageViewFlowManager: SCPageViewFlowManager?
 
     deinit {
@@ -34,8 +29,8 @@ class SCPageViewFlowViewController: UIPageViewController {
         self.dataSource = self
         self.delegate = self
         
-        if let pageViewType = self.pageViewType {
-            switch pageViewType {
+        if let pageViewFlowType = self.pageViewFlowType {
+            switch pageViewFlowType {
             case .PregameMenu:
                 switch SCStates.getPregameMenuState() {
                 case .gameSettings:
@@ -44,7 +39,7 @@ class SCPageViewFlowViewController: UIPageViewController {
                     self.showCategoriesViewController()
                 }
             case .PregameOnboarding:
-                self.pageViewFlowManager = SCPageViewFlowManager(flowType: .Pregame)
+                self.pageViewFlowManager = SCPageViewFlowManager(flowType: pageViewFlowType)
                 self.showInitialOnboardingViewController()
             }
         }
@@ -143,8 +138,8 @@ extension SCPageViewFlowViewController: UIPageViewControllerDataSource, UIPageVi
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let pageViewType = self.pageViewType {
-            switch pageViewType {
+        if let pageViewFlowType = self.pageViewFlowType {
+            switch pageViewFlowType {
             case .PregameMenu:
                 if let _ = viewController as? SCCategoriesViewController {
                     return SCPageViewFlowViewController.gameSettingsViewController
@@ -163,8 +158,8 @@ extension SCPageViewFlowViewController: UIPageViewControllerDataSource, UIPageVi
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let pageViewType = self.pageViewType {
-            switch pageViewType {
+        if let pageViewFlowType = self.pageViewFlowType {
+            switch pageViewFlowType {
             case .PregameMenu:
                 if let _ = viewController as? SCGameSettingsViewController {
                     return SCPageViewFlowViewController.categoriesViewController
@@ -181,8 +176,8 @@ extension SCPageViewFlowViewController: UIPageViewControllerDataSource, UIPageVi
     }
 
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        if let pageViewType = self.pageViewType {
-            switch pageViewType {
+        if let pageViewFlowType = self.pageViewFlowType {
+            switch pageViewFlowType {
             case .PregameMenu:
                 return 2
             case .PregameOnboarding:
@@ -198,8 +193,8 @@ extension SCPageViewFlowViewController: UIPageViewControllerDataSource, UIPageVi
     }
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        if let pageViewType = self.pageViewType {
-            switch pageViewType {
+        if let pageViewFlowType = self.pageViewFlowType {
+            switch pageViewFlowType {
             case .PregameMenu:
                 return SCStates.getPregameMenuState().rawValue
             case .PregameOnboarding:
