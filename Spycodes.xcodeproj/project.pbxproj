@@ -24,10 +24,8 @@
 		635599BA1F4DD35200508FE9 /* SCCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635599B51F4DD35200508FE9 /* SCCategoriesViewController.swift */; };
 		635599BB1F4DD35200508FE9 /* SCPregameRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635599B61F4DD35200508FE9 /* SCPregameRoomViewController.swift */; };
 		635599BF1F4DD45100508FE9 /* SCModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635599BC1F4DD45100508FE9 /* SCModalViewController.swift */; };
-		635599C01F4DD45100508FE9 /* SCPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635599BD1F4DD45100508FE9 /* SCPopoverViewController.swift */; };
 		635599C11F4DD45100508FE9 /* SCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635599BE1F4DD45100508FE9 /* SCViewController.swift */; };
 		635599C61F4DD8ED00508FE9 /* SCGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635599C31F4DD8ED00508FE9 /* SCGameViewController.swift */; };
-		635599C71F4DD8ED00508FE9 /* SCGameHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635599C41F4DD8ED00508FE9 /* SCGameHelpViewController.swift */; };
 		635599C81F4DD8ED00508FE9 /* SCTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635599C51F4DD8ED00508FE9 /* SCTimelineViewController.swift */; };
 		635599CA1F4DD94F00508FE9 /* SCCustomCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635599C91F4DD94F00508FE9 /* SCCustomCategoryViewController.swift */; };
 		635599CE1F4DEF8700508FE9 /* SCAccessCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635599CC1F4DEF8700508FE9 /* SCAccessCodeViewController.swift */; };
@@ -72,7 +70,6 @@
 		63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F091D3CB88D00211D3A /* Card.swift */; };
 		63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */; };
 		63D256811E6BA6BA0061D80C /* SCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256761E6BA6BA0061D80C /* SCButton.swift */; };
-		63D256821E6BA6BA0061D80C /* SCHelpDescriptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256771E6BA6BA0061D80C /* SCHelpDescriptionLabel.swift */; };
 		63D256841E6BA6BA0061D80C /* SCLogoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D256791E6BA6BA0061D80C /* SCLogoLabel.swift */; };
 		63D256871E6BA6BA0061D80C /* SCNavigationBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567C1E6BA6BA0061D80C /* SCNavigationBarLabel.swift */; };
 		63D256881E6BA6BA0061D80C /* SCRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2567D1E6BA6BA0061D80C /* SCRoundedButton.swift */; };
@@ -118,10 +115,8 @@
 		635599B51F4DD35200508FE9 /* SCCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCCategoriesViewController.swift; path = ViewControllers/Pregame/SCCategoriesViewController.swift; sourceTree = "<group>"; };
 		635599B61F4DD35200508FE9 /* SCPregameRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPregameRoomViewController.swift; path = ViewControllers/Pregame/SCPregameRoomViewController.swift; sourceTree = "<group>"; };
 		635599BC1F4DD45100508FE9 /* SCModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCModalViewController.swift; path = ViewControllers/Base/SCModalViewController.swift; sourceTree = "<group>"; };
-		635599BD1F4DD45100508FE9 /* SCPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPopoverViewController.swift; path = ViewControllers/Base/SCPopoverViewController.swift; sourceTree = "<group>"; };
 		635599BE1F4DD45100508FE9 /* SCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCViewController.swift; path = ViewControllers/Base/SCViewController.swift; sourceTree = "<group>"; };
 		635599C31F4DD8ED00508FE9 /* SCGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCGameViewController.swift; path = ViewControllers/Game/SCGameViewController.swift; sourceTree = "<group>"; };
-		635599C41F4DD8ED00508FE9 /* SCGameHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCGameHelpViewController.swift; path = ViewControllers/Game/SCGameHelpViewController.swift; sourceTree = "<group>"; };
 		635599C51F4DD8ED00508FE9 /* SCTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTimelineViewController.swift; path = ViewControllers/Game/SCTimelineViewController.swift; sourceTree = "<group>"; };
 		635599C91F4DD94F00508FE9 /* SCCustomCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCCustomCategoryViewController.swift; path = ViewControllers/Pregame/SCCustomCategoryViewController.swift; sourceTree = "<group>"; };
 		635599CC1F4DEF8700508FE9 /* SCAccessCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAccessCodeViewController.swift; path = ViewControllers/Entry/SCAccessCodeViewController.swift; sourceTree = "<group>"; };
@@ -169,7 +164,6 @@
 		63CB4F091D3CB88D00211D3A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Objects/Card.swift; sourceTree = "<group>"; };
 		63CB4F0B1D3CBCBC00211D3A /* CardCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CardCollection.swift; path = Objects/CardCollection.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63D256761E6BA6BA0061D80C /* SCButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCButton.swift; path = Utilities/SCButton.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		63D256771E6BA6BA0061D80C /* SCHelpDescriptionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCHelpDescriptionLabel.swift; path = Utilities/SCHelpDescriptionLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63D256791E6BA6BA0061D80C /* SCLogoLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCLogoLabel.swift; path = Utilities/SCLogoLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63D2567C1E6BA6BA0061D80C /* SCNavigationBarLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCNavigationBarLabel.swift; path = Utilities/SCNavigationBarLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63D2567D1E6BA6BA0061D80C /* SCRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCRoundedButton.swift; path = Utilities/SCRoundedButton.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -209,7 +203,6 @@
 			isa = PBXGroup;
 			children = (
 				635599BC1F4DD45100508FE9 /* SCModalViewController.swift */,
-				635599BD1F4DD45100508FE9 /* SCPopoverViewController.swift */,
 				635599BE1F4DD45100508FE9 /* SCViewController.swift */,
 			);
 			name = Base;
@@ -219,7 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				635599C31F4DD8ED00508FE9 /* SCGameViewController.swift */,
-				635599C41F4DD8ED00508FE9 /* SCGameHelpViewController.swift */,
 				635599C51F4DD8ED00508FE9 /* SCTimelineViewController.swift */,
 			);
 			name = Game;
@@ -378,7 +370,6 @@
 			isa = PBXGroup;
 			children = (
 				63D256761E6BA6BA0061D80C /* SCButton.swift */,
-				63D256771E6BA6BA0061D80C /* SCHelpDescriptionLabel.swift */,
 				638350A31EA1E3CF003049EF /* SCImageButton.swift */,
 				630D15571E99F1B3001C1D87 /* SCLabel.swift */,
 				63D256791E6BA6BA0061D80C /* SCLogoLabel.swift */,
@@ -632,7 +623,6 @@
 				632D31201E9F5C55005D9999 /* SCTextButton.swift in Sources */,
 				633292271E7DE8B30090B09D /* SCTableViewCell.swift in Sources */,
 				63D256891E6BA6BA0061D80C /* SCSingleCharacterTextField.swift in Sources */,
-				635599C71F4DD8ED00508FE9 /* SCGameHelpViewController.swift in Sources */,
 				635599C11F4DD45100508FE9 /* SCViewController.swift in Sources */,
 				63CB4F081D3CB3C300211D3A /* SCGameRoomViewCell.swift in Sources */,
 				639F88F41F0615540082D813 /* SCWordBank.swift in Sources */,
@@ -661,7 +651,6 @@
 				63B4C3B31FE8EFA200161773 /* SCPageViewFlowViewController.swift in Sources */,
 				635599BA1F4DD35200508FE9 /* SCCategoriesViewController.swift in Sources */,
 				63FDED391D26557200142780 /* Room.swift in Sources */,
-				63D256821E6BA6BA0061D80C /* SCHelpDescriptionLabel.swift in Sources */,
 				6378C6511D4C6F46009BD0CA /* GameMode.swift in Sources */,
 				639E17681E00EADB00640540 /* SCSectionHeaderViewCell.swift in Sources */,
 				639F88EE1F0615540082D813 /* SCArray.swift in Sources */,
@@ -669,7 +658,6 @@
 				635599CA1F4DD94F00508FE9 /* SCCustomCategoryViewController.swift in Sources */,
 				635599BF1F4DD45100508FE9 /* SCModalViewController.swift in Sources */,
 				63FDED351D264BE800142780 /* Player.swift in Sources */,
-				635599C01F4DD45100508FE9 /* SCPopoverViewController.swift in Sources */,
 				635599CE1F4DEF8700508FE9 /* SCAccessCodeViewController.swift in Sources */,
 				63B4C3B41FE8EFA200161773 /* SCPageViewFlowContainerViewController.swift in Sources */,
 				63B4C3BB1FEB7F6000161773 /* SCPageViewFlows.swift in Sources */,

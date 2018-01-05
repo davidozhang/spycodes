@@ -38,7 +38,7 @@ class SCPageViewFlowViewController: UIPageViewController {
                 case .categories:
                     self.showCategoriesViewController()
                 }
-            case .PregameOnboarding:
+            case .PregameOnboarding, .GameOnboarding:
                 self.pageViewFlowManager = SCPageViewFlowManager(flowType: pageViewFlowType)
                 self.showInitialOnboardingViewController()
             }
@@ -144,7 +144,7 @@ extension SCPageViewFlowViewController: UIPageViewControllerDataSource, UIPageVi
                 if let _ = viewController as? SCCategoriesViewController {
                     return SCPageViewFlowViewController.gameSettingsViewController
                 }
-            case .PregameOnboarding:
+            case .PregameOnboarding, .GameOnboarding:
                 if let pageViewFlowEntryViewController = viewController as? SCPageViewFlowEntryViewController,
                     let index = pageViewFlowEntryViewController.index {
                     return self.getPreviousPageViewFlowEntryViewController(index: index)
@@ -164,7 +164,7 @@ extension SCPageViewFlowViewController: UIPageViewControllerDataSource, UIPageVi
                 if let _ = viewController as? SCGameSettingsViewController {
                     return SCPageViewFlowViewController.categoriesViewController
                 }
-            case .PregameOnboarding:
+            case .PregameOnboarding, .GameOnboarding:
                 if let pageViewFlowEntryViewController = viewController as? SCPageViewFlowEntryViewController,
                     let index = pageViewFlowEntryViewController.index {
                     return self.getNextPageViewFlowEntryViewController(index: index)
@@ -180,7 +180,7 @@ extension SCPageViewFlowViewController: UIPageViewControllerDataSource, UIPageVi
             switch pageViewFlowType {
             case .PregameMenu:
                 return 2
-            case .PregameOnboarding:
+            case .PregameOnboarding, .GameOnboarding:
                 guard let pageViewFlowManager = self.pageViewFlowManager else {
                     return 0
                 }
@@ -197,7 +197,7 @@ extension SCPageViewFlowViewController: UIPageViewControllerDataSource, UIPageVi
             switch pageViewFlowType {
             case .PregameMenu:
                 return SCStates.getPregameMenuState().rawValue
-            case .PregameOnboarding:
+            case .PregameOnboarding, .GameOnboarding:
                 // TODO: Track onboarding flow location
                 return 0
             }

@@ -3,6 +3,7 @@ import UIKit
 class SCPageViewFlowEntryViewController: SCViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: SCLabel!
+    @IBOutlet weak var headerLabel: SCNavigationBarLabel!
 
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var labelTopSpaceConstraint: NSLayoutConstraint!
@@ -39,6 +40,12 @@ class SCPageViewFlowEntryViewController: SCViewController {
                 self.label.adjustsFontSizeToFitWidth = true
 
                 self.label.text = displayText
+            }
+
+            if let headerText = pageViewFlowEntry.getHeaderText() {
+                self.headerLabel.text = headerText
+            } else {
+                self.headerLabel.isHidden = true
             }
         }
     }

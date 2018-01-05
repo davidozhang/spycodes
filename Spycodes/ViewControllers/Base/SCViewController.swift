@@ -180,31 +180,6 @@ class SCViewController: UIViewController {
             return
         }
 
-        if let destination = segue.destination as? SCPopoverViewController {
-            self.showDimView()
-
-            destination.rootViewController = self
-            destination.modalPresentationStyle = .popover
-            destination.preferredContentSize = CGSize(
-                width: SCViewController.modalWidth,
-                height: SCViewController.modalHeight
-            )
-
-            if let popover = destination.popoverPresentationController {
-                popover.delegate = self
-                popover.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-                popover.sourceView = self.view
-                popover.sourceRect = CGRect(
-                    x: self.view.bounds.midX,
-                    y: self.view.bounds.midY,
-                    width: 0,
-                    height: 0
-                )
-            }
-
-            return
-        }
-
         if let destination = segue.destination as? SCViewController {
             destination.previousViewControllerUnwindSegueIdentifier = self.unwindSegueIdentifier
         }

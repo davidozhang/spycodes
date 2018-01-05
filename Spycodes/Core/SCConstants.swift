@@ -83,11 +83,19 @@ class SCConstants {
         case timelineUpdated = "timeline-updated"
         case updateCollectionView = "update-collection-view"
     }
+
+    enum pageViewFlowCustomKey: String {
+        case playerShared = "player-shared"
+        case leaderShared = "leader-shared"
+        case minigameEnding = "minigame-ending"
+        case regularGameEnding = "regular-game-ending"
+    }
     
     enum pageViewFlowEntryKey: String {
         case displayImageName = "display-image"
         case displayImageType = "display-image-type"
         case displayText = "display-text"
+        case headerText = "header-text"
     }
     
     enum reuseIdentifiers: String {

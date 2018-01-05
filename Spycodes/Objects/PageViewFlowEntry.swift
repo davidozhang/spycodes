@@ -5,6 +5,7 @@ class SCPageViewFlowEntry {
     fileprivate var displayImage: UIImage?
     fileprivate var displayImageType: DisplayImageType?
     fileprivate var displayText: String?
+    fileprivate var headerText: String?
     
     enum DisplayImageType: Int {
         case GIF
@@ -30,6 +31,10 @@ class SCPageViewFlowEntry {
         if let displayText = mapping[SCConstants.pageViewFlowEntryKey.displayText.rawValue] as? String? {
             self.displayText = displayText
         }
+
+        if let headerText = mapping[SCConstants.pageViewFlowEntryKey.headerText.rawValue] as? String? {
+            self.headerText = headerText
+        }
     }
     
     func getDisplayImage() -> UIImage? {
@@ -38,5 +43,9 @@ class SCPageViewFlowEntry {
     
     func getDisplayText() -> String? {
         return self.displayText
+    }
+
+    func getHeaderText() -> String? {
+        return self.headerText
     }
 }
