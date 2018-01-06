@@ -46,6 +46,7 @@
 		639488B01F6A5BB1009D24A5 /* SCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639488AF1F6A5BB1009D24A5 /* SCLogger.swift */; };
 		639E17681E00EADB00640540 /* SCSectionHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */; };
 		639F4B211FF52F3B006F67DE /* SCPageViewFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F4B201FF52F3B006F67DE /* SCPageViewFlowType.swift */; };
+		639F4B282001058B006F67DE /* SCPickerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639F4B272001058B006F67DE /* SCPickerViewCell.xib */; };
 		639F88EE1F0615540082D813 /* SCArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88E71F0615540082D813 /* SCArray.swift */; };
 		639F88EF1F0615540082D813 /* SCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88E81F0615540082D813 /* SCConstants.swift */; };
 		639F88F01F0615540082D813 /* SCFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88E91F0615540082D813 /* SCFonts.swift */; };
@@ -137,6 +138,7 @@
 		639488AF1F6A5BB1009D24A5 /* SCLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLogger.swift; path = Core/SCLogger.swift; sourceTree = "<group>"; };
 		639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCSectionHeaderViewCell.swift; path = Views/SCSectionHeaderViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		639F4B201FF52F3B006F67DE /* SCPageViewFlowType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPageViewFlowType.swift; path = Core/SCPageViewFlowType.swift; sourceTree = "<group>"; };
+		639F4B272001058B006F67DE /* SCPickerViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SCPickerViewCell.xib; path = Nibs/SCPickerViewCell.xib; sourceTree = "<group>"; };
 		639F88E71F0615540082D813 /* SCArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCArray.swift; path = Core/SCArray.swift; sourceTree = "<group>"; };
 		639F88E81F0615540082D813 /* SCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCConstants.swift; path = Core/SCConstants.swift; sourceTree = "<group>"; };
 		639F88E91F0615540082D813 /* SCFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCFonts.swift; path = Core/SCFonts.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				639F89001F0F2B730082D813 /* SCMultilineToggleViewCell.xib */,
+				639F4B272001058B006F67DE /* SCPickerViewCell.xib */,
 				63D949E51F18534F00697779 /* SCTextFieldViewCell.xib */,
 				632600FF1F423E0C00E28E9D /* SCToggleViewCell.xib */,
 			);
@@ -546,6 +549,7 @@
 				639F89011F0F2B730082D813 /* SCMultilineToggleViewCell.xib in Resources */,
 				635599D71F4E762B00508FE9 /* Spycodes.storyboard in Resources */,
 				635599E31F4E778E00508FE9 /* Localizable.strings in Resources */,
+				639F4B282001058B006F67DE /* SCPickerViewCell.xib in Resources */,
 				63A04D0E1D1A5713005A2914 /* Assets.xcassets in Resources */,
 				632601001F423E0C00E28E9D /* SCToggleViewCell.xib in Resources */,
 				635599DC1F4E76CC00508FE9 /* LaunchScreen.storyboard in Resources */,
