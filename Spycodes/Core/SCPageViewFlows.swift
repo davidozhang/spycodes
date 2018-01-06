@@ -2,37 +2,48 @@ class SCPageViewFlows {
     fileprivate static let mappings: [SCPageViewFlowType: [SCPageViewFlowEntry]] = [
         .PregameOnboarding: [
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayText.rawValue: "Welcome to Spycodes! Let's help you get started.",
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.pregameOnboarding.welcome.rawValue.localized,
             ]),
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayText.rawValue: "There are two types of games you could play: regular and minigame.",
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.pregameOnboarding.gameTypes.rawValue.localized,
             ]),
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayText.rawValue: "In a regular game, you can pick a team to be on. Each team should have at least 2 players.",
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.pregameOnboarding.regularGame.rawValue.localized,
             ]),
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayText.rawValue: "In a minigame, you all play on Team Red against the CPU on Team Blue. Your team should have 2-3 players.",
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.pregameOnboarding.minigame.rawValue.localized,
             ]),
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayText.rawValue: "Tap a teammate to nominate as leader. The leader will be providing clues to your team for the next game.",
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.pregameOnboarding.leaderNomination.rawValue.localized,
             ]),
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayText.rawValue: "Tap the shuffle button to randomly assign your team's leader. Tap the change button to change your team assignment.",
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.pregameOnboarding.shuffleChangeButtons.rawValue.localized,
             ]),
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayText.rawValue: "Tap Ready when you are set. The game starts when everyone is ready.",
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.pregameOnboarding.readyButton.rawValue.localized,
             ]),
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayText.rawValue: "Chevrons in the app can be tapped on. They also indicate swipe support in the direction it is pointing.",
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.pregameOnboarding.chevrons.rawValue.localized,
             ]),
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayText.rawValue: "Swipe up in the pregame view to access game and category settings.",
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.pregameOnboarding.pregameMenu.rawValue.localized,
             ]),
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayText.rawValue: "Remember, you can always access this help view by tapping on the help button.",
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.pregameOnboarding.helpAccess.rawValue.localized,
             ]),
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayText.rawValue: "You are all set for now. Swipe down to dismiss this view!",
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.pregameOnboarding.dismiss.rawValue.localized,
             ]),
         ],
         .GameOnboarding: SCPageViewFlows.retrieveCustomFlow(flowType: .GameOnboarding)
@@ -47,7 +58,8 @@ class SCPageViewFlows {
                     SCStrings.header.goal.rawValue.localized
             ]),
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayText.rawValue: SCStrings.message.leaderEnterClue.rawValue.localized,
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.message.leaderEnterClue.rawValue.localized,
                 SCConstants.pageViewFlowEntryKey.headerText.rawValue:
                     SCStrings.header.enterClue.rawValue.localized
             ]),

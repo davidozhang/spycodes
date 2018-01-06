@@ -265,6 +265,14 @@
 			name = Onboarding;
 			sourceTree = "<group>";
 		};
+		639F4B242000F83E006F67DE /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				635599E11F4E778E00508FE9 /* Localizable.strings */,
+			);
+			name = Localizations;
+			sourceTree = "<group>";
+		};
 		639F88FF1F0F25660082D813 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +310,7 @@
 				63A04D121D1A5713005A2914 /* Info.plist */,
 				63B4C3C41FECB0AD00161773 /* Assets */,
 				63A04D1B1D1A7F2B005A2914 /* Core */,
+				639F4B242000F83E006F67DE /* Localizations */,
 				63920A351D3090BC0073E7F7 /* Managers */,
 				639F88FF1F0F25660082D813 /* Nibs */,
 				63FDED331D264BD800142780 /* Objects */,
@@ -401,7 +410,6 @@
 		63FA54E31D1BCFA6004515DA /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				635599E11F4E778E00508FE9 /* Localizable.strings */,
 				635599DE1F4E76CC00508FE9 /* LaunchScreen.storyboard */,
 				635599D91F4E762B00508FE9 /* Spycodes.storyboard */,
 			);
