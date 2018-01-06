@@ -165,29 +165,19 @@ class SCCustomCategoryViewController: SCModalViewController {
         }
 
         switch integrityType {
-        case .wordListMutation:
+        case .wordListMutation, .nonMutating:
             let totalWordCount = ConsolidatedCategories.instance.getTotalWordsWithNonPersistedExistingCategory(
                 originalCategory: self.nonMutableCustomCategory,
                 newNonPersistedCategory: self.mutableCustomCategory
-            )
-
-            if totalWordCount <= SCConstants.constant.cardCount.rawValue {
-                self.presentIntegrityCheckAlert()
-                return false
-            }
-        case .categoryDeletion:
-            let totalWordCount = ConsolidatedCategories.instance.getTotalWordsWithDeletedExistedCategory(
-                deletedCategory: self.nonMutableCustomCategory
             )
 
             if totalWordCount < SCConstants.constant.cardCount.rawValue {
                 self.presentIntegrityCheckAlert()
                 return false
             }
-        case .nonMutating:
-            let totalWordCount = ConsolidatedCategories.instance.getTotalWordsWithNonPersistedExistingCategory(
-                originalCategory: self.nonMutableCustomCategory,
-                newNonPersistedCategory: self.mutableCustomCategory
+        case .categoryDeletion:
+            let totalWordCount = ConsolidatedCategories.instance.getTotalWordsWithDeletedExistingCategory(
+                deletedCategory: self.nonMutableCustomCategory
             )
 
             if totalWordCount < SCConstants.constant.cardCount.rawValue {
