@@ -112,10 +112,16 @@ class SCGameSettingsViewController: SCViewController {
 
     fileprivate func registerTableViewCells() {
         let multilineToggleViewCellNib = UINib(nibName: SCConstants.nibs.multilineToggleViewCell.rawValue, bundle: nil)
+        let pickerViewCellNib = UINib(nibName: SCConstants.nibs.pickerViewCell.rawValue, bundle: nil)
 
         self.tableView.register(
             multilineToggleViewCellNib,
             forCellReuseIdentifier: SCConstants.reuseIdentifiers.minigameToggleViewCell.rawValue
+        )
+
+        self.tableView.register(
+            pickerViewCellNib,
+            forCellReuseIdentifier: SCConstants.reuseIdentifiers.timerSettingViewCell.rawValue
         )
     }
 }

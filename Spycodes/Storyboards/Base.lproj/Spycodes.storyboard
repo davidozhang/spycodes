@@ -1252,60 +1252,6 @@
                                             <outlet property="primaryLabel" destination="IYE-QG-WB5" id="YlR-uh-avJ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-setting-view-cell" rowHeight="58" id="l3e-qQ-33L" userLabel="timer-setting-view-cell" customClass="SCPickerViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="1024" height="58"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l3e-qQ-33L" id="Ncp-AL-EVA">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="58"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jv7-mk-kLJ">
-                                                    <rect key="frame" x="4" y="6" width="1004" height="46"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZG-zH-Psm" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="52" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secondary Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2M-vo-mDP" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="25" width="1004" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Label" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bGU-cV-qD6" userLabel="Timer Duration" customClass="SCTextField" customModule="Spycodes" customModuleProvider="target">
-                                                            <rect key="frame" x="936" y="14.5" width="68" height="17"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <nil key="textColor"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
-                                                        </textField>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstItem="YZG-zH-Psm" firstAttribute="leading" secondItem="Jv7-mk-kLJ" secondAttribute="leading" id="4gU-T7-mgt"/>
-                                                        <constraint firstItem="YZG-zH-Psm" firstAttribute="top" secondItem="Jv7-mk-kLJ" secondAttribute="top" id="Vyb-JC-F28"/>
-                                                        <constraint firstItem="p2M-vo-mDP" firstAttribute="top" secondItem="YZG-zH-Psm" secondAttribute="bottom" constant="4" id="aac-cR-vAE"/>
-                                                        <constraint firstAttribute="trailing" secondItem="p2M-vo-mDP" secondAttribute="trailing" id="bq7-vH-yyq"/>
-                                                        <constraint firstAttribute="bottom" secondItem="p2M-vo-mDP" secondAttribute="bottom" id="nDv-zP-gnP"/>
-                                                        <constraint firstItem="p2M-vo-mDP" firstAttribute="leading" secondItem="Jv7-mk-kLJ" secondAttribute="leading" id="qFR-Gb-dDu"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Jv7-mk-kLJ" secondAttribute="bottom" constant="6" id="3Lm-mp-XrE"/>
-                                                <constraint firstItem="Jv7-mk-kLJ" firstAttribute="top" secondItem="Ncp-AL-EVA" secondAttribute="top" constant="6" id="NJT-hF-xPe"/>
-                                                <constraint firstAttribute="trailing" secondItem="Jv7-mk-kLJ" secondAttribute="trailing" constant="16" id="TEa-JE-TKi"/>
-                                                <constraint firstItem="Jv7-mk-kLJ" firstAttribute="leading" secondItem="Ncp-AL-EVA" secondAttribute="leading" constant="4" id="eZF-4b-7Cy"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="primaryLabel" destination="YZG-zH-Psm" id="caY-mx-AP8"/>
-                                            <outlet property="secondaryLabel" destination="p2M-vo-mDP" id="oKN-w2-gqy"/>
-                                            <outlet property="textField" destination="bGU-cV-qD6" id="bFL-Dx-Ihg"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>

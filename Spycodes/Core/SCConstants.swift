@@ -67,6 +67,7 @@ class SCConstants {
 
     enum nibs: String {
         case multilineToggleViewCell = "SCMultilineToggleViewCell"
+        case pickerViewCell = "SCPickerViewCell"
         case textFieldViewCell = "SCTextFieldViewCell"
         case toggleViewCell = "SCToggleViewCell"
     }
