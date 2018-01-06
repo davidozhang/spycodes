@@ -74,10 +74,13 @@ class SCGameViewController: SCViewController {
     }
 
     @IBAction func onHelpButtonTapped(_ sender: AnyObject) {
-        self.performSegue(
-            withIdentifier: SCConstants.segues.gameHelpViewControllerSegue.rawValue,
-            sender: self
-        )
+        self.destinationPageViewFlowType = .GameOnboarding
+        DispatchQueue.main.async {
+            self.performSegue(
+                withIdentifier: SCConstants.segues.pageViewFlowContainerViewControllerSegue.rawValue,
+                sender: self
+            )
+        }
     }
 
     // MARK: Lifecycle

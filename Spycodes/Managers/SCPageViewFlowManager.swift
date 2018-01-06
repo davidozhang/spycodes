@@ -1,7 +1,7 @@
 class SCPageViewFlowManager {
-    fileprivate var flow: [Int: SCPageViewFlowEntry]?
+    fileprivate var flow: [SCPageViewFlowEntry]?
 
-    init(flowType: SCPageViewFlows.FlowType) {
+    init(flowType: SCPageViewFlowType) {
         self.flow = SCPageViewFlows.retrieveFlow(flowType: flowType)
     }
     
@@ -18,11 +18,7 @@ class SCPageViewFlowManager {
             return nil
         }
 
-        if let entry = flow[0] {
-            return entry
-        }
-
-        return nil
+        return flow[0]
     }
     
     func getPreviousEntry(index: Int) -> SCPageViewFlowEntry? {
@@ -37,11 +33,7 @@ class SCPageViewFlowManager {
             return nil
         }
 
-        if let entry = flow[currentIndex] {
-            return entry
-        }
-
-        return nil
+        return flow[currentIndex]
     }
     
     func getNextEntry(index: Int) -> SCPageViewFlowEntry? {
@@ -56,10 +48,6 @@ class SCPageViewFlowManager {
             return nil
         }
 
-        if let entry = flow[currentIndex] {
-            return entry
-        }
-        
-        return nil
+        return flow[currentIndex]
     }
 }

@@ -100,6 +100,19 @@
 "CPU" = "CPU";
 "You" = "你";
 
+// Pregame Onboarding
+"Chevrons in the app can be tapped on. They also indicate swipe support in the direction it is pointing." = "应用程序中的箭头可以点击。 你也可以用手指朝他们的指向滑动。";
+"You are all set for now. Swipe down to dismiss this view!" = "你已准备好了。用手指向下滑动即可继续游戏！";
+"There are two types of games you could play: regular and minigame." = "此应用程序有两类游戏可以玩：常规和迷你游戏。";
+"In a minigame, you all play on Team Red against the CPU on Team Blue. Your team should have 2-3 players." = "如果玩迷你游戏，你们都属于红色队。你们一起对阵蓝色队的CPU。你的队应该有2-3名队员。";
+"You can always access this help view by tapping on the help button." = "你可以随时通过点击帮助按钮访问此屏幕。";
+"Tap a teammate to nominate as leader. The leader will be providing clues to your team for the next game." = "点击一名队友即可提名做领袖。领袖将会为你的队提供游戏里的线索。";
+"Swipe up in the pregame view to access game and category settings." = "用手指向上滑动即可访问游戏和单词分类设置。";
+"In a regular game, you can pick a team to be on. Each team should have at least 2 players." = "在常规游戏中，你可以选择你的队。每个队至少需要2名队员。";
+"Tap the shuffle button to randomly assign your team's leader. Tap the change button to change your team assignment." = "点击随机按钮即可随机选择你的队的领袖。 点击更改按钮可以调换你的队伍分配。";
+"Tap Ready when you are set. The game starts when everyone is ready." = "设置好后即可点击准备好了。 如果大家都准备好了，游戏就会自动开始。";
+"Welcome to Spycodes! Let's help you get started." = "欢迎玩Spycodes！此屏幕会给你一个简单的游戏流程介绍。";
+
 // Primary Label
 "Accessibility" = "无障碍";
 "Add Word" = "添加单词";

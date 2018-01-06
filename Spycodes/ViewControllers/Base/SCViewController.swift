@@ -13,7 +13,7 @@ class SCViewController: UIViewController {
     var unwindSegueIdentifier: String?
     var previousViewControllerUnwindSegueIdentifier: String?
     
-    var destinationPageViewType: SCPageViewFlowViewController.PageViewType?
+    var destinationPageViewFlowType: SCPageViewFlowType?
 
     var returnToRootViewController = false
     var unwindingSegue = false
@@ -165,8 +165,8 @@ class SCViewController: UIViewController {
         if let destination = segue.destination as? SCModalViewController {
             if let sender = segue.source as? SCViewController,
                let destination = segue.destination as? SCPageViewFlowContainerViewController,
-                let destinationPageViewType = sender.destinationPageViewType {
-                destination.destinationPageViewType = destinationPageViewType
+                let destinationPageViewFlowType = sender.destinationPageViewFlowType {
+                destination.destinationPageViewFlowType = destinationPageViewFlowType
             }
 
             destination.modalPresentationStyle = .overCurrentContext
@@ -175,33 +175,8 @@ class SCViewController: UIViewController {
         
         if let sender = segue.source as? SCPageViewFlowContainerViewController,
             let destination = segue.destination as? SCPageViewFlowViewController,
-            let destinationPageViewType = sender.destinationPageViewType {
-            destination.pageViewType = destinationPageViewType
-            return
-        }
-
-        if let destination = segue.destination as? SCPopoverViewController {
-            self.showDimView()
-
-            destination.rootViewController = self
-            destination.modalPresentationStyle = .popover
-            destination.preferredContentSize = CGSize(
-                width: SCViewController.modalWidth,
-                height: SCViewController.modalHeight
-            )
-
-            if let popover = destination.popoverPresentationController {
-                popover.delegate = self
-                popover.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-                popover.sourceView = self.view
-                popover.sourceRect = CGRect(
-                    x: self.view.bounds.midX,
-                    y: self.view.bounds.midY,
-                    width: 0,
-                    height: 0
-                )
-            }
-
+            let destinationPageViewFlowType = sender.destinationPageViewFlowType {
+            destination.pageViewFlowType = destinationPageViewFlowType
             return
         }
 
