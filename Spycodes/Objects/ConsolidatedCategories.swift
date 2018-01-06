@@ -226,13 +226,13 @@ class ConsolidatedCategories: NSObject, NSCoding {
     func getTotalWordsWithNonPersistedExistingCategory(originalCategory: CustomCategory?, newNonPersistedCategory: CustomCategory?) -> Int {
         if let originalCategory = originalCategory,
            let newNonPersistedCategory = newNonPersistedCategory {
-            return self.getTotalWordsWithDeletedExistedCategory(deletedCategory: originalCategory) + newNonPersistedCategory.getWordCount()
+            return self.getTotalWordsWithDeletedExistingCategory(deletedCategory: originalCategory) + newNonPersistedCategory.getWordCount()
         }
 
         return 0
     }
 
-    func getTotalWordsWithDeletedExistedCategory(deletedCategory: CustomCategory?) -> Int {
+    func getTotalWordsWithDeletedExistingCategory(deletedCategory: CustomCategory?) -> Int {
         if let deletedCategory = deletedCategory {
             return self.getTotalWords() - deletedCategory.getWordCount()
         }
