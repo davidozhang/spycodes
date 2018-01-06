@@ -56,7 +56,7 @@ class SCAccessCodeViewController: SCViewController {
 
         SCMultipeerManager.instance.delegate = self
 
-        self.headerLabel.text = SCStrings.header.accessCode.rawValue.localized
+        self.headerLabel.text = SCStrings.header.accessCode.rawLocalized
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? SCSingleCharacterTextField {
@@ -147,7 +147,7 @@ class SCAccessCodeViewController: SCViewController {
         self.timeoutTimer?.invalidate()
         SCMultipeerManager.instance.stopAdvertiser()
 
-        self.statusLabel.text = SCStrings.status.fail.rawValue.localized
+        self.statusLabel.text = SCStrings.status.fail.rawLocalized
 
         self.timeoutTimer = Foundation.Timer.scheduledTimer(
             timeInterval: SCAccessCodeViewController.shortTimeoutInterval,
@@ -215,7 +215,7 @@ class SCAccessCodeViewController: SCViewController {
 
     @objc
     fileprivate func restoreStatus() {
-        self.statusLabel.text = SCStrings.status.normal.rawValue.localized
+        self.statusLabel.text = SCStrings.status.normal.rawLocalized
         self.hideCancelButton(true)
     }
 
@@ -268,7 +268,7 @@ class SCAccessCodeViewController: SCViewController {
         self.startTime = Int(Date.timeIntervalSinceReferenceDate)
         self.showCancelButton()
 
-        self.statusLabel.text = SCStrings.status.pending.rawValue.localized
+        self.statusLabel.text = SCStrings.status.pending.rawLocalized
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? UITextField {

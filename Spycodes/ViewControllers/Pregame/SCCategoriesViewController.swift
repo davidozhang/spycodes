@@ -32,7 +32,7 @@ class SCCategoriesViewController: SCViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .categories: SCStrings.section.categories.rawValue.localized,
+        .categories: SCStrings.section.categories.rawLocalized,
     ]
 
     fileprivate var scrolled = false
@@ -132,7 +132,7 @@ class SCCategoriesViewController: SCViewController {
                 preferredStyle: .alert
             )
             let confirmAction = UIAlertAction(
-                title: SCStrings.button.ok.rawValue.localized,
+                title: SCStrings.button.ok.rawLocalized,
                 style: .default,
                 handler: nil
             )
@@ -362,9 +362,9 @@ extension SCCategoriesViewController: UITableViewDataSource, UITableViewDelegate
                     cell.primaryLabel.text = String(
                         format: SCStrings.primaryLabel.category.rawValue,
                         SCStrings.emoji.rocket.rawValue,
-                        SCStrings.primaryLabel.selectAll.rawValue.localized
+                        SCStrings.primaryLabel.selectAll.rawLocalized
                     )
-                    cell.secondaryLabel.text = SCStrings.secondaryLabel.selectAll.rawValue.localized
+                    cell.secondaryLabel.text = SCStrings.secondaryLabel.selectAll.rawLocalized
 
                     cell.synchronizeToggle()
                     cell.delegate = self
@@ -380,9 +380,9 @@ extension SCCategoriesViewController: UITableViewDataSource, UITableViewDelegate
                     cell.primaryLabel.text = String(
                         format: SCStrings.primaryLabel.category.rawValue,
                         SCStrings.emoji.setting.rawValue,
-                        SCStrings.primaryLabel.persist.rawValue.localized
+                        SCStrings.primaryLabel.persist.rawLocalized
                     )
-                    cell.secondaryLabel.text = SCStrings.secondaryLabel.persistentSelection.rawValue.localized
+                    cell.secondaryLabel.text = SCStrings.secondaryLabel.persistentSelection.rawLocalized
 
                     cell.synchronizeToggle()
                     cell.delegate = self
@@ -417,19 +417,19 @@ extension SCCategoriesViewController: UITableViewDataSource, UITableViewDelegate
                             format: SCStrings.secondaryLabel.numberOfWordsCustomCategory.rawValue,
                             wordCount,
                             wordCount == 1 ?
-                                SCStrings.secondaryLabel.word.rawValue.localized :
-                                SCStrings.secondaryLabel.words.rawValue.localized,
+                                SCStrings.secondaryLabel.word.rawLocalized :
+                                SCStrings.secondaryLabel.words.rawLocalized,
                             self.ticker ?
-                                SCStrings.secondaryLabel.custom.rawValue.localized :
-                                SCStrings.secondaryLabel.tapToEdit.rawValue.localized
+                                SCStrings.secondaryLabel.custom.rawLocalized :
+                                SCStrings.secondaryLabel.tapToEdit.rawLocalized
                         )
                     } else {
                         cell.secondaryLabel.text = String(
                             format: SCStrings.secondaryLabel.numberOfWords.rawValue,
                             wordCount,
                             wordCount == 1 ?
-                                SCStrings.secondaryLabel.word.rawValue.localized :
-                                SCStrings.secondaryLabel.words.rawValue.localized
+                                SCStrings.secondaryLabel.word.rawLocalized :
+                                SCStrings.secondaryLabel.words.rawLocalized
                         )
                     }
 
@@ -472,17 +472,17 @@ extension SCCategoriesViewController: UITableViewDataSource, UITableViewDelegate
                     format: SCStrings.secondaryLabel.numberOfWordsCustomCategory.rawValue,
                     wordCount,
                     wordCount == 1 ?
-                        SCStrings.secondaryLabel.word.rawValue.localized :
-                        SCStrings.secondaryLabel.words.rawValue.localized,
-                    SCStrings.secondaryLabel.custom.rawValue.localized
+                        SCStrings.secondaryLabel.word.rawLocalized :
+                        SCStrings.secondaryLabel.words.rawLocalized,
+                    SCStrings.secondaryLabel.custom.rawLocalized
                 )
             } else {
                 cell.secondaryLabel.text = String(
                     format: SCStrings.secondaryLabel.numberOfWords.rawValue,
                     wordCount,
                     wordCount == 1 ?
-                        SCStrings.secondaryLabel.word.rawValue.localized :
-                        SCStrings.secondaryLabel.words.rawValue.localized
+                        SCStrings.secondaryLabel.word.rawLocalized :
+                        SCStrings.secondaryLabel.words.rawLocalized
                 )
             }
 

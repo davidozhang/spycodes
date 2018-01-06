@@ -53,6 +53,10 @@ class SCStrings {
         case ready = "Ready"
         case returnToPregameRoom = "Return to Pregame Room"
         case showAnswer = "Show Answer"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum category: String {
@@ -72,6 +76,10 @@ class SCStrings {
         case space = "Space"
         case sports = "Sports"
         case transportation = "Transportation"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum emoji: String {
@@ -94,6 +102,10 @@ class SCStrings {
         case misc = "❓"
         case rocket = "🚀"
         case setting = "⚙"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum header: String {
@@ -124,6 +136,10 @@ class SCStrings {
         case minimumWords = "Too Few Words"
         case updateApp = "Update App"
         case waitForClue = "Waiting For Clue"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum logging: String {
@@ -141,6 +157,10 @@ class SCStrings {
         case selectedCustomCategoriesSaved = "Selected custom categories saved."
         case unidentifiedViewControllerAddingObservers = "Unidentified view controller adding observers!"
         case unidentifiedViewControllerRemovingObservers = "Unidentified view controller removing observers!"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum message: String {
@@ -175,11 +195,19 @@ class SCStrings {
         case regularGameIntro = "You are currently playing a regular game with your teammates. There are 22 words in total, including 6 Neutral (white) and 1 Assassin (black). Your team may get 7 or 8 starting words."
         case regularGameRoundEnd = "The other team will now follow the same process. Once they are done guessing they will hand the round back to your team. The round exchanges until one team guesses all of its words."
         case updatePrompt = "Please download the latest version of Spycodes."
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum player: String {
         case cpu = "CPU"
         case localPlayer = "You"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum pregameOnboarding: String {
@@ -194,6 +222,10 @@ class SCStrings {
         case shuffleChangeButtons = "Tap the shuffle button to randomly assign your team's leader. Tap the change button to change your team assignment."
         case readyButton = "Tap Ready when you are set. The game starts when everyone is ready."
         case welcome = "Welcome to Spycodes! Let's help you get started."
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum primaryLabel: String {
@@ -223,6 +255,10 @@ class SCStrings {
         case timer = "Timer"
         case version = "Version"
         case website = "Website"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum round: String {
@@ -230,6 +266,10 @@ class SCStrings {
         case defaultLeaderClue = "Enter Clue"
         case defaultNonTurnClue = "Not Your Turn"
         case defaultNumberOfWords = "#"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum secondaryLabel: String {
@@ -245,6 +285,10 @@ class SCStrings {
         case tapToEdit = "Tap to Edit"
         case word = "word"
         case words = "words"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum section: String {
@@ -261,6 +305,10 @@ class SCStrings {
         case words = "Words"
         case wordListWithWordCount = "%@ (%d %@)"
         case wordList = "Word List"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum state: String {
@@ -288,6 +336,10 @@ class SCStrings {
         case stopped = "Stopped"
         case timer = "Timer"
         case willStart = "Will Start"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum status: String {
@@ -297,6 +349,10 @@ class SCStrings {
         case pending = "Joining room..."
         case ready = "READY"
         case red = "Red"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum timeline: String {
@@ -324,6 +380,10 @@ class SCStrings {
         case unknownEvent = "Unknown event. Please update Spycodes!"
         case won = "won"
         case yourTeam = "Your team"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 
     enum timer: String {
@@ -331,5 +391,9 @@ class SCStrings {
         case format = "%d:%02d"
         case minutes = "%d min"
         case stopped = "--:--"
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
     }
 }

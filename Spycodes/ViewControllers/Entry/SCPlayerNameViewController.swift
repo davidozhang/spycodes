@@ -26,12 +26,12 @@ class SCPlayerNameViewController: SCViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.headerLabel.text = SCStrings.header.playerName.rawValue.localized
+        self.headerLabel.text = SCStrings.header.playerName.rawLocalized
 
         if let name = Player.instance.getName(), name.count > 0 {
             self.userNameTextField.text = name
         } else if !SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
-            self.userNameTextField.placeholder = SCStrings.header.playerName.rawValue.localized
+            self.userNameTextField.placeholder = SCStrings.header.playerName.rawLocalized
         }
 
         self.userNameTextField.delegate = self

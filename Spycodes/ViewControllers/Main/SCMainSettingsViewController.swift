@@ -50,25 +50,25 @@ class SCMainSettingsViewController: SCModalViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .customize: SCStrings.section.customize.rawValue.localized,
-        .about: SCStrings.section.about.rawValue.localized,
-        .more: SCStrings.section.more.rawValue.localized,
+        .customize: SCStrings.section.customize.rawLocalized,
+        .about: SCStrings.section.about.rawLocalized,
+        .more: SCStrings.section.more.rawLocalized,
     ]
 
     fileprivate let customizeLabels: [CustomSetting: String] = [
-        .nightMode: SCStrings.primaryLabel.nightMode.rawValue.localized,
-        .accessibility: SCStrings.primaryLabel.accessibility.rawValue.localized,
+        .nightMode: SCStrings.primaryLabel.nightMode.rawLocalized,
+        .accessibility: SCStrings.primaryLabel.accessibility.rawLocalized,
     ]
     
     fileprivate let customizeSecondaryLabels: [CustomSetting: String] = [
-        .nightMode: SCStrings.secondaryLabel.nightMode.rawValue.localized,
-        .accessibility: SCStrings.secondaryLabel.accessibility.rawValue.localized,
+        .nightMode: SCStrings.secondaryLabel.nightMode.rawLocalized,
+        .accessibility: SCStrings.secondaryLabel.accessibility.rawLocalized,
     ]
 
     fileprivate let disclosureLabels: [Link: String] = [
-        .support: SCStrings.primaryLabel.support.rawValue.localized,
-        .github: SCStrings.primaryLabel.github.rawValue.localized,
-        .icons8: SCStrings.primaryLabel.icons8.rawValue.localized,
+        .support: SCStrings.primaryLabel.support.rawLocalized,
+        .github: SCStrings.primaryLabel.github.rawLocalized,
+        .icons8: SCStrings.primaryLabel.icons8.rawLocalized,
     ]
 
     fileprivate var scrolled = false
@@ -241,7 +241,7 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
                 )
             )
 
-            cell.primaryLabel.text = SCStrings.primaryLabel.version.rawValue.localized
+            cell.primaryLabel.text = SCStrings.primaryLabel.version.rawLocalized
             cell.rightLabel.attributedText = attributedString
 
             return cell

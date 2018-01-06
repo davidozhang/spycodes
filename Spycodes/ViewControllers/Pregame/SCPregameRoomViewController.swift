@@ -6,8 +6,8 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sectionLabels = [
-        Team.red: SCStrings.section.teamRed.rawValue.localized,
-        Team.blue: SCStrings.section.teamBlue.rawValue.localized
+        Team.red: SCStrings.section.teamRed.rawLocalized,
+        Team.blue: SCStrings.section.teamBlue.rawLocalized
     ]
 
     @IBOutlet weak var tableView: UITableView!
@@ -60,7 +60,7 @@ class SCPregameRoomViewController: SCViewController {
         let attributedString = NSMutableAttributedString(
             string: String(
                 format: SCStrings.header.pregameRoom.rawValue,
-                SCStrings.header.accessCode.rawValue.localized,
+                SCStrings.header.accessCode.rawLocalized,
                 Room.instance.getAccessCode()
             )
         )
@@ -68,7 +68,7 @@ class SCPregameRoomViewController: SCViewController {
             NSFontAttributeName,
             value: SCFonts.regularSizeFont(.bold) ?? 0,
             range: NSMakeRange(
-                SCStrings.header.accessCode.rawValue.localized.count + 2,
+                SCStrings.header.accessCode.rawLocalized.count + 2,
                 SCConstants.constant.accessCodeLength.rawValue
             )
         )
@@ -248,13 +248,13 @@ class SCPregameRoomViewController: SCViewController {
         case .notReady:
             self.broadcastEvent(.cancel)
             UIView.performWithoutAnimation {
-                self.readyButton.setTitle(SCStrings.button.ready.rawValue.localized, for: .normal)
+                self.readyButton.setTitle(SCStrings.button.ready.rawLocalized, for: .normal)
             }
             self.animateReadyButtonIfNeeded()
         case .ready:
             self.broadcastEvent(.ready)
             UIView.performWithoutAnimation {
-                self.readyButton.setTitle(SCStrings.button.cancel.rawValue.localized, for: .normal)
+                self.readyButton.setTitle(SCStrings.button.cancel.rawLocalized, for: .normal)
             }
             self.stopReadyButtonAnimation()
         }
@@ -304,7 +304,7 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         let alertController = UIAlertController(
-            title: SCStrings.header.returningToMainMenu.rawValue.localized,
+            title: SCStrings.header.returningToMainMenu.rawLocalized,
             message: reason,
             preferredStyle: .alert
         )
@@ -327,7 +327,7 @@ class SCPregameRoomViewController: SCViewController {
 
     fileprivate func checkRoom() {
         if !Room.instance.hasHost() {
-            self.returnToMainMenu(reason: SCStrings.message.hostDisconnected.rawValue.localized)
+            self.returnToMainMenu(reason: SCStrings.message.hostDisconnected.rawLocalized)
         }
 
         if !Player.instance.isHost() {
@@ -555,7 +555,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                     return SCTableViewCell()
             }
 
-            cell.primaryLabel.text = SCStrings.primaryLabel.teamEmptyState.rawValue.localized
+            cell.primaryLabel.text = SCStrings.primaryLabel.teamEmptyState.rawLocalized
 
             return cell
         }
