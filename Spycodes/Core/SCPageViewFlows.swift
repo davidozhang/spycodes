@@ -5,8 +5,6 @@ class SCPageViewFlows {
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue: "Welcome to Spycodes! Let's help you get started.",
             ]),
             SCPageViewFlowEntry([
-                SCConstants.pageViewFlowEntryKey.displayImageName.rawValue: "out",
-                SCConstants.pageViewFlowEntryKey.displayImageType.rawValue: SCPageViewFlowEntry.DisplayImageType.GIF,
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue: "There are two types of games you could play: regular and minigame.",
             ]),
             SCPageViewFlowEntry([
