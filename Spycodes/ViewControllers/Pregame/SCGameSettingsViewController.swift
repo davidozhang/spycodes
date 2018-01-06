@@ -29,12 +29,12 @@ class SCGameSettingsViewController: SCViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .gameSettings: SCStrings.section.gameSettings.rawValue.localized,
+        .gameSettings: SCStrings.section.gameSettings.rawLocalized,
     ]
 
     fileprivate let settingsLabels: [GameSetting: String] = [
-        .minigame: SCStrings.primaryLabel.minigame.rawValue.localized,
-        .timer: SCStrings.primaryLabel.timer.rawValue.localized,
+        .minigame: SCStrings.primaryLabel.minigame.rawLocalized,
+        .timer: SCStrings.primaryLabel.timer.rawLocalized,
     ]
 
     fileprivate var scrolled = false
@@ -182,7 +182,7 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
 
                 cell.synchronizeToggle()
                 cell.primaryLabel.text = self.settingsLabels[.minigame]
-                cell.secondaryLabel.text = SCStrings.secondaryLabel.minigame.rawValue.localized
+                cell.secondaryLabel.text = SCStrings.secondaryLabel.minigame.rawLocalized
                 cell.delegate = self
 
                 return cell
@@ -194,7 +194,7 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
                 }
 
                 cell.primaryLabel.text = self.settingsLabels[.timer]
-                cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawValue.localized
+                cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawLocalized
                 cell.delegate = self
 
                 cell.synchronizeSetting()

@@ -57,12 +57,12 @@ class SCMainViewController: SCViewController {
         self.logoLabel.text = SCStrings.appName.localized
 
         self.createGameButton.setTitle(
-            SCStrings.button.createGame.rawValue.localized,
+            SCStrings.button.createGame.rawLocalized,
             for: .normal
         )
 
         self.joinGameButton.setTitle(
-            SCStrings.button.joinGame.rawValue.localized,
+            SCStrings.button.joinGame.rawLocalized,
             for: .normal
         )
     }
@@ -111,12 +111,12 @@ class SCMainViewController: SCViewController {
     // MARK: Private
     fileprivate func showUpdateAppAlert() {
         let alertController = UIAlertController(
-            title: SCStrings.header.updateApp.rawValue.localized,
-            message: SCStrings.message.updatePrompt.rawValue.localized,
+            title: SCStrings.header.updateApp.rawLocalized,
+            message: SCStrings.message.updatePrompt.rawLocalized,
             preferredStyle: .alert
         )
         let confirmAction = UIAlertAction(
-            title: SCStrings.button.download.rawValue.localized,
+            title: SCStrings.button.download.rawLocalized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 if let appStoreURL = URL(string: SCConstants.url.appStore.rawValue) {

@@ -49,13 +49,13 @@ class SCCustomCategoryViewController: SCModalViewController {
     fileprivate static let margin: CGFloat = 16
 
     fileprivate let sectionLabels: [Section: String] = [
-        .settings: SCStrings.section.settings.rawValue.localized,
-        .wordList: SCStrings.section.wordListWithWordCount.rawValue.localized,
+        .settings: SCStrings.section.settings.rawLocalized,
+        .wordList: SCStrings.section.wordListWithWordCount.rawLocalized,
     ]
 
     fileprivate let settingsLabels: [Setting: String] = [
-        .name: SCStrings.primaryLabel.name.rawValue.localized,
-        .emoji: SCStrings.primaryLabel.emoji.rawValue.localized,
+        .name: SCStrings.primaryLabel.name.rawLocalized,
+        .emoji: SCStrings.primaryLabel.emoji.rawLocalized,
     ]
 
     fileprivate var scrolled = false
@@ -394,15 +394,15 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
             if section == .wordList, let sectionLabel = self.sectionLabels[section] {
                 let wordCount = self.mutableCustomCategory.getWordCount()
                 if wordCount == 0 {
-                    sectionHeader.primaryLabel.text = SCStrings.section.wordList.rawValue.localized
+                    sectionHeader.primaryLabel.text = SCStrings.section.wordList.rawLocalized
                 } else {
                     sectionHeader.primaryLabel.text = String(
                         format: sectionLabel,
-                        SCStrings.section.wordList.rawValue.localized,
+                        SCStrings.section.wordList.rawLocalized,
                         wordCount,
                         wordCount == 1 ?
-                            SCStrings.section.word.rawValue.localized :
-                            SCStrings.section.words.rawValue.localized
+                            SCStrings.section.word.rawLocalized :
+                            SCStrings.section.words.rawLocalized
                     )
                 }
             } else {
@@ -504,7 +504,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                         return SCTableViewCell()
                     }
 
-                    cell.primaryLabel.text = SCStrings.primaryLabel.addWord.rawValue.localized
+                    cell.primaryLabel.text = SCStrings.primaryLabel.addWord.rawLocalized
                     cell.indexPath = indexPath
 
                     return cell
@@ -557,7 +557,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                     return SCTableViewCell()
             }
 
-            cell.primaryLabel.text = SCStrings.primaryLabel.deleteCategory.rawValue.localized
+            cell.primaryLabel.text = SCStrings.primaryLabel.deleteCategory.rawLocalized
             cell.indexPath = indexPath
 
             return cell
@@ -652,7 +652,7 @@ extension SCCustomCategoryViewController {
             preferredStyle: .alert
         )
         let confirmAction = UIAlertAction(
-            title: SCStrings.button.ok.rawValue.localized,
+            title: SCStrings.button.ok.rawLocalized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 alertController.dismiss(animated: false, completion: nil)
@@ -679,7 +679,7 @@ extension SCCustomCategoryViewController {
         alertController.addTextField(configurationHandler: textFieldHandler)
 
         let cancelAction = UIAlertAction(
-            title: SCStrings.button.cancel.rawValue.localized,
+            title: SCStrings.button.cancel.rawLocalized,
             style: .cancel,
             handler: { (action: UIAlertAction) in
                 self.changeStateTo(state: .nonEditing)
@@ -687,7 +687,7 @@ extension SCCustomCategoryViewController {
             }
         )
         let confirmAction = UIAlertAction(
-            title: SCStrings.button.ok.rawValue.localized,
+            title: SCStrings.button.ok.rawLocalized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 self.textFieldConfirmHandler(
@@ -715,7 +715,7 @@ extension SCCustomCategoryViewController {
         )
 
         let cancelAction = UIAlertAction(
-            title: SCStrings.button.cancel.rawValue.localized,
+            title: SCStrings.button.cancel.rawLocalized,
             style: .cancel,
             handler: { (action: UIAlertAction) in
                 self.changeStateTo(state: .nonEditing)
@@ -723,7 +723,7 @@ extension SCCustomCategoryViewController {
             }
         )
         let confirmAction = UIAlertAction(
-            title: SCStrings.button.confirm.rawValue.localized,
+            title: SCStrings.button.confirm.rawLocalized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 self.changeStateTo(state: .nonEditing)

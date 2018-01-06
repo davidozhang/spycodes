@@ -3,47 +3,47 @@ class SCPageViewFlows {
         .PregameOnboarding: [
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.pregameOnboarding.welcome.rawValue.localized,
+                    SCStrings.pregameOnboarding.welcome.rawLocalized,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.pregameOnboarding.gameTypes.rawValue.localized,
+                    SCStrings.pregameOnboarding.gameTypes.rawLocalized,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.pregameOnboarding.regularGame.rawValue.localized,
+                    SCStrings.pregameOnboarding.regularGame.rawLocalized,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.pregameOnboarding.minigame.rawValue.localized,
+                    SCStrings.pregameOnboarding.minigame.rawLocalized,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.pregameOnboarding.leaderNomination.rawValue.localized,
+                    SCStrings.pregameOnboarding.leaderNomination.rawLocalized,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.pregameOnboarding.shuffleChangeButtons.rawValue.localized,
+                    SCStrings.pregameOnboarding.shuffleChangeButtons.rawLocalized,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.pregameOnboarding.readyButton.rawValue.localized,
+                    SCStrings.pregameOnboarding.readyButton.rawLocalized,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.pregameOnboarding.chevrons.rawValue.localized,
+                    SCStrings.pregameOnboarding.chevrons.rawLocalized,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.pregameOnboarding.pregameMenu.rawValue.localized,
+                    SCStrings.pregameOnboarding.pregameMenu.rawLocalized,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.pregameOnboarding.helpAccess.rawValue.localized,
+                    SCStrings.pregameOnboarding.helpAccess.rawLocalized,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.pregameOnboarding.dismiss.rawValue.localized,
+                    SCStrings.pregameOnboarding.dismiss.rawLocalized,
             ]),
         ],
         .GameOnboarding: SCPageViewFlows.retrieveCustomFlow(flowType: .GameOnboarding)
@@ -53,53 +53,53 @@ class SCPageViewFlows {
         SCConstants.pageViewFlowCustomKey.leaderShared.rawValue: [
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.message.leaderGoal.rawValue.localized,
+                    SCStrings.message.leaderGoal.rawLocalized,
                 SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                    SCStrings.header.goal.rawValue.localized
+                    SCStrings.header.goal.rawLocalized
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.message.leaderEnterClue.rawValue.localized,
+                    SCStrings.message.leaderEnterClue.rawLocalized,
                 SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                    SCStrings.header.enterClue.rawValue.localized
+                    SCStrings.header.enterClue.rawLocalized
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.message.leaderConfirm.rawValue.localized,
+                    SCStrings.message.leaderConfirm.rawLocalized,
                 SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                    SCStrings.header.confirm.rawValue.localized
+                    SCStrings.header.confirm.rawLocalized
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.message.leaderGuess.rawValue.localized,
+                    SCStrings.message.leaderGuess.rawLocalized,
                 SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                    SCStrings.header.guess.rawValue.localized
+                    SCStrings.header.guess.rawLocalized
             ]),
         ],
         SCConstants.pageViewFlowCustomKey.playerShared.rawValue: [
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.message.playerGoal.rawValue.localized,
+                    SCStrings.message.playerGoal.rawLocalized,
                 SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                    SCStrings.header.goal.rawValue.localized
+                    SCStrings.header.goal.rawLocalized
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.message.playerWait.rawValue.localized,
+                    SCStrings.message.playerWait.rawLocalized,
                 SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                    SCStrings.header.waitForClue.rawValue.localized
+                    SCStrings.header.waitForClue.rawLocalized
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.message.playerClue.rawValue.localized,
+                    SCStrings.message.playerClue.rawLocalized,
                 SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                    SCStrings.header.clue.rawValue.localized
+                    SCStrings.header.clue.rawLocalized
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.message.playerGuess.rawValue.localized,
+                    SCStrings.message.playerGuess.rawLocalized,
                 SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                    SCStrings.header.guess.rawValue.localized
+                    SCStrings.header.guess.rawLocalized
             ]),
         ],
     ]
@@ -119,9 +119,9 @@ class SCPageViewFlows {
             if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
                 result += [SCPageViewFlowEntry([
                     SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                        SCStrings.message.minigameIntro.rawValue.localized,
+                        SCStrings.message.minigameIntro.rawLocalized,
                     SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                        SCStrings.header.introduction.rawValue.localized
+                        SCStrings.header.introduction.rawLocalized
                     ])]
 
                 if Player.instance.isLeader() {
@@ -135,22 +135,22 @@ class SCPageViewFlows {
                 }
 
                 result += [SCPageViewFlowEntry([
-                    SCConstants.pageViewFlowEntryKey.displayText.rawValue: SCStrings.message.minigameRoundEnd.rawValue.localized,
+                    SCConstants.pageViewFlowEntryKey.displayText.rawValue: SCStrings.message.minigameRoundEnd.rawLocalized,
                     SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                        SCStrings.header.roundEnd.rawValue.localized
+                        SCStrings.header.roundEnd.rawLocalized
                     ])]
                 result += [SCPageViewFlowEntry([
                     SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                        SCStrings.message.minigameEnd.rawValue.localized,
+                        SCStrings.message.minigameEnd.rawLocalized,
                     SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                        SCStrings.header.ending.rawValue.localized
+                        SCStrings.header.ending.rawLocalized
                     ])]
             } else {
                 result += [SCPageViewFlowEntry([
                     SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                        SCStrings.message.regularGameIntro.rawValue.localized,
+                        SCStrings.message.regularGameIntro.rawLocalized,
                     SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                        SCStrings.header.introduction.rawValue.localized
+                        SCStrings.header.introduction.rawLocalized
                     ])]
 
                 if Player.instance.isLeader() {
@@ -164,15 +164,15 @@ class SCPageViewFlows {
                 }
 
                 result += [SCPageViewFlowEntry([
-                    SCConstants.pageViewFlowEntryKey.displayText.rawValue: SCStrings.message.regularGameRoundEnd.rawValue.localized,
+                    SCConstants.pageViewFlowEntryKey.displayText.rawValue: SCStrings.message.regularGameRoundEnd.rawLocalized,
                     SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                        SCStrings.header.roundEnd.rawValue.localized
+                        SCStrings.header.roundEnd.rawLocalized
                     ])]
                 result += [SCPageViewFlowEntry([
                     SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                        SCStrings.message.regularGameEnd.rawValue.localized,
+                        SCStrings.message.regularGameEnd.rawLocalized,
                     SCConstants.pageViewFlowEntryKey.headerText.rawValue:
-                        SCStrings.header.ending.rawValue.localized
+                        SCStrings.header.ending.rawLocalized
                     ])]
             }
         }
