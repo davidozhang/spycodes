@@ -97,6 +97,7 @@ class SCConstants {
         case displayImageType = "display-image-type"
         case displayText = "display-text"
         case headerText = "header-text"
+        case showIphone = "show-iphone"
     }
     
     enum reuseIdentifiers: String {

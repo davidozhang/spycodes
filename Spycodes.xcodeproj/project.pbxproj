@@ -16,6 +16,7 @@
 		633292251E7D0D950090B09D /* SCDisclosureViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633292241E7D0D950090B09D /* SCDisclosureViewCell.swift */; };
 		633292271E7DE8B30090B09D /* SCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633292261E7DE8B30090B09D /* SCTableViewCell.swift */; };
 		6332922B1E7DE9EC0090B09D /* SCLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */; };
+		63348EC22003C56D00939B94 /* SCDeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63348EC12003C56D00939B94 /* SCDeviceType.swift */; };
 		633C48661FEDED6800EA2DD9 /* SCPageViewFlowEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C48651FEDED6800EA2DD9 /* SCPageViewFlowEntryViewController.swift */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
 		635464791EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */; };
@@ -102,6 +103,7 @@
 		633292241E7D0D950090B09D /* SCDisclosureViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDisclosureViewCell.swift; path = Views/SCDisclosureViewCell.swift; sourceTree = "<group>"; };
 		633292261E7DE8B30090B09D /* SCTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTableViewCell.swift; path = Views/SCTableViewCell.swift; sourceTree = "<group>"; };
 		6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLocalStorageManager.swift; path = Managers/SCLocalStorageManager.swift; sourceTree = "<group>"; };
+		63348EC12003C56D00939B94 /* SCDeviceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDeviceType.swift; path = Core/SCDeviceType.swift; sourceTree = "<group>"; };
 		633C48651FEDED6800EA2DD9 /* SCPageViewFlowEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPageViewFlowEntryViewController.swift; path = ViewControllers/Page/SCPageViewFlowEntryViewController.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
 		63512E051F5083A400837032 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Spycodes.strings"; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 			children = (
 				639F88E71F0615540082D813 /* SCArray.swift */,
 				639F88E81F0615540082D813 /* SCConstants.swift */,
+				63348EC12003C56D00939B94 /* SCDeviceType.swift */,
 				639F88E91F0615540082D813 /* SCFonts.swift */,
 				639488AF1F6A5BB1009D24A5 /* SCLogger.swift */,
 				63B4C3BA1FEB7F5F00161773 /* SCPageViewFlows.swift */,
@@ -690,6 +693,7 @@
 				63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */,
 				639F88F11F0615540082D813 /* SCStates.swift in Sources */,
 				633292251E7D0D950090B09D /* SCDisclosureViewCell.swift in Sources */,
+				63348EC22003C56D00939B94 /* SCDeviceType.swift in Sources */,
 				63D7E73D1EB183EF00B2F536 /* SCReadyStatusLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
