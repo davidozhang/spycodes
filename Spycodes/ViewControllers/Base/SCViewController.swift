@@ -69,7 +69,7 @@ class SCViewController: UIViewController {
             )
             self.modalPeekView.addGestureRecognizer(tapGestureRecognizer)
 
-            if SCDeviceTypeManager.getDeviceType() == SCDeviceTypeManager.DeviceType.iPhone_X {
+            if SCDeviceTypeManager.getDeviceType() == SCDeviceType.iPhone_X {
                 self.hideModalPeekView()
             } else {
                 self.showModalPeekView()
@@ -306,7 +306,7 @@ class SCViewController: UIViewController {
         self.modalPeekBlurView?.isHidden = true
     }
 
-    func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {}
+    func setCustomLayoutForDeviceType(deviceType: SCDeviceType) {}
 
     func swipeRight() {}
 

@@ -147,8 +147,8 @@ class SCPregameRoomViewController: SCViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {
-        if deviceType == SCDeviceTypeManager.DeviceType.iPhone_X {
+    override func setCustomLayoutForDeviceType(deviceType: SCDeviceType) {
+        if deviceType == SCDeviceType.iPhone_X {
             self.swipeUpButton.isHidden = false
             self.swipeUpButton.setImage(UIImage(named: "Chevron-Up"), for: UIControlState())
         } else {
