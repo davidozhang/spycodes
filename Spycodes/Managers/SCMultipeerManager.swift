@@ -22,11 +22,6 @@ class SCMultipeerManager: NSObject {
     fileprivate var advertiserOn = false
     fileprivate var browserOn = false
 
-    enum MessageType: Int {
-        case broadcast = 0
-        case targeted = 1
-    }
-
     // MARK: Public
 
     // IMPORTANT: This method must be called prior to all other method calls!
@@ -128,7 +123,7 @@ class SCMultipeerManager: NSObject {
     }
 
     func message(_ rootObject: Any,
-                 messageType: MessageType,
+                 messageType: SCMultipeerMessageType,
                  toPeers: [MCPeerID]?) {
         let data = NSKeyedArchiver.archivedData(withRootObject: rootObject)
         self.sendData(data, messageType: messageType, toPeers: toPeers)
@@ -161,7 +156,7 @@ class SCMultipeerManager: NSObject {
     }
 
     private func sendData(_ data: Data,
-                          messageType: MessageType,
+                          messageType: SCMultipeerMessageType,
                           toPeers: [MCPeerID]?) {
         guard let _ = self.session else {
             return

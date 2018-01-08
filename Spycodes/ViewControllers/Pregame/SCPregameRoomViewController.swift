@@ -188,12 +188,12 @@ class SCPregameRoomViewController: SCViewController {
     }
     
     func showOnboardingView() {
-        self.destinationPageViewFlowType = SCPageViewFlowType.PregameOnboarding
+        self.destinationPageViewFlowType = SCPageViewFlowType.pregameOnboarding
         self.showPageViewContainer()
     }
 
     func showPregameMenu() {
-        self.destinationPageViewFlowType = SCPageViewFlowType.PregameMenu
+        self.destinationPageViewFlowType = SCPageViewFlowType.pregameMenu
         self.showPageViewContainer()
     }
 

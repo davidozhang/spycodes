@@ -3,25 +3,19 @@ import Foundation
 class SCLocalStorageManager: SCLogger {
     static let instance = SCLocalStorageManager()
 
-    enum LocalSettingType: Int {
-        case nightMode = 0
-        case accessibility = 1
-        case persistentSelection = 2
-    }
-
-    var localSettings = [LocalSettingType: Bool]()
+    var localSettings = [SCLocalSettingType: Bool]()
 
     override func getIdentifier() -> String? {
         return SCConstants.loggingIdentifier.localStorageManager.rawValue
     }
 
     // MARK: Public
-    func enableLocalSetting(_ type: LocalSettingType, enabled: Bool) {
+    func enableLocalSetting(_ type: SCLocalSettingType, enabled: Bool) {
         self.localSettings[type] = enabled
         self.saveLocalSetting(type)
     }
 
-    func isLocalSettingEnabled(_ type: LocalSettingType) -> Bool {
+    func isLocalSettingEnabled(_ type: SCLocalSettingType) -> Bool {
         if let setting = self.localSettings[type] {
             return setting
         }
@@ -30,7 +24,7 @@ class SCLocalStorageManager: SCLogger {
     }
 
     // MARK: Private
-    fileprivate func saveLocalSetting(_ type: LocalSettingType) {
+    fileprivate func saveLocalSetting(_ type: SCLocalSettingType) {
         switch type {
         case .nightMode:
             UserDefaults.standard.set(
@@ -56,7 +50,7 @@ class SCLocalStorageManager: SCLogger {
 
 // MARK: SCUsageStatisticsManager Methods
 extension SCLocalStorageManager {
-    func saveDiscreteUsageStatistics(_ type: SCUsageStatisticsManager.DiscreteUsageStatisticsType, value: Int) {
+    func saveDiscreteUsageStatistics(_ type: SCDiscreteUsageStatisticsType, value: Int) {
         switch type {
         case .appOpens:
             UserDefaults.standard.set(
@@ -71,8 +65,8 @@ extension SCLocalStorageManager {
         }
     }
 
-    func retrieveDiscreteUsageStatistics() -> [SCUsageStatisticsManager.DiscreteUsageStatisticsType: Int] {
-        var result = [SCUsageStatisticsManager.DiscreteUsageStatisticsType: Int]()
+    func retrieveDiscreteUsageStatistics() -> [SCDiscreteUsageStatisticsType: Int] {
+        var result = [SCDiscreteUsageStatisticsType: Int]()
         let storedAppOpens = UserDefaults.standard.integer(
             forKey: SCConstants.userDefaults.appOpens.rawValue
         )
