@@ -16,7 +16,6 @@
 		633292251E7D0D950090B09D /* SCDisclosureViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633292241E7D0D950090B09D /* SCDisclosureViewCell.swift */; };
 		633292271E7DE8B30090B09D /* SCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633292261E7DE8B30090B09D /* SCTableViewCell.swift */; };
 		6332922B1E7DE9EC0090B09D /* SCLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */; };
-		63348EC22003C56D00939B94 /* SCDeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63348EC12003C56D00939B94 /* SCDeviceType.swift */; };
 		633C48661FEDED6800EA2DD9 /* SCPageViewFlowEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C48651FEDED6800EA2DD9 /* SCPageViewFlowEntryViewController.swift */; };
 		63486DA91D3DE29C00795403 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63486DA81D3DE29C00795403 /* Key.swift */; };
 		635464791EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635464781EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift */; };
@@ -46,7 +45,6 @@
 		639488AC1F6A3D23009D24A5 /* SCNotificationCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639488AB1F6A3D23009D24A5 /* SCNotificationCenterManager.swift */; };
 		639488B01F6A5BB1009D24A5 /* SCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639488AF1F6A5BB1009D24A5 /* SCLogger.swift */; };
 		639E17681E00EADB00640540 /* SCSectionHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */; };
-		639F4B211FF52F3B006F67DE /* SCPageViewFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F4B201FF52F3B006F67DE /* SCPageViewFlowType.swift */; };
 		639F4B282001058B006F67DE /* SCPickerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639F4B272001058B006F67DE /* SCPickerViewCell.xib */; };
 		639F88EE1F0615540082D813 /* SCArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88E71F0615540082D813 /* SCArray.swift */; };
 		639F88EF1F0615540082D813 /* SCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F88E81F0615540082D813 /* SCConstants.swift */; };
@@ -89,6 +87,13 @@
 		63FDED371D264CF300142780 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED361D264CF300142780 /* Team.swift */; };
 		63FDED391D26557200142780 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED381D26557200142780 /* Room.swift */; };
 		63FDED461D28B47200142780 /* SCPregameRoomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED451D28B47200142780 /* SCPregameRoomViewCell.swift */; };
+		63FE51FF2003CC5C0062F2E5 /* SCDeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FE51F52003CC5C0062F2E5 /* SCDeviceType.swift */; };
+		63FE52002003CC5C0062F2E5 /* SCGameSettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FE51F62003CC5C0062F2E5 /* SCGameSettingType.swift */; };
+		63FE52012003CC5C0062F2E5 /* SCPageViewFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FE51F72003CC5C0062F2E5 /* SCPageViewFlowType.swift */; };
+		63FE52032003CC5C0062F2E5 /* SCMultipeerMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FE51F92003CC5C0062F2E5 /* SCMultipeerMessageType.swift */; };
+		63FE52042003CC5C0062F2E5 /* SCDiscreteUsageStatisticsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FE51FA2003CC5C0062F2E5 /* SCDiscreteUsageStatisticsType.swift */; };
+		63FE52062003CC5C0062F2E5 /* SCFontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FE51FC2003CC5C0062F2E5 /* SCFontType.swift */; };
+		63FE52092003CD470062F2E5 /* SCLocalSettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FE52082003CD470062F2E5 /* SCLocalSettingType.swift */; };
 		63FFA4B11D50635B006A181B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63FFA4B01D50635B006A181B /* GameKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,7 +108,6 @@
 		633292241E7D0D950090B09D /* SCDisclosureViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDisclosureViewCell.swift; path = Views/SCDisclosureViewCell.swift; sourceTree = "<group>"; };
 		633292261E7DE8B30090B09D /* SCTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCTableViewCell.swift; path = Views/SCTableViewCell.swift; sourceTree = "<group>"; };
 		6332922A1E7DE9EC0090B09D /* SCLocalStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLocalStorageManager.swift; path = Managers/SCLocalStorageManager.swift; sourceTree = "<group>"; };
-		63348EC12003C56D00939B94 /* SCDeviceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDeviceType.swift; path = Core/SCDeviceType.swift; sourceTree = "<group>"; };
 		633C48651FEDED6800EA2DD9 /* SCPageViewFlowEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPageViewFlowEntryViewController.swift; path = ViewControllers/Page/SCPageViewFlowEntryViewController.swift; sourceTree = "<group>"; };
 		63486DA81D3DE29C00795403 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Objects/Key.swift; sourceTree = "<group>"; };
 		63512E051F5083A400837032 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Spycodes.strings"; sourceTree = "<group>"; };
@@ -139,7 +143,6 @@
 		639488AB1F6A3D23009D24A5 /* SCNotificationCenterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCNotificationCenterManager.swift; path = Managers/SCNotificationCenterManager.swift; sourceTree = "<group>"; };
 		639488AF1F6A5BB1009D24A5 /* SCLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLogger.swift; path = Core/SCLogger.swift; sourceTree = "<group>"; };
 		639E17671E00EADB00640540 /* SCSectionHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCSectionHeaderViewCell.swift; path = Views/SCSectionHeaderViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		639F4B201FF52F3B006F67DE /* SCPageViewFlowType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPageViewFlowType.swift; path = Core/SCPageViewFlowType.swift; sourceTree = "<group>"; };
 		639F4B272001058B006F67DE /* SCPickerViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SCPickerViewCell.xib; path = Nibs/SCPickerViewCell.xib; sourceTree = "<group>"; };
 		639F88E71F0615540082D813 /* SCArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCArray.swift; path = Core/SCArray.swift; sourceTree = "<group>"; };
 		639F88E81F0615540082D813 /* SCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCConstants.swift; path = Core/SCConstants.swift; sourceTree = "<group>"; };
@@ -184,6 +187,13 @@
 		63FDED361D264CF300142780 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Objects/Team.swift; sourceTree = "<group>"; };
 		63FDED381D26557200142780 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Room.swift; path = Objects/Room.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63FDED451D28B47200142780 /* SCPregameRoomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SCPregameRoomViewCell.swift; path = Views/SCPregameRoomViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63FE51F52003CC5C0062F2E5 /* SCDeviceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDeviceType.swift; path = Core/Types/SCDeviceType.swift; sourceTree = "<group>"; };
+		63FE51F62003CC5C0062F2E5 /* SCGameSettingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCGameSettingType.swift; path = Core/Types/SCGameSettingType.swift; sourceTree = "<group>"; };
+		63FE51F72003CC5C0062F2E5 /* SCPageViewFlowType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPageViewFlowType.swift; path = Core/Types/SCPageViewFlowType.swift; sourceTree = "<group>"; };
+		63FE51F92003CC5C0062F2E5 /* SCMultipeerMessageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCMultipeerMessageType.swift; path = Core/Types/SCMultipeerMessageType.swift; sourceTree = "<group>"; };
+		63FE51FA2003CC5C0062F2E5 /* SCDiscreteUsageStatisticsType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCDiscreteUsageStatisticsType.swift; path = Core/Types/SCDiscreteUsageStatisticsType.swift; sourceTree = "<group>"; };
+		63FE51FC2003CC5C0062F2E5 /* SCFontType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCFontType.swift; path = Core/Types/SCFontType.swift; sourceTree = "<group>"; };
+		63FE52082003CD470062F2E5 /* SCLocalSettingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLocalSettingType.swift; path = Core/Types/SCLocalSettingType.swift; sourceTree = "<group>"; };
 		63FFA4B01D50635B006A181B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		9CC921B002269746A71C6152 /* Pods_Spycodes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spycodes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -343,13 +353,12 @@
 		63A04D1B1D1A7F2B005A2914 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				63FE51F32003CBC60062F2E5 /* Types */,
 				639F88E71F0615540082D813 /* SCArray.swift */,
 				639F88E81F0615540082D813 /* SCConstants.swift */,
-				63348EC12003C56D00939B94 /* SCDeviceType.swift */,
 				639F88E91F0615540082D813 /* SCFonts.swift */,
 				639488AF1F6A5BB1009D24A5 /* SCLogger.swift */,
 				63B4C3BA1FEB7F5F00161773 /* SCPageViewFlows.swift */,
-				639F4B201FF52F3B006F67DE /* SCPageViewFlowType.swift */,
 				639F88EA1F0615540082D813 /* SCStates.swift */,
 				639F88EB1F0615540082D813 /* SCStrings.swift */,
 				639F88EC1F0615540082D813 /* SCUIColor.swift */,
@@ -459,6 +468,20 @@
 				6363EB661E7E5A3900CC287B /* SCToggleViewCell.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		63FE51F32003CBC60062F2E5 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				63FE51F52003CC5C0062F2E5 /* SCDeviceType.swift */,
+				63FE51FA2003CC5C0062F2E5 /* SCDiscreteUsageStatisticsType.swift */,
+				63FE51FC2003CC5C0062F2E5 /* SCFontType.swift */,
+				63FE51F62003CC5C0062F2E5 /* SCGameSettingType.swift */,
+				63FE52082003CD470062F2E5 /* SCLocalSettingType.swift */,
+				63FE51F92003CC5C0062F2E5 /* SCMultipeerMessageType.swift */,
+				63FE51F72003CC5C0062F2E5 /* SCPageViewFlowType.swift */,
+			);
+			name = Types;
 			sourceTree = "<group>";
 		};
 		7EF9474D1A1202AA6DB0DBB4 /* Frameworks */ = {
@@ -626,12 +649,14 @@
 				63FDED371D264CF300142780 /* Team.swift in Sources */,
 				637F195F1D46010E00FB4047 /* Statistics.swift in Sources */,
 				638CE44F1EAB45A500033480 /* SCTimelineViewCell.swift in Sources */,
+				63FE52092003CD470062F2E5 /* SCLocalSettingType.swift in Sources */,
 				63EAF9A31D41D2E700BC554E /* Round.swift in Sources */,
 				635599CF1F4DEF8700508FE9 /* SCPlayerNameViewController.swift in Sources */,
 				635464791EF9FC5C0013A196 /* SCTimelineHeaderViewCell.swift in Sources */,
 				635599D41F4DEFBF00508FE9 /* SCMainViewController.swift in Sources */,
 				63CB4F0C1D3CBCBC00211D3A /* CardCollection.swift in Sources */,
 				630D15581E99F1B3001C1D87 /* SCLabel.swift in Sources */,
+				63FE52062003CC5C0062F2E5 /* SCFontType.swift in Sources */,
 				6363EB651E7E4D5600CC287B /* SCUnderlineTextField.swift in Sources */,
 				63BF43BC1FDA5FBB0079B5EE /* SCDeviceTypeManager.swift in Sources */,
 				63D256841E6BA6BA0061D80C /* SCLogoLabel.swift in Sources */,
@@ -655,6 +680,7 @@
 				639F88F41F0615540082D813 /* SCWordBank.swift in Sources */,
 				639F88F21F0615540082D813 /* SCStrings.swift in Sources */,
 				6332922B1E7DE9EC0090B09D /* SCLocalStorageManager.swift in Sources */,
+				63FE52032003CC5C0062F2E5 /* SCMultipeerMessageType.swift in Sources */,
 				635599C61F4DD8ED00508FE9 /* SCGameViewController.swift in Sources */,
 				633C48661FEDED6800EA2DD9 /* SCPageViewFlowEntryViewController.swift in Sources */,
 				63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */,
@@ -664,10 +690,11 @@
 				63EAF9A51D41F1C400BC554E /* SCAudioManager.swift in Sources */,
 				63CB4F0A1D3CB88D00211D3A /* Card.swift in Sources */,
 				63D949E21F17F68900697779 /* CustomCategory.swift in Sources */,
+				63FE52002003CC5C0062F2E5 /* SCGameSettingType.swift in Sources */,
 				63DEDEE81E88921200DE94A1 /* Event.swift in Sources */,
 				63B4C3B61FE910A300161773 /* SCGameSettingsManager.swift in Sources */,
 				639F88F01F0615540082D813 /* SCFonts.swift in Sources */,
-				639F4B211FF52F3B006F67DE /* SCPageViewFlowType.swift in Sources */,
+				63FE52012003CC5C0062F2E5 /* SCPageViewFlowType.swift in Sources */,
 				635599D31F4DEFBF00508FE9 /* SCMainSettingsViewController.swift in Sources */,
 				63B4C3BF1FEBA19F00161773 /* PageViewFlowEntry.swift in Sources */,
 				6363EB671E7E5A3900CC287B /* SCToggleViewCell.swift in Sources */,
@@ -687,13 +714,14 @@
 				63FDED351D264BE800142780 /* Player.swift in Sources */,
 				635599CE1F4DEF8700508FE9 /* SCAccessCodeViewController.swift in Sources */,
 				63B4C3B41FE8EFA200161773 /* SCPageViewFlowContainerViewController.swift in Sources */,
+				63FE52042003CC5C0062F2E5 /* SCDiscreteUsageStatisticsType.swift in Sources */,
 				63B4C3BB1FEB7F6000161773 /* SCPageViewFlows.swift in Sources */,
 				63B4C3C91FED9D9A00161773 /* SCUsageStatisticsManager.swift in Sources */,
 				635599BB1F4DD35200508FE9 /* SCPregameRoomViewController.swift in Sources */,
 				63A04D041D1A5713005A2914 /* SCAppDelegate.swift in Sources */,
 				639F88F11F0615540082D813 /* SCStates.swift in Sources */,
 				633292251E7D0D950090B09D /* SCDisclosureViewCell.swift in Sources */,
-				63348EC22003C56D00939B94 /* SCDeviceType.swift in Sources */,
+				63FE51FF2003CC5C0062F2E5 /* SCDeviceType.swift in Sources */,
 				63D7E73D1EB183EF00B2F536 /* SCReadyStatusLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,6 +1,6 @@
 class SCPageViewFlows {
     fileprivate static let mappings: [SCPageViewFlowType: [SCPageViewFlowEntry]] = [
-        .PregameOnboarding: [
+        .pregameOnboarding: [
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
                     SCStrings.pregameOnboarding.welcome.rawLocalized,
@@ -46,7 +46,7 @@ class SCPageViewFlows {
                     SCStrings.pregameOnboarding.dismiss.rawLocalized,
             ]),
         ],
-        .GameOnboarding: SCPageViewFlows.retrieveCustomFlow(flowType: .GameOnboarding)
+        .gameOnboarding: SCPageViewFlows.retrieveCustomFlow(flowType: .gameOnboarding)
     ]
 
     fileprivate static let customMappings: [String: [SCPageViewFlowEntry]] = [
@@ -115,7 +115,7 @@ class SCPageViewFlows {
     fileprivate static func retrieveCustomFlow(flowType: SCPageViewFlowType) -> [SCPageViewFlowEntry] {
         var result = [SCPageViewFlowEntry]()
 
-        if flowType == .GameOnboarding {
+        if flowType == .gameOnboarding {
             if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
                 result += [SCPageViewFlowEntry([
                     SCConstants.pageViewFlowEntryKey.displayText.rawValue:

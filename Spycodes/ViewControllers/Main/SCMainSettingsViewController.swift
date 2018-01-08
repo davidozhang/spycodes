@@ -2,7 +2,7 @@ import UIKit
 
 protocol SCMainSettingsViewControllerDelegate: class {
     func mainSettings(onToggleViewCellChanged toggleViewCell: SCToggleViewCell,
-                      settingType: SCLocalStorageManager.LocalSettingType)
+                      settingType: SCLocalSettingType)
 }
 
 class SCMainSettingsViewController: SCModalViewController {

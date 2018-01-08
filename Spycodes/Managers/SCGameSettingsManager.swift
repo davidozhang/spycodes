@@ -1,11 +1,7 @@
 class SCGameSettingsManager: SCLogger {
     static let instance = SCGameSettingsManager()
-
-    enum GameSettingType: Int {
-        case minigame = 0
-    }
     
-    fileprivate var gameSettings = [GameSettingType: Bool]()
+    fileprivate var gameSettings = [SCGameSettingType: Bool]()
     
     override init() {
         super.init()
@@ -18,7 +14,7 @@ class SCGameSettingsManager: SCLogger {
     }
     
     // MARK: Public
-    func enableGameSetting(_ type: GameSettingType, enabled: Bool) {
+    func enableGameSetting(_ type: SCGameSettingType, enabled: Bool) {
         self.gameSettings[type] = enabled
         
         if type == .minigame {
@@ -32,7 +28,7 @@ class SCGameSettingsManager: SCLogger {
         super.log("Game settings changed.")
     }
     
-    func isGameSettingEnabled(_ type: GameSettingType) -> Bool {
+    func isGameSettingEnabled(_ type: SCGameSettingType) -> Bool {
         if type == .minigame {
             return GameMode.instance.getMode() == GameMode.Mode.miniGame
         }

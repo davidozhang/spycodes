@@ -1,18 +1,13 @@
 class SCUsageStatisticsManager: SCLogger {
     static let instance = SCUsageStatisticsManager()
     
-    enum DiscreteUsageStatisticsType: Int {
-        case appOpens = 0
-        case gamePlays = 1
-    }
-    
-    fileprivate var discreteUsageStatistics = [DiscreteUsageStatisticsType: Int]()
+    fileprivate var discreteUsageStatistics = [SCDiscreteUsageStatisticsType: Int]()
     
     override func getIdentifier() -> String? {
         return SCConstants.loggingIdentifier.usageStatisticsManager.rawValue
     }
 
-    func recordDiscreteUsageStatistics(_ type: DiscreteUsageStatisticsType) {
+    func recordDiscreteUsageStatistics(_ type: SCDiscreteUsageStatisticsType) {
         if let statistics = self.discreteUsageStatistics[type] {
             self.discreteUsageStatistics[type] = statistics + 1
         }
