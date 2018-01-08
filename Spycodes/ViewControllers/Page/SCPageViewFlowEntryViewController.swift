@@ -28,7 +28,10 @@ class SCPageViewFlowEntryViewController: SCViewController {
         self.view.backgroundColor = .clear
 
         if let pageViewFlowEntry = self.pageViewFlowEntry {
-            if pageViewFlowEntry.shouldShowIphone() {
+            let deviceType = SCDeviceTypeManager.getDeviceType()
+            let excludedDevices: Set = [SCDeviceTypeManager.DeviceType.iPhone_4, SCDeviceTypeManager.DeviceType.iPhone_5]
+
+            if pageViewFlowEntry.shouldShowIphone() && !excludedDevices.contains(deviceType) {
                 self.iphoneView.isHidden = false
             } else {
                 self.iphoneViewWidthConstraint.constant = 0
@@ -37,7 +40,7 @@ class SCPageViewFlowEntryViewController: SCViewController {
                 self.iphoneView.isHidden = true
             }
 
-            if let displayImage = pageViewFlowEntry.getDisplayImage() {
+            if let displayImage = pageViewFlowEntry.getDisplayImage(), !excludedDevices.contains(deviceType) {
                 self.imageView.image = displayImage
                 self.labelTopSpaceConstraint.constant = SCPageViewFlowEntryViewController.defaultLabelTopSpace
 
