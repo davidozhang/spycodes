@@ -2,11 +2,14 @@ import UIKit
 
 class SCPageViewFlowEntryViewController: SCViewController {
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var iphoneView: UIImageView!
     @IBOutlet weak var label: SCLabel!
     @IBOutlet weak var headerLabel: SCNavigationBarLabel!
 
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var labelTopSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var iphoneViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var iphoneViewHeightConstraint: NSLayoutConstraint!
 
     static let defaultLabelTopSpace: CGFloat = 48.0
 
@@ -25,12 +28,26 @@ class SCPageViewFlowEntryViewController: SCViewController {
         self.view.backgroundColor = .clear
 
         if let pageViewFlowEntry = self.pageViewFlowEntry {
+            if pageViewFlowEntry.shouldShowIphone() {
+                self.iphoneView.isHidden = false
+            } else {
+                self.iphoneViewWidthConstraint.constant = 0
+                self.iphoneViewHeightConstraint.constant = 0
+
+                self.iphoneView.isHidden = true
+            }
+
             if let displayImage = pageViewFlowEntry.getDisplayImage() {
                 self.imageView.image = displayImage
                 self.labelTopSpaceConstraint.constant = SCPageViewFlowEntryViewController.defaultLabelTopSpace
+
+                self.imageView.isHidden = false
+                self.imageView.superview?.bringSubview(toFront: self.imageView)
             } else {
                 self.imageViewWidthConstraint.constant = 0
                 self.labelTopSpaceConstraint.constant = 0
+
+                self.imageView.isHidden = true
             }
             
             if let displayText = pageViewFlowEntry.getDisplayText() {
