@@ -51,7 +51,8 @@ class SCMainViewController: SCViewController {
                 self.showUpdateAppAlert()
             }
         }
-        
+
+        SCAppReviewManager.requestReviewIfAllowed()
         SCUsageStatisticsManager.instance.recordDiscreteUsageStatistics(.appOpens)
 
         self.logoLabel.text = SCStrings.appName.localized
