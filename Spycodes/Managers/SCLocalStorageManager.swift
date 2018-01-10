@@ -67,9 +67,14 @@ extension SCLocalStorageManager {
 
     func retrieveDiscreteUsageStatistics() -> [SCDiscreteUsageStatisticsType: Int] {
         var result = [SCDiscreteUsageStatisticsType: Int]()
-        let storedAppOpens = UserDefaults.standard.integer(
+        var storedAppOpens = UserDefaults.standard.integer(
             forKey: SCConstants.userDefaults.appOpens.rawValue
         )
+
+        // Account for first-time app launch
+        if storedAppOpens == 0 {
+            storedAppOpens = 1
+        }
 
         result[.appOpens] = storedAppOpens
 

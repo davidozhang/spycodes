@@ -7,7 +7,7 @@ class SCAppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         SCLocalStorageManager.instance.retrieveLocalSettings()
-        SCUsageStatisticsManager.instance.retrieveDiscreteUsageStatistics()
+        SCUsageStatisticsManager.instance.retrieveDiscreteUsageStatisticsFromLocalStorage()
 
         application.isIdleTimerDisabled = true
         return true

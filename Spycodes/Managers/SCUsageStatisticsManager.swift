@@ -17,7 +17,11 @@ class SCUsageStatisticsManager: SCLogger {
         }
     }
     
-    func retrieveDiscreteUsageStatistics() {
+    func getDiscreteUsageStatisticsValue(type: SCDiscreteUsageStatisticsType) -> Int? {
+        return self.discreteUsageStatistics[type]
+    }
+    
+    func retrieveDiscreteUsageStatisticsFromLocalStorage() {
         self.discreteUsageStatistics = SCLocalStorageManager.instance.retrieveDiscreteUsageStatistics()
         super.log(self.discreteUsageStatistics.description)
     }
