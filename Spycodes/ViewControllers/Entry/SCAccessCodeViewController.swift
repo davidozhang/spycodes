@@ -57,6 +57,10 @@ class SCAccessCodeViewController: SCViewController {
         SCMultipeerManager.instance.delegate = self
 
         self.headerLabel.text = SCStrings.header.accessCode.rawLocalized
+        self.cancelButton.setTitle(
+            SCStrings.button.cancel.rawLocalized,
+            for: UIControlState()
+        )
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? SCSingleCharacterTextField {
