@@ -105,6 +105,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Iai-EH-C20" firstAttribute="centerX" secondItem="nVj-tx-bo9" secondAttribute="centerX" id="BMv-bw-yAu"/>
+                                    <constraint firstAttribute="height" constant="54" id="Hd6-KB-lj9"/>
                                     <constraint firstItem="Iai-EH-C20" firstAttribute="top" secondItem="nVj-tx-bo9" secondAttribute="top" constant="8" id="SMp-rz-TWR"/>
                                     <constraint firstAttribute="bottom" secondItem="Iai-EH-C20" secondAttribute="bottom" constant="16" id="l03-pc-EAf"/>
                                 </constraints>
@@ -136,6 +137,7 @@
                         <outlet property="joinGameButton" destination="CBi-9c-KRm" id="dUo-jD-ddi"/>
                         <outlet property="logoLabel" destination="kwp-LV-dpu" id="rpS-d7-Jwi"/>
                         <outlet property="modalPeekView" destination="nVj-tx-bo9" id="qlw-TL-Mg7"/>
+                        <outlet property="modalPeekViewHeightConstraint" destination="Hd6-KB-lj9" id="oda-Wu-O1B"/>
                         <outlet property="swipeUpButton" destination="tVk-pz-TGW" id="jGt-0M-ZVj"/>
                         <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name-view-controller-segue" modalTransitionStyle="crossDissolve" id="M2x-yW-um3"/>
                         <segue destination="oCs-d3-UDI" kind="presentation" identifier="main-settings-view-controller-segue" id="cpV-DQ-cDx"/>
@@ -992,6 +994,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="vip-gN-xru" secondAttribute="bottom" constant="16" id="MOO-Ua-XLx"/>
                                     <constraint firstItem="vip-gN-xru" firstAttribute="top" secondItem="qn1-V1-kty" secondAttribute="top" constant="8" id="ac5-JA-4Jr"/>
+                                    <constraint firstAttribute="height" constant="54" id="kW3-A1-gNr"/>
                                     <constraint firstItem="vip-gN-xru" firstAttribute="centerX" secondItem="qn1-V1-kty" secondAttribute="centerX" id="zbG-X2-sPF"/>
                                 </constraints>
                             </view>
@@ -1059,8 +1062,12 @@
                     <connections>
                         <outlet property="accessCodeLabel" destination="dZK-HZ-PAI" id="ChC-Yo-r67"/>
                         <outlet property="modalPeekView" destination="qn1-V1-kty" id="R3b-Yb-Qjd"/>
+                        <outlet property="modalPeekViewHeightConstraint" destination="kW3-A1-gNr" id="ucC-8M-VLx"/>
                         <outlet property="readyButton" destination="084-kN-Fki" id="kMu-UQ-07b"/>
+                        <outlet property="swipeUpButtomTopSpaceConstraint" destination="nbi-Jb-JYX" id="lT4-SJ-yGc"/>
                         <outlet property="swipeUpButton" destination="A1z-dP-UpL" id="7FJ-3u-pv7"/>
+                        <outlet property="swipeUpButtonHeightConstraint" destination="IAf-Cl-VTO" id="jZL-b7-Ok8"/>
+                        <outlet property="swipeUpButtonWidthConstraint" destination="ypP-Jv-JfE" id="jk3-Vo-oP9"/>
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="JyP-Fd-tkk" id="fGm-hU-E9O"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="jKW-MX-l9L" id="Dhs-xX-o3L"/>
@@ -1840,7 +1847,7 @@
         <image name="iPhone" width="324" height="572"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Zcx-BU-A4v"/>
+        <segue reference="CKf-j2-Ls6"/>
         <segue reference="7yd-xs-fux"/>
     </inferredMetricsTieBreakers>
 </document>

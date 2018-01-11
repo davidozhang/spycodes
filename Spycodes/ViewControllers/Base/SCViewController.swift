@@ -25,6 +25,7 @@ class SCViewController: UIViewController {
     fileprivate var modalPeekBlurView: UIVisualEffectView?
 
     @IBOutlet weak var modalPeekView: UIView!
+    @IBOutlet weak var modalPeekViewHeightConstraint: NSLayoutConstraint!
 
     deinit {
         if let uniqueIdentifier = self.uniqueIdentifier {
@@ -304,6 +305,7 @@ class SCViewController: UIViewController {
     func hideModalPeekView() {
         self.modalPeekView.isHidden = true
         self.modalPeekBlurView?.isHidden = true
+        self.modalPeekViewHeightConstraint.constant = 24
     }
 
     func setCustomLayoutForDeviceType(deviceType: SCDeviceType) {}

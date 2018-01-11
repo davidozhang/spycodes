@@ -16,6 +16,9 @@ class SCPregameRoomViewController: SCViewController {
     @IBOutlet weak var accessCodeLabel: SCNavigationBarLabel!
     @IBOutlet weak var readyButton: SCButton!
     @IBOutlet weak var swipeUpButton: SCImageButton!
+    @IBOutlet weak var swipeUpButtonWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var swipeUpButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var swipeUpButtomTopSpaceConstraint: NSLayoutConstraint!
 
     @IBAction func onSwipeUpButtonTapped(_ sender: Any) {
         self.swipeUp()
@@ -153,6 +156,9 @@ class SCPregameRoomViewController: SCViewController {
             self.swipeUpButton.setImage(UIImage(named: "Chevron-Up"), for: UIControlState())
         } else {
             self.swipeUpButton.isHidden = true
+            self.swipeUpButtonWidthConstraint.constant = 0
+            self.swipeUpButtonHeightConstraint.constant = 0
+            self.swipeUpButtomTopSpaceConstraint.constant = 0
         }
     }
 
