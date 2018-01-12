@@ -1,4 +1,5 @@
 import UIKit
+import TouchVisualizer
 
 @UIApplicationMain
 class SCAppDelegate: UIResponder, UIApplicationDelegate {
@@ -8,6 +9,12 @@ class SCAppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         SCLocalStorageManager.instance.retrieveLocalSettings()
         SCUsageStatisticsManager.instance.retrieveDiscreteUsageStatisticsFromLocalStorage()
+
+        // Presentation touch visualization
+        var config = Configuration()
+        config.color = UIColor.spycodesGrayColor()
+        config.defaultSize = CGSize(width: 20.0, height: 20.0)
+        Visualizer.start(config)
 
         application.isIdleTimerDisabled = true
         return true
