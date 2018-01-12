@@ -1,18 +1,15 @@
 PODS:
-  - Fingertips (0.5.0)
   - ISEmojiView (0.0.5)
   - SwiftGifOrigin (1.6.1)
 
 DEPENDENCIES:
-  - Fingertips
   - ISEmojiView
   - SwiftGifOrigin (~> 1.6.1)
 
 SPEC CHECKSUMS:
-  Fingertips: 8e557eed25253fcb4bfa25ac4418f8e8add1ad9a
   ISEmojiView: 792c0ce32a1a4f375ea09b6c3f2e86a488ee2d8f
   SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
 
-PODFILE CHECKSUM: 995dd4219f87e4947410114c2f30b404c74559d6
+PODFILE CHECKSUM: 2715a7c803f5e719bc11b8170a14ce88f9378c24
 
 COCOAPODS: 1.3.1
