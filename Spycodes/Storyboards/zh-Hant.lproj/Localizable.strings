@@ -101,15 +101,16 @@
 "You" = "你";
 
 // Pregame Onboarding
-"Chevrons in the app can be tapped on. They also indicate swipe support in the direction it is pointing." = "應用程序中的箭頭可以點擊。你也可以用手指朝他們的指向滑動。";
+"Chevrons in the app can be tapped on. They also indicate swipe support in the direction they are pointing to." = "應用程序中的箭頭可以點擊。你也可以用手指朝他們的指向滑動。";
 "You are all set for now. Swipe down to dismiss this view!" = "你已準備好了。用手指向下滑動即可繼續遊戲！";
 "There are two types of games you could play: regular and minigame." = "此應用程序有兩類遊戲可以玩：常規和迷你遊戲。";
-"In a minigame, you all play on Team Red against the CPU on Team Blue. Your team should have 2-3 players." = "如果玩迷你游戲，你們都屬於紅色隊。你們一起對陣藍色隊的CPU。你的隊應該有2-3名隊員。";
-"You can always access this help view by tapping on the help button." = "你可以隨時通過點擊幫助按鈕訪問此屏幕。";
+"In a minigame, you all play on Team Red against the CPU on Team Blue. Your team should have 2-3 players." = "如果玩迷你游戲，你們紅色隊一起對战藍色隊的CPU。你的隊應該有2-3名隊員。";
+"You can always access this help view by tapping on the help button in the top right corner." = "你可以隨時通過點擊右上角的幫助按鈕訪問此屏幕。";
 "Tap a teammate to nominate as leader. The leader will be providing clues to your team for the next game." = "點擊一名隊友即可提名做领袖。 领袖將會為你的隊提供游戏里的線索。";
-"Swipe up in the pregame view to access game and category settings." = "用手指向上滑動即可訪問遊戲和單詞分類設置。";
+"Swipe up in the pregame room view to access game and category settings." = "用手指向上滑動即可訪問遊戲和單詞分類設置。";
 "In a regular game, you can pick a team to be on. Each team should have at least 2 players." = "在常規遊戲中，你可以選擇你的队。 每个隊至少需要2名队員。";
-"Tap the shuffle button to randomly assign your team's leader. Tap the change button to change your team assignment." = "點擊隨機按鈕即可隨機選擇你的隊的領袖。點擊更改按鈕可以調換你的隊伍分配。";
+"Tap the shuffle button to randomly assign your team's leader." = "點擊隨機按鈕即可隨機選擇你的隊的領袖。";
+"Tap the change button to change your team assignment." = "點擊更改按鈕可以更換你的隊伍分配。";
 "Tap Ready when you are set. The game starts when everyone is ready." = "設置好後即可點擊準備好了。如果大家都準備好了，遊戲就會自動開始。";
 "Welcome to Spycodes! Let's help you get started." = "歡迎玩Spycodes！ 此屏幕会给你一个简单的游戏流程介绍。";
 

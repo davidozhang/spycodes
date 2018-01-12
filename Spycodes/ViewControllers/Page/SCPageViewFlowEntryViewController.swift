@@ -31,7 +31,8 @@ class SCPageViewFlowEntryViewController: SCViewController {
             let deviceType = SCDeviceTypeManager.getDeviceType()
             let excludedDeviceTypes: Set = [SCDeviceType.iPhone_4, SCDeviceType.iPhone_5]
 
-            if pageViewFlowEntry.shouldShowIphone() && !excludedDeviceTypes.contains(deviceType) {
+            if let _ = pageViewFlowEntry.getDisplayImage(),
+               pageViewFlowEntry.shouldShowIphone() && !excludedDeviceTypes.contains(deviceType) {
                 self.iphoneView.isHidden = false
             } else {
                 self.iphoneViewWidthConstraint.constant = 0

@@ -16,30 +16,82 @@ class SCPageViewFlows {
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
                     SCStrings.pregameOnboarding.minigame.rawLocalized,
+                SCConstants.pageViewFlowEntryKey.displayImageName.rawValue:
+                    SCConstants.pregameOnboardingGif.minigame.rawValue,
+                SCConstants.pageViewFlowEntryKey.displayImageType.rawValue:
+                    SCPageViewFlowEntry.DisplayImageType.GIF,
+                SCConstants.pageViewFlowEntryKey.showIphone.rawValue:
+                true,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
                     SCStrings.pregameOnboarding.leaderNomination.rawLocalized,
+                SCConstants.pageViewFlowEntryKey.displayImageName.rawValue:
+                    SCConstants.pregameOnboardingGif.nomination.rawValue,
+                SCConstants.pageViewFlowEntryKey.displayImageType.rawValue:
+                    SCPageViewFlowEntry.DisplayImageType.GIF,
+                SCConstants.pageViewFlowEntryKey.showIphone.rawValue:
+                    true,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
-                    SCStrings.pregameOnboarding.shuffleChangeButtons.rawLocalized,
+                    SCStrings.pregameOnboarding.shuffleButton.rawLocalized,
+                SCConstants.pageViewFlowEntryKey.displayImageName.rawValue:
+                    SCConstants.pregameOnboardingGif.shuffle.rawValue,
+                SCConstants.pageViewFlowEntryKey.displayImageType.rawValue:
+                    SCPageViewFlowEntry.DisplayImageType.GIF,
+                SCConstants.pageViewFlowEntryKey.showIphone.rawValue:
+                    true,
+            ]),
+            SCPageViewFlowEntry([
+                SCConstants.pageViewFlowEntryKey.displayText.rawValue:
+                    SCStrings.pregameOnboarding.changeButton.rawLocalized,
+                SCConstants.pageViewFlowEntryKey.displayImageName.rawValue:
+                    SCConstants.pregameOnboardingGif.change.rawValue,
+                SCConstants.pageViewFlowEntryKey.displayImageType.rawValue:
+                    SCPageViewFlowEntry.DisplayImageType.GIF,
+                SCConstants.pageViewFlowEntryKey.showIphone.rawValue:
+                    true,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
                     SCStrings.pregameOnboarding.readyButton.rawLocalized,
+                SCConstants.pageViewFlowEntryKey.displayImageName.rawValue:
+                    SCConstants.pregameOnboardingGif.ready.rawValue,
+                SCConstants.pageViewFlowEntryKey.displayImageType.rawValue:
+                    SCPageViewFlowEntry.DisplayImageType.GIF,
+                SCConstants.pageViewFlowEntryKey.showIphone.rawValue:
+                    true,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
                     SCStrings.pregameOnboarding.chevrons.rawLocalized,
+                SCConstants.pageViewFlowEntryKey.displayImageName.rawValue:
+                    SCConstants.pregameOnboardingGif.chevron.rawValue,
+                SCConstants.pageViewFlowEntryKey.displayImageType.rawValue:
+                    SCPageViewFlowEntry.DisplayImageType.GIF,
+                SCConstants.pageViewFlowEntryKey.showIphone.rawValue:
+                true,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
                     SCStrings.pregameOnboarding.pregameMenu.rawLocalized,
+                SCConstants.pageViewFlowEntryKey.displayImageName.rawValue:
+                    SCConstants.pregameOnboardingGif.menu.rawValue,
+                SCConstants.pageViewFlowEntryKey.displayImageType.rawValue:
+                    SCPageViewFlowEntry.DisplayImageType.GIF,
+                SCConstants.pageViewFlowEntryKey.showIphone.rawValue:
+                    true,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
                     SCStrings.pregameOnboarding.helpAccess.rawLocalized,
+                SCConstants.pageViewFlowEntryKey.displayImageName.rawValue:
+                    SCConstants.pregameOnboardingGif.help.rawValue,
+                SCConstants.pageViewFlowEntryKey.displayImageType.rawValue:
+                    SCPageViewFlowEntry.DisplayImageType.GIF,
+                SCConstants.pageViewFlowEntryKey.showIphone.rawValue:
+                    true,
             ]),
             SCPageViewFlowEntry([
                 SCConstants.pageViewFlowEntryKey.displayText.rawValue:
