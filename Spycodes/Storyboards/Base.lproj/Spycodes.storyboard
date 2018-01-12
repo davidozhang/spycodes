@@ -1190,8 +1190,8 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="VRD-ch-cEQ" secondAttribute="trailing" id="8F0-YA-OUE"/>
                                     <constraint firstItem="aGd-SH-d26" firstAttribute="top" secondItem="rwb-zi-xv8" secondAttribute="top" id="8SP-fP-TKF"/>
-                                    <constraint firstItem="VRD-ch-cEQ" firstAttribute="top" secondItem="aGd-SH-d26" secondAttribute="bottom" constant="48" id="9fM-e6-ulz"/>
                                     <constraint firstItem="VRD-ch-cEQ" firstAttribute="centerX" secondItem="rwb-zi-xv8" secondAttribute="centerX" id="KBm-tG-abg"/>
+                                    <constraint firstItem="Vca-6v-mPL" firstAttribute="bottom" secondItem="aGd-SH-d26" secondAttribute="bottom" id="Kf9-bA-Di5"/>
                                     <constraint firstItem="Vca-6v-mPL" firstAttribute="centerX" secondItem="rwb-zi-xv8" secondAttribute="centerX" id="Pph-Wa-pvz"/>
                                     <constraint firstItem="VRD-ch-cEQ" firstAttribute="leading" secondItem="rwb-zi-xv8" secondAttribute="leading" id="ULX-Yb-fWP"/>
                                     <constraint firstItem="aGd-SH-d26" firstAttribute="centerX" secondItem="rwb-zi-xv8" secondAttribute="centerX" id="ahF-C7-4ep"/>
