@@ -99,7 +99,18 @@ class SCConstants {
         case headerText = "header-text"
         case showIphone = "show-iphone"
     }
-    
+
+    enum pregameOnboardingGif: String {
+        case change = "change"
+        case chevron = "chevron"
+        case help = "help"
+        case menu = "menu"
+        case minigame = "minigame"
+        case nomination = "nomination"
+        case ready = "ready"
+        case shuffle = "shuffle"
+    }
+
     enum reuseIdentifiers: String {
         case accessibilityToggleViewCell = "accessibility-toggle-view-cell"
         case addWordViewCell = "add-word-view-cell"
