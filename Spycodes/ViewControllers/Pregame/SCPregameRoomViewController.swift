@@ -126,6 +126,10 @@ class SCPregameRoomViewController: SCViewController {
             SCConstants.notificationKey.pregameMenu.rawValue:
                 #selector(SCPregameRoomViewController.showPregameMenu)
         ])
+
+        if let viewed = SCUsageStatisticsManager.instance.getBooleanUsageStatisticsValue(type: .pregameOnboardingViewed), !viewed {
+            self.showOnboardingView()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -196,6 +200,8 @@ class SCPregameRoomViewController: SCViewController {
     func showOnboardingView() {
         self.destinationPageViewFlowType = SCPageViewFlowType.pregameOnboarding
         self.showPageViewContainer()
+
+        SCUsageStatisticsManager.instance.recordBooleanUsageStatistics(.pregameOnboardingViewed, value: true)
     }
 
     func showPregameMenu() {

@@ -50,6 +50,21 @@ class SCLocalStorageManager: SCLogger {
 
 // MARK: SCUsageStatisticsManager Methods
 extension SCLocalStorageManager {
+    func saveBooleanUsageStatistics(_ type: SCBooleanUsageStatisticsType, value: Bool) {
+        switch type {
+        case .pregameOnboardingViewed:
+            UserDefaults.standard.set(
+                value,
+                forKey: SCConstants.userDefaults.pregameOnboardingViewed.rawValue
+            )
+        case .gameOnboardingViewed:
+            UserDefaults.standard.set(
+                value,
+                forKey: SCConstants.userDefaults.gameOnboardingViewed.rawValue
+            )
+        }
+    }
+
     func saveDiscreteUsageStatistics(_ type: SCDiscreteUsageStatisticsType, value: Int) {
         switch type {
         case .appOpens:
@@ -63,6 +78,24 @@ extension SCLocalStorageManager {
                 forKey: SCConstants.userDefaults.gamePlays.rawValue
             )
         }
+    }
+
+    func retrieveBooleanUsageStatistics() -> [SCBooleanUsageStatisticsType: Bool] {
+        var result = [SCBooleanUsageStatisticsType: Bool]()
+        var storedPregameOnboardingViewed = UserDefaults.standard.bool(
+            forKey: SCConstants.userDefaults.pregameOnboardingViewed.rawValue
+        )
+
+        result[.pregameOnboardingViewed] = storedPregameOnboardingViewed
+
+        let storedGameOnboardingViewed = UserDefaults.standard.bool(
+            forKey: SCConstants.userDefaults.gameOnboardingViewed.rawValue
+        )
+
+        result[.gameOnboardingViewed] = storedGameOnboardingViewed
+        super.log(SCStrings.logging.discreteUsageStatisticsRetrieved.rawValue)
+
+        return result
     }
 
     func retrieveDiscreteUsageStatistics() -> [SCDiscreteUsageStatisticsType: Int] {

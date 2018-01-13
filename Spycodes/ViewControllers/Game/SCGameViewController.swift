@@ -74,13 +74,7 @@ class SCGameViewController: SCViewController {
     }
 
     @IBAction func onHelpButtonTapped(_ sender: AnyObject) {
-        self.destinationPageViewFlowType = .gameOnboarding
-        DispatchQueue.main.async {
-            self.performSegue(
-                withIdentifier: SCConstants.segues.pageViewFlowContainerViewControllerSegue.rawValue,
-                sender: self
-            )
-        }
+        self.showOnboardingView()
     }
 
     // MARK: Lifecycle
@@ -170,6 +164,10 @@ class SCGameViewController: SCViewController {
         self.bottomBlurView?.clipsToBounds = true
         self.bottomBarView.addSubview(self.bottomBlurView!)
         self.bottomBarView.sendSubview(toBack: self.bottomBlurView!)
+
+        if let viewed = SCUsageStatisticsManager.instance.getBooleanUsageStatisticsValue(type: .gameOnboardingViewed), !viewed {
+            self.showOnboardingView()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -260,6 +258,18 @@ class SCGameViewController: SCViewController {
                 self.updateCollectionView()
             }
         })
+    }
+
+    fileprivate func showOnboardingView() {
+        self.destinationPageViewFlowType = .gameOnboarding
+        DispatchQueue.main.async {
+            self.performSegue(
+                withIdentifier: SCConstants.segues.pageViewFlowContainerViewControllerSegue.rawValue,
+                sender: self
+            )
+        }
+
+        SCUsageStatisticsManager.instance.recordBooleanUsageStatistics(.gameOnboardingViewed, value: true)
     }
 
     fileprivate func dismissPresentedViewIfNeeded(completion: (() -> Void)?) {

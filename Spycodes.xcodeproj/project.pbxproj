@@ -91,6 +91,7 @@
 		63EBAA81200975DC00AA69AD /* help.gif in Resources */ = {isa = PBXBuildFile; fileRef = 63EBAA7B200975DC00AA69AD /* help.gif */; };
 		63EBAA83200976F000AA69AD /* chevron.gif in Resources */ = {isa = PBXBuildFile; fileRef = 63EBAA82200976EF00AA69AD /* chevron.gif */; };
 		63EBAA852009798400AA69AD /* minigame.gif in Resources */ = {isa = PBXBuildFile; fileRef = 63EBAA842009798300AA69AD /* minigame.gif */; };
+		63EBAA87200991B600AA69AD /* SCBooleanUsageStatisticsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EBAA86200991B500AA69AD /* SCBooleanUsageStatisticsType.swift */; };
 		63FDED351D264BE800142780 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED341D264BE800142780 /* Player.swift */; };
 		63FDED371D264CF300142780 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED361D264CF300142780 /* Team.swift */; };
 		63FDED391D26557200142780 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FDED381D26557200142780 /* Room.swift */; };
@@ -200,6 +201,7 @@
 		63EBAA7B200975DC00AA69AD /* help.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = help.gif; path = Assets/Onboarding/Pregame/help.gif; sourceTree = "<group>"; };
 		63EBAA82200976EF00AA69AD /* chevron.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = chevron.gif; path = Assets/Onboarding/Pregame/chevron.gif; sourceTree = "<group>"; };
 		63EBAA842009798300AA69AD /* minigame.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = minigame.gif; path = Assets/Onboarding/Pregame/minigame.gif; sourceTree = "<group>"; };
+		63EBAA86200991B500AA69AD /* SCBooleanUsageStatisticsType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCBooleanUsageStatisticsType.swift; path = Core/Types/SCBooleanUsageStatisticsType.swift; sourceTree = "<group>"; };
 		63FDED341D264BE800142780 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Player.swift; path = Objects/Player.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63FDED361D264CF300142780 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Objects/Team.swift; sourceTree = "<group>"; };
 		63FDED381D26557200142780 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Room.swift; path = Objects/Room.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -500,6 +502,7 @@
 		63FE51F32003CBC60062F2E5 /* Types */ = {
 			isa = PBXGroup;
 			children = (
+				63EBAA86200991B500AA69AD /* SCBooleanUsageStatisticsType.swift */,
 				63FE51F52003CC5C0062F2E5 /* SCDeviceType.swift */,
 				63FE51FA2003CC5C0062F2E5 /* SCDiscreteUsageStatisticsType.swift */,
 				63FE51FC2003CC5C0062F2E5 /* SCFontType.swift */,
@@ -721,6 +724,7 @@
 				633C48661FEDED6800EA2DD9 /* SCPageViewFlowEntryViewController.swift in Sources */,
 				63920A371D3090D60073E7F7 /* SCMultipeerManager.swift in Sources */,
 				635599B81F4DD35200508FE9 /* SCGameSettingsViewController.swift in Sources */,
+				63EBAA87200991B600AA69AD /* SCBooleanUsageStatisticsType.swift in Sources */,
 				638350A41EA1E3CF003049EF /* SCImageButton.swift in Sources */,
 				63D256881E6BA6BA0061D80C /* SCRoundedButton.swift in Sources */,
 				63EAF9A51D41F1C400BC554E /* SCAudioManager.swift in Sources */,
