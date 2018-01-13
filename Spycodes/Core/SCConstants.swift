@@ -179,9 +179,11 @@ class SCConstants {
         case accessibility = "accessibility"
         case appOpens = "app-opens"
         case customCategories = "custom-categories"
+        case gameOnboardingViewed = "game-onboarding-viewed"
         case gamePlays = "game-plays"
         case nightMode = "night-mode"
         case persistentSelection = "persistent-selection"
+        case pregameOnboardingViewed = "pregame-onboarding-viewed"
         case selectedCategories = "selected-categories"
         case selectedCustomCategories = "selected-custom-categories"
     }
