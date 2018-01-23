@@ -52,7 +52,7 @@ class SCMainViewController: SCViewController {
             }
         }
 
-        SCAppReviewManager.requestReviewIfAllowed()
+        SCStoreKitManager.requestReviewIfAllowed()
         SCUsageStatisticsManager.instance.recordDiscreteUsageStatistics(.appOpens)
 
         self.logoLabel.text = SCStrings.appName.localized
