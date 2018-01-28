@@ -98,7 +98,7 @@ class SCPageViewFlows {
                     SCStrings.pregameOnboarding.dismiss.rawLocalized,
             ]),
         ],
-        .gameOnboarding: SCPageViewFlows.retrieveCustomFlow(flowType: .gameOnboarding)
+        .gameOnboarding: SCPageViewFlows.retrieveCustomFlow(flowType: .gameOnboarding)      // TODO: Figure out how to invoke the retrieve method properly through the mapping
     ]
 
     fileprivate static let customMappings: [String: [SCPageViewFlowEntry]] = [
@@ -157,6 +157,11 @@ class SCPageViewFlows {
     ]
 
     static func retrieveFlow(flowType: SCPageViewFlowType) -> [SCPageViewFlowEntry]? {
+        // Prevent using cached data
+        if flowType == .gameOnboarding {
+            return SCPageViewFlows.retrieveCustomFlow(flowType: flowType)
+        }
+
         if let mappings = SCPageViewFlows.mappings[flowType] {
             return mappings
         }
