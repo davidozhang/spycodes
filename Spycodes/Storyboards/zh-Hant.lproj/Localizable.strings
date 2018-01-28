@@ -130,6 +130,7 @@
 "No players on the team." = "無隊員。";
 "Red" = "紅色隊";
 "Timer" = "計時器";
+"Clue Validation" = "線索檢查";
 "Version" = "版本";
 
 // Round
@@ -146,6 +147,7 @@
 "Your current selections will be saved." = "所有的分類選擇都會被保存到存儲。";
 "All categories will be selected." = "所有的分類都會被選擇。";
 "Tap to Edit" = "點擊編輯";
+"Checks if clue word is valid (English only)." = "檢查線索是否合格（暫時只支持英語）。";
 "word" = "個單詞";
 "words" = "個單詞";
 

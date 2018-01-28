@@ -17,7 +17,8 @@ class SCGameSettingsViewController: SCViewController {
 
     fileprivate enum GameSetting: Int {
         case minigame = 0
-        case timer = 1
+        case validateClues = 1
+        case timer = 2
 
         static var count: Int {
             var count = 0
@@ -33,8 +34,9 @@ class SCGameSettingsViewController: SCViewController {
     ]
 
     fileprivate let settingsLabels: [GameSetting: String] = [
-        .minigame: SCStrings.primaryLabel.minigame.rawLocalized,
-        .timer: SCStrings.primaryLabel.timer.rawLocalized,
+        .minigame: SCStrings.primaryLabel.minigame.rawValue.localized,
+        .timer: SCStrings.primaryLabel.timer.rawValue.localized,
+        .validateClues: SCStrings.primaryLabel.validateClues.rawValue.localized,
     ]
 
     fileprivate var scrolled = false
@@ -117,6 +119,11 @@ class SCGameSettingsViewController: SCViewController {
         self.tableView.register(
             multilineToggleViewCellNib,
             forCellReuseIdentifier: SCConstants.reuseIdentifiers.minigameToggleViewCell.rawValue
+        )
+
+        self.tableView.register(
+            multilineToggleViewCellNib,
+            forCellReuseIdentifier: SCConstants.reuseIdentifiers.validateCluesToggleViewCell.rawValue
         )
 
         self.tableView.register(
@@ -206,6 +213,17 @@ extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelega
                 cell.synchronizeSetting()
 
                 return cell
+            case GameSetting.validateClues.rawValue:
+                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: SCConstants.reuseIdentifiers.validateCluesToggleViewCell.rawValue) as? SCToggleViewCell else {
+                    return SCTableViewCell()
+                }
+
+                cell.synchronizeToggle()
+                cell.primaryLabel.text = self.settingsLabels[.validateClues]
+                cell.secondaryLabel.text = SCStrings.secondaryLabel.validateClues.rawValue.localized
+                cell.delegate = self
+
+                return cell
             default:
                 return SCTableViewCell()
             }
@@ -253,6 +271,8 @@ extension SCGameSettingsViewController: SCToggleViewCellDelegate {
 
                 SCMultipeerManager.instance.broadcast(GameMode.instance)
                 SCMultipeerManager.instance.broadcast(Room.instance)
+            case SCConstants.reuseIdentifiers.validateCluesToggleViewCell.rawValue:
+                SCGameSettingsManager.instance.enableGameSetting(.validateClues, enabled: enabled)
             default:
                 break
             }
