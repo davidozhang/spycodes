@@ -257,7 +257,7 @@ class SCStrings {
         case teamEmptyState = "No players on the team."
         case teamRed = "Red"
         case timer = "Timer"
-        case validateClues = "Clue Validation (Beta)"
+        case validateClues = "Clue Validation"
         case version = "Version"
         case website = "Website"
 
