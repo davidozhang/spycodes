@@ -50,8 +50,10 @@ class SCGameSettingsManager: SCLogger {
     }
     
     func reset() {
-        self.gameSettings[.minigame] = false
-        self.gameSettings[.validateClues] = false
+        for key in self.gameSettings.keys {
+            self.gameSettings[key] = false
+        }
+
         GameMode.instance.setMode(mode: .regularGame)
     }
 }
