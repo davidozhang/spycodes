@@ -108,8 +108,34 @@ class SCStrings {
         }
     }
 
+    enum gameOnboarding: String {
+        case clueRule = "The team leader is encouraged to come up with clever clues. However, cheap tactics should be avoided to keep the game fun and challenging for everyone!"
+        case communication = "The team leader should not communicate with teammates through verbal or physical cues. The leader's screen should not be visible to other players."
+        case dismiss = "Good luck and have fun! Swipe down to continue with the game."
+        case leaderConfirm = "Once you confirm the clue word and number, tap Confirm to allow your teammates to see them. The clue word and number cannot be modified until the round ends."
+        case leaderEnterClue = "Look over the your team's words and enter a 1-word clue followed by a number. The number represents the amount of words corresponding to your clue. Your clue cannot be a word already in the game!"
+        case leaderGuess = "Your teammates can tap on a word card to guess the word. If they guess the Assassin word, then the game is over. Guessing an enemy or neutral word will end the current round."
+        case leaderGoal = "As a leader, you will see a color coded version of all the words. Your goal is to provide clues that would allow your teammates to guess all your team's words in as few rounds as possible."
+        case minigameIntroduction = "Let's guide you through the basics of minigame. You are playing on Team Red against the CPU on Team Blue."
+        case minigameWordCount = "There are 22 word cards in total with the following assignment: 8 Red, 7 Blue, 6 White (Neutral) and 1 Black (Assassin)."
+        case endRound = "Your teammates can end the round by tapping End Round any time after all guesses have been made."
+        case cpuRound = "During the CPU round, the CPU eliminates one of its words and gives the round back to your team."
+        case playerClue = "Your team leader will post a clue consisting of a word and number. The number indicates how many words on the game board should correspond to the clue word."
+        case playerGoal = "As a regular player, your goal is to guess all the words belonging to your team in as few rounds as possible. You will be using the clues provided by your team leader."
+        case playerGuess = "Tap on a word card to guess the word. If your team guesses the Assassin word, then the game is over. Guessing an enemy or neutral word will end the round."
+        case playerWait = "While your team leader is coming up with the clue for the current round, look over and familiarize yourself with the words."
+        case regularGameIntroduction = "Let's guide you through the basics of the regular game."
+        case regularGameWordCount = "There are 22 word cards in total with 6 White (Neutral) and 1 Black (Assassin). Your team may receive 7 or 8 starting words."
+        case enemyTeamRound = "The other team will now follow the same process. Once they are done guessing they will give the round back to your team. The rounds exchange until one team guesses all of its words."
+
+        var rawLocalized: String {
+            return self.rawValue.localized
+        }
+    }
+
     enum header: String {
         case accessCode = "Access Code"
+        case additionalRules = "Additional Rules"
         case categoryExists = "Existing Category"
         case categoryName = "Category Name"
         case categoryWordList = "Category Word List"
@@ -179,24 +205,10 @@ class SCStrings {
         case hostDisconnected = "Host player has disconnected."
         case integrityCheck = "There must be at least 22 words for all selected categories."
         case invalidClue = "The clue is an invalid word. Please enter another one."
-        case leaderConfirm = "Once you are comfortable with your clue and number, tap Confirm to allow your teammates to see the clue and number. The clue and number cannot be modified until the round ends. You cannot talk or make eye contact with your teammates!"
-        case leaderEnterClue = "Look over the words belonging to your team carefully and enter a 1-word clue followed by a number. The number represents the amount of words corresponding to your clue. Your clue cannot be a word already in the game!"
-        case leaderGuess = "While guessing, your teammates can tap End Round at any time. If they guess the Assassin word, then it is Game Over. Guessing an enemy team word or a neutral word will end the round."
-        case leaderGoal = "As a leader, you will see a color coded version of all the words. Your goal is to provide clues that would allow your teammates to guess all of your team's words in as few rounds as possible."
-        case minigameEnd = "Your best record is based on the number of words remaining on the CPU team after each successful game. Try to aim for as high a number as possible!"
-        case minigameIntro = "You are currently playing a Minigame with your teammates on Team Red versus a CPU player on Team Blue. There are 22 words in total: 8 Red, 7 Blue, 6 Neutral (white) and 1 Assassin (black)."
-        case minigameRoundEnd = "After each round ends, the CPU automatically eliminates one of its words and hands the round back to your team. Your teammates must try to guess all of your team's words before the CPU finishes all of its words."
         case minigameWinString = "Your team won! There were %d opponent cards remaining. Great work!"
         case minimumWords = "There must be a minimum of 22 words."
         case playerAborted = "A player in the game has aborted."
-        case playerClue = "A 1-word clue and number will show at the top once your leader is done coming up with it. The number represents the amount of words corresponding to that clue. You cannot talk or make eye contact with your leader!"
         case playerDisconnected = "A player in the game has disconnected."
-        case playerGoal = "As a regular player, your goal is to guess all the words belonging to your team in as few rounds as possible. You will be using the clues provided to you by your leader."
-        case playerGuess = "Now it is your turn to guess! You can tap End Round at any time. If your team guesses the Assassin word, then it is Game Over. Guessing an enemy team word or a neutral word will end the round."
-        case playerWait = "While your leader is coming up with the clue for the current round, you can wait and look over the words."
-        case regularGameEnd = "Your team's wins and losses are tracked after each game. Try to win as many games as possible!"
-        case regularGameIntro = "You are currently playing a regular game with your teammates. There are 22 words in total, including 6 Neutral (white) and 1 Assassin (black). Your team may get 7 or 8 starting words."
-        case regularGameRoundEnd = "The other team will now follow the same process. Once they are done guessing they will hand the round back to your team. The round exchanges until one team guesses all of its words."
         case updatePrompt = "Please download the latest version of Spycodes."
 
         var rawLocalized: String {

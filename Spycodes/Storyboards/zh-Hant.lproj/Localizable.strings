@@ -35,8 +35,30 @@
 "Sports" = "體育";
 "Transportation" = "交通";
 
+// Game Onboarding
+"The team leader is encouraged to come up with clever clues. However, cheap tactics should be avoided to keep the game fun and challenging for everyone!" = "領袖應盡量避免提供不公平或作弊的線索，從而讓遊戲更有挑戰性！";
+"The team leader should not communicate with teammates through verbal or physical cues. The leader's screen should not be visible to other players." = "領袖不應該與隊友有任何口語或肢體溝通。領袖的屏幕應該被遮蔽。";
+"Good luck and have fun! Swipe down to continue with the game." = "祝你游戲玩的愉快！用手指向下滑動即可繼續遊戲。";
+"Once you confirm the clue word and number, tap Confirm to allow your teammates to see them. The clue word and number cannot be modified until the round ends." = "點擊'確認'即可讓你的隊友看到你設置的線索。線索確認後不能被編輯。";
+"Look over the your team's words and enter a 1-word clue followed by a number. The number represents the amount of words corresponding to your clue. Your clue cannot be a word already in the game!" = "查看一下所有有關你的隊的單詞，然後輸入一個線索。線索包括一個單詞和一位數字。數字代表有多少單詞是和此線索有關的。線索不能是遊戲裡面的任何單詞！";
+"Your teammates can tap on a word card to guess the word. If they guess the Assassin word, then the game is over. Guessing an enemy or neutral word will end the current round." = "你的隊員可通過點擊來猜單詞。隊員猜中刺客單詞會立即讓你的隊輸。猜中敵人或者旁觀者的單詞會結束此遊戲輪。";
+"As a leader, you will see a color coded version of all the words. Your goal is to provide clues that would allow your teammates to guess all your team's words in as few rounds as possible." = "作為領袖，你看得到所有單詞的顏色分類。你的目標是讓你的隊友在最少的游戏輪數里猜中所有屬於你的隊的單詞。";
+"Let's guide you through the basics of minigame. You are playing on Team Red against the CPU on Team Blue." = "此屏幕會給你一個簡單的迷你游戲規則介紹。在迷你游戲裡，你們紅色隊一起對戰藍色隊的CPU。";
+"There are 22 word cards in total with the following assignment: 8 Red, 7 Blue, 6 White (Neutral) and 1 Black (Assassin)." = "遊戲裡一共有22個單詞：8個紅色單詞，7個藍色單詞，6個白色單詞（旁觀者），1個黑色單詞（刺客）。";
+"Your teammates can end the round by tapping End Round any time after all guesses have been made." = "所有隊友都猜完單詞以後，任一一位隊友即可點擊‘結束此輪’。";
+"During the CPU round, the CPU eliminates one of its words and gives the round back to your team." = "你的遊戲輪結束後，CPU會自動篩選一個自己的單詞，然後會把遊戲輪還給你們。";
+"Your team leader will post a clue consisting of a word and number. The number indicates how many words on the game board should correspond to the clue word." = "線索設置後會在屏幕上方顯示。數字代表著多少游戲單詞與此線索有關。";
+"As a regular player, your goal is to guess all the words belonging to your team in as few rounds as possible. You will be using the clues provided by your team leader." = "你的目標是在最少的游戏輪數里，利用領袖提供的線索猜中所有屬於你的隊的單詞。";
+"Tap on a word card to guess the word. If your team guesses the Assassin word, then the game is over. Guessing an enemy or neutral word will end the round." = "你可通過點擊來猜單詞。如果你猜中刺客的單詞，你的隊就立即輸了。如果猜中敵人或者旁觀者的單詞，此遊戲輪就會結束。";
+"While your team leader is coming up with the clue for the current round, look over and familiarize yourself with the words." = "領袖在想線索的時候，你可以查閱並熟悉所有的單詞。";
+"Let's guide you through the basics of the regular game." = "此屏幕會給你一個簡單的遊戲規則介紹。";
+"There are 22 word cards in total with 6 White (Neutral) and 1 Black (Assassin). Your team may receive 7 or 8 starting words." = "遊戲裡一共有22個單詞：8個紅色單詞，7個藍色單詞，6個白色單詞（旁觀者），1個黑色單詞（刺客）。你的隊在開始時可能有7個或8個單詞。
+";
+"The other team will now follow the same process. Once they are done guessing they will give the round back to your team. The rounds exchange until one team guesses all of its words." = "另一個隊猜完後會把遊戲輪還給你的隊。兩隊會輪流交替遊戲輪，直到其中一個隊猜中所有屬於它的單詞。";
+
 // Header
 "Access Code" = "房間代碼";
+"Additional Rules" = "更多規則";
 "Existing Category" = "此分類已存在";
 "Category Name" = "分類名字";
 "Category Word List" = "分類單詞表";
@@ -76,24 +98,11 @@
 "Enter a category name" = "輸入分類名稱";
 "Host player has disconnected." = "房間主人掉線了。";
 "There must be at least 22 words for all selected categories." = "所有選擇的分類一共需要至少22個單詞。";
-"Once you are comfortable with your clue and number, tap Confirm to allow your teammates to see the clue and number. The clue and number cannot be modified until the round ends. You cannot talk or make eye contact with your teammates!" = "點擊確認即可讓你的隊友看到你設置的線索。線索確認後不能被編輯。 請注意不能和隊友有任何的溝通，包括眼神！";
-"Look over the words belonging to your team carefully and enter a 1-word clue followed by a number. The number represents the amount of words corresponding to your clue. Your clue cannot be a word already in the game!" = "查看一下所有有關你的隊的單詞，然後輸入一個線索。線索包括一個單詞和一位數字。數字代表有多少單詞是和此線索有關的。線索不能是遊戲裡面的任何單詞！";
-"While guessing, your teammates can tap End Round at any time. If they guess the Assassin word, then it is Game Over. Guessing an enemy team word or a neutral word will end the round." = "你的隊員在猜單詞時可以隨時結束此輪。隊員猜到刺客會立即讓你的隊輸。猜到敵人或者旁觀者的單詞會結束此輪。";
-"As a leader, you will see a color coded version of all the words. Your goal is to provide clues that would allow your teammates to guess all of your team's words in as few rounds as possible." = "作為領袖，你看得到所有單詞的顏色。你的目標是讓你的隊友在最少的輪數裡猜到所有屬於你的隊的單詞。";
-"Your best record is based on the number of words remaining on the CPU team after each successful game. Try to aim for as high a number as possible!" = "你的最佳紀錄是根據CPU在遊戲結束時剩下的單詞。CPU剩下的單詞越多越好！";
-"You are currently playing a Minigame with your teammates on Team Red versus a CPU player on Team Blue. There are 22 words in total: 8 Red, 7 Blue, 6 Neutral (white) and 1 Assassin (black)." = "迷你游戲讓你的隊一起vs CPU隊。遊戲裡一共有22個單詞：8個紅色單詞，7個藍色單詞，6個旁觀者單詞（白色），1個刺客單詞（黑色）。";
-"After each round ends, the CPU automatically eliminates one of its words and hands the round back to your team. Your teammates must try to guess all of your team's words before the CPU finishes all of its words." = "每一輪結束後，CPU會自動選擇屬於它的一個單詞。你的隊員們需要在CPU淘汰所有單詞前猜對屬於你的隊的單詞。";
+"The clue is an invalid word. Please enter another one." = "線索不合格。請另外輸入一個線索。";
 "Your team won! There were %d opponent cards remaining. Great work!" = "你的隊贏了！敵人單詞還剩%d個。不錯！";
 "There must be a minimum of 22 words." = "至少需要22個單詞。";
 "A player in the game has aborted." = "一位玩家中止了遊戲。";
-"A 1-word clue and number will show at the top once your leader is done coming up with it. The number represents the amount of words corresponding to that clue. You cannot talk or make eye contact with your leader!" = "線索設置後會在屏幕上方顯示。數字代表有多少單詞與這個線索有關。你不能和領袖有任何溝通，包括眼神！";
 "A player in the game has disconnected." = "一位玩家斷了連接。";
-"As a regular player, your goal is to guess all the words belonging to your team in as few rounds as possible. You will be using the clues provided to you by your leader." = "你的目標是在最少的輪數里，利用領袖提供的線索猜到所有屬於你的隊的單詞。";
-"Now it is your turn to guess! You can tap End Round at any time. If your team guesses the Assassin word, then it is Game Over. Guessing an enemy team word or a neutral word will end the round." = "輪到你猜單詞的時候了！你可以在任何時候結束此輪。 如果你猜到刺客的單詞，你的隊就立即輸了。 如果猜到敵人或者旁觀者的單詞，此輪就結束了。";
-"While your leader is coming up with the clue for the current round, you can wait and look over the words." = "領袖在想出線索的時候，你可以查閱並熟悉所有的單詞。";
-"Your team's wins and losses are tracked after each game. Try to win as many games as possible!" = "你的隊的贏輸都會被記錄。你的隊要盡量贏更多！";
-"You are currently playing a regular game with your teammates. There are 22 words in total, including 6 Neutral (white) and 1 Assassin (black). Your team may get 7 or 8 starting words." = "遊戲裡一共有22個單詞：8個紅色單詞，7個藍色單詞，6個旁觀者單詞（白色），1個刺客單詞（黑色）你的隊在開始時可能有7個或著8個單詞。";
-"The other team will now follow the same process. Once they are done guessing they will hand the round back to your team. The round exchanges until one team guesses all of its words." = "另一個隊猜完後會把遊戲輪還給你的隊。兩個隊會輪流交替遊戲輪，直到其中一個隊猜到所有屬於它的單詞。";
 "Please download the latest version of Spycodes." = "請下載最新版本的應用程序。";
 
 // Player
