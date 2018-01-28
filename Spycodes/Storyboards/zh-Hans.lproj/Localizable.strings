@@ -137,7 +137,7 @@
 "No players on the team." = "无队员。";
 "Red" = "红色队";
 "Timer" = "计时器";
-"Clue Validation" = "线索检查";
+"Clue Validation" = "线索验证";
 "Version" = "版本";
 
 // Round
@@ -154,7 +154,7 @@
 "Your current selections will be saved." = "所有的分类选择都会被保存到存储。";
 "All categories will be selected." = "所有的分类都会被选择。";
 "Tap to Edit" = "点击编辑";
-"Checks if clue word is valid (English only)." = "检查线索是否合格（英语）。";
+"Checks if clue word is valid (English only)." = "验证线索是否合格（英语支持）。";
 "word" = "个单词";
 "words" = "个单词";
 
