@@ -82,7 +82,7 @@ extension SCLocalStorageManager {
 
     func retrieveBooleanUsageStatistics() -> [SCBooleanUsageStatisticsType: Bool] {
         var result = [SCBooleanUsageStatisticsType: Bool]()
-        var storedPregameOnboardingViewed = UserDefaults.standard.bool(
+        let storedPregameOnboardingViewed = UserDefaults.standard.bool(
             forKey: SCConstants.userDefaults.pregameOnboardingViewed.rawValue
         )
 
