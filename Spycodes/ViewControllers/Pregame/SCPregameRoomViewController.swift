@@ -6,8 +6,8 @@ class SCPregameRoomViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate let sectionLabels = [
-        Team.red: SCStrings.section.teamRed.rawValue.localized,
-        Team.blue: SCStrings.section.teamBlue.rawValue.localized
+        Team.red: SCStrings.section.teamRed.rawLocalized,
+        Team.blue: SCStrings.section.teamBlue.rawLocalized
     ]
 
     @IBOutlet weak var tableView: UITableView!
@@ -16,6 +16,9 @@ class SCPregameRoomViewController: SCViewController {
     @IBOutlet weak var accessCodeLabel: SCNavigationBarLabel!
     @IBOutlet weak var readyButton: SCButton!
     @IBOutlet weak var swipeUpButton: SCImageButton!
+    @IBOutlet weak var swipeUpButtonWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var swipeUpButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var swipeUpButtomTopSpaceConstraint: NSLayoutConstraint!
 
     @IBAction func onSwipeUpButtonTapped(_ sender: Any) {
         self.swipeUp()
@@ -23,6 +26,10 @@ class SCPregameRoomViewController: SCViewController {
 
     @IBAction func onBackButtonTapped(_ sender: AnyObject) {
         self.swipeRight()
+    }
+    
+    @IBAction func onHelpButtonTapped(_ sender: Any) {
+        self.showOnboardingView()
     }
 
     @IBAction func onReadyButtonTapped(_ sender: Any) {
@@ -44,7 +51,8 @@ class SCPregameRoomViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.pregameRoom.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.pregameRoomViewController.rawValue
+        self.unwindSegueIdentifier = SCConstants.segues.pregameRoomViewControllerUnwindSegue.rawValue
 
         if Player.instance.isHost() {
             Room.instance.generateNewAccessCode()
@@ -55,7 +63,7 @@ class SCPregameRoomViewController: SCViewController {
         let attributedString = NSMutableAttributedString(
             string: String(
                 format: SCStrings.header.pregameRoom.rawValue,
-                SCStrings.header.accessCode.rawValue.localized,
+                SCStrings.header.accessCode.rawLocalized,
                 Room.instance.getAccessCode()
             )
         )
@@ -63,7 +71,7 @@ class SCPregameRoomViewController: SCViewController {
             NSFontAttributeName,
             value: SCFonts.regularSizeFont(.bold) ?? 0,
             range: NSMakeRange(
-                SCStrings.header.accessCode.rawValue.localized.count + 2,
+                SCStrings.header.accessCode.rawLocalized.count + 2,
                 SCConstants.constant.accessCodeLength.rawValue
             )
         )
@@ -115,9 +123,13 @@ class SCPregameRoomViewController: SCViewController {
         super.registerObservers(observers: [
             SCConstants.notificationKey.customCategory.rawValue:
                 #selector(SCPregameRoomViewController.showCustomCategoryView),
-            SCConstants.notificationKey.pregameModal.rawValue:
-                #selector(SCPregameRoomViewController.showPregameModalView)
+            SCConstants.notificationKey.pregameMenu.rawValue:
+                #selector(SCPregameRoomViewController.showPregameMenu)
         ])
+
+        if let viewed = SCUsageStatisticsManager.instance.getBooleanUsageStatisticsValue(type: .pregameOnboardingViewed), !viewed {
+            self.showOnboardingView()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -142,12 +154,15 @@ class SCPregameRoomViewController: SCViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {
-        if deviceType == SCDeviceTypeManager.DeviceType.iPhone_X {
+    override func setCustomLayoutForDeviceType(deviceType: SCDeviceType) {
+        if deviceType == SCDeviceType.iPhone_X {
             self.swipeUpButton.isHidden = false
             self.swipeUpButton.setImage(UIImage(named: "Chevron-Up"), for: UIControlState())
         } else {
             self.swipeUpButton.isHidden = true
+            self.swipeUpButtonWidthConstraint.constant = 0
+            self.swipeUpButtonHeightConstraint.constant = 0
+            self.swipeUpButtomTopSpaceConstraint.constant = 0
         }
     }
 
@@ -168,22 +183,30 @@ class SCPregameRoomViewController: SCViewController {
         }
     }
 
+    // MARK: Public
     func showCustomCategoryView(_ notification: Notification) {
         if let userInfo = notification.userInfo {
             self.userInfo = userInfo
         }
 
-        self.performSegue(
-            withIdentifier: SCConstants.identifier.customCategory.rawValue,
-            sender: self
-        )
+        DispatchQueue.main.async {
+            self.performSegue(
+                withIdentifier: SCConstants.segues.customCategoryViewControllerSegue.rawValue,
+                sender: self
+            )
+        }
+    }
+    
+    func showOnboardingView() {
+        self.destinationPageViewFlowType = SCPageViewFlowType.pregameOnboarding
+        self.showPageViewContainer()
+
+        SCUsageStatisticsManager.instance.recordBooleanUsageStatistics(.pregameOnboardingViewed, value: true)
     }
 
-    func showPregameModalView() {
-        self.performSegue(
-            withIdentifier: SCConstants.identifier.pregameModalContainerView.rawValue,
-            sender: self
-        )
+    func showPregameMenu() {
+        self.destinationPageViewFlowType = SCPageViewFlowType.pregameMenu
+        self.showPageViewContainer()
     }
 
     // MARK: SCViewController Overrides
@@ -200,7 +223,7 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     override func swipeUp() {
-        self.showPregameModalView()
+        self.showPregameMenu()
     }
 
     // MARK: Private
@@ -237,13 +260,13 @@ class SCPregameRoomViewController: SCViewController {
         case .notReady:
             self.broadcastEvent(.cancel)
             UIView.performWithoutAnimation {
-                self.readyButton.setTitle(SCStrings.button.ready.rawValue.localized, for: .normal)
+                self.readyButton.setTitle(SCStrings.button.ready.rawLocalized, for: .normal)
             }
             self.animateReadyButtonIfNeeded()
         case .ready:
             self.broadcastEvent(.ready)
             UIView.performWithoutAnimation {
-                self.readyButton.setTitle(SCStrings.button.cancel.rawValue.localized, for: .normal)
+                self.readyButton.setTitle(SCStrings.button.cancel.rawLocalized, for: .normal)
             }
             self.stopReadyButtonAnimation()
         }
@@ -259,11 +282,20 @@ class SCPregameRoomViewController: SCViewController {
         SCStates.resetState(type: .readyButton)
         self.updateReadyButton()
     }
+    
+    fileprivate func showPageViewContainer() {
+        DispatchQueue.main.async {
+            self.performSegue(
+                withIdentifier: SCConstants.segues.pageViewFlowContainerViewControllerSegue.rawValue,
+                sender: self
+            )
+        }
+    }
 
     fileprivate func goToGame() {
         DispatchQueue.main.async(execute: {
             self.performSegue(
-                withIdentifier: SCConstants.identifier.gameRoomViewController.rawValue,
+                withIdentifier: SCConstants.segues.gameViewControllerSegue.rawValue,
                 sender: self
             )
         })
@@ -284,7 +316,7 @@ class SCPregameRoomViewController: SCViewController {
         }
 
         let alertController = UIAlertController(
-            title: SCStrings.header.returningToMainMenu.rawValue.localized,
+            title: SCStrings.header.returningToMainMenu.rawLocalized,
             message: reason,
             preferredStyle: .alert
         )
@@ -307,16 +339,16 @@ class SCPregameRoomViewController: SCViewController {
 
     fileprivate func checkRoom() {
         if !Room.instance.hasHost() {
-            self.returnToMainMenu(reason: SCStrings.message.hostDisconnected.rawValue.localized)
+            self.returnToMainMenu(reason: SCStrings.message.hostDisconnected.rawLocalized)
         }
 
         if !Player.instance.isHost() {
             return
         }
 
-        let maxRoomSize = GameMode.instance.getMode() == .regularGame ?
-            SCConstants.constant.roomMaxSize.rawValue :
-            SCConstants.constant.roomMaxSize.rawValue + 1     // Account for additional CPU player in minigame
+        let maxRoomSize = SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) ?
+            SCConstants.constant.roomMaxSize.rawValue + 1 : // Account for additional CPU player in minigame
+            SCConstants.constant.roomMaxSize.rawValue
 
         if Room.instance.getPlayerCount() >= maxRoomSize {
             SCMultipeerManager.instance.stopAdvertiser()
@@ -478,7 +510,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         guard let sectionHeader = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.sectionHeaderCell.rawValue
             ) as? SCSectionHeaderViewCell else {
                 return nil
         }
@@ -530,12 +562,12 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         // Team empty state cell
         if Room.instance.getPlayers()[indexPath.section].count == 0 {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.pregameRoomTeamEmptyStateViewCell.rawValue
+                withIdentifier: SCConstants.reuseIdentifiers.pregameRoomTeamEmptyStateViewCell.rawValue
                 ) as? SCTableViewCell else {
                     return SCTableViewCell()
             }
 
-            cell.primaryLabel.text = SCStrings.primaryLabel.teamEmptyState.rawValue.localized
+            cell.primaryLabel.text = SCStrings.primaryLabel.teamEmptyState.rawLocalized
 
             return cell
         }
@@ -545,7 +577,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.pregameRoomViewCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.pregameRoomViewCell.rawValue
         ) as? SCPregameRoomViewCell else {
             return SCTableViewCell()
         }
@@ -579,7 +611,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
             }
 
 
-            if GameMode.instance.getMode() == .miniGame {
+            if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
                 cell.hideChangeTeamButton()
             } else {
                 cell.showChangeTeamButtonIfAllowed()
@@ -611,7 +643,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         if let cell = self.tableView.cellForRow(at: indexPath) as? SCTableViewCell,
-           cell.reuseIdentifier == SCConstants.identifier.pregameRoomTeamEmptyStateViewCell.rawValue {
+           cell.reuseIdentifier == SCConstants.reuseIdentifiers.pregameRoomTeamEmptyStateViewCell.rawValue {
             return
         }
 

@@ -63,13 +63,6 @@
 "Update App" = "更新應用程序";
 "Waiting For Clue" = "等待線索";
 
-// Info
-"Tap on a teammate to nominate as leader." = "點擊一位隊員即可提名做領袖。";
-"Your team should have 2-3 players." = "你的隊應該有2-3位隊員。";
-"Your team currently has 2-3 players." = "你的隊已有2-3位隊員。";
-"Each team should have 2-4 players." = "每個隊應該有2-3位隊員。";
-"Each team currently has 2-4 players." = "每個隊已有2-3位隊員。";
-
 // Message
 "The category name already exists." = "分類名稱已經存在。";
 "Only the host can toggle category settings." = "只有房間主人能夠調節分類設置。";
@@ -107,6 +100,20 @@
 "CPU" = "CPU";
 "You" = "你";
 
+// Pregame Onboarding
+"Chevrons in the app can be tapped on. They also indicate swipe support in the direction they are pointing to." = "應用程序中的箭頭可以點擊。你也可以用手指朝他們的指向滑動。";
+"You are all set for now. Swipe down to dismiss this view!" = "你已準備好了。用手指向下滑動即可繼續遊戲！";
+"There are two types of games you could play: regular and minigame." = "此應用程序有兩類遊戲可以玩：常規和迷你遊戲。";
+"In a minigame, you all play on Team Red against the CPU on Team Blue. Your team should have 2-3 players." = "如果玩迷你游戲，你們紅色隊一起對战藍色隊的CPU。你的隊應該有2-3名隊員。";
+"You can always access this help view by tapping on the help button in the top right corner." = "你可以隨時通過點擊右上角的幫助按鈕訪問此屏幕。";
+"Tap a teammate to nominate as leader. The leader will be providing clues to your team for the next game." = "點擊一名隊友即可提名做领袖。 领袖將會為你的隊提供游戏里的線索。";
+"Swipe up in the pregame room view to access game and word category settings." = "用手指向上滑動即可訪問遊戲和單詞分類設置。";
+"In a regular game, you can pick a team to be on. Each team should have at least 2 players." = "在常規遊戲中，你可以選擇你的队。 每个隊至少需要2名队員。";
+"Tap the shuffle button to randomly assign your team's leader." = "點擊隨機按鈕即可隨機選擇你的隊的領袖。";
+"Tap the change button to change your team assignment." = "點擊更改按鈕可以更換你的隊伍分配。";
+"Tap Ready when you are set. The game starts when everyone is ready." = "設置好後即可點擊準備好了。如果大家都準備好了，遊戲就會自動開始。";
+"Welcome to Spycodes! Let's help you get started." = "歡迎玩Spycodes！ 此屏幕会给你一个简单的游戏流程介绍。";
+
 // Primary Label
 "Accessibility" = "無障礙";
 "Add Word" = "添加單詞";
@@ -117,8 +124,6 @@
 "Name" = "名稱";
 "Night Mode" = "夜間模式";
 "Persist" = "保存";
-"Release Notes" = "發行說明";
-"Review App" = "評論";
 "Select All" = "全選";
 "Support" = "支持";
 "Blue" = "藍色隊";
@@ -126,7 +131,6 @@
 "Red" = "紅色隊";
 "Timer" = "計時器";
 "Version" = "版本";
-"Website" = "網站";
 
 // Round
 "Waiting for Clue" = "等待線索中";
@@ -134,8 +138,10 @@
 "Not Your Turn" = "还沒輪到你的隊";
 
 // Secondary Label
+"Add indicators to differentiate card colors." = "另加標示來區分卡片顏色。";
 "Custom" = "定制分類";
 "2-3 players play as a team against the CPU." = "2-3位隊員 vs CPU。";
+"Reduce the brightness of the background." = "降低背景的亮度。";
 "Set a time duration for each round." = "設置每一輪的時間限制。";
 "Your current selections will be saved." = "所有的分類選擇都會被保存到存儲。";
 "All categories will be selected." = "所有的分類都會被選擇。";
@@ -148,10 +154,8 @@
 "Categories" = "單詞分類";
 "Customize" = "定制";
 "Game Settings" = "遊戲設置";
-"Info" = "信息";
 "More" = "更多";
 "Settings" = "設置";
-"Statistics" = "統計";
 "Team Red" = "紅色隊";
 "Team Blue" = "藍色隊";
 "Timeline" = "時間軸";

@@ -3,25 +3,19 @@ import Foundation
 class SCLocalStorageManager: SCLogger {
     static let instance = SCLocalStorageManager()
 
-    enum LocalSettingType: Int {
-        case nightMode = 0
-        case accessibility = 1
-        case persistentSelection = 2
-    }
-
-    var localSettings = [LocalSettingType: Bool]()
+    var localSettings = [SCLocalSettingType: Bool]()
 
     override func getIdentifier() -> String? {
         return SCConstants.loggingIdentifier.localStorageManager.rawValue
     }
 
     // MARK: Public
-    func enableLocalSetting(_ type: LocalSettingType, enabled: Bool) {
+    func enableLocalSetting(_ type: SCLocalSettingType, enabled: Bool) {
         self.localSettings[type] = enabled
         self.saveLocalSetting(type)
     }
 
-    func isLocalSettingEnabled(_ type: LocalSettingType) -> Bool {
+    func isLocalSettingEnabled(_ type: SCLocalSettingType) -> Bool {
         if let setting = self.localSettings[type] {
             return setting
         }
@@ -29,6 +23,107 @@ class SCLocalStorageManager: SCLogger {
         return false
     }
 
+    // MARK: Private
+    fileprivate func saveLocalSetting(_ type: SCLocalSettingType) {
+        switch type {
+        case .nightMode:
+            UserDefaults.standard.set(
+                self.localSettings[.nightMode],
+                forKey: SCConstants.userDefaults.nightMode.rawValue
+            )
+        case .accessibility:
+            UserDefaults.standard.set(
+                self.localSettings[.accessibility],
+                forKey: SCConstants.userDefaults.accessibility.rawValue
+            )
+        case .persistentSelection:
+            UserDefaults.standard.set(
+                self.localSettings[.persistentSelection],
+                forKey: SCConstants.userDefaults.persistentSelection.rawValue
+            )
+        }
+
+        UserDefaults.standard.synchronize()
+        super.log(SCStrings.logging.localSettingsSaved.rawValue)
+    }
+}
+
+// MARK: SCUsageStatisticsManager Methods
+extension SCLocalStorageManager {
+    func saveBooleanUsageStatistics(_ type: SCBooleanUsageStatisticsType, value: Bool) {
+        switch type {
+        case .pregameOnboardingViewed:
+            UserDefaults.standard.set(
+                value,
+                forKey: SCConstants.userDefaults.pregameOnboardingViewed.rawValue
+            )
+        case .gameOnboardingViewed:
+            UserDefaults.standard.set(
+                value,
+                forKey: SCConstants.userDefaults.gameOnboardingViewed.rawValue
+            )
+        }
+    }
+
+    func saveDiscreteUsageStatistics(_ type: SCDiscreteUsageStatisticsType, value: Int) {
+        switch type {
+        case .appOpens:
+            UserDefaults.standard.set(
+                value,
+                forKey: SCConstants.userDefaults.appOpens.rawValue
+            )
+        case .gamePlays:
+            UserDefaults.standard.set(
+                value,
+                forKey: SCConstants.userDefaults.gamePlays.rawValue
+            )
+        }
+    }
+
+    func retrieveBooleanUsageStatistics() -> [SCBooleanUsageStatisticsType: Bool] {
+        var result = [SCBooleanUsageStatisticsType: Bool]()
+        var storedPregameOnboardingViewed = UserDefaults.standard.bool(
+            forKey: SCConstants.userDefaults.pregameOnboardingViewed.rawValue
+        )
+
+        result[.pregameOnboardingViewed] = storedPregameOnboardingViewed
+
+        let storedGameOnboardingViewed = UserDefaults.standard.bool(
+            forKey: SCConstants.userDefaults.gameOnboardingViewed.rawValue
+        )
+
+        result[.gameOnboardingViewed] = storedGameOnboardingViewed
+        super.log(SCStrings.logging.discreteUsageStatisticsRetrieved.rawValue)
+
+        return result
+    }
+
+    func retrieveDiscreteUsageStatistics() -> [SCDiscreteUsageStatisticsType: Int] {
+        var result = [SCDiscreteUsageStatisticsType: Int]()
+        var storedAppOpens = UserDefaults.standard.integer(
+            forKey: SCConstants.userDefaults.appOpens.rawValue
+        )
+
+        // Account for first-time app launch
+        if storedAppOpens == 0 {
+            storedAppOpens = 1
+        }
+
+        result[.appOpens] = storedAppOpens
+
+        let storedGamePlays = UserDefaults.standard.integer(
+            forKey: SCConstants.userDefaults.gamePlays.rawValue
+        )
+
+        result[.gamePlays] = storedGamePlays
+        super.log(SCStrings.logging.discreteUsageStatisticsRetrieved.rawValue)
+
+        return result
+    }
+}
+
+// MARK: ConsolidatedCategories Methods
+extension SCLocalStorageManager {
     func saveSelectedCustomCategories(selectedCategories: [CustomCategory]) {
         let data = NSKeyedArchiver.archivedData(withRootObject: selectedCategories)
         UserDefaults.standard.set(
@@ -129,30 +224,6 @@ class SCLocalStorageManager: SCLogger {
 
         UserDefaults.standard.synchronize()
         super.log(SCStrings.logging.selectedConsolidatedCategoriesCleared.rawValue)
-    }
-
-    // MARK: Private
-    fileprivate func saveLocalSetting(_ type: LocalSettingType) {
-        switch type {
-        case .nightMode:
-            UserDefaults.standard.set(
-                self.localSettings[.nightMode],
-                forKey: SCConstants.userDefaults.nightMode.rawValue
-            )
-        case .accessibility:
-            UserDefaults.standard.set(
-                self.localSettings[.accessibility],
-                forKey: SCConstants.userDefaults.accessibility.rawValue
-            )
-        case .persistentSelection:
-            UserDefaults.standard.set(
-                self.localSettings[.persistentSelection],
-                forKey: SCConstants.userDefaults.persistentSelection.rawValue
-            )
-        }
-
-        UserDefaults.standard.synchronize()
-        super.log(SCStrings.logging.localSettingsSaved.rawValue)
     }
 
     fileprivate func retrieveSelectedCustomCategories() -> Set<CustomCategory> {

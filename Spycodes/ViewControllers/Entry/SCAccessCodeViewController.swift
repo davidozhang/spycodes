@@ -47,7 +47,8 @@ class SCAccessCodeViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.accessCodeViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.accessCodeViewController.rawValue
+        self.unwindSegueIdentifier = SCConstants.segues.accessCodeViewControllerUnwindSegue.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +56,11 @@ class SCAccessCodeViewController: SCViewController {
 
         SCMultipeerManager.instance.delegate = self
 
-        self.headerLabel.text = SCStrings.header.accessCode.rawValue.localized
+        self.headerLabel.text = SCStrings.header.accessCode.rawLocalized
+        self.cancelButton.setTitle(
+            SCStrings.button.cancel.rawLocalized,
+            for: UIControlState()
+        )
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? SCSingleCharacterTextField {
@@ -146,7 +151,7 @@ class SCAccessCodeViewController: SCViewController {
         self.timeoutTimer?.invalidate()
         SCMultipeerManager.instance.stopAdvertiser()
 
-        self.statusLabel.text = SCStrings.status.fail.rawValue.localized
+        self.statusLabel.text = SCStrings.status.fail.rawLocalized
 
         self.timeoutTimer = Foundation.Timer.scheduledTimer(
             timeInterval: SCAccessCodeViewController.shortTimeoutInterval,
@@ -214,7 +219,7 @@ class SCAccessCodeViewController: SCViewController {
 
     @objc
     fileprivate func restoreStatus() {
-        self.statusLabel.text = SCStrings.status.normal.rawValue.localized
+        self.statusLabel.text = SCStrings.status.normal.rawLocalized
         self.hideCancelButton(true)
     }
 
@@ -267,7 +272,7 @@ class SCAccessCodeViewController: SCViewController {
         self.startTime = Int(Date.timeIntervalSinceReferenceDate)
         self.showCancelButton()
 
-        self.statusLabel.text = SCStrings.status.pending.rawValue.localized
+        self.statusLabel.text = SCStrings.status.pending.rawLocalized
 
         for view in textFieldsView.subviews as [UIView] {
             if let textField = view as? UITextField {
@@ -300,7 +305,7 @@ extension SCAccessCodeViewController: SCMultipeerManagerDelegate {
 
             DispatchQueue.main.async(execute: {
                 self.performSegue(
-                    withIdentifier: SCConstants.identifier.pregameRoom.rawValue,
+                    withIdentifier: SCConstants.segues.pregameRoomViewControllerSegue.rawValue,
                     sender: self
                 )
             })

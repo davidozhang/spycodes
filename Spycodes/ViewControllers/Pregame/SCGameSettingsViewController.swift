@@ -1,12 +1,10 @@
 import UIKit
 
-class SCPregameMenuMainViewController: SCViewController {
+class SCGameSettingsViewController: SCViewController {
     fileprivate var refreshTimer: Foundation.Timer?
 
     fileprivate enum Section: Int {
-        case info = 0
-        case statistics = 1
-        case gameSettings = 2
+        case gameSettings = 0
 
         static var count: Int {
             var count = 0
@@ -31,14 +29,12 @@ class SCPregameMenuMainViewController: SCViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .info: SCStrings.section.info.rawValue.localized,
-        .statistics: SCStrings.section.statistics.rawValue.localized,
-        .gameSettings: SCStrings.section.gameSettings.rawValue.localized,
+        .gameSettings: SCStrings.section.gameSettings.rawLocalized,
     ]
 
     fileprivate let settingsLabels: [GameSetting: String] = [
-        .minigame: SCStrings.primaryLabel.minigame.rawValue.localized,
-        .timer: SCStrings.primaryLabel.timer.rawValue.localized,
+        .minigame: SCStrings.primaryLabel.minigame.rawLocalized,
+        .timer: SCStrings.primaryLabel.timer.rawLocalized,
     ]
 
     fileprivate var scrolled = false
@@ -53,7 +49,7 @@ class SCPregameMenuMainViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.pregameModalMainView.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.gameSettingsViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
@@ -68,7 +64,7 @@ class SCPregameMenuMainViewController: SCViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        SCStates.changePregameMenuState(to: .main)
+        SCStates.changePregameMenuState(to: .gameSettings)
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -79,7 +75,7 @@ class SCPregameMenuMainViewController: SCViewController {
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 2.0,
             target: self,
-            selector: #selector(SCPregameMenuMainViewController.refreshView),
+            selector: #selector(SCGameSettingsViewController.refreshView),
             userInfo: nil,
             repeats: true
         )
@@ -116,36 +112,17 @@ class SCPregameMenuMainViewController: SCViewController {
 
     fileprivate func registerTableViewCells() {
         let multilineToggleViewCellNib = UINib(nibName: SCConstants.nibs.multilineToggleViewCell.rawValue, bundle: nil)
+        let pickerViewCellNib = UINib(nibName: SCConstants.nibs.pickerViewCell.rawValue, bundle: nil)
 
         self.tableView.register(
             multilineToggleViewCellNib,
-            forCellReuseIdentifier: SCConstants.identifier.minigameToggleViewCell.rawValue
+            forCellReuseIdentifier: SCConstants.reuseIdentifiers.minigameToggleViewCell.rawValue
         )
-    }
 
-    fileprivate func getChecklistItems() -> [String] {
-        var result = [String]()
-
-        // Team size check
-        if Room.instance.teamSizesValid() {
-            result.append(SCStrings.emoji.completed.rawValue)
-
-            if GameMode.instance.getMode() == .miniGame {
-                result.append(SCStrings.info.minigameTeamSizeSatisfied.rawValue.localized)
-            } else {
-                result.append(SCStrings.info.regularGameTeamSizeSatisfied.rawValue.localized)
-            }
-        } else {
-            result.append(SCStrings.emoji.incomplete.rawValue)
-
-            if GameMode.instance.getMode() == .miniGame {
-                result.append(SCStrings.info.minigameTeamSizeUnsatisfied.rawValue.localized)
-            } else {
-                result.append(SCStrings.info.regularGameTeamSizeUnsatisfied.rawValue.localized)
-            }
-        }
-
-        return result
+        self.tableView.register(
+            pickerViewCellNib,
+            forCellReuseIdentifier: SCConstants.reuseIdentifiers.timerSettingViewCell.rawValue
+        )
     }
 }
 
@@ -156,7 +133,7 @@ class SCPregameMenuMainViewController: SCViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCGameSettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Section.count
     }
@@ -169,7 +146,7 @@ extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionHeader = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.sectionHeaderCell.rawValue
             ) as? SCSectionHeaderViewCell else {
                 return nil
         }
@@ -190,10 +167,6 @@ extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case Section.info.rawValue:
-            return 2
-        case Section.statistics.rawValue:
-            return 1
         case Section.gameSettings.rawValue:
             return GameSetting.count
         default:
@@ -204,86 +177,30 @@ extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case Section.info.rawValue:
-            guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.infoViewCell.rawValue
-                ) as? SCTableViewCell else {
-                    return SCTableViewCell()
-            }
-
-            cell.primaryLabel.font = SCFonts.regularSizeFont(.regular)
-            cell.primaryLabel.numberOfLines = 2
-
-            switch indexPath.row {
-            case 0: // Start game checklist
-                let checkListItems = self.getChecklistItems()
-                cell.leftLabel.text = checkListItems[0]
-                cell.primaryLabel.text = checkListItems[1]
-            case 1: // Leader nomination info
-                cell.leftLabel.text = SCStrings.emoji.info.rawValue
-                cell.primaryLabel.text = SCStrings.info.leaderNomination.rawValue.localized
-            default:
-                break
-            }
-
-            return cell
-        case Section.statistics.rawValue:
-            guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.statisticsViewCell.rawValue
-                ) as? SCTableViewCell else {
-                    return SCTableViewCell()
-            }
-
-            if GameMode.instance.getMode() == .miniGame {
-                if let bestRecord = Statistics.instance.getBestRecord() {
-                    cell.primaryLabel.text = String(
-                        format: SCStrings.primaryLabel.minigameStatistics.rawValue,
-                        SCStrings.primaryLabel.bestRecord.rawValue,
-                        String(bestRecord)
-                    )
-                } else {
-                    cell.primaryLabel.text = String(
-                        format: SCStrings.primaryLabel.minigameStatistics.rawValue,
-                        SCStrings.primaryLabel.bestRecord.rawValue.localized,
-                        SCStrings.primaryLabel.none.rawValue
-                    )
-                }
-            } else {
-                let score = Statistics.instance.getScore()
-                cell.primaryLabel.text = String(
-                    format: SCStrings.primaryLabel.regularGameStatistics.rawValue,
-                    SCStrings.primaryLabel.teamRed.rawValue.localized,
-                    String(score[0]),
-                    String(score[1]),
-                    SCStrings.primaryLabel.teamBlue.rawValue.localized
-                )
-            }
-
-            return cell
         case Section.gameSettings.rawValue:
             switch indexPath.row {
             case GameSetting.minigame.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.minigameToggleViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.minigameToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
                         return SCTableViewCell()
                 }
 
                 cell.synchronizeToggle()
                 cell.primaryLabel.text = self.settingsLabels[.minigame]
-                cell.secondaryLabel.text = SCStrings.secondaryLabel.minigame.rawValue.localized
+                cell.secondaryLabel.text = SCStrings.secondaryLabel.minigame.rawLocalized
                 cell.delegate = self
 
                 return cell
             case GameSetting.timer.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.timerSettingViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.timerSettingViewCell.rawValue
                     ) as? SCPickerViewCell else {
                         return SCTableViewCell()
                 }
 
                 cell.primaryLabel.text = self.settingsLabels[.timer]
-                cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawValue.localized
+                cell.secondaryLabel.text = SCStrings.secondaryLabel.timer.rawLocalized
                 cell.delegate = self
 
                 cell.synchronizeSetting()
@@ -317,22 +234,18 @@ extension SCPregameMenuMainViewController: UITableViewDataSource, UITableViewDel
 }
 
 // MARK: SCToggleViewCellDelegate
-extension SCPregameMenuMainViewController: SCToggleViewCellDelegate {
+extension SCGameSettingsViewController: SCToggleViewCellDelegate {
     func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
-            case SCConstants.identifier.minigameToggleViewCell.rawValue:
-                if enabled {
-                    GameMode.instance.setMode(mode: .miniGame)
-                } else {
-                    GameMode.instance.setMode(mode: .regularGame)
-                }
+            case SCConstants.reuseIdentifiers.minigameToggleViewCell.rawValue:
+                SCGameSettingsManager.instance.enableGameSetting(.minigame, enabled: enabled)
 
                 self.tableView.reloadData()
 
                 Room.instance.resetPlayers()
 
-                if GameMode.instance.getMode() == .miniGame {
+                if SCGameSettingsManager.instance.isGameSettingEnabled(.minigame) {
                     Room.instance.addCPUPlayer()
                 } else {
                     Room.instance.removeCPUPlayer()
@@ -347,7 +260,7 @@ extension SCPregameMenuMainViewController: SCToggleViewCellDelegate {
     }
 }
 
-extension SCPregameMenuMainViewController: SCPickerViewCellDelegate {
+extension SCGameSettingsViewController: SCPickerViewCellDelegate {
     func pickerViewCell(onPickerViewCellTapped pickerViewCell: SCPickerViewCell) {
         self.inputMode = true
     }

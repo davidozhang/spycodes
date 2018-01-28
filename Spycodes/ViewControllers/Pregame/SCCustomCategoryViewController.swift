@@ -49,13 +49,13 @@ class SCCustomCategoryViewController: SCModalViewController {
     fileprivate static let margin: CGFloat = 16
 
     fileprivate let sectionLabels: [Section: String] = [
-        .settings: SCStrings.section.settings.rawValue.localized,
-        .wordList: SCStrings.section.wordListWithWordCount.rawValue.localized,
+        .settings: SCStrings.section.settings.rawLocalized,
+        .wordList: SCStrings.section.wordListWithWordCount.rawLocalized,
     ]
 
     fileprivate let settingsLabels: [Setting: String] = [
-        .name: SCStrings.primaryLabel.name.rawValue.localized,
-        .emoji: SCStrings.primaryLabel.emoji.rawValue.localized,
+        .name: SCStrings.primaryLabel.name.rawLocalized,
+        .emoji: SCStrings.primaryLabel.emoji.rawLocalized,
     ]
 
     fileprivate var scrolled = false
@@ -84,7 +84,7 @@ class SCCustomCategoryViewController: SCModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.customCategoryViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.customCategoryViewController.rawValue
 
         self.automaticallyAdjustsScrollViewInsets = false
 
@@ -148,7 +148,7 @@ class SCCustomCategoryViewController: SCModalViewController {
 
         self.tableView.register(
             textFieldViewCellNib,
-            forCellReuseIdentifier: SCConstants.identifier.wordViewCell.rawValue
+            forCellReuseIdentifier: SCConstants.reuseIdentifiers.wordViewCell.rawValue
         )
     }
 
@@ -165,29 +165,19 @@ class SCCustomCategoryViewController: SCModalViewController {
         }
 
         switch integrityType {
-        case .wordListMutation:
+        case .wordListMutation, .nonMutating:
             let totalWordCount = ConsolidatedCategories.instance.getTotalWordsWithNonPersistedExistingCategory(
                 originalCategory: self.nonMutableCustomCategory,
                 newNonPersistedCategory: self.mutableCustomCategory
-            )
-
-            if totalWordCount <= SCConstants.constant.cardCount.rawValue {
-                self.presentIntegrityCheckAlert()
-                return false
-            }
-        case .categoryDeletion:
-            let totalWordCount = ConsolidatedCategories.instance.getTotalWordsWithDeletedExistedCategory(
-                deletedCategory: self.nonMutableCustomCategory
             )
 
             if totalWordCount < SCConstants.constant.cardCount.rawValue {
                 self.presentIntegrityCheckAlert()
                 return false
             }
-        case .nonMutating:
-            let totalWordCount = ConsolidatedCategories.instance.getTotalWordsWithNonPersistedExistingCategory(
-                originalCategory: self.nonMutableCustomCategory,
-                newNonPersistedCategory: self.mutableCustomCategory
+        case .categoryDeletion:
+            let totalWordCount = ConsolidatedCategories.instance.getTotalWordsWithDeletedExistingCategory(
+                deletedCategory: self.nonMutableCustomCategory
             )
 
             if totalWordCount < SCConstants.constant.cardCount.rawValue {
@@ -276,11 +266,13 @@ class SCCustomCategoryViewController: SCModalViewController {
 
     fileprivate func dismissView() {
         super.onDismissalWithCompletion {
-            NotificationCenter.default.post(
-                name: NSNotification.Name(rawValue: SCConstants.notificationKey.pregameModal.rawValue),
-                object: self,
-                userInfo: nil
-            )
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(
+                    name: NSNotification.Name(rawValue: SCConstants.notificationKey.pregameMenu.rawValue),
+                    object: self,
+                    userInfo: nil
+                )
+            }
         }
     }
 
@@ -393,7 +385,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionHeader = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.sectionHeaderCell.rawValue
             ) as? SCSectionHeaderViewCell else {
                 return nil
         }
@@ -402,15 +394,15 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
             if section == .wordList, let sectionLabel = self.sectionLabels[section] {
                 let wordCount = self.mutableCustomCategory.getWordCount()
                 if wordCount == 0 {
-                    sectionHeader.primaryLabel.text = SCStrings.section.wordList.rawValue.localized
+                    sectionHeader.primaryLabel.text = SCStrings.section.wordList.rawLocalized
                 } else {
                     sectionHeader.primaryLabel.text = String(
                         format: sectionLabel,
-                        SCStrings.section.wordList.rawValue.localized,
+                        SCStrings.section.wordList.rawLocalized,
                         wordCount,
                         wordCount == 1 ?
-                            SCStrings.section.word.rawValue.localized :
-                            SCStrings.section.words.rawValue.localized
+                            SCStrings.section.word.rawLocalized :
+                            SCStrings.section.words.rawLocalized
                     )
                 }
             } else {
@@ -450,7 +442,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
             switch indexPath.row {
             case Setting.name.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.nameSettingViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.nameSettingViewCell.rawValue
                 ) as? SCTableViewCell else {
                     return SCTableViewCell()
                 }
@@ -469,7 +461,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                 return cell
             case Setting.emoji.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.emojiSettingViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.emojiSettingViewCell.rawValue
                     ) as? SCTableViewCell else {
                         return SCTableViewCell()
                 }
@@ -507,19 +499,19 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                 switch SCStates.getCustomCategoryState() {
                 case .nonEditing, .editingExistingWord, .editingCategoryName, .editingEmoji:
                     guard let cell = self.tableView.dequeueReusableCell(
-                        withIdentifier: SCConstants.identifier.addWordViewCell.rawValue
+                        withIdentifier: SCConstants.reuseIdentifiers.addWordViewCell.rawValue
                     ) as? SCTableViewCell else {
                         return SCTableViewCell()
                     }
 
-                    cell.primaryLabel.text = SCStrings.primaryLabel.addWord.rawValue.localized
+                    cell.primaryLabel.text = SCStrings.primaryLabel.addWord.rawLocalized
                     cell.indexPath = indexPath
 
                     return cell
                 case .addingNewWord:
                     // Custom top view cell with text field as first responder
                     guard let cell = self.tableView.dequeueReusableCell(
-                        withIdentifier: SCConstants.identifier.wordViewCell.rawValue
+                        withIdentifier: SCConstants.reuseIdentifiers.wordViewCell.rawValue
                     ) as? SCTextFieldViewCell else {
                         return SCTableViewCell()
                     }
@@ -537,7 +529,7 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
                 }
             default:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.wordViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.wordViewCell.rawValue
                 ) as? SCTextFieldViewCell else {
                         return SCTableViewCell()
                 }
@@ -560,12 +552,12 @@ extension SCCustomCategoryViewController: UITableViewDataSource, UITableViewDele
             }
         case Section.deleteCategory.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.deleteCategoryViewCell.rawValue
+                withIdentifier: SCConstants.reuseIdentifiers.deleteCategoryViewCell.rawValue
                 ) as? SCTableViewCell else {
                     return SCTableViewCell()
             }
 
-            cell.primaryLabel.text = SCStrings.primaryLabel.deleteCategory.rawValue.localized
+            cell.primaryLabel.text = SCStrings.primaryLabel.deleteCategory.rawLocalized
             cell.indexPath = indexPath
 
             return cell
@@ -660,7 +652,7 @@ extension SCCustomCategoryViewController {
             preferredStyle: .alert
         )
         let confirmAction = UIAlertAction(
-            title: SCStrings.button.ok.rawValue.localized,
+            title: SCStrings.button.ok.rawLocalized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 alertController.dismiss(animated: false, completion: nil)
@@ -687,7 +679,7 @@ extension SCCustomCategoryViewController {
         alertController.addTextField(configurationHandler: textFieldHandler)
 
         let cancelAction = UIAlertAction(
-            title: SCStrings.button.cancel.rawValue.localized,
+            title: SCStrings.button.cancel.rawLocalized,
             style: .cancel,
             handler: { (action: UIAlertAction) in
                 self.changeStateTo(state: .nonEditing)
@@ -695,7 +687,7 @@ extension SCCustomCategoryViewController {
             }
         )
         let confirmAction = UIAlertAction(
-            title: SCStrings.button.ok.rawValue.localized,
+            title: SCStrings.button.ok.rawLocalized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 self.textFieldConfirmHandler(
@@ -723,7 +715,7 @@ extension SCCustomCategoryViewController {
         )
 
         let cancelAction = UIAlertAction(
-            title: SCStrings.button.cancel.rawValue.localized,
+            title: SCStrings.button.cancel.rawLocalized,
             style: .cancel,
             handler: { (action: UIAlertAction) in
                 self.changeStateTo(state: .nonEditing)
@@ -731,7 +723,7 @@ extension SCCustomCategoryViewController {
             }
         )
         let confirmAction = UIAlertAction(
-            title: SCStrings.button.confirm.rawValue.localized,
+            title: SCStrings.button.confirm.rawLocalized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 self.changeStateTo(state: .nonEditing)

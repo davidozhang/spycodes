@@ -1,5 +1,13 @@
 import Foundation
 
+/**
+ NOTE: This class should not be called directly in code.
+ Use SCGameSettingsManager instead, which wraps around GameMode.
+ 
+ Adding deprecated annotation to replaces all usages in code to use SCGameSettingsManager.
+ **/
+
+@available(*, deprecated)
 class GameMode: NSObject, NSCoding {
     static var instance = GameMode()
     fileprivate var mode: Mode?
@@ -33,6 +41,11 @@ class GameMode: NSObject, NSCoding {
             )
 
             self.mode = Mode(rawValue: mode)
+            
+            SCGameSettingsManager.instance.enableGameSetting(
+                .minigame,
+                enabled: self.mode == .miniGame
+            )
         }
     }
 

@@ -1,5 +1,11 @@
 import Foundation
 
+/**
+ NOTE: This class is no longer actively supported and will be deprecated in version 4.0+.
+ It is kept in the codebase for backwards compatibility.
+ **/
+
+@available(*, deprecated)
 class Statistics: NSObject, NSCoding {
     static var instance = Statistics()
     fileprivate var bestRecord: Int?        // For minigame

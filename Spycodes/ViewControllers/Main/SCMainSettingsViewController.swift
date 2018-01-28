@@ -2,7 +2,7 @@ import UIKit
 
 protocol SCMainSettingsViewControllerDelegate: class {
     func mainSettings(onToggleViewCellChanged toggleViewCell: SCToggleViewCell,
-                      settingType: SCLocalStorageManager.LocalSettingType)
+                      settingType: SCLocalSettingType)
 }
 
 class SCMainSettingsViewController: SCModalViewController {
@@ -37,11 +37,8 @@ class SCMainSettingsViewController: SCModalViewController {
 
     fileprivate enum Link: Int {
         case support = 0
-        case reviewApp = 1
-        case website = 2
-        case releaseNotes = 3
-        case github = 4
-        case icons8 = 5
+        case github = 1
+        case icons8 = 2
 
         static var count: Int {
             var count = 0
@@ -53,23 +50,25 @@ class SCMainSettingsViewController: SCModalViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .customize: SCStrings.section.customize.rawValue.localized,
-        .about: SCStrings.section.about.rawValue.localized,
-        .more: SCStrings.section.more.rawValue.localized,
+        .customize: SCStrings.section.customize.rawLocalized,
+        .about: SCStrings.section.about.rawLocalized,
+        .more: SCStrings.section.more.rawLocalized,
     ]
 
     fileprivate let customizeLabels: [CustomSetting: String] = [
-        .nightMode: SCStrings.primaryLabel.nightMode.rawValue.localized,
-        .accessibility: SCStrings.primaryLabel.accessibility.rawValue.localized,
+        .nightMode: SCStrings.primaryLabel.nightMode.rawLocalized,
+        .accessibility: SCStrings.primaryLabel.accessibility.rawLocalized,
+    ]
+    
+    fileprivate let customizeSecondaryLabels: [CustomSetting: String] = [
+        .nightMode: SCStrings.secondaryLabel.nightMode.rawLocalized,
+        .accessibility: SCStrings.secondaryLabel.accessibility.rawLocalized,
     ]
 
     fileprivate let disclosureLabels: [Link: String] = [
-        .releaseNotes: SCStrings.primaryLabel.releaseNotes.rawValue.localized,
-        .support: SCStrings.primaryLabel.support.rawValue.localized,
-        .reviewApp: SCStrings.primaryLabel.reviewApp.rawValue.localized,
-        .website: SCStrings.primaryLabel.website.rawValue.localized,
-        .github: SCStrings.primaryLabel.github.rawValue.localized,
-        .icons8: SCStrings.primaryLabel.icons8.rawValue.localized,
+        .support: SCStrings.primaryLabel.support.rawLocalized,
+        .github: SCStrings.primaryLabel.github.rawLocalized,
+        .icons8: SCStrings.primaryLabel.icons8.rawLocalized,
     ]
 
     fileprivate var scrolled = false
@@ -84,7 +83,7 @@ class SCMainSettingsViewController: SCModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.mainSettingsViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.mainSettingsViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
@@ -122,16 +121,16 @@ class SCMainSettingsViewController: SCModalViewController {
     }
 
     fileprivate func registerTableViewCells() {
-        let toggleViewCellNib = UINib(nibName: SCConstants.nibs.toggleViewCell.rawValue, bundle: nil)
+        let multilineToggleViewCellNib = UINib(nibName: SCConstants.nibs.multilineToggleViewCell.rawValue, bundle: nil)
 
         self.tableView.register(
-            toggleViewCellNib,
-            forCellReuseIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
+            multilineToggleViewCellNib,
+            forCellReuseIdentifier: SCConstants.reuseIdentifiers.nightModeToggleViewCell.rawValue
         )
 
         self.tableView.register(
-            toggleViewCellNib,
-            forCellReuseIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
+            multilineToggleViewCellNib,
+            forCellReuseIdentifier: SCConstants.reuseIdentifiers.accessibilityToggleViewCell.rawValue
         )
     }
 }
@@ -156,7 +155,7 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionHeader = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.sectionHeaderCell.rawValue
         ) as? SCSectionHeaderViewCell else {
             return nil
         }
@@ -195,25 +194,27 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
             switch indexPath.row {
             case CustomSetting.nightMode.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.nightModeToggleViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.nightModeToggleViewCell.rawValue
                 ) as? SCToggleViewCell else {
                     return SCTableViewCell()
                 }
 
                 cell.synchronizeToggle()
                 cell.primaryLabel.text = self.customizeLabels[.nightMode]
+                cell.secondaryLabel.text = self.customizeSecondaryLabels[.nightMode]
                 cell.delegate = self
 
                 return cell
             case CustomSetting.accessibility.rawValue:
                 guard let cell = self.tableView.dequeueReusableCell(
-                    withIdentifier: SCConstants.identifier.accessibilityToggleViewCell.rawValue
+                    withIdentifier: SCConstants.reuseIdentifiers.accessibilityToggleViewCell.rawValue
                 ) as? SCToggleViewCell else {
                     return SCTableViewCell()
                 }
 
                 cell.synchronizeToggle()
                 cell.primaryLabel.text = self.customizeLabels[.accessibility]
+                cell.secondaryLabel.text = self.customizeSecondaryLabels[.accessibility]
                 cell.delegate = self
 
                 return cell
@@ -223,7 +224,7 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
 
         case Section.about.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.versionViewCell.rawValue
+                withIdentifier: SCConstants.reuseIdentifiers.versionViewCell.rawValue
             ) as? SCTableViewCell else {
                 return SCTableViewCell()
             }
@@ -240,13 +241,13 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
                 )
             )
 
-            cell.primaryLabel.text = SCStrings.primaryLabel.version.rawValue.localized
+            cell.primaryLabel.text = SCStrings.primaryLabel.version.rawLocalized
             cell.rightLabel.attributedText = attributedString
 
             return cell
         case Section.more.rawValue:
             guard let cell = self.tableView.dequeueReusableCell(
-                withIdentifier: SCConstants.identifier.disclosureViewCell.rawValue
+                withIdentifier: SCConstants.reuseIdentifiers.disclosureViewCell.rawValue
             ) as? SCDisclosureViewCell else {
                 return SCTableViewCell()
             }
@@ -272,14 +273,6 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
                 if let supportURL = URL(string: SCConstants.url.support.rawValue) {
                     UIApplication.shared.openURL(supportURL)
                 }
-            case Link.reviewApp.rawValue:
-                if let appStoreURL = URL(string: SCConstants.url.appStore.rawValue) {
-                    UIApplication.shared.openURL(appStoreURL)
-                }
-            case Link.website.rawValue:
-                if let websiteURL = URL(string: SCConstants.url.website.rawValue) {
-                    UIApplication.shared.openURL(websiteURL)
-                }
             case Link.github.rawValue:
                 if let githubURL = URL(string: SCConstants.url.github.rawValue) {
                     UIApplication.shared.openURL(githubURL)
@@ -287,10 +280,6 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
             case Link.icons8.rawValue:
                 if let icons8URL = URL(string: SCConstants.url.icons8.rawValue) {
                     UIApplication.shared.openURL(icons8URL)
-                }
-            case Link.releaseNotes.rawValue:
-                if let supportURL = URL(string: SCConstants.url.releaseNotes.rawValue) {
-                    UIApplication.shared.openURL(supportURL)
                 }
             default:
                 return
@@ -331,12 +320,12 @@ extension SCMainSettingsViewController: SCToggleViewCellDelegate {
     func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool) {
         if let reuseIdentifier = cell.reuseIdentifier {
             switch reuseIdentifier {
-            case SCConstants.identifier.nightModeToggleViewCell.rawValue:
+            case SCConstants.reuseIdentifiers.nightModeToggleViewCell.rawValue:
                 SCLocalStorageManager.instance.enableLocalSetting(.nightMode, enabled: enabled)
                 super.updateModalAppearance()
                 self.tableView.reloadData()
                 self.delegate?.mainSettings(onToggleViewCellChanged: cell, settingType: .nightMode)
-            case SCConstants.identifier.accessibilityToggleViewCell.rawValue:
+            case SCConstants.reuseIdentifiers.accessibilityToggleViewCell.rawValue:
                 SCLocalStorageManager.instance.enableLocalSetting(.accessibility, enabled: enabled)
             default:
                 break

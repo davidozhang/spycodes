@@ -7,6 +7,11 @@ class SCImageButton: UIButton {
         didSet {
             if isHighlighted {
                 if !self.alreadyHighlighted {
+                    if #available(iOS 10.0, *) {
+                        let generator = UIImpactFeedbackGenerator(style: .light)
+                        generator.impactOccurred()
+                    }
+
                     SCAudioManager.playClickSound()
                     self.alreadyHighlighted = true
                 }

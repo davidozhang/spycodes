@@ -19,18 +19,19 @@ class SCPlayerNameViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.playerNameViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.playerNameViewController.rawValue
+        self.unwindSegueIdentifier = SCConstants.segues.playerNameViewControllerUnwindSegue.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.headerLabel.text = SCStrings.header.playerName.rawValue.localized
+        self.headerLabel.text = SCStrings.header.playerName.rawLocalized
 
         if let name = Player.instance.getName(), name.count > 0 {
             self.userNameTextField.text = name
         } else if !SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) {
-            self.userNameTextField.placeholder = SCStrings.header.playerName.rawValue.localized
+            self.userNameTextField.placeholder = SCStrings.header.playerName.rawLocalized
         }
 
         self.userNameTextField.delegate = self
@@ -97,12 +98,12 @@ extension SCPlayerNameViewController: UITextFieldDelegate {
             if Player.instance.isHost() {
                 Room.instance.addPlayer(Player.instance, team: Team.red)
                 self.performSegue(
-                    withIdentifier: SCConstants.identifier.pregameRoom.rawValue,
+                    withIdentifier: SCConstants.segues.pregameRoomViewControllerSegue.rawValue,
                     sender: self
                 )
             } else {
                 self.performSegue(
-                    withIdentifier: SCConstants.identifier.accessCodeViewController.rawValue,
+                    withIdentifier: SCConstants.segues.accessCodeViewControllerSegue.rawValue,
                     sender: self
                 )
             }

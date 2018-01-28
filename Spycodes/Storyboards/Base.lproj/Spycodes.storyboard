@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +14,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="main-menu-view-controller" id="BYZ-38-t0r" customClass="SCMainViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="main-view-controller" id="BYZ-38-t0r" customClass="SCMainViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -104,6 +105,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Iai-EH-C20" firstAttribute="centerX" secondItem="nVj-tx-bo9" secondAttribute="centerX" id="BMv-bw-yAu"/>
+                                    <constraint firstAttribute="height" constant="54" id="Hd6-KB-lj9"/>
                                     <constraint firstItem="Iai-EH-C20" firstAttribute="top" secondItem="nVj-tx-bo9" secondAttribute="top" constant="8" id="SMp-rz-TWR"/>
                                     <constraint firstAttribute="bottom" secondItem="Iai-EH-C20" secondAttribute="bottom" constant="16" id="l03-pc-EAf"/>
                                 </constraints>
@@ -135,9 +137,10 @@
                         <outlet property="joinGameButton" destination="CBi-9c-KRm" id="dUo-jD-ddi"/>
                         <outlet property="logoLabel" destination="kwp-LV-dpu" id="rpS-d7-Jwi"/>
                         <outlet property="modalPeekView" destination="nVj-tx-bo9" id="qlw-TL-Mg7"/>
+                        <outlet property="modalPeekViewHeightConstraint" destination="Hd6-KB-lj9" id="oda-Wu-O1B"/>
                         <outlet property="swipeUpButton" destination="tVk-pz-TGW" id="jGt-0M-ZVj"/>
-                        <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name" modalTransitionStyle="crossDissolve" id="M2x-yW-um3"/>
-                        <segue destination="oCs-d3-UDI" kind="presentation" identifier="main-menu-modal" id="cpV-DQ-cDx"/>
+                        <segue destination="oCE-jf-1fM" kind="presentation" identifier="player-name-view-controller-segue" modalTransitionStyle="crossDissolve" id="M2x-yW-um3"/>
+                        <segue destination="oCs-d3-UDI" kind="presentation" identifier="main-settings-view-controller-segue" id="cpV-DQ-cDx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -147,7 +150,7 @@
         <!--Main Settings View Controller-->
         <scene sceneID="cV3-jj-Kon">
             <objects>
-                <viewController id="oCs-d3-UDI" customClass="SCMainSettingsViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="main-settings-view-controller" id="oCs-d3-UDI" customClass="SCMainSettingsViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nGe-bY-2XB"/>
                         <viewControllerLayoutGuide type="bottom" id="o82-JI-MmW"/>
@@ -311,7 +314,7 @@
                                 <rect key="frame" x="15" y="24" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="7Ei-9K-ZoL"/>
-                                    <constraint firstAttribute="width" constant="35" id="usp-eM-Gje"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="35" id="usp-eM-Gje"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="Back"/>
                                 <connections>
@@ -445,8 +448,8 @@
                         <outlet property="statusLabel" destination="Lxf-jD-guR" id="MYy-k5-4mw"/>
                         <outlet property="statusLabelTopMarginConstraint" destination="Jyf-ti-DR9" id="DjB-SB-1Nb"/>
                         <outlet property="textFieldsView" destination="oCC-FN-amc" id="Ahu-DB-j5h"/>
-                        <segue destination="vJw-If-bFy" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="417-vA-iX0"/>
-                        <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" modalTransitionStyle="crossDissolve" id="N7R-5v-7k6"/>
+                        <segue destination="vJw-If-bFy" kind="unwind" identifier="player-name-view-controller-unwind-segue" unwindAction="unwindToPlayerName:" id="417-vA-iX0"/>
+                        <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room-view-controller-segue" modalTransitionStyle="crossDissolve" id="N7R-5v-7k6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ll0-UV-VBC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -483,8 +486,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYY-fp-HQH" userLabel="Back Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
                                 <rect key="frame" x="15" y="24" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="6OD-rQ-5oE"/>
-                                    <constraint firstAttribute="height" constant="35" id="Wdf-Df-5Gl"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="35" id="6OD-rQ-5oE"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="Wdf-Df-5Gl"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="Back"/>
                                 <connections>
@@ -526,9 +529,9 @@
                         <outlet property="headerLabelTopMarginConstraint" destination="LmF-O1-SiH" id="HBa-XQ-SoJ"/>
                         <outlet property="userNameTextField" destination="4s9-er-VpV" id="KFG-Mj-S6u"/>
                         <outlet property="userNameTextFieldVerticalCenterConstraint" destination="UwC-kY-pWD" id="dho-lO-OK1"/>
-                        <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room" modalTransitionStyle="crossDissolve" id="7yd-xs-fux"/>
-                        <segue destination="Z98-DM-ptk" kind="unwind" identifier="main-menu" unwindAction="unwindToMainMenu:" id="XBQ-Hk-25x"/>
-                        <segue destination="RKo-Nr-UiC" kind="presentation" identifier="access-code" modalTransitionStyle="crossDissolve" id="9Td-mv-cvu"/>
+                        <segue destination="VkA-D4-zlT" kind="presentation" identifier="pregame-room-view-controller-segue" modalTransitionStyle="crossDissolve" id="7yd-xs-fux"/>
+                        <segue destination="Z98-DM-ptk" kind="unwind" identifier="main-view-controller-unwind-segue" unwindAction="unwindToMainMenu:" id="XBQ-Hk-25x"/>
+                        <segue destination="RKo-Nr-UiC" kind="presentation" identifier="access-code-view-controller-segue" modalTransitionStyle="crossDissolve" id="9Td-mv-cvu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sKn-Jb-gii" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -805,7 +808,7 @@
                                 <rect key="frame" x="15" y="24" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Wq3-KC-GD0"/>
-                                    <constraint firstAttribute="width" constant="35" id="qrm-NK-Xm7"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="35" id="qrm-NK-Xm7"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="Back"/>
                                 <connections>
@@ -991,6 +994,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="vip-gN-xru" secondAttribute="bottom" constant="16" id="MOO-Ua-XLx"/>
                                     <constraint firstItem="vip-gN-xru" firstAttribute="top" secondItem="qn1-V1-kty" secondAttribute="top" constant="8" id="ac5-JA-4Jr"/>
+                                    <constraint firstAttribute="height" constant="54" id="kW3-A1-gNr"/>
                                     <constraint firstItem="vip-gN-xru" firstAttribute="centerX" secondItem="qn1-V1-kty" secondAttribute="centerX" id="zbG-X2-sPF"/>
                                 </constraints>
                             </view>
@@ -1013,6 +1017,17 @@
                                     <action selector="onSwipeUpButtonTapped:" destination="VkA-D4-zlT" eventType="touchUpInside" id="T7T-7I-kHs"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohS-rg-aAB" userLabel="Help Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="984" y="29" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="HLF-6h-CBA"/>
+                                    <constraint firstAttribute="height" constant="25" id="hkA-qs-LX9"/>
+                                </constraints>
+                                <state key="normal" image="Question"/>
+                                <connections>
+                                    <action selector="onHelpButtonTapped:" destination="VkA-D4-zlT" eventType="touchUpInside" id="bNr-8r-6sa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1024,6 +1039,7 @@
                             <constraint firstItem="084-kN-Fki" firstAttribute="centerX" secondItem="ch0-Rf-qt2" secondAttribute="centerX" id="JYY-yq-p6M"/>
                             <constraint firstItem="084-kN-Fki" firstAttribute="top" secondItem="A1z-dP-UpL" secondAttribute="bottom" constant="16" id="Jqg-Zb-QvE"/>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="leading" secondItem="ch0-Rf-qt2" secondAttribute="leading" id="JyP-Fd-tkk"/>
+                            <constraint firstItem="ohS-rg-aAB" firstAttribute="centerY" secondItem="Zpa-v1-yiA" secondAttribute="centerY" id="X8k-Fj-XWq"/>
                             <constraint firstItem="Doc-Hq-B89" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="50" id="XBE-ff-nvo"/>
                             <constraint firstItem="Zpa-v1-yiA" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="20" id="Yg8-eX-EZE"/>
                             <constraint firstItem="5W3-A0-VGs" firstAttribute="top" secondItem="Zpa-v1-yiA" secondAttribute="bottom" constant="16" id="dJQ-a4-9Pw"/>
@@ -1033,6 +1049,7 @@
                             <constraint firstItem="A1z-dP-UpL" firstAttribute="top" secondItem="5W3-A0-VGs" secondAttribute="bottom" constant="16" id="nbi-Jb-JYX"/>
                             <constraint firstAttribute="trailing" secondItem="qn1-V1-kty" secondAttribute="trailing" id="pZJ-G4-EGl"/>
                             <constraint firstItem="2Qg-Lg-n4v" firstAttribute="top" secondItem="peM-0h-h84" secondAttribute="bottom" constant="8" id="x3O-jC-Q5S"/>
+                            <constraint firstAttribute="trailing" secondItem="ohS-rg-aAB" secondAttribute="trailing" constant="15" id="xuI-qW-CEd"/>
                             <constraint firstItem="qn1-V1-kty" firstAttribute="top" secondItem="084-kN-Fki" secondAttribute="bottom" constant="16" id="yAM-OL-D3l"/>
                         </constraints>
                         <variation key="default">
@@ -1045,16 +1062,20 @@
                     <connections>
                         <outlet property="accessCodeLabel" destination="dZK-HZ-PAI" id="ChC-Yo-r67"/>
                         <outlet property="modalPeekView" destination="qn1-V1-kty" id="R3b-Yb-Qjd"/>
+                        <outlet property="modalPeekViewHeightConstraint" destination="kW3-A1-gNr" id="ucC-8M-VLx"/>
                         <outlet property="readyButton" destination="084-kN-Fki" id="kMu-UQ-07b"/>
+                        <outlet property="swipeUpButtomTopSpaceConstraint" destination="nbi-Jb-JYX" id="lT4-SJ-yGc"/>
                         <outlet property="swipeUpButton" destination="A1z-dP-UpL" id="7FJ-3u-pv7"/>
+                        <outlet property="swipeUpButtonHeightConstraint" destination="IAf-Cl-VTO" id="jZL-b7-Ok8"/>
+                        <outlet property="swipeUpButtonWidthConstraint" destination="ypP-Jv-JfE" id="jk3-Vo-oP9"/>
                         <outlet property="tableView" destination="5W3-A0-VGs" id="5ia-S1-UXx"/>
                         <outlet property="tableViewLeadingSpaceConstraint" destination="JyP-Fd-tkk" id="fGm-hU-E9O"/>
                         <outlet property="tableViewTrailingSpaceConstraint" destination="jKW-MX-l9L" id="Dhs-xX-o3L"/>
-                        <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-room" modalTransitionStyle="crossDissolve" id="pzx-vK-usD"/>
-                        <segue destination="Vvw-J8-7L6" kind="unwind" identifier="player-name" unwindAction="unwindToPlayerName:" id="4eT-dC-kfX"/>
-                        <segue destination="Vvw-J8-7L6" kind="unwind" identifier="access-code" unwindAction="unwindToAccessCode:" id="v3W-bc-vVR"/>
-                        <segue destination="Bsc-BJ-zGX" kind="presentation" identifier="pregame-modal-container-view" id="CKf-j2-Ls6"/>
-                        <segue destination="HKy-Oo-bc1" kind="presentation" identifier="custom-category" modalPresentationStyle="overCurrentContext" id="NwO-x4-uMo"/>
+                        <segue destination="yX4-d1-WHr" kind="presentation" identifier="game-view-controller-segue" modalTransitionStyle="crossDissolve" id="pzx-vK-usD"/>
+                        <segue destination="Vvw-J8-7L6" kind="unwind" identifier="player-name-view-controller-unwind-segue" unwindAction="unwindToPlayerName:" id="4eT-dC-kfX"/>
+                        <segue destination="Vvw-J8-7L6" kind="unwind" identifier="access-code-view-controller-unwind-segue" unwindAction="unwindToAccessCode:" id="v3W-bc-vVR"/>
+                        <segue destination="Bsc-BJ-zGX" kind="presentation" identifier="page-view-flow-container-view-controller-segue" id="CKf-j2-Ls6"/>
+                        <segue destination="HKy-Oo-bc1" kind="presentation" identifier="custom-category-view-controller-segue" modalPresentationStyle="overCurrentContext" id="NwO-x4-uMo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lDc-cz-jrN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1062,10 +1083,10 @@
             </objects>
             <point key="canvasLocation" x="1825.7812499999998" y="338.21376281112737"/>
         </scene>
-        <!--Pregame Menu Container View Controller-->
+        <!--Page View Flow Container View Controller-->
         <scene sceneID="EeC-NJ-N0R">
             <objects>
-                <viewController storyboardIdentifier="pregame-modal-container-view" id="Bsc-BJ-zGX" customClass="SCPregameMenuContainerViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="page-view-flow-container-view-controller" id="Bsc-BJ-zGX" customClass="SCPageViewFlowContainerViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iLe-eX-mDc"/>
                         <viewControllerLayoutGuide type="bottom" id="MLa-iE-UmV"/>
@@ -1082,7 +1103,7 @@
                                 <rect key="frame" x="0.0" y="62" width="1024" height="1304"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="DJ4-hE-VYj" kind="embed" identifier="pregame-page-view-controller" id="Rpi-nl-bm8"/>
+                                    <segue destination="DJ4-hE-VYj" kind="embed" identifier="page-view-flow-view-controller-segue" id="Rpi-nl-bm8"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FjP-pl-Sjb" userLabel="Swipe Down Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
@@ -1121,18 +1142,99 @@
             </objects>
             <point key="canvasLocation" x="1826" y="1156"/>
         </scene>
-        <!--Pregame Menu Page View Controller-->
+        <!--Page View Flow View Controller-->
         <scene sceneID="Rr9-HP-0Ne">
             <objects>
-                <pageViewController storyboardIdentifier="pregame-page-view-controller" autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="overCurrentContext" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="DJ4-hE-VYj" customClass="SCPregameMenuPageViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="page-view-flow-view-controller" autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="overCurrentContext" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="DJ4-hE-VYj" customClass="SCPageViewFlowViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8eq-31-sXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1826" y="1938"/>
         </scene>
-        <!--Pregame Menu Main View Controller-->
+        <!--Page View Flow Entry View Controller-->
+        <scene sceneID="pRz-U1-dnG">
+            <objects>
+                <viewController storyboardIdentifier="page-view-flow-entry-view-controller" id="70g-iv-FoM" customClass="SCPageViewFlowEntryViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hzi-bG-Xx4"/>
+                        <viewControllerLayoutGuide type="bottom" id="8Dc-Gp-hEk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6av-ke-ws8">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwb-zi-xv8">
+                                <rect key="frame" x="40" y="466.5" width="944" height="433"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vca-6v-mPL">
+                                        <rect key="frame" x="382" y="44" width="180" height="320"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="180" id="0gG-dN-k3e"/>
+                                            <constraint firstAttribute="width" secondItem="Vca-6v-mPL" secondAttribute="height" multiplier="9:16" id="6qF-kQ-KhK"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRD-ch-cEQ" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="412" width="944" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone" translatesAutoresizingMaskIntoConstraints="NO" id="aGd-SH-d26">
+                                        <rect key="frame" x="371" y="0.0" width="203" height="364"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="203" id="5Hd-xK-fzJ"/>
+                                            <constraint firstAttribute="height" constant="364" id="pHm-a3-WMX"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="VRD-ch-cEQ" secondAttribute="trailing" id="8F0-YA-OUE"/>
+                                    <constraint firstItem="aGd-SH-d26" firstAttribute="top" secondItem="rwb-zi-xv8" secondAttribute="top" id="8SP-fP-TKF"/>
+                                    <constraint firstItem="VRD-ch-cEQ" firstAttribute="centerX" secondItem="rwb-zi-xv8" secondAttribute="centerX" id="KBm-tG-abg"/>
+                                    <constraint firstItem="Vca-6v-mPL" firstAttribute="bottom" secondItem="aGd-SH-d26" secondAttribute="bottom" id="Kf9-bA-Di5"/>
+                                    <constraint firstItem="Vca-6v-mPL" firstAttribute="centerX" secondItem="rwb-zi-xv8" secondAttribute="centerX" id="Pph-Wa-pvz"/>
+                                    <constraint firstItem="VRD-ch-cEQ" firstAttribute="leading" secondItem="rwb-zi-xv8" secondAttribute="leading" id="ULX-Yb-fWP"/>
+                                    <constraint firstItem="aGd-SH-d26" firstAttribute="centerX" secondItem="rwb-zi-xv8" secondAttribute="centerX" id="ahF-C7-4ep"/>
+                                    <constraint firstAttribute="bottom" secondItem="VRD-ch-cEQ" secondAttribute="bottom" id="mcX-Vr-UtP"/>
+                                    <constraint firstItem="VRD-ch-cEQ" firstAttribute="top" secondItem="Vca-6v-mPL" secondAttribute="bottom" constant="48" id="vfL-q0-wSA"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxr-Qt-n0T" userLabel="Header Label" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
+                                <rect key="frame" x="491" y="31" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="rwb-zi-xv8" secondAttribute="trailing" constant="40" id="206-4k-P53"/>
+                            <constraint firstItem="rwb-zi-xv8" firstAttribute="centerY" secondItem="6av-ke-ws8" secondAttribute="centerY" id="BIs-b1-Txi"/>
+                            <constraint firstItem="pxr-Qt-n0T" firstAttribute="centerX" secondItem="6av-ke-ws8" secondAttribute="centerX" id="GGr-k0-Qzl"/>
+                            <constraint firstItem="pxr-Qt-n0T" firstAttribute="top" secondItem="hzi-bG-Xx4" secondAttribute="bottom" constant="11" id="MIo-Zc-Gr9"/>
+                            <constraint firstItem="rwb-zi-xv8" firstAttribute="leading" secondItem="6av-ke-ws8" secondAttribute="leading" constant="40" id="PS9-ef-aL2"/>
+                            <constraint firstItem="rwb-zi-xv8" firstAttribute="centerX" secondItem="6av-ke-ws8" secondAttribute="centerX" id="q7c-eB-kTG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="headerLabel" destination="pxr-Qt-n0T" id="m5l-BH-j9b"/>
+                        <outlet property="imageView" destination="Vca-6v-mPL" id="Dna-90-I4D"/>
+                        <outlet property="imageViewWidthConstraint" destination="0gG-dN-k3e" id="OxS-9o-m6F"/>
+                        <outlet property="iphoneView" destination="aGd-SH-d26" id="97K-kI-yd9"/>
+                        <outlet property="iphoneViewHeightConstraint" destination="pHm-a3-WMX" id="8iI-IW-x7J"/>
+                        <outlet property="iphoneViewWidthConstraint" destination="5Hd-xK-fzJ" id="rIx-1p-TnM"/>
+                        <outlet property="label" destination="VRD-ch-cEQ" id="NBr-5j-I4S"/>
+                        <outlet property="labelTopSpaceConstraint" destination="vfL-q0-wSA" id="2BM-FJ-8VV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r7z-pe-KfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2641.9921875" y="1951.9765739385064"/>
+        </scene>
+        <!--Game Settings View Controller-->
         <scene sceneID="Nl8-ZF-fk9">
             <objects>
-                <viewController storyboardIdentifier="pregame-modal-main-view" id="R1J-Mf-Sjp" customClass="SCPregameMenuMainViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="game-settings-view-controller" id="R1J-Mf-Sjp" customClass="SCGameSettingsViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kXk-ok-nU4"/>
                         <viewControllerLayoutGuide type="bottom" id="1LJ-wz-GW3"/>
@@ -1169,121 +1271,6 @@
                                             <outlet property="primaryLabel" destination="IYE-QG-WB5" id="YlR-uh-avJ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="statistics-view-cell" id="vA5-4g-NUA" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="1024" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vA5-4g-NUA" id="RX9-CZ-q6R">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpI-da-aAb" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="6" width="42" height="32"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="MpI-da-aAb" secondAttribute="bottom" constant="6" id="JCF-2I-maJ"/>
-                                                <constraint firstItem="MpI-da-aAb" firstAttribute="top" secondItem="RX9-CZ-q6R" secondAttribute="top" constant="6" id="KG3-UN-b0i"/>
-                                                <constraint firstItem="MpI-da-aAb" firstAttribute="leading" secondItem="RX9-CZ-q6R" secondAttribute="leading" constant="4" id="Wmm-0L-xbd"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="primaryLabel" destination="MpI-da-aAb" id="0di-eJ-BzR"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="info-view-cell" id="ZM8-qH-jmj" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116" width="1024" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZM8-qH-jmj" id="wlm-qw-hTN">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHp-OB-HYt" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="36" y="8" width="984" height="28"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5s-29-39v" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="12" width="24" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="24" id="zPO-dU-IrM"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="zHp-OB-HYt" firstAttribute="top" secondItem="wlm-qw-hTN" secondAttribute="top" constant="8" id="6aI-qz-xrW"/>
-                                                <constraint firstAttribute="bottom" secondItem="zHp-OB-HYt" secondAttribute="bottom" constant="8" id="7uD-9F-C1N"/>
-                                                <constraint firstItem="K5s-29-39v" firstAttribute="centerY" secondItem="wlm-qw-hTN" secondAttribute="centerY" id="MCj-Rx-8dI"/>
-                                                <constraint firstAttribute="trailing" secondItem="zHp-OB-HYt" secondAttribute="trailing" constant="4" id="Pa9-gj-IsY"/>
-                                                <constraint firstItem="K5s-29-39v" firstAttribute="leading" secondItem="wlm-qw-hTN" secondAttribute="leading" constant="4" id="Vim-Pg-Jp3"/>
-                                                <constraint firstItem="zHp-OB-HYt" firstAttribute="leading" secondItem="K5s-29-39v" secondAttribute="trailing" constant="8" id="vSB-V4-HMu"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="leftLabel" destination="K5s-29-39v" id="BjX-Ra-6uC"/>
-                                            <outlet property="primaryLabel" destination="zHp-OB-HYt" id="Zua-73-Gtf"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timer-setting-view-cell" rowHeight="58" id="l3e-qQ-33L" userLabel="timer-setting-view-cell" customClass="SCPickerViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160" width="1024" height="58"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l3e-qQ-33L" id="Ncp-AL-EVA">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="58"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jv7-mk-kLJ">
-                                                    <rect key="frame" x="4" y="6" width="1004" height="46"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZG-zH-Psm" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="52" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secondary Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2M-vo-mDP" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="25" width="1004" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Label" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bGU-cV-qD6" userLabel="Timer Duration" customClass="SCTextField" customModule="Spycodes" customModuleProvider="target">
-                                                            <rect key="frame" x="936" y="14.5" width="68" height="17"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <nil key="textColor"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
-                                                        </textField>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstItem="YZG-zH-Psm" firstAttribute="leading" secondItem="Jv7-mk-kLJ" secondAttribute="leading" id="4gU-T7-mgt"/>
-                                                        <constraint firstItem="YZG-zH-Psm" firstAttribute="top" secondItem="Jv7-mk-kLJ" secondAttribute="top" id="Vyb-JC-F28"/>
-                                                        <constraint firstItem="p2M-vo-mDP" firstAttribute="top" secondItem="YZG-zH-Psm" secondAttribute="bottom" constant="4" id="aac-cR-vAE"/>
-                                                        <constraint firstAttribute="trailing" secondItem="p2M-vo-mDP" secondAttribute="trailing" id="bq7-vH-yyq"/>
-                                                        <constraint firstAttribute="bottom" secondItem="p2M-vo-mDP" secondAttribute="bottom" id="nDv-zP-gnP"/>
-                                                        <constraint firstItem="p2M-vo-mDP" firstAttribute="leading" secondItem="Jv7-mk-kLJ" secondAttribute="leading" id="qFR-Gb-dDu"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Jv7-mk-kLJ" secondAttribute="bottom" constant="6" id="3Lm-mp-XrE"/>
-                                                <constraint firstItem="Jv7-mk-kLJ" firstAttribute="top" secondItem="Ncp-AL-EVA" secondAttribute="top" constant="6" id="NJT-hF-xPe"/>
-                                                <constraint firstAttribute="trailing" secondItem="Jv7-mk-kLJ" secondAttribute="trailing" constant="16" id="TEa-JE-TKi"/>
-                                                <constraint firstItem="Jv7-mk-kLJ" firstAttribute="leading" secondItem="Ncp-AL-EVA" secondAttribute="leading" constant="4" id="eZF-4b-7Cy"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="primaryLabel" destination="YZG-zH-Psm" id="caY-mx-AP8"/>
-                                            <outlet property="secondaryLabel" destination="p2M-vo-mDP" id="oKN-w2-gqy"/>
-                                            <outlet property="textField" destination="bGU-cV-qD6" id="bFL-Dx-Ihg"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -1306,10 +1293,10 @@
             </objects>
             <point key="canvasLocation" x="1825.7812499999998" y="2748.7554904831622"/>
         </scene>
-        <!--Pregame Menu Secondary View Controller-->
+        <!--Categories View Controller-->
         <scene sceneID="jkV-qk-FcC">
             <objects>
-                <viewController storyboardIdentifier="pregame-modal-secondary-view" id="LAW-Ow-WYx" customClass="SCPregameMenuSecondaryViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="categories-view-controller" id="LAW-Ow-WYx" customClass="SCCategoriesViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fhi-4I-yKc"/>
                         <viewControllerLayoutGuide type="bottom" id="hl5-MT-36A"/>
@@ -1385,7 +1372,7 @@
         <!--Timeline View Controller-->
         <scene sceneID="QbP-47-cxE">
             <objects>
-                <viewController id="HuE-xd-fYV" customClass="SCTimelineViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="timeline-view-controller" id="HuE-xd-fYV" customClass="SCTimelineViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zcm-Dl-ICE"/>
                         <viewControllerLayoutGuide type="bottom" id="htW-uQ-Xx7"/>
@@ -1532,7 +1519,7 @@
         <!--Game View Controller-->
         <scene sceneID="9GO-gD-g4A">
             <objects>
-                <viewController storyboardIdentifier="game-room-view-controller" id="yX4-d1-WHr" customClass="SCGameViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="game-view-controller" id="yX4-d1-WHr" customClass="SCGameViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DMO-Jt-Cx9"/>
                         <viewControllerLayoutGuide type="bottom" id="Zrc-Nf-5YD"/>
@@ -1583,8 +1570,8 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUf-TJ-d5l" userLabel="Back Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="15" y="24" width="35" height="35"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="35" id="4in-hr-7jc"/>
-                                            <constraint firstAttribute="height" constant="35" id="Ozq-uH-Lel"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="35" id="4in-hr-7jc"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="Ozq-uH-Lel"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="Back"/>
                                         <connections>
@@ -1690,7 +1677,7 @@
                                             <action selector="onHelpButtonTapped:" destination="yX4-d1-WHr" eventType="touchUpInside" id="eWY-A2-2E1"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxl-gd-SeO" userLabel="Timeline Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxl-gd-SeO" userLabel="Timeline Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="953" y="30" width="23" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="Bxb-Z0-LKP"/>
@@ -1808,115 +1795,15 @@
                         <outlet property="timerViewHeightConstraint" destination="03J-1v-qHl" id="Bb2-DO-ThR"/>
                         <outlet property="topBarView" destination="Vhy-Dr-vSM" id="Vdg-zN-a3H"/>
                         <outlet property="topBarViewHeightConstraint" destination="cP6-J4-cEl" id="9Gy-Ue-J7O"/>
-                        <segue destination="Isy-vz-eu5" kind="unwind" identifier="pregame-room" unwindAction="unwindToPregameRoom:" id="0dq-Te-mES"/>
-                        <segue destination="e9C-iv-SDh" kind="popoverPresentation" identifier="help-view" popoverAnchorView="udo-t2-F4l" id="eZC-mV-Lzl">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
-                        <segue destination="HuE-xd-fYV" kind="presentation" identifier="timeline-modal" id="1wN-tv-5na"/>
+                        <segue destination="Isy-vz-eu5" kind="unwind" identifier="pregame-room-view-controller-unwind-segue" unwindAction="unwindToPregameRoom:" id="0dq-Te-mES"/>
+                        <segue destination="HuE-xd-fYV" kind="presentation" identifier="timeline-view-controller-segue" id="1wN-tv-5na"/>
+                        <segue destination="Bsc-BJ-zGX" kind="presentation" identifier="page-view-flow-container-view-controller-segue" id="Zcx-BU-A4v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfM-Nb-l9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Isy-vz-eu5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2641.9921875" y="338.65300146412881"/>
-        </scene>
-        <!--Game Help View Controller-->
-        <scene sceneID="I3C-gg-tTW">
-            <objects>
-                <viewController id="e9C-iv-SDh" customClass="SCGameHelpViewController" customModule="Spycodes" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Gyg-n5-NU8"/>
-                        <viewControllerLayoutGuide type="bottom" id="TdX-78-Xw5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="UOH-cx-BY5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xJj-by-Gfb" userLabel="Help Text View">
-                                <rect key="frame" x="20" y="296.5" width="335" height="58"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAV-w8-wCb" userLabel="Header" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="139.5" y="0.0" width="56" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDR-yr-yah" userLabel="Description Label" customClass="SCHelpDescriptionLabel" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="37" width="335" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="FDR-yr-yah" firstAttribute="centerX" secondItem="xJj-by-Gfb" secondAttribute="centerX" id="1FK-JA-8Vm"/>
-                                    <constraint firstItem="FDR-yr-yah" firstAttribute="leading" secondItem="xJj-by-Gfb" secondAttribute="leading" id="1JC-Bv-o4H"/>
-                                    <constraint firstAttribute="bottom" secondItem="FDR-yr-yah" secondAttribute="bottom" id="465-T8-dH7"/>
-                                    <constraint firstAttribute="trailing" secondItem="FDR-yr-yah" secondAttribute="trailing" id="BXl-uE-N0S"/>
-                                    <constraint firstItem="VAV-w8-wCb" firstAttribute="centerX" secondItem="xJj-by-Gfb" secondAttribute="centerX" id="LKf-h8-TDm"/>
-                                    <constraint firstItem="VAV-w8-wCb" firstAttribute="top" secondItem="xJj-by-Gfb" secondAttribute="top" id="Odp-Is-pBL"/>
-                                    <constraint firstItem="FDR-yr-yah" firstAttribute="top" secondItem="VAV-w8-wCb" secondAttribute="bottom" constant="16" id="s1k-7g-i0n"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7CP-SC-jzr" userLabel="Exit Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="337" y="8" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="1Qo-p1-NdR"/>
-                                    <constraint firstAttribute="width" constant="30" id="C54-jo-NX8"/>
-                                </constraints>
-                                <state key="normal" image="Exit"/>
-                                <connections>
-                                    <action selector="onExitTapped:" destination="e9C-iv-SDh" eventType="touchUpInside" id="V8k-ji-XnU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zan-j6-pQD" userLabel="Back Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="15" y="624" width="35" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="jZH-DZ-AlP"/>
-                                    <constraint firstAttribute="width" constant="35" id="vVc-h8-bER"/>
-                                </constraints>
-                                <state key="normal" image="Back"/>
-                                <connections>
-                                    <action selector="onLeftTapped:" destination="e9C-iv-SDh" eventType="touchUpInside" id="UHF-5a-fQz"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="net-Cb-pBu" userLabel="Next Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="325" y="624" width="35" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="IXc-ry-Ytg"/>
-                                    <constraint firstAttribute="width" constant="35" id="RTg-I9-u4B"/>
-                                </constraints>
-                                <state key="normal" image="Next"/>
-                                <connections>
-                                    <action selector="onRightTapped:" destination="e9C-iv-SDh" eventType="touchUpInside" id="Tub-HV-MVn"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="7CP-SC-jzr" secondAttribute="trailing" constant="8" id="7N3-p4-Tco"/>
-                            <constraint firstItem="TdX-78-Xw5" firstAttribute="top" secondItem="Zan-j6-pQD" secondAttribute="bottom" constant="8" id="JiC-oG-Fpo"/>
-                            <constraint firstItem="TdX-78-Xw5" firstAttribute="top" secondItem="net-Cb-pBu" secondAttribute="bottom" constant="8" id="Phc-Ny-ZKk"/>
-                            <constraint firstItem="7CP-SC-jzr" firstAttribute="top" secondItem="Gyg-n5-NU8" secondAttribute="bottom" constant="8" id="QJ0-er-TI2"/>
-                            <constraint firstItem="Zan-j6-pQD" firstAttribute="leading" secondItem="UOH-cx-BY5" secondAttribute="leading" constant="15" id="RhA-Cs-L0z"/>
-                            <constraint firstItem="xJj-by-Gfb" firstAttribute="centerY" secondItem="UOH-cx-BY5" secondAttribute="centerY" constant="-8" id="bgH-lg-UAf"/>
-                            <constraint firstAttribute="trailing" secondItem="xJj-by-Gfb" secondAttribute="trailing" constant="20" id="gDn-61-2Y5"/>
-                            <constraint firstItem="xJj-by-Gfb" firstAttribute="leading" secondItem="UOH-cx-BY5" secondAttribute="leading" constant="20" id="pTD-Ur-IuV"/>
-                            <constraint firstItem="xJj-by-Gfb" firstAttribute="centerX" secondItem="UOH-cx-BY5" secondAttribute="centerX" id="qmJ-cf-VSj"/>
-                            <constraint firstAttribute="trailing" secondItem="net-Cb-pBu" secondAttribute="trailing" constant="15" id="wI4-TP-x8p"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="descriptionLabel" destination="FDR-yr-yah" id="AuJ-tn-u7c"/>
-                        <outlet property="headerLabel" destination="VAV-w8-wCb" id="nHZ-kd-a1L"/>
-                        <outlet property="leftButton" destination="Zan-j6-pQD" id="BVY-7X-ND1"/>
-                        <outlet property="rightButton" destination="net-Cb-pBu" id="fHR-uW-N7b"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HJ3-MJ-N3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3534.7826086956525" y="336.68478260869568"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4qB-N6-aTh">
@@ -1948,9 +1835,7 @@
         <image name="Clock" width="50" height="50"/>
         <image name="Crown-Filled" width="100" height="100"/>
         <image name="Delete-Circular-Filled" width="50" height="50"/>
-        <image name="Exit" width="42" height="42"/>
         <image name="Mark-As-Read" width="50" height="50"/>
-        <image name="Next" width="100" height="100"/>
         <image name="Notification-Dot" width="300" height="300"/>
         <image name="Question" width="100" height="100"/>
         <image name="Shuffle" width="50" height="50"/>
@@ -1959,8 +1844,10 @@
         <image name="Team" width="100" height="100"/>
         <image name="Timer" width="50" height="50"/>
         <image name="Up-Arrow-Circled" width="50" height="50"/>
+        <image name="iPhone" width="324" height="569"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="CKf-j2-Ls6"/>
         <segue reference="7yd-xs-fux"/>
     </inferredMetricsTieBreakers>
 </document>

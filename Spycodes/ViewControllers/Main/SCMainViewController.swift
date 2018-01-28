@@ -14,14 +14,14 @@ class SCMainViewController: SCViewController {
     @IBAction func onCreateGame(_ sender: AnyObject) {
         Player.instance.setIsHost(true)
         self.performSegue(
-            withIdentifier: SCConstants.identifier.playerNameViewController.rawValue,
+            withIdentifier: SCConstants.segues.playerNameViewControllerSegue.rawValue,
             sender: self
         )
     }
 
     @IBAction func onJoinGame(_ sender: AnyObject) {
         self.performSegue(
-            withIdentifier: SCConstants.identifier.playerNameViewController.rawValue,
+            withIdentifier: SCConstants.segues.playerNameViewControllerSegue.rawValue,
             sender: self
         )
     }
@@ -34,8 +34,10 @@ class SCMainViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.uniqueIdentifier = SCConstants.viewControllers.mainViewController.rawValue
+
         // Currently this view is the root view controller for unwinding logic
-        self.identifier = SCConstants.identifier.mainMenu.rawValue
+        self.unwindSegueIdentifier = SCConstants.segues.mainViewControllerUnwindSegue.rawValue
         self.isRootViewController = true
 
         SCLogger.log(
@@ -50,15 +52,18 @@ class SCMainViewController: SCViewController {
             }
         }
 
+        SCStoreKitManager.requestReviewIfAllowed()
+        SCUsageStatisticsManager.instance.recordDiscreteUsageStatistics(.appOpens)
+
         self.logoLabel.text = SCStrings.appName.localized
 
         self.createGameButton.setTitle(
-            SCStrings.button.createGame.rawValue.localized,
+            SCStrings.button.createGame.rawLocalized,
             for: .normal
         )
 
         self.joinGameButton.setTitle(
-            SCStrings.button.joinGame.rawValue.localized,
+            SCStrings.button.joinGame.rawLocalized,
             for: .normal
         )
     }
@@ -68,7 +73,7 @@ class SCMainViewController: SCViewController {
 
         ConsolidatedCategories.instance.reset()
         Player.instance.reset()
-        GameMode.instance.reset()
+        SCGameSettingsManager.instance.reset()
         Statistics.instance.reset()
         Room.instance.reset()
         Timer.instance.reset()
@@ -90,13 +95,13 @@ class SCMainViewController: SCViewController {
 
     override func swipeUp() {
         self.performSegue(
-            withIdentifier: SCConstants.identifier.mainMenuModal.rawValue,
+            withIdentifier: SCConstants.segues.mainSettingsViewControllerSegue.rawValue,
             sender: self
         )
     }
 
-    override func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {
-        if deviceType == SCDeviceTypeManager.DeviceType.iPhone_X {
+    override func setCustomLayoutForDeviceType(deviceType: SCDeviceType) {
+        if deviceType == SCDeviceType.iPhone_X {
             self.swipeUpButton.isHidden = false
             self.swipeUpButton.setImage(UIImage(named: "Chevron-Up"), for: UIControlState())
         } else {
@@ -107,12 +112,12 @@ class SCMainViewController: SCViewController {
     // MARK: Private
     fileprivate func showUpdateAppAlert() {
         let alertController = UIAlertController(
-            title: SCStrings.header.updateApp.rawValue.localized,
-            message: SCStrings.message.updatePrompt.rawValue.localized,
+            title: SCStrings.header.updateApp.rawLocalized,
+            message: SCStrings.message.updatePrompt.rawLocalized,
             preferredStyle: .alert
         )
         let confirmAction = UIAlertAction(
-            title: SCStrings.button.download.rawValue.localized,
+            title: SCStrings.button.download.rawLocalized,
             style: .default,
             handler: { (action: UIAlertAction) in
                 if let appStoreURL = URL(string: SCConstants.url.appStore.rawValue) {
@@ -138,7 +143,7 @@ class SCMainViewController: SCViewController {
 // MARK: SCMainSettingsViewControllerDelegate
 extension SCMainViewController: SCMainSettingsViewControllerDelegate {
     func mainSettings(onToggleViewCellChanged toggleViewCell: SCToggleViewCell,
-                      settingType: SCLocalStorageManager.LocalSettingType) {
+                      settingType: SCLocalSettingType) {
         if settingType == .nightMode {
             DispatchQueue.main.async {
                 super.updateAppearance()

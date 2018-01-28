@@ -1,6 +1,6 @@
 import UIKit
 
-class SCPregameMenuSecondaryViewController: SCViewController {
+class SCCategoriesViewController: SCViewController {
     fileprivate let extraRows = Categories.count
     fileprivate var ticker = false
 
@@ -32,7 +32,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
     }
 
     fileprivate let sectionLabels: [Section: String] = [
-        .categories: SCStrings.section.categories.rawValue.localized,
+        .categories: SCStrings.section.categories.rawLocalized,
     ]
 
     fileprivate var scrolled = false
@@ -46,7 +46,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.pregameModalSecondaryView.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.categoriesViewController.rawValue
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 87.0
@@ -60,7 +60,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        SCStates.changePregameMenuState(to: .secondary)
+        SCStates.changePregameMenuState(to: .categories)
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -71,7 +71,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
         self.refreshTimer = Foundation.Timer.scheduledTimer(
             timeInterval: 2.0,
             target: self,
-            selector: #selector(SCPregameMenuSecondaryViewController.refreshView),
+            selector: #selector(SCCategoriesViewController.refreshView),
             userInfo: nil,
             repeats: true
         )
@@ -132,7 +132,7 @@ class SCPregameMenuSecondaryViewController: SCViewController {
                 preferredStyle: .alert
             )
             let confirmAction = UIAlertAction(
-                title: SCStrings.button.ok.rawValue.localized,
+                title: SCStrings.button.ok.rawLocalized,
                 style: .default,
                 handler: nil
             )
@@ -180,11 +180,11 @@ class SCPregameMenuSecondaryViewController: SCViewController {
 
             self.tableView.register(
                 multilineToggleViewCellNib,
-                forCellReuseIdentifier: SCConstants.identifier.selectAllToggleViewCell.rawValue
+                forCellReuseIdentifier: SCConstants.reuseIdentifiers.selectAllToggleViewCell.rawValue
             )
             self.tableView.register(
                 multilineToggleViewCellNib,
-                forCellReuseIdentifier: SCConstants.identifier.persistentSelectionToggleViewCell.rawValue
+                forCellReuseIdentifier: SCConstants.reuseIdentifiers.persistentSelectionToggleViewCell.rawValue
             )
         } else {
             for categoryString in ConsolidatedCategories.instance.getSynchronizedCategories() {
@@ -205,11 +205,13 @@ class SCPregameMenuSecondaryViewController: SCViewController {
             userInfo[SCConstants.notificationKey.customCategoryName.rawValue] = category
         }
 
-        NotificationCenter.default.post(
-            name: NSNotification.Name(rawValue: SCConstants.notificationKey.dismissModal.rawValue),
-            object: self,
-            userInfo: userInfo
-        )
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: SCConstants.notificationKey.dismissModal.rawValue),
+                object: self,
+                userInfo: userInfo
+            )
+        }
     }
 
     fileprivate func getSafeIndex(index: Int) -> Int {
@@ -228,25 +230,25 @@ class SCPregameMenuSecondaryViewController: SCViewController {
 //  |_____/_/\_\\__\___|_| |_|___/_|\___/|_| |_|___/
 
 // MARK: SCSectionHeaderViewCellDelegate
-extension SCPregameMenuSecondaryViewController: SCSectionHeaderViewCellDelegate {
+extension SCCategoriesViewController: SCSectionHeaderViewCellDelegate {
     func sectionHeaderViewCell(onButtonTapped sectionHeaderViewCell: SCSectionHeaderViewCell) {
         self.presentCustomCategoryView(existingCategory: false, category: nil)
     }
 }
 
 // MARK: SCToggleViewCellDelegate
-extension SCPregameMenuSecondaryViewController: SCToggleViewCellDelegate {
+extension SCCategoriesViewController: SCToggleViewCellDelegate {
     func toggleViewCell(onToggleViewCellChanged cell: SCToggleViewCell, enabled: Bool) {
         guard let reuseIdentifier = cell.reuseIdentifier else {
             return
         }
 
-        if reuseIdentifier == SCConstants.identifier.selectAllToggleViewCell.rawValue {
+        if reuseIdentifier == SCConstants.reuseIdentifiers.selectAllToggleViewCell.rawValue {
             ConsolidatedCategories.instance.selectAllCategories()
             return
         }
 
-        if reuseIdentifier == SCConstants.identifier.persistentSelectionToggleViewCell.rawValue {
+        if reuseIdentifier == SCConstants.reuseIdentifiers.persistentSelectionToggleViewCell.rawValue {
             SCLocalStorageManager.instance.enableLocalSetting(.persistentSelection, enabled: enabled)
 
             if !enabled {
@@ -293,7 +295,7 @@ extension SCPregameMenuSecondaryViewController: SCToggleViewCellDelegate {
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
-extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableViewDelegate {
+extension SCCategoriesViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Section.count
     }
@@ -306,7 +308,7 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionHeader = self.tableView.dequeueReusableCell(
-            withIdentifier: SCConstants.identifier.sectionHeaderCell.rawValue
+            withIdentifier: SCConstants.reuseIdentifiers.sectionHeaderCell.rawValue
         ) as? SCSectionHeaderViewCell else {
                 return nil
         }
@@ -352,7 +354,7 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                 switch indexPath.row {
                 case Categories.selectAll.rawValue:
                     guard let cell = self.tableView.dequeueReusableCell(
-                        withIdentifier: SCConstants.identifier.selectAllToggleViewCell.rawValue
+                        withIdentifier: SCConstants.reuseIdentifiers.selectAllToggleViewCell.rawValue
                     ) as? SCToggleViewCell else {
                         return SCTableViewCell()
                     }
@@ -360,9 +362,9 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                     cell.primaryLabel.text = String(
                         format: SCStrings.primaryLabel.category.rawValue,
                         SCStrings.emoji.rocket.rawValue,
-                        SCStrings.primaryLabel.selectAll.rawValue.localized
+                        SCStrings.primaryLabel.selectAll.rawLocalized
                     )
-                    cell.secondaryLabel.text = SCStrings.secondaryLabel.selectAll.rawValue.localized
+                    cell.secondaryLabel.text = SCStrings.secondaryLabel.selectAll.rawLocalized
 
                     cell.synchronizeToggle()
                     cell.delegate = self
@@ -370,7 +372,7 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                     return cell
                 case Categories.persistentSelection.rawValue:
                     guard let cell = self.tableView.dequeueReusableCell(
-                        withIdentifier: SCConstants.identifier.persistentSelectionToggleViewCell.rawValue
+                        withIdentifier: SCConstants.reuseIdentifiers.persistentSelectionToggleViewCell.rawValue
                         ) as? SCToggleViewCell else {
                             return SCTableViewCell()
                     }
@@ -378,9 +380,9 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                     cell.primaryLabel.text = String(
                         format: SCStrings.primaryLabel.category.rawValue,
                         SCStrings.emoji.setting.rawValue,
-                        SCStrings.primaryLabel.persist.rawValue.localized
+                        SCStrings.primaryLabel.persist.rawLocalized
                     )
-                    cell.secondaryLabel.text = SCStrings.secondaryLabel.persistentSelection.rawValue.localized
+                    cell.secondaryLabel.text = SCStrings.secondaryLabel.persistentSelection.rawLocalized
 
                     cell.synchronizeToggle()
                     cell.delegate = self
@@ -415,19 +417,19 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                             format: SCStrings.secondaryLabel.numberOfWordsCustomCategory.rawValue,
                             wordCount,
                             wordCount == 1 ?
-                                SCStrings.secondaryLabel.word.rawValue.localized :
-                                SCStrings.secondaryLabel.words.rawValue.localized,
+                                SCStrings.secondaryLabel.word.rawLocalized :
+                                SCStrings.secondaryLabel.words.rawLocalized,
                             self.ticker ?
-                                SCStrings.secondaryLabel.custom.rawValue.localized :
-                                SCStrings.secondaryLabel.tapToEdit.rawValue.localized
+                                SCStrings.secondaryLabel.custom.rawLocalized :
+                                SCStrings.secondaryLabel.tapToEdit.rawLocalized
                         )
                     } else {
                         cell.secondaryLabel.text = String(
                             format: SCStrings.secondaryLabel.numberOfWords.rawValue,
                             wordCount,
                             wordCount == 1 ?
-                                SCStrings.secondaryLabel.word.rawValue.localized :
-                                SCStrings.secondaryLabel.words.rawValue.localized
+                                SCStrings.secondaryLabel.word.rawLocalized :
+                                SCStrings.secondaryLabel.words.rawLocalized
                         )
                     }
 
@@ -470,17 +472,17 @@ extension SCPregameMenuSecondaryViewController: UITableViewDataSource, UITableVi
                     format: SCStrings.secondaryLabel.numberOfWordsCustomCategory.rawValue,
                     wordCount,
                     wordCount == 1 ?
-                        SCStrings.secondaryLabel.word.rawValue.localized :
-                        SCStrings.secondaryLabel.words.rawValue.localized,
-                    SCStrings.secondaryLabel.custom.rawValue.localized
+                        SCStrings.secondaryLabel.word.rawLocalized :
+                        SCStrings.secondaryLabel.words.rawLocalized,
+                    SCStrings.secondaryLabel.custom.rawLocalized
                 )
             } else {
                 cell.secondaryLabel.text = String(
                     format: SCStrings.secondaryLabel.numberOfWords.rawValue,
                     wordCount,
                     wordCount == 1 ?
-                        SCStrings.secondaryLabel.word.rawValue.localized :
-                        SCStrings.secondaryLabel.words.rawValue.localized
+                        SCStrings.secondaryLabel.word.rawLocalized :
+                        SCStrings.secondaryLabel.words.rawLocalized
                 )
             }
 

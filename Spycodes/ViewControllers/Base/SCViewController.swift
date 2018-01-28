@@ -8,8 +8,13 @@ class SCViewController: UIViewController {
     let animationDuration: TimeInterval = 0.6
     let animationAlpha: CGFloat = 0.5
 
-    var identifier: String?
-    var previousViewControllerIdentifier: String?
+    // Separate identifiers
+    var uniqueIdentifier: String?
+    var unwindSegueIdentifier: String?
+    var previousViewControllerUnwindSegueIdentifier: String?
+    
+    var destinationPageViewFlowType: SCPageViewFlowType?
+
     var returnToRootViewController = false
     var unwindingSegue = false
     var isRootViewController = false
@@ -20,12 +25,13 @@ class SCViewController: UIViewController {
     fileprivate var modalPeekBlurView: UIVisualEffectView?
 
     @IBOutlet weak var modalPeekView: UIView!
+    @IBOutlet weak var modalPeekViewHeightConstraint: NSLayoutConstraint!
 
     deinit {
-        if let identifier = self.identifier {
+        if let uniqueIdentifier = self.uniqueIdentifier {
             SCLogger.log(
                 identifier: SCConstants.loggingIdentifier.deinitialize.rawValue,
-                String(format: SCStrings.logging.deinitStatement.rawValue, identifier)
+                String(format: SCStrings.logging.deinitStatement.rawValue, uniqueIdentifier)
             )
         }
     }
@@ -64,7 +70,7 @@ class SCViewController: UIViewController {
             )
             self.modalPeekView.addGestureRecognizer(tapGestureRecognizer)
 
-            if SCDeviceTypeManager.getDeviceType() == SCDeviceTypeManager.DeviceType.iPhone_X {
+            if SCDeviceTypeManager.getDeviceType() == SCDeviceType.iPhone_X {
                 self.hideModalPeekView()
             } else {
                 self.showModalPeekView()
@@ -158,37 +164,25 @@ class SCViewController: UIViewController {
 
         // By default, present modal view controllers over current context
         if let destination = segue.destination as? SCModalViewController {
+            if let sender = segue.source as? SCViewController,
+               let destination = segue.destination as? SCPageViewFlowContainerViewController,
+                let destinationPageViewFlowType = sender.destinationPageViewFlowType {
+                destination.destinationPageViewFlowType = destinationPageViewFlowType
+            }
+
             destination.modalPresentationStyle = .overCurrentContext
             return
         }
-
-        if let destination = segue.destination as? SCPopoverViewController {
-            self.showDimView()
-
-            destination.rootViewController = self
-            destination.modalPresentationStyle = .popover
-            destination.preferredContentSize = CGSize(
-                width: SCViewController.modalWidth,
-                height: SCViewController.modalHeight
-            )
-
-            if let popover = destination.popoverPresentationController {
-                popover.delegate = self
-                popover.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-                popover.sourceView = self.view
-                popover.sourceRect = CGRect(
-                    x: self.view.bounds.midX,
-                    y: self.view.bounds.midY,
-                    width: 0,
-                    height: 0
-                )
-            }
-
+        
+        if let sender = segue.source as? SCPageViewFlowContainerViewController,
+            let destination = segue.destination as? SCPageViewFlowViewController,
+            let destinationPageViewFlowType = sender.destinationPageViewFlowType {
+            destination.pageViewFlowType = destinationPageViewFlowType
             return
         }
 
         if let destination = segue.destination as? SCViewController {
-            destination.previousViewControllerIdentifier = self.identifier
+            destination.previousViewControllerUnwindSegueIdentifier = self.unwindSegueIdentifier
         }
     }
 
@@ -201,9 +195,9 @@ class SCViewController: UIViewController {
         self.unwindingSegue = true
         self.returnToRootViewController = returnToRootViewController
 
-        if let previousViewControllerIdentifier = self.previousViewControllerIdentifier {
+        if let previousViewControllerUnwindSegueIdentifier = self.previousViewControllerUnwindSegueIdentifier {
             self.performSegue(
-                withIdentifier: previousViewControllerIdentifier,
+                withIdentifier: previousViewControllerUnwindSegueIdentifier,
                 sender: self
             )
 
@@ -212,7 +206,7 @@ class SCViewController: UIViewController {
             }
         }
 
-        self.previousViewControllerIdentifier = nil
+        self.previousViewControllerUnwindSegueIdentifier = nil
     }
 
     func unwindedToSelf(_ sender: UIStoryboardSegue) {
@@ -311,9 +305,10 @@ class SCViewController: UIViewController {
     func hideModalPeekView() {
         self.modalPeekView.isHidden = true
         self.modalPeekBlurView?.isHidden = true
+        self.modalPeekViewHeightConstraint.constant = 24
     }
 
-    func setCustomLayoutForDeviceType(deviceType: SCDeviceTypeManager.DeviceType) {}
+    func setCustomLayoutForDeviceType(deviceType: SCDeviceType) {}
 
     func swipeRight() {}
 

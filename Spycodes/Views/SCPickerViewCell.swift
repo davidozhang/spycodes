@@ -68,13 +68,13 @@ class SCPickerViewCell: SCTableViewCell {
         }
 
         switch reuseIdentifier {
-        case SCConstants.identifier.timerSettingViewCell.rawValue:
+        case SCConstants.reuseIdentifiers.timerSettingViewCell.rawValue:
             if Timer.instance.isEnabled() {
                 let minutes = Timer.instance.getDurationInMinutes()
                 self.textField.text = String(format: SCStrings.timer.minutes.rawValue, minutes)
                 self.pickerView.selectRow(minutes, inComponent: 0, animated: false)
             } else {
-                self.textField.text = SCStrings.timer.disabled.rawValue.localized
+                self.textField.text = SCStrings.timer.disabled.rawLocalized
                 self.pickerView.selectRow(SCPickerViewCell.disabledOptionRow, inComponent: 0, animated: false)
             }
         default:
@@ -97,7 +97,7 @@ class SCPickerViewCell: SCTableViewCell {
         let selectedRow = self.pickerView.selectedRow(inComponent: 0)
 
         switch reuseIdentifier {
-        case SCConstants.identifier.timerSettingViewCell.rawValue:
+        case SCConstants.reuseIdentifiers.timerSettingViewCell.rawValue:
             if selectedRow == SCPickerViewCell.disabledOptionRow {
                 Timer.instance.setEnabled(false)
             } else {
@@ -137,7 +137,7 @@ extension SCPickerViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
         }
 
         switch reuseIdentifier {
-        case SCConstants.identifier.timerSettingViewCell.rawValue:
+        case SCConstants.reuseIdentifiers.timerSettingViewCell.rawValue:
             return 11
         default:
             return 0
@@ -151,7 +151,7 @@ extension SCPickerViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
         }
 
         switch reuseIdentifier {
-        case SCConstants.identifier.timerSettingViewCell.rawValue:
+        case SCConstants.reuseIdentifiers.timerSettingViewCell.rawValue:
             if row == SCPickerViewCell.disabledOptionRow {
                 self.textField.text = SCStrings.timer.disabled.rawValue
             } else {
@@ -170,7 +170,7 @@ extension SCPickerViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
         var baseString: String?
 
         switch reuseIdentifier {
-        case SCConstants.identifier.timerSettingViewCell.rawValue:
+        case SCConstants.reuseIdentifiers.timerSettingViewCell.rawValue:
             if row == SCPickerViewCell.disabledOptionRow {
                 baseString = SCStrings.timer.disabled.rawValue
             } else {

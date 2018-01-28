@@ -1,11 +1,11 @@
 import UIKit
 
-class SCPregameMenuContainerViewController: SCModalViewController {
+class SCPageViewFlowContainerViewController: SCModalViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.identifier = SCConstants.identifier.pregameMenuContainerViewController.rawValue
+        self.uniqueIdentifier = SCConstants.viewControllers.pageViewFlowContainerViewController.rawValue
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -13,7 +13,7 @@ class SCPregameMenuContainerViewController: SCModalViewController {
 
         super.registerObservers(observers: [
             SCConstants.notificationKey.dismissModal.rawValue:
-                #selector(SCPregameMenuContainerViewController.dismissViewFromNotification)
+                #selector(SCPageViewFlowContainerViewController.dismissViewFromNotification)
         ])
     }
 
@@ -24,6 +24,10 @@ class SCPregameMenuContainerViewController: SCModalViewController {
 
     override func keyboardWillHide(_ notification: Notification) {
         super.hideDimView()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super._prepareForSegue(segue, sender: self)
     }
 
     @objc
