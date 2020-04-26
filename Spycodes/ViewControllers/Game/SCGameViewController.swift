@@ -158,12 +158,12 @@ class SCGameViewController: SCViewController {
         self.topBlurView?.frame = self.topBarView.bounds
         self.topBlurView?.clipsToBounds = true
         self.topBarView.addSubview(self.topBlurView!)
-        self.topBarView.sendSubview(toBack: self.topBlurView!)
+        self.topBarView.sendSubviewToBack(self.topBlurView!)
 
         self.bottomBlurView?.frame = self.bottomBarView.bounds
         self.bottomBlurView?.clipsToBounds = true
         self.bottomBarView.addSubview(self.bottomBlurView!)
-        self.bottomBarView.sendSubview(toBack: self.bottomBlurView!)
+        self.bottomBarView.sendSubviewToBack(self.bottomBlurView!)
 
         if let viewed = SCUsageStatisticsManager.instance.getBooleanUsageStatisticsValue(type: .gameOnboardingViewed), !viewed {
             self.showOnboardingView()
@@ -221,7 +221,7 @@ class SCGameViewController: SCViewController {
     // MARK: Keyboard
     override func keyboardWillShow(_ notification: Notification) {
         if let userInfo = notification.userInfo,
-           let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let rect = frame.cgRectValue
 
             self.bottomBarViewBottomMarginConstraint.constant = rect.size.height
@@ -360,7 +360,7 @@ class SCGameViewController: SCViewController {
             )
         )
         attributedString.addAttribute(
-            NSFontAttributeName,
+            NSAttributedString.Key.font,
             value: SCFonts.regularSizeFont(.bold) ?? 0,
             range: NSMakeRange(0, 1)
         )
@@ -461,7 +461,7 @@ class SCGameViewController: SCViewController {
         switch SCStates.getActionButtonState() {
         case .confirm:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.confirm.rawLocalized, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.confirm.rawLocalized, for: UIControl.State())
             }
 
             if !Player.instance.isLeader() ||
@@ -484,7 +484,7 @@ class SCGameViewController: SCViewController {
             }
         case .endRound:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.endRound.rawLocalized, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.endRound.rawLocalized, for: UIControl.State())
             }
             self.stopButtonAnimations()
 
@@ -499,25 +499,25 @@ class SCGameViewController: SCViewController {
             }
         case .gameOver:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.gameOver.rawLocalized, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.gameOver.rawLocalized, for: UIControl.State())
             }
             self.stopButtonAnimations()
             self.disableActionButton()
         case .gameAborted:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.gameAborted.rawLocalized, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.gameAborted.rawLocalized, for: UIControl.State())
             }
             self.stopButtonAnimations()
             self.disableActionButton()
         case .showAnswer:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.showAnswer.rawLocalized, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.showAnswer.rawLocalized, for: UIControl.State())
             }
             self.stopButtonAnimations()
             self.enableActionButton()
         case .hideAnswer:
             UIView.performWithoutAnimation {
-                self.actionButton.setTitle(SCStrings.button.hideAnswer.rawLocalized, for: UIControlState())
+                self.actionButton.setTitle(SCStrings.button.hideAnswer.rawLocalized, for: UIControl.State())
             }
             self.stopButtonAnimations()
             self.enableActionButton()
@@ -945,7 +945,7 @@ extension SCGameViewController: UICollectionViewDelegateFlowLayout, UICollection
 
                 if SCLocalStorageManager.instance.isLocalSettingEnabled(.accessibility) {
                     attributedString.addAttribute(
-                        NSStrikethroughStyleAttributeName,
+                        NSAttributedString.Key.strikethroughStyle,
                         value: 2,
                         range: NSMakeRange(0, attributedString.length)
                     )
@@ -971,7 +971,7 @@ extension SCGameViewController: UICollectionViewDelegateFlowLayout, UICollection
 
             if cardAtIndex.getTeam() == .neutral || cardAtIndex.getTeam() == .assassin {
                 attributedString.addAttribute(
-                    NSStrikethroughStyleAttributeName,
+                    NSAttributedString.Key.strikethroughStyle,
                     value: 2,
                     range: NSMakeRange(0, attributedString.length)
                 )
@@ -1067,11 +1067,11 @@ extension SCGameViewController: UICollectionViewDelegateFlowLayout, UICollection
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(
-            self.topBarViewHeightConstraint.constant + 8,
-            edgeInset,
-            self.bottomBarViewHeightConstraint.constant + 8,
-            edgeInset
+        return UIEdgeInsets(
+            top: self.topBarViewHeightConstraint.constant + 8,
+            left: edgeInset,
+            bottom: self.bottomBarViewHeightConstraint.constant + 8,
+            right: edgeInset
         )
     }
 

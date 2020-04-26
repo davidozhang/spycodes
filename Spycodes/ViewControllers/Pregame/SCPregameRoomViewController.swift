@@ -68,7 +68,7 @@ class SCPregameRoomViewController: SCViewController {
             )
         )
         attributedString.addAttribute(
-            NSFontAttributeName,
+            NSAttributedString.Key.font,
             value: SCFonts.regularSizeFont(.bold) ?? 0,
             range: NSMakeRange(
                 SCStrings.header.accessCode.rawLocalized.count + 2,
@@ -157,7 +157,7 @@ class SCPregameRoomViewController: SCViewController {
     override func setCustomLayoutForDeviceType(deviceType: SCDeviceType) {
         if deviceType == SCDeviceType.iPhone_X {
             self.swipeUpButton.isHidden = false
-            self.swipeUpButton.setImage(UIImage(named: "Chevron-Up"), for: UIControlState())
+            self.swipeUpButton.setImage(UIImage(named: "Chevron-Up"), for: UIControl.State())
         } else {
             self.swipeUpButton.isHidden = true
             self.swipeUpButtonWidthConstraint.constant = 0
@@ -184,7 +184,7 @@ class SCPregameRoomViewController: SCViewController {
     }
 
     // MARK: Public
-    func showCustomCategoryView(_ notification: Notification) {
+    @objc func showCustomCategoryView(_ notification: Notification) {
         if let userInfo = notification.userInfo {
             self.userInfo = userInfo
         }
@@ -204,6 +204,7 @@ class SCPregameRoomViewController: SCViewController {
         SCUsageStatisticsManager.instance.recordBooleanUsageStatistics(.pregameOnboardingViewed, value: true)
     }
 
+    @objc
     func showPregameMenu() {
         self.destinationPageViewFlowType = SCPageViewFlowType.pregameMenu
         self.showPageViewContainer()
@@ -602,7 +603,7 @@ extension SCPregameRoomViewController: UITableViewDelegate, UITableViewDataSourc
                     string: name
                 )
                 attributedString.addAttribute(
-                    NSFontAttributeName,
+                    NSAttributedString.Key.font,
                     value: SCFonts.intermediateSizeFont(.bold) ?? 0,
                     range: NSMakeRange(0, name.count)
                 )

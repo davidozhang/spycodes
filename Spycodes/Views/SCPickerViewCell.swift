@@ -181,7 +181,7 @@ extension SCPickerViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
         }
 
         return SCLocalStorageManager.instance.isLocalSettingEnabled(.nightMode) ?
-            NSAttributedString(string: baseString!, attributes: [NSForegroundColorAttributeName: UIColor.white]) :
+            NSAttributedString(string: baseString!, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]) :
             NSAttributedString(string: baseString!, attributes: nil)
     }
 }

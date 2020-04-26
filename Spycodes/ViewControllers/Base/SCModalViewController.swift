@@ -62,14 +62,14 @@ class SCModalViewController: SCViewController {
     }
 
     // MARK: Swipe Gesture Recognizer
-    func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
+    @objc func respondToSwipeGesture(gesture: UISwipeGestureRecognizer) {
         if let recognizer = self.swipeGestureRecognizer, recognizer.isEnabled {
             self.onDismissalWithCompletion(completion: nil)
         }
     }
 
     // MARK: SCModalViewController-Only Functions
-    func onDismissal() {
+    @objc func onDismissal() {
         self.onDismissalWithCompletion(completion: nil)
     }
 
@@ -100,13 +100,15 @@ class SCModalViewController: SCViewController {
         self.blurView?.clipsToBounds = true
         self.blurView?.tag = SCConstants.tag.modalBlurView.rawValue
         self.view.addSubview(self.blurView!)
-        self.view.sendSubview(toBack: self.blurView!)
+        self.view.sendSubviewToBack(self.blurView!)
     }
 
+    @objc
     func enableSwipeGestureRecognizer() {
         self.swipeGestureRecognizer?.isEnabled = true
     }
 
+    @objc
     func disableSwipeGestureRecognizer() {
         self.swipeGestureRecognizer?.isEnabled = false
     }

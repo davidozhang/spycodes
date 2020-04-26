@@ -24,7 +24,7 @@ class SCReadyStatusLabel: SCLabel {
             right: SCReadyStatusLabel.rightInset
         )
 
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+        super.drawText(in: rect.inset(by: insets))
     }
 
     override var intrinsicContentSize: CGSize {

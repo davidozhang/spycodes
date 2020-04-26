@@ -120,7 +120,7 @@ class CustomCategory: NSObject, NSCoding, NSCopying {
 }
 
 extension CustomCategory {
-    override var hashValue: Int {
+    override var hash: Int {
         if let nameHashValue = self.name?.hashValue {
             return nameHashValue
         }

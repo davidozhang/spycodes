@@ -88,7 +88,7 @@ class SCCustomCategoryViewController: SCModalViewController {
 
         self.automaticallyAdjustsScrollViewInsets = false
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 87.0
 
         self.tableViewBottomSpaceConstraint.constant = SCCustomCategoryViewController.margin

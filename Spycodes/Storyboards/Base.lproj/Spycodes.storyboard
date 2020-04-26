@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="ipad12_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -111,7 +107,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVk-pz-TGW" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="497" y="24" width="30" height="30"/>
+                                <rect key="frame" x="497" y="4" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="gLU-64-ICs"/>
                                     <constraint firstAttribute="width" constant="30" id="xjR-1z-hLL"/>
@@ -156,15 +152,15 @@
                         <viewControllerLayoutGuide type="bottom" id="o82-JI-MmW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KNG-kX-5el">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xkZ-ZW-TrC" userLabel="Top Bar View">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="34"/>
+                                <rect key="frame" x="0.0" y="20" width="712" height="34"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bct-GX-0L1" userLabel="Swipe Down Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="497" y="24" width="30" height="30"/>
+                                <rect key="frame" x="341" y="24" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="02d-1l-lU2"/>
                                     <constraint firstAttribute="width" constant="30" id="kWA-Np-feE"/>
@@ -175,14 +171,14 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U45-QB-oub">
-                                <rect key="frame" x="0.0" y="62" width="1024" height="1304"/>
+                                <rect key="frame" x="0.0" y="62" width="712" height="945"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="cV2-Q2-yFg" userLabel="section-header-view-cell" customClass="SCSectionHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cV2-Q2-yFg" id="72g-4P-P2B">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwO-dx-PX5" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
@@ -203,20 +199,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="version-view-cell" id="ndq-Dt-qrT" userLabel="version-view-cell" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ndq-Dt-qrT" id="VSR-ii-XSf">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZy-Cq-4CR" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="12" width="42" height="21"/>
+                                                    <rect key="frame" x="4" y="11.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ml8-t1-bfc" userLabel="Right Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="967" y="12.5" width="42" height="21"/>
+                                                    <rect key="frame" x="655" y="11.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -235,14 +231,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="disclosure-view-cell" id="jB4-gi-44R" userLabel="disclosure-view-cell" customClass="SCDisclosureViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jB4-gi-44R" id="sdb-yw-5Qe">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yin-hz-8gC" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="11" width="42" height="21"/>
+                                                    <rect key="frame" x="4" y="11.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -260,7 +256,7 @@
                                 </prototypes>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Up-Arrow-Circled" translatesAutoresizingMaskIntoConstraints="NO" id="47I-wx-ACz">
-                                <rect key="frame" x="499.5" y="1306" width="25" height="25"/>
+                                <rect key="frame" x="343.5" y="947" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="TZf-CM-drd"/>
                                     <constraint firstAttribute="width" constant="25" id="vnD-M1-wUu"/>
@@ -307,11 +303,11 @@
                         <viewControllerLayoutGuide type="bottom" id="nkF-4R-UGL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4RA-z8-adq">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZq-dn-08N" userLabel="Back Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="15" y="24" width="35" height="35"/>
+                                <rect key="frame" x="15" y="4" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="7Ei-9K-ZoL"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="35" id="usp-eM-Gje"/>
@@ -322,19 +318,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJJ-9X-JwH" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="491" y="31" width="42" height="21"/>
+                                <rect key="frame" x="335" y="11" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxf-jD-guR" customClass="SCStatusLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="491" y="60" width="42" height="21"/>
+                                <rect key="frame" x="335" y="40" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bm-f0-0Jn" userLabel="Content View">
-                                <rect key="frame" x="404" y="634" width="216" height="98"/>
+                                <rect key="frame" x="248" y="454.5" width="216" height="98"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCC-FN-amc" userLabel="Text Fields View">
                                         <rect key="frame" x="0.0" y="0.0" width="216" height="48"/>
@@ -345,7 +341,6 @@
                                                     <constraint firstAttribute="height" constant="48" id="MHY-d7-Ycg"/>
                                                     <constraint firstAttribute="width" constant="48" id="xXo-n6-fCu"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="join"/>
                                             </textField>
@@ -355,7 +350,6 @@
                                                     <constraint firstAttribute="width" constant="48" id="RUj-Ih-TV4"/>
                                                     <constraint firstAttribute="height" constant="48" id="rhJ-5U-eo0"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="join"/>
                                             </textField>
@@ -365,7 +359,6 @@
                                                     <constraint firstAttribute="width" constant="48" id="6J5-HM-dq7"/>
                                                     <constraint firstAttribute="height" constant="48" id="WDX-EZ-Idg"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="join"/>
                                             </textField>
@@ -375,7 +368,6 @@
                                                     <constraint firstAttribute="height" constant="48" id="Jdd-JH-UGH"/>
                                                     <constraint firstAttribute="width" constant="48" id="rai-Ae-mgd"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="join"/>
                                             </textField>
@@ -466,11 +458,11 @@
                         <viewControllerLayoutGuide type="bottom" id="s1v-bI-7WK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Muy-4C-ske">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4s9-er-VpV" customClass="SCUnderlineTextField" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="48" y="659" width="928" height="48"/>
+                                <rect key="frame" x="48" y="479.5" width="616" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Q8y-5x-z0R"/>
                                     <constraint firstAttribute="width" constant="50" id="f6G-L2-vEk"/>
@@ -484,7 +476,7 @@
                                 </variation>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYY-fp-HQH" userLabel="Back Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="15" y="24" width="35" height="35"/>
+                                <rect key="frame" x="15" y="4" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="35" id="6OD-rQ-5oE"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="Wdf-Df-5Gl"/>
@@ -495,7 +487,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPo-CD-ok9" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="491" y="31" width="42" height="21"/>
+                                <rect key="frame" x="335" y="11" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -548,18 +540,18 @@
                         <viewControllerLayoutGuide type="bottom" id="Yk6-ov-0Jb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="p3l-BQ-RCd">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BSL-jj-YPR">
-                                <rect key="frame" x="0.0" y="72" width="1024" height="1294"/>
+                                <rect key="frame" x="0.0" y="64" width="712" height="942.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="5TT-Lb-ozq" userLabel="section-header-view-cell" customClass="SCSectionHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5TT-Lb-ozq" id="Utq-vj-841">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7Q-B5-aBL" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
@@ -580,10 +572,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="name-setting-view-cell" id="PpO-Qg-y8F" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PpO-Qg-y8F" id="LB6-1G-eDA">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xe-JU-OVw" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
@@ -596,13 +588,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdg-1U-dRu" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="84" y="22" width="940" height="0.0"/>
+                                                    <rect key="frame" x="84" y="22" width="628" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Add-Circular-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="4et-va-out">
-                                                    <rect key="frame" x="999" y="7.5" width="25" height="25"/>
+                                                    <rect key="frame" x="687" y="7.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="8JS-5V-GOY"/>
                                                         <constraint firstAttribute="height" constant="25" id="a9a-yo-VVP"/>
@@ -626,10 +618,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="emoji-setting-view-cell" id="9kY-40-qac" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9kY-40-qac" id="IBD-dj-6Yf">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oml-FI-hjL" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
@@ -639,14 +631,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Add-Circular-Filled" translatesAutoresizingMaskIntoConstraints="NO" id="ijg-6p-pgZ">
-                                                    <rect key="frame" x="999" y="7.5" width="25" height="25"/>
+                                                    <rect key="frame" x="687" y="7.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="OJH-xs-EnB"/>
                                                         <constraint firstAttribute="width" constant="25" id="xCE-gg-9yH"/>
                                                     </constraints>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="Woh-cC-aYx" userLabel="Right Text View">
-                                                    <rect key="frame" x="1018" y="0.0" width="10" height="44"/>
+                                                    <rect key="frame" x="706" y="0.0" width="10" height="44"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="fZZ-oS-gyf"/>
@@ -671,14 +663,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="add-word-view-cell" id="xcW-Xg-mka" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="160" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xcW-Xg-mka" id="4Eb-0x-Xt4">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4By-EB-13S">
-                                                    <rect key="frame" x="474.5" y="11.5" width="75" height="21"/>
+                                                    <rect key="frame" x="318.5" y="11.5" width="75" height="21"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ie5-Z6-85z" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
                                                             <rect key="frame" x="33" y="0.0" width="42" height="21"/>
@@ -715,14 +707,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="delete-category-view-cell" id="VRe-gM-vRY" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="204" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="204" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VRe-gM-vRY" id="dx9-AV-gns">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlj-MT-1Cw">
-                                                    <rect key="frame" x="474.5" y="11.5" width="75" height="21"/>
+                                                    <rect key="frame" x="318.5" y="11.5" width="75" height="21"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C2-EV-r5y" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
                                                             <rect key="frame" x="33" y="0.0" width="42" height="21"/>
@@ -801,11 +793,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Doc-Hq-B89"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ch0-Rf-qt2">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zpa-v1-yiA" userLabel="Exit Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="15" y="24" width="35" height="35"/>
+                                <rect key="frame" x="15" y="4" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Wq3-KC-GD0"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="35" id="qrm-NK-Xm7"/>
@@ -816,7 +808,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Qg-Lg-n4v" userLabel="Access Code View">
-                                <rect key="frame" x="438" y="28" width="148" height="27"/>
+                                <rect key="frame" x="282" y="8" width="148" height="27"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Access Code: abcd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZK-HZ-PAI" userLabel="Access Code Label" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="148" height="27"/>
@@ -834,15 +826,15 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5W3-A0-VGs">
-                                <rect key="frame" x="0.0" y="75" width="1024" height="1125"/>
+                                <rect key="frame" x="0.0" y="55" width="712" height="786"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="E7U-cE-ebk" customClass="SCSectionHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E7U-cE-ebk" id="1IL-pn-CxA">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuz-gN-j21" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
@@ -852,7 +844,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ck7-zh-cKq" userLabel="Shuffle Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="990" y="7.5" width="30" height="25"/>
+                                                    <rect key="frame" x="678" y="7.5" width="30" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="LJ6-bD-zsm"/>
                                                         <constraint firstAttribute="height" constant="25" id="iMK-ub-2xW"/>
@@ -877,10 +869,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="pregame-room-view-cell" id="PVh-e3-TPn" customClass="SCPregameRoomViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PVh-e3-TPn" id="rq2-uF-F29">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEo-bZ-gPM" userLabel="Team Indicator View">
@@ -891,7 +883,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d84-Az-a9v" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="24" width="909" height="0.0"/>
+                                                    <rect key="frame" x="17" y="24" width="597" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="300" id="xaW-k5-dCT"/>
                                                     </constraints>
@@ -912,7 +904,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qs7-lh-8Kt" userLabel="Change Team Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="990" y="7" width="30" height="30"/>
+                                                    <rect key="frame" x="678" y="7" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Gem-Jv-lyJ"/>
                                                         <constraint firstAttribute="width" constant="30" id="Zaf-8k-ZBc"/>
@@ -923,7 +915,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MK-qa-awl" userLabel="Ready Status Label" customClass="SCReadyStatusLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="1020" y="24" width="0.0" height="0.0"/>
+                                                    <rect key="frame" x="708" y="24" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -954,10 +946,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pregame-room-team-empty-state-view-cell" id="hij-HO-082" customClass="SCTableViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hij-HO-082" id="g1h-6L-mO9">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xni-IZ-iQ2" userLabel="Primary Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
@@ -980,10 +972,10 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qn1-V1-kty" userLabel="Modal Peek View">
-                                <rect key="frame" x="0.0" y="1312" width="1024" height="54"/>
+                                <rect key="frame" x="0.0" y="953" width="712" height="54"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Chevron-Up" translatesAutoresizingMaskIntoConstraints="NO" id="vip-gN-xru">
-                                        <rect key="frame" x="497" y="8" width="30" height="30"/>
+                                        <rect key="frame" x="341" y="8" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="8iU-HN-72F"/>
                                             <constraint firstAttribute="width" constant="30" id="l3s-GE-1OV"/>
@@ -999,7 +991,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="084-kN-Fki" userLabel="Ready Button" customClass="SCRoundedButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="497.5" y="1262" width="30" height="34"/>
+                                <rect key="frame" x="341" y="903" width="30" height="34"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1008,7 +1000,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1z-dP-UpL" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="497" y="1216" width="30" height="30"/>
+                                <rect key="frame" x="341" y="857" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="IAf-Cl-VTO"/>
                                     <constraint firstAttribute="width" constant="30" id="ypP-Jv-JfE"/>
@@ -1018,7 +1010,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohS-rg-aAB" userLabel="Help Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="984" y="29" width="25" height="25"/>
+                                <rect key="frame" x="672" y="9" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="HLF-6h-CBA"/>
                                     <constraint firstAttribute="height" constant="25" id="hkA-qs-LX9"/>
@@ -1092,22 +1084,22 @@
                         <viewControllerLayoutGuide type="bottom" id="MLa-iE-UmV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lxN-QK-ytI">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Q7-RG-wBr" userLabel="Top Bar View">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="34"/>
+                                <rect key="frame" x="0.0" y="20" width="712" height="34"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OER-g1-Sil">
-                                <rect key="frame" x="0.0" y="62" width="1024" height="1304"/>
+                                <rect key="frame" x="0.0" y="62" width="712" height="945"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="DJ4-hE-VYj" kind="embed" identifier="page-view-flow-view-controller-segue" id="Rpi-nl-bm8"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FjP-pl-Sjb" userLabel="Swipe Down Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="497" y="24" width="30" height="30"/>
+                                <rect key="frame" x="341" y="24" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="G37-zQ-6qx"/>
                                     <constraint firstAttribute="height" constant="30" id="apa-2a-2tL"/>
@@ -1179,7 +1171,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhone" translatesAutoresizingMaskIntoConstraints="NO" id="aGd-SH-d26">
-                                        <rect key="frame" x="371" y="0.0" width="203" height="364"/>
+                                        <rect key="frame" x="370.5" y="0.0" width="203" height="364"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="203" id="5Hd-xK-fzJ"/>
                                             <constraint firstAttribute="height" constant="364" id="pHm-a3-WMX"/>
@@ -1200,7 +1192,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxr-Qt-n0T" userLabel="Header Label" customClass="SCNavigationBarLabel" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="491" y="31" width="42" height="21"/>
+                                <rect key="frame" x="491" y="11" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1378,15 +1370,15 @@
                         <viewControllerLayoutGuide type="bottom" id="htW-uQ-Xx7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2Yv-eL-zb3">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Pa-JQ-tRa" userLabel="Top Bar View">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="34"/>
+                                <rect key="frame" x="0.0" y="20" width="712" height="34"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jpi-zT-CKN" userLabel="Swipe Down Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                <rect key="frame" x="497" y="24" width="30" height="30"/>
+                                <rect key="frame" x="341" y="24" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="UfE-MD-k1x"/>
                                     <constraint firstAttribute="width" constant="30" id="cE3-RK-Kwl"/>
@@ -1397,14 +1389,14 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dQz-dg-RRO">
-                                <rect key="frame" x="0.0" y="62" width="1024" height="1304"/>
+                                <rect key="frame" x="0.0" y="62" width="712" height="945"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="section-header-view-cell" id="U0P-fS-6xk" userLabel="section-header-view-cell" customClass="SCTimelineHeaderViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U0P-fS-6xk" id="SI5-rg-eRp">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LS9-Xw-Bdc" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
@@ -1414,7 +1406,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQf-fA-0fm" userLabel="Mark As Read Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="1000" y="10" width="20" height="20"/>
+                                                    <rect key="frame" x="688" y="10" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="WJO-bo-aue"/>
                                                         <constraint firstAttribute="height" constant="20" id="aw5-et-U8O"/>
@@ -1425,7 +1417,7 @@
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notification-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="ncP-d2-IPX">
-                                                    <rect key="frame" x="1015" y="11.5" width="5" height="5"/>
+                                                    <rect key="frame" x="703" y="11.5" width="5" height="5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="5" id="U4I-TA-FBC"/>
                                                         <constraint firstAttribute="width" constant="5" id="V4d-aD-GHR"/>
@@ -1449,14 +1441,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timeline-view-cell" id="jKc-qz-lSA" customClass="SCTimelineViewCell" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="1024" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="712" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jKc-qz-lSA" id="AJM-1F-fph">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unknown event. Please update Spycodes!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D3W-OQ-wp9" userLabel="Event Label" customClass="SCLabel" customModule="Spycodes" customModuleProvider="target">
-                                                    <rect key="frame" x="12" y="8" width="1008" height="28"/>
+                                                    <rect key="frame" x="12" y="8" width="696" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1525,11 +1517,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Zrc-Nf-5YD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hUt-sP-cEd">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="udo-t2-F4l">
-                                <rect key="frame" x="20" y="0.0" width="984" height="1366"/>
+                                <rect key="frame" x="20" y="-20" width="672" height="1027"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kdn-LK-Bc8">
                                     <size key="itemSize" width="150" height="50"/>
@@ -1565,7 +1557,7 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vhy-Dr-vSM" userLabel="Top Bar View">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="103"/>
+                                <rect key="frame" x="0.0" y="-20" width="712" height="103"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUf-TJ-d5l" userLabel="Back Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
                                         <rect key="frame" x="15" y="24" width="35" height="35"/>
@@ -1579,15 +1571,15 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFn-Ic-8z8" userLabel="Clue Number View">
-                                        <rect key="frame" x="499" y="30.5" width="26" height="22"/>
+                                        <rect key="frame" x="347" y="31" width="18" height="21"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="32" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Two-zP-PDk" userLabel="Clue Text Field" customClass="SCTextField" customModule="Spycodes" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="9" height="22"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="5" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="32" translatesAutoresizingMaskIntoConstraints="NO" id="1J8-w3-IbM" userLabel="Number of Words Field" customClass="SCTextField" customModule="Spycodes" customModuleProvider="target">
-                                                <rect key="frame" x="17" y="0.0" width="9" height="21"/>
+                                                <rect key="frame" x="13" y="0.0" width="5" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next"/>
                                             </textField>
@@ -1605,7 +1597,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scv-CB-Z0e" userLabel="Dashboard View">
-                                        <rect key="frame" x="472.5" y="63" width="79" height="30"/>
+                                        <rect key="frame" x="316.5" y="63" width="79" height="30"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Team" translatesAutoresizingMaskIntoConstraints="NO" id="vkP-5T-eUP">
                                                 <rect key="frame" x="0.0" y="4" width="22" height="22"/>
@@ -1667,7 +1659,7 @@
                                         </variation>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8FH-JK-Uar" userLabel="Help Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="984" y="29" width="25" height="25"/>
+                                        <rect key="frame" x="672" y="29" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="411-X8-hR0"/>
                                             <constraint firstAttribute="height" constant="25" id="piC-o6-DIJ"/>
@@ -1678,7 +1670,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxl-gd-SeO" userLabel="Timeline Button" customClass="SCImageButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="953" y="30" width="23" height="23"/>
+                                        <rect key="frame" x="641" y="30" width="23" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="Bxb-Z0-LKP"/>
                                             <constraint firstAttribute="width" constant="23" id="Yez-tm-hum"/>
@@ -1689,7 +1681,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notification-Dot" translatesAutoresizingMaskIntoConstraints="NO" id="FZ4-VG-vhc">
-                                        <rect key="frame" x="970" y="29" width="5" height="5"/>
+                                        <rect key="frame" x="658" y="29" width="5" height="5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="5" id="ggJ-b8-hgv"/>
                                             <constraint firstAttribute="width" constant="5" id="kfF-eI-Kf8"/>
@@ -1715,10 +1707,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWW-d1-JFl" userLabel="Bottom Bar View">
-                                <rect key="frame" x="0.0" y="1284" width="1024" height="82"/>
+                                <rect key="frame" x="0.0" y="925" width="712" height="82"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bw4-Gi-FS4" userLabel="Timer View">
-                                        <rect key="frame" x="495.5" y="18" width="33" height="25"/>
+                                        <rect key="frame" x="339.5" y="18" width="33" height="25"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer" translatesAutoresizingMaskIntoConstraints="NO" id="IwY-ey-aZE">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -1746,7 +1738,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-Ow-5JW" userLabel="Action Button" customClass="SCRoundedButton" customModule="Spycodes" customModuleProvider="target">
-                                        <rect key="frame" x="497.5" y="30" width="30" height="34"/>
+                                        <rect key="frame" x="341" y="30" width="30" height="34"/>
                                         <state key="normal">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -1811,7 +1803,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HKy-Oo-bc1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="c6Y-hs-NXb">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1847,7 +1839,7 @@
         <image name="iPhone" width="324" height="569"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CKf-j2-Ls6"/>
+        <segue reference="Zcx-BU-A4v"/>
         <segue reference="7yd-xs-fux"/>
     </inferredMetricsTieBreakers>
 </document>

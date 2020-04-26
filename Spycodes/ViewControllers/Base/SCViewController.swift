@@ -96,13 +96,13 @@ class SCViewController: UIViewController {
         SCNotificationCenterManager.instance.addObservers(
             viewController: self,
             observers: [
-                NSNotification.Name.UIApplicationDidBecomeActive.rawValue:
+                UIApplication.didBecomeActiveNotification.rawValue:
                     #selector(SCViewController.applicationDidBecomeActive),
-                NSNotification.Name.UIApplicationWillResignActive.rawValue:
+                UIApplication.willResignActiveNotification.rawValue:
                     #selector(SCViewController.applicationWillResignActive),
-                NSNotification.Name.UIKeyboardWillShow.rawValue:
+                UIResponder.keyboardWillShowNotification.rawValue:
                     #selector(SCViewController.keyboardWillShow),
-                NSNotification.Name.UIKeyboardWillHide.rawValue:
+                UIResponder.keyboardWillHideNotification.rawValue:
                     #selector(SCViewController.keyboardWillHide)
             ]
         )
@@ -262,8 +262,8 @@ class SCViewController: UIViewController {
         barButtonItemAppearance.tintColor = .spycodesGrayColor()
 
         if let font = SCFonts.regularSizeFont(.medium) {
-            barButtonItemAppearance.setTitleTextAttributes([NSFontAttributeName: font], for: UIControlState())
-            navigationBarAppearance.titleTextAttributes = [NSFontAttributeName: font]
+            barButtonItemAppearance.setTitleTextAttributes([NSAttributedString.Key.font: font], for: UIControl.State())
+            navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.font: font]
         }
 
         pageControlAppearance.hidesForSinglePage = true
@@ -274,7 +274,7 @@ class SCViewController: UIViewController {
             self.modalPeekBlurView?.clipsToBounds = true
             self.modalPeekBlurView?.tag = SCConstants.tag.modalPeekBlurView.rawValue
             self.modalPeekView?.addSubview(self.modalPeekBlurView!)
-            self.modalPeekView?.sendSubview(toBack: self.modalPeekBlurView!)
+            self.modalPeekView?.sendSubviewToBack(self.modalPeekBlurView!)
         }
 
         self.setNeedsStatusBarAppearanceUpdate()
@@ -310,8 +310,10 @@ class SCViewController: UIViewController {
 
     func setCustomLayoutForDeviceType(deviceType: SCDeviceType) {}
 
+    @objc
     func swipeRight() {}
 
+    @objc
     func swipeUp() {}
 
     @objc

@@ -63,7 +63,7 @@ class SCPlayerNameViewController: SCViewController {
     // MARK: Keyboard
     override func keyboardWillShow(_ notification: Notification) {
         if let userInfo = notification.userInfo,
-           let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let rect = frame.cgRectValue
             self.userNameTextFieldVerticalCenterConstraint.constant = -(
                 rect.height/2 - self.headerLabelTopMarginConstraint.constant

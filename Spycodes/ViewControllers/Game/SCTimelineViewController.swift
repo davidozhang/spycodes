@@ -15,7 +15,7 @@ class SCTimelineViewController: SCModalViewController {
 
         self.uniqueIdentifier = SCConstants.viewControllers.timelineViewController.rawValue
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 87.0
     }
 
@@ -297,7 +297,7 @@ extension SCTimelineViewController: UITableViewDataSource, UITableViewDelegate {
             if let hasRead = parameters[SCConstants.coding.hasRead.rawValue] as? Bool,
                 !hasRead {
                 attributedString.addAttribute(
-                    NSFontAttributeName,
+                    NSAttributedString.Key.font,
                     value: SCFonts.intermediateSizeFont(.bold) ?? 0,
                     range: NSMakeRange(0, baseString.count - 1)
                 )

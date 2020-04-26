@@ -22,7 +22,7 @@ class SCSectionHeaderViewCell: SCTableViewCell {
 
     func setButtonImage(name: String) {
         if let _ = self.button {
-            self.button.setImage(UIImage(named: name), for: UIControlState())
+            self.button.setImage(UIImage(named: name), for: UIControl.State())
         }
     }
 
@@ -51,7 +51,7 @@ class SCSectionHeaderViewCell: SCTableViewCell {
         self.blurView?.clipsToBounds = true
         self.blurView?.tag = SCConstants.tag.sectionHeaderBlurView.rawValue
         self.addSubview(self.blurView!)
-        self.sendSubview(toBack: self.blurView!)
+        self.sendSubviewToBack(self.blurView!)
     }
 
     func hideBlurBackground() {

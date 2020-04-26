@@ -85,7 +85,7 @@ class SCMainSettingsViewController: SCModalViewController {
 
         self.uniqueIdentifier = SCConstants.viewControllers.mainSettingsViewController.rawValue
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44.0
         self.registerTableViewCells()
     }
@@ -233,7 +233,7 @@ extension SCMainSettingsViewController: UITableViewDelegate, UITableViewDataSour
                 string: SCAppInfoManager.appVersion + " (\(SCAppInfoManager.buildNumber))"
             )
             attributedString.addAttribute(
-                NSFontAttributeName,
+                NSAttributedString.Key.font,
                 value: SCFonts.intermediateSizeFont(.medium) ?? 0,
                 range: NSMakeRange(
                     SCAppInfoManager.appVersion.count + 1,

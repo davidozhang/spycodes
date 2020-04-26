@@ -48,7 +48,7 @@ class SCCategoriesViewController: SCViewController {
 
         self.uniqueIdentifier = SCConstants.viewControllers.categoriesViewController.rawValue
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 87.0
 
         self.tableViewBottomSpaceConstraint.constant = 0

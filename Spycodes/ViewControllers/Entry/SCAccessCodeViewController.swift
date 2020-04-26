@@ -59,7 +59,7 @@ class SCAccessCodeViewController: SCViewController {
         self.headerLabel.text = SCStrings.header.accessCode.rawLocalized
         self.cancelButton.setTitle(
             SCStrings.button.cancel.rawLocalized,
-            for: UIControlState()
+            for: UIControl.State()
         )
 
         for view in textFieldsView.subviews as [UIView] {
@@ -123,7 +123,7 @@ class SCAccessCodeViewController: SCViewController {
         }
 
         if let userInfo = notification.userInfo,
-           let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             self.keyboardDidShow = true
 
             let rect = frame.cgRectValue

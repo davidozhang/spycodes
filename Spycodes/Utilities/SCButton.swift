@@ -5,10 +5,10 @@ class SCButton: UIButton {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.contentEdgeInsets = UIEdgeInsetsMake(15, 25, 15, 25)
+        self.contentEdgeInsets = UIEdgeInsets(top: 15, left: 25, bottom: 15, right: 25)
         self.setTitleColor(
             .spycodesGrayColor(),
-            for: UIControlState()
+            for: UIControl.State()
         )
         self.setTitleColor(
             .white,
@@ -19,9 +19,10 @@ class SCButton: UIButton {
         self.layer.borderWidth = 2.0
         self.layer.cornerRadius = 4.0
         
-        self.addTarget(self, action: #selector(self.onTouchDown), for: UIControlEvents.touchDown)
+        self.addTarget(self, action: #selector(self.onTouchDown), for: UIControl.Event.touchDown)
     }
     
+    @objc
     func onTouchDown() {
         if #available(iOS 10.0, *) {
             let generator = UIImpactFeedbackGenerator(style: .medium)

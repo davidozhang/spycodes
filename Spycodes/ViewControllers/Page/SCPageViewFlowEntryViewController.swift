@@ -46,7 +46,7 @@ class SCPageViewFlowEntryViewController: SCViewController {
                 self.labelTopSpaceConstraint.constant = SCPageViewFlowEntryViewController.defaultLabelTopSpace
 
                 self.imageView.isHidden = false
-                self.imageView.superview?.bringSubview(toFront: self.imageView)
+                self.imageView.superview?.bringSubviewToFront(self.imageView)
             } else {
                 self.imageViewWidthConstraint.constant = 0
                 self.labelTopSpaceConstraint.constant = 0

@@ -82,7 +82,7 @@ class Timer: NSObject, NSCoding {
             repeats: true
         )
 
-        Foundation.RunLoop.main.add(self.timer!, forMode: .commonModes)
+        Foundation.RunLoop.main.add(self.timer!, forMode: RunLoop.Mode.common)
     }
 
     func invalidate() {
@@ -92,6 +92,7 @@ class Timer: NSObject, NSCoding {
         self.timerInProgressCallback = nil
     }
 
+    @objc
     func updateTime() {
         if !self.enabled {
             return

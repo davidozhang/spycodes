@@ -103,7 +103,7 @@ class SCMainViewController: SCViewController {
     override func setCustomLayoutForDeviceType(deviceType: SCDeviceType) {
         if deviceType == SCDeviceType.iPhone_X {
             self.swipeUpButton.isHidden = false
-            self.swipeUpButton.setImage(UIImage(named: "Chevron-Up"), for: UIControlState())
+            self.swipeUpButton.setImage(UIImage(named: "Chevron-Up"), for: UIControl.State())
         } else {
             self.swipeUpButton.isHidden = true
         }

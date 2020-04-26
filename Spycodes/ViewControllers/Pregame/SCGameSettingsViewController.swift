@@ -53,7 +53,7 @@ class SCGameSettingsViewController: SCViewController {
 
         self.uniqueIdentifier = SCConstants.viewControllers.gameSettingsViewController.rawValue
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 87.0
 
         self.tableViewBottomSpaceConstraint.constant = 0

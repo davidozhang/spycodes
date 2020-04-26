@@ -543,7 +543,6 @@
 				63A04CFD1D1A5713005A2914 /* Frameworks */,
 				63A04CFE1D1A5713005A2914 /* Resources */,
 				1AF75283B65C4B918EC70F67 /* [CP] Embed Pods Frameworks */,
-				CED194B1897EE1C60EC80831 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -581,6 +580,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -629,7 +629,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Spycodes/Pods-Spycodes-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Spycodes/Pods-Spycodes-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ISEmojiView/ISEmojiView.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftGifOrigin/SwiftGifOrigin.framework",
 			);
@@ -640,7 +640,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spycodes/Pods-Spycodes-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Spycodes/Pods-Spycodes-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A099851FC276BA395E02AB40 /* [CP] Check Pods Manifest.lock */ = {
@@ -659,21 +659,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CED194B1897EE1C60EC80831 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spycodes/Pods-Spycodes-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -923,7 +908,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidzhang.Spycodes;
 				PRODUCT_NAME = Spycodes;
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -940,7 +925,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidzhang.Spycodes;
 				PRODUCT_NAME = Spycodes;
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
